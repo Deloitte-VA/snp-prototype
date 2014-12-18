@@ -1,5 +1,5 @@
 //Insert data into the PCE collection.
--- PCE collection
+//PCE collection.
 db.pces.insert( 
 	[
 		{ "_id": 5695930304, "desc": "5695930315 |Systolic Blood Pressure (Observable Entity)| + 5695444314 |Procedure on upper arm| + 5695444316 |Right upper arm structure (body structure)|" }, 
@@ -17,7 +17,7 @@ db.pces.insert(
 );
 
 //Insert data into the Patients collection.
--- Patient collection
+//Patient collection.
 db.patients.insert( 
 	[
 		{ "_id": 10000001, first_name:"Diann", middle_name:"Agnese", last_name:"Ayers", dob:new Date('04/15/1955'), gender:1, race:1 },
@@ -72,7 +72,7 @@ db.patients.insert(
 );
 
 //Insert data into the Encounters collection.
--- Encounter collection
+//Encounter collection.
 db.encounters.insert( 
 	[
 		{ "_id": 3049593923, "patient_id":	10000001, "date": new Date('6/29/2014'), type:4, reason_for_visit:"Emergency room visit for heart palpitations.", observations:[
@@ -205,13 +205,13 @@ db.encounters.insert(
 		] },
 		{ "_id": 3049593947, "patient_id":	10000025, "date": new Date('6/4/2014'), type:4, reason_for_visit:"Follow-up visit with specialist.", observations:[
 			{ name: 5695930304, name_type: 1, value: 135, value_type: 2, issued: new Date('6/4/2014')},
-			{ name: 5695930307, name_type: 1, value:  93, value_type: 2, issued: new Date('6/4/2014')},
+			{ name: 5695930307, name_type: 1, value:  93, value_type: 2, issued: new Date('6/4/2014')}
 		] },
 		{ "_id": 3049593948, "patient_id":	10000026, "date": new Date('6/24/2014'), type:4, reason_for_visit:"Follow-up visit with specialist.", observations:[
 			{ name: 5695930310, name_type: 1, value: 123, value_type: 2, issued: new Date('6/24/2014')},
 			{ name: 5695930313, name_type: 1, value:  82, value_type: 2, issued: new Date('6/24/2014')}
 		] },
-		{ "_id": 3049593949, "patient_id":	10000027, "date": new Date('6/10/2014') "6-10-2014", type:4, reason_for_visit:"Follow-up visit with specialist.", observations:[
+		{ "_id": 3049593949, "patient_id":	10000027, "date": new Date('6/10/2014'), type:4, reason_for_visit:"Follow-up visit with specialist.", observations:[
 			{ name: 5695930304, name_type: 1, value: 124, value_type: 2, issued: new Date('6/10/2014')},
 			{ name: 5695930307, name_type: 1, value:  76, value_type: 2, issued: new Date('6/10/2014')}
 		] },
@@ -286,7 +286,7 @@ db.encounters.insert(
 		{ "_id": 3049593967, "patient_id":	10000045, "date": new Date('12/8/2014'), type:4, reason_for_visit:"Annual physical.", observations:[
 			{ name: 5695930304, name_type: 1, value: 124, value_type: 2, issued: new Date('12/8/2014')},
 			{ name: 5695930307, name_type: 1, value:  83, value_type: 2, issued: new Date('12/8/2014')}
-		] }
+		] },
 		{ "_id": 3049593968, "patient_id":	10000046, "date": new Date('5/28/2014'), type:4, reason_for_visit:"Annual physical.", observations:[
 			{ name: 5695930304, name_type: 1, value: 122, value_type: 2, issued: new Date('5/28/2014')},
 			{ name: 5695930307, name_type: 1, value:  82, value_type: 2, issued: new Date('5/28/2014')}
