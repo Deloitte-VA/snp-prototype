@@ -17,5 +17,5 @@ while(conn===undefined)
     {
         //print(Error);
     }
-    sleep(100);
+    sleep(1000);
 }

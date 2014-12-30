@@ -1,3 +1,27 @@
+var conn;
+try
+{
+    conn = new Mongo();
+}
+catch(Error)
+{
+    //print(Error);
+}
+while(conn===undefined)
+{
+    try
+    {
+        conn = new Mongo();
+    }
+    catch(Error)
+    {
+        //print(Error);
+    }
+    sleep(1000);
+}
+
+var db = conn.getDB( "temp" );
+
 //Insert data into the PCE collection.
 //PCE collection.
 db.pces.insert( 
