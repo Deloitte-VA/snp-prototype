@@ -1,6 +1,27 @@
+var conn;
+while(conn===undefined)
+{
+    try
+    {
+        conn = new Mongo();
+    }
+    catch(Error)
+    {
+        print(Error);
+    }
+    print("sleep...");
+    sleep(1000);
+}
+
+print("setting up db...");
+var mydb = conn.getDB( "test" );
+
+
+print("starting inserts...");
+
 //Insert data into the PCE collection.
 //PCE collection.
-db.pces.insert( 
+mydb.pces.insert( 
 	[
 		{ "_id": 5695930304, "desc": "5695930315 |Systolic Blood Pressure (Observable Entity)| + 5695444314 |Procedure on upper arm| + 5695444316 |Right upper arm structure (body structure)|" }, 
 		{ "_id": 5695930307, "desc": "5695444313 |Diastolic Blood Pressure (Observable Entity)| + 5695444314 |Procedure on upper arm| + 5695444316 |Right upper arm structure (body structure)|" }, 
@@ -18,7 +39,7 @@ db.pces.insert(
 
 //Insert data into the Patients collection.
 //Patient collection.
-db.patients.insert( 
+mydb.patients.insert( 
 	[
 		{ "_id": 10000001, first_name:"Diann", middle_name:"Agnese", last_name:"Ayers", dob:new Date('04/15/1955'), gender:1, race:1 },
 		{ "_id": 10000002, first_name:"Annalee", middle_name:"Marlee", last_name:"Coleman", dob:new Date('04/15/1955'), gender:1, race:1 }, 
@@ -73,7 +94,7 @@ db.patients.insert(
 
 //Insert data into the Encounters collection.
 //Encounter collection.
-db.encounters.insert( 
+mydb.encounters.insert( 
 	[
 		{ "_id": 3049593923, "patient_id":	10000001, "date": new Date('6/29/2014'), type:4, reason_for_visit:"Emergency room visit for heart palpitations.", observations:[
 			{ name: 5695930304, name_type: 1, value: 120, value_type: 2, issued: new Date('6/29/2014')},
@@ -301,3 +322,5 @@ db.encounters.insert(
 		] }
 	]	
 );
+
+print("completed inserts.");
