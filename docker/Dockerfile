@@ -20,6 +20,11 @@ RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so
 ENV NOTVISIBLE "in users profile"
 RUN echo "export VISIBLE=now" >> /etc/profile
 
+# Upgrade Python3 and install eggs
+RUN apt-get install -y python-pip
+RUN pip install virtualenv
+
+
 # create directory for child images to store configuration in
 RUN mkdir -p /var/log/supervisor && \
   mkdir -p /etc/supervisor/conf.d
@@ -34,7 +39,6 @@ ADD conf/bootstrap.conf /etc/supervisor/conf.d/bootstrap.conf
 
 # add bootstrap files for loading
 ADD data/test-data.js /bootstrap/data/test-data.js
-ADD sh/testConnection.js /bootstrap/sh/testConnection.js
 
 # expose the ports (mongodb is already exposed)
 EXPOSE 22
