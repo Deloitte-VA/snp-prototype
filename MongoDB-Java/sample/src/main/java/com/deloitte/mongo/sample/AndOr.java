@@ -1,16 +1,26 @@
 package com.deloitte.mongo.sample;
 
 import com.mongodb.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 
-/**
- * Created by jlgrock on 1/8/15.
- */
 public class AndOr {
-    public static void main(String[] args) throws Exception {
+
+    private static Logger LOGGER = LoggerFactory.getLogger(AndOr.class);
+
+    private AndOr() {}
+
+    private void query() {
         // connect to the local database server
-        MongoClient mongoClient = new MongoClient( "192.168.59.108" , 27017 );
+        MongoClient mongoClient = null;
+        try {
+            mongoClient = new MongoClient( "192.168.59.108" , 27017 );
+        } catch (UnknownHostException e) {
+            LOGGER.error("Unable to Connect to MongoDB", e);
+        }
 
         // get handle to "mydb"
         DB db = mongoClient.getDB("test");  //instance name under docker VM
@@ -45,11 +55,11 @@ public class AndOr {
 
         DBCursor cursor = testCollection.find(query);
 
-        System.out.println("count: " + cursor.size());
+        LOGGER.debug("Filtered data count (length): " + cursor.length());
         cursor = testCollection.find(query); //Get the cursor value afresh before iterating over the collection
         try {
             while (cursor.hasNext()) {
-                System.out.println(cursor.next()); //Note that the output may not be formatted cleanly
+                LOGGER.info(cursor.next().toString()); //Note that the output may not be formatted cleanly
             }
         } finally {
             cursor.close();
@@ -57,5 +67,10 @@ public class AndOr {
 
         // release resources
         mongoClient.close();
+    }
+
+    public static void main(String[] args) throws Exception {
+        AndOr andor = new AndOr();
+        andor.query();
     }
 }
