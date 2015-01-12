@@ -96,6 +96,10 @@ mydb.patients.insert(
 //Encounter collection.
 mydb.encounters.insert( 
 	[
+	    { "_id": 3049593922, "patient_id":	10000001, "date": new Date('6/29/2014'), type:4, reason_for_visit:"Emergency room visit for heart palpitations.", observations:[
+			{ name: 5695930304, name_type: 1, value: 110, value_type: 2, issued: new Date('6/29/2014')},
+			{ name: 5695930310, name_type: 1, value: 145, value_type: 2, issued: new Date('6/29/2014')}
+		] },
 		{ "_id": 3049593923, "patient_id":	10000001, "date": new Date('6/29/2014'), type:4, reason_for_visit:"Emergency room visit for heart palpitations.", observations:[
 			{ name: 5695930304, name_type: 1, value: 120, value_type: 2, issued: new Date('6/29/2014')},
 			{ name: 5695930307, name_type: 1, value:  80, value_type: 2, issued: new Date('6/29/2014')},
