@@ -1,6 +1,7 @@
 package com.deloitte.mongo.sample;
 
 import java.util.Date;
+import java.util.List;
 
 public class Encounter {
 	
@@ -12,7 +13,7 @@ public class Encounter {
 	private Long type; //private String type; //private Long type;
 	private String reason_for_visit;
 	
-	private Observation[] observations;
+	private List<Observation> observations;
 
 	public Long get_id() {
 		return _id;
@@ -67,11 +68,11 @@ public class Encounter {
 		this.reason_for_visit = reason_for_visit;
 	}
 
-	public Observation[] getObservations() {
+	public List<Observation> getObservations() {
 		return observations;
 	}
 
-	public void setObservations(Observation[] observations) {
+	public void setObservations(List<Observation> observations) {
 		this.observations = observations;
 	}
 }

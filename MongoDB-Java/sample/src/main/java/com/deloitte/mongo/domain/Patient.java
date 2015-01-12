@@ -14,17 +14,17 @@ public class Patient {
     @Id
     private Long id;
 
-    @NotNull
+    //@NotNull
     private String firstName;
 
     private String middleName;
 
-    @NotNull
+    //@NotNull
     private String lastName;
 
     private Date dob;
 
-    @NotNull
+    //@NotNull
     private Gender gender;
 
     private Race race;

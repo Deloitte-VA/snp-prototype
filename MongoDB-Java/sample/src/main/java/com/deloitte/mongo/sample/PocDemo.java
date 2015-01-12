@@ -19,11 +19,12 @@ public class PocDemo {
 
     private void query() {
         // connect to the local database server
-        MongoClient mongoClient = null; //192.168.59.103 - docker VM IP addr //"localhost"
+        MongoClient mongoClient = null;
         try {
-            mongoClient = new MongoClient( "192.168.59.103" , 27017 );
+            mongoClient = new MongoClient( "192.168.59.103" , 27017 ); //boot2docker ip address
         } catch (UnknownHostException e) {
             LOGGER.error("Unable to connect to MongoDB", e);
+            return;
         }
 
         // get handle to "mydb"

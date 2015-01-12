@@ -14,11 +14,11 @@ public class PatientWriteConverter implements Converter<Patient, DBObject> {
         DBObject dbo = new BasicDBObject();
         dbo.put("_id", source.getId());
         dbo.put("first_name", source.getFirstName());
-        dbo.put("middle_name", source.getMiddleName());
-        dbo.put("last_name", source.getLastName());
-        dbo.put("gender", source.getGender().getId());
-        dbo.put("race", source.getRace().getId());
-        dbo.put("dob", source.getDob().getTime());
+//        dbo.put("middle_name", source.getMiddleName());
+//        dbo.put("last_name", source.getLastName());
+//        dbo.put("gender", source.getGender().getId());
+//        dbo.put("race", source.getRace().getId());
+//        dbo.put("dob", source.getDob().getTime());
         return dbo;
     }
 }
