@@ -9,7 +9,7 @@ public class Observation {
     private Long value;
     private Integer valueType;
     private String applies;
-    private Date issued; //private String issued;
+    private Date issued;
 
     private String identifier;
     private String subject;
