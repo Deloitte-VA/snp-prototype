@@ -7,6 +7,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.deloitte.mongo.domain.Encounter;
+import com.deloitte.mongo.domain.Observation;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
@@ -66,7 +68,7 @@ public class PocDemo2 {
 
         Set<Long> uniquePatientIds = new HashSet<Long>();
         for (Encounter rightArmEncounter : myRightArmEncounters) {
-            LOGGER.debug("***!myRightArmEncounters patientId=" + rightArmEncounter.getPatient_id());
+            LOGGER.debug("***!myRightArmEncounters patientId=" + rightArmEncounter.getPatientId());
 
             MinMaxObservationValue minMaxObservation;
             final Long minObservationValue; //final modifier needed for inner class usage
@@ -76,7 +78,7 @@ public class PocDemo2 {
             minObservationValue = minMaxObservation.getMin();
             maxObservationValue = minMaxObservation.getMax();
 
-            final Long patientId = rightArmEncounter.getPatient_id();  //final modifier needed for inner class usage
+            final Long patientId = rightArmEncounter.getPatientId();  //final modifier needed for inner class usage
 
             BasicDBObject query2 = new BasicDBObject("$and",
                     new ArrayList<BasicDBObject>() {{
@@ -113,7 +115,7 @@ public class PocDemo2 {
             List<Encounter> myLeftArmEncounters = convertDBObjectToJavaEncounterObj(cursor2);
             LOGGER.debug("myLeftArmEncounters=" + myLeftArmEncounters + ", size=" + myLeftArmEncounters.size());
 
-            myLeftArmEncounters.forEach(enctr -> uniquePatientIds.add(enctr.getPatient_id()));
+            myLeftArmEncounters.forEach(enctr -> uniquePatientIds.add(enctr.getPatientId()));
         }
 
         //End of Query 2 processing
@@ -264,8 +266,8 @@ public class PocDemo2 {
 
                     if (key.equalsIgnoreCase("_id")) {
 
-                        encounter.set_id(doubleToLong(dbObject.get(key)));
-                        System.out.println("_id:" + encounter.get_id());
+                        encounter.setId(doubleToLong(dbObject.get(key)));
+                        System.out.println("_id:" + encounter.getId());
                     }
 					/* patient_id is found to be of type Double
             		if (key.equalsIgnoreCase("patient_id")) {
@@ -277,8 +279,8 @@ public class PocDemo2 {
                     if (key.equalsIgnoreCase("patient_id")) {
                         Double patient_id = (Double) dbObject.get(key);
 
-                        encounter.setPatient_id(doubleToLong(patient_id));
-                        System.out.println("patient_id: " + encounter.getPatient_id());
+                        encounter.setPatientId(doubleToLong(patient_id));
+                        System.out.println("patient_id: " + encounter.getPatientId());
                     }
                     //date field is found to be of type String in localhost MongoDB and of type Date in Docker VM MongoDB
 					/*
@@ -306,13 +308,14 @@ public class PocDemo2 {
 					 */
                     if (key.equalsIgnoreCase("type")) {
                         Double type = (Double) dbObject.get(key);
-                        encounter.setType(doubleToLong(type));
+                        //TODO had to comment this out due to conversion issues in new domain design
+                        // encounter.setType(doubleToLong(type));
                         System.out.println("type: " + encounter.getType());
                     }
                     if (key.equalsIgnoreCase("reason_for_visit")) {
                         String reason_for_visit = (String) dbObject.get(key);
-                        encounter.setReason_for_visit(reason_for_visit);
-                        System.out.println("reason_for_visit: " + encounter.getReason_for_visit());
+                        encounter.setReasonForVisit(reason_for_visit);
+                        System.out.println("reason_for_visit: " + encounter.getReasonForVisit());
                     }
 					/*
             		if (key.equalsIgnoreCase("observations")) {
@@ -348,8 +351,9 @@ public class PocDemo2 {
                                 }
                                 if (keyObsrvn.equalsIgnoreCase("name_type")) {
 
-                                    observation.setName_type(doubleToLong(dbobjectObsrvn.get(keyObsrvn)));
-                                    System.out.println("name_type:" + observation.getName_type());
+                                    //TODO had to comment this out due to conversion issues in new domain design
+                                    // observation.setNameType(doubleToLong(dbobjectObsrvn.get(keyObsrvn)));
+                                    System.out.println("name_type:" + observation.getNameType());
                                 }
                                 if (keyObsrvn.equalsIgnoreCase("value")) {
 
@@ -358,8 +362,9 @@ public class PocDemo2 {
                                 }
                                 if (keyObsrvn.equalsIgnoreCase("value_type")) {
 
-                                    observation.setValue_type(doubleToLong(dbobjectObsrvn.get(keyObsrvn)));
-                                    System.out.println("value_type:" + observation.getValue_type());
+                                    //TODO had to comment this out due to conversion issues in new domain design
+                                    // observation.setValueType(doubleToLong(dbobjectObsrvn.get(keyObsrvn)));
+                                    System.out.println("value_type:" + observation.getValueType());
                                 }
                                 if (keyObsrvn.equalsIgnoreCase("applies")) {
                                     String applies = (String) dbobjectObsrvn.get(keyObsrvn);
