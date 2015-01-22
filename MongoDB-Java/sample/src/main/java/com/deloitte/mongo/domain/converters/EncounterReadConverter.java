@@ -14,24 +14,27 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by jlgrock on 1/12/15.
+ *
  */
 public class EncounterReadConverter implements Converter<DBObject, Encounter> {
 
     @Autowired
     ObservationReadConverter observationReadConverter;
 
+    @Autowired
+    PatientRepository patientRepository;
+
     @Override
     public Encounter convert(DBObject source) {
         Encounter encounter = new Encounter();
         encounter.setId(((Long) source.get("_id")));
-        encounter.setPatientId(((Number) source.get("patient_id")).longValue());
+        encounter.setPatient(patientRepository.findOne(((Number) source.get("patient_id")).longValue()));
         encounter.setDate((Date) source.get("date"));
         encounter.setType(((Number) source.get("type")).intValue());
         encounter.setReasonForVisit((String) source.get("reason_for_visit"));
 
         List<Observation> observations = new ArrayList();
-        ((List<DBObject>) source.get("observations")).forEach(observationReadConverter::convert);
+        //((List<DBObject>) source.get("observations")).forEach();
         encounter.setObservations(observations);
         return encounter;
     }

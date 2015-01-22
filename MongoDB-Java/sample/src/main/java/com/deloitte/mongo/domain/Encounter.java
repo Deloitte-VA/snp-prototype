@@ -19,7 +19,7 @@ public class Encounter {
     private Long id;
 
     @NotNull
-    private Long patientId;
+    private Patient patient;
 
     @Override
     public boolean equals(Object o) {
@@ -104,11 +104,11 @@ public class Encounter {
         return id;
     }
 
-    public Long getPatientId() {
-        return patientId;
+    public Patient getPatient() {
+        return patient;
     }
 
-    public void setPatientId(Long patient) {
-        this.patientId = patientId;
+    public void setPatient(Patient patient) {
+        this.patient = patient;
     }
 }
