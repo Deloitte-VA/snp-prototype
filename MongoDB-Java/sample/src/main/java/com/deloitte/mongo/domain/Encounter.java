@@ -8,6 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by jlgrock on 1/11/15.
@@ -17,8 +18,8 @@ public class Encounter {
     @Id
     private Long id;
 
-    //@NotNull
-    //private Patient patient;
+    @NotNull
+    private Long patientId;
 
     @Override
     public boolean equals(Object o) {
@@ -56,7 +57,7 @@ public class Encounter {
     @NotNull
     private Date date;
 
-    //private Integer type;
+    private Integer type;
 
     @Field(value = "reason_for_visit")
     private String reasonForVisit;
@@ -76,7 +77,24 @@ public class Encounter {
     public void setReasonForVisit(String reasonForVisit) {
         this.reasonForVisit = reasonForVisit;
     }
-//private ArrayList<Observation> observations;
+
+    public List<Observation> getObservations() {
+        return observations;
+    }
+
+    public void setObservations(List<Observation> observations) {
+        this.observations = observations;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
+    private List<Observation> observations;
 
     public void setId(Long id) {
         this.id = id;
@@ -84,5 +102,13 @@ public class Encounter {
 
     public Long getId() {
         return id;
+    }
+
+    public Long getPatientId() {
+        return patientId;
+    }
+
+    public void setPatientId(Long patient) {
+        this.patientId = patientId;
     }
 }

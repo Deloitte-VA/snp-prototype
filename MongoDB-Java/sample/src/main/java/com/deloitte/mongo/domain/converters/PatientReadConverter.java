@@ -17,11 +17,11 @@ public class PatientReadConverter implements Converter<DBObject, Patient> {
         Patient p = new Patient();
         p.setId((Long) source.get("_id"));
         p.setFirstName((String) source.get("first_name"));
-//        p.setMiddleName((String) source.get("middle_name"));
-//        p.setLastName((String) source.get("last_name"));
-//        p.setGender(Gender.getValueById((Integer) source.get("gender")));
-//        p.setRace(Race.getValueById((Integer) source.get("race")));
-//        p.setDob(new Date((Long) source.get("dob")));
+        p.setMiddleName((String) source.get("middle_name"));
+        p.setLastName((String) source.get("last_name"));
+        p.setGender(Gender.getValueById((Integer) source.get("gender")));
+        p.setRace(Race.getValueById((Integer) source.get("race")));
+        p.setDob(new Date((Long) source.get("dob")));
         return p;
     }
 }

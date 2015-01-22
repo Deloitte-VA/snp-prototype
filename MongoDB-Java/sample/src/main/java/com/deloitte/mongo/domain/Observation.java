@@ -2,20 +2,80 @@ package com.deloitte.mongo.domain;
 
 import java.util.Date;
 
-/**
- * Created by jlgrock on 1/11/15.
- */
 public class Observation {
 
+    private Long name;
+    private Integer nameType;
+    private Long value;
+    private Integer valueType;
+    private String applies;
+    private Date issued; //private String issued;
 
+    private String identifier;
+    private String subject;
 
-    //private Object name;
+    public Long getName() {
+        return name;
+    }
 
-    //private NameType name_type;
+    public void setName(Long name) {
+        this.name = name;
+    }
 
-    //private Object value;
+    public Integer getNameType() {
+        return nameType;
+    }
 
-    //private ValueType value_type;
+    public void setNameType(Integer nameType) {
+        this.nameType = nameType;
+    }
 
-    private Date issued;
+    public Long getValue() {
+        return value;
+    }
+
+    public void setValue(Long value) {
+        this.value = value;
+    }
+
+    public Integer getValueType() {
+        return valueType;
+    }
+
+    public void setValueType(Integer value_type) {
+        valueType = valueType;
+    }
+
+    public String getApplies() {
+        return applies;
+    }
+
+    public void setApplies(String applies) {
+        this.applies = applies;
+    }
+
+    public Date getIssued() {
+        return issued;
+    }
+
+    public void setIssued(Date issued) {
+        this.issued = issued;
+    }
+
+    public String getIdentifier() {
+        return identifier;
+    }
+
+    public void setIdentifier(String identifier) {
+        this.identifier = identifier;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
 }

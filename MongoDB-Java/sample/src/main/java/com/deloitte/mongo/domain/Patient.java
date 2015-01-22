@@ -19,12 +19,12 @@ public class Patient {
 
     private String middleName;
 
-    //@NotNull
+    @NotNull
     private String lastName;
 
     private Date dob;
 
-    //@NotNull
+    @NotNull
     private Gender gender;
 
     private Race race;
