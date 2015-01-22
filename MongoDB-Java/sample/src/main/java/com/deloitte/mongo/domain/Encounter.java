@@ -11,7 +11,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by jlgrock on 1/11/15.
+ *
  */
 @Document(collection = "encounters")
 public class Encounter {

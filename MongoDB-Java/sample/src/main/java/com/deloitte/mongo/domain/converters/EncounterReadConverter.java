@@ -3,9 +3,7 @@ package com.deloitte.mongo.domain.converters;
 import com.deloitte.mongo.data.PatientRepository;
 import com.deloitte.mongo.domain.Encounter;
 import com.deloitte.mongo.domain.Observation;
-import com.deloitte.mongo.domain.Patient;
 import com.mongodb.DBObject;
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 
@@ -24,6 +22,10 @@ public class EncounterReadConverter implements Converter<DBObject, Encounter> {
     @Autowired
     PatientRepository patientRepository;
 
+    EncounterReadConverter(ObservationReadConverter observationReadConverterIn, PatientRepository patientRepositoryIn) {
+        observationReadConverter = observationReadConverterIn;
+        patientRepository = patientRepositoryIn;
+    }
     @Override
     public Encounter convert(DBObject source) {
         Encounter encounter = new Encounter();
@@ -34,7 +36,7 @@ public class EncounterReadConverter implements Converter<DBObject, Encounter> {
         encounter.setReasonForVisit((String) source.get("reason_for_visit"));
 
         List<Observation> observations = new ArrayList();
-        //((List<DBObject>) source.get("observations")).forEach();
+        ((List<DBObject>) source.get("observations")).forEach(observationObj -> observationReadConverter.convert(observationObj));
         encounter.setObservations(observations);
         return encounter;
     }

@@ -11,6 +11,10 @@ import java.util.Date;
  * Created by jlgrock on 1/12/15.
  */
 public class ObservationReadConverter implements Converter<DBObject, Observation> {
+
+    ObservationReadConverter() {
+    }
+
     @Override
     public Observation convert(DBObject source) {
         Observation observation = new Observation();

@@ -68,7 +68,7 @@ public class PocDemo2 {
 
         Set<Long> uniquePatientIds = new HashSet<Long>();
         for (Encounter rightArmEncounter : myRightArmEncounters) {
-            LOGGER.debug("***!myRightArmEncounters patientId=" + rightArmEncounter.getPatientId());
+            LOGGER.debug("***!myRightArmEncounters patientId=" + rightArmEncounter.getPatient().getId());
 
             MinMaxObservationValue minMaxObservation;
             final Long minObservationValue; //final modifier needed for inner class usage
@@ -78,7 +78,7 @@ public class PocDemo2 {
             minObservationValue = minMaxObservation.getMin();
             maxObservationValue = minMaxObservation.getMax();
 
-            final Long patientId = rightArmEncounter.getPatientId();  //final modifier needed for inner class usage
+            final Long patientId = rightArmEncounter.getPatient().getId();  //final modifier needed for inner class usage
 
             BasicDBObject query2 = new BasicDBObject("$and",
                     new ArrayList<BasicDBObject>() {{
@@ -115,7 +115,7 @@ public class PocDemo2 {
             List<Encounter> myLeftArmEncounters = convertDBObjectToJavaEncounterObj(cursor2);
             LOGGER.debug("myLeftArmEncounters=" + myLeftArmEncounters + ", size=" + myLeftArmEncounters.size());
 
-            myLeftArmEncounters.forEach(enctr -> uniquePatientIds.add(enctr.getPatientId()));
+            myLeftArmEncounters.forEach(enctr -> uniquePatientIds.add(enctr.getPatient().getId()));
         }
 
         //End of Query 2 processing
@@ -279,8 +279,8 @@ public class PocDemo2 {
                     if (key.equalsIgnoreCase("patient_id")) {
                         Double patient_id = (Double) dbObject.get(key);
 
-                        encounter.setPatientId(doubleToLong(patient_id));
-                        System.out.println("patient_id: " + encounter.getPatientId());
+                        //encounter.setPatient(doubleToLong(patient_id));
+                        //System.out.println("patient_id: " + encounter.getPatientId());
                     }
                     //date field is found to be of type String in localhost MongoDB and of type Date in Docker VM MongoDB
 					/*
