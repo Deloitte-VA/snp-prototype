@@ -20,13 +20,6 @@ public class EncounterController {
     @Autowired
     private EncounterRepository repository;
 
-    @RequestMapping(value = "", method = RequestMethod.GET)
-    public @ResponseBody
-    List<Encounter> getEncounters() {
-        List<Encounter> encounters = repository.findAll();
-        return encounters;
-    }
-
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public @ResponseBody
     Encounter getEncounter(@PathVariable final Long id) {

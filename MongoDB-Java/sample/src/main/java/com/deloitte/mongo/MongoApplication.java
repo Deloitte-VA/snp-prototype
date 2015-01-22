@@ -54,7 +54,7 @@ public class MongoApplication implements CommandLineRunner {
         p1.setId(1l);
         p1.setFirstName("Jason");
         p1.setMiddleName("Gerald");
-        //p1.setLastName("Bourne");
+        p1.setLastName("Bourne");
         p1.setGender(Gender.OTHER);
         p1.setRace(Race.OTHER);
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
