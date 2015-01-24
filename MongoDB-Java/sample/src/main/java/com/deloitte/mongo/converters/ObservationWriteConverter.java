@@ -1,14 +1,15 @@
-package com.deloitte.mongo.domain.converters;
+package com.deloitte.mongo.converters;
 
 import com.deloitte.mongo.domain.Observation;
-import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.stereotype.Component;
 
 /**
- * Created by jlgrock on 1/12/15.
+ *
  */
+@Component
 public class ObservationWriteConverter  implements Converter<Observation, DBObject> {
 
     @Override

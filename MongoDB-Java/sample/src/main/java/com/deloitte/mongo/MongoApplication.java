@@ -2,21 +2,14 @@ package com.deloitte.mongo;
 
 import com.deloitte.mongo.data.PatientRepository;
 import com.deloitte.mongo.domain.*;
-import com.deloitte.mongo.domain.converters.PatientReadConverter;
-import com.deloitte.mongo.domain.converters.PatientWriteConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.data.mongo.MongoRepositoriesAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.FilterType;
-import org.springframework.core.convert.converter.Converter;
-import org.springframework.data.mongodb.core.convert.CustomConversions;
-import org.springframework.data.mongodb.core.convert.MappingMongoConverter;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -59,7 +52,7 @@ public class MongoApplication implements CommandLineRunner {
         p1.setRace(Race.OTHER);
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Date d = sdf.parse("21/12/2012");
-        p1.setDob(d);
+        p1.setDateOfBirth(d);
         patientRepository.save(p1);
 
         printPatientCount();

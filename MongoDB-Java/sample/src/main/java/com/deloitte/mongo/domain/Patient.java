@@ -14,17 +14,14 @@ public class Patient {
     @Id
     private Long id;
 
-    //@NotNull
     private String firstName;
 
     private String middleName;
 
-    @NotNull
     private String lastName;
 
-    private Date dob;
+    private Date dateOfBirth;
 
-    @NotNull
     private Gender gender;
 
     private Race race;
@@ -36,7 +33,7 @@ public class Patient {
 
         Patient patient = (Patient) o;
 
-        if (dob != null ? !dob.equals(patient.dob) : patient.dob != null) return false;
+        if (dateOfBirth != null ? !dateOfBirth.equals(patient.dateOfBirth) : patient.dateOfBirth != null) return false;
         if (firstName != null ? !firstName.equals(patient.firstName) : patient.firstName != null) return false;
         if (gender != patient.gender) return false;
         if (id != null ? !id.equals(patient.id) : patient.id != null) return false;
@@ -53,7 +50,7 @@ public class Patient {
         result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
         result = 31 * result + (middleName != null ? middleName.hashCode() : 0);
         result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
-        result = 31 * result + (dob != null ? dob.hashCode() : 0);
+        result = 31 * result + (dateOfBirth != null ? dateOfBirth.hashCode() : 0);
         result = 31 * result + (gender != null ? gender.hashCode() : 0);
         result = 31 * result + (race != null ? race.hashCode() : 0);
         return result;
@@ -66,7 +63,7 @@ public class Patient {
                 ", firstName='" + firstName + '\'' +
                 ", middleName='" + middleName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", dob=" + dob +
+                ", dob=" + dateOfBirth +
                 ", gender=" + gender.toString() +
                 ", race=" + race +
                 '}';
@@ -104,12 +101,12 @@ public class Patient {
         this.lastName = lastName;
     }
 
-    public Date getDob() {
-        return dob;
+    public Date getDateOfBirth() {
+        return dateOfBirth;
     }
 
-    public void setDob(Date dob) {
-        this.dob = dob;
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
     public Gender getGender() {

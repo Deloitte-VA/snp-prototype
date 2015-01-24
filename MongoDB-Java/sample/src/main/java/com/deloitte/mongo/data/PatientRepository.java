@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by jlgrock on 1/11/15.
+ *
  */
 public interface PatientRepository extends MongoRepository<Patient, Long> {
     public List<Patient> findAllByLastName(String lastName);

@@ -8,9 +8,10 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by jlgrock on 1/11/15.
+ *
  */
 public interface EncounterRepository extends MongoRepository<Encounter, Long> {
+
     public List<Encounter> findByDate(Date date);
     //public List<Encounter> findByPatientId(Long id);
 

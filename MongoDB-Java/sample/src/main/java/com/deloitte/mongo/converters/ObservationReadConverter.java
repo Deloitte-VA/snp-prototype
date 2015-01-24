@@ -1,15 +1,16 @@
-package com.deloitte.mongo.domain.converters;
+package com.deloitte.mongo.converters;
 
 import com.deloitte.mongo.domain.Observation;
-import com.deloitte.mongo.domain.Patient;
 import com.mongodb.DBObject;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
 /**
- * Created by jlgrock on 1/12/15.
+ *
  */
+@Component
 public class ObservationReadConverter implements Converter<DBObject, Observation> {
 
     ObservationReadConverter() {
