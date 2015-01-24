@@ -13,8 +13,13 @@ public interface SimplePrimitive {
     public PrimitiveType getType();
 
     public static SimplePrimitive createPrimitive(Integer type, Object value) {
-        SimplePrimitive sp;
-        switch(PrimitiveType.getValueById(type)) {
+        SimplePrimitive sp = null;
+        PrimitiveType parsedType = PrimitiveType.getValueById(type);
+        if (parsedType == null) {
+            throw new IllegalArgumentException("Type not recognized.  Type=" + type.toString());
+        }
+
+        switch(parsedType) {
             case BOOLEAN:
                 if (!(value instanceof Boolean)) {
                     throw new IllegalArgumentException("Type indicated is BOOLEAN, but value is not of the same type");
@@ -58,7 +63,7 @@ public interface SimplePrimitive {
                 sp = new StringPrimitive(value);
                 break;
             default:
-                throw new IllegalArgumentException("Type not recognized.  Type=" + type.toString());
+                //Can't ever get to this
         }
         return sp;
     }

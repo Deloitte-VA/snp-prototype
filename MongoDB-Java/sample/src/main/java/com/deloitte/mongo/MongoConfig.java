@@ -3,6 +3,7 @@ package com.deloitte.mongo;
 import com.deloitte.mongo.converters.PatientReadConverter;
 import com.deloitte.mongo.converters.PatientWriteConverter;
 import com.mongodb.Mongo;
+import com.mongodb.MongoClient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by jlgrock on 1/12/15.
+ *
  */
 @Configuration
 public class MongoConfig extends AbstractMongoConfiguration {
@@ -40,7 +41,7 @@ public class MongoConfig extends AbstractMongoConfiguration {
     }
 
     @Override
-    public Mongo mongo() throws Exception {
-        return new Mongo(host + ":" + port);
+    public MongoClient mongo() throws Exception {
+        return new MongoClient(host + ":" + port);
     }
 }
