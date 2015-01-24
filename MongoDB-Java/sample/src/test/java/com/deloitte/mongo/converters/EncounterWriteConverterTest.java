@@ -1,18 +1,25 @@
-package com.deloitte.mongo.converters
+package com.deloitte.mongo.converters;
 
-import com.deloitte.mongo.domain.Encounter
-import com.deloitte.mongo.domain.Observation
-import com.deloitte.mongo.domain.Patient
-import com.mongodb.BasicDBList
-import com.mongodb.BasicDBObject
-import com.mongodb.DBObject
+import com.deloitte.mongo.data.EncounterTags;
+import com.deloitte.mongo.domain.Encounter;
+import com.deloitte.mongo.domain.Observation;
+import com.deloitte.mongo.domain.Patient;
+import com.mongodb.BasicDBList;
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBObject;
 import org.junit.Test;
 
-import static org.mockito.Mockito.*;
-import static org.junit.Assert.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 
-class EncounterWriteConverterTest extends GroovyTestCase {
+public class EncounterWriteConverterTest {
+
     @Test
     public void testConvert() {
         Date date = mock(Date.class);

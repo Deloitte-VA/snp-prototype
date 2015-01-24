@@ -1,5 +1,6 @@
 package com.deloitte.mongo.converters;
 
+import com.deloitte.mongo.data.ObservationTags;
 import com.deloitte.mongo.domain.Observation;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
@@ -15,14 +16,14 @@ public class ObservationWriteConverter  implements Converter<Observation, DBObje
     @Override
     public DBObject convert(Observation source) {
         DBObject dbo = new BasicDBObject();
-        dbo.put("identifier", source.getIdentifier());
-        dbo.put("name", source.getName());
-        dbo.put("name_type", source.getNameType());
-        dbo.put("value", source.getValue());
-        dbo.put("value_type", source.getValueType());
-        dbo.put("applies", source.getApplies());
-        dbo.put("subject", source.getSubject());
-        dbo.put("issued", source.getIssued());
+        dbo.put(ObservationTags.ID_TAG, source.getIdentifier());
+        dbo.put(ObservationTags.NAME_TAG, source.getName().getValue());
+        dbo.put(ObservationTags.NAME_TYPE_TAG, source.getName().getType().getId());
+        dbo.put(ObservationTags.VALUE_TAG, source.getValue().getValue());
+        dbo.put(ObservationTags.VALUE_TYPE_TAG, source.getValue().getType().getId());
+        dbo.put(ObservationTags.APPLIES_TAG, source.getApplies());
+        dbo.put(ObservationTags.SUBJECT_TAG, source.getSubject());
+        dbo.put(ObservationTags.ISSUED_TAG, source.getIssued().getTime());
         return dbo;
     }
 }

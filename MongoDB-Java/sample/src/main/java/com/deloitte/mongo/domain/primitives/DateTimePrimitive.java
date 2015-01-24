@@ -1,11 +1,18 @@
 package com.deloitte.mongo.domain.primitives;
 
+import org.joda.time.DateTime;
+
 /**
  *
  */
-public class DateTimePrimitive extends AbstractSimplePrimitive {
+class DateTimePrimitive extends AbstractSimplePrimitive<DateTime> {
+
+    DateTimePrimitive(final Object value) {
+        super(value);
+    }
+
     @Override
-    public PrimitiveType determineType() {
+    public PrimitiveType getType() {
         return PrimitiveType.DATETIME;
     }
 }

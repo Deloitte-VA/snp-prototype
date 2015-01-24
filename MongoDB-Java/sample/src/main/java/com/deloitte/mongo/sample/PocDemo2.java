@@ -1,25 +1,20 @@
 package com.deloitte.mongo.sample;
 
-import java.net.UnknownHostException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
+import com.deloitte.mongo.converters.EncounterReadConverter;
 import com.deloitte.mongo.domain.Encounter;
 import com.deloitte.mongo.domain.Observation;
-import com.deloitte.mongo.domain.converters.EncounterReadConverter;
-import com.mongodb.BasicDBObject;
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
-import com.mongodb.DBCursor;
-import com.mongodb.DBObject;
-import com.mongodb.MongoClient;
-
+import com.deloitte.mongo.domain.primitives.IntegerPrimitive;
+import com.deloitte.mongo.domain.primitives.PrimitiveType;
+import com.mongodb.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class PocDemo2 {
 
@@ -143,11 +138,15 @@ public class PocDemo2 {
         MinMaxObservationValue minMaxObservationValue = new MinMaxObservationValue();
 
         for (Observation observation : observations) {
-            if (max == null || observation.getValue() > max) {
-                max = observation.getValue();
-            }
-            if (min == null || observation.getValue() < min) {
-                min = observation.getValue();
+            if (observation.getValue().getType() == PrimitiveType.INTEGER) {
+                IntegerPrimitive integerPrimitive = (IntegerPrimitive) observation.getValue();
+                if (max == null || integerPrimitive.getValue() > max) {
+                    max = integerPrimitive.getValue();
+                }
+                if (min == null || integerPrimitive.getValue() < min) {
+                    min = integerPrimitive.getValue();
+                }
+
             }
         }
 

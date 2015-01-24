@@ -3,9 +3,14 @@ package com.deloitte.mongo.domain.primitives;
 /**
  *
  */
-public class BooleanPrimitive extends AbstractSimplePrimitive {
+public class BooleanPrimitive extends AbstractSimplePrimitive<Boolean> {
+
+    BooleanPrimitive(final Object value) {
+        super(value);
+    }
+
     @Override
-    public PrimitiveType determineType() {
+    public PrimitiveType getType() {
         return PrimitiveType.BOOLEAN;
     }
 }

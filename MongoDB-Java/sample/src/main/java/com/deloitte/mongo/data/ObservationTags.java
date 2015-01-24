@@ -11,4 +11,5 @@ public class ObservationTags {
     public static final String VALUE_TYPE_TAG = "value_type";
     public static final String APPLIES_TAG = "applies_tag";
     public static final String ISSUED_TAG = "issued";
+    public static final String SUBJECT_TAG = "subject";
 }
