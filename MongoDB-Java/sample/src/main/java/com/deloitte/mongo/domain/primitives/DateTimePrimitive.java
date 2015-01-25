@@ -3,11 +3,14 @@ package com.deloitte.mongo.domain.primitives;
 import org.joda.time.DateTime;
 
 /**
- *
+ * The primitive representing Date + Time values.  The underlying type is the JodaTime DateTime object.
  */
 class DateTimePrimitive extends AbstractSimplePrimitive<DateTime> {
 
-    DateTimePrimitive(final Object value) {
+    /**
+     * @param value The value to store.
+     */
+    DateTimePrimitive(final DateTime value) {
         super(value);
     }
 

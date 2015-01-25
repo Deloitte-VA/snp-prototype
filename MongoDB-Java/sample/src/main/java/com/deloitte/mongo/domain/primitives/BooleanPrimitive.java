@@ -1,11 +1,14 @@
 package com.deloitte.mongo.domain.primitives;
 
 /**
- *
+ * The primitive representing Boolean values.  The underlying type is the Boolean object.
  */
 public class BooleanPrimitive extends AbstractSimplePrimitive<Boolean> {
 
-    BooleanPrimitive(final Object value) {
+    /**
+     * @param value The value to store.
+     */
+    BooleanPrimitive(final Boolean value) {
         super(value);
     }
 

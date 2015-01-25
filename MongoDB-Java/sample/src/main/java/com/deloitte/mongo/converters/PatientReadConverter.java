@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import java.util.Date;
 
 /**
- *
+ * A Conversion class to convert between a MongoDB DBObject to an Patient object.
  */
 @Component
 public class PatientReadConverter implements Converter<DBObject, Patient> {

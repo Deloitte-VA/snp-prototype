@@ -1,11 +1,14 @@
 package com.deloitte.mongo.domain.primitives;
 
 /**
- *
+ * The primitive representing String values.  The underlying type is the String object.
  */
 public class StringPrimitive extends AbstractSimplePrimitive<String> {
 
-    StringPrimitive(final Object valueIn) {
+    /**
+     * @param valueIn the represented String
+     */
+    StringPrimitive(final String valueIn) {
         super(valueIn);
     }
 

@@ -8,7 +8,7 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
 /**
- *
+ * A Conversion class to convert between an Observation objects and a MongoDB DBObject.
  */
 @Component
 public class ObservationWriteConverter  implements Converter<Observation, DBObject> {

@@ -3,11 +3,14 @@ package com.deloitte.mongo.domain.primitives;
 import java.math.BigDecimal;
 
 /**
- *
+ * The primitive representing Decimal values.  The underlying type is the BigDecimal object.
  */
 public class DecimalPrimitive extends AbstractSimplePrimitive<BigDecimal> {
 
-    DecimalPrimitive(final Object valueIn) {
+    /**
+     * @param valueIn the value to store
+     */
+    DecimalPrimitive(final BigDecimal valueIn) {
         super(valueIn);
     }
 

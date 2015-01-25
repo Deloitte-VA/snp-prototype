@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import java.util.Date;
 
 /**
- *
+ * A Conversion class to convert between a MongoDB DBObject to an Observation object.
  */
 @Component
 public class ObservationReadConverter implements Converter<DBObject, Observation> {

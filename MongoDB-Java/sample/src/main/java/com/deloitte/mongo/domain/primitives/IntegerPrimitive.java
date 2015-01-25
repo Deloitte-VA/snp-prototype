@@ -1,11 +1,14 @@
 package com.deloitte.mongo.domain.primitives;
 
 /**
- *
+ * The primitive representing Integer values.  The underlying type is the Long object (to cover the case that this is a very large integer).
  */
 public class IntegerPrimitive extends AbstractSimplePrimitive<Long> {
 
-    IntegerPrimitive(final Object valueIn) {
+    /**
+     * @param valueIn The value to store.
+     */
+    IntegerPrimitive(final Long valueIn) {
         super(valueIn);
     }
 

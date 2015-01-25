@@ -8,7 +8,7 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
 /**
- *
+ * A Conversion class to convert between an Patient objects and a MongoDB DBObject.
  */
 @Component
 public class PatientWriteConverter implements Converter<Patient, DBObject> {

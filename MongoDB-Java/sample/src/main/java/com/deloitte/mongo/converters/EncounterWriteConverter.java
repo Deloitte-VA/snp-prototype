@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
- *
+ * A Conversion class to convert between an Encounter objects and a MongoDB DBObject.
  */
 @Component
 public class EncounterWriteConverter implements Converter<Encounter, DBObject> {

@@ -5,11 +5,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * The primitive types allowable in the SNP Observation/PCE objects.
  *
+ * Based off of the current FHIR primitives
+ * http://www.hl7.org/implement/standards/fhir/datatypes.html
  */
 public enum PrimitiveType {
-    // Based off of the current FHIR primitives
-    // http://www.hl7.org/implement/standards/fhir/datatypes.html
+    /**
+     * The allowable Primitive Types.
+     */
     BOOLEAN(1), INTEGER(2), DECIMAL(3), BINARY64(4), DATE(5), DATETIME(6), STRING(7);
 
     private static Map<Integer, PrimitiveType> valuesById;
@@ -25,10 +29,19 @@ public enum PrimitiveType {
         id = i;
     }
 
+    /**
+     * @return the id of the Primitive Type
+     */
     public Integer getId() {
         return id;
     }
 
+    /**
+     * Reverse-Lookup a PrimitiveType by its ID
+     *
+     * @param id the id of the PrimitiveType
+     * @return the PrimitiveType referred
+     */
     public static PrimitiveType getValueById(final Integer id) {
         return valuesById.get(id);
     }
