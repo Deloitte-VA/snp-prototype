@@ -4,11 +4,9 @@ import org.bson.types.Binary;
 import org.junit.Test;
 
 import java.math.BigDecimal;
-import java.security.InvalidParameterException;
-import java.util.Date;
 
-import static org.mockito.Mockito.*;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class PrimitivesTest {
     @Test
@@ -60,9 +58,9 @@ public class PrimitivesTest {
     @Test
     public void testGoodDateTime() {
         Long longVal = 1234l;
-        SimplePrimitive simplePrimitive = SimplePrimitive.createPrimitive(PrimitiveType.DATE.getId(), longVal);
-        assertTrue(simplePrimitive instanceof DatePrimitive);
-        assertEquals(PrimitiveType.DATE, simplePrimitive.getType());
+        SimplePrimitive simplePrimitive = SimplePrimitive.createPrimitive(PrimitiveType.DATETIME.getId(), longVal);
+        assertTrue(simplePrimitive instanceof DateTimePrimitive);
+        assertEquals(PrimitiveType.DATETIME, simplePrimitive.getType());
         assertEquals(longVal, simplePrimitive.getValue());
     }
 
