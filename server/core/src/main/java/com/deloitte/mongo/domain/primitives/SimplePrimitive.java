@@ -46,43 +46,43 @@ public interface SimplePrimitive {
         switch(parsedType) {
             case BOOLEAN:
                 if (!(value instanceof Boolean)) {
-                    throw new IllegalArgumentException("Type indicated is BOOLEAN, but value is not of the same type");
+                    throw new IllegalArgumentException("Type indicated is BOOLEAN, but value is not of the same type (Boolean)");
                 }
                 sp = new BooleanPrimitive((Boolean) value);
                 break;
             case BINARY64:
                 if (!(value instanceof Binary)) {
-                    throw new IllegalArgumentException("Type indicated is BINARY, but value is not of the same type");
+                    throw new IllegalArgumentException("Type indicated is BINARY, but value is not of the same type (Binary)");
                 }
                 sp = new BinaryPrimitive((Binary) value);
                 break;
             case DATE:
                 if (!(value instanceof Long)) {
-                    throw new IllegalArgumentException("Type indicated is DATE, but value is not of the same type");
+                    throw new IllegalArgumentException("Type indicated is DATE, but value is not of the same type (Long)");
                 }
                 sp = new DatePrimitive(new LocalDate((Long) value));
                 break;
             case DATETIME:
                 if (!(value instanceof Long)) {
-                    throw new IllegalArgumentException("Type indicated is DATETIME, but value is not of the same type");
+                    throw new IllegalArgumentException("Type indicated is DATETIME, but value is not of the same type (Long)");
                 }
                 sp = new DateTimePrimitive(new DateTime((Long) value));
                 break;
             case DECIMAL:
                 if (!(value instanceof BigDecimal)) {
-                throw new IllegalArgumentException("Type indicated is DECIMAL, but value is not of the same type");
+                throw new IllegalArgumentException("Type indicated is DECIMAL, but value is not of the same type (BigDecimal)");
                 }
                 sp = new DecimalPrimitive((BigDecimal) value);
                 break;
             case INTEGER:
                 if (!(value instanceof Long)) {
-                    throw new IllegalArgumentException("Type indicated is INTEGER, but value is not of the same type");
+                    throw new IllegalArgumentException("Type indicated is INTEGER, but value is not of the same type (Long)");
                 }
                 sp = new IntegerPrimitive((Long) value);
                 break;
             case STRING:
                 if (!(value instanceof String)) {
-                    throw new IllegalArgumentException("Type indicated is STRING, but value is not of the same type");
+                    throw new IllegalArgumentException("Type indicated is STRING, but value is not of the same type (String)");
                 }
                 sp = new StringPrimitive((String) value);
                 break;

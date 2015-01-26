@@ -1,6 +1,8 @@
 package com.deloitte.mongo.domain.primitives;
 
 import org.bson.types.Binary;
+import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
 import org.junit.Test;
 
 import java.math.BigDecimal;
@@ -46,7 +48,7 @@ public class PrimitivesTest {
         SimplePrimitive simplePrimitive = SimplePrimitive.createPrimitive(PrimitiveType.DATE.getId(), longVal);
         assertTrue(simplePrimitive instanceof DatePrimitive);
         assertEquals(PrimitiveType.DATE, simplePrimitive.getType());
-        assertEquals(longVal, simplePrimitive.getValue());
+        assertEquals(new LocalDate(longVal), simplePrimitive.getValue());
     }
 
     @Test(expected=IllegalArgumentException.class)
@@ -61,7 +63,7 @@ public class PrimitivesTest {
         SimplePrimitive simplePrimitive = SimplePrimitive.createPrimitive(PrimitiveType.DATETIME.getId(), longVal);
         assertTrue(simplePrimitive instanceof DateTimePrimitive);
         assertEquals(PrimitiveType.DATETIME, simplePrimitive.getType());
-        assertEquals(longVal, simplePrimitive.getValue());
+        assertEquals(new DateTime(longVal), simplePrimitive.getValue());
     }
 
     @Test(expected=IllegalArgumentException.class)
@@ -87,7 +89,7 @@ public class PrimitivesTest {
 
     @Test
     public void testGoodInteger() {
-        Integer integer = 5;
+        Long integer = 5l;
         SimplePrimitive simplePrimitive = SimplePrimitive.createPrimitive(PrimitiveType.INTEGER.getId(), integer);
         assertTrue(simplePrimitive instanceof IntegerPrimitive);
         assertEquals(PrimitiveType.INTEGER, simplePrimitive.getType());
