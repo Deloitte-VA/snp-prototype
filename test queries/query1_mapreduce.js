@@ -2,7 +2,7 @@ var map1 = function() {
     var i;
 
     for (i=0; i < this.observations.length; i=i+1) {
-        if ( this.observations[i].name == 5695930304 
+        if ( this.observations[i].name == 5695930304, 5695930310 
                 && this.observations[i].name_type == 1 
                 && this.observations[i].value > 140 ) {
             emit( this.patient_id, 1 );
