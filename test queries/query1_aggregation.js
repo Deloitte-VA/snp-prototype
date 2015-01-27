@@ -2,7 +2,7 @@ print(
 db.encounters.aggregate([
     {
         $match: {
-            "observations.name": 5695930304,
+            "observations.name": {$in: [5695930304, 5695930310]},
             "observations.name_type": 1,
             "observations.value": {$gt: 140}    
         }
