@@ -32,7 +32,9 @@ public class PocDemo2 {
         // connect to the local database server
         MongoClient mongoClient = null;
         try {
-            mongoClient = new MongoClient("192.168.59.103", 27017); //boot2docker ip address
+            //mongoClient = new MongoClient("192.168.59.103", 27017); //boot2docker ip address
+            mongoClient = new MongoClient("192.168.59.104", 27017); //boot2docker ip address
+            LOGGER.debug("Obtained Mongo client");
         } catch (UnknownHostException e) {
             LOGGER.error("Unable to connect to MongoDB", e);
             return;
@@ -118,6 +120,8 @@ public class PocDemo2 {
 
             myLeftArmEncounters.forEach(enctr -> uniquePatientIds.add(enctr.getPatient().getId()));
         }
+        //Display unique patient IDs
+        LOGGER.debug("Patient IDs with diparity of more than between left and right arm blood pressure readings: " + "Size =" + uniquePatientIds.size() + ", List = " + uniquePatientIds);
 
         //End of Query 2 processing
 
@@ -164,7 +168,7 @@ public class PocDemo2 {
      * @param cursor
      * @return
      */
-    private List<Encounter> convertDBObjectToJavaEncounterObj(DBCursor cursor) {
+    public List<Encounter> convertDBObjectToJavaEncounterObj(DBCursor cursor) {
 
         List<Encounter> encounterList = new ArrayList<Encounter>();
 
@@ -172,7 +176,7 @@ public class PocDemo2 {
             while (cursor.hasNext()) {
                 DBObject dbObject = cursor.next();
                 //Convert to POJO and add it to the encounterList
-                LOGGER.debug("encounterJsonStr =" + dbObject);
+                //LOGGER.debug("encounterJsonStr =" + dbObject);
                 
                 // Use the converter class's convert() method to create POJO. 
                 //AutoWired encounterReadConverter object
@@ -192,5 +196,5 @@ public class PocDemo2 {
         //Return
         return encounterList;
     }
-
+    
 }
