@@ -1,9 +1,9 @@
 language: java
 
-install: mvn clean install -PcodeQuality
-
-before_install: 
+before_install:
  - cd server
+
+script: mvn clean install -PcodeQuality
 
 jdk:
   - oraclejdk8
