@@ -19,7 +19,7 @@ public enum Race {
 
     private final Integer id;
 
-    private Race(Integer i) {
+    private Race(final Integer i) {
         id = i;
     }
 

@@ -5,10 +5,9 @@ import com.deloitte.mongo.domain.Gender;
 import com.deloitte.mongo.domain.Patient;
 import com.deloitte.mongo.domain.Race;
 import com.mongodb.DBObject;
+import org.joda.time.DateTime;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
-
-import java.util.Date;
 
 /**
  * A Conversion class to convert between a MongoDB DBObject to an Patient object.
@@ -24,7 +23,7 @@ public class PatientReadConverter implements Converter<DBObject, Patient> {
         p.setLastName((String) source.get(PatientTags.LAST_NAME_TAG));
         p.setGender(Gender.getValueById((Integer) source.get(PatientTags.GENDER_TAG)));
         p.setRace(Race.getValueById((Integer) source.get(PatientTags.RACE_TAG)));
-        p.setDateOfBirth(new Date((Long) source.get(PatientTags.DATE_OF_BIRTH_TAG)));
+        p.setDateOfBirth(new DateTime((Long) source.get(PatientTags.DATE_OF_BIRTH_TAG)));
         return p;
     }
 }

@@ -32,7 +32,6 @@ public class PocDemo2 {
         // connect to the local database server
         MongoClient mongoClient = null;
         try {
-            //mongoClient = new MongoClient("192.168.59.103", 27017); //boot2docker ip address
             mongoClient = new MongoClient("192.168.59.104", 27017); //boot2docker ip address
             LOGGER.debug("Obtained Mongo client");
         } catch (UnknownHostException e) {

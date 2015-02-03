@@ -7,10 +7,10 @@ import com.deloitte.mongo.domain.Patient;
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
+import org.joda.time.DateTime;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -22,7 +22,7 @@ public class EncounterWriteConverterTest {
 
     @Test
     public void testConvert() {
-        Date date = mock(Date.class);
+        DateTime date = new DateTime(888l);
         Patient patient = mock(Patient.class);
         when(patient.getId()).thenReturn((Long) 456l);
 
@@ -56,7 +56,7 @@ public class EncounterWriteConverterTest {
         DBObject dbObj = encounterWriteConverter.convert(encounter);
 
         assertEquals((Long) 123l, dbObj.get(EncounterTags.ID_TAG));
-        assertEquals(date, dbObj.get(EncounterTags.DATE_TAG));
+        assertEquals(date.getMillis(), dbObj.get(EncounterTags.DATE_TAG));
         assertEquals((Long) 456l, dbObj.get(EncounterTags.PATIENT_TAG));
         assertEquals("hernia", dbObj.get(EncounterTags.REASON_FOR_VISIT_TAG));
         assertEquals(1, dbObj.get(EncounterTags.TYPE_TAG));

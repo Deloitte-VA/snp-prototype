@@ -2,7 +2,6 @@ package com.deloitte.mongo;
 
 import com.deloitte.mongo.converters.PatientReadConverter;
 import com.deloitte.mongo.converters.PatientWriteConverter;
-import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -21,10 +20,10 @@ import java.util.List;
 public class MongoConfig extends AbstractMongoConfiguration {
 
     @Value("${spring.data.mongodb.host}")
-    String host;
+    private String host;
 
     @Value("${spring.data.mongodb.port}")
-    String port;
+    private String port;
 
     @Bean
     @Override

@@ -13,13 +13,13 @@ public enum Gender {
     private static Map<Integer, Gender> valuesById;
 
     static {
-        valuesById = new HashMap();
+        valuesById = new HashMap<>();
         Arrays.asList(Gender.values()).forEach(gender -> valuesById.put(gender.getId(), gender));
     }
 
     private final Integer id;
 
-    private Gender(Integer i) {
+    private Gender(final Integer i) {
         id = i;
     }
 

@@ -14,7 +14,7 @@ public class PCE {
     private String desc;
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
@@ -45,7 +45,7 @@ public class PCE {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(final Long id) {
         this.id = id;
     }
 
@@ -53,7 +53,7 @@ public class PCE {
         return desc;
     }
 
-    public void setDesc(String desc) {
+    public void setDesc(final String desc) {
         this.desc = desc;
     }
 }

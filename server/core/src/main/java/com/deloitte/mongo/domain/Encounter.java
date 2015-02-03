@@ -1,13 +1,11 @@
 package com.deloitte.mongo.domain;
 
+import org.joda.time.DateTime;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -55,18 +53,18 @@ public class Encounter {
     }
 
     @NotNull
-    private Date date;
+    private DateTime date;
 
     private Integer type;
 
     @Field(value = "reason_for_visit")
     private String reasonForVisit;
 
-    public Date getDate() {
+    public DateTime getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(final DateTime date) {
         this.date = date;
     }
 
@@ -74,7 +72,7 @@ public class Encounter {
         return reasonForVisit;
     }
 
-    public void setReasonForVisit(String reasonForVisit) {
+    public void setReasonForVisit(final String reasonForVisit) {
         this.reasonForVisit = reasonForVisit;
     }
 
@@ -82,7 +80,7 @@ public class Encounter {
         return observations;
     }
 
-    public void setObservations(List<Observation> observations) {
+    public void setObservations(final List<Observation> observations) {
         this.observations = observations;
     }
 
@@ -90,13 +88,13 @@ public class Encounter {
         return type;
     }
 
-    public void setType(Integer type) {
+    public void setType(final Integer type) {
         this.type = type;
     }
 
     private List<Observation> observations;
 
-    public void setId(Long id) {
+    public void setId(final Long id) {
         this.id = id;
     }
 

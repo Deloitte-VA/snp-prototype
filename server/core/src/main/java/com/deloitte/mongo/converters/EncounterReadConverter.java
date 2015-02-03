@@ -5,12 +5,12 @@ import com.deloitte.mongo.data.PatientRepository;
 import com.deloitte.mongo.domain.Encounter;
 import com.deloitte.mongo.domain.Observation;
 import com.mongodb.DBObject;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,7 +35,7 @@ public class EncounterReadConverter implements Converter<DBObject, Encounter> {
         Encounter encounter = new Encounter();
         encounter.setId(((Long) source.get(EncounterTags.ID_TAG)));
         encounter.setPatient(patientRepository.findOne(((Number) source.get(EncounterTags.PATIENT_TAG)).longValue()));
-        encounter.setDate((Date) source.get(EncounterTags.DATE_TAG));
+        encounter.setDate(new DateTime((Long) source.get(EncounterTags.DATE_TAG)));
         encounter.setType(((Number) source.get(EncounterTags.TYPE_TAG)).intValue());
         encounter.setReasonForVisit((String) source.get(EncounterTags.REASON_FOR_VISIT_TAG));
 

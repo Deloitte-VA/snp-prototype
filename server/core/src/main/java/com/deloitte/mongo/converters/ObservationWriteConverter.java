@@ -23,7 +23,7 @@ public class ObservationWriteConverter  implements Converter<Observation, DBObje
         dbo.put(ObservationTags.VALUE_TYPE_TAG, source.getValue().getType().getId());
         dbo.put(ObservationTags.APPLIES_TAG, source.getApplies());
         dbo.put(ObservationTags.SUBJECT_TAG, source.getSubject());
-        dbo.put(ObservationTags.ISSUED_TAG, source.getIssued().getTime());
+        dbo.put(ObservationTags.ISSUED_TAG, source.getIssued().getMillis());
         return dbo;
     }
 }

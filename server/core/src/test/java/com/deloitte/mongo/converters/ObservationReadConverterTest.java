@@ -4,9 +4,8 @@ import com.deloitte.mongo.data.ObservationTags;
 import com.deloitte.mongo.domain.Observation;
 import com.deloitte.mongo.domain.primitives.PrimitiveType;
 import com.mongodb.DBObject;
+import org.joda.time.DateTime;
 import org.junit.Test;
-
-import java.util.Date;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
@@ -16,7 +15,7 @@ public class ObservationReadConverterTest {
 
     @Test
     public void testConvert() {
-        Date date = new Date();
+        DateTime date = new DateTime();
 
         DBObject dbObj = mock(DBObject.class);
         when(dbObj.get(ObservationTags.ID_TAG)).thenReturn("stringId");
@@ -25,7 +24,7 @@ public class ObservationReadConverterTest {
         when(dbObj.get(ObservationTags.VALUE_TAG)).thenReturn(true);
         when(dbObj.get(ObservationTags.VALUE_TYPE_TAG)).thenReturn(PrimitiveType.BOOLEAN.getId());
         when(dbObj.get(ObservationTags.APPLIES_TAG)).thenReturn("applies");
-        when(dbObj.get(ObservationTags.ISSUED_TAG)).thenReturn(date.getTime());
+        when(dbObj.get(ObservationTags.ISSUED_TAG)).thenReturn(date.getMillis());
         when(dbObj.get(ObservationTags.SUBJECT_TAG)).thenReturn("subject");
 
         ObservationReadConverter observationReadConverter = new ObservationReadConverter();
