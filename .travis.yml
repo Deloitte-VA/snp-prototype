@@ -17,4 +17,4 @@ notifications:
     notify: true
     format: html
     rooms:
-      secure: "V4lvMXjpr5F+XbEJ55ZZWe/96+st8DURmfmh1SpBy8y7HzMDACIC/6tcOV/zZbdQkMD87uCWo5bqVDslGBrKgxJl7i+wzvrARtvRNT1f/eWDIqXE93t6o05Ulf5Ei7r2yjF6VKA6RGV8zFEgNplbX+2Sp3UYd6kRWfQJXfFNNcE="
+      secure: "KsNXiU3yUR53GzXqdBJETAv7nnpMnkcJmKyvW3M6mlZFQiCjwEYY/wtJAasIWQxeyl06oZSlAcCkXpvGGo43+nGh+aaW+rlcL1XwIE05sZmknfiBivwK2RZIdqkYrwGSofgZkSrgC5NjJAKYPQeRyMtTYoGrn17raRAdKOF+rIU="
