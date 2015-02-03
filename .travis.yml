@@ -9,4 +9,5 @@ jdk:
   - oraclejdk8
 
 notifications:
-  hipchat: b8IVrkEK3yIDMy4Q92xjqyjFsHa2BJkb5vfX8YqM@268183_snp-prototype
+  hipchat:
+    -secure: "PPFSFrs07TvAgnKyevlGGBFDoTJ9OXyqlZcIjY64BqMnFUYJRHWri6wvEmnZI699FVUrTGH++NtxG4w8fbycmCbEKVEtwZT/ewR7vgd++/ycQmcYR1rnPrRPHXU1IE6Sc6QtLuzADQxJeAXZ2kl/rDAOItyFHoeKBhc6q7FcZL0="
