@@ -32,7 +32,7 @@ public class EncounterReadConverter implements Converter<DBObject, Encounter> {
     }
 
     @Override
-    spublic Encounter convert(DBObject source) {
+    public Encounter convert(DBObject source) {
         Encounter encounter = new Encounter();
         encounter.setId(((Long) source.get(EncounterTags.ID_TAG)));
         encounter.setPatient(patientRepository.findOne(((Number) source.get(EncounterTags.PATIENT_TAG)).longValue()));
