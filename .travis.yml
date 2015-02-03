@@ -1,0 +1,9 @@
+language: java
+
+before_install:
+ - cd server
+
+script: mvn clean install -PcodeQuality
+
+jdk:
+  - oraclejdk8

@@ -4,10 +4,9 @@ import com.deloitte.mongo.data.ObservationTags;
 import com.deloitte.mongo.domain.Observation;
 import com.deloitte.mongo.domain.primitives.SimplePrimitive;
 import com.mongodb.DBObject;
+import org.joda.time.DateTime;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
-
-import java.util.Date;
 
 /**
  * A Conversion class to convert between a MongoDB DBObject to an Observation object.
@@ -26,7 +25,7 @@ public class ObservationReadConverter implements Converter<DBObject, Observation
         observation.setValue(SimplePrimitive.createPrimitive((Integer) source.get(ObservationTags.VALUE_TYPE_TAG), source.get(ObservationTags.VALUE_TAG)));
         observation.setApplies((String) source.get(ObservationTags.APPLIES_TAG));
         observation.setSubject((String) source.get(ObservationTags.SUBJECT_TAG));
-        observation.setIssued(new Date((Long) source.get(ObservationTags.ISSUED_TAG)));
+        observation.setIssued(new DateTime((Long) source.get(ObservationTags.ISSUED_TAG)));
         return observation;
     }
 }

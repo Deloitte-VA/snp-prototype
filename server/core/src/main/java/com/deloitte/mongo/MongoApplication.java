@@ -1,7 +1,10 @@
 package com.deloitte.mongo;
 
 import com.deloitte.mongo.data.PatientRepository;
-import com.deloitte.mongo.domain.*;
+import com.deloitte.mongo.domain.Gender;
+import com.deloitte.mongo.domain.Patient;
+import com.deloitte.mongo.domain.Race;
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +13,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-
-import java.text.SimpleDateFormat;
-import java.util.*;
 
 /**
  * Created by jlgrock on 1/11/15.
@@ -27,7 +27,7 @@ public class MongoApplication implements CommandLineRunner {
     private PatientRepository patientRepository;
 
     @Autowired
-    MyConnection myConnection;
+    private MyConnection myConnection;
 
     public static void main(String[] args) throws Exception {
         LOGGER.info("Starting Mongo Application.");
@@ -50,8 +50,7 @@ public class MongoApplication implements CommandLineRunner {
         p1.setLastName("Bourne");
         p1.setGender(Gender.OTHER);
         p1.setRace(Race.OTHER);
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        Date d = sdf.parse("21/12/2012");
+        DateTime d = new DateTime("21/12/2012");
         p1.setDateOfBirth(d);
         patientRepository.save(p1);
 

@@ -1,17 +1,5 @@
 package com.deloitte.mongo.sample;
 
-import static org.junit.Assert.assertEquals;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import org.junit.Test;
-//import org.mockito.ArgumentMatcher;
-import org.mockito.Mockito;
-
 import com.deloitte.mongo.converters.EncounterReadConverter;
 import com.deloitte.mongo.data.EncounterTags;
 import com.deloitte.mongo.domain.Encounter;
@@ -23,14 +11,26 @@ import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
+import org.joda.time.DateTime;
+import org.junit.Test;
+import org.mockito.Mockito;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
+
+//import org.mockito.ArgumentMatcher;
 
 public class PocDemo2Test extends Mockito {
 	
 	@Test
     public void testConvertDBObjectToEncounterObj() {
-        Date date = mock(Date.class);
+        DateTime date = new DateTime(99999l);
         Patient patient = mock(Patient.class);
-        when(date.getTime()).thenReturn(99999l);
 
         Observation observation1 = mock(Observation.class);
         Observation observation2 = mock(Observation.class);
@@ -148,7 +148,7 @@ public class PocDemo2Test extends Mockito {
     		//String inputDateStr = "06/29/2014"; //"dd-MM-yyyy" or "dd/MM/yyyy"
     		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
     		Date inputDate = dateFormat.parse("06/29/2014"); //inputDateStr
-    		encounter.setDate(new Date ());
+    		encounter.setDate(new DateTime());
     		encounter.setType(4);
     		encounter.setReasonForVisit("Emergency room visit for heart palpitations.");
     		
@@ -175,7 +175,7 @@ public class PocDemo2Test extends Mockito {
     		//String inputDateStr = "06/29/2014"; //"dd-MM-yyyy" or "dd/MM/yyyy"
     		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
     		Date inputDate = dateFormat.parse("06/29/2014"); //inputDateStr
-    		encounter.setDate(new Date ());
+    		encounter.setDate(new DateTime());
     		encounter.setType(4);
     		encounter.setReasonForVisit("Emergency room visit for heart palpitations.");
     		
@@ -213,7 +213,7 @@ public class PocDemo2Test extends Mockito {
     		//String inputDateStr = "06/29/2014"; //"dd-MM-yyyy" or "dd/MM/yyyy"
     		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
     		Date inputDate = dateFormat.parse("01/17/2014"); //inputDateStr
-    		encounter.setDate(new Date ());
+    		encounter.setDate(new DateTime());
     		encounter.setType(4);
     		encounter.setReasonForVisit("Emergency room visit for heart palpitations.");
     		

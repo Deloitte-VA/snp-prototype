@@ -1,15 +1,14 @@
 package com.deloitte.mongo.domain;
 
 import com.deloitte.mongo.domain.primitives.SimplePrimitive;
-
-import java.util.Date;
+import org.joda.time.DateTime;
 
 public class Observation {
 
     private SimplePrimitive name;
     private SimplePrimitive value;
     private String applies;
-    private Date issued;
+    private DateTime issued;
 
     private String identifier;
     private String subject;
@@ -18,7 +17,7 @@ public class Observation {
         return name;
     }
 
-    public void setName(SimplePrimitive name) {
+    public void setName(final SimplePrimitive name) {
         this.name = name;
     }
 
@@ -26,7 +25,7 @@ public class Observation {
         return value;
     }
 
-    public void setValue(SimplePrimitive value) {
+    public void setValue(final SimplePrimitive value) {
         this.value = value;
     }
 
@@ -34,15 +33,15 @@ public class Observation {
         return applies;
     }
 
-    public void setApplies(String applies) {
+    public void setApplies(final String applies) {
         this.applies = applies;
     }
 
-    public Date getIssued() {
+    public DateTime getIssued() {
         return issued;
     }
 
-    public void setIssued(Date issued) {
+    public void setIssued(final DateTime issued) {
         this.issued = issued;
     }
 
@@ -50,7 +49,7 @@ public class Observation {
         return identifier;
     }
 
-    public void setIdentifier(String identifier) {
+    public void setIdentifier(final String identifier) {
         this.identifier = identifier;
     }
 
@@ -58,7 +57,7 @@ public class Observation {
         return subject;
     }
 
-    public void setSubject(String subject) {
+    public void setSubject(final String subject) {
         this.subject = subject;
     }
 

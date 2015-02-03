@@ -8,27 +8,26 @@ import com.deloitte.mongo.domain.Patient;
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
-
+import org.joda.time.DateTime;
 import org.junit.Test;
 
-import static org.mockito.Mockito.*;
-import static org.junit.Assert.*;
-
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class EncounterReadConverterTest {
 
     @Test
     public void testConvert() {
-        Date date = mock(Date.class);
+        DateTime date = new DateTime(99999l);
         Patient patient = mock(Patient.class);
-        when(date.getTime()).thenReturn(99999l);
 
         Observation observation1 = mock(Observation.class);
         Observation observation2 = mock(Observation.class);
-        List<Observation> observations = new ArrayList() {{
+        List<Observation> observations = new ArrayList<Observation>() {{
             add(observation1);
             add(observation1);
             add(observation2);
@@ -45,7 +44,7 @@ public class EncounterReadConverterTest {
         DBObject dbObject = new BasicDBObject() {{
             put(EncounterTags.ID_TAG, 123l);
             put(EncounterTags.PATIENT_TAG, 456l);
-            put(EncounterTags.DATE_TAG, date);
+            put(EncounterTags.DATE_TAG, date.getMillis());
             put(EncounterTags.TYPE_TAG, 1);
             put(EncounterTags.REASON_FOR_VISIT_TAG, "hernia");
             put(EncounterTags.OBSERVATIONS_TAG, observationObjs);

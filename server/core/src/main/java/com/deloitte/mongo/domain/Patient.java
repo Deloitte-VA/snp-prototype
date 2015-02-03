@@ -1,10 +1,8 @@
 package com.deloitte.mongo.domain;
 
+import org.joda.time.DateTime;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
-import javax.validation.constraints.NotNull;
-import java.util.Date;
 
 /**
  * Created by jlgrock on 1/11/15.
@@ -20,14 +18,14 @@ public class Patient {
 
     private String lastName;
 
-    private Date dateOfBirth;
+    private DateTime dateOfBirth;
 
     private Gender gender;
 
     private Race race;
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
@@ -73,7 +71,7 @@ public class Patient {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(final Long id) {
         this.id = id;
     }
 
@@ -81,7 +79,7 @@ public class Patient {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
+    public void setFirstName(final String firstName) {
         this.firstName = firstName;
     }
 
@@ -89,7 +87,7 @@ public class Patient {
         return middleName;
     }
 
-    public void setMiddleName(String middleName) {
+    public void setMiddleName(final String middleName) {
         this.middleName = middleName;
     }
 
@@ -97,15 +95,15 @@ public class Patient {
         return lastName;
     }
 
-    public void setLastName(String lastName) {
+    public void setLastName(final String lastName) {
         this.lastName = lastName;
     }
 
-    public Date getDateOfBirth() {
+    public DateTime getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(final DateTime dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -113,7 +111,7 @@ public class Patient {
         return gender;
     }
 
-    public void setGender(Gender gender) {
+    public void setGender(final Gender gender) {
         this.gender = gender;
     }
 
@@ -121,7 +119,7 @@ public class Patient {
         return race;
     }
 
-    public void setRace(Race race) {
+    public void setRace(final Race race) {
         this.race = race;
     }
 }

@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.util.Date;
 
+import org.joda.time.DateTime;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -12,19 +13,19 @@ public class PatientTest {
 	@Test
 	public void test() {
 
-	    Long ln1 = new Long(222015);
+	    Long ln1 = new Long(201521);
 	    String st1 = "Brady";
 	    String st2 = "Wilson";
 	    String st3 = "Lynch";
-		Date dt1 = Mockito.mock (Date.class); 
+		DateTime dt1 = new DateTime(2015, 2, 2, 0, 0, 0); 
 		Gender gn1 = Gender.MALE; 
 		Race rc1 = Race.CAUCASIAN; 
 	    
-	    Long ln2 = new Long(212015);
+	    Long ln2 = new Long(201523);
 	    String st4 = "Gronkowski";
 	    String st5 = "Amendola";
 	    String st6 = "Sherman";
-		Date dt2 = Mockito.mock (Date.class); 
+		DateTime dt2 = new DateTime(2015, 2, 4, 0, 0, 0); 
 		Gender gn2 = Gender.FEMALE; 
 		Race rc2 = Race.ASIAN; 
 		
@@ -76,7 +77,7 @@ public class PatientTest {
 		assertNotEquals(pt1.getGender(), pt2.getGender());
 		assertNotEquals(pt1.getRace(), pt2.getRace());
 		
-		assertEquals(pt1.toString(), "Patient{id=222015, firstName='Brady', middleName='Wilson', lastName='Lynch', dob=Mock for Date, hashCode: 1223685984, gender=MALE, race=CAUCASIAN}");
+		assertEquals(pt1.toString(), "Patient{id=201521, firstName='Brady', middleName='Wilson', lastName='Lynch', dob=2015-02-02T00:00:00.000-05:00, gender=MALE, race=CAUCASIAN}");
 		assertNotEquals(pt1.hashCode(), pt2.hashCode());
 		
 	}

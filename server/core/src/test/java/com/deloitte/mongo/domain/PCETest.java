@@ -12,10 +12,10 @@ public class PCETest {
 	@Test
 	public void test() {
 		
-	    Long ln1 = new Long(212015);
+	    Long ln1 = new Long(201521);
 	    String st1 = "Touchdown";
 	    
-		Long ln2 = new Long(222015);
+		Long ln2 = new Long(201522);
 	    String st2 = "Field Goal";
 	    
 		PCE pc1 = new PCE();
@@ -40,7 +40,7 @@ public class PCETest {
 		assertNotEquals(pc1.getId(), pc2.getId());
 		assertNotEquals(pc1.getDesc(), pc2.getDesc());
 
-		assertEquals(pc1.toString(), "PCE{id=212015, desc='Touchdown'}");
+		assertEquals(pc1.toString(), "PCE{id=201521, desc='Touchdown'}");
 		assertNotEquals(pc1.hashCode(), pc2.hashCode());
 		
 	}

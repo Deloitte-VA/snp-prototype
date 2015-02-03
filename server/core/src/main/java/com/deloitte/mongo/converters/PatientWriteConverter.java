@@ -21,7 +21,7 @@ public class PatientWriteConverter implements Converter<Patient, DBObject> {
         dbo.put(PatientTags.LAST_NAME_TAG, source.getLastName());
         dbo.put(PatientTags.GENDER_TAG, source.getGender().getId());
         dbo.put(PatientTags.RACE_TAG, source.getRace().getId());
-        dbo.put(PatientTags.DATE_OF_BIRTH_TAG, source.getDateOfBirth());
+        dbo.put(PatientTags.DATE_OF_BIRTH_TAG, source.getDateOfBirth().getMillis());
         return dbo;
     }
 }

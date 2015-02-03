@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.util.Date;
 
+import org.joda.time.DateTime;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -18,7 +19,7 @@ public class ObservationTest {
 		StringPrimitive st1 = Mockito.mock (StringPrimitive.class); 
 		IntegerPrimitive it1 = Mockito.mock (IntegerPrimitive.class); 
 		String st2 = new String(); 
-		Date dt1 = new Date();
+		DateTime dt1 = new DateTime(2015, 2, 1, 0, 0, 0);
 		String st3 = new String();
 		String st4 = new String();
 		

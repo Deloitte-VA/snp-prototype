@@ -6,18 +6,18 @@ import com.deloitte.mongo.domain.primitives.BooleanPrimitive;
 import com.deloitte.mongo.domain.primitives.PrimitiveType;
 import com.deloitte.mongo.domain.primitives.StringPrimitive;
 import com.mongodb.DBObject;
+import org.joda.time.DateTime;
 import org.junit.Test;
 
-import java.util.Date;
-
-import static org.mockito.Mockito.*;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class ObservationWriteConverterTest {
 
     @Test
     public void testConvert() {
-        Date date = new Date();
+        DateTime date = new DateTime();
 
         StringPrimitive primitiveString = mock(StringPrimitive.class);
         when(primitiveString.getType()).thenReturn(PrimitiveType.STRING);
@@ -43,7 +43,7 @@ public class ObservationWriteConverterTest {
         assertEquals(true, dbObj.get(ObservationTags.VALUE_TAG));
         assertEquals(PrimitiveType.BOOLEAN.getId(), dbObj.get(ObservationTags.VALUE_TYPE_TAG));
         assertEquals("applies", dbObj.get(ObservationTags.APPLIES_TAG));
-        assertEquals(date.getTime(), dbObj.get(ObservationTags.ISSUED_TAG));
+        assertEquals(date.getMillis(), dbObj.get(ObservationTags.ISSUED_TAG));
         assertEquals("subject", dbObj.get(ObservationTags.SUBJECT_TAG));
 
     }

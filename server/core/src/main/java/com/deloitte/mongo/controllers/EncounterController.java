@@ -1,13 +1,11 @@
 package com.deloitte.mongo.controllers;
 
-import com.deloitte.mongo.domain.Encounter;
 import com.deloitte.mongo.data.EncounterRepository;
+import com.deloitte.mongo.domain.Encounter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 /**
  * Created by jlgrock on 1/11/15.
@@ -24,7 +22,6 @@ public class EncounterController {
     public @ResponseBody
     Encounter getEncounter(@PathVariable final Long id) {
         LOGGER.debug("getting encounter");
-        final Encounter encounter = repository.findOne(id);
-        return encounter;
+        return repository.findOne(id);
     }
 }

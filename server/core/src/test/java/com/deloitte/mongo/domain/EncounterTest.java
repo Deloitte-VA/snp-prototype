@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.util.Date;
 import java.util.List;
 
+import org.joda.time.DateTime;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -13,17 +14,17 @@ public class EncounterTest {
 	@Test
 	public void test() {
 				
-	    Long ln1 = new Long(222015);		
+	    Long ln1 = new Long(201521);		
 		Patient pt1 = Mockito.mock (Patient.class);
-		Date dt1 = Mockito.mock (Date.class);
-		Integer it1 = 212015;
+		DateTime dt1 = new DateTime(2015, 2, 2, 0, 0, 0);
+		Integer it1 = 201523;
 	    String st1 = "Sprained Ankle";
 	    List lt1 = Mockito.mock (List.class);	
 	    
-	    Long ln2 = new Long(212015);		
+	    Long ln2 = new Long(201524);		
 		Patient pt2 = Mockito.mock (Patient.class);
-		Date dt2 = Mockito.mock (Date.class);
-		Integer it2 = 222015;
+		DateTime dt2 = new DateTime(2015, 2, 5, 0, 0, 0);
+		Integer it2 = 201526;
 	    String st2 = "Sprained Wrist";
 	    List lt2 = Mockito.mock (List.class);	
 	    
@@ -70,7 +71,7 @@ public class EncounterTest {
 		assertNotEquals(en1.getId(), en2.getId());
 		assertNotEquals(en1.getPatient(), en2.getPatient());
 		
-		assertEquals(en1.toString(), "Encounter{id=222015, date=Mock for Date, hashCode: 1635546341, reasonForVisit='Sprained Ankle'}");
+		assertEquals(en1.toString(), "Encounter{id=201521, date=2015-02-02T00:00:00.000-05:00, reasonForVisit='Sprained Ankle'}");
 		assertNotEquals(en1.hashCode(), en2.hashCode());
 
 	}
