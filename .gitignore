@@ -79,6 +79,12 @@ local.properties
 # TeXlipse plugin
 .texlipse
 
+# Recommenders plugin
+.recommenders/
+
+
+
+
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm
 
 *.iml
