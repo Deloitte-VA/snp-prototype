@@ -7,3 +7,9 @@ script: mvn clean install -PcodeQuality
 
 jdk:
   - oraclejdk8
+
+notifications:
+  hipchat: b8IVrkEK3yIDMy4Q92xjqyjFsHa2BJkb5vfX8YqM@snp-prototype
+  email:
+    on_success: change
+    on_failure: change
