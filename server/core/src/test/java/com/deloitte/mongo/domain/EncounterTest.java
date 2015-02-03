@@ -70,9 +70,9 @@ public class EncounterTest {
 		assertNotEquals(en1.getId(), en2.getId());
 		assertNotEquals(en1.getPatient(), en2.getPatient());
 		
-		assertEquals(pt1.toString(), "Encounter [id=222015, patient=Mock for Patient, hashCode: 1635546341, date=Mock for Date, hashCode: 1698156408, type=212015, reasonForVisit=Sprained Ankle, observations=Mock for List, hashCode: 1740035246]");
+		assertEquals(en1.toString(), "Encounter{id=222015, date=Mock for Date, hashCode: 1635546341, reasonForVisit='Sprained Ankle'}");
 		assertNotEquals(en1.hashCode(), en2.hashCode());
-		
+
 	}
 
 }

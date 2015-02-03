@@ -7,7 +7,7 @@ import org.junit.Test;
 public class GenderTest {
 
 	@Test
-	public void GenderTest() {
+	public void test() {
 
 		Gender gender1 = Gender.MALE;
 		Gender gender2 = Gender.FEMALE;
