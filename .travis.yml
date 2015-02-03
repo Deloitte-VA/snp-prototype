@@ -9,7 +9,4 @@ jdk:
   - oraclejdk8
 
 notifications:
-  hipchat: b8IVrkEK3yIDMy4Q92xjqyjFsHa2BJkb5vfX8YqM@snp-prototype
-  email:
-    on_success: change
-    on_failure: change
+  hipchat: b8IVrkEK3yIDMy4Q92xjqyjFsHa2BJkb5vfX8YqM@268183_snp-prototype
