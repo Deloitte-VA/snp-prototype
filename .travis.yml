@@ -3,7 +3,9 @@ language: java
 before_install:
  - cd server
 
-script: mvn clean install -PcodeQuality
+install: mvn install -PcodeQuality -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+
+script: mvn test -B
 
 jdk:
   - oraclejdk8
