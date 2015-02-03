@@ -8,9 +8,6 @@ import java.util.List;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import com.deloitte.mongo.domain.primitives.IntegerPrimitive;
-import com.deloitte.mongo.domain.primitives.StringPrimitive;
-
 public class EncounterTest {
 
 	@Test
@@ -20,61 +17,61 @@ public class EncounterTest {
 		Patient pt1 = Mockito.mock (Patient.class);
 		Date dt1 = Mockito.mock (Date.class);
 		Integer it1 = 212015;
-	    String st1 = "Brady";
-			
-	    public Date getDate() {
-	        return date;
-	    }
+	    String st1 = "Sprained Ankle";
+	    List lt1 = Mockito.mock (List.class);	
+	    
+	    Long ln2 = new Long(212015);		
+		Patient pt2 = Mockito.mock (Patient.class);
+		Date dt2 = Mockito.mock (Date.class);
+		Integer it2 = 222015;
+	    String st2 = "Sprained Wrist";
+	    List lt2 = Mockito.mock (List.class);	
+	    
+	    Encounter en1 = new Encounter();
+	    
+        en1.setDate(dt1);
+	    en1.setReasonForVisit(st1);
+	    en1.setObservations(lt1);
+	    en1.setType(it1);
+	    en1.setId(ln1);
+        en1.setPatient(pt1);
 
-	    public void setDate(Date date) {
-	        this.date = date;
-	    }
-
-	    public String getReasonForVisit() {
-	        return reasonForVisit;
-	    }
-
-	    public void setReasonForVisit(String reasonForVisit) {
-	        this.reasonForVisit = reasonForVisit;
-	    }
-
-	    public List<Observation> getObservations() {
-	        return observations;
-	    }
-
-	    public void setObservations(List<Observation> observations) {
-	        this.observations = observations;
-	    }
-
-	    public Integer getType() {
-	        return type;
-	    }
-
-	    public void setType(Integer type) {
-	        this.type = type;
-	    }
-
-	    private List<Observation> observations;
-
-	    public void setId(Long id) {
-	        this.id = id;
-	    }
-
-	    public Long getId() {
-	        return id;
-	    }
-
-	    public Patient getPatient() {
-	        return patient;
-	    }
-
-	    public void setPatient(Patient patient) {
-	        this.patient = patient;
-	    }	
+	    Encounter en2 = new Encounter();
+	    
+        en2.setDate(dt1);
+	    en2.setReasonForVisit(st1);
+	    en2.setObservations(lt1);
+	    en2.setType(it1);
+	    en2.setId(ln1);
+        en2.setPatient(pt1);
+        
+		assertTrue(en2.equals(en1));
+        
+		assertEquals(dt1, en1.getDate());
+		assertEquals(st1, en1.getReasonForVisit());
+		assertEquals(lt1, en1.getObservations());
+		assertEquals(it1, en1.getType());
+		assertEquals(ln1, en1.getId());
+		assertEquals(pt1, en1.getPatient());
 		
+        en2.setDate(dt2);
+	    en2.setReasonForVisit(st2);
+	    en2.setObservations(lt2);
+	    en2.setType(it2);
+	    en2.setId(ln2);
+        en2.setPatient(pt2);
 		
+		assertFalse(en2.equals(pt1));
 		
+		assertNotEquals(en1.getDate(), en2.getDate());
+		assertNotEquals(en1.getReasonForVisit(), en2.getReasonForVisit());
+		assertNotEquals(en1.getObservations(), en2.getObservations());
+		assertNotEquals(en1.getType(), en2.getType());
+		assertNotEquals(en1.getId(), en2.getId());
+		assertNotEquals(en1.getPatient(), en2.getPatient());
 		
+		assertEquals(pt1.toString(), "Encounter [id=222015, patient=Mock for Patient, hashCode: 1635546341, date=Mock for Date, hashCode: 1698156408, type=212015, reasonForVisit=Sprained Ankle, observations=Mock for List, hashCode: 1740035246]");
+		assertNotEquals(en1.hashCode(), en2.hashCode());
 		
 	}
 
