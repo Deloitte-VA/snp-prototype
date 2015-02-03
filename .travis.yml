@@ -10,4 +10,9 @@ jdk:
 
 notifications:
   hipchat:
-    -secure: "eOzJ9y7z5VtBUQCJiGxgDwDxdODPrY8rOHWTD21tq/J6GYRcRGcrxsSdwTuvt/feNArc+NFtNk6PX7WGXtxmvDLCMC0Ls9jjC8cGkoeJ69db1qxsAy8BTaY9kGZh8BARlXK+2TFil68E/G3uRb5oqehCoB4Sx4/R/0ZDpk78FAY="
+    on_success: always
+    on_failure: always
+    notify: true
+    format: html
+    rooms:
+      secure: "eOzJ9y7z5VtBUQCJiGxgDwDxdODPrY8rOHWTD21tq/J6GYRcRGcrxsSdwTuvt/feNArc+NFtNk6PX7WGXtxmvDLCMC0Ls9jjC8cGkoeJ69db1qxsAy8BTaY9kGZh8BARlXK+2TFil68E/G3uRb5oqehCoB4Sx4/R/0ZDpk78FAY="
