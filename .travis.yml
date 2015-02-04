@@ -7,7 +7,7 @@ env:
 
 before_install:
   - cd server
-  - sudo apt-get install gnupg -y
+  - sudo apt-get install gnupg openssl -y
   - gpg --list-keys
   - openssl aes-256-cbc -pass pass:$ENCRYPTION_PASSWORD -in secring.gpg.enc -out local.secring.gpg -d
   - openssl aes-256-cbc -pass pass:$ENCRYPTION_PASSWORD -in pubring.gpg.enc -out local.pubring.gpg -d
