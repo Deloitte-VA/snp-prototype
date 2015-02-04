@@ -6,14 +6,14 @@ env:
   secure: "LVU6+H1PWtOKOuZO5Y5tRC2TFsLJpVLvfMCIm9jVHHhB1xtjbNWT34PbrEXtEFwEIrcj9VsxRKmetuS8cp2n3yD6uQlIXslfQVqSgjX0FiQDpDENdgj9qrIC1YtH8AcmAj8gS1tPgCpQfKbJx9Rp0hdmgOzLFglvGqg6VHm9Yo0="
 
 before_install:
-  - cd server
   - sudo apt-get update
   - sudo apt-get install gnupg openssl -y
   - gpg --list-keys
-  - openssl aes-256-cbc -pass pass:$ENCRYPTION_PASSWORD -in secring.gpg.enc -out local.secring.gpg -d
-  - openssl aes-256-cbc -pass pass:$ENCRYPTION_PASSWORD -in pubring.gpg.enc -out local.pubring.gpg -d
-  - mv -f local.secring.gpg ~/.gnupg/secring.gpg
-  - mv -f local.pubring.gpg ~/.gnupg/pubring.gpg
+  - openssl aes-256-cbc -pass pass:$ENCRYPTION_PASSWORD -in keystores/secring.gpg.enc -out keystores/local.secring.gpg -d
+  - openssl aes-256-cbc -pass pass:$ENCRYPTION_PASSWORD -in keystores/pubring.gpg.enc -out keystores/local.pubring.gpg -d
+  - mv -f keystores/local.secring.gpg ~/.gnupg/secring.gpg
+  - mv -f keystores/local.pubring.gpg ~/.gnupg/pubring.gpg
+  - cd server
 
 install: mvn deploy -PcodeQuality,sonatype-oss-release -DskipTests=true -Dmaven.javadoc.skip=true -B -V -Psonatype-oss-release -Dgpg.passphrase=$gpg.passphrase
 
