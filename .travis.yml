@@ -4,6 +4,7 @@ language: java
 env:
   secure: "dQDx5aIzwhOauhLhKYiIAbxrbyBN30Y0KqdrkLfNmUM7gYd+8uSCHmeFJnkXu9GCQNx2dpkKBJtty54fSoTz8uHJgWn6sjG8V0A6t5b3AaXo2XYSL3P0xi3AHiJ44xPr1hZOnoX1OiuUV0a6W8DEnmbCCUWApZtleuEvmxDgSjw="
   secure: "LVU6+H1PWtOKOuZO5Y5tRC2TFsLJpVLvfMCIm9jVHHhB1xtjbNWT34PbrEXtEFwEIrcj9VsxRKmetuS8cp2n3yD6uQlIXslfQVqSgjX0FiQDpDENdgj9qrIC1YtH8AcmAj8gS1tPgCpQfKbJx9Rp0hdmgOzLFglvGqg6VHm9Yo0="
+  secure: "D/MzK7qe3M1bP08U4tTZ32ILWQ251glwgXAhRIgVZc8ZGD3F7ZmGg5EbT87CBEmUdHv500CVHPnd25rgBIjvg9MXNDlsoNSkyxYDHdNxChWMpt9HtNyGaflbYLPZwpxDgH0i4X2Ny5Okt9ScQPymkZuwCsuaKzJ6rF5quzoF0SY="
 
 before_install:
   - sudo apt-get update
@@ -11,13 +12,11 @@ before_install:
   - gpg --list-keys
   - openssl aes-256-cbc -pass pass:$ENCRYPTION_PASSWORD -in keystores/secring.gpg.enc -out keystores/local.secring.gpg -d
   - openssl aes-256-cbc -pass pass:$ENCRYPTION_PASSWORD -in keystores/pubring.gpg.enc -out keystores/local.pubring.gpg -d
-  - openssl aes-256-cbc -pass pass:$ENCRYPTION_PASSWORD -in keystores/pubring.gpg.enc -out keystores/local.gpg.conf -d
   - mv -f keystores/local.secring.gpg ~/.gnupg/secring.gpg
   - mv -f keystores/local.pubring.gpg ~/.gnupg/pubring.gpg
-  - mv -f keystores/local.gpg.conf ~/.gnupg/gpg.conf
   - cd server
 
-install: mvn deploy -PcodeQuality,sonatype-oss-release -DskipTests=true -Dmaven.javadoc.skip=true -B -V -Psonatype-oss-release -Dgpg.passphrase=$gpg.passphrase
+install: mvn deploy -PcodeQuality,sonatype-oss-release -DskipTests=true -Dmaven.javadoc.skip=true -B -V -Psonatype-oss-release -Dgpg.passphrase=$GNU_PASSWORD
 
 script: mvn test -B
 
