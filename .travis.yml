@@ -5,7 +5,7 @@ env:
   global:
     - secure: "dQDx5aIzwhOauhLhKYiIAbxrbyBN30Y0KqdrkLfNmUM7gYd+8uSCHmeFJnkXu9GCQNx2dpkKBJtty54fSoTz8uHJgWn6sjG8V0A6t5b3AaXo2XYSL3P0xi3AHiJ44xPr1hZOnoX1OiuUV0a6W8DEnmbCCUWApZtleuEvmxDgSjw="
     - secure: "LVU6+H1PWtOKOuZO5Y5tRC2TFsLJpVLvfMCIm9jVHHhB1xtjbNWT34PbrEXtEFwEIrcj9VsxRKmetuS8cp2n3yD6uQlIXslfQVqSgjX0FiQDpDENdgj9qrIC1YtH8AcmAj8gS1tPgCpQfKbJx9Rp0hdmgOzLFglvGqg6VHm9Yo0="
-    - secure: "dCae/zlQ4R91d84HsAarci7coiv0iFDEJu3yByhxyMxXmutyPBmnTKDzHglcbcl4tKpqbW0XeD6xV0WjHfWaN3Qvevwk+tQVc2oDuTPajrE6MH3yjXRv1JsqnMTmHawa5NMaq2ZNAWvIObtuYl3V9rAkTzG0sU3HBO1uPD7S/0U="
+    - secure: "Za9CMIlBPrT2G/8cluiVz+B71+pSelkcy6cPSSruRzKMUsZY15reaJy4mH4nWyAzTcSzC7Pd8YuiGDPHsbdtrVVKYRUtLZ+qJ2wm2iXjgFrC2JQBClQnQ+XNimvv1+zIgJunqTLBSV9flGLK+M9oJupg1rjXGyPCWWbHuoUP2Ps="
 before_install:
   - sudo apt-get update
   - sudo apt-get install gnupg openssl -y
@@ -15,10 +15,9 @@ before_install:
   - mv -f keystores/local.secring.gpg ~/.gnupg/secring.gpg
   - mv -f keystores/local.pubring.gpg ~/.gnupg/pubring.gpg
   - gpg --list-keys
-  - echo $TEST
   - cd server
 
-install: mvn deploy -PcodeQuality,sonatype-oss-release -DskipTests=true -Dmaven.javadoc.skip=true -B -V -Psonatype-oss-release -Dgpg.passphrase=$gpg.passphrase
+install: mvn deploy -PcodeQuality,sonatype-oss-release -DskipTests=true -Dmaven.javadoc.skip=true -B -V -Psonatype-oss-release -Dgpg.passphrase=$GPG_PASSPHRASE
 
 script: mvn test -B
 
