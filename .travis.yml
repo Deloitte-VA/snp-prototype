@@ -1,9 +1,20 @@
 language: java
 
-before_install:
- - cd server
 
-install: mvn install -PcodeQuality -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+env:
+  secure: "dQDx5aIzwhOauhLhKYiIAbxrbyBN30Y0KqdrkLfNmUM7gYd+8uSCHmeFJnkXu9GCQNx2dpkKBJtty54fSoTz8uHJgWn6sjG8V0A6t5b3AaXo2XYSL3P0xi3AHiJ44xPr1hZOnoX1OiuUV0a6W8DEnmbCCUWApZtleuEvmxDgSjw="
+  secure: "LVU6+H1PWtOKOuZO5Y5tRC2TFsLJpVLvfMCIm9jVHHhB1xtjbNWT34PbrEXtEFwEIrcj9VsxRKmetuS8cp2n3yD6uQlIXslfQVqSgjX0FiQDpDENdgj9qrIC1YtH8AcmAj8gS1tPgCpQfKbJx9Rp0hdmgOzLFglvGqg6VHm9Yo0="
+
+before_install:
+  - cd server
+  - sudo apt-get install gnupg -y
+  - gpg --list-keys
+  - openssl aes-256-cbc -pass pass:$ENCRYPTION_PASSWORD -in secring.gpg.enc -out local.secring.gpg -d
+  - openssl aes-256-cbc -pass pass:$ENCRYPTION_PASSWORD -in pubring.gpg.enc -out local.pubring.gpg -d
+  - mv -f local.secring.gpg ~/.gnupg/secring.gpg
+  - mv -f local.pubring.gpg ~/.gnupg/pubring.gpg
+
+install: mvn deploy -PcodeQuality,sonatype-oss-release -DskipTests=true -Dmaven.javadoc.skip=true -B -V -Psonatype-oss-release -Dgpg.passphrase=$gpg.passphrase
 
 script: mvn test -B
 
