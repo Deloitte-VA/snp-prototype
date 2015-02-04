@@ -1,14 +1,46 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    
-    <groupId>com.deloitte.mongo</groupId>
+
+    <parent>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>7</version>
+        <relativePath />
+    </parent>
+
+    <groupId>com.github.jlgrock.snp</groupId>
     <artifactId>server</artifactId>
     <version>1.0-SNAPSHOT</version>
     
     <packaging>pom</packaging>
     <name>server</name>
     <url>https://github.com/jlgrock/snp-prototype</url>
+    <description>Symantic Normalization Prototype: A simple proof of concept of ingesting and processing Health Ontologies into a mongoDB instance.</description>
+
+    <issueManagement>
+        <url>https://snp-prototype.atlassian.net</url>
+        <system>JIRA</system>
+    </issueManagement>
+
+    <licenses>
+        <license>
+            <name>TBD</name>
+            <url></url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <scm>
+        <url>http://github.com/jlgrock/snp-prototype</url>
+        <connection>scm:git:git://github.com/jlgrock/snp-prototype.git</connection>
+        <developerConnection>scm:git:git@github.com:jlgrock/snp-prototype.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+
+    <ciManagement>
+        <system>Travis-CI</system>
+    </ciManagement>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -131,19 +163,6 @@
                 <scope>test</scope>
             </dependency>
 
-            <!--<dependency>-->
-            <!--<groupId>org.powermock</groupId>-->
-            <!--<artifactId>powermock-module-junit4</artifactId>-->
-            <!--<version>1.6.1</version>-->
-            <!--<scope>test</scope>-->
-            <!--</dependency>-->
-
-            <!--<dependency>-->
-            <!--<groupId>org.powermock</groupId>-->
-            <!--<artifactId>powermock-api-mockito</artifactId>-->
-            <!--<version>1.6.1</version>-->
-            <!--<scope>test</scope>-->
-            <!--</dependency>-->
         </dependencies>
     </dependencyManagement>
 
@@ -177,39 +196,10 @@
                     </includes>
                 </configuration>
             </plugin>
-
         </plugins>
-
     </build>
 
     <profiles>
-        <profile>
-            <id>release-sign-artifacts</id>
-            <activation>
-                <property>
-                    <name>performRelease</name>
-                    <value>true</value>
-                </property>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-gpg-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>sign-artifacts</id>
-                                <phase>verify</phase>
-                                <goals>
-                                    <goal>sign</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-
         <profile>
             <id>codeQuality</id>
             <build>
@@ -296,3 +286,5 @@
         </profile>
     </profiles>
 </project>
+
+
