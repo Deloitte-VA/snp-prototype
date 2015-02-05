@@ -71,7 +71,7 @@ public class EncounterTest {
 		assertNotEquals(en1.getId(), en2.getId());
 		assertNotEquals(en1.getPatient(), en2.getPatient());
 		
-		assertEquals(en1.toString(), "Encounter{id=201521, date=2015-02-02T00:00:00.000-05:00, reasonForVisit='Sprained Ankle'}");
+		assertEquals(en1.toString(), "Encounter{id=201521, date=2015-02-02T00:00:00.000Z, reasonForVisit='Sprained Ankle'}");
 		assertNotEquals(en1.hashCode(), en2.hashCode());
 
 	}

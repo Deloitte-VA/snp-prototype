@@ -23,7 +23,7 @@ public class PatientTest {
 	    String st4 = "Gronkowski";
 	    String st5 = "Amendola";
 	    String st6 = "Sherman";
-		DateTime dt2 = new DateTime(2015, 2, 4, 0, 0, 0); 
+		DateTime dt2 = new DateTime(2015, 2, 4, 0, 0, 0, DateTimeZone.UTC);
 		Gender gn2 = Gender.FEMALE; 
 		Race rc2 = Race.ASIAN; 
 		
@@ -75,7 +75,7 @@ public class PatientTest {
 		assertNotEquals(pt1.getGender(), pt2.getGender());
 		assertNotEquals(pt1.getRace(), pt2.getRace());
 		
-		assertEquals(pt1.toString(), "Patient{id=201521, firstName='Brady', middleName='Wilson', lastName='Lynch', dob=2015-02-02T00:00:00.000, gender=MALE, race=CAUCASIAN}");
+		assertEquals(pt1.toString(), "Patient{id=201521, firstName='Brady', middleName='Wilson', lastName='Lynch', dob=2015-02-02T00:00:00.000Z, gender=MALE, race=CAUCASIAN}");
 		assertNotEquals(pt1.hashCode(), pt2.hashCode());
 		
 	}
