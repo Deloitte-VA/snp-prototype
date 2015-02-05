@@ -1,21 +1,18 @@
 package com.github.jlgrock.snp.domain;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Test;
+
+import static org.junit.Assert.*;
 
 public class PCETest {
 
 	@Test
 	public void test() {
 		
-	    Long ln1 = new Long(201521);
+	    Long ln1 = new Long(201521l);
 	    String st1 = "Touchdown";
 	    
-		Long ln2 = new Long(201522);
+		Long ln2 = new Long(201522l);
 	    String st2 = "Field Goal";
 	    
 		PCE pc1 = new PCE();

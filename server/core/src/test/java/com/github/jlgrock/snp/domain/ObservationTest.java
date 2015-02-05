@@ -3,6 +3,7 @@ package com.github.jlgrock.snp.domain;
 import com.github.jlgrock.snp.domain.primitives.IntegerPrimitive;
 import com.github.jlgrock.snp.domain.primitives.StringPrimitive;
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -16,7 +17,7 @@ public class ObservationTest {
 		StringPrimitive st1 = Mockito.mock (StringPrimitive.class);
 		IntegerPrimitive it1 = Mockito.mock (IntegerPrimitive.class);
 		String st2 = new String(); 
-		DateTime dt1 = new DateTime(2015, 2, 1, 0, 0, 0);
+		DateTime dt1 = new DateTime(2015, 2, 1, 0, 0, 0, DateTimeZone.UTC);
 		String st3 = new String();
 		String st4 = new String();
 		

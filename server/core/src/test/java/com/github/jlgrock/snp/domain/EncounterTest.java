@@ -1,17 +1,13 @@
 package com.github.jlgrock.snp.domain;
 
-import com.github.jlgrock.snp.domain.Encounter;
-import com.github.jlgrock.snp.domain.Patient;
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.junit.Test;
 import org.mockito.Mockito;
 
 import java.util.List;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.*;
 
 public class EncounterTest {
 
@@ -20,14 +16,14 @@ public class EncounterTest {
 				
 	    Long ln1 = new Long(201521);		
 		Patient pt1 = Mockito.mock (Patient.class);
-		DateTime dt1 = new DateTime(2015, 2, 2, 0, 0, 0);
+		DateTime dt1 = new DateTime(2015, 2, 2, 0, 0, 0, DateTimeZone.UTC);
 		Integer it1 = 201523;
 	    String st1 = "Sprained Ankle";
 	    List lt1 = Mockito.mock (List.class);	
 	    
 	    Long ln2 = new Long(201524);		
 		Patient pt2 = Mockito.mock (Patient.class);
-		DateTime dt2 = new DateTime(2015, 2, 5, 0, 0, 0);
+		DateTime dt2 = new DateTime(2015, 2, 5, 0, 0, 0, DateTimeZone.UTC);
 		Integer it2 = 201526;
 	    String st2 = "Sprained Wrist";
 	    List lt2 = Mockito.mock (List.class);	

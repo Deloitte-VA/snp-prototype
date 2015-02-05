@@ -1,27 +1,25 @@
 package com.github.jlgrock.snp.domain;
 
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.junit.Test;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.*;
 
 public class PatientTest {
 
 	@Test
 	public void test() {
 
-	    Long ln1 = new Long(201521);
+	    Long ln1 = new Long(201521l);
 	    String st1 = "Brady";
 	    String st2 = "Wilson";
 	    String st3 = "Lynch";
-		DateTime dt1 = new DateTime(2015, 2, 2, 0, 0, 0); 
+		DateTime dt1 = new DateTime(2015, 2, 2, 0, 0, 0, DateTimeZone.UTC);
 		Gender gn1 = Gender.MALE;
 		Race rc1 = Race.CAUCASIAN;
 	    
-	    Long ln2 = new Long(201523);
+	    Long ln2 = new Long(201523l);
 	    String st4 = "Gronkowski";
 	    String st5 = "Amendola";
 	    String st6 = "Sherman";
@@ -77,7 +75,7 @@ public class PatientTest {
 		assertNotEquals(pt1.getGender(), pt2.getGender());
 		assertNotEquals(pt1.getRace(), pt2.getRace());
 		
-		assertEquals(pt1.toString(), "Patient{id=201521, firstName='Brady', middleName='Wilson', lastName='Lynch', dob=2015-02-02T00:00:00.000-05:00, gender=MALE, race=CAUCASIAN}");
+		assertEquals(pt1.toString(), "Patient{id=201521, firstName='Brady', middleName='Wilson', lastName='Lynch', dob=2015-02-02T00:00:00.000, gender=MALE, race=CAUCASIAN}");
 		assertNotEquals(pt1.hashCode(), pt2.hashCode());
 		
 	}
