@@ -1,7 +1,9 @@
 #!/usr/bin/python -tt
 
-def generate_name( gender ):
-  #doesn't work, but it's a start
+import names
+
+def generate_name( gender, race ):
+  #doesn't use race, but this can be added later
   first_name = names.get_first_name(gender=gender)
   last_name = names.get_last_name()
   return (first_name, last_name)
@@ -36,8 +38,3 @@ def convert_patient_to_json( patient ):
 def convert_encounter_to_json( encounter ):
 	# put code here
 
-def main():
-  #put code here for execution
-
-if __name__ == __main__():
-  main()
