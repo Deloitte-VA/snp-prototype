@@ -18,8 +18,8 @@ public class MongoRestApplication {
     private static Logger LOGGER = LoggerFactory.getLogger(MongoRestApplication.class);
 
     public static void main(String[] args) throws Exception {
-        LOGGER.info("Starting Mongo Application.");
-        SpringApplication.run(MongoApplication.class, args);
+        LOGGER.info("Starting Mongo Rest Application.");
+        SpringApplication.run(MongoRestApplication.class, args);
     }
 
 }
