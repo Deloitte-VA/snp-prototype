@@ -1,4 +1,4 @@
-SNP - Synaptic Normalization Prototype
+SNP - Semantic Normalization Prototype
 =============
 
 A simple proof of concept of ingesting and processing Health Ontologies into a mongoDB instance.  The data included is not accurate, nor representative of the actual data stored in different Health organizations.
