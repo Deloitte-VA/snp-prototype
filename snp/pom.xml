@@ -50,6 +50,7 @@
 
         <jackson.version>2.5.0</jackson.version>
         <slf4j.version>1.7.9</slf4j.version>
+        <log4j.version>1.2.17</log4j.version>
         <mongo.driver.version>2.13.0-rc1</mongo.driver.version>
         <spring.core.version>4.1.4.RELEASE</spring.core.version>
         <spring.data-mongo.version>1.2.0.RELEASE</spring.data-mongo.version>
@@ -80,18 +81,6 @@
             </dependency>
 
             <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-api</artifactId>
-                <version>${slf4j.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-log4j12</artifactId>
-                <version>${slf4j.version}</version>
-            </dependency>
-
-            <dependency>
                 <groupId>org.mongodb</groupId>
                 <artifactId>mongo-java-driver</artifactId>
                 <version>${mongo.driver.version}</version>
@@ -114,6 +103,12 @@
                         <artifactId>spring-boot-starter-logging</artifactId>
                     </exclusion>
                 </exclusions>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-log4j</artifactId>
+                <version>${spring.boot.version}</version>
             </dependency>
 
             <dependency>

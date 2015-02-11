@@ -4,10 +4,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.data.mongo.MongoRepositoriesAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 
 /**
  * Created by jlgrock on 1/11/15.
@@ -15,7 +15,7 @@ import org.springframework.context.annotation.PropertySource;
 @Configuration
 @EnableAutoConfiguration(exclude = {MongoRepositoriesAutoConfiguration.class})
 @ComponentScan({"com.github.jlgrock.snp.web", "com.github.jlgrock.snp.core"})
-@PropertySource("classpath:application.properties")
+@SpringBootApplication
 public class MongoRestApplication {
     private static Logger LOGGER = LoggerFactory.getLogger(MongoRestApplication.class);
 
@@ -23,5 +23,4 @@ public class MongoRestApplication {
         LOGGER.info("Starting Mongo Rest Application.");
         SpringApplication.run(MongoRestApplication.class, args);
     }
-
 }

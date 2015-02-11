@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
 import org.springframework.data.mongodb.core.convert.CustomConversions;
@@ -21,6 +22,7 @@ import java.util.List;
 @Configuration
 @ComponentScan
 @EnableMongoRepositories("com.github.jlgrock.snp.core.data")
+@PropertySource("classpath:application.properties")
 public class MongoConfig extends AbstractMongoConfiguration {
 
     @Value("${spring.data.mongodb.host}")
