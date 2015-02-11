@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 public class EncounterController {
     private static final Logger LOGGER = LoggerFactory.getLogger(EncounterController.class);
    
+    
     @Autowired
     private EncounterRepository repository;
        
@@ -24,6 +25,7 @@ public class EncounterController {
         LOGGER.debug("getting encounter");
         return repository.findOne(id);
     }
+    
     
     /* Just for temporary testing of WAR file. Comment Autowired repository var. And used the method below.
      * But currently this method gives "Could not find acceptable representation" error. */
@@ -35,6 +37,7 @@ public class EncounterController {
         return  new Encounter(); //repository.findOne(id);
     }
     */
+    
     
     /* Returning String object works with the browser without any problem during testing */
     /*

@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.data.mongo.MongoRepositoriesAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 
 /**
  * Created by jlgrock on 1/11/15.
@@ -14,6 +15,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @EnableAutoConfiguration(exclude = {MongoRepositoriesAutoConfiguration.class})
 @ComponentScan({"com.github.jlgrock.snp.web", "com.github.jlgrock.snp.core"})
+@PropertySource("classpath:application.properties")
 public class MongoRestApplication {
     private static Logger LOGGER = LoggerFactory.getLogger(MongoRestApplication.class);
 
