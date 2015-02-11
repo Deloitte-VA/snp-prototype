@@ -11,3 +11,4 @@ public class EncounterTags {
     public static final String REASON_FOR_VISIT_TAG = "reason_for_visit";
     public static final String OBSERVATIONS_TAG = "observations";
 }
+

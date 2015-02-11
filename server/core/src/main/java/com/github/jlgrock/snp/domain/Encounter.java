@@ -110,3 +110,4 @@ public class Encounter {
         this.patient = patient;
     }
 }
+

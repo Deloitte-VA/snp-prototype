@@ -28,7 +28,7 @@ public class EncounterWriteConverter implements Converter<Encounter, DBObject> {
     }
 
     @Override
-    public DBObject convert(Encounter source) {
+    public DBObject convert(final Encounter source) {
         DBObject dbo = new BasicDBObject();
         dbo.put(EncounterTags.ID_TAG, source.getId());
         dbo.put(EncounterTags.PATIENT_TAG, source.getPatient().getId());
@@ -48,3 +48,4 @@ public class EncounterWriteConverter implements Converter<Encounter, DBObject> {
         return dbo;
     }
 }
+

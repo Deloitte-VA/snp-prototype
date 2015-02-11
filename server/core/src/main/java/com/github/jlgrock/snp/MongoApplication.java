@@ -28,14 +28,21 @@ public class MongoApplication implements CommandLineRunner {
 
     @Autowired
     private MyConnection myConnection;
-
-    public static void main(String[] args) throws Exception {
+    
+/**
+ * 
+ * @param args command line arguments
+ * @throws Exception "Starting Mongo Application."
+ * 
+ */
+    
+    public static void main(final String[] args) throws Exception {
         LOGGER.info("Starting Mongo Application.");
         SpringApplication.run(MongoApplication.class, args);
     }
 
     @Override
-    public void run(String... strings) throws Exception {
+    public void run(final String... strings) throws Exception {
         //print the current connection info
         myConnection.printAddress();
 
@@ -74,3 +81,4 @@ public class MongoApplication implements CommandLineRunner {
     }
 
 }
+

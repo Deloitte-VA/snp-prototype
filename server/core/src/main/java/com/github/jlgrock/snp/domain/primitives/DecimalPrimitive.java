@@ -19,3 +19,4 @@ public class DecimalPrimitive extends AbstractSimplePrimitive<BigDecimal> {
         return PrimitiveType.DECIMAL;
     }
 }
+

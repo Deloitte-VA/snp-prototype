@@ -18,7 +18,7 @@ public class ObservationReadConverter implements Converter<DBObject, Observation
     }
 
     @Override
-    public Observation convert(DBObject source) {
+    public Observation convert(final DBObject source) {
         Observation observation = new Observation();
         observation.setIdentifier((String) source.get(ObservationTags.ID_TAG));
         observation.setName(SimplePrimitive.createPrimitive((Integer) source.get(ObservationTags.NAME_TYPE_TAG), source.get(ObservationTags.NAME_TAG)));
@@ -29,3 +29,4 @@ public class ObservationReadConverter implements Converter<DBObject, Observation
         return observation;
     }
 }
+

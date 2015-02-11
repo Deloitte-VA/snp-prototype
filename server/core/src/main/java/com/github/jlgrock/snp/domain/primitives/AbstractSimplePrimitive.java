@@ -22,3 +22,4 @@ public abstract class AbstractSimplePrimitive<T> implements SimplePrimitive {
        return (T) value;
     };
 }
+

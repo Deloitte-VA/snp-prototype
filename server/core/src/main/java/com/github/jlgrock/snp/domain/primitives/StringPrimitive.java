@@ -17,3 +17,4 @@ public class StringPrimitive extends AbstractSimplePrimitive<String> {
         return PrimitiveType.STRING;
     }
 }
+

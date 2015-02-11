@@ -31,3 +31,4 @@ public enum Race {
         return valuesById.get(id);
     }
 }
+

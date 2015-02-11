@@ -13,3 +13,4 @@ public class ObservationTags {
     public static final String ISSUED_TAG = "issued";
     public static final String SUBJECT_TAG = "subject";
 }
+

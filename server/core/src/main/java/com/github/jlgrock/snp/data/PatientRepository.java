@@ -18,3 +18,4 @@ public interface PatientRepository extends MongoRepository<Patient, Long> {
     public List<Patient> findAllByGender(Gender gender);
     public List<Patient> findAllByRace(Race race);
 }
+

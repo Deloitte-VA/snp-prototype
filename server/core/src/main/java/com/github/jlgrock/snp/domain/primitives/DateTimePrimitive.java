@@ -19,3 +19,4 @@ class DateTimePrimitive extends AbstractSimplePrimitive<DateTime> {
         return PrimitiveType.DATETIME;
     }
 }
+

@@ -16,10 +16,15 @@ import org.springframework.context.annotation.Configuration;
 @ComponentScan
 public class MongoRestApplication {
     private static Logger LOGGER = LoggerFactory.getLogger(MongoRestApplication.class);
-
-    public static void main(String[] args) throws Exception {
+/**
+ * 
+ * @param args command line arguments
+ * @throws Exception "Starting Mongo Application."
+ */
+    public static void main(final String[] args) throws Exception {
         LOGGER.info("Starting Mongo Application.");
         SpringApplication.run(MongoApplication.class, args);
     }
 
 }
+

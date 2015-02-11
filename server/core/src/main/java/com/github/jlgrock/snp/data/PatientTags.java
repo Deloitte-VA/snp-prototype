@@ -12,3 +12,4 @@ public class PatientTags {
     public static final String GENDER_TAG = "gender";
     public static final String RACE_TAG = "race";
 }
+
