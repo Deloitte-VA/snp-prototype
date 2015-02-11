@@ -1,5 +1,7 @@
 package com.github.jlgrock.snp.core;
 
+import com.github.jlgrock.snp.core.converters.ObservationReadConverter;
+import com.github.jlgrock.snp.core.converters.ObservationWriteConverter;
 import com.github.jlgrock.snp.core.converters.PatientReadConverter;
 import com.github.jlgrock.snp.core.converters.PatientWriteConverter;
 import com.mongodb.MongoClient;
@@ -37,12 +39,13 @@ public class MongoConfig extends AbstractMongoConfiguration {
         List<Converter> converterList = new ArrayList<Converter>();
         converterList.add(new PatientReadConverter());
         converterList.add(new PatientWriteConverter());
+        converterList.add(new ObservationReadConverter());
+        converterList.add(new ObservationWriteConverter());
         return new CustomConversions(converterList);
     }
 
     @Override
     protected String getDatabaseName() {
-        //return "bla";
     	return "test";
     }
 

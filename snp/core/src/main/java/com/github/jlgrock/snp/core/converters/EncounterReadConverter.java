@@ -25,7 +25,7 @@ public class EncounterReadConverter implements Converter<DBObject, Encounter> {
     private final PatientRepository patientRepository;
 
     @Autowired
-    EncounterReadConverter(ObservationReadConverter observationReadConverterIn, PatientRepository patientRepositoryIn) {
+    public EncounterReadConverter(ObservationReadConverter observationReadConverterIn, PatientRepository patientRepositoryIn) {
         observationReadConverter = observationReadConverterIn;
         patientRepository = patientRepositoryIn;
     }
@@ -33,9 +33,9 @@ public class EncounterReadConverter implements Converter<DBObject, Encounter> {
     @Override
     public Encounter convert(DBObject source) {
         Encounter encounter = new Encounter();
-        encounter.setId(((Long) source.get(EncounterTags.ID_TAG)));
+        encounter.setId(((Number) source.get(EncounterTags.ID_TAG)).longValue());
         encounter.setPatient(patientRepository.findOne(((Number) source.get(EncounterTags.PATIENT_TAG)).longValue()));
-        encounter.setDate(new DateTime((Long) source.get(EncounterTags.DATE_TAG)));
+        encounter.setDate(new DateTime(((Number) source.get(EncounterTags.DATE_TAG)).longValue()));
         encounter.setType(((Number) source.get(EncounterTags.TYPE_TAG)).intValue());
         encounter.setReasonForVisit((String) source.get(EncounterTags.REASON_FOR_VISIT_TAG));
 

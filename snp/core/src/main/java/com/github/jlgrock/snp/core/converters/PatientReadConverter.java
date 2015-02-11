@@ -24,7 +24,7 @@ public class PatientReadConverter implements Converter<DBObject, Patient> {
         p.setLastName((String) source.get(PatientTags.LAST_NAME_TAG));
         p.setGender(Gender.getValueById((Integer) source.get(PatientTags.GENDER_TAG)));
         p.setRace(Race.getValueById((Integer) source.get(PatientTags.RACE_TAG)));
-        p.setDateOfBirth(new DateTime((Long) source.get(PatientTags.DATE_OF_BIRTH_TAG)));
+        p.setDateOfBirth(new DateTime(((Number) source.get(PatientTags.DATE_OF_BIRTH_TAG)).longValue()));
         return p;
     }
 }

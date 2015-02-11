@@ -23,7 +23,7 @@ public class EncounterWriteConverter implements Converter<Encounter, DBObject> {
     private final ObservationWriteConverter observationWriteConverter;
 
     @Autowired
-    EncounterWriteConverter(ObservationWriteConverter observationWriteConverterIn) {
+    public EncounterWriteConverter(ObservationWriteConverter observationWriteConverterIn) {
         observationWriteConverter = observationWriteConverterIn;
     }
 
