@@ -21,7 +21,7 @@ public class EncounterReadConverterTest {
     @Test
     public void testConvert() {
         DateTime date = new DateTime(99999l);
-        Long patientId = 765l;
+        Long patientId = 456l;
 
         Observation observation1 = mock(Observation.class);
         Observation observation2 = mock(Observation.class);

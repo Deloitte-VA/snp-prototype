@@ -89,7 +89,7 @@ public class PrimitivesTest {
 
     @Test
     public void testGoodInteger() {
-        Long integer = 5l;
+        Integer integer = 55;
         SimplePrimitive simplePrimitive = SimplePrimitive.createPrimitive(PrimitiveType.INTEGER.getId(), integer);
         assertTrue(simplePrimitive instanceof IntegerPrimitive);
         assertEquals(PrimitiveType.INTEGER, simplePrimitive.getType());
