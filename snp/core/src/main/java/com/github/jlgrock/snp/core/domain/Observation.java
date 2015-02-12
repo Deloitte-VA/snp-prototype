@@ -17,48 +17,48 @@ public class Observation {
         return name;
     }
 
-    public void setName(final SimplePrimitive pname) {
-        this.name = name;
+    public void setName(final SimplePrimitive pName) {
+        this.name = pName;
     }
 
     public SimplePrimitive getValue() {
         return value;
     }
 
-    public void setValue(final SimplePrimitive pvalue) {
-        this.value = value;
+    public void setValue(final SimplePrimitive pValue) {
+        this.value = pValue;
     }
 
     public String getApplies() {
         return applies;
     }
 
-    public void setApplies(final String papplies) {
-        this.applies = applies;
+    public void setApplies(final String pApplies) {
+        this.applies = pApplies;
     }
 
     public DateTime getIssued() {
         return issued;
     }
 
-    public void setIssued(final DateTime pissued) {
-        this.issued = issued;
+    public void setIssued(final DateTime pIssued) {
+        this.issued = pIssued;
     }
 
     public String getIdentifier() {
         return identifier;
     }
 
-    public void setIdentifier(final String pidentifier) {
-        this.identifier = identifier;
+    public void setIdentifier(final String pIdentifier) {
+        this.identifier = pIdentifier;
     }
 
     public String getSubject() {
         return subject;
     }
 
-    public void setSubject(final String psubject) {
-        this.subject = subject;
+    public void setSubject(final String pSubject) {
+        this.subject = pSubject;
     }
 
 }

@@ -21,13 +21,11 @@ public class EncounterReadConverter implements Converter<DBObject, Encounter> {
 
     private final ObservationReadConverter observationReadConverter;
 
-/**
- * 
- * @param observationReadConverterIn
- * @param patientRepositoryIn
- */
+    /**
+     * @param observationReadConverterIn converter for observation class
+     */
     @Autowired
-    public EncounterReadConverter(final ObservationReadConverter observationReadConverterIn, final PatientRepository patientRepositoryIn) {
+    public EncounterReadConverter(final ObservationReadConverter observationReadConverterIn) {
         observationReadConverter = observationReadConverterIn;
     }
 
