@@ -7,18 +7,18 @@ import com.github.jlgrock.snp.core.domain.Race;
 import com.mongodb.DBObject;
 import org.joda.time.DateTime;
 import org.springframework.core.convert.converter.Converter;
-import org.springframework.stereotype.Component;
+import org.springframework.data.convert.ReadingConverter;
 
 /**
  * A Conversion class to convert between a MongoDB DBObject to an Patient object.
  */
-@Component
+@ReadingConverter
 public class PatientReadConverter implements Converter<DBObject, Patient> {
 
     @Override
     public Patient convert(DBObject source) {
         Patient p = new Patient();
-        p.setId((Long) source.get(PatientTags.ID_TAG));
+        p.setId(((Number) source.get(PatientTags.ID_TAG)).longValue());
         p.setFirstName((String) source.get(PatientTags.FIRST_NAME_TAG));
         p.setMiddleName((String) source.get(PatientTags.MIDDLE_NAME_TAG));
         p.setLastName((String) source.get(PatientTags.LAST_NAME_TAG));

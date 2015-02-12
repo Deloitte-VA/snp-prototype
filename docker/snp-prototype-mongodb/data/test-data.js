@@ -97,232 +97,232 @@ mydb.patients.insert(
 mydb.encounters.insert( 
 	[
 	    { "_id": NumberLong(3049593922), "patient_id": NumberLong(10000001), "date": new Date('6/29/2014').getTime(), "type": 4, reason_for_visit: "Emergency room visit for heart palpitations.", observations:[
-			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(110), "value_type": NumberInt(2), "issued": new Date('6/29/2014').getTime()},
-			{ "name": NumberLong(5695930310), "name_type": NumberInt(1), "value": NumberInt(145), "value_type": NumberInt(2), "issued": new Date('6/29/2014').getTime()}
+			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(110), "value_type": NumberInt(2), "issued": new Date('6/29/2014').getTime(),},
+			{ "name": NumberLong(5695930310), "name_type": NumberInt(1), "value": NumberInt(145), "value_type": NumberInt(2), "issued": new Date('6/29/2014').getTime(),}
 		] },
 		{ "_id": NumberLong(3049593923), "patient_id": NumberLong(10000001), "date": new Date('6/29/2014').getTime(), "type": 4, reason_for_visit: "Emergency room visit for heart palpitations.", observations:[
-			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(120), "value_type": NumberInt(2), "issued": new Date('6/29/2014').getTime()},
-			{ name: 5695930307, name_type: 1, value:  80, value_type: 2, issued: new Date('6/29/2014').getTime()},
-			{ "name": NumberLong(5695930310), "name_type": NumberInt(1), "value": NumberInt(120), "value_type": NumberInt(2), "issued": new Date('6/29/2014').getTime()},
-			{ name: 5695930313, name_type: 1, value:  80, value_type: 2, issued: new Date('6/29/2014').getTime()}
+			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(120), "value_type": NumberInt(2), "issued": new Date('6/29/2014').getTime(),},
+			{ "name": NumberLong(5695930307), "name_type": NumberInt(1), "value": NumberInt(80), "value_type": NumberInt(2), "issued": new Date('6/29/2014').getTime(),},
+			{ "name": NumberLong(5695930310), "name_type": NumberInt(1), "value": NumberInt(120), "value_type": NumberInt(2), "issued": new Date('6/29/2014').getTime(),},
+			{ "name": NumberLong(5695930313), "name_type": NumberInt(1), "value": NumberInt(80), "value_type": NumberInt(2), "issued": new Date('6/29/2014').getTime(),}
 		] },
 		{ "_id": NumberLong(3049593924), "patient_id": NumberLong(10000002), "date": new Date('1/17/2014').getTime(), "type": 4, reason_for_visit: "Emergency room visit for heart palpitations.", observations:[
-			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(165), "value_type": NumberInt(2), "issued": new Date('1/17/2014').getTime()},
-			{ "name": NumberLong(5695930307), "name_type": NumberInt(1), "value": NumberInt(100), "value_type": NumberInt(2), "issued": new Date('1/17/2014').getTime()},
-			{ "name": NumberLong(5695930310), "name_type": NumberInt(1), "value": NumberInt(100), "value_type": NumberInt(2), "issued": new Date('1/17/2014').getTime()},
-			{ name: 5695930313, name_type: 1, value:  50, value_type: 2, issued: new Date('1/17/2014').getTime()}
+			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(165), "value_type": NumberInt(2), "issued": new Date('1/17/2014').getTime(),},
+			{ "name": NumberLong(5695930307), "name_type": NumberInt(1), "value": NumberInt(100), "value_type": NumberInt(2), "issued": new Date('1/17/2014').getTime(),},
+			{ "name": NumberLong(5695930310), "name_type": NumberInt(1), "value": NumberInt(100), "value_type": NumberInt(2), "issued": new Date('1/17/2014').getTime(),},
+			{ "name": NumberLong(5695930313), "name_type": NumberInt(1), "value": NumberInt(50), "value_type": NumberInt(2), "issued": new Date('1/17/2014').getTime(),}
 		] },
 		{ "_id": NumberLong(3049593925), "patient_id": NumberLong(10000003), "date": new Date('12/2/2014').getTime(), "type": 4, reason_for_visit: "Emergency room visit for heart palpitations.", observations:[
-			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(165), "value_type": NumberInt(2), "issued": new Date('12/2/2014').getTime()},
-			{ "name": NumberLong(5695930307), "name_type": NumberInt(1), "value": NumberInt(100), "value_type": NumberInt(2), "issued": new Date('12/2/2014').getTime()},
-			{ "name": NumberLong(5695930310), "name_type": NumberInt(1), "value": NumberInt(110), "value_type": NumberInt(2), "issued": new Date('12/2/2014').getTime()},
-			{ name: 5695930313, name_type: 1, value:  60, value_type: 2, issued: new Date('12/2/2014').getTime()}
+			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(165), "value_type": NumberInt(2), "issued": new Date('12/2/2014').getTime(),},
+			{ "name": NumberLong(5695930307), "name_type": NumberInt(1), "value": NumberInt(100), "value_type": NumberInt(2), "issued": new Date('12/2/2014').getTime(),},
+			{ "name": NumberLong(5695930310), "name_type": NumberInt(1), "value": NumberInt(110), "value_type": NumberInt(2), "issued": new Date('12/2/2014').getTime(),},
+			{ "name": NumberLong(5695930313), "name_type": NumberInt(1), "value": NumberInt(60), "value_type": NumberInt(2), "issued": new Date('12/2/2014').getTime(),}
 		] },
 		{ "_id": NumberLong(3049593926), "patient_id": NumberLong(10000004), "date": new Date('2/18/2014').getTime(), "type": 4, reason_for_visit: "Emergency room visit for heart palpitations.", observations:[
-			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(115), "value_type": NumberInt(2), "issued": new Date('2/18/2014').getTime()},
-			{ name: 5695930307, name_type: 1, value:  85, value_type: 2, issued: new Date('2/18/2014').getTime()},
-			{ "name": NumberLong(5695930310), "name_type": NumberInt(1), "value": NumberInt(125), "value_type": NumberInt(2), "issued": new Date('2/18/2014').getTime()},
-			{ name: 5695930313, name_type: 1, value:  75, value_type: 2, issued: new Date('2/18/2014').getTime()}
+			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(115), "value_type": NumberInt(2), "issued": new Date('2/18/2014').getTime(),},
+			{ "name": NumberLong(5695930307), "name_type": NumberInt(1), "value": NumberInt(85), "value_type": NumberInt(2), "issued": new Date('2/18/2014').getTime(),},
+			{ "name": NumberLong(5695930310), "name_type": NumberInt(1), "value": NumberInt(125), "value_type": NumberInt(2), "issued": new Date('2/18/2014').getTime(),},
+			{ "name": NumberLong(5695930313), "name_type": NumberInt(1), "value": NumberInt(75), "value_type": NumberInt(2), "issued": new Date('2/18/2014').getTime(),}
 		] },
 		{ "_id": NumberLong(3049593927), "patient_id": NumberLong(10000005), "date": new Date('3/30/2014').getTime(), "type": 4, reason_for_visit: "Emergency room visit for heart palpitations.", observations:[
-			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(120), "value_type": NumberInt(2), "issued": new Date('3/30/2014').getTime()},
-			{ name: 5695930307, name_type: 1, value:  80, value_type: 2, issued: new Date('3/30/2014').getTime()},
-			{ "name": NumberLong(5695930310), "name_type": NumberInt(1), "value": NumberInt(120), "value_type": NumberInt(2), "issued": new Date('3/30/2014').getTime()},
-			{ name: 5695930313, name_type: 1, value:  80, value_type: 2, issued: new Date('3/30/2014').getTime()}
+			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(120), "value_type": NumberInt(2), "issued": new Date('3/30/2014').getTime(),},
+			{ "name": NumberLong(5695930307), "name_type": NumberInt(1), "value": NumberInt(80), "value_type": NumberInt(2), "issued": new Date('3/30/2014').getTime(),},
+			{ "name": NumberLong(5695930310), "name_type": NumberInt(1), "value": NumberInt(120), "value_type": NumberInt(2), "issued": new Date('3/30/2014').getTime(),},
+			{ "name": NumberLong(5695930313), "name_type": NumberInt(1), "value": NumberInt(80), "value_type": NumberInt(2), "issued": new Date('3/30/2014').getTime(),}
 		] },
 		{ "_id": NumberLong(3049593928), "patient_id": NumberLong(10000006), "date": new Date('2/5/2014').getTime(), "type": 4, reason_for_visit: "Emergency room visit for heart palpitations.", observations:[
-			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(145), "value_type": NumberInt(2), "issued": new Date('2/5/2014').getTime()},
-			{ name: 5695930307, name_type: 1, value:  95, value_type: 2, issued: new Date('2/5/2014').getTime()},
-			{ "name": NumberLong(5695930310), "name_type": NumberInt(1), "value": NumberInt(175), "value_type": NumberInt(2), "issued": new Date('2/5/2014').getTime()},
-			{ "name": NumberLong(5695930313), "name_type": NumberInt(1), "value": NumberInt(110), "value_type": NumberInt(2), "issued": new Date('2/5/2014').getTime()}
+			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(145), "value_type": NumberInt(2), "issued": new Date('2/5/2014').getTime(),},
+			{ "name": NumberLong(5695930307), "name_type": NumberInt(1), "value": NumberInt(95), "value_type": NumberInt(2), "issued": new Date('2/5/2014').getTime(),},
+			{ "name": NumberLong(5695930310), "name_type": NumberInt(1), "value": NumberInt(175), "value_type": NumberInt(2), "issued": new Date('2/5/2014').getTime(),},
+			{ "name": NumberLong(5695930313), "name_type": NumberInt(1), "value": NumberInt(110), "value_type": NumberInt(2), "issued": new Date('2/5/2014').getTime(),}
 		] },
 		{ "_id": NumberLong(3049593929), "patient_id": NumberLong(10000007), "date": new Date('6/27/2014').getTime(), "type": 4, reason_for_visit: "Emergency room visit for heart palpitations.", observations:[
-			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(155), "value_type": NumberInt(2), "issued": new Date('6/27/2014').getTime()},
-			{ name: 5695930307, name_type: 1, value:  95, value_type: 2, issued: new Date('6/27/2014').getTime()},
-			{ "name": NumberLong(5695930310), "name_type": NumberInt(1), "value": NumberInt(160), "value_type": NumberInt(2), "issued": new Date('6/27/2014').getTime()},
-			{ "name": NumberLong(5695930313), "name_type": NumberInt(1), "value": NumberInt(100), "value_type": NumberInt(2), "issued": new Date('6/27/2014').getTime()}
+			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(155), "value_type": NumberInt(2), "issued": new Date('6/27/2014').getTime(),},
+			{ "name": NumberLong(5695930307), "name_type": NumberInt(1), "value": NumberInt(95), "value_type": NumberInt(2), "issued": new Date('6/27/2014').getTime(),},
+			{ "name": NumberLong(5695930310), "name_type": NumberInt(1), "value": NumberInt(160), "value_type": NumberInt(2), "issued": new Date('6/27/2014').getTime(),},
+			{ "name": NumberLong(5695930313), "name_type": NumberInt(1), "value": NumberInt(100), "value_type": NumberInt(2), "issued": new Date('6/27/2014').getTime(),}
 		] },
 		{ "_id": NumberLong(3049593930), "patient_id": NumberLong(10000008), "date": new Date('1/8/2014').getTime(), "type": 4, reason_for_visit: "Emergency room visit for heart palpitations.", observations:[
-			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(110), "value_type": NumberInt(2), "issued": new Date('1/8/2014').getTime()},
-			{ name: 5695930307, name_type: 1, value:  70, value_type: 2, issued: new Date('1/8/2014').getTime()},
-			{ "name": NumberLong(5695930310), "name_type": NumberInt(1), "value": NumberInt(105), "value_type": NumberInt(2), "issued": new Date('1/8/2014').getTime()},
-			{ name: 5695930313, name_type: 1, value:  65, value_type: 2, issued: new Date('1/8/2014').getTime()}
+			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(110), "value_type": NumberInt(2), "issued": new Date('1/8/2014').getTime(),},
+			{ "name": NumberLong(5695930307), "name_type": NumberInt(1), "value": NumberInt(70), "value_type": NumberInt(2), "issued": new Date('1/8/2014').getTime(),},
+			{ "name": NumberLong(5695930310), "name_type": NumberInt(1), "value": NumberInt(105), "value_type": NumberInt(2), "issued": new Date('1/8/2014').getTime(),},
+			{ "name": NumberLong(5695930313), "name_type": NumberInt(1), "value": NumberInt(65), "value_type": NumberInt(2), "issued": new Date('1/8/2014').getTime(),}
 		] },
 		{ "_id": NumberLong(3049593931), "patient_id": NumberLong(10000009), "date": new Date('3/31/2014').getTime(), "type": 4, reason_for_visit: "Annual physical.", observations:[
-			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(120), "value_type": NumberInt(2), "issued": new Date('3/31/2014').getTime()},
-			{ name: 5695930307, name_type: 1, value:  80, value_type: 2, issued: new Date('3/31/2014').getTime()}
+			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(120), "value_type": NumberInt(2), "issued": new Date('3/31/2014').getTime(),},
+			{ "name": NumberLong(5695930307), "name_type": NumberInt(1), "value": NumberInt(80), "value_type": NumberInt(2), "issued": new Date('3/31/2014').getTime(),}
 		] },
 		{ "_id": NumberLong(3049593932), "patient_id": NumberLong(10000010), "date": new Date('5/6/2014').getTime(), "type": 4, reason_for_visit: "Annual physical.", observations:[
-			{ "name": NumberLong(5695930310), "name_type": NumberInt(1), "value": NumberInt(120), "value_type": NumberInt(2), "issued": new Date('5/6/2014').getTime()},
-			{ name: 5695930313, name_type: 1, value:  80, value_type: 2, issued: new Date('5/6/2014').getTime()}
+			{ "name": NumberLong(5695930310), "name_type": NumberInt(1), "value": NumberInt(120), "value_type": NumberInt(2), "issued": new Date('5/6/2014').getTime(),},
+			{ "name": NumberLong(5695930313), "name_type": NumberInt(1), "value": NumberInt(80), "value_type": NumberInt(2), "issued": new Date('5/6/2014').getTime(),}
 		] },
 		{ "_id": NumberLong(3049593933), "patient_id": NumberLong(10000011), "date": new Date('1/12/2014').getTime(), "type": 4, reason_for_visit: "Annual physical.", observations:[
-			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(120), "value_type": NumberInt(2), "issued": new Date('1/12/2014').getTime()},
-			{ name: 5695930307, name_type: 1, value:  80, value_type: 2, issued: new Date('1/12/2014').getTime()}
+			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(120), "value_type": NumberInt(2), "issued": new Date('1/12/2014').getTime(),},
+			{ "name": NumberLong(5695930307), "name_type": NumberInt(1), "value": NumberInt(80), "value_type": NumberInt(2), "issued": new Date('1/12/2014').getTime(),}
 		] },
 		{ "_id": NumberLong(3049593934), "patient_id": NumberLong(10000012), "date": new Date('12/1/2014').getTime(), "type": 4, reason_for_visit: "Annual physical.", observations:[
-			{ "name": NumberLong(5695930310), "name_type": NumberInt(1), "value": NumberInt(120), "value_type": NumberInt(2), "issued": new Date('12/1/2014').getTime()},
-			{ name: 5695930313, name_type: 1, value:  80, value_type: 2, issued: new Date('12/1/2014').getTime()}
+			{ "name": NumberLong(5695930310), "name_type": NumberInt(1), "value": NumberInt(120), "value_type": NumberInt(2), "issued": new Date('12/1/2014').getTime(),},
+			{ "name": NumberLong(5695930313), "name_type": NumberInt(1), "value": NumberInt(80), "value_type": NumberInt(2), "issued": new Date('12/1/2014').getTime(),}
 		] },
 		{ "_id": NumberLong(3049593935), "patient_id": NumberLong(10000013), "date": new Date('11/25/2014').getTime(), "type": 4, reason_for_visit: "Annual physical.", observations:[
-			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(120), "value_type": NumberInt(2), "issued": new Date('11/25/2014').getTime()},
-			{ name: 5695930307, name_type: 1, value:  80, value_type: 2, issued: new Date('11/25/2014').getTime()}
+			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(120), "value_type": NumberInt(2), "issued": new Date('11/25/2014').getTime(),},
+			{ "name": NumberLong(5695930307), "name_type": NumberInt(1), "value": NumberInt(80), "value_type": NumberInt(2), "issued": new Date('11/25/2014').getTime(),}
 		] },
 		{ "_id": NumberLong(3049593936), "patient_id": NumberLong(10000014), "date": new Date('1/16/2014').getTime(), "type": 4, reason_for_visit: "Annual physical.", observations:[
-			{ "name": NumberLong(5695930310), "name_type": NumberInt(1), "value": NumberInt(120), "value_type": NumberInt(2), "issued": new Date('1/16/2014').getTime()},
-			{ name: 5695930313, name_type: 1, value:  80, value_type: 2, issued: new Date('1/16/2014').getTime()}
+			{ "name": NumberLong(5695930310), "name_type": NumberInt(1), "value": NumberInt(120), "value_type": NumberInt(2), "issued": new Date('1/16/2014').getTime(),},
+			{ "name": NumberLong(5695930313), "name_type": NumberInt(1), "value": NumberInt(80), "value_type": NumberInt(2), "issued": new Date('1/16/2014').getTime(),}
 		] },
 		{ "_id": NumberLong(3049593937), "patient_id": NumberLong(10000015), "date": new Date('4/16/2014').getTime(), "type": 4, reason_for_visit: "Annual physical.", observations:[
-			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(120), "value_type": NumberInt(2), "issued": new Date('4/16/2014').getTime()},
-			{ name: 5695930307, name_type: 1, value:  80, value_type: 2, issued: new Date('4/16/2014').getTime()}
+			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(120), "value_type": NumberInt(2), "issued": new Date('4/16/2014').getTime(),},
+			{ "name": NumberLong(5695930307), "name_type": NumberInt(1), "value": NumberInt(80), "value_type": NumberInt(2), "issued": new Date('4/16/2014').getTime(),}
 		] },
 		{ "_id": NumberLong(3049593938), "patient_id": NumberLong(10000016), "date": new Date('2/19/2014').getTime(), "type": 4, reason_for_visit: "Annual physical.", observations:[
-			{ "name": NumberLong(5695930310), "name_type": NumberInt(1), "value": NumberInt(120), "value_type": NumberInt(2), "issued": new Date('2/19/2014').getTime()},
-			{ name: 5695930313, name_type: 1, value:  80, value_type: 2, issued: new Date('2/19/2014').getTime()}
+			{ "name": NumberLong(5695930310), "name_type": NumberInt(1), "value": NumberInt(120), "value_type": NumberInt(2), "issued": new Date('2/19/2014').getTime(),},
+			{ "name": NumberLong(5695930313), "name_type": NumberInt(1), "value": NumberInt(80), "value_type": NumberInt(2), "issued": new Date('2/19/2014').getTime(),}
 		] },
 		{ "_id": NumberLong(3049593939), "patient_id": NumberLong(10000017), "date": new Date('1/30/2014').getTime(), "type": 4, reason_for_visit: "Emergency room visit for headaches/light-headedness.", observations:[
-			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(120), "value_type": NumberInt(2), "issued": new Date('1/30/2014').getTime()},
-			{ name: 5695930307, name_type: 1, value:  80, value_type: 2, issued: new Date('1/30/2014').getTime()},
-			{ "name": NumberLong(5695930310), "name_type": NumberInt(1), "value": NumberInt(120), "value_type": NumberInt(2), "issued": new Date('1/15/2014').getTime()},
-			{ name: 5695930313, name_type: 1, value:  80, value_type: 2, issued: new Date('1/15/2014').getTime()}
+			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(120), "value_type": NumberInt(2), "issued": new Date('1/30/2014').getTime(),},
+			{ "name": NumberLong(5695930307), "name_type": NumberInt(1), "value": NumberInt(80), "value_type": NumberInt(2), "issued": new Date('1/30/2014').getTime(),},
+			{ "name": NumberLong(5695930310), "name_type": NumberInt(1), "value": NumberInt(120), "value_type": NumberInt(2), "issued": new Date('1/15/2014').getTime(),},
+			{ "name": NumberLong(5695930313), "name_type": NumberInt(1), "value": NumberInt(80), "value_type": NumberInt(2), "issued": new Date('1/15/2014').getTime(),}
 		] },
 		{ "_id": NumberLong(3049593940), "patient_id": NumberLong(10000018), "date": new Date('2/6/2014').getTime(), "type": 4, reason_for_visit: "Emergency room visit for headaches/light-headedness.", observations:[
-			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(165), "value_type": NumberInt(2), "issued": new Date('2/6/2014').getTime()},
-			{ "name": NumberLong(5695930307), "name_type": NumberInt(1), "value": NumberInt(100), "value_type": NumberInt(2), "issued": new Date('2/6/2014').getTime()},
-			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(130), "value_type": NumberInt(2), "issued": new Date('1/23/2014').getTime()},
-			{ name: 5695930307, name_type: 1, value:  95, value_type: 2, issued: new Date('1/23/2014').getTime()}
+			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(165), "value_type": NumberInt(2), "issued": new Date('2/6/2014').getTime(),},
+			{ "name": NumberLong(5695930307), "name_type": NumberInt(1), "value": NumberInt(100), "value_type": NumberInt(2), "issued": new Date('2/6/2014').getTime(),},
+			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(130), "value_type": NumberInt(2), "issued": new Date('1/23/2014').getTime(),},
+			{ "name": NumberLong(5695930307), "name_type": NumberInt(1), "value": NumberInt(95), "value_type": NumberInt(2), "issued": new Date('1/23/2014').getTime(),}
 		] },
 		{ "_id": NumberLong(3049593941), "patient_id": NumberLong(10000019), "date": new Date('12/8/2014').getTime(), "type": 4, reason_for_visit: "Emergency room visit for headaches/light-headedness.", observations:[
-			{ "name": NumberLong(5695930310), "name_type": NumberInt(1), "value": NumberInt(170), "value_type": NumberInt(2), "issued": new Date('12/8/2014').getTime()},
-			{ "name": NumberLong(5695930313), "name_type": NumberInt(1), "value": NumberInt(120), "value_type": NumberInt(2), "issued": new Date('12/8/2014').getTime()},
-			{ "name": NumberLong(5695930310), "name_type": NumberInt(1), "value": NumberInt(170), "value_type": NumberInt(2), "issued": new Date('1/28/2014').getTime()},
-			{ "name": NumberLong(5695930313), "name_type": NumberInt(1), "value": NumberInt(120), "value_type": NumberInt(2), "issued": new Date('1/28/2014').getTime()}
+			{ "name": NumberLong(5695930310), "name_type": NumberInt(1), "value": NumberInt(170), "value_type": NumberInt(2), "issued": new Date('12/8/2014').getTime(),},
+			{ "name": NumberLong(5695930313), "name_type": NumberInt(1), "value": NumberInt(120), "value_type": NumberInt(2), "issued": new Date('12/8/2014').getTime(),},
+			{ "name": NumberLong(5695930310), "name_type": NumberInt(1), "value": NumberInt(170), "value_type": NumberInt(2), "issued": new Date('1/28/2014').getTime(),},
+			{ "name": NumberLong(5695930313), "name_type": NumberInt(1), "value": NumberInt(120), "value_type": NumberInt(2), "issued": new Date('1/28/2014').getTime(),}
 		] },
 		{ "_id": NumberLong(3049593942), "patient_id": NumberLong(10000020), "date": new Date('5/30/2014').getTime(), "type": 4, reason_for_visit: "Emergency room visit for headaches/light-headedness.", observations:[
-			{ name: 5695930304, name_type: 1, value:  90, value_type: 2, issued: new Date('5/30/2014').getTime()},
-			{ name: 5695930307, name_type: 1, value:  60, value_type: 2, issued: new Date('5/30/2014').getTime()},
-			{ "name": NumberLong(5695930310), "name_type": NumberInt(1), "value": NumberInt(100), "value_type": NumberInt(2), "issued": new Date('3/30/2014').getTime()},
-			{ name: 5695930313, name_type: 1, value:  70, value_type: 2, issued: new Date('3/30/2014').getTime()}
+			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(90), "value_type": NumberInt(2), "issued": new Date('5/30/2014').getTime(),},
+			{ "name": NumberLong(5695930307), "name_type": NumberInt(1), "value": NumberInt(60), "value_type": NumberInt(2), "issued": new Date('5/30/2014').getTime(),},
+			{ "name": NumberLong(5695930310), "name_type": NumberInt(1), "value": NumberInt(100), "value_type": NumberInt(2), "issued": new Date('3/30/2014').getTime(),},
+			{ "name": NumberLong(5695930313), "name_type": NumberInt(1), "value": NumberInt(70), "value_type": NumberInt(2), "issued": new Date('3/30/2014').getTime(),}
 		] },
 		{ "_id": NumberLong(3049593943), "patient_id": NumberLong(10000021), "date": new Date('4/22/2014').getTime(), "type": 4, reason_for_visit: "Emergency room visit for headaches/light-headedness.", observations:[
-			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(120), "value_type": NumberInt(2), "issued": new Date('4/22/2014').getTime()},
-			{ name: 5695930307, name_type: 1, value:  80, value_type: 2, issued: new Date('4/22/2014').getTime()},
-			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(120), "value_type": NumberInt(2), "issued": new Date('4/22/2014').getTime()},
-			{ name: 5695930307, name_type: 1, value:  80, value_type: 2, issued: new Date('4/22/2014').getTime()}
+			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(120), "value_type": NumberInt(2), "issued": new Date('4/22/2014').getTime(),},
+			{ "name": NumberLong(5695930307), "name_type": NumberInt(1), "value": NumberInt(80), "value_type": NumberInt(2), "issued": new Date('4/22/2014').getTime(),},
+			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(120), "value_type": NumberInt(2), "issued": new Date('4/22/2014').getTime(),},
+			{ "name": NumberLong(5695930307), "name_type": NumberInt(1), "value": NumberInt(80), "value_type": NumberInt(2), "issued": new Date('4/22/2014').getTime(),}
 		] },
 		{ "_id": NumberLong(3049593944), "patient_id": NumberLong(10000022), "date": new Date('12/3/2014').getTime(), "type": 4, reason_for_visit: "Emergency room visit for headaches/light-headedness.", observations:[
-			{ "name": NumberLong(5695930307), "name_type": NumberInt(1), "value": NumberInt(125), "value_type": NumberInt(2), "issued": new Date('12/3/2014').getTime()},
-			{ name: 5695930313, name_type: 1, value:  85, value_type: 2, issued: new Date('12/3/2014').getTime()},
-			{ "name": NumberLong(5695930307), "name_type": NumberInt(1), "value": NumberInt(125), "value_type": NumberInt(2), "issued": new Date('12/3/2014').getTime()},
-			{ name: 5695930313, name_type: 1, value:  85, value_type: 2, issued: new Date('12/3/2014').getTime()}
+			{ "name": NumberLong(5695930307), "name_type": NumberInt(1), "value": NumberInt(125), "value_type": NumberInt(2), "issued": new Date('12/3/2014').getTime(),},
+			{ "name": NumberLong(5695930313), "name_type": NumberInt(1), "value": NumberInt(85), "value_type": NumberInt(2), "issued": new Date('12/3/2014').getTime(),},
+			{ "name": NumberLong(5695930307), "name_type": NumberInt(1), "value": NumberInt(125), "value_type": NumberInt(2), "issued": new Date('12/3/2014').getTime(),},
+			{ "name": NumberLong(5695930313), "name_type": NumberInt(1), "value": NumberInt(85), "value_type": NumberInt(2), "issued": new Date('12/3/2014').getTime(),}
 		] },
 		{ "_id": NumberLong(3049593945), "patient_id": NumberLong(10000023), "date": new Date('6/26/2014').getTime(), "type": 4, reason_for_visit: "Emergency room visit for headaches/light-headedness.", observations:[
-			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(115), "value_type": NumberInt(2), "issued": new Date('6/26/2014').getTime()},
-			{ name: 5695930307, name_type: 1, value:  75, value_type: 2, issued: new Date('6/26/2014').getTime()},
-			{ "name": NumberLong(5695930310), "name_type": NumberInt(1), "value": NumberInt(115), "value_type": NumberInt(2), "issued": new Date('4/26/2014').getTime()},
-			{ name: 5695930313, name_type: 1, value:  75, value_type: 2, issued: new Date('4/26/2014').getTime()}
+			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(115), "value_type": NumberInt(2), "issued": new Date('6/26/2014').getTime(),},
+			{ "name": NumberLong(5695930307), "name_type": NumberInt(1), "value": NumberInt(75), "value_type": NumberInt(2), "issued": new Date('6/26/2014').getTime(),},
+			{ "name": NumberLong(5695930310), "name_type": NumberInt(1), "value": NumberInt(115), "value_type": NumberInt(2), "issued": new Date('4/26/2014').getTime(),},
+			{ "name": NumberLong(5695930313), "name_type": NumberInt(1), "value": NumberInt(75), "value_type": NumberInt(2), "issued": new Date('4/26/2014').getTime(),}
 		] },
 		{ "_id": NumberLong(3049593946), "patient_id": NumberLong(10000024), "date": new Date('10/18/2014').getTime(), "type": 4, reason_for_visit: "Emergency room visit for headaches/light-headedness.", observations:[
-			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(120), "value_type": NumberInt(2), "issued": new Date('10/18/2014').getTime()},
-			{ name: 5695930307, name_type: 1, value:  80, value_type: 2, issued: new Date('10/18/2014').getTime()},
-			{ "name": NumberLong(5695930310), "name_type": NumberInt(1), "value": NumberInt(120), "value_type": NumberInt(2), "issued": new Date('10/18/2014').getTime()},
-			{ name: 5695930313, name_type: 1, value:  80, value_type: 2, issued: new Date('10/18/2014').getTime()}
+			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(120), "value_type": NumberInt(2), "issued": new Date('10/18/2014').getTime(),},
+			{ "name": NumberLong(5695930307), "name_type": NumberInt(1), "value": NumberInt(80), "value_type": NumberInt(2), "issued": new Date('10/18/2014').getTime(),},
+			{ "name": NumberLong(5695930310), "name_type": NumberInt(1), "value": NumberInt(120), "value_type": NumberInt(2), "issued": new Date('10/18/2014').getTime(),},
+			{ "name": NumberLong(5695930313), "name_type": NumberInt(1), "value": NumberInt(80), "value_type": NumberInt(2), "issued": new Date('10/18/2014').getTime(),}
 		] },
 		{ "_id": NumberLong(3049593947), "patient_id": NumberLong(10000025), "date": new Date('6/4/2014').getTime(), "type": 4, reason_for_visit: "Follow-up visit with specialist.", observations:[
-			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(135), "value_type": NumberInt(2), "issued": new Date('6/4/2014').getTime()},
-			{ name: 5695930307, name_type: 1, value:  93, value_type: 2, issued: new Date('6/4/2014').getTime()}
+			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(135), "value_type": NumberInt(2), "issued": new Date('6/4/2014').getTime(),},
+			{ "name": NumberLong(5695930307), "name_type": NumberInt(1), "value": NumberInt(93), "value_type": NumberInt(2), "issued": new Date('6/4/2014').getTime(),}
 		] },
 		{ "_id": NumberLong(3049593948), "patient_id": NumberLong(10000026), "date": new Date('6/24/2014').getTime(), "type": 4, reason_for_visit: "Follow-up visit with specialist.", observations:[
-			{ "name": NumberLong(5695930310), "name_type": NumberInt(1), "value": NumberInt(123), "value_type": NumberInt(2), "issued": new Date('6/24/2014').getTime()},
-			{ name: 5695930313, name_type: 1, value:  82, value_type: 2, issued: new Date('6/24/2014').getTime()}
+			{ "name": NumberLong(5695930310), "name_type": NumberInt(1), "value": NumberInt(123), "value_type": NumberInt(2), "issued": new Date('6/24/2014').getTime(),},
+			{ "name": NumberLong(5695930313), "name_type": NumberInt(1), "value": NumberInt(82), "value_type": NumberInt(2), "issued": new Date('6/24/2014').getTime(),}
 		] },
 		{ "_id": NumberLong(3049593949), "patient_id": NumberLong(10000027), "date": new Date('6/10/2014').getTime(), "type": 4, reason_for_visit: "Follow-up visit with specialist.", observations:[
-			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(124), "value_type": NumberInt(2), "issued": new Date('6/10/2014').getTime()},
-			{ name: 5695930307, name_type: 1, value:  76, value_type: 2, issued: new Date('6/10/2014').getTime()}
+			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(124), "value_type": NumberInt(2), "issued": new Date('6/10/2014').getTime(),},
+			{ "name": NumberLong(5695930307), "name_type": NumberInt(1), "value": NumberInt(76), "value_type": NumberInt(2), "issued": new Date('6/10/2014').getTime(),}
 		] },
 		{ "_id": NumberLong(3049593950), "patient_id": NumberLong(10000028), "date": new Date('3/12/2014').getTime(), "type": 4, reason_for_visit: "Follow-up visit with specialist.", observations:[
-			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(138), "value_type": NumberInt(2), "issued": new Date('3/12/2014').getTime()},
-			{ name: 5695930307, name_type: 1, value:  94, value_type: 2, issued: new Date('3/12/2014').getTime()}
+			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(138), "value_type": NumberInt(2), "issued": new Date('3/12/2014').getTime(),},
+			{ "name": NumberLong(5695930307), "name_type": NumberInt(1), "value": NumberInt(94), "value_type": NumberInt(2), "issued": new Date('3/12/2014').getTime(),}
 		] },
 		{ "_id": NumberLong(3049593951), "patient_id": NumberLong(10000029), "date": new Date('12/8/2014').getTime(), "type": 4, reason_for_visit: "Follow-up visit with specialist.", observations:[
-			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(118), "value_type": NumberInt(2), "issued": new Date('12/8/2014').getTime()},
-			{ name: 5695930307, name_type: 1, value:  75, value_type: 2, issued: new Date('12/8/2014').getTime()}
+			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(118), "value_type": NumberInt(2), "issued": new Date('12/8/2014').getTime(),},
+			{ "name": NumberLong(5695930307), "name_type": NumberInt(1), "value": NumberInt(75), "value_type": NumberInt(2), "issued": new Date('12/8/2014').getTime(),}
 		] },
 		{ "_id": NumberLong(3049593952), "patient_id": NumberLong(10000030), "date": new Date('1/29/2014').getTime(), "type": 4, reason_for_visit: "Follow-up visit with specialist.", observations:[
-			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(115), "value_type": NumberInt(2), "issued": new Date('1/29/2014').getTime()},
-			{ name: 5695930307, name_type: 1, value:  77, value_type: 2, issued: new Date('1/29/2014').getTime()}
+			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(115), "value_type": NumberInt(2), "issued": new Date('1/29/2014').getTime(),},
+			{ "name": NumberLong(5695930307), "name_type": NumberInt(1), "value": NumberInt(77), "value_type": NumberInt(2), "issued": new Date('1/29/2014').getTime(),}
 		] },
 		{ "_id": NumberLong(3049593953), "patient_id": NumberLong(10000031), "date": new Date('1/6/2014').getTime(), "type": 4, reason_for_visit: "Follow-up visit with specialist.", observations:[
-			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(125), "value_type": NumberInt(2), "issued": new Date('1/6/2014').getTime()},
-			{ name: 5695930307, name_type: 1, value:  76, value_type: 2, issued: new Date('1/6/2014').getTime()}
+			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(125), "value_type": NumberInt(2), "issued": new Date('1/6/2014').getTime(),},
+			{ "name": NumberLong(5695930307), "name_type": NumberInt(1), "value": NumberInt(76), "value_type": NumberInt(2), "issued": new Date('1/6/2014').getTime(),}
 		] },
 		{ "_id": NumberLong(3049593954), "patient_id": NumberLong(10000032), "date": new Date('12/8/2014').getTime(), "type": 4, reason_for_visit: "Follow-up visit with specialist.", observations:[
-			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(120), "value_type": NumberInt(2), "issued": new Date('12/8/2014').getTime()},
-			{ name: 5695930307, name_type: 1, value:  80, value_type: 2, issued: new Date('12/8/2014').getTime()}
+			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(120), "value_type": NumberInt(2), "issued": new Date('12/8/2014').getTime(),},
+			{ "name": NumberLong(5695930307), "name_type": NumberInt(1), "value": NumberInt(80), "value_type": NumberInt(2), "issued": new Date('12/8/2014').getTime(),}
 		] },
 		{ "_id": NumberLong(3049593955), "patient_id": NumberLong(10000033), "date": new Date('6/30/2014').getTime(), "type": 4, reason_for_visit: "Pre-procedural reading.", observations:[
-			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(115), "value_type": NumberInt(2), "issued": new Date('6/30/2014').getTime()},
-			{ name: 5695930307, name_type: 1, value:  87, value_type: 2, issued: new Date('6/30/2014').getTime()}
+			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(115), "value_type": NumberInt(2), "issued": new Date('6/30/2014').getTime(),},
+			{ "name": NumberLong(5695930307), "name_type": NumberInt(1), "value": NumberInt(87), "value_type": NumberInt(2), "issued": new Date('6/30/2014').getTime(),}
 		] },
 		{ "_id": NumberLong(3049593956), "patient_id": NumberLong(10000034), "date": new Date('5/20/2014').getTime(), "type": 4, reason_for_visit: "Pre-procedural reading.", observations:[
-			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(129), "value_type": NumberInt(2), "issued": new Date('5/20/2014').getTime()},
-			{ name: 5695930307, name_type: 1, value:  72, value_type: 2, issued: new Date('5/20/2014').getTime()}
+			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(129), "value_type": NumberInt(2), "issued": new Date('5/20/2014').getTime(),},
+			{ "name": NumberLong(5695930307), "name_type": NumberInt(1), "value": NumberInt(72), "value_type": NumberInt(2), "issued": new Date('5/20/2014').getTime(),}
 		] },
 		{ "_id": NumberLong(3049593957), "patient_id": NumberLong(10000035), "date": new Date('11/26/2014').getTime(), "type": 4, reason_for_visit: "Pre-procedural reading.", observations:[
-			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(129), "value_type": NumberInt(2), "issued": new Date('11/26/2014').getTime()},
-			{ name: 5695930307, name_type: 1, value:  89, value_type: 2, issued: new Date('11/26/2014').getTime()}
+			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(129), "value_type": NumberInt(2), "issued": new Date('11/26/2014').getTime(),},
+			{ "name": NumberLong(5695930307), "name_type": NumberInt(1), "value": NumberInt(89), "value_type": NumberInt(2), "issued": new Date('11/26/2014').getTime(),}
 		] },
 		{ "_id": NumberLong(3049593958), "patient_id": NumberLong(10000036), "date": new Date('8/26/2014').getTime(), "type": 4, reason_for_visit: "Pre-procedural reading.", observations:[
-			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(135), "value_type": NumberInt(2), "issued": new Date('8/26/2014').getTime()},
-			{ name: 5695930307, name_type: 1, value:  93, value_type: 2, issued: new Date('8/26/2014').getTime()}
+			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(135), "value_type": NumberInt(2), "issued": new Date('8/26/2014').getTime(),},
+			{ "name": NumberLong(5695930307), "name_type": NumberInt(1), "value": NumberInt(93), "value_type": NumberInt(2), "issued": new Date('8/26/2014').getTime(),}
 		] },
 		{ "_id": NumberLong(3049593959), "patient_id": NumberLong(10000037), "date": new Date('12/8/2014').getTime(), "type": 4, reason_for_visit: "Pre-procedural reading.", observations:[
-			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(145), "value_type": NumberInt(2), "issued": new Date('12/8/2014').getTime()},
-			{ name: 5695930307, name_type: 1, value:  98, value_type: 2, issued: new Date('12/8/2014').getTime()}
+			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(145), "value_type": NumberInt(2), "issued": new Date('12/8/2014').getTime(),},
+			{ "name": NumberLong(5695930307), "name_type": NumberInt(1), "value": NumberInt(98), "value_type": NumberInt(2), "issued": new Date('12/8/2014').getTime(),}
 		] },
 		{ "_id": NumberLong(3049593960), "patient_id": NumberLong(10000038), "date": new Date('11/5/2014').getTime(), "type": 4, reason_for_visit: "Pre-procedural reading.", observations:[
-			{ "name": NumberLong(5695930310), "name_type": NumberInt(1), "value": NumberInt(111), "value_type": NumberInt(2), "issued": new Date('11/5/2014').getTime()},
-			{ name: 5695930313, name_type: 1, value:  71, value_type: 2, issued: new Date('11/5/2014').getTime()}
+			{ "name": NumberLong(5695930310), "name_type": NumberInt(1), "value": NumberInt(111), "value_type": NumberInt(2), "issued": new Date('11/5/2014').getTime(),},
+			{ "name": NumberLong(5695930313), "name_type": NumberInt(1), "value": NumberInt(71), "value_type": NumberInt(2), "issued": new Date('11/5/2014').getTime(),}
 		] },
 		{ "_id": NumberLong(3049593961), "patient_id": NumberLong(10000039), "date": new Date('1/4/2014').getTime(), "type": 4, reason_for_visit: "Pre-procedural reading.", observations:[
-			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(120), "value_type": NumberInt(2), "issued": new Date('1/4/2014').getTime()},
-			{ name: 5695930307, name_type: 1, value:  80, value_type: 2, issued: new Date('1/4/2014').getTime()}
+			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(120), "value_type": NumberInt(2), "issued": new Date('1/4/2014').getTime(),},
+			{ "name": NumberLong(5695930307), "name_type": NumberInt(1), "value": NumberInt(80), "value_type": NumberInt(2), "issued": new Date('1/4/2014').getTime(),}
 		] },
 		{ "_id": NumberLong(3049593962), "patient_id": NumberLong(10000040), "date": new Date('10/31/2014').getTime(), "type": 4, reason_for_visit: "Pre-procedural reading.", observations:[
-			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(129), "value_type": NumberInt(2), "issued": new Date('10/31/2014').getTime()},
-			{ name: 5695930307, name_type: 1, value:  83, value_type: 2, issued: new Date('10/31/2014').getTime()}
+			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(129), "value_type": NumberInt(2), "issued": new Date('10/31/2014').getTime(),},
+			{ "name": NumberLong(5695930307), "name_type": NumberInt(1), "value": NumberInt(83), "value_type": NumberInt(2), "issued": new Date('10/31/2014').getTime(),}
 		] },
 		{ "_id": NumberLong(3049593963), "patient_id": NumberLong(10000041), "date": new Date('6/10/2014').getTime(), "type": 4, reason_for_visit: "Annual physical.", observations:[
-			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(120), "value_type": NumberInt(2), "issued": new Date('6/10/2014').getTime()},
-			{ name: 5695930307, name_type: 1, value:  80, value_type: 2, issued: new Date('6/10/2014').getTime()}
+			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(120), "value_type": NumberInt(2), "issued": new Date('6/10/2014').getTime(),},
+			{ "name": NumberLong(5695930307), "name_type": NumberInt(1), "value": NumberInt(80), "value_type": NumberInt(2), "issued": new Date('6/10/2014').getTime(),}
 		] },
 		{ "_id": NumberLong(3049593964), "patient_id": NumberLong(10000042), "date": new Date('1/8/2014').getTime(), "type": 4, reason_for_visit: "Annual physical.", observations:[
-			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(118), "value_type": NumberInt(2), "issued": new Date('1/8/2014').getTime()},
-			{ name: 5695930307, name_type: 1, value:  77, value_type: 2, issued: new Date('1/8/2014').getTime()}
+			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(118), "value_type": NumberInt(2), "issued": new Date('1/8/2014').getTime(),},
+			{ "name": NumberLong(5695930307), "name_type": NumberInt(1), "value": NumberInt(77), "value_type": NumberInt(2), "issued": new Date('1/8/2014').getTime(),}
 		] },
 		{ "_id": NumberLong(3049593965), "patient_id": NumberLong(10000043), "date": new Date('7/3/2014').getTime(), "type": 4, reason_for_visit: "Annual physical.", observations:[
-			{ name: NumberInt(5695930304), name_type: 1, value: 119, value_type: 2, issued: new Date('7/3/2014').getTime()},
-			{ name: 5695930307, name_type: 1, value:  74, value_type: 2, issued: new Date('7/3/2014').getTime()}
+			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(119), "value_type": NumberInt(2), "issued": new Date('7/3/2014').getTime(),},
+			{ "name": NumberLong(5695930307), "name_type": NumberInt(1), "value": NumberInt(74), "value_type": NumberInt(2), "issued": new Date('7/3/2014').getTime(),}
 		] },
 		{ "_id": NumberLong(3049593966), "patient_id": NumberLong(10000044), "date": new Date('5/20/2014').getTime(), "type": 4, reason_for_visit: "Annual physical.", observations:[
-			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(112), "value_type": NumberInt(2), "issued": new Date('5/20/2014').getTime()},
-			{ name: 5695930307, name_type: 1, value:  73, value_type: 2, issued: new Date('5/20/2014').getTime()}
+			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(112), "value_type": NumberInt(2), "issued": new Date('5/20/2014').getTime(),},
+			{ "name": NumberLong(5695930307), "name_type": NumberInt(1), "value": NumberInt(73), "value_type": NumberInt(2), "issued": new Date('5/20/2014').getTime(),}
 		] },
 		{ "_id": NumberLong(3049593967), "patient_id": NumberLong(10000045), "date": new Date('12/8/2014').getTime(), "type": 4, reason_for_visit: "Annual physical.", observations:[
-			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(124), "value_type": NumberInt(2), "issued": new Date('12/8/2014').getTime()},
-			{ name: 5695930307, name_type: 1, value:  83, value_type: 2, issued: new Date('12/8/2014').getTime()}
+			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(124), "value_type": NumberInt(2), "issued": new Date('12/8/2014').getTime(),},
+			{ "name": NumberLong(5695930307), "name_type": NumberInt(1), "value": NumberInt(83), "value_type": NumberInt(2), "issued": new Date('12/8/2014').getTime(),}
 		] },
 		{ "_id": NumberLong(3049593968), "patient_id": NumberLong(10000046), "date": new Date('5/28/2014').getTime(), "type": 4, reason_for_visit: "Annual physical.", observations:[
-			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(122), "value_type": NumberInt(2), "issued": new Date('5/28/2014').getTime()},
-			{ name: 5695930307, name_type: 1, value:  82, value_type: 2, issued: new Date('5/28/2014').getTime()}
+			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(122), "value_type": NumberInt(2), "issued": new Date('5/28/2014').getTime(),},
+			{ "name": NumberLong(5695930307), "name_type": NumberInt(1), "value": NumberInt(82), "value_type": NumberInt(2), "issued": new Date('5/28/2014').getTime(),}
 		] },
 		{ "_id": NumberLong(3049593969), "patient_id": NumberLong(10000047), "date": new Date('4/21/2014').getTime(), "type": 4, reason_for_visit: "Annual physical.", observations:[
-			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(115), "value_type": NumberInt(2), "issued": new Date('4/21/2014').getTime()},
-			{ name: 5695930307, name_type: 1, value:  73, value_type: 2, issued: new Date('4/21/2014').getTime()}
+			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(115), "value_type": NumberInt(2), "issued": new Date('4/21/2014').getTime(),},
+			{ "name": NumberLong(5695930307), "name_type": NumberInt(1), "value": NumberInt(73), "value_type": NumberInt(2), "issued": new Date('4/21/2014').getTime(),}
 		] },
 		{ "_id": NumberLong(3049593970), "patient_id": NumberLong(10000048), "date": new Date('6/15/2014').getTime(), "type": 4, reason_for_visit: "Annual physical.", observations:[
-			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(120), "value_type": NumberInt(2), "issued": new Date('6/15/2014').getTime()},
-			{ name: 5695930307, name_type: 1, value:  80, value_type: 2, issued: new Date('6/15/2014').getTime()}
+			{ "name": NumberLong(5695930304), "name_type": NumberInt(1), "value": NumberInt(120), "value_type": NumberInt(2), "issued": new Date('6/15/2014').getTime(),},
+			{ "name": NumberLong(5695930307), "name_type": NumberInt(1), "value": NumberInt(80), "value_type": NumberInt(2), "issued": new Date('6/15/2014').getTime(),}
 		] }
 	]	
 );

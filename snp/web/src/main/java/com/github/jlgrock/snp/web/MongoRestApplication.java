@@ -21,4 +21,5 @@ public class MongoRestApplication {
         LOGGER.info("Starting Mongo Rest Application.");
         SpringApplication.run(MongoRestApplication.class, args);
     }
+
 }

@@ -10,6 +10,19 @@ import java.math.BigDecimal;
  * The interface that defines all of the primitive classes allowable by the SNP server.
  */
 public interface SimplePrimitive {
+
+    public static String makeErrorMessage(PrimitiveType parsedType, String expectedClassType, Object o) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("ENUM indicated is ");
+        sb.append(parsedType.name());
+        sb.append(", but value is of type ");
+        sb.append(o.getClass().getName());
+        sb.append(" which is not the expected type (");
+        sb.append(expectedClassType);
+        sb.append(")");
+        return sb.toString();
+    }
+
     /**
      * Returns the value object.  This should be one of the values supported by SimplePrimitives.
      *
@@ -46,43 +59,49 @@ public interface SimplePrimitive {
         switch(parsedType) {
             case BOOLEAN:
                 if (!(value instanceof Boolean)) {
-                    throw new IllegalArgumentException("Type indicated is BOOLEAN, but value is not of the same type (Boolean)");
+                    throw new IllegalArgumentException(SimplePrimitive.makeErrorMessage(PrimitiveType.BOOLEAN, "Boolean", value));
                 }
                 sp = new BooleanPrimitive((Boolean) value);
                 break;
             case BINARY64:
                 if (!(value instanceof Binary)) {
-                    throw new IllegalArgumentException("Type indicated is BINARY, but value is not of the same type (Binary)");
+                    throw new IllegalArgumentException(SimplePrimitive.makeErrorMessage(PrimitiveType.BINARY64, "Binary", value));
                 }
                 sp = new BinaryPrimitive((Binary) value);
                 break;
             case DATE:
                 if (!(value instanceof Long)) {
-                    throw new IllegalArgumentException("Type indicated is DATE, but value is not of the same type (Long)");
+                    throw new IllegalArgumentException(SimplePrimitive.makeErrorMessage(PrimitiveType.LONG, "Long", value));
                 }
                 sp = new DatePrimitive(new LocalDate((Long) value));
                 break;
             case DATETIME:
                 if (!(value instanceof Long)) {
-                    throw new IllegalArgumentException("Type indicated is DATETIME, but value is not of the same type (Long)");
+                    throw new IllegalArgumentException(SimplePrimitive.makeErrorMessage(PrimitiveType.LONG, "Long", value));
                 }
                 sp = new DateTimePrimitive(new DateTime((Long) value));
                 break;
             case DECIMAL:
                 if (!(value instanceof BigDecimal)) {
-                throw new IllegalArgumentException("Type indicated is DECIMAL, but value is not of the same type (BigDecimal)");
+                throw new IllegalArgumentException(SimplePrimitive.makeErrorMessage(PrimitiveType.DECIMAL, "Decimal", value));
                 }
                 sp = new DecimalPrimitive((BigDecimal) value);
                 break;
             case INTEGER:
-                if (!(value instanceof Long)) {
-                    throw new IllegalArgumentException("Type indicated is INTEGER, but value is not of the same type (Long)");
+                if (!(value instanceof Integer)) {
+                    throw new IllegalArgumentException(SimplePrimitive.makeErrorMessage(PrimitiveType.INTEGER, "Integer", value));
                 }
-                sp = new IntegerPrimitive((Long) value);
+                sp = new IntegerPrimitive((Integer) value);
+                break;
+            case LONG:
+                if (!(value instanceof Long)) {
+                    throw new IllegalArgumentException(SimplePrimitive.makeErrorMessage(PrimitiveType.LONG, "Long", value));
+                }
+                sp = new LongPrimitive((Long) value);
                 break;
             case STRING:
                 if (!(value instanceof String)) {
-                    throw new IllegalArgumentException("Type indicated is STRING, but value is not of the same type (String)");
+                    throw new IllegalArgumentException(SimplePrimitive.makeErrorMessage(PrimitiveType.BOOLEAN, "String", value));
                 }
                 sp = new StringPrimitive((String) value);
                 break;

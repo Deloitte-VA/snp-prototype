@@ -3,6 +3,7 @@ package com.github.jlgrock.snp.core.domain;
 import org.joda.time.DateTime;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * Created by jlgrock on 1/11/15.
@@ -18,6 +19,7 @@ public class Patient {
 
     private String lastName;
 
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private DateTime dateOfBirth;
 
     private Gender gender;

@@ -1,12 +1,8 @@
 package com.github.jlgrock.snp.core;
 
-import com.github.jlgrock.snp.core.converters.ObservationReadConverter;
-import com.github.jlgrock.snp.core.converters.ObservationWriteConverter;
-import com.github.jlgrock.snp.core.converters.PatientReadConverter;
-import com.github.jlgrock.snp.core.converters.PatientWriteConverter;
+import com.github.jlgrock.snp.core.converters.*;
 import com.mongodb.MongoClient;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
@@ -33,14 +29,13 @@ public class MongoConfig extends AbstractMongoConfiguration {
     @Value("${spring.data.mongodb.port}")
     private String port;
 
-    @Bean
     @Override
     public CustomConversions customConversions() {
-        List<Converter> converterList = new ArrayList<Converter>();
+        List<Converter<?, ?>> converterList = new ArrayList<>();
         converterList.add(new PatientReadConverter());
         converterList.add(new PatientWriteConverter());
-        converterList.add(new ObservationReadConverter());
-        converterList.add(new ObservationWriteConverter());
+        converterList.add(new EncounterReadConverter(new ObservationReadConverter()));
+        converterList.add(new EncounterWriteConverter(new ObservationWriteConverter()));
         return new CustomConversions(converterList);
     }
 

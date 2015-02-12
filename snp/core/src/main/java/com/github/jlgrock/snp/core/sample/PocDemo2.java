@@ -71,7 +71,7 @@ public class PocDemo2 {
 
         Set<Long> uniquePatientIds = new HashSet<Long>();
         for (Encounter rightArmEncounter : myRightArmEncounters) {
-            LOGGER.debug("***!myRightArmEncounters patientId=" + rightArmEncounter.getPatient().getId());
+            LOGGER.debug("***!myRightArmEncounters patientId=" + rightArmEncounter.getPatientId());
 
             MinMaxObservationValue minMaxObservation;
             final Long minObservationValue; //final modifier needed for inner class usage
@@ -81,7 +81,7 @@ public class PocDemo2 {
             minObservationValue = minMaxObservation.getMin();
             maxObservationValue = minMaxObservation.getMax();
 
-            final Long patientId = rightArmEncounter.getPatient().getId();  //final modifier needed for inner class usage
+            final Long patientId = rightArmEncounter.getPatientId();  //final modifier needed for inner class usage
 
             BasicDBObject query2 = new BasicDBObject("$and",
                     new ArrayList<BasicDBObject>() {{
@@ -118,7 +118,7 @@ public class PocDemo2 {
             List<Encounter> myLeftArmEncounters = convertDBObjectToJavaEncounterObj(cursor2);
             LOGGER.debug("myLeftArmEncounters=" + myLeftArmEncounters + ", size=" + myLeftArmEncounters.size());
 
-            myLeftArmEncounters.forEach(enctr -> uniquePatientIds.add(enctr.getPatient().getId()));
+            myLeftArmEncounters.forEach(enctr -> uniquePatientIds.add(enctr.getPatientId()));
         }
         //Display unique patient IDs
         LOGGER.debug("Patient IDs with diparity of more than between left and right arm blood pressure readings: " + "Size =" + uniquePatientIds.size() + ", List = " + uniquePatientIds);

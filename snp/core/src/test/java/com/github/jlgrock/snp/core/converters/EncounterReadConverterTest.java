@@ -1,10 +1,8 @@
 package com.github.jlgrock.snp.core.converters;
 
 import com.github.jlgrock.snp.core.data.EncounterTags;
-import com.github.jlgrock.snp.core.data.PatientRepository;
 import com.github.jlgrock.snp.core.domain.Encounter;
 import com.github.jlgrock.snp.core.domain.Observation;
-import com.github.jlgrock.snp.core.domain.Patient;
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
@@ -23,7 +21,7 @@ public class EncounterReadConverterTest {
     @Test
     public void testConvert() {
         DateTime date = new DateTime(99999l);
-        Patient patient = mock(Patient.class);
+        Long patientId = 765l;
 
         Observation observation1 = mock(Observation.class);
         Observation observation2 = mock(Observation.class);
@@ -53,14 +51,11 @@ public class EncounterReadConverterTest {
         when(observationReadConverter.convert(observation1Obj)).thenReturn(observation1);
         when(observationReadConverter.convert(observation2Obj)).thenReturn(observation2);
 
-        PatientRepository patientRepository = mock(PatientRepository.class);
-        when(patientRepository.findOne(456l)).thenReturn(patient);
-
-        EncounterReadConverter encounterReadConverter = new EncounterReadConverter(observationReadConverter, patientRepository);
+        EncounterReadConverter encounterReadConverter = new EncounterReadConverter(observationReadConverter);
 
         Encounter encounter = encounterReadConverter.convert(dbObject);
         assertEquals((Long) 123l, encounter.getId());
-        assertEquals(patient, encounter.getPatient());
+        assertEquals(patientId, encounter.getPatientId());
         assertEquals(date, encounter.getDate());
         assertEquals((Integer) 1, encounter.getType());
         assertEquals("hernia", encounter.getReasonForVisit());

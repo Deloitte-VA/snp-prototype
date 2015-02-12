@@ -3,7 +3,6 @@ package com.github.jlgrock.snp.core.converters;
 import com.github.jlgrock.snp.core.data.EncounterTags;
 import com.github.jlgrock.snp.core.domain.Encounter;
 import com.github.jlgrock.snp.core.domain.Observation;
-import com.github.jlgrock.snp.core.domain.Patient;
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
@@ -23,8 +22,7 @@ public class EncounterWriteConverterTest {
     @Test
     public void testConvert() {
         DateTime date = new DateTime(888l);
-        Patient patient = mock(Patient.class);
-        when(patient.getId()).thenReturn((Long) 456l);
+        Long patientId = (Long) 456l;
 
         Observation observation1 = mock(Observation.class);
         Observation observation2 = mock(Observation.class);
@@ -47,7 +45,7 @@ public class EncounterWriteConverterTest {
         Encounter encounter = mock(Encounter.class);
         when(encounter.getId()).thenReturn((Long) 123l);
         when(encounter.getDate()).thenReturn(date);
-        when(encounter.getPatient()).thenReturn(patient);
+        when(encounter.getPatientId()).thenReturn(patientId);
         when(encounter.getReasonForVisit()).thenReturn("hernia");
         when(encounter.getType()).thenReturn(1);
         when(encounter.getObservations()).thenReturn(observations);

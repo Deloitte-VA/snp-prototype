@@ -31,7 +31,7 @@ public class EncounterWriteConverter implements Converter<Encounter, DBObject> {
     public DBObject convert(Encounter source) {
         DBObject dbo = new BasicDBObject();
         dbo.put(EncounterTags.ID_TAG, source.getId());
-        dbo.put(EncounterTags.PATIENT_TAG, source.getPatient().getId());
+        dbo.put(EncounterTags.PATIENT_TAG, source.getPatientId());
         dbo.put(EncounterTags.DATE_TAG, source.getDate().getMillis());
         dbo.put(EncounterTags.TYPE_TAG, source.getType());
         dbo.put(EncounterTags.REASON_FOR_VISIT_TAG, source.getReasonForVisit());
