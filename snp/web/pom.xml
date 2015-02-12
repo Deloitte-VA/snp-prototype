@@ -5,11 +5,7 @@
     <parent>
         <groupId>com.github.jlgrock.snp</groupId>
         <artifactId>snp</artifactId>
-<<<<<<< HEAD
-        <version>0.2-SNAPSHOT</version>
-=======
         <version>1.0-SNAPSHOT</version>
->>>>>>> parent of 50b02c6... [maven-release-plugin] prepare release 0.1
     </parent>
 
     <artifactId>web</artifactId>
