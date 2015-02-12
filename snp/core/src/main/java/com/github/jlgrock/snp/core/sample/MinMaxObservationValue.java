@@ -8,14 +8,15 @@ public class MinMaxObservationValue {
 	public Long getMin() {
 		return min;
 	}
-	public void setMin(Long min) {
+	public void setMin(final Long min) {
 		this.min = min;
 	}
 	public Long getMax() {
 		return max;
 	}
-	public void setMax(Long max) {
+	public void setMax(final Long max) {
 		this.max = max;
 	}
 
 }
+

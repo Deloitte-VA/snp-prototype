@@ -17,3 +17,4 @@ public class BooleanPrimitive extends AbstractSimplePrimitive<Boolean> {
         return PrimitiveType.BOOLEAN;
     }
 }
+

@@ -17,7 +17,7 @@ public class Observation {
         return name;
     }
 
-    public void setName(final SimplePrimitive name) {
+    public void setName(final SimplePrimitive pname) {
         this.name = name;
     }
 
@@ -25,7 +25,7 @@ public class Observation {
         return value;
     }
 
-    public void setValue(final SimplePrimitive value) {
+    public void setValue(final SimplePrimitive pvalue) {
         this.value = value;
     }
 
@@ -33,7 +33,7 @@ public class Observation {
         return applies;
     }
 
-    public void setApplies(final String applies) {
+    public void setApplies(final String papplies) {
         this.applies = applies;
     }
 
@@ -41,7 +41,7 @@ public class Observation {
         return issued;
     }
 
-    public void setIssued(final DateTime issued) {
+    public void setIssued(final DateTime pissued) {
         this.issued = issued;
     }
 
@@ -49,7 +49,7 @@ public class Observation {
         return identifier;
     }
 
-    public void setIdentifier(final String identifier) {
+    public void setIdentifier(final String pidentifier) {
         this.identifier = identifier;
     }
 
@@ -57,8 +57,9 @@ public class Observation {
         return subject;
     }
 
-    public void setSubject(final String subject) {
+    public void setSubject(final String psubject) {
         this.subject = subject;
     }
 
 }
+

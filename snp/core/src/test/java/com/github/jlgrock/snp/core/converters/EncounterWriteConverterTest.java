@@ -61,3 +61,4 @@ public class EncounterWriteConverterTest {
         assertEquals(observationObjs, dbObj.get(EncounterTags.OBSERVATIONS_TAG));
     }
 }
+

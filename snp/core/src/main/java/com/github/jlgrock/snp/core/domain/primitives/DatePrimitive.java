@@ -19,3 +19,4 @@ public class DatePrimitive extends AbstractSimplePrimitive<LocalDate> {
         return PrimitiveType.DATE;
     }
 }
+

@@ -134,7 +134,7 @@ public class PocDemo2 {
      * This method is used to obtain the minimum and maximum values from the given observation values.
      * The observation values for an encounter are provided as input parameter (argument) to this method.
      */
-    private MinMaxObservationValue findMinMaxObservation(List<Observation> observations) {
+    private MinMaxObservationValue findMinMaxObservation(final List<Observation> observations) {
 
         Long min = null;
         Long max = null;
@@ -166,9 +166,9 @@ public class PocDemo2 {
      * Converts the DBObjects from the result set (DBCursor) into list of Encounter objects.
      * Note that to convert from JSON DBObject to Encounter POJO, autowired encounterReadConverter class is used.
      * @param cursor
-     * @return
+     * @return encounterList
      */
-    public List<Encounter> convertDBObjectToJavaEncounterObj(DBCursor cursor) {
+    public List<Encounter> convertDBObjectToJavaEncounterObj(final DBCursor cursor) {
 
         List<Encounter> encounterList = new ArrayList<Encounter>();
 
@@ -198,3 +198,4 @@ public class PocDemo2 {
     }
     
 }
+

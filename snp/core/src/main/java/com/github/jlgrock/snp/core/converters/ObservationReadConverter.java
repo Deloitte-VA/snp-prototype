@@ -15,7 +15,7 @@ import org.springframework.data.convert.ReadingConverter;
 public class ObservationReadConverter implements Converter<DBObject, Observation> {
 
     @Override
-    public Observation convert(DBObject source) {
+    public Observation convert(final DBObject source) {
         Observation observation = new Observation();
         observation.setIdentifier((String) source.get(ObservationTags.ID_TAG));
         observation.setName(SimplePrimitive.createPrimitive(((Number) source.get(ObservationTags.NAME_TYPE_TAG)).intValue(), source.get(ObservationTags.NAME_TAG)));
@@ -26,3 +26,4 @@ public class ObservationReadConverter implements Converter<DBObject, Observation
         return observation;
     }
 }
+

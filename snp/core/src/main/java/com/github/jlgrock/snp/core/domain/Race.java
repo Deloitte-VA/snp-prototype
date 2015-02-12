@@ -27,7 +27,8 @@ public enum Race {
         return id;
     }
 
-    public static Race getValueById(Integer id) {
+    public static Race getValueById(final Integer id) {
         return valuesById.get(id);
     }
 }
+

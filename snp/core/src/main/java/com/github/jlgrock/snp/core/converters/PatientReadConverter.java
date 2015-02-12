@@ -16,7 +16,7 @@ import org.springframework.data.convert.ReadingConverter;
 public class PatientReadConverter implements Converter<DBObject, Patient> {
 
     @Override
-    public Patient convert(DBObject source) {
+    public Patient convert(final DBObject source) {
         Patient p = new Patient();
         p.setId(((Number) source.get(PatientTags.ID_TAG)).longValue());
         p.setFirstName((String) source.get(PatientTags.FIRST_NAME_TAG));
@@ -28,3 +28,4 @@ public class PatientReadConverter implements Converter<DBObject, Patient> {
         return p;
     }
 }
+

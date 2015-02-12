@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 public class ObservationWriteConverter  implements Converter<Observation, DBObject> {
 
     @Override
-    public DBObject convert(Observation source) {
+    public DBObject convert(final Observation source) {
         DBObject dbo = new BasicDBObject();
         dbo.put(ObservationTags.ID_TAG, source.getIdentifier());
         dbo.put(ObservationTags.NAME_TAG, source.getName().getValue());
@@ -27,3 +27,4 @@ public class ObservationWriteConverter  implements Converter<Observation, DBObje
         return dbo;
     }
 }
+

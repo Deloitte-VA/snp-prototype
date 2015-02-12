@@ -23,12 +23,12 @@ public class EncounterWriteConverter implements Converter<Encounter, DBObject> {
     private final ObservationWriteConverter observationWriteConverter;
 
     @Autowired
-    public EncounterWriteConverter(ObservationWriteConverter observationWriteConverterIn) {
+    public EncounterWriteConverter(final ObservationWriteConverter observationWriteConverterIn) {
         observationWriteConverter = observationWriteConverterIn;
     }
 
     @Override
-    public DBObject convert(Encounter source) {
+    public DBObject convert(final Encounter source) {
         DBObject dbo = new BasicDBObject();
         dbo.put(EncounterTags.ID_TAG, source.getId());
         dbo.put(EncounterTags.PATIENT_TAG, source.getPatientId());
@@ -48,3 +48,4 @@ public class EncounterWriteConverter implements Converter<Encounter, DBObject> {
         return dbo;
     }
 }
+

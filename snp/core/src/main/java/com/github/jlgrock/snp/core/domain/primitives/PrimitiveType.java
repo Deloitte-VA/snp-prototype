@@ -25,7 +25,7 @@ public enum PrimitiveType {
 
     private final Integer id;
 
-    private PrimitiveType(Integer i) {
+    private PrimitiveType(final Integer i) {
         id = i;
     }
 
@@ -46,3 +46,4 @@ public enum PrimitiveType {
         return valuesById.get(id);
     }
 }
+

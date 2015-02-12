@@ -12,4 +12,9 @@ public class ObservationTags {
     public static final String APPLIES_TAG = "applies_tag";
     public static final String ISSUED_TAG = "issued";
     public static final String SUBJECT_TAG = "subject";
+    
+    private ObservationTags(){
+    }
+    
 }
+

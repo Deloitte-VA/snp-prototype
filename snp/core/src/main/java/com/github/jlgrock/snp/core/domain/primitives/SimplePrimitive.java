@@ -28,14 +28,14 @@ public interface SimplePrimitive {
      *
      * @return the value.
      */
-    public Object getValue();
+    Object getValue();
 
     /**
      * Get the PrimitiveType so you know what kind of object to parse into.
      *
      * @return the specific type, so that it can be stored with the object in MongoDB.
      */
-    public PrimitiveType getType();
+    PrimitiveType getType();
 
     /**
      * A factory class that will create the primitive using a type and value object.
@@ -49,7 +49,7 @@ public interface SimplePrimitive {
      *
      * @throws java.lang.IllegalArgumentException if the object type does not match the type
      */
-    public static SimplePrimitive createPrimitive(Integer type, Object value) {
+    static SimplePrimitive createPrimitive(Integer type, Object value) {
         SimplePrimitive sp = null;
         PrimitiveType parsedType = PrimitiveType.getValueById(type);
         if (parsedType == null) {
@@ -111,3 +111,4 @@ public interface SimplePrimitive {
         return sp;
     }
 }
+

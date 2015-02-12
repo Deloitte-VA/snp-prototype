@@ -21,13 +21,18 @@ public class EncounterReadConverter implements Converter<DBObject, Encounter> {
 
     private final ObservationReadConverter observationReadConverter;
 
+/**
+ * 
+ * @param observationReadConverterIn
+ * @param patientRepositoryIn
+ */
     @Autowired
-    public EncounterReadConverter(ObservationReadConverter observationReadConverterIn) {
+    public EncounterReadConverter(final ObservationReadConverter observationReadConverterIn, final PatientRepository patientRepositoryIn) {
         observationReadConverter = observationReadConverterIn;
     }
 
     @Override
-    public Encounter convert(DBObject source) {
+    public Encounter convert(final DBObject source) {
         Encounter encounter = new Encounter();
         encounter.setId(((Number) source.get(EncounterTags.ID_TAG)).longValue());
         encounter.setPatientId(((Number) source.get(EncounterTags.PATIENT_TAG)).longValue());
@@ -44,3 +49,6 @@ public class EncounterReadConverter implements Converter<DBObject, Encounter> {
         return encounter;
     }
 }
+
+
+

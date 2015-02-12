@@ -19,3 +19,4 @@ public class BinaryPrimitive extends AbstractSimplePrimitive<Binary> {
         return PrimitiveType.BINARY64;
     }
 }
+

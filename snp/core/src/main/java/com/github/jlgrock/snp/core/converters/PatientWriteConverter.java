@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 public class PatientWriteConverter implements Converter<Patient, DBObject> {
 
     @Override
-    public DBObject convert(Patient source) {
+    public DBObject convert(final Patient source) {
         DBObject dbo = new BasicDBObject();
         dbo.put(PatientTags.ID_TAG, source.getId());
         dbo.put(PatientTags.FIRST_NAME_TAG, source.getFirstName());
@@ -26,3 +26,4 @@ public class PatientWriteConverter implements Converter<Patient, DBObject> {
         return dbo;
     }
 }
+
