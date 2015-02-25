@@ -9,7 +9,8 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
- *
+ * The domain object that represents a single encounter in a patient visit.  Each encounter can consist
+ * of multiple {@link com.github.jlgrock.snp.core.domain.Observation Observation} objects.
  */
 @Document(collection = "encounters")
 public class Encounter {
