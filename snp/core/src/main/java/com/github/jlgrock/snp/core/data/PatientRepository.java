@@ -9,7 +9,8 @@ import java.util.Date;
 import java.util.List;
 
 /**
- *
+ * The Patient Repository provides an abstraction layer to executing queries against the Patient
+ * Collection within MongoDB.
  */
 public interface PatientRepository extends MongoRepository<Patient, Long> {
     List<Patient> findAllByLastName(String lastName);
