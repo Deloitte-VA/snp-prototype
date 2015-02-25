@@ -25,8 +25,8 @@ public class EncounterReadConverter implements Converter<DBObject, Encounter> {
     private final PatientRepository patientRepository;
 /**
  * 
- * @param observationReadConverterIn
- * @param patientRepositoryIn
+ * @param observationReadConverterIn object
+ * @param patientRepositoryIn object
  */
     @Autowired
     public EncounterReadConverter(final ObservationReadConverter observationReadConverterIn, final PatientRepository patientRepositoryIn) {

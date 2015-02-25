@@ -26,7 +26,11 @@ public enum Gender {
     public Integer getId() {
         return id;
     }
-
+/**
+ * 
+ * @param id of type integer
+ * @return gender
+ */
     public static Gender getValueById(final Integer id) {
         return valuesById.get(id);
     }

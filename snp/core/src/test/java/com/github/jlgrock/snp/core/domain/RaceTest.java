@@ -3,9 +3,15 @@ package com.github.jlgrock.snp.core.domain;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
-
+/**
+ * 
+ * @author vbhole
+ *
+ */
 public class RaceTest {
-
+    /**
+     * public function returns void
+     */
 	@Test
 	public void test() {
 	

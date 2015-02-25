@@ -21,7 +21,10 @@ import java.util.stream.Stream;
 public class EncounterWriteConverter implements Converter<Encounter, DBObject> {
 
     private final ObservationWriteConverter observationWriteConverter;
-
+/**
+ * 
+ * @param observationWriteConverterIn object
+ */
     @Autowired
     public EncounterWriteConverter(final ObservationWriteConverter observationWriteConverterIn) {
         observationWriteConverter = observationWriteConverterIn;

@@ -6,7 +6,11 @@ import org.slf4j.LoggerFactory;
 
 import java.net.UnknownHostException;
 import java.util.ArrayList;
-
+/**
+ * 
+ * @author jlgrock
+ *
+ */
 public class AndOr {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AndOr.class);
@@ -69,8 +73,12 @@ public class AndOr {
             LOGGER.error("Unable to Connect to MongoDB", e);
         }
     }
-
-    public static void main(final String[] args) throws Exception {
+    /**
+     * 
+     * @param args of type string
+     * 
+     */
+    public static void main(final String[] args){
         AndOr andor = new AndOr();
         andor.query();
     }

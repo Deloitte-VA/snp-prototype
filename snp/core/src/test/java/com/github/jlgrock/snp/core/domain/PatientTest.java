@@ -5,9 +5,15 @@ import org.joda.time.DateTimeZone;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
-
+/**
+ * 
+ * @author vbhole
+ *
+ */
 public class PatientTest {
-
+    /**
+     * public function returns void
+     */
 	@Test
 	public void test() {
 

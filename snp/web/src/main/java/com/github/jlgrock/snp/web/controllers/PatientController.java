@@ -20,14 +20,12 @@ public class PatientController {
     @Autowired
     private PatientRepository repository;
 
-/* * 
+ /** 
  * @param id used to find encounter
  * @return single encounter that corresponds to id
  */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public 
-    @ResponseBody
-    Patient getPatient(@PathVariable final Long id) {
+    public Patient getPatient(@PathVariable final Long id) {
         LOGGER.debug("getting encounter");
         return repository.findOne(id);
     }

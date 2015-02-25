@@ -9,10 +9,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.net.UnknownHostException;
-
+/**
+ * 
+ * @author jlgrock
+ *
+ */
 public class PocDemo {
 
-    private static Logger LOGGER = LoggerFactory.getLogger(PocDemo.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(PocDemo.class);
 
     private PocDemo() {}
 
@@ -80,8 +84,12 @@ public class PocDemo {
         // release resources
         mongoClient.close();
     }
-
-    public static void main(final String[] args) throws Exception {
+/**
+ * 
+ * @param args string command line arguments
+ * 
+ */
+    public static void main(final String[] args){
         PocDemo pocDemo = new PocDemo();
         pocDemo.query();
     }

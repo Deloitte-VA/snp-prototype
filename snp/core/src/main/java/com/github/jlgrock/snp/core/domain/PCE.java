@@ -45,16 +45,16 @@ public class PCE {
         return id;
     }
 
-    public void setId(final Long id) {
-        this.id = id;
+    public void setId(final Long pid) {
+        this.id = pid;
     }
 
     public String getDesc() {
         return desc;
     }
 
-    public void setDesc(final String desc) {
-        this.desc = desc;
+    public void setDesc(final String pdesc) {
+        this.desc = pdesc;
     }
 }
 

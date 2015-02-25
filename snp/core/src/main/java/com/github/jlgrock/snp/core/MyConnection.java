@@ -16,14 +16,14 @@ public class MyConnection {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MyConnection.class);
 
-    private final MongoDbFactory mongo;
+    private final MongoDbFactory mongo1;
 /**
  * 
  * @param mongo is private variable of type MongoDbFactory
  */
     @Autowired
     public MyConnection(final MongoDbFactory mongo) {
-        this.mongo = mongo;
+        this.mongo = mongo1;
     }
 /**
  *  

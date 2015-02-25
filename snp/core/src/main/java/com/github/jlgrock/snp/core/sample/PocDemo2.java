@@ -15,19 +15,28 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
+/**
+ * 
+ * @author jlgrock
+ *
+ */
 public class PocDemo2 {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PocDemo2.class);
     
     @Autowired
     EncounterReadConverter encounterReadConverter;
-
-    public static void main(String[] args) throws Exception {
+/**
+ * 
+ * @param args command line string arguments
+ */
+    public static void main(final String[] args){
         PocDemo2 poc = new PocDemo2();
         poc.query();
     }
-
+    /**
+     * public function return type void
+     */
     public void query() {
         // connect to the local database server
         MongoClient mongoClient = null;
@@ -165,7 +174,7 @@ public class PocDemo2 {
     /**
      * Converts the DBObjects from the result set (DBCursor) into list of Encounter objects.
      * Note that to convert from JSON DBObject to Encounter POJO, autowired encounterReadConverter class is used.
-     * @param cursor
+     * @param cursor MongoDB cursor input
      * @return encounterList
      */
     public List<Encounter> convertDBObjectToJavaEncounterObj(final DBCursor cursor) {

@@ -3,9 +3,15 @@ package com.github.jlgrock.snp.core.domain;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
-
+/**
+ * 
+ * @author vbhole
+ *
+ */
 public class GenderTest {
-
+    /**
+     * public function returns void
+     */
 	@Test
 	public void test() {
 

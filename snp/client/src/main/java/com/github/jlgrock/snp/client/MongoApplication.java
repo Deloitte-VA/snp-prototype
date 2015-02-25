@@ -52,7 +52,7 @@ public class MongoApplication implements CommandLineRunner {
 
         LOGGER.info("Inserting a patient...");
         Patient p1 = new Patient();
-        p1.setId(1l);
+        p1.setId(1L);
         p1.setFirstName("Jason");
         p1.setMiddleName("Gerald");
         p1.setLastName("Bourne");

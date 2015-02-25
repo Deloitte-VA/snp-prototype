@@ -18,12 +18,15 @@ public class EncounterController {
     
     @Autowired
     private EncounterRepository repository;
-       
+    /**
+     * 
+     * @param pid encounter id used for search
+     * @return returns an encounter
+     */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public @ResponseBody
-    Encounter getEncounter(@PathVariable final Long id) {
+    public Encounter getEncounter(@PathVariable final Long pid) {
         LOGGER.debug("getting encounter");
-        return repository.findOne(id);
+        return repository.findOne(pid);
     }
     
     
