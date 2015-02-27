@@ -22,9 +22,13 @@ before_install:
   - mv -f keystores/local.settings-security.xml ~/.m2/settings-security.xml
   - cd snp
 
-install: mvn deploy -PcodeQuality,sonatype-oss-release -DskipTests=true -Dmaven.javadoc.skip=true -B -V -Psonatype-oss-release -Dgpg.passphrase=$GPG_PASSPHRASE
+install:
+  - pip install -r requirements.txt
+  - mvn deploy -PcodeQuality,sonatype-oss-release -DskipTests=true -Dmaven.javadoc.skip=true -B -V -Psonatype-oss-release -Dgpg.passphrase=$GPG_PASSPHRASE
 
-script: mvn test -B
+script:
+  - python -m py.test
+  - mvn test -B
 
 jdk:
   - oraclejdk8

@@ -1,0 +1,10 @@
+
+# Install with: `pip install -r requirements.txt`
+
+# For running python
+# https://virtualenv.pypa.io/en/latest/
+virtualenv
+
+# Names library
+# https://github.com/treyhunner/names
+names

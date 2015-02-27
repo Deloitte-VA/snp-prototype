@@ -1,4 +1,5 @@
 #!/usr/bin/python -tt
+import names
 
 def generate_name( gender ):
   #doesn't work, but it's a start
