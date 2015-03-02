@@ -69,7 +69,8 @@ public class PocDemo2Test extends Mockito {
         //Mock the values for 2nd item in the list just so we can cross check them later
         when(encounter2.getId()).thenReturn(2L);
         when(encounter2.getDate()).thenReturn(date);
-        when(encounter2.getPatient()).thenReturn(patient);
+        //when(encounter2.getPatient()).thenReturn(patient);
+        when(encounter2.getPatientId()).thenReturn(456l);
         when(encounter2.getReasonForVisit()).thenReturn("Mocked reason 2");
         when(encounter2.getType()).thenReturn(1);
         when(encounter2.getObservations()).thenReturn(observations);
@@ -83,7 +84,8 @@ public class PocDemo2Test extends Mockito {
         assertEquals(2, encounters.size() );  //Verify length of the list
         //Verify that the item in the list (in this case 2nd item) has proper values
         assertEquals((Long) 2l, encounters.get(1).getId());
-        assertEquals(patient, encounters.get(1).getPatient());
+        //assertEquals(patient, encounters.get(1).getPatientId());
+        assertEquals((Long) 456l, encounters.get(1).getPatientId());
         assertEquals(date, encounters.get(1).getDate());
         assertEquals((Integer) 1, encounters.get(1).getType());
         assertEquals("Mocked reason 2", encounters.get(1).getReasonForVisit());
@@ -144,7 +146,8 @@ public class PocDemo2Test extends Mockito {
     		encounter.setId(3049593922L);
     		Patient patient = new Patient();
     		patient.setId(10000001L);
-    		encounter.setPatient(patient);
+    		//encounter.setPatient(patient);
+    		encounter.setPatientId(456l);
     		//String inputDateStr = "06/29/2014"; //"dd-MM-yyyy" or "dd/MM/yyyy"
     		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
     		Date inputDate = dateFormat.parse("06/29/2014"); //inputDateStr
@@ -170,8 +173,10 @@ public class PocDemo2Test extends Mockito {
     		encounter = new Encounter();
     		encounter.setId(3049593923L);
     		Patient patient = new Patient();
+    		Long patientId = 456l;
     		patient.setId(10000001L);
-    		encounter.setPatient(patient);
+    		//encounter.setPatientId(patient);
+    		encounter.setPatientId(patientId);
     		//String inputDateStr = "06/29/2014"; //"dd-MM-yyyy" or "dd/MM/yyyy"
     		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
     		Date inputDate = dateFormat.parse("06/29/2014"); //inputDateStr
@@ -208,8 +213,10 @@ public class PocDemo2Test extends Mockito {
     		encounter = new Encounter();
     		encounter.setId(3049593924L);
     		Patient patient = new Patient();
+    		Long patientId = 456l;
     		patient.setId(10000002L);
-    		encounter.setPatient(patient);
+    		//encounter.setPatientId(patient);
+    		encounter.setPatientId(patientId);
     		//String inputDateStr = "06/29/2014"; //"dd-MM-yyyy" or "dd/MM/yyyy"
     		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
     		Date inputDate = dateFormat.parse("01/17/2014"); //inputDateStr

@@ -1,4 +1,4 @@
-package com.github.jlgrock.snp;
+package com.github.jlgrock.snp.web;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
