@@ -10,7 +10,8 @@ import java.util.List;
 
 /**
  * 
- * @author jlgrock
+ * The Patient Repository provides an abstraction layer to executing queries against the Patient 
+ * Collection within MongoDB. 
  *
  */
 public interface PatientRepository extends MongoRepository<Patient, Long> {
@@ -46,4 +47,5 @@ public interface PatientRepository extends MongoRepository<Patient, Long> {
      */
     List<Patient> findAllByRace(Race race);
 }
+
 

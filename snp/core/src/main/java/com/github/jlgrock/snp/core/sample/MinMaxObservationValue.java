@@ -1,8 +1,9 @@
 package com.github.jlgrock.snp.core.sample;
 /**
  * 
- * @author jlgrock
- *
+ * Returns the minimum and maximum values from the input observation values. This method is used to obtain 
+ * the minimum and maximum values from the given observation values. The observation values for an encounter 
+ * are provided as the input parameter (argument) to this method.
  */
 public class MinMaxObservationValue {
 	private Long min;
@@ -19,7 +20,7 @@ public class MinMaxObservationValue {
 		return max;
 	}
 	public void setMax(final Long pmax) {
-		this.max = pax;
+		this.max = pmax;
 	}
 
 }

@@ -6,35 +6,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.MongoDbFactory;
 import com.mongodb.DB;
 import org.springframework.stereotype.Component;
-/**
- * 
- * @author jlgrock
- *
- */
+
 @Component
 public class MyConnection {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MyConnection.class);
 
-    private final MongoDbFactory mongo1;
-/**
- * 
- * @param mongo is private variable of type MongoDbFactory
- */
+    private final MongoDbFactory mongo;
+    /**
+     * 
+ 	 * @param pmongo is private variable of type MongoDbFactory
+ 	 */
     @Autowired
-    public MyConnection(final MongoDbFactory mongo) {
-        this.mongo = mongo1;
+    public MyConnection(final MongoDbFactory pmongo) {
+        this.mongo = pmongo;
     }
-/**
- *  
- *     
- */
+    
     public void printAddress() {
         DB db = mongo.getDb();
         LOGGER.info("db address: {}", db.getMongo().getAddress());
     }
 
 }
-
 
 

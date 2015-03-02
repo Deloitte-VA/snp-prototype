@@ -3,11 +3,7 @@ package com.github.jlgrock.snp.core.domain;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
-/**
- * 
- * @author vbhole
- *
- */
+
 public class PCETest {
     /**
      * public function returns void

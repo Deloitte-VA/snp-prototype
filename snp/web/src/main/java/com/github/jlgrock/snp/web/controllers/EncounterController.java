@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 /**
  * Created by jlgrock on 1/11/15.
  */
+@ResponseBody
 @RestController
 @RequestMapping("/encounter")
 public class EncounterController {

@@ -71,56 +71,56 @@ public class Patient {
         return id;
     }
 
-    public void setId(final Long pid) {
-        this.id = pid;
+    public void setId(final Long pId) {
+        this.id = pId;
     }
 
     public String getFirstName() {
         return firstName;
     }
 
-    public void setFirstName(final String pfirstName) {
-        this.firstName = pfirstName;
+    public void setFirstName(final String pFirstName) {
+        this.firstName = pFirstName;
     }
 
     public String getMiddleName() {
         return middleName;
     }
 
-    public void setMiddleName(final String pmiddleName) {
-        this.middleName = pmiddleName;
+    public void setMiddleName(final String pMiddleName) {
+        this.middleName = pMiddleName;
     }
 
     public String getLastName() {
         return lastName;
     }
 
-    public void setLastName(final String plastName) {
-        this.lastName = plastName;
+    public void setLastName(final String pLastName) {
+        this.lastName = pLastName;
     }
 
     public DateTime getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(final DateTime pdateOfBirth) {
-        this.dateOfBirth = pdateOfBirth;
+    public void setDateOfBirth(final DateTime pDateOfBirth) {
+        this.dateOfBirth = pDateOfBirth;
     }
 
     public Gender getGender() {
         return gender;
     }
 
-    public void setGender(final Gender pgender) {
-        this.gender = pgender;
+    public void setGender(final Gender pGender) {
+        this.gender = pGender;
     }
 
     public Race getRace() {
         return race;
     }
 
-    public void setRace(final Race prace) {
-        this.race = prace;
+    public void setRace(final Race pRace) {
+        this.race = pRace;
     }
 }
 

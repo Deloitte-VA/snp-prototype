@@ -30,12 +30,12 @@ public class MongoApplication implements CommandLineRunner {
     @Autowired
     private MyConnection myConnection;
     
-/**
- * 
- * @param args command line arguments
- * @throws Exception "Starting Mongo Application."
- * 
- */
+    /**
+     * 
+     * @param args command line arguments
+     * @throws Exception "Starting Mongo Application."
+     * 
+     */
     
     public static void main(final String[] args) throws Exception {
         LOGGER.info("Starting Mongo Application.");

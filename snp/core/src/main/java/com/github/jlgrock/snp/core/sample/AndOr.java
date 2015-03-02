@@ -8,8 +8,7 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 /**
  * 
- * @author jlgrock
- *
+ * Simple example of how to do nested AND and OR statements using the MongoDB driver library.
  */
 public class AndOr {
 

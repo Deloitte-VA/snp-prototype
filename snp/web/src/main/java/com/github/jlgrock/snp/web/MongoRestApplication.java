@@ -15,12 +15,13 @@ import org.springframework.context.annotation.Configuration;
 @EnableAutoConfiguration(exclude = {MongoRepositoriesAutoConfiguration.class})
 @ComponentScan
 public class MongoRestApplication {
-    private static Logger LOGGER = LoggerFactory.getLogger(MongoRestApplication.class);
-/**
- * 
- * @param args command line arguments
- * @throws Exception "Starting Mongo Application."
- */
+    private static final Logger LOGGER = LoggerFactory.getLogger(MongoRestApplication.class);
+    private MongoRestApplication(){};
+    /**
+    * 
+    * @param args command line arguments
+    * @throws Exception "Starting Mongo Application."
+    */
     public static void main(final String[] args) throws Exception {
         LOGGER.info("Starting Mongo Application.");
         SpringApplication.run(MongoRestApplication.class, args);

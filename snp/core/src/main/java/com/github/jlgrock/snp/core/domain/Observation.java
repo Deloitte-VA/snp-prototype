@@ -5,8 +5,7 @@ import org.joda.time.DateTime;
 
 /**
  * 
- * @author jlgrock
- *
+ * An Observation is a single measurement or perception during a patient visit.
  */
 public class Observation {
 

@@ -65,24 +65,24 @@ public class Encounter {
         return date;
     }
 
-    public void setDate(final DateTime pdate) {
-        this.date = pdate;
+    public void setDate(final DateTime pDate) {
+        this.date = pDate;
     }
 
     public String getReasonForVisit() {
         return reasonForVisit;
     }
 
-    public void setReasonForVisit(final String preasonForVisit) {
-        this.reasonForVisit = preasonForVisit;
+    public void setReasonForVisit(final String pReasonForVisit) {
+        this.reasonForVisit = pReasonForVisit;
     }
 
     public List<Observation> getObservations() {
         return observations;
     }
 
-    public void setObservations(final List<Observation> pobservations) {
-        this.observations = pobservations;
+    public void setObservations(final List<Observation> pObservations) {
+        this.observations = pObservations;
     }
 
     public Integer getType() {
@@ -95,8 +95,8 @@ public class Encounter {
 
     private List<Observation> observations;
 
-    public void setId(final Long pid) {
-        this.id = pid;
+    public void setId(final Long pId) {
+        this.id = pId;
     }
 
     public Long getId() {
@@ -107,8 +107,8 @@ public class Encounter {
         return patient;
     }
 
-    public void setPatient(final Patient ppatient) {
-        this.patient = ppatient;
+    public void setPatient(final Patient pPatient) {
+        this.patient = pPatient;
     }
 }
 

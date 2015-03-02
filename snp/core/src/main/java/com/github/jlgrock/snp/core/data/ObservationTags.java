@@ -1,8 +1,5 @@
 package com.github.jlgrock.snp.core.data;
 
-/**
- *
- */
 public class ObservationTags {
     public static final String ID_TAG = "identifier";
     public static final String NAME_TAG = "name";

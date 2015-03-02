@@ -17,8 +17,8 @@ import java.util.List;
 import java.util.Set;
 /**
  * 
- * @author jlgrock
- *
+ * Simple example of how to implement Query 2 using Java for semantic normalization prototype 
+ * using MongoDB Java driver library.
  */
 public class PocDemo2 {
 
@@ -26,10 +26,10 @@ public class PocDemo2 {
     
     @Autowired
     EncounterReadConverter encounterReadConverter;
-/**
- * 
- * @param args command line string arguments
- */
+    /**
+     * 
+     * @param args command line string arguments
+     */
     public static void main(final String[] args){
         PocDemo2 poc = new PocDemo2();
         poc.query();

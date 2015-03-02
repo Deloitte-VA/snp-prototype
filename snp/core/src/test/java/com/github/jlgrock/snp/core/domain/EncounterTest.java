@@ -8,11 +8,7 @@ import org.mockito.Mockito;
 import java.util.List;
 
 import static org.junit.Assert.*;
-/**
- * 
- * @author vbhole
- *
- */
+
 public class EncounterTest {
     /**
      * public function returns void

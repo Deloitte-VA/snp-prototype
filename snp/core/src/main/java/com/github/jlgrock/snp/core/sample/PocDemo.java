@@ -11,8 +11,8 @@ import org.slf4j.LoggerFactory;
 import java.net.UnknownHostException;
 /**
  * 
- * @author jlgrock
- *
+ * Simple example of how to implement Query 1 using Java for semantic normalization prototype 
+ * using MongoDB Java driver library.
  */
 public class PocDemo {
 
@@ -84,11 +84,11 @@ public class PocDemo {
         // release resources
         mongoClient.close();
     }
-/**
- * 
- * @param args string command line arguments
- * 
- */
+    /**
+     * 
+     * @param args string command line arguments
+     * 
+     */
     public static void main(final String[] args){
         PocDemo pocDemo = new PocDemo();
         pocDemo.query();

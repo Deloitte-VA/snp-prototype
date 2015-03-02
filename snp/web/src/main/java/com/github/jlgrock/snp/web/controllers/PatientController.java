@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 /**
  * Created by jlgrock on 1/11/15.
  */
+@ResponseBody
 @RestController
 @RequestMapping("/patient")
 public class PatientController {
@@ -20,10 +21,10 @@ public class PatientController {
     @Autowired
     private PatientRepository repository;
 
- /** 
- * @param id used to find encounter
- * @return single encounter that corresponds to id
- */
+    /** 
+     * @param id used to find encounter
+     * @return single encounter that corresponds to id
+     */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public Patient getPatient(@PathVariable final Long id) {
         LOGGER.debug("getting encounter");
