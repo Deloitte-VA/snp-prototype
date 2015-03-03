@@ -66,6 +66,7 @@
         <maven-war-plugin.version>2.5</maven-war-plugin.version>
         <maven-javadoc-plugin.version>2.10.1</maven-javadoc-plugin.version>
         <maven-release-plugin.version>2.5.1</maven-release-plugin.version>
+        <maven-checkstyle-plugin.version>2.9</maven-checkstyle-plugin.version>
     </properties>
 
     <dependencyManagement>
@@ -240,6 +241,25 @@
                         </configuration>
                         <version>${maven-surefire-plugin.version}</version>
                     </plugin>
+
+                    <!-- Check Style: Make sure that it matches basic formatting and usage requirements -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-checkstyle-plugin</artifactId>
+                        <version>${maven-checkstyle-plugin.version}</version>
+                        <configuration>
+                            <configLocation>${project.basedir}/checkstyle.xml</configLocation>
+                            <failsOnError>true</failsOnError>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>check</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+
                     <!-- COBERTURA: Code Coverage Check -->
                     <!--<plugin>-->
                         <!--<groupId>org.codehaus.mojo</groupId>-->
