@@ -10,7 +10,9 @@ import org.mockito.Mockito;
 import static org.junit.Assert.assertEquals;
 
 public class ObservationTest {
-
+    /**
+     * public function returns void
+     */
 	@Test
 	public void test() {
 		

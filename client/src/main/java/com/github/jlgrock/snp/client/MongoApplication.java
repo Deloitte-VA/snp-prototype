@@ -30,12 +30,12 @@ public class MongoApplication implements CommandLineRunner {
     @Autowired
     private MyConnection myConnection;
     
-/**
- * 
- * @param args command line arguments
- * @throws Exception "Starting Mongo Application."
- * 
- */
+    /**
+     * 
+     * @param args command line arguments
+     * @throws Exception "Starting Mongo Application."
+     * 
+     */
     
     public static void main(final String[] args) throws Exception {
         LOGGER.info("Starting Mongo Application.");
@@ -52,7 +52,7 @@ public class MongoApplication implements CommandLineRunner {
 
         LOGGER.info("Inserting a patient...");
         Patient p1 = new Patient();
-        p1.setId(1l);
+        p1.setId(1L);
         p1.setFirstName("Jason");
         p1.setMiddleName("Gerald");
         p1.setLastName("Bourne");

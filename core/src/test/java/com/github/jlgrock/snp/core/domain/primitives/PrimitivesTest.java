@@ -11,6 +11,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class PrimitivesTest {
+	/**
+	 * public function returns void
+	 */
     @Test
     public void testGoodBinary() {
         byte[] bytes = {1, 0, 0 ,1, 1, 1, 1, 1};
@@ -20,13 +23,17 @@ public class PrimitivesTest {
         assertEquals(PrimitiveType.BINARY64, simplePrimitive.getType());
         assertEquals(binary, simplePrimitive.getValue());
     }
-
+    /**
+     * public function returns void
+     */
     @Test(expected=IllegalArgumentException.class)
     public void testBadBinary() {
         String str = "bla";
         SimplePrimitive.createPrimitive(PrimitiveType.BINARY64.getId(), str);
     }
-
+    /**
+     * public function returns void
+     */
     @Test
     public void testGoodBoolean() {
         Boolean booleanTest = false;
@@ -35,13 +42,17 @@ public class PrimitivesTest {
         assertEquals(PrimitiveType.BOOLEAN, simplePrimitive.getType());
         assertEquals(booleanTest, simplePrimitive.getValue());
     }
-
+    /**
+     * public function returns void
+     */
     @Test(expected=IllegalArgumentException.class)
     public void testBadBoolean() {
         String str = "bla";
         SimplePrimitive.createPrimitive(PrimitiveType.BOOLEAN.getId(), str);
     }
-
+    /**
+     * public function returns void
+     */
     @Test
     public void testGoodDate() {
         Long longVal = 1234l;
@@ -50,13 +61,17 @@ public class PrimitivesTest {
         assertEquals(PrimitiveType.DATE, simplePrimitive.getType());
         assertEquals(new LocalDate(longVal), simplePrimitive.getValue());
     }
-
+    /**
+     * public function returns void
+     */
     @Test(expected=IllegalArgumentException.class)
     public void testBadDate() {
         String str = "bla";
         SimplePrimitive.createPrimitive(PrimitiveType.DATE.getId(), str);
     }
-
+    /**
+     * public function returns void
+     */
     @Test
     public void testGoodDateTime() {
         Long longVal = 1234l;
@@ -65,13 +80,17 @@ public class PrimitivesTest {
         assertEquals(PrimitiveType.DATETIME, simplePrimitive.getType());
         assertEquals(new DateTime(longVal), simplePrimitive.getValue());
     }
-
+    /**
+     * public function returns void
+     */
     @Test(expected=IllegalArgumentException.class)
     public void testBadDateTime() {
         String str = "bla";
         SimplePrimitive.createPrimitive(PrimitiveType.DATETIME.getId(), str);
     }
-
+    /**
+     * public function returns void
+     */
     @Test
     public void testGoodDecimal() {
         BigDecimal bigDecimal = new BigDecimal("2.2");
@@ -80,13 +99,17 @@ public class PrimitivesTest {
         assertEquals(PrimitiveType.DECIMAL, simplePrimitive.getType());
         assertEquals(bigDecimal, simplePrimitive.getValue());
     }
-
+    /**
+     * public function returns void
+     */
     @Test(expected=IllegalArgumentException.class)
     public void testBadDecimal() {
         String str = "bla";
         SimplePrimitive.createPrimitive(PrimitiveType.DECIMAL.getId(), str);
     }
-
+    /**
+     * public function returns void
+     */
     @Test
     public void testGoodInteger() {
         Integer integer = 55;
@@ -95,13 +118,17 @@ public class PrimitivesTest {
         assertEquals(PrimitiveType.INTEGER, simplePrimitive.getType());
         assertEquals(integer, simplePrimitive.getValue());
     }
-
+    /**
+     * public function returns void
+     */
     @Test(expected=IllegalArgumentException.class)
     public void testBadInteger() {
         String str = "bla";
         SimplePrimitive.createPrimitive(PrimitiveType.INTEGER.getId(), str);
     }
-
+    /**
+     * public function returns void
+     */
     @Test
     public void testGoodString() {
         String str = "bla";
@@ -110,13 +137,17 @@ public class PrimitivesTest {
         assertEquals(PrimitiveType.STRING, simplePrimitive.getType());
         assertEquals(str, simplePrimitive.getValue());
     }
-
+    /**
+     * public function returns void
+     */
     @Test(expected=IllegalArgumentException.class)
     public void testBadString() {
         Integer integer = 6;
         SimplePrimitive.createPrimitive(PrimitiveType.STRING.getId(), integer);
     }
-
+    /**
+     * public function returns void
+     */
     @Test(expected=IllegalArgumentException.class)
     public void testUnknownType() {
         Double floatTest = 4.0;

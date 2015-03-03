@@ -5,7 +5,9 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 public class RaceTest {
-
+    /**
+     * public function returns void
+     */
 	@Test
 	public void test() {
 	

@@ -17,7 +17,9 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class EncounterReadConverterTest {
-
+    /**
+     * public function returns void
+     */
     @Test
     public void testConvert() {
         DateTime date = new DateTime(99999l);
@@ -64,4 +66,5 @@ public class EncounterReadConverterTest {
 
 
 }
+
 

@@ -1,10 +1,10 @@
 package com.github.jlgrock.snp.core.domain.primitives;
 
 /**
- * The abstract SimplePrimitive.  It contains shared functionality between all
+ * The abstract SimplePrimitive. It contains shared functionality between all
  * SimplePrimitive objects.
- *
- * @param <T> The value type that will be stored in the primitive
+ * 
+ * @param <T> The value type that will be stored in the primitive.
  */
 public abstract class AbstractSimplePrimitive<T> implements SimplePrimitive {
     protected final Object value;
