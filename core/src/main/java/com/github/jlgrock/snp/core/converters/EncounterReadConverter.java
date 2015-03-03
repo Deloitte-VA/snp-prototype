@@ -21,11 +21,8 @@ public class EncounterReadConverter implements Converter<DBObject, Encounter> {
 
     private final ObservationReadConverter observationReadConverter;
 
-    private final PatientRepository patientRepository;
     /**
-     * 
      * @param observationReadConverterIn object of type ObservationReadConverter that has values from a MongoDB object stored in an Observation object.
-     * @param patientRepositoryIn object object of type PatientRepository that holds a patient list.
      */
     @Autowired
     public EncounterReadConverter(final ObservationReadConverter observationReadConverterIn) {
