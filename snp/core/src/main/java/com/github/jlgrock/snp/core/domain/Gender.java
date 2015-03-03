@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * 
  * The gender of the patient.
  */
 public enum Gender {
@@ -22,17 +23,17 @@ public enum Gender {
     private Gender(final Integer i) {
         id = i;
     }
-
     /**
+     * 
      * @return the Integer representing the gender.
      */
     public Integer getId() {
         return id;
     }
-
     /**
-     * @param id the integer representing the gender
-     * @return the Gender enumeration that matches the integer
+     * 
+     * @param id the integer representing the gender.
+     * @return the Gender enumeration that matches the integer.
      */
     public static Gender getValueById(final Integer id) {
         return valuesById.get(id);

@@ -3,6 +3,10 @@ package com.github.jlgrock.snp.core.domain;
 import com.github.jlgrock.snp.core.domain.primitives.SimplePrimitive;
 import org.joda.time.DateTime;
 
+/**
+ * 
+ * An Observation is a single measurement or perception during a patient visit.
+ */
 public class Observation {
 
     private SimplePrimitive name;
@@ -18,7 +22,7 @@ public class Observation {
     }
 
     public void setName(final SimplePrimitive pname) {
-        this.name = name;
+        this.name = pname;
     }
 
     public SimplePrimitive getValue() {
@@ -26,7 +30,7 @@ public class Observation {
     }
 
     public void setValue(final SimplePrimitive pvalue) {
-        this.value = value;
+        this.value = pvalue;
     }
 
     public String getApplies() {
@@ -34,7 +38,7 @@ public class Observation {
     }
 
     public void setApplies(final String papplies) {
-        this.applies = applies;
+        this.applies = papplies;
     }
 
     public DateTime getIssued() {
@@ -42,7 +46,7 @@ public class Observation {
     }
 
     public void setIssued(final DateTime pissued) {
-        this.issued = issued;
+        this.issued = pissued;
     }
 
     public String getIdentifier() {
@@ -50,7 +54,7 @@ public class Observation {
     }
 
     public void setIdentifier(final String pidentifier) {
-        this.identifier = identifier;
+        this.identifier = pidentifier;
     }
 
     public String getSubject() {
@@ -58,7 +62,7 @@ public class Observation {
     }
 
     public void setSubject(final String psubject) {
-        this.subject = subject;
+        this.subject = psubject;
     }
 
 }

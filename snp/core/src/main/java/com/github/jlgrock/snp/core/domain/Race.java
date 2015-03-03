@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ *
  * The Race of the Patient.
  */
 public enum Race {
@@ -22,17 +23,17 @@ public enum Race {
     private Race(final Integer i) {
         id = i;
     }
-
     /**
+     * 
      * @return the Integer representing the Race.
      */
     public Integer getId() {
         return id;
     }
-
     /**
-     * @param id the integer representing the Race
-     * @return the Race enumeration that matches the integer
+     * 
+     * @param id the integer representing the Race.
+     * @return the Race enumeration that matches the integer.
      */
     public static Race getValueById(final Integer id) {
         return valuesById.get(id);

@@ -6,7 +6,7 @@ package com.github.jlgrock.snp.core.domain.primitives;
 public class StringPrimitive extends AbstractSimplePrimitive<String> {
 
     /**
-     * @param valueIn the represented String
+     * @param valueIn the represented String.
      */
     StringPrimitive(final String valueIn) {
         super(valueIn);

@@ -7,7 +7,9 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class PatientTest {
-
+    /**
+     * public function returns void
+     */
 	@Test
 	public void test() {
 

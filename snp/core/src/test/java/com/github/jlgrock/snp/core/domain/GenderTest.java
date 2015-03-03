@@ -5,7 +5,9 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class GenderTest {
-
+    /**
+     * public function returns void
+     */
 	@Test
 	public void test() {
 
