@@ -69,7 +69,8 @@ public class PocDemo2Test extends Mockito {
         //Mock the values for 2nd item in the list just so we can cross check them later
         when(encounter2.getId()).thenReturn(2L);
         when(encounter2.getDate()).thenReturn(date);
-        when(encounter2.getPatient()).thenReturn(patient);
+        //when(encounter2.getPatient()).thenReturn(patient);
+        when(encounter2.getPatientId()).thenReturn(456l);
         when(encounter2.getReasonForVisit()).thenReturn("Mocked reason 2");
         when(encounter2.getType()).thenReturn(1);
         when(encounter2.getObservations()).thenReturn(observations);
@@ -83,7 +84,8 @@ public class PocDemo2Test extends Mockito {
         assertEquals(2, encounters.size() );  //Verify length of the list
         //Verify that the item in the list (in this case 2nd item) has proper values
         assertEquals((Long) 2l, encounters.get(1).getId());
-        assertEquals(patient, encounters.get(1).getPatient());
+        //assertEquals(patient, encounters.get(1).getPatientId());
+        assertEquals((Long) 456l, encounters.get(1).getPatientId());
         assertEquals(date, encounters.get(1).getDate());
         assertEquals((Integer) 1, encounters.get(1).getType());
         assertEquals("Mocked reason 2", encounters.get(1).getReasonForVisit());
@@ -144,7 +146,8 @@ public class PocDemo2Test extends Mockito {
     		encounter.setId(3049593922L);
     		Patient patient = new Patient();
     		patient.setId(10000001L);
-    		encounter.setPatient(patient);
+    		//encounter.setPatient(patient);
+    		encounter.setPatientId(456l);
     		//String inputDateStr = "06/29/2014"; //"dd-MM-yyyy" or "dd/MM/yyyy"
     		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
     		Date inputDate = dateFormat.parse("06/29/2014"); //inputDateStr
@@ -153,12 +156,12 @@ public class PocDemo2Test extends Mockito {
     		encounter.setReasonForVisit("Emergency room visit for heart palpitations.");
     		
     		Observation observation1 = new Observation();
-    		observation1.setName(SimplePrimitive.createPrimitive (PrimitiveType.INTEGER.getId(), 5695930304L));
-    		observation1.setValue(SimplePrimitive.createPrimitive (PrimitiveType.INTEGER.getId(), 110L));
+    		observation1.setName(SimplePrimitive.createPrimitive (PrimitiveType.LONG.getId(), 5695930304L));
+    		observation1.setValue(SimplePrimitive.createPrimitive (PrimitiveType.LONG.getId(), 110L));
     		
     		Observation observation2 = new Observation();
-    		observation2.setName(SimplePrimitive.createPrimitive (PrimitiveType.INTEGER.getId(), 5695930310L));
-    		observation2.setValue(SimplePrimitive.createPrimitive (PrimitiveType.INTEGER.getId(), 145L));
+    		observation2.setName(SimplePrimitive.createPrimitive (PrimitiveType.LONG.getId(), 5695930310L));
+    		observation2.setValue(SimplePrimitive.createPrimitive (PrimitiveType.LONG.getId(), 145L));
     		
     		List<Observation> observations = new ArrayList<Observation>();
     		observations.add(observation1);
@@ -170,8 +173,10 @@ public class PocDemo2Test extends Mockito {
     		encounter = new Encounter();
     		encounter.setId(3049593923L);
     		Patient patient = new Patient();
+    		Long patientId = 456l;
     		patient.setId(10000001L);
-    		encounter.setPatient(patient);
+    		//encounter.setPatientId(patient);
+    		encounter.setPatientId(patientId);
     		//String inputDateStr = "06/29/2014"; //"dd-MM-yyyy" or "dd/MM/yyyy"
     		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
     		Date inputDate = dateFormat.parse("06/29/2014"); //inputDateStr
@@ -180,20 +185,20 @@ public class PocDemo2Test extends Mockito {
     		encounter.setReasonForVisit("Emergency room visit for heart palpitations.");
     		
     		Observation observation1 = new Observation();
-    		observation1.setName(SimplePrimitive.createPrimitive (PrimitiveType.INTEGER.getId(), 5695930304L));
-    		observation1.setValue(SimplePrimitive.createPrimitive (PrimitiveType.INTEGER.getId(), 120L));
+    		observation1.setName(SimplePrimitive.createPrimitive (PrimitiveType.LONG.getId(), 5695930304L));
+    		observation1.setValue(SimplePrimitive.createPrimitive (PrimitiveType.LONG.getId(), 120L));
     		
     		Observation observation2 = new Observation();
-    		observation2.setName(SimplePrimitive.createPrimitive (PrimitiveType.INTEGER.getId(), 5695930307L));
-    		observation2.setValue(SimplePrimitive.createPrimitive (PrimitiveType.INTEGER.getId(), 80L));
+    		observation2.setName(SimplePrimitive.createPrimitive (PrimitiveType.LONG.getId(), 5695930307L));
+    		observation2.setValue(SimplePrimitive.createPrimitive (PrimitiveType.LONG.getId(), 80L));
     		
     		Observation observation3 = new Observation();
-    		observation3.setName(SimplePrimitive.createPrimitive (PrimitiveType.INTEGER.getId(), 5695930310L));
-    		observation3.setValue(SimplePrimitive.createPrimitive (PrimitiveType.INTEGER.getId(), 120L));
+    		observation3.setName(SimplePrimitive.createPrimitive (PrimitiveType.LONG.getId(), 5695930310L));
+    		observation3.setValue(SimplePrimitive.createPrimitive (PrimitiveType.LONG.getId(), 120L));
     		
     		Observation observation4 = new Observation();
-    		observation4.setName(SimplePrimitive.createPrimitive (PrimitiveType.INTEGER.getId(), 5695930313L));
-    		observation4.setValue(SimplePrimitive.createPrimitive (PrimitiveType.INTEGER.getId(), 80L));
+    		observation4.setName(SimplePrimitive.createPrimitive (PrimitiveType.LONG.getId(), 5695930313L));
+    		observation4.setValue(SimplePrimitive.createPrimitive (PrimitiveType.LONG.getId(), 80L));
     		
     		
     		List<Observation> observations = new ArrayList<Observation>();
@@ -208,8 +213,10 @@ public class PocDemo2Test extends Mockito {
     		encounter = new Encounter();
     		encounter.setId(3049593924L);
     		Patient patient = new Patient();
+    		Long patientId = 456l;
     		patient.setId(10000002L);
-    		encounter.setPatient(patient);
+    		//encounter.setPatientId(patient);
+    		encounter.setPatientId(patientId);
     		//String inputDateStr = "06/29/2014"; //"dd-MM-yyyy" or "dd/MM/yyyy"
     		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
     		Date inputDate = dateFormat.parse("01/17/2014"); //inputDateStr
@@ -218,20 +225,20 @@ public class PocDemo2Test extends Mockito {
     		encounter.setReasonForVisit("Emergency room visit for heart palpitations.");
     		
     		Observation observation1 = new Observation();
-    		observation1.setName(SimplePrimitive.createPrimitive (PrimitiveType.INTEGER.getId(), 5695930304L));
-    		observation1.setValue(SimplePrimitive.createPrimitive (PrimitiveType.INTEGER.getId(), 165L));
+    		observation1.setName(SimplePrimitive.createPrimitive (PrimitiveType.LONG.getId(), 5695930304L));
+    		observation1.setValue(SimplePrimitive.createPrimitive (PrimitiveType.LONG.getId(), 165L));
     		
     		Observation observation2 = new Observation();
-    		observation2.setName(SimplePrimitive.createPrimitive (PrimitiveType.INTEGER.getId(), 5695930307L));
-    		observation2.setValue(SimplePrimitive.createPrimitive (PrimitiveType.INTEGER.getId(), 100L));
+    		observation2.setName(SimplePrimitive.createPrimitive (PrimitiveType.LONG.getId(), 5695930307L));
+    		observation2.setValue(SimplePrimitive.createPrimitive (PrimitiveType.LONG.getId(), 100L));
     		
     		Observation observation3 = new Observation();
-    		observation3.setName(SimplePrimitive.createPrimitive (PrimitiveType.INTEGER.getId(), 5695930310L));
-    		observation3.setValue(SimplePrimitive.createPrimitive (PrimitiveType.INTEGER.getId(), 100L));
+    		observation3.setName(SimplePrimitive.createPrimitive (PrimitiveType.LONG.getId(), 5695930310L));
+    		observation3.setValue(SimplePrimitive.createPrimitive (PrimitiveType.LONG.getId(), 100L));
     		
     		Observation observation4 = new Observation();
-    		observation4.setName(SimplePrimitive.createPrimitive (PrimitiveType.INTEGER.getId(), 5695930313L));
-    		observation4.setValue(SimplePrimitive.createPrimitive (PrimitiveType.INTEGER.getId(), 50L));
+    		observation4.setName(SimplePrimitive.createPrimitive (PrimitiveType.LONG.getId(), 5695930313L));
+    		observation4.setValue(SimplePrimitive.createPrimitive (PrimitiveType.LONG.getId(), 50L));
     		
     		
     		List<Observation> observations = new ArrayList<Observation>();
