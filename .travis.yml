@@ -20,7 +20,6 @@ before_install:
   - gpg --list-keys
   - mv -f keystores/local.settings.xml ~/.m2/settings.xml
   - mv -f keystores/local.settings-security.xml ~/.m2/settings-security.xml
-  - cd snp
 
 install: mvn deploy -PcodeQuality,sonatype-oss-release -DskipTests=true -Dmaven.javadoc.skip=true -B -V -Psonatype-oss-release -Dgpg.passphrase=$GPG_PASSPHRASE
 
