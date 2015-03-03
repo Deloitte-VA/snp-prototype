@@ -81,6 +81,5 @@ public class PatientTest {
 		assertNotEquals(pt1.hashCode(), pt2.hashCode());
 		
 	}
-;
 }
 

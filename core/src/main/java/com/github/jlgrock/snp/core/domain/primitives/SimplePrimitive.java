@@ -11,7 +11,15 @@ import java.math.BigDecimal;
  */
 public interface SimplePrimitive {
 
-    public static String makeErrorMessage(PrimitiveType parsedType, String expectedClassType, Object o) {
+    /**
+     * A string builder to build up a string for exceptions parsing SimplePrimitives
+     *
+     * @param parsedType the type that it is marked as
+     * @param expectedClassType the expected class type
+     * @param o the object that is being analyzed
+     * @return the string for the exception
+     */
+    static String makeErrorMessage(PrimitiveType parsedType, String expectedClassType, Object o) {
         StringBuilder sb = new StringBuilder();
         sb.append("ENUM indicated is ");
         sb.append(parsedType.name());

@@ -14,6 +14,9 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Spring configuration base for Spring Data Mongo.
+ */
 @Configuration
 @ComponentScan
 @EnableMongoRepositories("com.github.jlgrock.snp.core.data")

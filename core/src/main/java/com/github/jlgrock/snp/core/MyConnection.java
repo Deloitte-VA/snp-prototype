@@ -7,6 +7,9 @@ import org.springframework.data.mongodb.MongoDbFactory;
 import com.mongodb.DB;
 import org.springframework.stereotype.Component;
 
+/**
+ * The default connection for MongoDB
+ */
 @Component
 public class MyConnection {
 
@@ -21,7 +24,10 @@ public class MyConnection {
     public MyConnection(final MongoDbFactory pmongo) {
         this.mongo = pmongo;
     }
-    
+
+    /**
+     * Simple output for use in logging.
+     */
     public void printAddress() {
         DB db = mongo.getDb();
         LOGGER.info("db address: {}", db.getMongo().getAddress());

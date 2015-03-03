@@ -11,6 +11,10 @@
     <name>web</name>
     <packaging>war</packaging>
 
+    <properties>
+        <project.rootdir>${project.parent.basedir}</project.rootdir>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>

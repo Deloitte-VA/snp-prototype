@@ -43,7 +43,8 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        
+
+        <project.rootdir>${project.basedir}</project.rootdir>
         <source.jdk>1.8</source.jdk>
         <target.jdk>1.8</target.jdk>
 
@@ -248,7 +249,7 @@
                         <artifactId>maven-checkstyle-plugin</artifactId>
                         <version>${maven-checkstyle-plugin.version}</version>
                         <configuration>
-                            <configLocation>${project.basedir}/checkstyle.xml</configLocation>
+                            <configLocation>${project.rootdir}/checkstyle.xml</configLocation>
                             <failsOnError>true</failsOnError>
                         </configuration>
                         <executions>

@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * Created by jlgrock on 1/11/15.
+ * The Controller serving up domain objects for Patient objects.
  */
 
 @RestController
@@ -26,7 +26,8 @@ public class PatientController {
      * @return single encounter that corresponds to id
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public @ResponseBody Patient getPatient(@PathVariable final Long id) {
+    @ResponseBody
+    public Patient getPatient(@PathVariable final Long id) {
         LOGGER.debug("getting encounter");
         return repository.findOne(id);
     }

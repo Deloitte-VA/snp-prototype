@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 /**
- *
+ * The Controller serving up domain objects for PCE objects.
  */
 @RestController
 @RequestMapping("/pce")
@@ -18,10 +18,15 @@ public class PCEController {
     @Autowired
     private PCERepository repository;
 
+    /**
+     * get a single PCE.
+     *
+     * @param id the id of the PCE to get
+     * @return the PCE to return to the client
+     */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public
     @ResponseBody
-    PCE getPCE(@PathVariable final Long id) {
+    public PCE getPCE(@PathVariable final Long id) {
         LOGGER.debug("getting encounter");
         return repository.findOne(id);
     }

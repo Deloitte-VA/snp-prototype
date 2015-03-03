@@ -107,7 +107,7 @@ public class Encounter {
         return patientId;
     }
 
-	public void setPatientId(Long pPatientId) {
+	public void setPatientId(final Long pPatientId) {
         this.patientId = pPatientId;
     }
 }

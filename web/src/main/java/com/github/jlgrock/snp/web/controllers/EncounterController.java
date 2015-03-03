@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * Created by jlgrock on 1/11/15.
+ * The Controller serving up domain objects for Encounter objects.
  */
 
 @RestController
@@ -25,7 +25,8 @@ public class EncounterController {
      * @return returns an encounter
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public @ResponseBody Encounter getEncounter(@PathVariable final Long pid) {
+    @ResponseBody
+    public Encounter getEncounter(@PathVariable final Long pid) {
         LOGGER.debug("getting encounter");
         return repository.findOne(pid);
     }

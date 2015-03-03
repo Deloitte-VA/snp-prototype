@@ -7,7 +7,7 @@ package com.github.jlgrock.snp.core.domain.primitives;
  * @param <T> The value type that will be stored in the primitive.
  */
 public abstract class AbstractSimplePrimitive<T> implements SimplePrimitive {
-    protected final Object value;
+    private final Object value;
 
     /**
      * @param valueIn the value of the SimplePrimitive.
@@ -22,6 +22,6 @@ public abstract class AbstractSimplePrimitive<T> implements SimplePrimitive {
     @Override
     public T getValue() {
        return (T) value;
-    };
+    }
 }
 

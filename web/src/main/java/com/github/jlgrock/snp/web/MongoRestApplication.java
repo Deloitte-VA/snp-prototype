@@ -1,4 +1,4 @@
-package com.github.jlgrock.snp;
+package com.github.jlgrock.snp.web;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,14 +9,18 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * Created by jlgrock on 1/11/15.
+ * The entry point for Spring to start a web application in a Servlet 3.0 container.
  */
 @Configuration
 @EnableAutoConfiguration(exclude = {MongoRepositoriesAutoConfiguration.class})
 @ComponentScan
 public class MongoRestApplication {
+
     private static final Logger LOGGER = LoggerFactory.getLogger(MongoRestApplication.class);
-    private MongoRestApplication(){};
+
+    private MongoRestApplication(){
+    }
+
     /**
     * 
     * @param args command line arguments
