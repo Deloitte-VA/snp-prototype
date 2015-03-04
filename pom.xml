@@ -67,7 +67,7 @@
         <maven-war-plugin.version>2.5</maven-war-plugin.version>
         <maven-javadoc-plugin.version>2.10.1</maven-javadoc-plugin.version>
         <maven-release-plugin.version>2.5.1</maven-release-plugin.version>
-        <maven-checkstyle-plugin.version>2.9</maven-checkstyle-plugin.version>
+        <maven-checkstyle-plugin.version>2.14</maven-checkstyle-plugin.version>
     </properties>
 
     <dependencyManagement>
@@ -251,6 +251,7 @@
                         <configuration>
                             <configLocation>${project.rootdir}/checkstyle.xml</configLocation>
                             <failsOnError>true</failsOnError>
+                            <consoleOutput>true</consoleOutput>
                         </configuration>
                         <executions>
                             <execution>
@@ -259,6 +260,13 @@
                                 </goals>
                             </execution>
                         </executions>
+                        <dependencies>
+                            <dependency>
+                                <groupId>com.puppycrawl.tools</groupId>
+                                <artifactId>checkstyle</artifactId>
+                                <version>5.9</version>
+                            </dependency>
+                        </dependencies>
                     </plugin>
 
                     <!-- COBERTURA: Code Coverage Check -->

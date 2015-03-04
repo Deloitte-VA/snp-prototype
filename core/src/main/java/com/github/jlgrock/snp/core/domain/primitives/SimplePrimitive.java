@@ -55,7 +55,7 @@ public interface SimplePrimitive {
      * @param value the value object, which could be of a number of different type.
      * @return the primitive that was created using the type and value
      *
-     * @throws java.lang.IllegalArgumentException if the object type does not match the type
+     * throws java.lang.IllegalArgumentException if the object type does not match the type
      */
     static SimplePrimitive createPrimitive(Integer type, Object value) {
         SimplePrimitive sp = null;

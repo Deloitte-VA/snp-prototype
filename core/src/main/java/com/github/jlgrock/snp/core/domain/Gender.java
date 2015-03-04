@@ -23,6 +23,7 @@ public enum Gender {
     private Gender(final Integer i) {
         id = i;
     }
+
     /**
      * 
      * @return the Integer representing the gender.
@@ -30,6 +31,7 @@ public enum Gender {
     public Integer getId() {
         return id;
     }
+
     /**
      * 
      * @param id the integer representing the gender.
