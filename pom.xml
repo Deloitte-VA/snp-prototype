@@ -43,7 +43,8 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        
+
+        <project.rootdir>${project.basedir}</project.rootdir>
         <source.jdk>1.8</source.jdk>
         <target.jdk>1.8</target.jdk>
 
@@ -66,6 +67,7 @@
         <maven-war-plugin.version>2.5</maven-war-plugin.version>
         <maven-javadoc-plugin.version>2.10.1</maven-javadoc-plugin.version>
         <maven-release-plugin.version>2.5.1</maven-release-plugin.version>
+        <maven-checkstyle-plugin.version>2.14</maven-checkstyle-plugin.version>
     </properties>
 
     <dependencyManagement>
@@ -240,6 +242,33 @@
                         </configuration>
                         <version>${maven-surefire-plugin.version}</version>
                     </plugin>
+
+                    <!-- Check Style: Make sure that it matches basic formatting and usage requirements -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-checkstyle-plugin</artifactId>
+                        <version>${maven-checkstyle-plugin.version}</version>
+                        <configuration>
+                            <configLocation>${project.rootdir}/checkstyle.xml</configLocation>
+                            <failsOnError>true</failsOnError>
+                            <consoleOutput>true</consoleOutput>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>check</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <dependencies>
+                            <dependency>
+                                <groupId>com.puppycrawl.tools</groupId>
+                                <artifactId>checkstyle</artifactId>
+                                <version>5.9</version>
+                            </dependency>
+                        </dependencies>
+                    </plugin>
+
                     <!-- COBERTURA: Code Coverage Check -->
                     <!--<plugin>-->
                         <!--<groupId>org.codehaus.mojo</groupId>-->

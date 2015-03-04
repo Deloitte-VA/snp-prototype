@@ -5,11 +5,16 @@ import com.github.jlgrock.snp.core.domain.Encounter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Created by jlgrock on 1/11/15.
+ * The Controller serving up domain objects for Encounter objects.
  */
+
 @RestController
 @RequestMapping("/encounter")
 public class EncounterController {
@@ -18,12 +23,16 @@ public class EncounterController {
     
     @Autowired
     private EncounterRepository repository;
-       
+    /**
+     * 
+     * @param pid encounter id used for search
+     * @return returns an encounter
+     */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public @ResponseBody
-    Encounter getEncounter(@PathVariable final Long id) {
+    @ResponseBody
+    public Encounter getEncounter(@PathVariable final Long pid) {
         LOGGER.debug("getting encounter");
-        return repository.findOne(id);
+        return repository.findOne(pid);
     }
     
     

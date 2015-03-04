@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * Spring configuration base for Spring Data Mongo.
  */
 @Configuration
 @ComponentScan

@@ -3,6 +3,10 @@ package com.github.jlgrock.snp.core.domain;
 import com.github.jlgrock.snp.core.domain.primitives.SimplePrimitive;
 import org.joda.time.DateTime;
 
+/**
+ * 
+ * An Observation is a single measurement or perception during a patient visit.
+ */
 public class Observation {
 
     private SimplePrimitive name;

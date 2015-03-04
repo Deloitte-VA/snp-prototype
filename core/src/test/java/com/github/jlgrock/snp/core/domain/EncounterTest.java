@@ -10,7 +10,9 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 public class EncounterTest {
-
+    /**
+     * public function returns void
+     */
 	@Test
 	public void test() {
 				

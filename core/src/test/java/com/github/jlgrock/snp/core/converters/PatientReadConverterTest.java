@@ -13,7 +13,9 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class PatientReadConverterTest {
-
+    /**
+     * public function returns void
+     */
     @Test
     public void testConvert() {
         DateTime dob = new DateTime(12345l);

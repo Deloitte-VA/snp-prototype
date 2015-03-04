@@ -21,7 +21,10 @@ import java.util.stream.Stream;
 public class EncounterWriteConverter implements Converter<Encounter, DBObject> {
 
     private final ObservationWriteConverter observationWriteConverter;
-
+    /**
+     * 
+     * @param observationWriteConverterIn object of type ObservationWriteConverter that has values from an Observation object stored in a MongoDB object.
+     */
     @Autowired
     public EncounterWriteConverter(final ObservationWriteConverter observationWriteConverterIn) {
         observationWriteConverter = observationWriteConverterIn;

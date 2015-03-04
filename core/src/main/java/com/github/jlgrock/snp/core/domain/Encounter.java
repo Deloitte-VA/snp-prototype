@@ -9,7 +9,8 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
- *
+ * The domain object that represents a single encounter in a patient visit.  Each encounter can consist
+ * of multiple {@link com.github.jlgrock.snp.core.domain.Observation Observation} objects.
  */
 @Document(collection = "encounters")
 public class Encounter {
@@ -64,38 +65,38 @@ public class Encounter {
         return date;
     }
 
-    public void setDate(final DateTime date) {
-        this.date = date;
+    public void setDate(final DateTime pDate) {
+        this.date = pDate;
     }
 
     public String getReasonForVisit() {
         return reasonForVisit;
     }
 
-    public void setReasonForVisit(final String reasonForVisit) {
-        this.reasonForVisit = reasonForVisit;
+    public void setReasonForVisit(final String pReasonForVisit) {
+        this.reasonForVisit = pReasonForVisit;
     }
 
     public List<Observation> getObservations() {
         return observations;
     }
 
-    public void setObservations(final List<Observation> observations) {
-        this.observations = observations;
+    public void setObservations(final List<Observation> pObservations) {
+        this.observations = pObservations;
     }
 
     public Integer getType() {
         return type;
     }
 
-    public void setType(final Integer type) {
-        this.type = type;
+    public void setType(final Integer ptype) {
+        this.type = ptype;
     }
 
     private List<Observation> observations;
 
-    public void setId(final Long id) {
-        this.id = id;
+    public void setId(final Long pId) {
+        this.id = pId;
     }
 
     public Long getId() {
@@ -106,8 +107,8 @@ public class Encounter {
         return patientId;
     }
 
-    public void setPatientId(Long patientId) {
-        this.patientId = patientId;
+	public void setPatientId(final Long pPatientId) {
+        this.patientId = pPatientId;
     }
 }
 

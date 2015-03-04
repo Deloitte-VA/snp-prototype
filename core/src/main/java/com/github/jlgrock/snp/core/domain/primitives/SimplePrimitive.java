@@ -11,7 +11,15 @@ import java.math.BigDecimal;
  */
 public interface SimplePrimitive {
 
-    public static String makeErrorMessage(PrimitiveType parsedType, String expectedClassType, Object o) {
+    /**
+     * A string builder to build up a string for exceptions parsing SimplePrimitives
+     *
+     * @param parsedType the type that it is marked as
+     * @param expectedClassType the expected class type
+     * @param o the object that is being analyzed
+     * @return the string for the exception
+     */
+    static String makeErrorMessage(PrimitiveType parsedType, String expectedClassType, Object o) {
         StringBuilder sb = new StringBuilder();
         sb.append("ENUM indicated is ");
         sb.append(parsedType.name());
@@ -47,7 +55,7 @@ public interface SimplePrimitive {
      * @param value the value object, which could be of a number of different type.
      * @return the primitive that was created using the type and value
      *
-     * @throws java.lang.IllegalArgumentException if the object type does not match the type
+     * throws java.lang.IllegalArgumentException if the object type does not match the type
      */
     static SimplePrimitive createPrimitive(Integer type, Object value) {
         SimplePrimitive sp = null;

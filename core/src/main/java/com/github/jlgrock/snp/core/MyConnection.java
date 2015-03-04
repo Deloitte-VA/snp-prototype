@@ -6,10 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.MongoDbFactory;
 import com.mongodb.DB;
 import org.springframework.stereotype.Component;
+
 /**
- * 
- * @author jlgrock
- *
+ * The default connection for MongoDB
  */
 @Component
 public class MyConnection {
@@ -17,24 +16,23 @@ public class MyConnection {
     private static final Logger LOGGER = LoggerFactory.getLogger(MyConnection.class);
 
     private final MongoDbFactory mongo;
-/**
- * 
- * @param mongo is private variable of type MongoDbFactory
- */
+    /**
+     * 
+ 	 * @param pmongo is private variable of type MongoDbFactory
+ 	 */
     @Autowired
-    public MyConnection(final MongoDbFactory mongo) {
-        this.mongo = mongo;
+    public MyConnection(final MongoDbFactory pmongo) {
+        this.mongo = pmongo;
     }
-/**
- *  
- *     
- */
+
+    /**
+     * Simple output for use in logging.
+     */
     public void printAddress() {
         DB db = mongo.getDb();
         LOGGER.info("db address: {}", db.getMongo().getAddress());
     }
 
 }
-
 
 

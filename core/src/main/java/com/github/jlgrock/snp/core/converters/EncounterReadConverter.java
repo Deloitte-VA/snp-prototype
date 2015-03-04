@@ -22,7 +22,7 @@ public class EncounterReadConverter implements Converter<DBObject, Encounter> {
     private final ObservationReadConverter observationReadConverter;
 
     /**
-     * @param observationReadConverterIn converter for observation class
+     * @param observationReadConverterIn object of type ObservationReadConverter that has values from a MongoDB object stored in an Observation object.
      */
     @Autowired
     public EncounterReadConverter(final ObservationReadConverter observationReadConverterIn) {

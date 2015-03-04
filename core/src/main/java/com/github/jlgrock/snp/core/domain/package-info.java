@@ -1,8 +1,4 @@
-package com.github.jlgrock.snp.core.domain;
 /**
- * 
- * 
- * 
- * 
- * 
+ *
  */
+package com.github.jlgrock.snp.core.domain;

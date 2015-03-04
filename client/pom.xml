@@ -11,6 +11,10 @@
     <name>client</name>
     <packaging>jar</packaging>
 
+    <properties>
+        <project.rootdir>${project.parent.basedir}</project.rootdir>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
