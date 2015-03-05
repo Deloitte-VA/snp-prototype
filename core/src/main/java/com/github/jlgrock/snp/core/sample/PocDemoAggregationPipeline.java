@@ -15,9 +15,12 @@ import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 
+/**
+ * Simple example of how to implement Query 1 using Java for semantic normalization prototype using MongoDB Java driver library and aggregation framework. 
+ */
 public class PocDemoAggregationPipeline {
 
-    private static Logger LOGGER = LoggerFactory.getLogger(PocDemoAggregationPipeline.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(PocDemoAggregationPipeline.class);
 
     private PocDemoAggregationPipeline() {}
 
@@ -97,7 +100,6 @@ public class PocDemoAggregationPipeline {
         //There would be only one row in the result, based on the final grouping
         if (cursor.hasNext()) {
             DBObject dbObject = cursor.next();
-            //System.out.println(dbObject + ", Number of patients= " + dbObject.get("sum") );
             LOGGER.debug("Number of patients= " + dbObject.get("sum") );
         }
         
@@ -107,8 +109,12 @@ public class PocDemoAggregationPipeline {
         // release resources
         mongoClient.close();
     }
-
-    public static void main(String[] args) throws Exception {
+    
+    /**
+     * @param args string command line arguments
+     * @throws Exception "Starting Aggregation Framework API usage demo Application."
+     */
+    public static void main(final String[] args) throws Exception {
         PocDemoAggregationPipeline pocDemo = new PocDemoAggregationPipeline();
         pocDemo.query();
     }
