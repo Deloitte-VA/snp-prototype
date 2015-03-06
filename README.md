@@ -7,4 +7,4 @@ For more details and the documentation for this program, please visit the wiki a
 
 Travis-CI Build Status
 ---------------------
-![Build Status](https://travis-ci.org/jlgrock/snp-prototype.svg?branch=master)
+![Build Status](https://travis-ci.org/Deloitte-VA/snp-prototype.svg?branch=master)
