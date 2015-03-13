@@ -7,8 +7,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
-import org.springframework.util.StringUtils;
-
 /**
 * Sort option for queries. You have to provide at least a list of properties to sort for that must not include
 * {@literal null} or empty strings. The direction defaults to {@link Sort#DEFAULT_DIRECTION}.
@@ -16,7 +14,7 @@ import org.springframework.util.StringUtils;
 * @author Oliver Gierke
 * @author Thomas Darimont
 */
-public class Sort implements Iterable<org.springframework.data.domain.Sort.Order>, Serializable {
+public class Sort implements Iterable<Order>, Serializable {
 
 	private static final long serialVersionUID = 5737186511678863905L;
 	public static final Direction DEFAULT_DIRECTION = Direction.ASC;
