@@ -21,7 +21,7 @@ public class EncounterController {
     private static final Logger LOGGER = LoggerFactory.getLogger(EncounterController.class);
    
     
-    @Autowired
+    @Inject
     private EncounterRepository repository;
     /**
      * 

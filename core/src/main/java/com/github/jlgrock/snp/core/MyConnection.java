@@ -1,6 +1,6 @@
 package com.github.jlgrock.snp.core;
 
-import com.github.jlgrock.snp.core.connection.MongoDbFactory;
+import com.github.jlgrock.snp.apis.connection.MongoDbFactory;
 import com.mongodb.DB;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,12 +19,11 @@ public class MyConnection {
     private final MongoDbFactory mongo;
 
     /**
-     * 
- 	 * @param pmongo is private variable of type MongoDbFactory
+ 	 * @param mongoIn is private variable of type MongoDbFactory
  	 */
     @Inject
-    public MyConnection(final MongoDbFactory pmongo) {
-        this.mongo = pmongo;
+    public MyConnection(final MongoDbFactory mongoIn) {
+        this.mongo = mongoIn;
     }
 
     /**

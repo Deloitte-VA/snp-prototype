@@ -1,4 +1,4 @@
-package com.github.jlgrock.snp.core.exceptions;
+package com.github.jlgrock.snp.apis.exceptions;
 
 /**
  *

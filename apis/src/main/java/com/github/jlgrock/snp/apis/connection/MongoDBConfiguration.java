@@ -1,6 +1,6 @@
-package com.github.jlgrock.snp.core.connection;
+package com.github.jlgrock.snp.apis.connection;
 
-import com.github.jlgrock.snp.core.connection.security.UserCredentials;
+import com.github.jlgrock.snp.apis.connection.security.UserCredentials;
 import org.jvnet.hk2.annotations.Contract;
 
 /**

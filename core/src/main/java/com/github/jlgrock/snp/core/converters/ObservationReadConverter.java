@@ -4,9 +4,9 @@ import com.github.jlgrock.snp.core.data.ObservationTags;
 import com.github.jlgrock.snp.core.domain.Observation;
 import com.github.jlgrock.snp.core.domain.primitives.SimplePrimitive;
 import com.mongodb.DBObject;
-import org.joda.time.DateTime;
 
 import javax.inject.Named;
+import java.time.Instant;
 
 /**
  * A Conversion class to convert between a MongoDB DBObject to an Observation object.
@@ -26,7 +26,7 @@ public class ObservationReadConverter implements ReadConverter<DBObject, Observa
                 source.get(ObservationTags.VALUE_TAG)));
         observation.setApplies((String) source.get(ObservationTags.APPLIES_TAG));
         observation.setSubject((String) source.get(ObservationTags.SUBJECT_TAG));
-        observation.setIssued(new DateTime(((Number) source.get(ObservationTags.ISSUED_TAG)).longValue()));
+        observation.setIssued(Instant.ofEpochMilli(((Number) source.get(ObservationTags.ISSUED_TAG)).longValue()));
         return observation;
     }
 }

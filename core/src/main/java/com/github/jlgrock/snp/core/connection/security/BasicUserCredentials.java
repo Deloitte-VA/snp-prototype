@@ -1,5 +1,6 @@
 package com.github.jlgrock.snp.core.connection.security;
 
+import com.github.jlgrock.snp.apis.connection.security.UserCredentials;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -1,9 +1,13 @@
 package com.github.jlgrock.snp.core.domain;
 
+import com.google.common.base.MoreObjects;
+import com.google.common.base.Objects;
 import org.joda.time.DateTime;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.format.annotation.DateTimeFormat;
+
+import java.time.LocalDate;
 
 /**
  * Created by jlgrock on 1/11/15.
@@ -20,53 +24,45 @@ public class Patient {
     private String lastName;
 
     @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private DateTime dateOfBirth;
+    private LocalDate dateOfBirth;
 
     private Gender gender;
 
     private Race race;
 
     @Override
-    public boolean equals(final Object o) {
+    public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Patient patient = (Patient) o;
+        Patient that = (Patient) o;
 
-        if (dateOfBirth != null ? !dateOfBirth.equals(patient.dateOfBirth) : patient.dateOfBirth != null) return false;
-        if (firstName != null ? !firstName.equals(patient.firstName) : patient.firstName != null) return false;
-        if (gender != patient.gender) return false;
-        if (id != null ? !id.equals(patient.id) : patient.id != null) return false;
-        if (lastName != null ? !lastName.equals(patient.lastName) : patient.lastName != null) return false;
-        if (middleName != null ? !middleName.equals(patient.middleName) : patient.middleName != null) return false;
-        if (race != patient.race) return false;
-
-        return true;
+        return Objects.equal(this.id, that.id) &&
+                Objects.equal(this.firstName, that.firstName) &&
+                Objects.equal(this.middleName, that.middleName) &&
+                Objects.equal(this.lastName, that.lastName) &&
+                Objects.equal(this.dateOfBirth, that.dateOfBirth) &&
+                Objects.equal(this.gender, that.gender) &&
+                Objects.equal(this.race, that.race);
     }
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
-        result = 31 * result + (middleName != null ? middleName.hashCode() : 0);
-        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
-        result = 31 * result + (dateOfBirth != null ? dateOfBirth.hashCode() : 0);
-        result = 31 * result + (gender != null ? gender.hashCode() : 0);
-        result = 31 * result + (race != null ? race.hashCode() : 0);
-        return result;
+        return Objects.hashCode(id, firstName, middleName, lastName, dateOfBirth, gender,
+                race);
     }
 
     @Override
     public String toString() {
-        return "Patient{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", middleName='" + middleName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", dateOfBirth=" + dateOfBirth +
-                ", gender=" + gender.toString() +
-                ", race=" + race +
-                '}';
+        return MoreObjects.toStringHelper(this)
+                .add("id", id)
+                .add("firstName", firstName)
+                .add("middleName", middleName)
+                .add("lastName", lastName)
+                .add("dateOfBirth", dateOfBirth)
+                .add("gender", gender)
+                .add("race", race)
+                .toString();
     }
 
     public Long getId() {
@@ -101,11 +97,11 @@ public class Patient {
         this.lastName = pLastName;
     }
 
-    public DateTime getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(final DateTime pDateOfBirth) {
+    public void setDateOfBirth(final LocalDate pDateOfBirth) {
         this.dateOfBirth = pDateOfBirth;
     }
 

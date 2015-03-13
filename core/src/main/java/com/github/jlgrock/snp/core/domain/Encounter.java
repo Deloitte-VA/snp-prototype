@@ -1,11 +1,14 @@
 package com.github.jlgrock.snp.core.domain;
 
+import com.google.common.base.MoreObjects;
+import com.google.common.base.Objects;
 import org.joda.time.DateTime;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -21,51 +24,50 @@ public class Encounter {
     private Long patientId;
 
     @Override
-    public boolean equals(final Object o) {
+    public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Encounter encounter = (Encounter) o;
+        Encounter that = (Encounter) o;
 
-        if (date != null ? !date.equals(encounter.date) : encounter.date != null) return false;
-        if (id != null ? !id.equals(encounter.id) : encounter.id != null) return false;
-        if (reasonForVisit != null ? !reasonForVisit.equals(encounter.reasonForVisit) : encounter.reasonForVisit != null)
-            return false;
-
-        return true;
+        return Objects.equal(this.id, that.id) &&
+                Objects.equal(this.patientId, that.patientId) &&
+                Objects.equal(this.date, that.date) &&
+                Objects.equal(this.type, that.type) &&
+                Objects.equal(this.reasonForVisit, that.reasonForVisit) &&
+                Objects.equal(this.observations, that.observations);
     }
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (date != null ? date.hashCode() : 0);
-        result = 31 * result + (reasonForVisit != null ? reasonForVisit.hashCode() : 0);
-        return result;
+        return Objects.hashCode(id, patientId, date, type, reasonForVisit, observations);
     }
 
     @Override
     public String toString() {
-        return "Encounter{" +
-                "id=" + id +
-
-                ", date=" + date +
-                ", reasonForVisit='" + reasonForVisit + '\'' +
-                '}';
+        return MoreObjects.toStringHelper(this)
+                .add("id", id)
+                .add("patientId", patientId)
+                .add("date", date)
+                .add("type", type)
+                .add("reasonForVisit", reasonForVisit)
+                .add("observations", observations)
+                .toString();
     }
 
     @NotNull
-    private DateTime date;
+    private LocalDate date;
 
     private Integer type;
 
     @Field(value = "reason_for_visit")
     private String reasonForVisit;
 
-    public DateTime getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(final DateTime pDate) {
+    public void setDate(final LocalDate pDate) {
         this.date = pDate;
     }
 

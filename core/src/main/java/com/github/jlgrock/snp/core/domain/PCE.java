@@ -1,5 +1,7 @@
 package com.github.jlgrock.snp.core.domain;
 
+import com.google.common.base.MoreObjects;
+import com.google.common.base.Objects;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -14,31 +16,27 @@ public class PCE {
     private String desc;
 
     @Override
-    public boolean equals(final Object o) {
+    public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        PCE pce = (PCE) o;
+        PCE that = (PCE) o;
 
-        if (desc != null ? !desc.equals(pce.desc) : pce.desc != null) return false;
-        if (id != null ? !id.equals(pce.id) : pce.id != null) return false;
-
-        return true;
+        return Objects.equal(this.id, that.id) &&
+                Objects.equal(this.desc, that.desc);
     }
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (desc != null ? desc.hashCode() : 0);
-        return result;
+        return Objects.hashCode(id, desc);
     }
 
     @Override
     public String toString() {
-        return "PCE{" +
-                "id=" + id +
-                ", desc='" + desc + '\'' +
-                '}';
+        return MoreObjects.toStringHelper(this)
+                .add("id", id)
+                .add("desc", desc)
+                .toString();
     }
 
     public Long getId() {

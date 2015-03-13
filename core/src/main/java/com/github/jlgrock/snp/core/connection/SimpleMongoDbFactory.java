@@ -1,8 +1,10 @@
 package com.github.jlgrock.snp.core.connection;
 
-import com.github.jlgrock.snp.core.connection.security.UserCredentials;
-import com.github.jlgrock.snp.core.connection.synchronization.TransactionSynchronizationManager;
-import com.github.jlgrock.snp.core.exceptions.DataAccessException;
+import com.github.jlgrock.snp.apis.connection.MongoDBConfiguration;
+import com.github.jlgrock.snp.apis.connection.MongoDbFactory;
+import com.github.jlgrock.snp.apis.connection.security.UserCredentials;
+import com.github.jlgrock.snp.apis.connection.synchronization.TransactionSynchronizationManager;
+import com.github.jlgrock.snp.apis.exceptions.DataAccessException;
 import com.mongodb.DB;
 import com.mongodb.MongoClient;
 import com.mongodb.WriteConcern;

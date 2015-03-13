@@ -1,12 +1,14 @@
-package com.github.jlgrock.snp.core.connection;
+package com.github.jlgrock.snp.apis.connection;
 
-import com.github.jlgrock.snp.core.exceptions.DataAccessException;
+import com.github.jlgrock.snp.apis.exceptions.DataAccessException;
 import com.mongodb.DB;
 import com.mongodb.WriteConcern;
+import org.jvnet.hk2.annotations.Contract;
 
 /**
  *
  */
+@Contract
 public interface MongoDbFactory {
 
     public void destroy();
