@@ -4,14 +4,14 @@ import com.github.jlgrock.snp.core.data.ObservationTags;
 import com.github.jlgrock.snp.core.domain.Observation;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
-import org.springframework.core.convert.converter.Converter;
-import org.springframework.stereotype.Component;
+
+import javax.inject.Named;
 
 /**
  * A Conversion class to convert between an Observation objects and a MongoDB DBObject.
  */
-@Component
-public class ObservationWriteConverter  implements Converter<Observation, DBObject> {
+@Named
+public class ObservationWriteConverter  implements WriteConverter<Observation, DBObject> {
 
     @Override
     public DBObject convert(final Observation source) {

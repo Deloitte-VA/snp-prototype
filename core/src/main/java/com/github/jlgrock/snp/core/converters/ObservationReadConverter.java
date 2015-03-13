@@ -5,14 +5,14 @@ import com.github.jlgrock.snp.core.domain.Observation;
 import com.github.jlgrock.snp.core.domain.primitives.SimplePrimitive;
 import com.mongodb.DBObject;
 import org.joda.time.DateTime;
-import org.springframework.core.convert.converter.Converter;
-import org.springframework.data.convert.ReadingConverter;
+
+import javax.inject.Named;
 
 /**
  * A Conversion class to convert between a MongoDB DBObject to an Observation object.
  */
-@ReadingConverter
-public class ObservationReadConverter implements Converter<DBObject, Observation> {
+@Named
+public class ObservationReadConverter implements ReadConverter<DBObject, Observation> {
 
     @Override
     public Observation convert(final DBObject source) {

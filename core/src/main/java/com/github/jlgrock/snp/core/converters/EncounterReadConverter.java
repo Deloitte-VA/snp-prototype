@@ -5,10 +5,9 @@ import com.github.jlgrock.snp.core.domain.Encounter;
 import com.github.jlgrock.snp.core.domain.Observation;
 import com.mongodb.DBObject;
 import org.joda.time.DateTime;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.convert.converter.Converter;
-import org.springframework.data.convert.ReadingConverter;
 
+import javax.inject.Inject;
+import javax.inject.Named;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,7 +15,7 @@ import java.util.stream.Collectors;
 /**
  * A Conversion class to convert between a MongoDB DBObject to an Encounter object.
  */
-@ReadingConverter
+@Named
 public class EncounterReadConverter implements Converter<DBObject, Encounter> {
 
     private final ObservationReadConverter observationReadConverter;
@@ -24,7 +23,7 @@ public class EncounterReadConverter implements Converter<DBObject, Encounter> {
     /**
      * @param observationReadConverterIn object of type ObservationReadConverter that has values from a MongoDB object stored in an Observation object.
      */
-    @Autowired
+    @Inject
     public EncounterReadConverter(final ObservationReadConverter observationReadConverterIn) {
         observationReadConverter = observationReadConverterIn;
     }

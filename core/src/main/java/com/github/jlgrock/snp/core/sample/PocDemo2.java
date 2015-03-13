@@ -5,11 +5,16 @@ import com.github.jlgrock.snp.core.domain.Encounter;
 import com.github.jlgrock.snp.core.domain.Observation;
 import com.github.jlgrock.snp.core.domain.primitives.IntegerPrimitive;
 import com.github.jlgrock.snp.core.domain.primitives.PrimitiveType;
-import com.mongodb.*;
+import com.mongodb.BasicDBObject;
+import com.mongodb.DB;
+import com.mongodb.DBCollection;
+import com.mongodb.DBCursor;
+import com.mongodb.DBObject;
+import com.mongodb.MongoClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.inject.Inject;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -24,7 +29,7 @@ public class PocDemo2 {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PocDemo2.class);
     
-    @Autowired
+    @Inject
     EncounterReadConverter encounterReadConverter;
     /**
      * 

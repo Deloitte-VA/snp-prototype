@@ -6,10 +6,9 @@ import com.github.jlgrock.snp.core.domain.Observation;
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.convert.converter.Converter;
-import org.springframework.stereotype.Component;
 
+import javax.inject.Inject;
+import javax.inject.Named;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -17,15 +16,15 @@ import java.util.stream.Stream;
 /**
  * A Conversion class to convert between an Encounter objects and a MongoDB DBObject.
  */
-@Component
-public class EncounterWriteConverter implements Converter<Encounter, DBObject> {
+@Named
+public class EncounterWriteConverter implements WriteConverter<Encounter, DBObject> {
 
     private final ObservationWriteConverter observationWriteConverter;
     /**
      * 
      * @param observationWriteConverterIn object of type ObservationWriteConverter that has values from an Observation object stored in a MongoDB object.
      */
-    @Autowired
+    @Inject
     public EncounterWriteConverter(final ObservationWriteConverter observationWriteConverterIn) {
         observationWriteConverter = observationWriteConverterIn;
     }

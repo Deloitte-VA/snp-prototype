@@ -1,26 +1,28 @@
 package com.github.jlgrock.snp.core;
 
+import com.github.jlgrock.snp.core.connection.MongoDbFactory;
+import com.mongodb.DB;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.MongoDbFactory;
-import com.mongodb.DB;
-import org.springframework.stereotype.Component;
+
+import javax.inject.Inject;
+import javax.inject.Named;
 
 /**
  * The default connection for MongoDB
  */
-@Component
+@Named
 public class MyConnection {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MyConnection.class);
 
     private final MongoDbFactory mongo;
+
     /**
      * 
  	 * @param pmongo is private variable of type MongoDbFactory
  	 */
-    @Autowired
+    @Inject
     public MyConnection(final MongoDbFactory pmongo) {
         this.mongo = pmongo;
     }

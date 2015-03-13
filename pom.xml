@@ -52,12 +52,11 @@
         <slf4j.version>1.7.9</slf4j.version>
         <log4j.version>1.2.17</log4j.version>
         <mongo.driver.version>2.13.0-rc1</mongo.driver.version>
-        <spring.core.version>4.1.4.RELEASE</spring.core.version>
-        <spring.data-mongo.version>1.2.0.RELEASE</spring.data-mongo.version>
-        <spring.boot.version>1.2.0.RELEASE</spring.boot.version>
         <joda.time.version>2.7</joda.time.version>
         <junit.version>4.12</junit.version>
         <mockito.version>1.10.8</mockito.version>
+        <hk2.version>2.4.0-b10</hk2.version>
+        <guava.version>18.0</guava.version>
 
         <findbugs-maven-plugin.version>3.0.0</findbugs-maven-plugin.version>
         <pmd-maven-plugin.version>3.3</pmd-maven-plugin.version>
@@ -90,41 +89,10 @@
                 <version>${mongo.driver.version}</version>
             </dependency>
 
-            <!-- Spring Framework libraries -->
             <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-context</artifactId>
-                <version>${spring.core.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter</artifactId>
-                <version>${spring.boot.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>org.springframework.boot</groupId>
-                        <artifactId>spring-boot-starter-logging</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-log4j</artifactId>
-                <version>${spring.boot.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-web</artifactId>
-                <version>${spring.boot.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-data-mongodb</artifactId>
-                <version>${spring.boot.version}</version>
+                <groupId>org.glassfish.hk2</groupId>
+                <artifactId>hk2</artifactId>
+                <version>${hk2.version}</version>
             </dependency>
 
             <dependency>
@@ -132,6 +100,19 @@
                 <artifactId>joda-time</artifactId>
                 <version>${joda.time.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+            </dependency>
+
 
             <!-- Testing dependencies -->
             <dependency>
@@ -167,8 +148,8 @@
 
     <modules>
         <module>core</module>
-        <module>web</module>
-        <module>client</module>
+        <!--<module>web</module>-->
+        <!--<module>client</module>-->
     </modules>
 
     <build>

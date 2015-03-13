@@ -6,14 +6,14 @@ import com.github.jlgrock.snp.core.domain.Patient;
 import com.github.jlgrock.snp.core.domain.Race;
 import com.mongodb.DBObject;
 import org.joda.time.DateTime;
-import org.springframework.core.convert.converter.Converter;
-import org.springframework.data.convert.ReadingConverter;
+
+import javax.inject.Named;
 
 /**
  * A Conversion class to convert between a MongoDB DBObject to an Patient object.
  */
-@ReadingConverter
-public class PatientReadConverter implements Converter<DBObject, Patient> {
+@Named
+public class PatientReadConverter implements ReadConverter<DBObject, Patient> {
 
     @Override
     public Patient convert(final DBObject source) {
