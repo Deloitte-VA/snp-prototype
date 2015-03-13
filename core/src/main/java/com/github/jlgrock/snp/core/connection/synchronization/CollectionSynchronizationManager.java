@@ -11,7 +11,8 @@ public class CollectionSynchronizationManager implements TransactionSynchronizat
      * @return true if the collection is locked, false otherwise
      */
     public boolean isSynchronizedWithTransaction() {
-
+        //TODO
+        return false;
     }
 
     /**

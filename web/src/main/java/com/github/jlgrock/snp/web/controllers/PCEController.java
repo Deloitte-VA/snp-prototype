@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class PCEController {
     private static final Logger LOGGER = LoggerFactory.getLogger(PCEController.class);
 
-    @Autowired
+    @@Inject
     private PCERepository repository;
 
     /**

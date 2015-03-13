@@ -2,19 +2,16 @@ package com.github.jlgrock.snp.core.domain;
 
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
-import org.joda.time.DateTime;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
 
 /**
- * Created by jlgrock on 1/11/15.
+ * The patient and all of the immediate metadata about the patient.
  */
-@Document(collection = "patients")
 public class Patient {
-    @Id
+    @NotNull
     private Long id;
 
     private String firstName;
@@ -23,7 +20,7 @@ public class Patient {
 
     private String lastName;
 
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @Pattern(regexp="(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)\\d\\d")
     private LocalDate dateOfBirth;
 
     private Gender gender;
@@ -48,7 +45,13 @@ public class Patient {
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(id, firstName, middleName, lastName, dateOfBirth, gender,
+        return Objects.hashCode(
+                id,
+                firstName,
+                middleName,
+                lastName,
+                dateOfBirth,
+                gender,
                 race);
     }
 

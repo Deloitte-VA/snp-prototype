@@ -1,10 +1,10 @@
 package com.github.jlgrock.snp.core.domain.primitives;
 
 import org.bson.types.Binary;
-import org.joda.time.DateTime;
-import org.joda.time.LocalDate;
 
 import java.math.BigDecimal;
+import java.time.Instant;
+import java.time.LocalDate;
 
 /**
  * The interface that defines all of the primitive classes allowable by the SNP server.
@@ -81,13 +81,13 @@ public interface SimplePrimitive {
                 if (!(value instanceof Long)) {
                     throw new IllegalArgumentException(SimplePrimitive.makeErrorMessage(PrimitiveType.LONG, "Long", value));
                 }
-                sp = new DatePrimitive(new LocalDate((Long) value));
+                sp = new DatePrimitive(LocalDate.ofEpochDay((Long) value));
                 break;
             case DATETIME:
                 if (!(value instanceof Long)) {
                     throw new IllegalArgumentException(SimplePrimitive.makeErrorMessage(PrimitiveType.LONG, "Long", value));
                 }
-                sp = new DateTimePrimitive(new DateTime((Long) value));
+                sp = new DateTimePrimitive(Instant.ofEpochMilli((Long) value));
                 break;
             case DECIMAL:
                 if (!(value instanceof BigDecimal)) {

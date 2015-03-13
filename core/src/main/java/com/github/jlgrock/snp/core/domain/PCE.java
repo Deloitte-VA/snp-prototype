@@ -2,15 +2,14 @@ package com.github.jlgrock.snp.core.domain;
 
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+
+import javax.validation.constraints.NotNull;
 
 /**
- * Created by jlgrock on 1/11/15.
+ * The post-coordinated expression and the unique identifier, for reference purposes.
  */
-@Document(collection = "pces")
 public class PCE {
-    @Id
+    @NotNull
     private Long id;
 
     private String desc;
