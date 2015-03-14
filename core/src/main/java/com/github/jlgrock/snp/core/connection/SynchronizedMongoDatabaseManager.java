@@ -1,5 +1,6 @@
 package com.github.jlgrock.snp.core.connection;
 
+import com.github.jlgrock.snp.apis.connection.MongoDatabaseManager;
 import com.mongodb.DB;
 import org.jvnet.hk2.annotations.Service;
 
@@ -14,12 +15,10 @@ import java.util.concurrent.ConcurrentHashMap;
 @Service
 public class SynchronizedMongoDatabaseManager implements MongoDatabaseManager {
 
-    boolean synchronizedWithTransaction = true;
-
     /**
-     * Created to allow for locking.
+     * whether or not the manager is synchronized
      */
-    private final Object lock = new Object();
+    private volatile boolean synchronizedWithTransaction = false;
 
     /**
      * The concurrent hashmap that will allow you to keep track of the accessed databases, by name.
@@ -65,9 +64,7 @@ public class SynchronizedMongoDatabaseManager implements MongoDatabaseManager {
      *
      * @param value the value to set it to
      */
-    public void setSynchronizedWithTransaction(boolean value) {
-        synchronized (lock) {
-            synchronizedWithTransaction = value;
-        }
+    public void setSynchronizedWithTransaction(final boolean value) {
+        synchronizedWithTransaction = value;
     }
 }

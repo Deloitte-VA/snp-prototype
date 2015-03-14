@@ -1,8 +1,11 @@
 package com.github.jlgrock.snp.apis.data;
 
+import org.jvnet.hk2.annotations.Contract;
+
 /**
  * The methods required if something can return pages of information.
  */
+@Contract
 public interface Pageable {
     /**
      * @return the page to be returned.

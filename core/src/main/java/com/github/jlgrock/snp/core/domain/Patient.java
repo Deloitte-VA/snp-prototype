@@ -28,19 +28,19 @@ public class Patient {
     private Race race;
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
         Patient that = (Patient) o;
 
-        return Objects.equal(this.id, that.id) &&
-                Objects.equal(this.firstName, that.firstName) &&
-                Objects.equal(this.middleName, that.middleName) &&
-                Objects.equal(this.lastName, that.lastName) &&
-                Objects.equal(this.dateOfBirth, that.dateOfBirth) &&
-                Objects.equal(this.gender, that.gender) &&
-                Objects.equal(this.race, that.race);
+        return Objects.equal(id, that.id) &&
+                Objects.equal(firstName, that.firstName) &&
+                Objects.equal(middleName, that.middleName) &&
+                Objects.equal(lastName, that.lastName) &&
+                Objects.equal(dateOfBirth, that.dateOfBirth) &&
+                Objects.equal(gender, that.gender) &&
+                Objects.equal(race, that.race);
     }
 
     @Override
@@ -73,7 +73,7 @@ public class Patient {
     }
 
     public void setId(final Long pId) {
-        this.id = pId;
+        id = pId;
     }
 
     public String getFirstName() {
@@ -81,7 +81,7 @@ public class Patient {
     }
 
     public void setFirstName(final String pFirstName) {
-        this.firstName = pFirstName;
+        firstName = pFirstName;
     }
 
     public String getMiddleName() {
@@ -89,7 +89,7 @@ public class Patient {
     }
 
     public void setMiddleName(final String pMiddleName) {
-        this.middleName = pMiddleName;
+        middleName = pMiddleName;
     }
 
     public String getLastName() {
@@ -97,7 +97,7 @@ public class Patient {
     }
 
     public void setLastName(final String pLastName) {
-        this.lastName = pLastName;
+        lastName = pLastName;
     }
 
     public LocalDate getDateOfBirth() {
@@ -105,7 +105,7 @@ public class Patient {
     }
 
     public void setDateOfBirth(final LocalDate pDateOfBirth) {
-        this.dateOfBirth = pDateOfBirth;
+        dateOfBirth = pDateOfBirth;
     }
 
     public Gender getGender() {
@@ -113,7 +113,7 @@ public class Patient {
     }
 
     public void setGender(final Gender pGender) {
-        this.gender = pGender;
+        gender = pGender;
     }
 
     public Race getRace() {
@@ -121,7 +121,7 @@ public class Patient {
     }
 
     public void setRace(final Race pRace) {
-        this.race = pRace;
+        race = pRace;
     }
 }
 

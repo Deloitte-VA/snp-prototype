@@ -2,23 +2,21 @@ package com.github.jlgrock.snp.apis.data;
 
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
+import com.google.common.base.Preconditions;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
 /**
- * Sort option for queries. You have to provide at least a list of properties to sort for that must not include
- * {@literal null} or empty strings. The direction defaults to {@link Sort#DEFAULT_DIRECTION}.
- *
- * @author Oliver Gierke
- * @author Thomas Darimont
+ * Sort option for queries.
  */
-public class Sort implements Iterable<Sort.Order>, Serializable {
+public class Sort implements Iterable<Sort.Order> {
 
-    private static final long serialVersionUID = 5737186511678863905L;
+    /**
+     * The default direction that will be set if nothing else is provided.
+     */
     public static final Direction DEFAULT_DIRECTION = Direction.ASC;
 
     private final List<Order> orders;
@@ -26,78 +24,73 @@ public class Sort implements Iterable<Sort.Order>, Serializable {
     /**
      * Creates a new {@link Sort} instance using the given {@link Order}s.
      *
-     * @param orders must not be {@literal null}.
+     * @param ordersIn must not be {@literal null}.
      */
-    public Sort(Order... orders) {
-        this(Arrays.asList(orders));
+    public Sort(final Order... ordersIn) {
+        this(Arrays.asList(ordersIn));
     }
 
     /**
      * Creates a new {@link Sort} instance.
      *
-     * @param orders must not be {@literal null} or contain {@literal null}.
+     * @param ordersIn must not be {@literal null} or contain {@literal null}.
      */
-    public Sort(List<Order> orders) {
-
-        if (null == orders || orders.isEmpty()) {
-            throw new IllegalArgumentException("You have to provide at least one sort property to sort by!");
-        }
-
-        this.orders = orders;
+    public Sort(final List<Order> ordersIn) {
+        Preconditions.checkNotNull(ordersIn, "You have to provide at least one sort property to sort by!");
+        Preconditions.checkArgument(ordersIn.isEmpty(), "You have to provide at least one sort property to sort by!");
+        orders = ordersIn;
     }
 
     /**
-     * Creates a new {@link Sort} instance. Order defaults to {@value Direction#ASC}.
+     * Creates a new {@link Sort} instance. Order defaults to ascending.
      *
      * @param properties must not be {@literal null} or contain {@literal null} or empty strings
      */
-    public Sort(String... properties) {
+    public Sort(final String... properties) {
         this(DEFAULT_DIRECTION, properties);
     }
 
     /**
      * Creates a new {@link Sort} instance.
      *
-     * @param direction  defaults to {@linke Sort#DEFAULT_DIRECTION} (for {@literal null} cases, too)
+     * @param direction  defaults to {@link Sort#DEFAULT_DIRECTION} (for {@literal null} cases, too)
      * @param properties must not be {@literal null}, empty or contain {@literal null} or empty strings.
      */
-    public Sort(Direction direction, String... properties) {
+    public Sort(final Direction direction, final String... properties) {
         this(direction, properties == null ? new ArrayList<String>() : Arrays.asList(properties));
     }
 
     /**
      * Creates a new {@link Sort} instance.
      *
-     * @param direction  defaults to {@linke Sort#DEFAULT_DIRECTION} (for {@literal null} cases, too)
+     * @param direction  defaults to {@link Sort#DEFAULT_DIRECTION} (for {@literal null} cases, too)
      * @param properties must not be {@literal null} or contain {@literal null} or empty strings.
      */
-    public Sort(Direction direction, List<String> properties) {
+    public Sort(final Direction direction, final List<String> properties) {
 
         if (properties == null || properties.isEmpty()) {
             throw new IllegalArgumentException("You have to provide at least one property to sort by!");
         }
 
-        this.orders = new ArrayList<Order>(properties.size());
+        orders = new ArrayList<>(properties.size());
 
         for (String property : properties) {
-            this.orders.add(new Order(direction, property));
+            orders.add(new Order(direction, property));
         }
     }
 
     /**
-     * Returns a new {@link Sort} consisting of the {@link Order}s of the current {@link Sort} combined with the given
-     * ones.
-     *
      * @param sort can be {@literal null}.
-     * @return
+     * @return a new {@link Sort} consisting of the {@link Order}s of the current {@link Sort} combined with the given
+     * ones.
      */
-    public Sort and(Sort sort) {
+    public Sort and(final Sort sort) {
 
         if (sort == null) {
             return this;
         }
 
-        ArrayList<Order> these = new ArrayList<Order>(this.orders);
+        ArrayList<Order> these = new ArrayList<>(this.orders);
 
         for (Order order : sort) {
             these.add(order);
@@ -109,10 +102,10 @@ public class Sort implements Iterable<Sort.Order>, Serializable {
     /**
      * Returns the order registered for the given property.
      *
-     * @param property
-     * @return
+     * @param property the property to search for
+     * @return Returns the order registered for the given property, or null if it does not exist.
      */
-    public Order getOrderFor(String property) {
+    public Order getOrderFor(final String property) {
 
         for (Order order : this) {
             if (order.getProperty().equals(property)) {
@@ -123,44 +116,24 @@ public class Sort implements Iterable<Sort.Order>, Serializable {
         return null;
     }
 
-    /*
-     * (non-Javadoc)
-     * @see java.lang.Iterable#iterator()
-     */
-    public Iterator<Order> iterator() {
-        return this.orders.iterator();
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see java.lang.Object#equals(java.lang.Object)
-     */
     @Override
-    public boolean equals(Object obj) {
-
-        if (this == obj) {
-            return true;
-        }
-
-        if (!(obj instanceof Sort)) {
-            return false;
-        }
-
-        Sort that = (Sort) obj;
-
-        return this.orders.equals(that.orders);
+    public Iterator<Order> iterator() {
+        return orders.iterator();
     }
 
-    /*
-     * (non-Javadoc)
-     * @see java.lang.Object#hashCode()
-     */
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Sort that = (Sort) o;
+
+        return Objects.equal(orders, that.orders);
+    }
+
     @Override
     public int hashCode() {
-
-        int result = 17;
-        result = 31 * result + orders.hashCode();
-        return result;
+        return Objects.hashCode(DEFAULT_DIRECTION, orders);
     }
 
     @Override
@@ -204,13 +177,9 @@ public class Sort implements Iterable<Sort.Order>, Serializable {
     /**
      * PropertyPath implements the pairing of an {@link Direction} and a property. It is used to provide input for
      * {@link Sort}
-     *
-     * @author Oliver Gierke
-     * @author Kevin Raymond
      */
-    public static class Order implements Serializable {
+    public static class Order {
 
-        private static final long serialVersionUID = 1522511010900108987L;
         private static final boolean DEFAULT_IGNORE_CASE = false;
 
         private final Direction direction;
@@ -222,168 +191,134 @@ public class Sort implements Iterable<Sort.Order>, Serializable {
          * Creates a new {@link Order} instance. if order is {@literal null} then order defaults to
          * {@link Sort#DEFAULT_DIRECTION}
          *
-         * @param direction can be {@literal null}, will default to {@link Sort#DEFAULT_DIRECTION}
-         * @param property  must not be {@literal null} or empty.
+         * @param directionIn can be {@literal null}, will default to {@link Sort#DEFAULT_DIRECTION}
+         * @param propertyIn must not be {@literal null} or empty.
          */
-        public Order(Direction direction, String property) {
-            this(direction, property, DEFAULT_IGNORE_CASE, null);
+        public Order(final Direction directionIn, final String propertyIn) {
+            this(directionIn, propertyIn, DEFAULT_IGNORE_CASE, null);
         }
 
         /**
          * Creates a new {@link Order} instance. if order is {@literal null} then order defaults to
          * {@link Sort#DEFAULT_DIRECTION}
          *
-         * @param direction    can be {@literal null}, will default to {@link Sort#DEFAULT_DIRECTION}
-         * @param property     must not be {@literal null} or empty.
-         * @param nullHandling can be {@literal null}, will default to {@link NullHandling#NATIVE}.
+         * @param directionIn can be {@literal null}, will default to {@link Sort#DEFAULT_DIRECTION}
+         * @param propertyIn must not be {@literal null} or empty.
+         * @param nullHandlingHintIn can be {@literal null}, will default to {@link NullHandling#NATIVE}.
          */
-        public Order(Direction direction, String property, NullHandling nullHandlingHint) {
-            this(direction, property, DEFAULT_IGNORE_CASE, nullHandlingHint);
+        public Order(final Direction directionIn, final String propertyIn, final NullHandling nullHandlingHintIn) {
+            this(directionIn, propertyIn, DEFAULT_IGNORE_CASE, nullHandlingHintIn);
         }
 
         /**
          * Creates a new {@link Order} instance. Takes a single property. Direction defaults to
          * {@link Sort#DEFAULT_DIRECTION}.
          *
-         * @param property must not be {@literal null} or empty.
+         * @param propertyIn must not be {@literal null} or empty.
          */
-        public Order(String property) {
-            this(DEFAULT_DIRECTION, property);
+        public Order(final String propertyIn) {
+            this(DEFAULT_DIRECTION, propertyIn);
         }
 
         /**
          * Creates a new {@link Order} instance. if order is {@literal null} then order defaults to
          * {@link Sort#DEFAULT_DIRECTION}
          *
-         * @param direction    can be {@literal null}, will default to {@link Sort#DEFAULT_DIRECTION}
-         * @param property     must not be {@literal null} or empty.
-         * @param ignoreCase   true if sorting should be case insensitive. false if sorting should be case sensitive.
-         * @param nullHandling can be {@literal null}, will default to {@link NullHandling#NATIVE}.
-         * @since 1.7
+         * @param directionIn can be {@literal null}, will default to {@link Sort#DEFAULT_DIRECTION}
+         * @param propertyIn must not be {@literal null} or empty.
+         * @param ignoreCaseIn true if sorting should be case insensitive. false if sorting should be case sensitive.
+         * @param nullHandlingIn can be {@literal null}, will default to {@link NullHandling#NATIVE}.
          */
-        private Order(Direction direction, String property, boolean ignoreCase, NullHandling nullHandling) {
-
-            if (!StringUtils.hasText(property)) {
-                throw new IllegalArgumentException("Property must not null or empty!");
-            }
-
-            this.direction = direction == null ? DEFAULT_DIRECTION : direction;
-            this.property = property;
-            this.ignoreCase = ignoreCase;
-            this.nullHandling = nullHandling == null ? NullHandling.NATIVE : nullHandling;
+        private Order(final Direction directionIn, final String propertyIn, final boolean ignoreCaseIn, final NullHandling nullHandlingIn) {
+            Preconditions.checkNotNull(propertyIn, "Property must not null or empty!");
+            direction = directionIn == null ? DEFAULT_DIRECTION : directionIn;
+            property = propertyIn;
+            ignoreCase = ignoreCaseIn;
+            nullHandling = nullHandlingIn == null ? NullHandling.NATIVE : nullHandlingIn;
         }
 
         /**
-         * Returns the order the property shall be sorted for.
-         *
-         * @return
+         * @return the order the property shall be sorted for.
          */
         public Direction getDirection() {
             return direction;
         }
 
         /**
-         * Returns the property to order for.
-         *
-         * @return
+         * @return the property to order for.
          */
         public String getProperty() {
             return property;
         }
 
         /**
-         * Returns whether sorting for this property shall be ascending.
-         *
-         * @return
+         * @return whether sorting for this property shall be ascending.
          */
         public boolean isAscending() {
-            return this.direction.equals(Direction.ASC);
+            return direction.equals(Direction.ASC);
         }
 
         /**
-         * Returns whether or not the sort will be case sensitive.
-         *
-         * @return
+         * @return whether or not the sort will be case sensitive.
          */
         public boolean isIgnoreCase() {
             return ignoreCase;
         }
 
         /**
-         * Returns a new {@link Order} with the given {@link Order}.
-         *
-         * @param order
-         * @return
+         * @param order the given direction for the order
+         * @return a new {@link Order} with the given {@link Order}.
          */
-        public Order with(Direction order) {
-            return new Order(order, this.property, nullHandling);
+        public Order with(final Direction order) {
+            return new Order(order, property, nullHandling);
         }
 
         /**
-         * Returns a new {@link Sort} instance for the given properties.
-         *
-         * @param properties
-         * @return
+         * @param propertiesIn the properties to sort by
+         * @return a new {@link Sort} instance for the given properties.
          */
-        public Sort withProperties(String... properties) {
-            return new Sort(this.direction, properties);
+        public Sort withProperties(final String... propertiesIn) {
+            return new Sort(direction, propertiesIn);
         }
 
         /**
-         * Returns a new {@link Order} with case insensitive sorting enabled.
-         *
-         * @return
+         * @return a new {@link Order} with case insensitive sorting enabled.
          */
         public Order ignoreCase() {
             return new Order(direction, property, true, nullHandling);
         }
 
         /**
-         * Returns a {@link Order} with the given {@link NullHandling}.
-         *
-         * @param nullHandling can be {@literal null}.
-         * @return
-         * @since 1.8
+         * @param nullHandlingIn can be {@literal null}.
+         * @return a {@link Order} with the given {@link NullHandling}.
          */
-        public Order with(NullHandling nullHandling) {
-            return new Order(direction, this.property, ignoreCase, nullHandling);
+        public Order with(final NullHandling nullHandlingIn) {
+            return new Order(direction, property, ignoreCase, nullHandlingIn);
         }
 
         /**
-         * Returns a {@link Order} with {@link NullHandling#NULLS_FIRST} as null handling hint.
-         *
-         * @return
-         * @since 1.8
+         * @return a {@link Order} with {@link NullHandling#NULLS_FIRST} as null handling hint.
          */
         public Order nullsFirst() {
             return with(NullHandling.NULLS_FIRST);
         }
 
         /**
-         * Returns a {@link Order} with {@link NullHandling#NULLS_LAST} as null handling hint.
-         *
-         * @return
-         * @since 1.7
+         * @return a {@link Order} with {@link NullHandling#NULLS_LAST} as null handling hint.
          */
         public Order nullsLast() {
             return with(NullHandling.NULLS_LAST);
         }
 
         /**
-         * Returns a {@link Order} with {@link NullHandling#NATIVE} as null handling hint.
-         *
-         * @return
-         * @since 1.7
+         * @return a {@link Order} with {@link NullHandling#NATIVE} as null handling hint.
          */
         public Order nullsNative() {
             return with(NullHandling.NATIVE);
         }
 
         /**
-         * Returns the used {@link NullHandling} hint, which can but may not be respected by the used datastore.
-         *
-         * @return
-         * @since 1.7
+         * @return the used {@link NullHandling} hint, which can but may not be respected by the used datastore.
          */
         public NullHandling getNullHandling() {
             return nullHandling;
@@ -395,16 +330,16 @@ public class Sort implements Iterable<Sort.Order>, Serializable {
         }
 
         @Override
-        public boolean equals(Object o) {
+        public boolean equals(final Object o) {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
 
             Order that = (Order) o;
 
-            return Objects.equal(this.direction, that.direction) &&
-                    Objects.equal(this.property, that.property) &&
-                    Objects.equal(this.ignoreCase, that.ignoreCase) &&
-                    Objects.equal(this.nullHandling, that.nullHandling);
+            return Objects.equal(direction, that.direction) &&
+                    Objects.equal(property, that.property) &&
+                    Objects.equal(ignoreCase, that.ignoreCase) &&
+                    Objects.equal(nullHandling, that.nullHandling);
         }
 
         @Override

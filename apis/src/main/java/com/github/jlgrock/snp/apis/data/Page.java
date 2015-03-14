@@ -1,13 +1,18 @@
 package com.github.jlgrock.snp.apis.data;
 
+import org.jvnet.hk2.annotations.Contract;
+
 import java.util.List;
 
 /**
  * The pages allowable from a document.
+ *
+ * @param <T> the type of object that this will page through
  */
+@Contract
 public interface Page<T> {
     /**
-     * @return the number of toral pages
+     * @return the number of total pages
      */
     int getTotalPages();
 

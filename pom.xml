@@ -56,6 +56,7 @@
         <mockito.version>1.10.8</mockito.version>
         <hk2.version>2.4.0-b10</hk2.version>
         <guava.version>18.0</guava.version>
+        <jersey.version>2.16</jersey.version>
 
         <findbugs-maven-plugin.version>3.0.0</findbugs-maven-plugin.version>
         <pmd-maven-plugin.version>3.3</pmd-maven-plugin.version>
@@ -71,7 +72,6 @@
     <dependencyManagement>
         <dependencies>
             <!-- internal dependencies -->
-
             <dependency>
                 <groupId>com.github.jlgrock.snp</groupId>
                 <artifactId>apis</artifactId>
@@ -133,6 +133,29 @@
                 <version>${guava.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>org.glassfish.jersey.core</groupId>
+                <artifactId>jersey-common</artifactId>
+                <version>${jersey.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.glassfish.jersey.core</groupId>
+                <artifactId>jersey-server</artifactId>
+                <version>${jersey.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.glassfish.jersey.containers</groupId>
+                <artifactId>jersey-container-servlet</artifactId>
+                <version>${jersey.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.glassfish.jersey.media</groupId>
+                <artifactId>jersey-media-json-jackson</artifactId>
+                <version>${jersey.version}</version>
+            </dependency>
 
             <!-- Testing dependencies -->
             <dependency>
@@ -178,13 +201,26 @@
             <artifactId>hk2</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+
+
+        <!-- Testing dependencies -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <modules>
         <module>apis</module>
         <module>defaultconfig</module>
         <module>core</module>
-        <!--<module>web</module>-->
+        <module>web</module>
         <!--<module>client</module>-->
     </modules>
 
@@ -203,7 +239,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.18</version>
+                <version>${maven-surefire-plugin.version}</version>
                 <configuration>
                     <includes>
                         <!-- By default only files ending in 'Test' will be included, so also include support for Spock style naming convention -->
@@ -277,6 +313,8 @@
                                 </goals>
                             </execution>
                         </executions>
+                        <!-- This needs to be upgraded, but there is a bug with using > 6.0 with this version of the
+                        plugin.  Also, we are disabling "Illegal -->
                         <dependencies>
                             <dependency>
                                 <groupId>com.puppycrawl.tools</groupId>

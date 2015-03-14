@@ -11,6 +11,6 @@ public interface TransactionSynchronizationManager {
      * Whether or not the transaction synchonization manager is active, vs disabled.
      * @return true/false
      */
-    public boolean isActive();
+    boolean isActive();
 
 }

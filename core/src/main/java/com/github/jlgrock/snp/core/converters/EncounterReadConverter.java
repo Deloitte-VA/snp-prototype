@@ -21,7 +21,8 @@ public class EncounterReadConverter implements Converter<DBObject, Encounter> {
     private final ObservationReadConverter observationReadConverter;
 
     /**
-     * @param observationReadConverterIn object of type ObservationReadConverter that has values from a MongoDB object stored in an Observation object.
+     * @param observationReadConverterIn object of type ObservationReadConverter that has values from a MongoDB
+     *                                   object stored in an Observation object.
      */
     @Inject
     public EncounterReadConverter(final ObservationReadConverter observationReadConverterIn) {
@@ -40,7 +41,8 @@ public class EncounterReadConverter implements Converter<DBObject, Encounter> {
         List<DBObject> observationsObjs = (List<DBObject>) source.get(EncounterTags.OBSERVATIONS_TAG);
         List<Observation> observations = new ArrayList<>();
         if (observationsObjs != null) {
-            observations = observationsObjs.stream().map(observationObj->observationReadConverter.convert(observationObj)).collect(Collectors.toList());
+            observations = observationsObjs.stream().map(
+                    observationObj->observationReadConverter.convert(observationObj)).collect(Collectors.toList());
         }
         encounter.setObservations(observations);
         return encounter;

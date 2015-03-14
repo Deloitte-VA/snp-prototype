@@ -8,7 +8,7 @@ import com.github.jlgrock.snp.apis.connection.synchronization.TransactionSynchro
 public class CollectionSynchronizationManager implements TransactionSynchronizationManager {
 
     /**
-     * @return true if the collection is locked, false otherwise
+     * @return {@literal true} if the collection is locked, {@literal false} otherwise
      */
     public boolean isSynchronizedWithTransaction() {
         //TODO
@@ -16,9 +16,11 @@ public class CollectionSynchronizationManager implements TransactionSynchronizat
     }
 
     /**
-     * @return set the synchronization on a particular collection
+     * Sets the synchronization per collection
+     * @param collection the collection to set the synchronization token
+     * @param setSynchronized the value to set the lock
      */
-    public void setSynchronizedWithTransaction(final String collection) {
+    public void setSynchronizedWithTransaction(final String collection, final boolean setSynchronized) {
         //TODO
     }
 

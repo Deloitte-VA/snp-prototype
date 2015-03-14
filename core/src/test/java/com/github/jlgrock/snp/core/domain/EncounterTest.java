@@ -1,10 +1,9 @@
 package com.github.jlgrock.snp.core.domain;
 
-import org.joda.time.DateTime;
-import org.joda.time.DateTimeZone;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -18,14 +17,14 @@ public class EncounterTest {
 				
 	    Long ln1 = new Long(201521);		
 		Long pt1 = new Long(4334l);
-		DateTime dt1 = new DateTime(2015, 2, 2, 0, 0, 0, DateTimeZone.UTC);
+        LocalDate dt1 = LocalDate.of(2015, 2, 2);
 		Integer it1 = 201523;
 	    String st1 = "Sprained Ankle";
 	    List lt1 = Mockito.mock (List.class);	
 	    
 	    Long ln2 = new Long(201524);		
 		Long pt2 = new Long(2425l);
-		DateTime dt2 = new DateTime(2015, 2, 5, 0, 0, 0, DateTimeZone.UTC);
+        LocalDate dt2 = LocalDate.of(2014, 2, 4);
 		Integer it2 = 201526;
 	    String st2 = "Sprained Wrist";
 	    List lt2 = Mockito.mock (List.class);	
@@ -72,8 +71,9 @@ public class EncounterTest {
 		assertNotEquals(en1.getType(), en2.getType());
 		assertNotEquals(en1.getId(), en2.getId());
 		assertNotEquals(en1.getPatientId(), en2.getPatientId());
-		
-		assertEquals(en1.toString(), "Encounter{id=201521, date=2015-02-02T00:00:00.000Z, reasonForVisit='Sprained Ankle'}");
+
+        // has an extra hashcode at the end because of the mocking of the list
+		assertEquals(true, en1.toString().contains("Encounter{id=201521, patientId=4334, date=2015-02-02, type=201523, reasonForVisit=Sprained Ankle, observations="));
 		assertNotEquals(en1.hashCode(), en2.hashCode());
 
 	}

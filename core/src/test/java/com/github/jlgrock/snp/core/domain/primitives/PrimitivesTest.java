@@ -1,11 +1,11 @@
 package com.github.jlgrock.snp.core.domain.primitives;
 
 import org.bson.types.Binary;
-import org.joda.time.DateTime;
-import org.joda.time.LocalDate;
 import org.junit.Test;
 
 import java.math.BigDecimal;
+import java.time.Instant;
+import java.time.LocalDate;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -55,11 +55,11 @@ public class PrimitivesTest {
      */
     @Test
     public void testGoodDate() {
-        Long longVal = 1234l;
+        Long longVal = LocalDate.now().toEpochDay();
         SimplePrimitive simplePrimitive = SimplePrimitive.createPrimitive(PrimitiveType.DATE.getId(), longVal);
         assertTrue(simplePrimitive instanceof DatePrimitive);
         assertEquals(PrimitiveType.DATE, simplePrimitive.getType());
-        assertEquals(new LocalDate(longVal), simplePrimitive.getValue());
+        assertEquals(LocalDate.ofEpochDay(longVal), simplePrimitive.getValue());
     }
     /**
      * public function returns void
@@ -78,7 +78,7 @@ public class PrimitivesTest {
         SimplePrimitive simplePrimitive = SimplePrimitive.createPrimitive(PrimitiveType.DATETIME.getId(), longVal);
         assertTrue(simplePrimitive instanceof DateTimePrimitive);
         assertEquals(PrimitiveType.DATETIME, simplePrimitive.getType());
-        assertEquals(new DateTime(longVal), simplePrimitive.getValue());
+        assertEquals(Instant.ofEpochMilli(longVal), simplePrimitive.getValue());
     }
     /**
      * public function returns void

@@ -6,9 +6,9 @@ import com.github.jlgrock.snp.core.domain.Observation;
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
-import org.joda.time.DateTime;
 import org.junit.Test;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +22,7 @@ public class EncounterWriteConverterTest {
      */
     @Test
     public void testConvert() {
-        DateTime date = new DateTime(888l);
+        LocalDate date = LocalDate.ofEpochDay(888l);
         Long patientId = (Long) 456l;
 
         Observation observation1 = mock(Observation.class);
@@ -55,7 +55,7 @@ public class EncounterWriteConverterTest {
         DBObject dbObj = encounterWriteConverter.convert(encounter);
 
         assertEquals((Long) 123l, dbObj.get(EncounterTags.ID_TAG));
-        assertEquals(date.getMillis(), dbObj.get(EncounterTags.DATE_TAG));
+        assertEquals(date.toEpochDay(), dbObj.get(EncounterTags.DATE_TAG));
         assertEquals((Long) 456l, dbObj.get(EncounterTags.PATIENT_TAG));
         assertEquals("hernia", dbObj.get(EncounterTags.REASON_FOR_VISIT_TAG));
         assertEquals(1, dbObj.get(EncounterTags.TYPE_TAG));

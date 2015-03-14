@@ -69,18 +69,18 @@ public class Observation {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
         Observation that = (Observation) o;
 
-        return Objects.equal(this.name, that.name) &&
-                Objects.equal(this.value, that.value) &&
-                Objects.equal(this.applies, that.applies) &&
-                Objects.equal(this.issued, that.issued) &&
-                Objects.equal(this.identifier, that.identifier) &&
-                Objects.equal(this.subject, that.subject);
+        return Objects.equal(name, that.name) &&
+                Objects.equal(value, that.value) &&
+                Objects.equal(applies, that.applies) &&
+                Objects.equal(issued, that.issued) &&
+                Objects.equal(identifier, that.identifier) &&
+                Objects.equal(subject, that.subject);
     }
 
     @Override

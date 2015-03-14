@@ -15,14 +15,14 @@ public class PCE {
     private String desc;
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
         PCE that = (PCE) o;
 
-        return Objects.equal(this.id, that.id) &&
-                Objects.equal(this.desc, that.desc);
+        return Objects.equal(id, that.id) &&
+                Objects.equal(desc, that.desc);
     }
 
     @Override

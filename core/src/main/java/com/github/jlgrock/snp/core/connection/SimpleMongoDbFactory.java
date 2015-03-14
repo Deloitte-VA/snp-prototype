@@ -1,10 +1,11 @@
 package com.github.jlgrock.snp.core.connection;
 
 import com.github.jlgrock.snp.apis.connection.MongoDBConfiguration;
+import com.github.jlgrock.snp.apis.connection.MongoDatabaseManager;
 import com.github.jlgrock.snp.apis.connection.MongoDbFactory;
-import com.github.jlgrock.snp.apis.connection.security.UserCredentials;
 import com.github.jlgrock.snp.apis.connection.synchronization.TransactionSynchronizationManager;
 import com.github.jlgrock.snp.apis.exceptions.DataAccessException;
+import com.google.common.base.Preconditions;
 import com.mongodb.DB;
 import com.mongodb.MongoClient;
 import com.mongodb.WriteConcern;
@@ -13,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
+import java.net.UnknownHostException;
 
 /**
  * Simple wrapper around the mongodb java library to allow for different levels of synchronization.
@@ -23,9 +25,6 @@ public class SimpleMongoDbFactory implements MongoDbFactory {
     private static final Logger LOGGER = LoggerFactory.getLogger(SimpleMongoDbFactory.class);
 
     private final MongoClient mongo;
-    private final String defaultDatabaseName;
-    private String username;
-    private String password;
     private WriteConcern writeConcern;
 
     @Inject
@@ -35,37 +34,36 @@ public class SimpleMongoDbFactory implements MongoDbFactory {
     private MongoDatabaseManager mongoDatabaseManager;
 
     @Inject
-    TransactionSynchronizationManager synchronizationManager;
+    private TransactionSynchronizationManager synchronizationManager;
 
+    /**
+     * Create a simple MongoDB connection and return the appropriate database
+     *
+     * @param mongoDBConfigurationIn the configuration to use to set up the connection
+     *
+     * @throws UnknownHostException if unable to connect to the database
+     */
+    public SimpleMongoDbFactory(final MongoDBConfiguration mongoDBConfigurationIn) throws UnknownHostException {
+        Preconditions.checkNotNull(mongoDBConfiguration, "Mongo configuration must not be null");
+        mongoDBConfiguration = mongoDBConfigurationIn;
 
-    public SimpleMongoDbFactory(final MongoClient mongoIn,
-                                final String defaultDatabaseNameIn) {
-        if (mongoIn == null) {
-            LOGGER.error("Mongo must not be null");
-        }
-        if (defaultDatabaseNameIn == null) {
-            LOGGER.error("Database name must not be empty");
-        }
-        if (defaultDatabaseNameIn.matches("[\\w-]+")) {
-            LOGGER.error("Database name must only contain letters, numbers, underscores and dashes!");
-        }
-        mongo = mongoIn;
-        defaultDatabaseName = defaultDatabaseNameIn;
+        //TODO this needs to be set up for sharding, even possibly several servers on different ports, all on the same machine
+        //TODO something like the following...
+        //        MongoClient mongoClient = new MongoClient(Arrays.asList(
+        //                * new ServerAddress("localhost", 27017),
+        //                *   new ServerAddress("localhost", 27018),
+        //        *   new ServerAddress("localhost", 27019)));
+        //TODO set credentials
+        mongo = new MongoClient(mongoDBConfiguration.getHost(), mongoDBConfiguration.getPort());
     }
 
-    public SimpleMongoDbFactory(final MongoClient mongo,
-                                final String databaseName,
-                                final UserCredentials userCredentials) {
-        this(mongo, databaseName);
-        this.username = userCredentials.getUsername();
-        this.password = userCredentials.getPassword();
+
+    @Override
+    public void setWriteConcern(final WriteConcern writeConcernIn) {
+        writeConcern = writeConcernIn;
     }
 
     @Override
-    public void setWriteConcern(WriteConcern writeConcern) {
-        this.writeConcern = writeConcern;
-    }
-
     public WriteConcern getWriteConcern() {
         return writeConcern;
     }
@@ -81,31 +79,16 @@ public class SimpleMongoDbFactory implements MongoDbFactory {
     }
 
     @Override
-    public DB getDb(final String databaseName) throws DataAccessException {
-
-        if (mongo == null) {
-            throw new DataAccessException("Cannot open data connection, as mongo is null.");
-        }
-
-        String dbName = defaultDatabaseName;
-        if (databaseName == null) {
-            LOGGER.info("Name of collection is null, using default database=[" + defaultDatabaseName + "]");
+    public DB getDb(final String databaseNameIn) throws DataAccessException {
+        if (databaseNameIn == null) {
+            LOGGER.info("Name of collection is null, using default database=[" + mongoDBConfiguration.getDefaultDatabase() + "]");
 
             //TODO get default collection from map
         }
 
-        LOGGER.trace("Getting Mongo Database name=[" + databaseName + "]");
+        LOGGER.trace("Getting Mongo Database name=[" + databaseNameIn + "]");
 
-        DB db = mongo.getDB(databaseName);
-
-        boolean credentialsGiven = username != null && password != null;
-        if (credentialsGiven && !db.isAuthenticated()) {
-            // Note, can only authenticate once against the same com.mongodb.DB object.
-            if (!db.authenticate(username, password.toCharArray())) {
-                throw new DataAccessException("Failed to authenticate to database [" + databaseName
-                        + "], username = [" + username + "], password = [" + new String(password) + "]");
-            }
-        }
+        DB db = mongo.getDB(databaseNameIn);
 
         //TODO need to work on synchronization code
 

@@ -39,7 +39,7 @@ public class PCETest {
 		assertNotEquals(pc1.getId(), pc2.getId());
 		assertNotEquals(pc1.getDesc(), pc2.getDesc());
 
-		assertEquals(pc1.toString(), "PCE{id=201521, desc='Touchdown'}");
+		assertEquals("PCE{id=201521, desc=Touchdown}", pc1.toString());
 		assertNotEquals(pc1.hashCode(), pc2.hashCode());
 		
 	}

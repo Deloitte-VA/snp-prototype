@@ -5,8 +5,9 @@ import com.github.jlgrock.snp.core.domain.Gender;
 import com.github.jlgrock.snp.core.domain.Patient;
 import com.github.jlgrock.snp.core.domain.Race;
 import com.mongodb.DBObject;
-import org.joda.time.DateTime;
 import org.junit.Test;
+
+import java.time.LocalDate;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
@@ -18,7 +19,7 @@ public class PatientWriteConverterTest {
      */
     @Test
     public void testConvert() {
-        DateTime dob = new DateTime(); //final
+        LocalDate dob = LocalDate.now(); //final
 
         Patient patient = mock(Patient.class);
         when(patient.getId()).thenReturn((Long) 123l);
@@ -36,7 +37,7 @@ public class PatientWriteConverterTest {
         assertEquals("Jerry", dbObj.get(PatientTags.FIRST_NAME_TAG));
         assertEquals("Lee", dbObj.get(PatientTags.MIDDLE_NAME_TAG));
         assertEquals("Lewis", dbObj.get(PatientTags.LAST_NAME_TAG));
-        assertEquals(dob.getMillis(), dbObj.get(PatientTags.DATE_OF_BIRTH_TAG));
+        assertEquals(dob.toEpochDay(), dbObj.get(PatientTags.DATE_OF_BIRTH_TAG));
         assertEquals(Gender.MALE.getId(), dbObj.get(PatientTags.GENDER_TAG));
         assertEquals(Race.AMERICAN_INDIAN.getId(), dbObj.get(PatientTags.RACE_TAG));
 

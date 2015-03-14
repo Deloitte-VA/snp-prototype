@@ -1,67 +1,73 @@
 package com.github.jlgrock.snp.apis.data;
 
-import com.sun.xml.internal.bind.v2.model.core.ID;
+import org.jvnet.hk2.annotations.Contract;
+
+import java.io.Serializable;
 
 /**
+ * An Abstraction level, to separate the implementation from the queries
  *
+ * @param <DT> the domain objects to store in the collection
+ * @param <ID> the type of the id
  */
-public interface MongoRepository<S, T> {
-
-    //PagingAndSortingRepository Method Signatures
+@Contract
+public interface MongoRepository<DT, ID extends Serializable> {
 
     /**
      * Returns all entities sorted by the given options.
      *
-     * @param sort
+     * @param sort the direction to sort the results
      * @return all entities sorted by the given options
      */
-    Iterable<T> findAll(Sort sort);
+    Iterable<DT> findAll(Sort sort);
 
     /**
      * Returns a {@link Page} of entities meeting the paging restriction provided in the {@code Pageable} object.
      *
-     * @param pageable
+     * @param pageable the details on how the results should be returned
      * @return a page of entities
      */
-    Page<T> findAll(Pageable pageable);
-
-
-
-    //CrudRepository Method Signatures
+    Page<DT> findAll(Pageable pageable);
 
     /**
-     * Saves a given entity. Use the returned instance for further operations as the save operation might have changed the
-     * entity instance completely.
+     * Saves a given entity. Use the returned instance for further operations as the save operation might have changed
+     * the entity instance completely.
      *
-     * @param entity
+     * @param <S> a type that extends the id type
+     * @param entity the entity to save
+     *
      * @return the saved entity
      */
-    <S extends T> S save(S entity);
+    <S extends DT> DT save(S entity);
 
     /**
      * Saves all given entities.
      *
-     * @param entities
+     * @param entities the entities to save
+     * @param <S> a type that matches the domain object store
      * @return the saved entities
-     * @throws IllegalArgumentException in case the given entity is (@literal null}.
+     *
+     * throws IllegalArgumentException in case the given entity is (@literal null}.
      */
-    <S extends T> Iterable<S> save(Iterable<S> entities);
+    <S extends DT> Iterable<S> save(Iterable<S> entities);
 
     /**
      * Retrieves an entity by its id.
      *
      * @param id must not be {@literal null}.
      * @return the entity with the given id or {@literal null} if none found
-     * @throws IllegalArgumentException if {@code id} is {@literal null}
+     *
+     * throws IllegalArgumentException if {@code id} is {@literal null}
      */
-    T findOne(ID id);
+    DT findOne(ID id);
 
     /**
      * Returns whether an entity with the given id exists.
      *
      * @param id must not be {@literal null}.
      * @return true if an entity with the given id exists, {@literal false} otherwise
-     * @throws IllegalArgumentException if {@code id} is {@literal null}
+     *
+     * throws IllegalArgumentException if {@code id} is {@literal null}
      */
     boolean exists(ID id);
 
@@ -70,15 +76,16 @@ public interface MongoRepository<S, T> {
      *
      * @return all entities
      */
-    Iterable<T> findAll();
+    Iterable<DT> findAll();
 
     /**
      * Returns all instances of the type with the given IDs.
      *
-     * @param ids
-     * @return
+     * @param ids the id's to find
+     * @return all of the results, brought back into a single iterable collection.  Please note, that you should be
+     *          using Pageable versions if the expected output is large.
      */
-    Iterable<T> findAll(Iterable<ID> ids);
+    Iterable<DT> findAll(Iterable<ID> ids);
 
     /**
      * Returns the number of entities available.
@@ -91,25 +98,28 @@ public interface MongoRepository<S, T> {
      * Deletes the entity with the given id.
      *
      * @param id must not be {@literal null}.
-     * @throws IllegalArgumentException in case the given {@code id} is {@literal null}
+     *
+     * throws IllegalArgumentException in case the given {@code id} is {@literal null}
      */
     void delete(ID id);
 
     /**
      * Deletes a given entity.
      *
-     * @param entity
-     * @throws IllegalArgumentException in case the given entity is (@literal null}.
+     * @param entity the entity to delete
+     *
+     * throws IllegalArgumentException in case the given entity is (@literal null}.
      */
-    void delete(T entity);
+    void delete(DT entity);
 
     /**
      * Deletes the given entities.
      *
-     * @param entities
-     * @throws IllegalArgumentException in case the given {@link Iterable} is (@literal null}.
+     * @param entities the entitites to delete
+     *
+     * throws IllegalArgumentException in case the given {@link Iterable} is (@literal null}.
      */
-    void delete(Iterable<? extends T> entities);
+    void delete(Iterable<? extends DT> entities);
 
     /**
      * Deletes all entities managed by the repository.

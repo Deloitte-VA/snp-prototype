@@ -1,4 +1,4 @@
-package com.github.jlgrock.snp.core.connection;
+package com.github.jlgrock.snp.apis.connection;
 
 import com.mongodb.DB;
 
@@ -18,28 +18,28 @@ public interface MongoDatabaseManager {
      * Unindex a database that is no longer used.
      *
      * @param dbName the name of the database to un-index.
-     * @return the database that matches the name, or null if it doesn't exist
+     * @return the database that matches the name, or {@literal null} if it doesn't exist
      */
     DB removeDB(String dbName);
 
     /**
      * Determine whether or not the DB has been indexed.
      * @param session the db to check for
-     * @return
+     * @return {@literal true} if it contains the session, {@literal false} otherwise
      */
     boolean containsDB(DB session);
 
     /**
      * Determine whether or not the DB has been indexed.
      * @param key the db to check for
-     * @return
+     * @return {@literal true} if it contains the key, {@literal false} otherwise
      */
     boolean containsDB(String key);
 
     /**
      * Whether or not this index has been initialized or not
      *
-     * @return true if it is empty, false otherwise
+     * @return {@literal true} if it is empty, {@literal false} otherwise
      */
     boolean isEmpty();
 }

@@ -19,18 +19,18 @@ public class Encounter {
     private Long patientId;
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
         Encounter that = (Encounter) o;
 
-        return Objects.equal(this.id, that.id) &&
-                Objects.equal(this.patientId, that.patientId) &&
-                Objects.equal(this.date, that.date) &&
-                Objects.equal(this.type, that.type) &&
-                Objects.equal(this.reasonForVisit, that.reasonForVisit) &&
-                Objects.equal(this.observations, that.observations);
+        return Objects.equal(id, that.id) &&
+                Objects.equal(patientId, that.patientId) &&
+                Objects.equal(date, that.date) &&
+                Objects.equal(type, that.type) &&
+                Objects.equal(reasonForVisit, that.reasonForVisit) &&
+                Objects.equal(observations, that.observations);
     }
 
     @Override
@@ -62,7 +62,7 @@ public class Encounter {
     }
 
     public void setDate(final LocalDate pDate) {
-        this.date = pDate;
+        date = pDate;
     }
 
     public String getReasonForVisit() {
@@ -70,7 +70,7 @@ public class Encounter {
     }
 
     public void setReasonForVisit(final String pReasonForVisit) {
-        this.reasonForVisit = pReasonForVisit;
+        reasonForVisit = pReasonForVisit;
     }
 
     public List<Observation> getObservations() {
@@ -78,21 +78,21 @@ public class Encounter {
     }
 
     public void setObservations(final List<Observation> pObservations) {
-        this.observations = pObservations;
+        observations = pObservations;
     }
 
     public Integer getType() {
         return type;
     }
 
-    public void setType(final Integer ptype) {
-        this.type = ptype;
+    public void setType(final Integer pType) {
+        type = pType;
     }
 
     private List<Observation> observations;
 
     public void setId(final Long pId) {
-        this.id = pId;
+        id = pId;
     }
 
     public Long getId() {

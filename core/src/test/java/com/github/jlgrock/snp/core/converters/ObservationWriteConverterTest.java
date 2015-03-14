@@ -6,8 +6,9 @@ import com.github.jlgrock.snp.core.domain.primitives.BooleanPrimitive;
 import com.github.jlgrock.snp.core.domain.primitives.PrimitiveType;
 import com.github.jlgrock.snp.core.domain.primitives.StringPrimitive;
 import com.mongodb.DBObject;
-import org.joda.time.DateTime;
 import org.junit.Test;
+
+import java.time.Instant;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
@@ -19,7 +20,7 @@ public class ObservationWriteConverterTest {
      */
     @Test
     public void testConvert() {
-        DateTime date = new DateTime();
+        Instant date = Instant.now();
 
         StringPrimitive primitiveString = mock(StringPrimitive.class);
         when(primitiveString.getType()).thenReturn(PrimitiveType.STRING);
@@ -45,7 +46,7 @@ public class ObservationWriteConverterTest {
         assertEquals(true, dbObj.get(ObservationTags.VALUE_TAG));
         assertEquals(PrimitiveType.BOOLEAN.getId(), dbObj.get(ObservationTags.VALUE_TYPE_TAG));
         assertEquals("applies", dbObj.get(ObservationTags.APPLIES_TAG));
-        assertEquals(date.getMillis(), dbObj.get(ObservationTags.ISSUED_TAG));
+        assertEquals(date.getEpochSecond(), dbObj.get(ObservationTags.ISSUED_TAG));
         assertEquals("subject", dbObj.get(ObservationTags.SUBJECT_TAG));
 
     }

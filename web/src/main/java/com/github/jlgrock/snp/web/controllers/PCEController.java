@@ -4,12 +4,13 @@ import com.github.jlgrock.snp.core.data.PCERepository;
 import com.github.jlgrock.snp.core.domain.PCE;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.inject.Inject;
 
 /**
  * The Controller serving up domain objects for PCE objects.
@@ -19,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class PCEController {
     private static final Logger LOGGER = LoggerFactory.getLogger(PCEController.class);
 
-    @@Inject
+    @Inject
     private PCERepository repository;
 
     /**
