@@ -1,10 +1,12 @@
 package com.github.jlgrock.snp.core.connection.synchronization;
 
 import com.github.jlgrock.snp.apis.connection.synchronization.TransactionSynchronizationManager;
+import org.jvnet.hk2.annotations.Service;
 
 /**
  * A thread-safe synchronization mechanism based on a particular collection.
  */
+@Service
 public class CollectionSynchronizationManager implements TransactionSynchronizationManager {
 
     /**

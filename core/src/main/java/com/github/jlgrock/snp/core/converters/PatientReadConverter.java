@@ -5,6 +5,7 @@ import com.github.jlgrock.snp.core.domain.Gender;
 import com.github.jlgrock.snp.core.domain.Patient;
 import com.github.jlgrock.snp.core.domain.Race;
 import com.mongodb.DBObject;
+import org.jvnet.hk2.annotations.Service;
 
 import javax.inject.Named;
 import java.time.LocalDate;
@@ -12,6 +13,7 @@ import java.time.LocalDate;
 /**
  * A Conversion class to convert between a MongoDB DBObject to an Patient object.
  */
+@Service
 @Named
 public class PatientReadConverter implements ReadConverter<DBObject, Patient> {
 

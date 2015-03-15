@@ -1,10 +1,12 @@
 package com.github.jlgrock.snp.apis.connection;
 
 import com.mongodb.DB;
+import org.jvnet.hk2.annotations.Contract;
 
 /**
  * Defines a class that will be able to index open connections to many MongoDB instances.
  */
+@Contract
 public interface MongoDatabaseManager {
     /**
      * Index a created database session.

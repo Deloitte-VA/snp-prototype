@@ -4,6 +4,7 @@ import com.github.jlgrock.snp.core.data.ObservationTags;
 import com.github.jlgrock.snp.core.domain.Observation;
 import com.github.jlgrock.snp.core.domain.primitives.SimplePrimitive;
 import com.mongodb.DBObject;
+import org.jvnet.hk2.annotations.Service;
 
 import javax.inject.Named;
 import java.time.Instant;
@@ -11,6 +12,7 @@ import java.time.Instant;
 /**
  * A Conversion class to convert between a MongoDB DBObject to an Observation object.
  */
+@Service
 @Named
 public class ObservationReadConverter implements ReadConverter<DBObject, Observation> {
 

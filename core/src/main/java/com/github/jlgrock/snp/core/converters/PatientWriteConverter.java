@@ -4,12 +4,14 @@ import com.github.jlgrock.snp.core.data.PatientTags;
 import com.github.jlgrock.snp.core.domain.Patient;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
+import org.jvnet.hk2.annotations.Service;
 
 import javax.inject.Named;
 
 /**
  * A Conversion class to convert between an Patient objects and a MongoDB DBObject.
  */
+@Service
 @Named
 public class PatientWriteConverter implements WriteConverter<Patient, DBObject> {
 

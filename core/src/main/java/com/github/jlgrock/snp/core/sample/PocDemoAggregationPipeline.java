@@ -1,42 +1,36 @@
 package com.github.jlgrock.snp.core.sample;
 
-import java.net.UnknownHostException;
-import java.util.Arrays;
-import java.util.List;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
+import com.github.jlgrock.snp.apis.connection.MongoDbFactory;
+import com.github.jlgrock.snp.apis.exceptions.DataAccessException;
 import com.mongodb.AggregationOptions;
 import com.mongodb.BasicDBObject;
 import com.mongodb.Cursor;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
-import com.mongodb.MongoClient;
+import org.jvnet.hk2.annotations.Service;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.inject.Inject;
+import java.util.Arrays;
+import java.util.List;
 
 /**
- * Simple example of how to implement Query 1 using Java for semantic normalization prototype using MongoDB Java driver library and aggregation framework. 
+ * Simple example of how to implement Query 1 using Java for semantic normalization prototype using MongoDB
+ * Java driver library and aggregation framework.
  */
-public class PocDemoAggregationPipeline {
+@Service
+public class PocDemoAggregationPipeline implements SampleQuery {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PocDemoAggregationPipeline.class);
 
-    private PocDemoAggregationPipeline() {}
+    @Inject
+    MongoDbFactory mongoDbFactory;
 
-    private void query() {
-        // connect to the database server
-        MongoClient mongoClient = null;
-        try {
-            mongoClient = new MongoClient( "192.168.59.103", 27017 ); //boot2docker ip address
-        } catch (UnknownHostException e) {
-            LOGGER.error("Unable to connect to MongoDB", e);
-            return;
-        }
-        LOGGER.info("Obtained connection to MongoDB");
-
+    public void query() throws DataAccessException {
         // get handle to database
-        DB db = mongoClient.getDB("test");  //instance name under docker VM
+        DB db = mongoDbFactory.db();
 
         //The following query (Query 1) from Javascript would be tried in java
         /*
@@ -105,17 +99,8 @@ public class PocDemoAggregationPipeline {
         
         //Close cursor
         cursor.close();
-        
-        // release resources
-        mongoClient.close();
+
+        mongoDbFactory.destroy();
     }
-    
-    /**
-     * @param args string command line arguments
-     * @throws Exception "Starting Aggregation Framework API usage demo Application."
-     */
-    public static void main(final String[] args) throws Exception {
-        PocDemoAggregationPipeline pocDemo = new PocDemoAggregationPipeline();
-        pocDemo.query();
-    }
+
 }

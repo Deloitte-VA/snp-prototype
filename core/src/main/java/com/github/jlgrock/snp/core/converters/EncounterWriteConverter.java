@@ -6,6 +6,7 @@ import com.github.jlgrock.snp.core.domain.Observation;
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
+import org.jvnet.hk2.annotations.Service;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -16,6 +17,7 @@ import java.util.stream.Stream;
 /**
  * A Conversion class to convert between an Encounter objects and a MongoDB DBObject.
  */
+@Service
 @Named
 public class EncounterWriteConverter implements WriteConverter<Encounter, DBObject> {
 

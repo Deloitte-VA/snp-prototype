@@ -73,25 +73,25 @@
         <dependencies>
             <!-- internal dependencies -->
             <dependency>
-                <groupId>com.github.jlgrock.snp</groupId>
+                <groupId>${project.groupId}</groupId>
                 <artifactId>apis</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.github.jlgrock.snp</groupId>
+                <groupId>${project.groupId}</groupId>
                 <artifactId>core</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.github.jlgrock.snp</groupId>
+                <groupId>${project.groupId}</groupId>
                 <artifactId>defaultconfig</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.github.jlgrock.snp</groupId>
+                <groupId>${project.groupId}</groupId>
                 <artifactId>web</artifactId>
                 <version>${project.version}</version>
             </dependency>
@@ -157,6 +157,13 @@
                 <version>${jersey.version}</version>
             </dependency>
 
+            <!-- When you need to bind to the console -->
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-simple</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+
             <!-- Testing dependencies -->
             <dependency>
                 <groupId>org.slf4j</groupId>
@@ -191,6 +198,7 @@
 
     <dependencies>
 
+        <!-- External dependencies for all projects -->
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
@@ -207,12 +215,25 @@
         </dependency>
 
 
-        <!-- Testing dependencies -->
+        <!-- Testing dependencies for all projects -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <scope>test</scope>
+        </dependency>
+
 
     </dependencies>
 
@@ -220,63 +241,184 @@
         <module>apis</module>
         <module>defaultconfig</module>
         <module>core</module>
-        <module>web</module>
+        <module>integration</module>
+        <!--<module>web</module>-->
         <!--<module>client</module>-->
     </modules>
 
     <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.glassfish.hk2</groupId>
+                    <artifactId>hk2-inhabitant-generator</artifactId>
+                    <version>2.4.0-b11</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>generate-inhabitants</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven-compiler-plugin.version}</version>
+                    <configuration>
+                        <source>${source.jdk}</source>
+                        <target>${target.jdk}</target>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${maven-surefire-plugin.version}</version>
+                    <configuration>
+                        <argLine>-Xmx512m</argLine>
+                        <includes>
+                            <!-- By default only files ending in 'Test' will be included, so also include support for Spock style naming convention -->
+                            <!-- Oddly enough for Groovy files, *Spec.groovy does not work, but *Spec.java does -->
+                            <include>**/*Test.java</include>
+                            <include>**/*Spec.java</include>
+                        </includes>
+                    </configuration>
+                </plugin>
+
+                <!-- Generate Java Doc jar -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>${maven-javadoc-plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>jar</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <!-- Check Style: Make sure that it matches basic formatting and usage requirements -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-checkstyle-plugin</artifactId>
+                    <version>${maven-checkstyle-plugin.version}</version>
+                    <configuration>
+                        <configLocation>${project.rootdir}/checkstyle.xml</configLocation>
+                        <failsOnError>true</failsOnError>
+                        <consoleOutput>true</consoleOutput>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>check</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <!-- This needs to be upgraded, but there is a bug with using > 6.0 with this version of the
+                    plugin.  Also, we are disabling "Illegal -->
+                    <dependencies>
+                        <dependency>
+                            <groupId>com.puppycrawl.tools</groupId>
+                            <artifactId>checkstyle</artifactId>
+                            <version>5.9</version>
+                        </dependency>
+                    </dependencies>
+                </plugin>
+
+                <!-- COBERTURA: Code Coverage Check -->
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>cobertura-maven-plugin</artifactId>
+                    <version>${cobertura-maven-plugin.version}</version>
+                    <configuration>
+                        <check>
+                            <haltOnFailure>false</haltOnFailure>
+                        </check>
+                        <formats>
+                            <format>html</format>
+                        </formats>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>clean</goal>
+                                <goal>check</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <!-- FINDBUGS CHECK: Fails build if there are "High" threshold violations -->
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>findbugs-maven-plugin</artifactId>
+                    <version>${findbugs-maven-plugin.version}</version>
+                    <configuration>
+                        <effort>Max</effort>
+                        <threshold>Medium</threshold>
+                        <xmlOutput>true</xmlOutput>
+                        <failOnError>true</failOnError>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>check</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <!-- PMD CHECK: Fails build if there are "High" priority violations -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-pmd-plugin</artifactId>
+                    <version>${pmd-maven-plugin.version}</version>
+                    <configuration>
+                        <targetJdk>${target.jdk}</targetJdk>
+                        <failurePriority>1</failurePriority>
+                        <failOnViolation>true</failOnViolation>
+                        <aggregate>true</aggregate>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>check</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+
+
+        </pluginManagement>
+
         <plugins>
+            <!-- Generate inhabitant file for HK2 -->
+            <plugin>
+                <groupId>org.glassfish.hk2</groupId>
+                <artifactId>hk2-inhabitant-generator</artifactId>
+            </plugin>
+
+            <!-- compiler adjustments-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>${maven-compiler-plugin.version}</version>
-                <configuration>
-                    <source>${source.jdk}</source>
-                    <target>${target.jdk}</target>
-                </configuration>
             </plugin>
 
+            <!-- Configure Test running -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>${maven-surefire-plugin.version}</version>
-                <configuration>
-                    <includes>
-                        <!-- By default only files ending in 'Test' will be included, so also include support for Spock style naming convention -->
-                        <!-- Oddly enough for Groovy files, *Spec.groovy does not work, but *Spec.java does -->
-                        <include>**/*Test.java</include>
-                        <include>**/*Spec.java</include>
-                    </includes>
-                </configuration>
             </plugin>
+
             <!-- Generate Java Doc jar -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>${maven-javadoc-plugin.version}</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-release-plugin</artifactId>
-                <version>${maven-release-plugin.version}</version>
-                <executions>
-                    <execution>
-                        <id>default</id>
-                        <goals>
-                            <goal>perform</goal>
-                        </goals>
-                        <configuration>
-                            <pomFileName>snp/pom.xml</pomFileName>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>
@@ -286,105 +428,23 @@
             <id>codeQuality</id>
             <build>
                 <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-surefire-plugin</artifactId>
-                        <configuration>
-                            <!--<excludedGroups>integration</excludedGroups>-->
-                            <argLine>-Xmx512m</argLine>
-                        </configuration>
-                        <version>${maven-surefire-plugin.version}</version>
-                    </plugin>
 
-                    <!-- Check Style: Make sure that it matches basic formatting and usage requirements -->
+                    <!-- Check the project for issues in style guidelines -->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-checkstyle-plugin</artifactId>
-                        <version>${maven-checkstyle-plugin.version}</version>
-                        <configuration>
-                            <configLocation>${project.rootdir}/checkstyle.xml</configLocation>
-                            <failsOnError>true</failsOnError>
-                            <consoleOutput>true</consoleOutput>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <goals>
-                                    <goal>check</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                        <!-- This needs to be upgraded, but there is a bug with using > 6.0 with this version of the
-                        plugin.  Also, we are disabling "Illegal -->
-                        <dependencies>
-                            <dependency>
-                                <groupId>com.puppycrawl.tools</groupId>
-                                <artifactId>checkstyle</artifactId>
-                                <version>5.9</version>
-                            </dependency>
-                        </dependencies>
                     </plugin>
 
-                    <!-- COBERTURA: Code Coverage Check -->
-                    <!--<plugin>-->
-                        <!--<groupId>org.codehaus.mojo</groupId>-->
-                        <!--<artifactId>cobertura-maven-plugin</artifactId>-->
-                        <!--<version>${cobertura-maven-plugin.version}</version>-->
-                        <!--<configuration>-->
-                            <!--<check>-->
-                                <!--<haltOnFailure>false</haltOnFailure>-->
-                            <!--</check>-->
-                            <!--<formats>-->
-                                <!--<format>html</format>-->
-                            <!--</formats>-->
-                        <!--</configuration>-->
-                        <!--<executions>-->
-                            <!--<execution>-->
-                                <!--<goals>-->
-                                    <!--<goal>clean</goal>-->
-                                    <!--<goal>check</goal>-->
-                                <!--</goals>-->
-                            <!--</execution>-->
-                        <!--</executions>-->
-                    <!--</plugin>-->
-
-                    <!-- FINDBUGS CHECK: Fails build if there are "High" threshold violations -->
+                    <!-- check for significant bugs that might have been missed in development -->
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>findbugs-maven-plugin</artifactId>
-                        <version>${findbugs-maven-plugin.version}</version>
-                        <configuration>
-                            <effort>Max</effort>
-                            <threshold>Medium</threshold>
-                            <xmlOutput>true</xmlOutput>
-                            <failOnError>true</failOnError>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <goals>
-                                    <goal>check</goal>
-                                </goals>
-                            </execution>
-                        </executions>
                     </plugin>
 
-                    <!-- PMD CHECK: Fails build if there are "High" priority violations -->
+                    <!-- check for significant bugs that might have been missed in development -->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-pmd-plugin</artifactId>
-                        <version>${pmd-maven-plugin.version}</version>
-                        <configuration>
-                            <targetJdk>${target.jdk}</targetJdk>
-                            <failurePriority>1</failurePriority>
-                            <failOnViolation>true</failOnViolation>
-                            <aggregate>true</aggregate>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <goals>
-                                    <goal>check</goal>
-                                </goals>
-                            </execution>
-                        </executions>
                     </plugin>
                 </plugins>
             </build>

@@ -25,16 +25,15 @@ public class SimpleMongoDbFactory implements MongoDbFactory {
     private static final Logger LOGGER = LoggerFactory.getLogger(SimpleMongoDbFactory.class);
 
     private final MongoClient mongo;
+
     private WriteConcern writeConcern;
 
-    @Inject
-    private MongoDBConfiguration mongoDBConfiguration;
+    private final MongoDBConfiguration mongoDBConfiguration;
 
-    @Inject
-    private MongoDatabaseManager mongoDatabaseManager;
+    private final MongoDatabaseManager mongoDatabaseManager;
 
-    @Inject
-    private TransactionSynchronizationManager synchronizationManager;
+    private final TransactionSynchronizationManager synchronizationManager;
+
 
     /**
      * Create a simple MongoDB connection and return the appropriate database
@@ -43,8 +42,9 @@ public class SimpleMongoDbFactory implements MongoDbFactory {
      *
      * @throws UnknownHostException if unable to connect to the database
      */
-    public SimpleMongoDbFactory(final MongoDBConfiguration mongoDBConfigurationIn) throws UnknownHostException {
-        Preconditions.checkNotNull(mongoDBConfiguration, "Mongo configuration must not be null");
+    @Inject
+    public SimpleMongoDbFactory(final MongoDBConfiguration mongoDBConfigurationIn, final MongoDatabaseManager mongoDatabaseManagerIn, TransactionSynchronizationManager synchronizationManagerIn) throws UnknownHostException {
+        Preconditions.checkNotNull(mongoDBConfigurationIn, "Mongo configuration must not be null");
         mongoDBConfiguration = mongoDBConfigurationIn;
 
         //TODO this needs to be set up for sharding, even possibly several servers on different ports, all on the same machine
@@ -55,6 +55,8 @@ public class SimpleMongoDbFactory implements MongoDbFactory {
         //        *   new ServerAddress("localhost", 27019)));
         //TODO set credentials
         mongo = new MongoClient(mongoDBConfiguration.getHost(), mongoDBConfiguration.getPort());
+        mongoDatabaseManager = mongoDatabaseManagerIn;
+        synchronizationManager = synchronizationManagerIn;
     }
 
 
@@ -74,21 +76,24 @@ public class SimpleMongoDbFactory implements MongoDbFactory {
     }
 
     @Override
-    public DB getDb() throws DataAccessException {
-        return getDb(null);
+    public DB db() throws DataAccessException {
+        return db(null);
     }
 
     @Override
-    public DB getDb(final String databaseNameIn) throws DataAccessException {
+    public DB db(final String databaseNameIn) throws DataAccessException {
+        String databaseToUse;
         if (databaseNameIn == null) {
             LOGGER.info("Name of collection is null, using default database=[" + mongoDBConfiguration.getDefaultDatabase() + "]");
-
+            databaseToUse = mongoDBConfiguration.getDefaultDatabase();
             //TODO get default collection from map
+        } else {
+            databaseToUse = databaseNameIn;
         }
 
-        LOGGER.trace("Getting Mongo Database name=[" + databaseNameIn + "]");
+        LOGGER.trace("Getting Mongo Database name=[" + databaseToUse + "]");
 
-        DB db = mongo.getDB(databaseNameIn);
+        DB db = mongo.getDB(databaseToUse);
 
         //TODO need to work on synchronization code
 

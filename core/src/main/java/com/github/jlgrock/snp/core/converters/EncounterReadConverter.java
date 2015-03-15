@@ -4,6 +4,7 @@ import com.github.jlgrock.snp.core.data.EncounterTags;
 import com.github.jlgrock.snp.core.domain.Encounter;
 import com.github.jlgrock.snp.core.domain.Observation;
 import com.mongodb.DBObject;
+import org.jvnet.hk2.annotations.Service;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -15,6 +16,7 @@ import java.util.stream.Collectors;
 /**
  * A Conversion class to convert between a MongoDB DBObject to an Encounter object.
  */
+@Service
 @Named
 public class EncounterReadConverter implements Converter<DBObject, Encounter> {
 

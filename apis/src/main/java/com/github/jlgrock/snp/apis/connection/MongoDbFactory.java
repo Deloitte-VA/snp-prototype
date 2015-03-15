@@ -17,17 +17,21 @@ public interface MongoDbFactory {
     void destroy();
 
     /**
+     * Returns the default database
+     *
      * @return get the default Database
      * @throws DataAccessException if the default database does not exist or a connection cannot be made
      */
-    DB getDb() throws DataAccessException;
+    DB db() throws DataAccessException;
 
     /**
+     * Returns the database with the name indicated
+     *
      * @param name the name of the database to get
      * @return get the Database with the name specified
      * @throws DataAccessException if the default database does not exist or a connection cannot be made
      */
-    DB getDb(String name) throws DataAccessException;
+    DB db(String name) throws DataAccessException;
 
     /**
      * Set the Write concern of the connection

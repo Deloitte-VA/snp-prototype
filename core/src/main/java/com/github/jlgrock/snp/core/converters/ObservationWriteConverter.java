@@ -4,12 +4,14 @@ import com.github.jlgrock.snp.core.data.ObservationTags;
 import com.github.jlgrock.snp.core.domain.Observation;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
+import org.jvnet.hk2.annotations.Service;
 
 import javax.inject.Named;
 
 /**
  * A Conversion class to convert between an Observation objects and a MongoDB DBObject.
  */
+@Service
 @Named
 public class ObservationWriteConverter  implements WriteConverter<Observation, DBObject> {
 

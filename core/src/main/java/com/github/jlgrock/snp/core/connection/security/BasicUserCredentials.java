@@ -70,4 +70,5 @@ public class BasicUserCredentials implements UserCredentials {
     public char[] getPassword() {
         return Arrays.copyOf(password, password.length);
     }
+
 }

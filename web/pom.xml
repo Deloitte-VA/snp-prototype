@@ -18,7 +18,7 @@
     <dependencies>
         <!-- internal dependencies -->
         <dependency>
-            <groupId>com.github.jlgrock.snp</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>apis</artifactId>
         </dependency>
 

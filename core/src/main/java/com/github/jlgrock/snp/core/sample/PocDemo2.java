@@ -1,5 +1,7 @@
 package com.github.jlgrock.snp.core.sample;
 
+import com.github.jlgrock.snp.apis.connection.MongoDbFactory;
+import com.github.jlgrock.snp.apis.exceptions.DataAccessException;
 import com.github.jlgrock.snp.core.converters.EncounterReadConverter;
 import com.github.jlgrock.snp.core.domain.Encounter;
 import com.github.jlgrock.snp.core.domain.Observation;
@@ -10,52 +12,38 @@ import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
-import com.mongodb.MongoClient;
+import org.jvnet.hk2.annotations.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
-import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
 /**
  * 
  * Simple example of how to implement Query 2 using Java for semantic normalization prototype 
  * using MongoDB Java driver library.
  */
-public class PocDemo2 {
+@Service
+public class PocDemo2 implements SampleQuery {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PocDemo2.class);
     
     @Inject
     EncounterReadConverter encounterReadConverter;
-    /**
-     * 
-     * @param args command line string arguments
-     */
-    public static void main(final String[] args){
-        PocDemo2 poc = new PocDemo2();
-        poc.query();
-    }
+
+    @Inject
+    MongoDbFactory mongoDbFactory;
+
     /**
      * public function return type void
      */
-    public void query() {
-        // connect to the local database server
-        MongoClient mongoClient = null;
-        try {
-            //mongoClient = new MongoClient("192.168.59.104", 27017); //boot2docker ip address
-            mongoClient = new MongoClient("192.168.59.103", 27017); //boot2docker ip address
-            LOGGER.debug("Obtained Mongo client");
-        } catch (UnknownHostException e) {
-            LOGGER.error("Unable to connect to MongoDB", e);
-            return;
-        }
-
+    public void query() throws DataAccessException {
         // get handle for db
-        DB db = mongoClient.getDB("test");  //instance name under docker VM
+        DB db = mongoDbFactory.db();  //instance name under docker VM
 
         LOGGER.trace("Displaying the filtered data from encountered collection: ");
 
@@ -75,15 +63,15 @@ public class PocDemo2 {
         //Display the count of items in the resultant collection
         LOGGER.debug("Filtered data count (length): " + cursor.length());
 
-        //If you want to display the actual records in the result, try the following code block
-        cursor = testCollection.find(query); //Get the cursor value afresh before iterating over the collection
+        //Get the cursor value afresh before iterating over the collection
+        cursor = testCollection.find(query);
 
 
         //Get an array of encounters
         List<Encounter> myRightArmEncounters = convertDBObjectToJavaEncounterObj(cursor);
         LOGGER.debug("myRightArmEncounters=" + myRightArmEncounters + ", size=" + myRightArmEncounters.size());
 
-        Set<Long> uniquePatientIds = new HashSet<Long>();
+        Set<Long> uniquePatientIds = new HashSet<>();
         for (Encounter rightArmEncounter : myRightArmEncounters) {
             LOGGER.debug("***!myRightArmEncounters patientId=" + rightArmEncounter.getPatientId());
 
@@ -139,8 +127,7 @@ public class PocDemo2 {
 
         //End of Query 2 processing
 
-        // release resources
-        mongoClient.close();
+        mongoDbFactory.destroy();
     }
 
     /**
@@ -184,23 +171,18 @@ public class PocDemo2 {
      */
     public List<Encounter> convertDBObjectToJavaEncounterObj(final DBCursor cursor) {
 
-        List<Encounter> encounterList = new ArrayList<Encounter>();
+        List<Encounter> encounterList = new ArrayList<>();
 
         try {
             while (cursor.hasNext()) {
                 DBObject dbObject = cursor.next();
-                //Convert to POJO and add it to the encounterList
-                //LOGGER.debug("encounterJsonStr =" + dbObject);
-                
+
                 // Use the converter class's convert() method to create POJO. 
-                //AutoWired encounterReadConverter object
-                //EncounterReadConverter encounterReadConverter = new EncounterReadConverter();
                 Encounter encounter = encounterReadConverter.convert(dbObject);
                 
                 encounterList.add(encounter);
-                //Display encounter list
-                //LOGGER.debug("encounterList size=" + encounterList.size() + ", encounterList=" + encounterList);
             }
+
             //Display encounter list
             LOGGER.debug("encounterList size=" + encounterList.size() + ", encounterList=" + encounterList);
 
