@@ -11,7 +11,11 @@
     <artifactId>integration</artifactId>
     <name>integration tests</name>
 	<packaging>jar</packaging>
-    
+
+    <properties>
+        <project.rootdir>${project.parent.basedir}</project.rootdir>
+    </properties>
+
 	<dependencies>
 
         <!-- internal dependencies -->

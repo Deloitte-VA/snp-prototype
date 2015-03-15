@@ -2,6 +2,7 @@ package com.github.jlgrock.snp.core.sample;
 
 import com.github.jlgrock.snp.apis.connection.MongoDbFactory;
 import com.github.jlgrock.snp.apis.exceptions.DataAccessException;
+import com.github.jlgrock.snp.apis.sample.SampleQuery;
 import com.github.jlgrock.snp.core.converters.EncounterReadConverter;
 import com.github.jlgrock.snp.core.domain.Encounter;
 import com.github.jlgrock.snp.core.domain.Observation;
@@ -32,15 +33,23 @@ public class PocDemo2 implements SampleQuery {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PocDemo2.class);
     
-    @Inject
-    EncounterReadConverter encounterReadConverter;
+    private final EncounterReadConverter encounterReadConverter;
 
-    @Inject
-    MongoDbFactory mongoDbFactory;
+    private final MongoDbFactory mongoDbFactory;
 
     /**
-     * public function return type void
+     * Will set up the class for querying
+     *
+     * @param encounterReadConverterIn the coverter to allow quick serialization of the Encounter domain object
+     * @param mongoDbFactoryIn the mongoDB access
      */
+    @Inject
+    public PocDemo2(final EncounterReadConverter encounterReadConverterIn, final MongoDbFactory mongoDbFactoryIn) {
+        encounterReadConverter = encounterReadConverterIn;
+        mongoDbFactory = mongoDbFactoryIn;
+    }
+
+    @Override
     public void query() throws DataAccessException {
         // get handle for db
         DB db = mongoDbFactory.db();  //instance name under docker VM

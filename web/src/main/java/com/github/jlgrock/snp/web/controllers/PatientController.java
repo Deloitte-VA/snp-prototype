@@ -22,8 +22,12 @@ import javax.inject.Inject;
 public class PatientController {
     private static final Logger LOGGER = LoggerFactory.getLogger(PatientController.class);
 
-    @Inject
     private PatientRepository repository;
+
+    @Inject
+    public PatientController(final PatientRepository repositoryIn) {
+        repository = repositoryIn;
+    }
 
     /** 
      * @param id used to find encounter

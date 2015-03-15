@@ -3,31 +3,41 @@ package com.github.jlgrock.integration.connection.security;
 import com.github.jlgrock.snp.apis.connection.MongoDBConfiguration;
 import org.glassfish.hk2.api.ServiceLocator;
 import org.glassfish.hk2.utilities.ServiceLocatorUtilities;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
- * Bla.
+ * Checks the configuration settings that are injected, based on dependencies
  */
-public class ConfigurationCheck {
+public final class ConfigurationCheck {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(ConfigurationCheck.class);
+
+    private ConfigurationCheck() {}
+
+    /**
+     * Run the configuration test
+     * @param args command line arguments - ignored
+     */
     //Simple test that can be run via command line to ensure that user credentials are being loaded properly
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         ServiceLocator locator = ServiceLocatorUtilities.createAndPopulateServiceLocator();
 
         MongoDBConfiguration myService = locator.getService(MongoDBConfiguration.class);
 
         if (myService == null) {
-            System.out.println("Configuration has not been set.");
+            LOGGER.info("Configuration has not been set.");
         } else {
-            System.out.println("Configuration has been set...");
+            LOGGER.info("Configuration has been set...");
             if (!myService.getUserCredentials().isPresent()) {
-                System.out.println("Credentials have not been set.");
+                LOGGER.info("Credentials have not been set.");
             } else {
-                System.out.println("username: " + myService.getUserCredentials().get().getUsername());
-                System.out.println("password: " + myService.getUserCredentials().get().getPassword());
+                LOGGER.info("username: " + myService.getUserCredentials().get().getUsername());
+                LOGGER.info("password: " + new String(myService.getUserCredentials().get().getPassword()));
             }
-            System.out.println("host: " + myService.getHost());
-            System.out.println("port: " + myService.getPort());
-            System.out.println("default Database: " + myService.getDefaultDatabase());
+            LOGGER.info("host: " + myService.getHost());
+            LOGGER.info("port: " + myService.getPort());
+            LOGGER.info("default Database: " + myService.getDefaultDatabase());
         }
     }
 }

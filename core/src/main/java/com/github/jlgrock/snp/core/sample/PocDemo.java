@@ -2,6 +2,7 @@ package com.github.jlgrock.snp.core.sample;
 
 import com.github.jlgrock.snp.apis.connection.MongoDbFactory;
 import com.github.jlgrock.snp.apis.exceptions.DataAccessException;
+import com.github.jlgrock.snp.apis.sample.SampleQuery;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
@@ -26,6 +27,7 @@ public class PocDemo implements SampleQuery {
     @Inject
     MongoDbFactory mongoDbFactory;
 
+    @Override
     public void query() throws DataAccessException {
         // First, get the "encounters" collection from then database
         DBCollection testCollection = mongoDbFactory.db().getCollection("encounters");

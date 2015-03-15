@@ -241,8 +241,8 @@
         <module>apis</module>
         <module>defaultconfig</module>
         <module>core</module>
-        <module>integration</module>
-        <!--<module>web</module>-->
+        <!--<module>integration</module>-->
+        <module>web</module>
         <!--<module>client</module>-->
     </modules>
 

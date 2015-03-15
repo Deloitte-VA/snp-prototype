@@ -20,11 +20,16 @@ import javax.inject.Inject;
 @RestController
 @RequestMapping("/encounter")
 public class EncounterController {
+
     private static final Logger LOGGER = LoggerFactory.getLogger(EncounterController.class);
    
-    
+    private final EncounterRepository repository;
+
     @Inject
-    private EncounterRepository repository;
+    EncounterController(final EncounterRepository repositoryIn) {
+        repository = repositoryIn;
+    }
+
     /**
      * 
      * @param pid encounter id used for search

@@ -39,11 +39,15 @@ public class SimpleMongoDbFactory implements MongoDbFactory {
      * Create a simple MongoDB connection and return the appropriate database
      *
      * @param mongoDBConfigurationIn the configuration to use to set up the connection
+     * @param mongoDatabaseManagerIn the database manager to index database connections
+     * @param synchronizationManagerIn the synchronization manager that will weave synchronization through the access
      *
      * @throws UnknownHostException if unable to connect to the database
      */
     @Inject
-    public SimpleMongoDbFactory(final MongoDBConfiguration mongoDBConfigurationIn, final MongoDatabaseManager mongoDatabaseManagerIn, TransactionSynchronizationManager synchronizationManagerIn) throws UnknownHostException {
+    public SimpleMongoDbFactory(final MongoDBConfiguration mongoDBConfigurationIn,
+                                final MongoDatabaseManager mongoDatabaseManagerIn,
+                                final TransactionSynchronizationManager synchronizationManagerIn) throws UnknownHostException {
         Preconditions.checkNotNull(mongoDBConfigurationIn, "Mongo configuration must not be null");
         mongoDBConfiguration = mongoDBConfigurationIn;
 

@@ -20,8 +20,13 @@ import javax.inject.Inject;
 public class PCEController {
     private static final Logger LOGGER = LoggerFactory.getLogger(PCEController.class);
 
-    @Inject
+
     private PCERepository repository;
+
+    @Inject
+    public PCEController(final PCERepository repositoryIn) {
+        repository = repositoryIn;
+    }
 
     /**
      * get a single PCE.

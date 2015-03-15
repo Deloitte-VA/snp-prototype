@@ -2,6 +2,7 @@ package com.github.jlgrock.snp.core.sample;
 
 import com.github.jlgrock.snp.apis.connection.MongoDbFactory;
 import com.github.jlgrock.snp.apis.exceptions.DataAccessException;
+import com.github.jlgrock.snp.apis.sample.SampleQuery;
 import com.mongodb.AggregationOptions;
 import com.mongodb.BasicDBObject;
 import com.mongodb.Cursor;
@@ -25,9 +26,18 @@ public class PocDemoAggregationPipeline implements SampleQuery {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PocDemoAggregationPipeline.class);
 
-    @Inject
-    MongoDbFactory mongoDbFactory;
+    private final MongoDbFactory mongoDbFactory;
 
+    /**
+     * Will set up the class for querying
+     * @param mongoDbFactoryIn the mongoDB access
+     */
+    @Inject
+    public PocDemoAggregationPipeline(final MongoDbFactory mongoDbFactoryIn) {
+        mongoDbFactory = mongoDbFactoryIn;
+    }
+
+    @Override
     public void query() throws DataAccessException {
         // get handle to database
         DB db = mongoDbFactory.db();
