@@ -1,5 +1,6 @@
 package com.github.jlgrock.snp.core.converters;
 
+import com.github.jlgrock.snp.apis.converters.ReadConverter;
 import com.github.jlgrock.snp.core.data.PatientTags;
 import com.github.jlgrock.snp.core.domain.Gender;
 import com.github.jlgrock.snp.core.domain.Patient;

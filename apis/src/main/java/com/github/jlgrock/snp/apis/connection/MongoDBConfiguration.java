@@ -1,12 +1,15 @@
 package com.github.jlgrock.snp.apis.connection;
 
-import com.github.jlgrock.snp.apis.connection.security.UserCredentials;
+import com.mongodb.MongoCredential;
+import com.mongodb.ServerAddress;
 import org.jvnet.hk2.annotations.Contract;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
- * The individual configuration settings for connecting to the mongodb server.
+ * The individual configuration settings for connecting to the mongodb database.  A separate configuration should be
+ * provided for each db connection.
  */
 @Contract
 public interface MongoDBConfiguration {
@@ -14,20 +17,27 @@ public interface MongoDBConfiguration {
     /**
      * @return the user credentials for the user that will log in for all MongoClient connections
      */
-    Optional<UserCredentials> getUserCredentials();
+    Optional<List<MongoCredential>> getUserCredentials();
 
     /**
-     * @return the hostname or ip address to use for the server.
+     * The hostname/ip address and port for a single host mode.  If this is set, it is expected
+     * that the implementation for {@link MongoDBConfiguration#getHosts} has not been set.
+     *
+     * @return The hostname/ip address and port for a single host mode.
      */
-    String getHost();
+    Optional<ServerAddress> getHost();
 
     /**
-     * @return the port to use for the server.
+     * Return the hosts when using replicaSets.  If this is set, it is expected
+     * that the implementation for {@link MongoDBConfiguration#getHost} has not been set
+     *
+     * @return Return the hosts when using replicaSets.
      */
-    int getPort();
+    Optional<List<ServerAddress>> getHosts();
+
 
     /**
-     * @return the name of the default database.
+     * @return the name of the database.
      */
     String getDefaultDatabase();
 }

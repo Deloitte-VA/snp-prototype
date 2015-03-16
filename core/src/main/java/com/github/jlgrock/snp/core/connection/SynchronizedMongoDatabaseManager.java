@@ -50,6 +50,11 @@ public class SynchronizedMongoDatabaseManager implements MongoDatabaseManager {
         return collectionMap.isEmpty();
     }
 
+    @Override
+    public DB getDB(final String key) {
+        return collectionMap.get(key);
+    }
+
     /**
      * Whether or not this is currently marked as synchronized
      *

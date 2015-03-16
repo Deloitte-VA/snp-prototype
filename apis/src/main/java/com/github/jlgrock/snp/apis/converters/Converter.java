@@ -1,4 +1,4 @@
-package com.github.jlgrock.snp.core.converters;
+package com.github.jlgrock.snp.apis.converters;
 
 /**
  * Simple interface used to help in conversion between known object types.

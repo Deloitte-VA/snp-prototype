@@ -1,14 +1,14 @@
 package com.github.jlgrock.snp.core.domain.primitives;
 
 import org.bson.types.Binary;
-import org.junit.Test;
+import org.testng.annotations.Test;
 
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.time.LocalDate;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 public class PrimitivesTest {
 	/**
@@ -26,7 +26,7 @@ public class PrimitivesTest {
     /**
      * public function returns void
      */
-    @Test(expected=IllegalArgumentException.class)
+    @Test(expectedExceptions=IllegalArgumentException.class)
     public void testBadBinary() {
         String str = "bla";
         SimplePrimitive.createPrimitive(PrimitiveType.BINARY64.getId(), str);
@@ -45,7 +45,7 @@ public class PrimitivesTest {
     /**
      * public function returns void
      */
-    @Test(expected=IllegalArgumentException.class)
+    @Test(expectedExceptions=IllegalArgumentException.class)
     public void testBadBoolean() {
         String str = "bla";
         SimplePrimitive.createPrimitive(PrimitiveType.BOOLEAN.getId(), str);
@@ -64,7 +64,7 @@ public class PrimitivesTest {
     /**
      * public function returns void
      */
-    @Test(expected=IllegalArgumentException.class)
+    @Test(expectedExceptions=IllegalArgumentException.class)
     public void testBadDate() {
         String str = "bla";
         SimplePrimitive.createPrimitive(PrimitiveType.DATE.getId(), str);
@@ -83,7 +83,7 @@ public class PrimitivesTest {
     /**
      * public function returns void
      */
-    @Test(expected=IllegalArgumentException.class)
+    @Test(expectedExceptions=IllegalArgumentException.class)
     public void testBadDateTime() {
         String str = "bla";
         SimplePrimitive.createPrimitive(PrimitiveType.DATETIME.getId(), str);
@@ -102,7 +102,7 @@ public class PrimitivesTest {
     /**
      * public function returns void
      */
-    @Test(expected=IllegalArgumentException.class)
+    @Test(expectedExceptions=IllegalArgumentException.class)
     public void testBadDecimal() {
         String str = "bla";
         SimplePrimitive.createPrimitive(PrimitiveType.DECIMAL.getId(), str);
@@ -121,7 +121,7 @@ public class PrimitivesTest {
     /**
      * public function returns void
      */
-    @Test(expected=IllegalArgumentException.class)
+    @Test(expectedExceptions=IllegalArgumentException.class)
     public void testBadInteger() {
         String str = "bla";
         SimplePrimitive.createPrimitive(PrimitiveType.INTEGER.getId(), str);
@@ -140,7 +140,7 @@ public class PrimitivesTest {
     /**
      * public function returns void
      */
-    @Test(expected=IllegalArgumentException.class)
+    @Test(expectedExceptions=IllegalArgumentException.class)
     public void testBadString() {
         Integer integer = 6;
         SimplePrimitive.createPrimitive(PrimitiveType.STRING.getId(), integer);
@@ -148,7 +148,7 @@ public class PrimitivesTest {
     /**
      * public function returns void
      */
-    @Test(expected=IllegalArgumentException.class)
+    @Test(expectedExceptions=IllegalArgumentException.class)
     public void testUnknownType() {
         Double floatTest = 4.0;
         SimplePrimitive.createPrimitive(103, floatTest);

@@ -44,4 +44,13 @@ public interface MongoDatabaseManager {
      * @return {@literal true} if it is empty, {@literal false} otherwise
      */
     boolean isEmpty();
+
+    /**
+     * Retrieve the database defined by the key
+     *
+     * @param key the database name
+     *
+     * @return the database identified by this key
+     */
+    DB getDB(String key);
 }

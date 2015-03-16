@@ -6,13 +6,13 @@ import com.github.jlgrock.snp.core.domain.primitives.BooleanPrimitive;
 import com.github.jlgrock.snp.core.domain.primitives.PrimitiveType;
 import com.github.jlgrock.snp.core.domain.primitives.StringPrimitive;
 import com.mongodb.DBObject;
-import org.junit.Test;
+import org.testng.annotations.Test;
 
 import java.time.Instant;
 
-import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import static org.testng.Assert.assertEquals;
 
 public class ObservationWriteConverterTest {
     /**

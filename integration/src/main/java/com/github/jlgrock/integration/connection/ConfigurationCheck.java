@@ -1,4 +1,4 @@
-package com.github.jlgrock.integration.connection.security;
+package com.github.jlgrock.integration.connection;
 
 import com.github.jlgrock.snp.apis.connection.MongoDBConfiguration;
 import org.glassfish.hk2.api.ServiceLocator;
@@ -32,11 +32,13 @@ public final class ConfigurationCheck {
             if (!myService.getUserCredentials().isPresent()) {
                 LOGGER.info("Credentials have not been set.");
             } else {
-                LOGGER.info("username: " + myService.getUserCredentials().get().getUsername());
-                LOGGER.info("password: " + new String(myService.getUserCredentials().get().getPassword()));
+                LOGGER.info("credentials: " + myService.getUserCredentials().get());
             }
-            LOGGER.info("host: " + myService.getHost());
-            LOGGER.info("port: " + myService.getPort());
+            if (myService.getHost().isPresent()) {
+                LOGGER.info("host: " + myService.getHost().get());
+            } else {
+                LOGGER.info("hosts: " + myService.getHosts().get());
+            }
             LOGGER.info("default Database: " + myService.getDefaultDatabase());
         }
     }

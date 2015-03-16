@@ -23,25 +23,18 @@ import java.net.UnknownHostException;
 public class SimpleMongoDbFactory implements MongoDbFactory {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SimpleMongoDbFactory.class);
-
-    private final MongoClient mongo;
-
-    private WriteConcern writeConcern;
-
     private final MongoDBConfiguration mongoDBConfiguration;
-
     private final MongoDatabaseManager mongoDatabaseManager;
-
     private final TransactionSynchronizationManager synchronizationManager;
-
+    private WriteConcern writeConcern;
+    private MongoClient mongoClient;
 
     /**
      * Create a simple MongoDB connection and return the appropriate database
      *
-     * @param mongoDBConfigurationIn the configuration to use to set up the connection
-     * @param mongoDatabaseManagerIn the database manager to index database connections
+     * @param mongoDBConfigurationIn   the configuration to use to set up the connection
+     * @param mongoDatabaseManagerIn   the database manager to index database connections
      * @param synchronizationManagerIn the synchronization manager that will weave synchronization through the access
-     *
      * @throws UnknownHostException if unable to connect to the database
      */
     @Inject
@@ -58,15 +51,9 @@ public class SimpleMongoDbFactory implements MongoDbFactory {
         //                *   new ServerAddress("localhost", 27018),
         //        *   new ServerAddress("localhost", 27019)));
         //TODO set credentials
-        mongo = new MongoClient(mongoDBConfiguration.getHost(), mongoDBConfiguration.getPort());
+
         mongoDatabaseManager = mongoDatabaseManagerIn;
         synchronizationManager = synchronizationManagerIn;
-    }
-
-
-    @Override
-    public void setWriteConcern(final WriteConcern writeConcernIn) {
-        writeConcern = writeConcernIn;
     }
 
     @Override
@@ -75,8 +62,13 @@ public class SimpleMongoDbFactory implements MongoDbFactory {
     }
 
     @Override
+    public void setWriteConcern(final WriteConcern writeConcernIn) {
+        writeConcern = writeConcernIn;
+    }
+
+    @Override
     public void destroy() {
-        mongo.close();
+        mongoClient.close();
     }
 
     @Override
@@ -95,9 +87,19 @@ public class SimpleMongoDbFactory implements MongoDbFactory {
             databaseToUse = databaseNameIn;
         }
 
+        if (mongoClient == null) {
+            createConnection();
+        }
+
         LOGGER.trace("Getting Mongo Database name=[" + databaseToUse + "]");
 
-        DB db = mongo.getDB(databaseToUse);
+        DB db;
+        if (mongoDatabaseManager.containsDB(databaseToUse)) {
+            db = mongoDatabaseManager.getDB(databaseToUse);
+        } else {
+            db = mongoClient.getDB(databaseToUse);
+            mongoDatabaseManager.addDb(databaseToUse, db);
+        }
 
         //TODO need to work on synchronization code
 
@@ -107,4 +109,26 @@ public class SimpleMongoDbFactory implements MongoDbFactory {
 
         return db;
     }
+
+    private void createConnection() {
+        Preconditions.checkState(mongoDBConfiguration.getHost().isPresent() || mongoDBConfiguration.getHosts().isPresent());
+
+        if (mongoDBConfiguration.getHost().isPresent()) {
+            // the server is using a standalone database
+            if (mongoDBConfiguration.getUserCredentials().isPresent()) {
+                mongoClient = new MongoClient(mongoDBConfiguration.getHost().get(), mongoDBConfiguration.getUserCredentials().get());
+            } else {
+                mongoClient = new MongoClient(mongoDBConfiguration.getHost().get());
+            }
+        } else {
+            // The server is using a replica set
+            if (mongoDBConfiguration.getUserCredentials().isPresent()) {
+                mongoClient = new MongoClient(mongoDBConfiguration.getHosts().get(), mongoDBConfiguration.getUserCredentials().get());
+            } else {
+                mongoClient = new MongoClient(mongoDBConfiguration.getHosts().get());
+            }
+        }
+        // create single host
+    }
+
 }

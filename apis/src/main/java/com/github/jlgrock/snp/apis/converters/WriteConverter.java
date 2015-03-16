@@ -1,4 +1,4 @@
-package com.github.jlgrock.snp.core.converters;
+package com.github.jlgrock.snp.apis.converters;
 
 import org.jvnet.hk2.annotations.Contract;
 
