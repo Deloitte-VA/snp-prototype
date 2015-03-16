@@ -143,10 +143,10 @@ public class PrimitivesTest {
      */
     @Test
     public void testGoodLong() {
-        Long lng = 55;
+        Long lng = 55l;
         SimplePrimitive simplePrimitive = SimplePrimitive.createPrimitive(PrimitiveType.LONG.getId(), lng);
-        assertTrue(simplePrimitive instanceof IntegerPrimitive);
-        assertEquals(PrimitiveType.INTEGER, simplePrimitive.getType());
+        assertTrue(simplePrimitive instanceof LongPrimitive);
+        assertEquals(PrimitiveType.LONG, simplePrimitive.getType());
         assertEquals(lng, simplePrimitive.getValue());
     }
 
