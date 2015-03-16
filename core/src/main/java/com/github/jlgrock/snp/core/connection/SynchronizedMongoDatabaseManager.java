@@ -31,17 +31,17 @@ public class SynchronizedMongoDatabaseManager implements MongoDatabaseManager {
     }
 
     @Override
-    public DB removeDB(final String dbName) {
+    public DB removeDb(final String dbName) {
         return collectionMap.remove(dbName);
     }
 
     @Override
-    public boolean containsDB(final DB session) {
+    public boolean containsDb(final DB session) {
         return collectionMap.containsValue(session);
     }
 
     @Override
-    public boolean containsDB(final String key) {
+    public boolean containsDb(final String key) {
         return collectionMap.containsKey(key);
     }
 
@@ -51,7 +51,7 @@ public class SynchronizedMongoDatabaseManager implements MongoDatabaseManager {
     }
 
     @Override
-    public DB getDB(final String key) {
+    public DB getDb(final String key) {
         return collectionMap.get(key);
     }
 

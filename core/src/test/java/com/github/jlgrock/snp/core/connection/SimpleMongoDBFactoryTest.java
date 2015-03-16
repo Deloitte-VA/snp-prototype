@@ -1,7 +1,7 @@
 package com.github.jlgrock.snp.core.connection;
 
-import com.github.jlgrock.snp.apis.connection.MongoDBConfiguration;
 import com.github.jlgrock.snp.apis.connection.MongoDatabaseManager;
+import com.github.jlgrock.snp.apis.connection.MongoDbConfiguration;
 import com.github.jlgrock.snp.apis.connection.synchronization.TransactionSynchronizationManager;
 import com.mongodb.DB;
 import com.mongodb.MongoCredential;
@@ -16,13 +16,13 @@ import java.util.List;
 import java.util.Optional;
 
 @Test
-public class SimpleMongoDBFactoryTest {
+public class SimpleMongoDbFactoryTest {
 
     @Mock
     ServerAddress serverAddress;
 
     @Spy
-    MongoDBConfiguration mongoDBConfiguration = new MongoDBConfiguration() {
+    MongoDbConfiguration mongoDBConfiguration = new MongoDbConfiguration() {
         @Override
         public Optional<List<MongoCredential>> getUserCredentials() {
             return Optional.ofNullable(null);
@@ -52,17 +52,17 @@ public class SimpleMongoDBFactoryTest {
         }
 
         @Override
-        public DB removeDB(String dbName) {
+        public DB removeDb(String dbName) {
             return null;
         }
 
         @Override
-        public boolean containsDB(DB session) {
+        public boolean containsDb(DB session) {
             return false;
         }
 
         @Override
-        public boolean containsDB(String key) {
+        public boolean containsDb(String key) {
             return false;
         }
 
@@ -72,7 +72,7 @@ public class SimpleMongoDBFactoryTest {
         }
 
         @Override
-        public DB getDB(String key) {
+        public DB getDb(String key) {
             return null;
         }
     };

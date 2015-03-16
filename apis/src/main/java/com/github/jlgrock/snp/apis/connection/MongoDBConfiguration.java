@@ -12,7 +12,7 @@ import java.util.Optional;
  * provided for each db connection.
  */
 @Contract
-public interface MongoDBConfiguration {
+public interface MongoDbConfiguration {
 
     /**
      * @return the user credentials for the user that will log in for all MongoClient connections
@@ -21,7 +21,7 @@ public interface MongoDBConfiguration {
 
     /**
      * The hostname/ip address and port for a single host mode.  If this is set, it is expected
-     * that the implementation for {@link MongoDBConfiguration#getHosts} has not been set.
+     * that the implementation for {@link MongoDbConfiguration#getHosts} has not been set.
      *
      * @return The hostname/ip address and port for a single host mode.
      */
@@ -29,7 +29,7 @@ public interface MongoDBConfiguration {
 
     /**
      * Return the hosts when using replicaSets.  If this is set, it is expected
-     * that the implementation for {@link MongoDBConfiguration#getHost} has not been set
+     * that the implementation for {@link MongoDbConfiguration#getHost} has not been set
      *
      * @return Return the hosts when using replicaSets.
      */

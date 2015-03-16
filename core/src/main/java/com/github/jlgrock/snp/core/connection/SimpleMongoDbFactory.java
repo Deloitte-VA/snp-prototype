@@ -1,7 +1,7 @@
 package com.github.jlgrock.snp.core.connection;
 
-import com.github.jlgrock.snp.apis.connection.MongoDBConfiguration;
 import com.github.jlgrock.snp.apis.connection.MongoDatabaseManager;
+import com.github.jlgrock.snp.apis.connection.MongoDbConfiguration;
 import com.github.jlgrock.snp.apis.connection.MongoDbFactory;
 import com.github.jlgrock.snp.apis.connection.synchronization.TransactionSynchronizationManager;
 import com.github.jlgrock.snp.apis.exceptions.DataAccessException;
@@ -23,7 +23,7 @@ import java.net.UnknownHostException;
 public class SimpleMongoDbFactory implements MongoDbFactory {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SimpleMongoDbFactory.class);
-    private final MongoDBConfiguration mongoDBConfiguration;
+    private final MongoDbConfiguration mongoDBConfiguration;
     private final MongoDatabaseManager mongoDatabaseManager;
     private final TransactionSynchronizationManager synchronizationManager;
     private WriteConcern writeConcern;
@@ -38,7 +38,7 @@ public class SimpleMongoDbFactory implements MongoDbFactory {
      * @throws UnknownHostException if unable to connect to the database
      */
     @Inject
-    public SimpleMongoDbFactory(final MongoDBConfiguration mongoDBConfigurationIn,
+    public SimpleMongoDbFactory(final MongoDbConfiguration mongoDBConfigurationIn,
                                 final MongoDatabaseManager mongoDatabaseManagerIn,
                                 final TransactionSynchronizationManager synchronizationManagerIn) throws UnknownHostException {
         Preconditions.checkNotNull(mongoDBConfigurationIn, "Mongo configuration must not be null");
@@ -94,8 +94,8 @@ public class SimpleMongoDbFactory implements MongoDbFactory {
         LOGGER.trace("Getting Mongo Database name=[" + databaseToUse + "]");
 
         DB db;
-        if (mongoDatabaseManager.containsDB(databaseToUse)) {
-            db = mongoDatabaseManager.getDB(databaseToUse);
+        if (mongoDatabaseManager.containsDb(databaseToUse)) {
+            db = mongoDatabaseManager.getDb(databaseToUse);
         } else {
             db = mongoClient.getDB(databaseToUse);
             mongoDatabaseManager.addDb(databaseToUse, db);

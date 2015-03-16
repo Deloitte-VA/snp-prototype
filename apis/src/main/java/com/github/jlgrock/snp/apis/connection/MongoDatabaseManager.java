@@ -22,21 +22,21 @@ public interface MongoDatabaseManager {
      * @param dbName the name of the database to un-index.
      * @return the database that matches the name, or {@literal null} if it doesn't exist
      */
-    DB removeDB(String dbName);
+    DB removeDb(String dbName);
 
     /**
      * Determine whether or not the DB has been indexed.
      * @param session the db to check for
      * @return {@literal true} if it contains the session, {@literal false} otherwise
      */
-    boolean containsDB(DB session);
+    boolean containsDb(DB session);
 
     /**
      * Determine whether or not the DB has been indexed.
      * @param key the db to check for
      * @return {@literal true} if it contains the key, {@literal false} otherwise
      */
-    boolean containsDB(String key);
+    boolean containsDb(String key);
 
     /**
      * Whether or not this index has been initialized or not
@@ -52,5 +52,5 @@ public interface MongoDatabaseManager {
      *
      * @return the database identified by this key
      */
-    DB getDB(String key);
+    DB getDb(String key);
 }
