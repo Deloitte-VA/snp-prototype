@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.inject.Inject;
+
 /**
  * The Controller serving up domain objects for Patient objectsØ.
  */
@@ -20,8 +22,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class PatientController {
     private static final Logger LOGGER = LoggerFactory.getLogger(PatientController.class);
 
-    @Autowired
     private PatientRepository repository;
+
+    @Inject
+    public PatientController(final PatientRepository repositoryIn) {
+        repository = repositoryIn;
+    }
 
     /** 
      * @param id used to find encounter

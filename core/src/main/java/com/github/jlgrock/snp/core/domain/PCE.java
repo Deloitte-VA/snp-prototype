@@ -1,14 +1,15 @@
 package com.github.jlgrock.snp.core.domain;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import com.google.common.base.MoreObjects;
+import com.google.common.base.Objects;
+
+import javax.validation.constraints.NotNull;
 
 /**
- * Created by jlgrock on 1/11/15.
+ * The post-coordinated expression and the unique identifier, for reference purposes.
  */
-@Document(collection = "pces")
 public class PCE {
-    @Id
+    @NotNull
     private Long id;
 
     private String desc;
@@ -18,27 +19,23 @@ public class PCE {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        PCE pce = (PCE) o;
+        PCE that = (PCE) o;
 
-        if (desc != null ? !desc.equals(pce.desc) : pce.desc != null) return false;
-        if (id != null ? !id.equals(pce.id) : pce.id != null) return false;
-
-        return true;
+        return Objects.equal(id, that.id) &&
+                Objects.equal(desc, that.desc);
     }
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (desc != null ? desc.hashCode() : 0);
-        return result;
+        return Objects.hashCode(id, desc);
     }
 
     @Override
     public String toString() {
-        return "PCE{" +
-                "id=" + id +
-                ", desc='" + desc + '\'' +
-                '}';
+        return MoreObjects.toStringHelper(this)
+                .add("id", id)
+                .add("desc", desc)
+                .toString();
     }
 
     public Long getId() {

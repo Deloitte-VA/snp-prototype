@@ -1,7 +1,7 @@
 package com.github.jlgrock.snp.core.data;
 
+import com.github.jlgrock.snp.apis.data.MongoRepository;
 import com.github.jlgrock.snp.core.domain.Encounter;
-import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.Date;
 import java.util.List;

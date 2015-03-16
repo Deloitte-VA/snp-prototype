@@ -3,7 +3,7 @@ package com.github.jlgrock.snp.core.data;
 /**
  * JSON key tags related to Patient serialization.
  */
-public class PatientTags {
+public final class PatientTags {
     /**
      * The unique identifier.
      */

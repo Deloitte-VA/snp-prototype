@@ -1,20 +1,18 @@
 package com.github.jlgrock.snp.core.domain;
 
-import org.joda.time.DateTime;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
+import com.google.common.base.MoreObjects;
+import com.google.common.base.Objects;
 
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
  * The domain object that represents a single encounter in a patient visit.  Each encounter can consist
  * of multiple {@link com.github.jlgrock.snp.core.domain.Observation Observation} objects.
  */
-@Document(collection = "encounters")
 public class Encounter {
-    @Id
+    @NotNull
     private Long id;
 
     @NotNull
@@ -25,48 +23,46 @@ public class Encounter {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Encounter encounter = (Encounter) o;
+        Encounter that = (Encounter) o;
 
-        if (date != null ? !date.equals(encounter.date) : encounter.date != null) return false;
-        if (id != null ? !id.equals(encounter.id) : encounter.id != null) return false;
-        if (reasonForVisit != null ? !reasonForVisit.equals(encounter.reasonForVisit) : encounter.reasonForVisit != null)
-            return false;
-
-        return true;
+        return Objects.equal(id, that.id) &&
+                Objects.equal(patientId, that.patientId) &&
+                Objects.equal(date, that.date) &&
+                Objects.equal(type, that.type) &&
+                Objects.equal(reasonForVisit, that.reasonForVisit) &&
+                Objects.equal(observations, that.observations);
     }
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (date != null ? date.hashCode() : 0);
-        result = 31 * result + (reasonForVisit != null ? reasonForVisit.hashCode() : 0);
-        return result;
+        return Objects.hashCode(id, patientId, date, type, reasonForVisit, observations);
     }
 
     @Override
     public String toString() {
-        return "Encounter{" +
-                "id=" + id +
-
-                ", date=" + date +
-                ", reasonForVisit='" + reasonForVisit + '\'' +
-                '}';
+        return MoreObjects.toStringHelper(this)
+                .add("id", id)
+                .add("patientId", patientId)
+                .add("date", date)
+                .add("type", type)
+                .add("reasonForVisit", reasonForVisit)
+                .add("observations", observations)
+                .toString();
     }
 
     @NotNull
-    private DateTime date;
+    private LocalDate date;
 
     private Integer type;
 
-    @Field(value = "reason_for_visit")
     private String reasonForVisit;
 
-    public DateTime getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(final DateTime pDate) {
-        this.date = pDate;
+    public void setDate(final LocalDate pDate) {
+        date = pDate;
     }
 
     public String getReasonForVisit() {
@@ -74,7 +70,7 @@ public class Encounter {
     }
 
     public void setReasonForVisit(final String pReasonForVisit) {
-        this.reasonForVisit = pReasonForVisit;
+        reasonForVisit = pReasonForVisit;
     }
 
     public List<Observation> getObservations() {
@@ -82,21 +78,21 @@ public class Encounter {
     }
 
     public void setObservations(final List<Observation> pObservations) {
-        this.observations = pObservations;
+        observations = pObservations;
     }
 
     public Integer getType() {
         return type;
     }
 
-    public void setType(final Integer ptype) {
-        this.type = ptype;
+    public void setType(final Integer pType) {
+        type = pType;
     }
 
     private List<Observation> observations;
 
     public void setId(final Long pId) {
-        this.id = pId;
+        id = pId;
     }
 
     public Long getId() {

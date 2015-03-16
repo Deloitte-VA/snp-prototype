@@ -11,11 +11,11 @@ import java.util.Map;
 public enum Race {
     CAUCASIAN(1), ASIAN(2), HISPANIC(3), BLACK_AFRICAN_AMERICAN(4), AMERICAN_INDIAN(5), OTHER(6);
 
-    static Map<Integer, Race> valuesById;
+    private static final Map<Integer, Race> VALUES_BY_ID;
 
     static {
-        valuesById = new HashMap<>();
-        Arrays.asList(Race.values()).forEach(race -> valuesById.put(race.getId(), race));
+        VALUES_BY_ID = new HashMap<>();
+        Arrays.asList(Race.values()).forEach(race -> VALUES_BY_ID.put(race.getId(), race));
     }
 
     private final Integer id;
@@ -36,7 +36,7 @@ public enum Race {
      * @return the Race enumeration that matches the integer.
      */
     public static Race getValueById(final Integer id) {
-        return valuesById.get(id);
+        return VALUES_BY_ID.get(id);
     }
 }
 

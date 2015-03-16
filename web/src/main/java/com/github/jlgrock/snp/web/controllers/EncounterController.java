@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.inject.Inject;
+
 /**
  * The Controller serving up domain objects for Encounter objects.
  */
@@ -18,11 +20,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/encounter")
 public class EncounterController {
+
     private static final Logger LOGGER = LoggerFactory.getLogger(EncounterController.class);
    
-    
-    @Autowired
-    private EncounterRepository repository;
+    private final EncounterRepository repository;
+
+    @Inject
+    EncounterController(final EncounterRepository repositoryIn) {
+        repository = repositoryIn;
+    }
+
     /**
      * 
      * @param pid encounter id used for search

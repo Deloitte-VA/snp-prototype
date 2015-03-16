@@ -5,12 +5,13 @@ import com.github.jlgrock.snp.core.domain.Gender;
 import com.github.jlgrock.snp.core.domain.Patient;
 import com.github.jlgrock.snp.core.domain.Race;
 import com.mongodb.DBObject;
-import org.joda.time.DateTime;
-import org.junit.Test;
+import org.testng.annotations.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.time.LocalDate;
+
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import static org.testng.Assert.assertEquals;
 
 public class PatientReadConverterTest {
     /**
@@ -18,14 +19,14 @@ public class PatientReadConverterTest {
      */
     @Test
     public void testConvert() {
-        DateTime dob = new DateTime(12345l);
+        LocalDate dob = LocalDate.ofEpochDay(12345l);
 
         DBObject dbObj = mock(DBObject.class);
         when(dbObj.get(PatientTags.ID_TAG)).thenReturn((Long) 123l);
         when(dbObj.get(PatientTags.FIRST_NAME_TAG)).thenReturn("Jerry");
         when(dbObj.get(PatientTags.MIDDLE_NAME_TAG)).thenReturn("Lee");
         when(dbObj.get(PatientTags.LAST_NAME_TAG)).thenReturn("Lewis");
-        when(dbObj.get(PatientTags.DATE_OF_BIRTH_TAG)).thenReturn(dob.getMillis());
+        when(dbObj.get(PatientTags.DATE_OF_BIRTH_TAG)).thenReturn(dob.toEpochDay());
         when(dbObj.get(PatientTags.GENDER_TAG)).thenReturn(Gender.MALE.getId());
         when(dbObj.get(PatientTags.RACE_TAG)).thenReturn(Race.AMERICAN_INDIAN.getId());
 

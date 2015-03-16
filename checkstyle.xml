@@ -173,7 +173,7 @@
       <property name="ignoreCase" value="true"/>
     </module>
     <module name="AbstractClassName">
-      <property name="severity" value="error"/>
+      <property name="severity" value="warning"/>
     </module>
     <module name="ClassTypeParameterName">
       <property name="severity" value="error"/>

@@ -6,15 +6,15 @@ import com.github.jlgrock.snp.core.domain.Observation;
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
-import org.joda.time.DateTime;
-import org.junit.Test;
+import org.testng.annotations.Test;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import static org.testng.Assert.assertEquals;
 
 public class EncounterReadConverterTest {
     /**
@@ -22,7 +22,7 @@ public class EncounterReadConverterTest {
      */
     @Test
     public void testConvert() {
-        DateTime date = new DateTime(99999l);
+        LocalDate date = LocalDate.ofEpochDay(99999l);
         Long patientId = 456l;
 
         Observation observation1 = mock(Observation.class);
@@ -44,7 +44,7 @@ public class EncounterReadConverterTest {
         DBObject dbObject = new BasicDBObject() {{
             put(EncounterTags.ID_TAG, 123l);
             put(EncounterTags.PATIENT_TAG, 456l);
-            put(EncounterTags.DATE_TAG, date.getMillis());
+            put(EncounterTags.DATE_TAG, date.toEpochDay());
             put(EncounterTags.TYPE_TAG, 1);
             put(EncounterTags.REASON_FOR_VISIT_TAG, "hernia");
             put(EncounterTags.OBSERVATIONS_TAG, observationObjs);

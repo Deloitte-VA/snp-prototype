@@ -1,15 +1,16 @@
 package com.github.jlgrock.snp.core.converters;
 
+import com.github.jlgrock.snp.apis.converters.WriteConverter;
 import com.github.jlgrock.snp.core.data.EncounterTags;
 import com.github.jlgrock.snp.core.domain.Encounter;
 import com.github.jlgrock.snp.core.domain.Observation;
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.convert.converter.Converter;
-import org.springframework.stereotype.Component;
+import org.jvnet.hk2.annotations.Service;
 
+import javax.inject.Inject;
+import javax.inject.Named;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -17,15 +18,17 @@ import java.util.stream.Stream;
 /**
  * A Conversion class to convert between an Encounter objects and a MongoDB DBObject.
  */
-@Component
-public class EncounterWriteConverter implements Converter<Encounter, DBObject> {
+@Service
+@Named
+public class EncounterWriteConverter implements WriteConverter<Encounter, DBObject> {
 
     private final ObservationWriteConverter observationWriteConverter;
     /**
      * 
-     * @param observationWriteConverterIn object of type ObservationWriteConverter that has values from an Observation object stored in a MongoDB object.
+     * @param observationWriteConverterIn object of type ObservationWriteConverter that has values from
+     *                                    an Observation object stored in a MongoDB object.
      */
-    @Autowired
+    @Inject
     public EncounterWriteConverter(final ObservationWriteConverter observationWriteConverterIn) {
         observationWriteConverter = observationWriteConverterIn;
     }
@@ -35,7 +38,7 @@ public class EncounterWriteConverter implements Converter<Encounter, DBObject> {
         DBObject dbo = new BasicDBObject();
         dbo.put(EncounterTags.ID_TAG, source.getId());
         dbo.put(EncounterTags.PATIENT_TAG, source.getPatientId());
-        dbo.put(EncounterTags.DATE_TAG, source.getDate().getMillis());
+        dbo.put(EncounterTags.DATE_TAG, source.getDate().toEpochDay());
         dbo.put(EncounterTags.TYPE_TAG, source.getType());
         dbo.put(EncounterTags.REASON_FOR_VISIT_TAG, source.getReasonForVisit());
 
