@@ -101,7 +101,7 @@ public interface MongoRepository<DT, ID extends Serializable> {
      *
      * throws IllegalArgumentException in case the given {@code id} is {@literal null}
      */
-    void delete(ID id);
+    void deleteById(ID id);
 
     /**
      * Deletes a given entity.
