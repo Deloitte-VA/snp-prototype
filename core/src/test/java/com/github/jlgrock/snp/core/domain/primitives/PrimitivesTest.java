@@ -23,6 +23,7 @@ public class PrimitivesTest {
         assertEquals(PrimitiveType.BINARY64, simplePrimitive.getType());
         assertEquals(binary, simplePrimitive.getValue());
     }
+
     /**
      * public function returns void
      */
@@ -31,6 +32,7 @@ public class PrimitivesTest {
         String str = "bla";
         SimplePrimitive.createPrimitive(PrimitiveType.BINARY64.getId(), str);
     }
+
     /**
      * public function returns void
      */
@@ -42,6 +44,7 @@ public class PrimitivesTest {
         assertEquals(PrimitiveType.BOOLEAN, simplePrimitive.getType());
         assertEquals(booleanTest, simplePrimitive.getValue());
     }
+
     /**
      * public function returns void
      */
@@ -50,6 +53,7 @@ public class PrimitivesTest {
         String str = "bla";
         SimplePrimitive.createPrimitive(PrimitiveType.BOOLEAN.getId(), str);
     }
+
     /**
      * public function returns void
      */
@@ -61,6 +65,7 @@ public class PrimitivesTest {
         assertEquals(PrimitiveType.DATE, simplePrimitive.getType());
         assertEquals(LocalDate.ofEpochDay(longVal), simplePrimitive.getValue());
     }
+
     /**
      * public function returns void
      */
@@ -69,6 +74,7 @@ public class PrimitivesTest {
         String str = "bla";
         SimplePrimitive.createPrimitive(PrimitiveType.DATE.getId(), str);
     }
+
     /**
      * public function returns void
      */
@@ -80,6 +86,7 @@ public class PrimitivesTest {
         assertEquals(PrimitiveType.DATETIME, simplePrimitive.getType());
         assertEquals(Instant.ofEpochMilli(longVal), simplePrimitive.getValue());
     }
+
     /**
      * public function returns void
      */
@@ -88,6 +95,7 @@ public class PrimitivesTest {
         String str = "bla";
         SimplePrimitive.createPrimitive(PrimitiveType.DATETIME.getId(), str);
     }
+
     /**
      * public function returns void
      */
@@ -99,6 +107,7 @@ public class PrimitivesTest {
         assertEquals(PrimitiveType.DECIMAL, simplePrimitive.getType());
         assertEquals(bigDecimal, simplePrimitive.getValue());
     }
+
     /**
      * public function returns void
      */
@@ -107,6 +116,7 @@ public class PrimitivesTest {
         String str = "bla";
         SimplePrimitive.createPrimitive(PrimitiveType.DECIMAL.getId(), str);
     }
+
     /**
      * public function returns void
      */
@@ -118,6 +128,7 @@ public class PrimitivesTest {
         assertEquals(PrimitiveType.INTEGER, simplePrimitive.getType());
         assertEquals(integer, simplePrimitive.getValue());
     }
+
     /**
      * public function returns void
      */
@@ -126,6 +137,28 @@ public class PrimitivesTest {
         String str = "bla";
         SimplePrimitive.createPrimitive(PrimitiveType.INTEGER.getId(), str);
     }
+
+    /**
+     * public function returns void
+     */
+    @Test
+    public void testGoodLong() {
+        Long lng = 55;
+        SimplePrimitive simplePrimitive = SimplePrimitive.createPrimitive(PrimitiveType.LONG.getId(), lng);
+        assertTrue(simplePrimitive instanceof IntegerPrimitive);
+        assertEquals(PrimitiveType.INTEGER, simplePrimitive.getType());
+        assertEquals(lng, simplePrimitive.getValue());
+    }
+
+    /**
+     * public function returns void
+     */
+    @Test(expectedExceptions=IllegalArgumentException.class)
+    public void testBadLong() {
+        String str = "bla";
+        SimplePrimitive.createPrimitive(PrimitiveType.LONG.getId(), str);
+    }
+
     /**
      * public function returns void
      */
@@ -137,6 +170,7 @@ public class PrimitivesTest {
         assertEquals(PrimitiveType.STRING, simplePrimitive.getType());
         assertEquals(str, simplePrimitive.getValue());
     }
+
     /**
      * public function returns void
      */
@@ -145,6 +179,7 @@ public class PrimitivesTest {
         Integer integer = 6;
         SimplePrimitive.createPrimitive(PrimitiveType.STRING.getId(), integer);
     }
+
     /**
      * public function returns void
      */

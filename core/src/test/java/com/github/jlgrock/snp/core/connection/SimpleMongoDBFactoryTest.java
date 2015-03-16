@@ -18,16 +18,19 @@ import java.util.Optional;
 @Test
 public class SimpleMongoDBFactoryTest {
 
+    @Mock
+    ServerAddress serverAddress;
+
     @Spy
     MongoDBConfiguration mongoDBConfiguration = new MongoDBConfiguration() {
         @Override
         public Optional<List<MongoCredential>> getUserCredentials() {
-            return null;
+            return Optional.ofNullable(null);
         }
 
         @Override
         public Optional<ServerAddress> getHost() {
-            return null;
+            return Optional.of(serverAddress);
         }
 
         @Override
@@ -37,7 +40,7 @@ public class SimpleMongoDBFactoryTest {
 
         @Override
         public String getDefaultDatabase() {
-            return null;
+            return "bla";
         }
     };
 
@@ -84,6 +87,7 @@ public class SimpleMongoDBFactoryTest {
         MockitoAnnotations.initMocks(this);
     }
 
+    //TODO this will actually reach out and try to connect.  Need to work on this.
 //    @Test
 //    public void testThatCredentialsAreAccessed() throws Exception {
 //        SimpleMongoDbFactory simpleMongoDbFactory = new SimpleMongoDbFactory(mongoDBConfiguration, mongoDatabaseManagerIn, synchronizationManagerIn);

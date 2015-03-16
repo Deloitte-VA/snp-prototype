@@ -80,7 +80,7 @@ public class SimpleMongoDbFactory implements MongoDbFactory {
     public DB db(final String databaseNameIn) throws DataAccessException {
         String databaseToUse;
         if (databaseNameIn == null) {
-            LOGGER.info("Name of collection is null, using default database=[" + mongoDBConfiguration.getDefaultDatabase() + "]");
+            LOGGER.info("Name of database is null, using default database=[" + mongoDBConfiguration.getDefaultDatabase() + "]");
             databaseToUse = mongoDBConfiguration.getDefaultDatabase();
             //TODO get default collection from map
         } else {
