@@ -1,0 +1,2668 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<legoList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="LEGO.xsd">
+    <groupName>Hypertension Disability Benefits Questionnaire</groupName>
+    <legoListUUID>7e277b2b-a6a7-47d5-aa34-73005aa88314</legoListUUID>
+    <groupDescription>Legos about Hypertension</groupDescription>
+    <comment></comment>
+    <lego>
+        <legoUUID>fd03829c-b34a-4521-a642-6105e6c1d75c</legoUUID>
+        <stamp status="Active" time="2014-01-08T11:21:56.645-05:00" author="hsaitwal" module="default module" path="default path" uuid="2773da68-59b8-4d22-af3d-51847dc3fbb8"/>
+        <pncs id="41378" name="Average Blood Pressure Reading - Diastolic" value="Free text"/>
+        <assertion>
+            <assertionUUID>cc4054a1-a93e-4a2c-b046-fd2a8431b932</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="314453003" uuid="99a597f7-42a4-3b38-96b0-fe17122f52e5" desc="Average diastolic blood pressure (observable entity)"/>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <measurement>
+                    <units>
+                        <concept sctid="259018001" uuid="707f5dec-7899-39fc-83dd-07fd452f18a2" desc="mmHg (qualifier value)"/>
+                    </units>
+                    <point xsi:type="pointMeasurementConstant">
+                        <value>PNCS Value Field</value>
+                    </point>
+                </measurement>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>1085bf61-9e57-46f0-870a-74cb20a86d7d</legoUUID>
+        <stamp status="Active" time="2014-01-08T11:22:43.874-05:00" author="hsaitwal" module="default module" path="default path" uuid="9cf234fc-39ee-4bb5-ae79-c6fb8b59186d"/>
+        <pncs id="41379" name="Average Blood Pressure Reading - Systolic" value="Free text"/>
+        <assertion>
+            <assertionUUID>d8e30e35-21ef-4513-abcb-d1ca7ba6d86c</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="314440001" uuid="9c190176-4d69-3486-acb2-679df05b85b5" desc="Average systolic blood pressure (observable entity)"/>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <measurement>
+                    <units>
+                        <concept sctid="259018001" uuid="707f5dec-7899-39fc-83dd-07fd452f18a2" desc="mmHg (qualifier value)"/>
+                    </units>
+                    <point xsi:type="pointMeasurementConstant">
+                        <value>PNCS Value Field</value>
+                    </point>
+                </measurement>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>65e58588-fdcd-4b87-a755-7a3ffea44fe5</legoUUID>
+        <stamp status="Active" time="2014-01-08T11:26:20.790-05:00" author="hsaitwal" module="default module" path="default path" uuid="fac25dea-9ca1-4f90-9707-bce267b710c8"/>
+        <pncs id="29330" name="Current blood pressure readings - BP - Reading 1 - Date" value="Free text"/>
+        <assertion>
+            <assertionUUID>99d70abc-c2a6-4ee2-b427-ac4b3ae37e54</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="439272007" uuid="c909e67a-9925-3ebc-9e77-65227a329bea" desc="Date of procedure (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="53" uuid="d82c8d16-19ad-3176-9665-453cfb2e55f0" desc="IS ABOUT (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="46973005" uuid="215fd598-e21d-3e27-a0a2-8e23b1b36dfc" desc="Blood pressure taking (procedure)"/>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <measurement>
+                    <point xsi:type="pointMeasurementConstant">
+                        <value>PNCS Value Field</value>
+                    </point>
+                </measurement>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>e7e282bd-982d-458f-9178-e7700a7baaf8</legoUUID>
+        <stamp status="Active" time="2014-01-08T11:26:28.295-05:00" author="hsaitwal" module="default module" path="default path" uuid="b583c3eb-6a77-4e36-bec4-b010006ab3cb"/>
+        <pncs id="29333" name="Current blood pressure readings - BP - Reading 2 - Date" value="Free text"/>
+        <assertion>
+            <assertionUUID>934e8d9a-8e81-4b14-ac4d-816f6c145020</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="439272007" uuid="c909e67a-9925-3ebc-9e77-65227a329bea" desc="Date of procedure (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="53" uuid="d82c8d16-19ad-3176-9665-453cfb2e55f0" desc="IS ABOUT (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="46973005" uuid="215fd598-e21d-3e27-a0a2-8e23b1b36dfc" desc="Blood pressure taking (procedure)"/>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <measurement>
+                    <point xsi:type="pointMeasurementConstant">
+                        <value>PNCS Value Field</value>
+                    </point>
+                </measurement>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>7ad25d33-a7d7-4b7a-bc81-685d38ff22a4</legoUUID>
+        <stamp status="Active" time="2014-01-08T11:26:37.889-05:00" author="hsaitwal" module="default module" path="default path" uuid="d39ce971-06da-406b-a22a-5fdd11452536"/>
+        <pncs id="29336" name="Current blood pressure readings - BP - Reading 3 - Date" value="Free text"/>
+        <assertion>
+            <assertionUUID>32bc09fe-fd90-406e-916e-9e9f1819d05e</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="439272007" uuid="c909e67a-9925-3ebc-9e77-65227a329bea" desc="Date of procedure (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="53" uuid="d82c8d16-19ad-3176-9665-453cfb2e55f0" desc="IS ABOUT (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="46973005" uuid="215fd598-e21d-3e27-a0a2-8e23b1b36dfc" desc="Blood pressure taking (procedure)"/>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <measurement>
+                    <point xsi:type="pointMeasurementConstant">
+                        <value>PNCS Value Field</value>
+                    </point>
+                </measurement>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>1ebf12f1-2b50-4b37-826e-5362250159aa</legoUUID>
+        <stamp status="Active" time="2014-01-08T11:29:57.473-05:00" author="hsaitwal" module="default module" path="default path" uuid="cbfb498c-47fb-4229-83af-ca2a0f01a021"/>
+        <pncs id="29331" name="Current blood pressure readings - Diastolic - Reading 1" value="Free text"/>
+        <assertion>
+            <assertionUUID>af14d59a-a6e7-486e-945f-d644b516bd5a</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="271650006" uuid="8176ed59-8151-37de-a28a-0e1cbbec39a7" desc="Diastolic blood pressure (observable entity)"/>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <measurement>
+                    <units>
+                        <concept sctid="259018001" uuid="707f5dec-7899-39fc-83dd-07fd452f18a2" desc="mmHg (qualifier value)"/>
+                    </units>
+                    <point xsi:type="pointMeasurementConstant">
+                        <value>PNCS Value Field</value>
+                    </point>
+                </measurement>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>16ace8b2-1cee-44ff-87d4-bc6aad7dee64</legoUUID>
+        <stamp status="Active" time="2014-01-08T11:30:08.956-05:00" author="hsaitwal" module="default module" path="default path" uuid="9f3aa9c1-fa1a-4531-bf59-90849f64af9f"/>
+        <pncs id="29334" name="Current blood pressure readings - Diastolic - Reading 2" value="Free text"/>
+        <assertion>
+            <assertionUUID>ec4a5394-85da-4616-af0b-98d0d7533453</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="271650006" uuid="8176ed59-8151-37de-a28a-0e1cbbec39a7" desc="Diastolic blood pressure (observable entity)"/>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <measurement>
+                    <units>
+                        <concept sctid="259018001" uuid="707f5dec-7899-39fc-83dd-07fd452f18a2" desc="mmHg (qualifier value)"/>
+                    </units>
+                    <point xsi:type="pointMeasurementConstant">
+                        <value>PNCS Value Field</value>
+                    </point>
+                </measurement>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>f9fb5ce0-86db-4347-8b2f-d09fb80444e8</legoUUID>
+        <stamp status="Active" time="2014-01-08T11:30:21.758-05:00" author="hsaitwal" module="default module" path="default path" uuid="8c8008b6-61ed-4efa-bff1-4ebfd1e79783"/>
+        <pncs id="29337" name="Current blood pressure readings - Diastolic - Reading 3" value="Free text"/>
+        <assertion>
+            <assertionUUID>546f394e-7742-4d04-8b9e-4d4a48d39ff6</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="271650006" uuid="8176ed59-8151-37de-a28a-0e1cbbec39a7" desc="Diastolic blood pressure (observable entity)"/>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <measurement>
+                    <units>
+                        <concept sctid="259018001" uuid="707f5dec-7899-39fc-83dd-07fd452f18a2" desc="mmHg (qualifier value)"/>
+                    </units>
+                    <point xsi:type="pointMeasurementConstant">
+                        <value>PNCS Value Field</value>
+                    </point>
+                </measurement>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>84099894-2ab8-4d80-967a-03ef757a1b2b</legoUUID>
+        <stamp status="Active" time="2014-01-08T11:33:09.919-05:00" author="hsaitwal" module="default module" path="default path" uuid="e488b704-1180-4e02-bb53-7d723911e72a"/>
+        <pncs id="29339" name="Diagnosis - History of hypertension or isolated systolic hypertension" value="No"/>
+        <assertion>
+            <assertionUUID>4fef515b-8dc7-4c26-80f7-69b614c42284</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="364066008" uuid="c2a29890-2bfa-30b9-ab3c-fd75d879166c" desc="Cardiovascular observable (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="53" uuid="d82c8d16-19ad-3176-9665-453cfb2e55f0" desc="IS ABOUT (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="38341003" uuid="352b93a4-a278-38a0-8406-b521c47f9f97" desc="Hypertensive disorder, systemic arterial (disorder)"/>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <expression>
+                    <concept sctid="2667000" uuid="23dfdcb1-bfa8-3bad-a32a-49ed6d0ca6d7" desc="Absent (qualifier value)"/>
+                </expression>
+            </value>
+            <timing>
+                <bound>
+                    <lowerPoint xsi:type="pointMeasurementConstant">
+                        <value>DOB</value>
+                    </lowerPoint>
+                    <upperPoint xsi:type="pointMeasurementConstant">
+                        <value>NOW</value>
+                    </upperPoint>
+                </bound>
+            </timing>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>aafadc8d-d2b2-4379-a1a4-58598e8274c0</legoUUID>
+        <stamp status="Active" time="2014-01-08T11:33:29.989-05:00" author="hsaitwal" module="default module" path="default path" uuid="5baf7434-8867-4586-8cec-c02ecd32a665"/>
+        <pncs id="29339" name="Diagnosis - History of hypertension or isolated systolic hypertension" value="Yes"/>
+        <assertion>
+            <assertionUUID>9f9b0ddb-fc61-4068-a9c2-75e9e29cbcc7</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="364066008" uuid="c2a29890-2bfa-30b9-ab3c-fd75d879166c" desc="Cardiovascular observable (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="53" uuid="d82c8d16-19ad-3176-9665-453cfb2e55f0" desc="IS ABOUT (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="38341003" uuid="352b93a4-a278-38a0-8406-b521c47f9f97" desc="Hypertensive disorder, systemic arterial (disorder)"/>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <expression>
+                    <concept sctid="52101004" uuid="850e9dff-7c45-3db4-8cf9-34c8fb7359fd" desc="Present (qualifier value)"/>
+                </expression>
+            </value>
+            <timing>
+                <bound>
+                    <lowerPoint xsi:type="pointMeasurementConstant">
+                        <value>DOB</value>
+                    </lowerPoint>
+                    <upperPoint xsi:type="pointMeasurementConstant">
+                        <value>NOW</value>
+                    </upperPoint>
+                </bound>
+            </timing>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>3d815d3b-6a84-46ce-bd7b-136a3ccde864</legoUUID>
+        <stamp status="Active" time="2014-01-08T11:34:17.133-05:00" author="hsaitwal" module="default module" path="default path" uuid="45c24c64-7ac1-40ef-a0d9-1123492665d7"/>
+        <pncs id="29339" name="Diagnosis - History of hypertension or isolated systolic hypertension" value="No"/>
+        <assertion>
+            <assertionUUID>12d2136d-7eb5-4571-b597-a4023f58deb6</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="364066008" uuid="c2a29890-2bfa-30b9-ab3c-fd75d879166c" desc="Cardiovascular observable (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="53" uuid="d82c8d16-19ad-3176-9665-453cfb2e55f0" desc="IS ABOUT (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="194759009" uuid="6a12d1c1-c031-33d7-adb6-c49bbe3ff1f8" desc="Systolic hypertension (disorder)"/>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <expression>
+                    <concept sctid="2667000" uuid="23dfdcb1-bfa8-3bad-a32a-49ed6d0ca6d7" desc="Absent (qualifier value)"/>
+                </expression>
+            </value>
+            <timing>
+                <bound>
+                    <lowerPoint xsi:type="pointMeasurementConstant">
+                        <value>DOB</value>
+                    </lowerPoint>
+                    <upperPoint xsi:type="pointMeasurementConstant">
+                        <value>NOW</value>
+                    </upperPoint>
+                </bound>
+            </timing>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>5b2ef2a1-312b-4304-8c41-20b8a0bb243a</legoUUID>
+        <stamp status="Active" time="2014-01-08T11:34:30.278-05:00" author="hsaitwal" module="default module" path="default path" uuid="40665ed4-a55c-4fd4-b697-532dab5cc83c"/>
+        <pncs id="29339" name="Diagnosis - History of hypertension or isolated systolic hypertension" value="Yes"/>
+        <assertion>
+            <assertionUUID>23f0ac99-e1b0-40a1-8a4a-f46bfe97292b</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="364066008" uuid="c2a29890-2bfa-30b9-ab3c-fd75d879166c" desc="Cardiovascular observable (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="53" uuid="d82c8d16-19ad-3176-9665-453cfb2e55f0" desc="IS ABOUT (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="194759009" uuid="6a12d1c1-c031-33d7-adb6-c49bbe3ff1f8" desc="Systolic hypertension (disorder)"/>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <expression>
+                    <concept sctid="52101004" uuid="850e9dff-7c45-3db4-8cf9-34c8fb7359fd" desc="Present (qualifier value)"/>
+                </expression>
+            </value>
+            <timing>
+                <bound>
+                    <lowerPoint xsi:type="pointMeasurementConstant">
+                        <value>DOB</value>
+                    </lowerPoint>
+                    <upperPoint xsi:type="pointMeasurementConstant">
+                        <value>NOW</value>
+                    </upperPoint>
+                </bound>
+            </timing>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>e430605a-1d18-4474-a3f7-2fc0f763d51c</legoUUID>
+        <stamp status="Active" time="2014-01-08T11:34:48.881-05:00" author="hsaitwal" module="default module" path="default path" uuid="686008ea-263b-44a9-accf-94688c426c0e"/>
+        <pncs id="29631" name="Diagnosis - Hypertension" value="Yes"/>
+        <assertion>
+            <assertionUUID>8c8a5ccb-ee3b-43d7-8539-d9e412ac5afa</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="364066008" uuid="c2a29890-2bfa-30b9-ab3c-fd75d879166c" desc="Cardiovascular observable (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="53" uuid="d82c8d16-19ad-3176-9665-453cfb2e55f0" desc="IS ABOUT (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="38341003" uuid="352b93a4-a278-38a0-8406-b521c47f9f97" desc="Hypertensive disorder, systemic arterial (disorder)"/>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <expression>
+                    <concept sctid="52101004" uuid="850e9dff-7c45-3db4-8cf9-34c8fb7359fd" desc="Present (qualifier value)"/>
+                </expression>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>f9de373d-4922-4b0a-a095-6d33a7d8dad4</legoUUID>
+        <stamp status="Active" time="2014-01-08T11:35:27.191-05:00" author="hsaitwal" module="default module" path="default path" uuid="14eac2ea-1543-4c25-b363-bca078f7722a"/>
+        <pncs id="29632" name="Diagnosis - Hypertension - Date of diagnosis" value="Free text"/>
+        <assertion>
+            <assertionUUID>dd3fa9cb-2057-4c2b-a34c-f0ce9ca4993b</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="432213005" uuid="73a07b95-03f6-3b4d-b932-7ded8daa4e43" desc="Date of diagnosis (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="53" uuid="d82c8d16-19ad-3176-9665-453cfb2e55f0" desc="IS ABOUT (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="38341003" uuid="352b93a4-a278-38a0-8406-b521c47f9f97" desc="Hypertensive disorder, systemic arterial (disorder)"/>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <measurement>
+                    <point xsi:type="pointMeasurementConstant">
+                        <value>PNCS Value Field</value>
+                    </point>
+                </measurement>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>2dc074fb-95d8-43fc-8877-c95cda5fd3d7</legoUUID>
+        <stamp status="Active" time="2014-01-08T11:35:48.893-05:00" author="hsaitwal" module="default module" path="default path" uuid="44b04929-1705-4383-8bd4-6114e90ab9af"/>
+        <pncs id="29635" name="Diagnosis - Isolated systolic hypertension" value="Yes"/>
+        <assertion>
+            <assertionUUID>b5baa269-420d-4563-8f43-d36287760cff</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="364066008" uuid="c2a29890-2bfa-30b9-ab3c-fd75d879166c" desc="Cardiovascular observable (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="53" uuid="d82c8d16-19ad-3176-9665-453cfb2e55f0" desc="IS ABOUT (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="194759009" uuid="6a12d1c1-c031-33d7-adb6-c49bbe3ff1f8" desc="Systolic hypertension (disorder)"/>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <expression>
+                    <concept sctid="52101004" uuid="850e9dff-7c45-3db4-8cf9-34c8fb7359fd" desc="Present (qualifier value)"/>
+                </expression>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>54e603ab-385e-4394-a4aa-281f1999b1ae</legoUUID>
+        <stamp status="Active" time="2014-01-08T11:36:10.360-05:00" author="hsaitwal" module="default module" path="default path" uuid="e9bb539c-51d1-4c7e-bad1-381bb8efd3d9"/>
+        <pncs id="29636" name="Diagnosis - Isolated systolic hypertension - Date of diagnosis" value="Free text"/>
+        <assertion>
+            <assertionUUID>bcbcaefd-7492-44fe-993b-d6e65c701d7b</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="432213005" uuid="73a07b95-03f6-3b4d-b932-7ded8daa4e43" desc="Date of diagnosis (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="53" uuid="d82c8d16-19ad-3176-9665-453cfb2e55f0" desc="IS ABOUT (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="194759009" uuid="6a12d1c1-c031-33d7-adb6-c49bbe3ff1f8" desc="Systolic hypertension (disorder)"/>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <measurement>
+                    <point xsi:type="pointMeasurementConstant">
+                        <value>PNCS Value Field</value>
+                    </point>
+                </measurement>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>6f9172ae-bed7-489c-b236-00f85efdbd5c</legoUUID>
+        <stamp status="Active" time="2014-01-08T11:36:31.621-05:00" author="hsaitwal" module="default module" path="default path" uuid="4a76580f-2301-47f7-a3b2-0bf5ea2e2575"/>
+        <pncs id="29634" name="Diagnosis - Other specify" value="Yes"/>
+        <assertion>
+            <assertionUUID>bd766f36-a59e-4c35-b9e9-e9715d738d4f</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept/>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value/>
+        </assertion>
+        <comment>DO NOT MODEL OTHER</comment>
+    </lego>
+    <lego>
+        <legoUUID>2fbd72fc-4136-497b-b31f-e169b936608e</legoUUID>
+        <stamp status="Active" time="2014-01-08T11:37:19.653-05:00" author="hsaitwal" module="default module" path="default path" uuid="a0f5d2f8-0d01-4bb9-8676-07e9e5d2c387"/>
+        <pncs id="29352" name="Functional impact - Does the Veteran's hypertension or isolated systolic hypertension impact his or her ability to work?" value="No"/>
+        <assertion>
+            <assertionUUID>a4ace17b-aec9-4b12-b4df-4910bc86acce</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="364704001" uuid="81ba3b85-4b20-3803-8052-377ca07722c4" desc="Performance at work (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="53" uuid="d82c8d16-19ad-3176-9665-453cfb2e55f0" desc="IS ABOUT (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="38341003" uuid="352b93a4-a278-38a0-8406-b521c47f9f97" desc="Hypertensive disorder, systemic arterial (disorder)"/>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <expression>
+                    <concept sctid="17621005" uuid="ca19fdc5-21b8-3c9c-b4d2-18b5345c28cb" desc="Normal (qualifier value)"/>
+                </expression>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>7ed6f7da-8920-4a10-a7dd-be8605d3c13d</legoUUID>
+        <stamp status="Active" time="2014-01-08T11:37:37.993-05:00" author="hsaitwal" module="default module" path="default path" uuid="d87b3603-8c46-483f-be41-738e564dc62a"/>
+        <pncs id="29352" name="Functional impact - Does the Veteran's hypertension or isolated systolic hypertension impact his or her ability to work?" value="No"/>
+        <assertion>
+            <assertionUUID>1fd072a0-d082-4ebb-ac5a-df2262be8103</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="364704001" uuid="81ba3b85-4b20-3803-8052-377ca07722c4" desc="Performance at work (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="53" uuid="d82c8d16-19ad-3176-9665-453cfb2e55f0" desc="IS ABOUT (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="194759009" uuid="6a12d1c1-c031-33d7-adb6-c49bbe3ff1f8" desc="Systolic hypertension (disorder)"/>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <expression>
+                    <concept sctid="17621005" uuid="ca19fdc5-21b8-3c9c-b4d2-18b5345c28cb" desc="Normal (qualifier value)"/>
+                </expression>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>ebb47f6e-1040-4c57-93da-0e1c8c085583</legoUUID>
+        <stamp status="Active" time="2014-01-08T11:37:57.803-05:00" author="hsaitwal" module="default module" path="default path" uuid="24726be9-1392-41af-88cd-f0b6d6ab3b56"/>
+        <pncs id="29352" name="Functional impact - Does the Veteran's hypertension or isolated systolic hypertension impact his or her ability to work?" value="Yes"/>
+        <assertion>
+            <assertionUUID>9d7d895e-a112-4d8d-bef2-d3f9d2b7588c</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="364704001" uuid="81ba3b85-4b20-3803-8052-377ca07722c4" desc="Performance at work (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="53" uuid="d82c8d16-19ad-3176-9665-453cfb2e55f0" desc="IS ABOUT (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="38341003" uuid="352b93a4-a278-38a0-8406-b521c47f9f97" desc="Hypertensive disorder, systemic arterial (disorder)"/>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <expression>
+                    <concept sctid="260379002" uuid="783aba12-8d2a-3ebf-a13f-8561c60a9e44" desc="Impaired (qualifier value)"/>
+                </expression>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>43142145-5578-4fe4-9507-eaf3f6c63d08</legoUUID>
+        <stamp status="Active" time="2014-01-08T11:38:06.036-05:00" author="hsaitwal" module="default module" path="default path" uuid="2ec3283f-85e5-4ac3-9777-ef6bf265b050"/>
+        <pncs id="29352" name="Functional impact - Does the Veteran's hypertension or isolated systolic hypertension impact his or her ability to work?" value="Yes"/>
+        <assertion>
+            <assertionUUID>99e1ebb8-95ab-47e5-b234-9600a2cdcefb</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="364704001" uuid="81ba3b85-4b20-3803-8052-377ca07722c4" desc="Performance at work (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="53" uuid="d82c8d16-19ad-3176-9665-453cfb2e55f0" desc="IS ABOUT (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="194759009" uuid="6a12d1c1-c031-33d7-adb6-c49bbe3ff1f8" desc="Systolic hypertension (disorder)"/>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <expression>
+                    <concept sctid="260379002" uuid="783aba12-8d2a-3ebf-a13f-8561c60a9e44" desc="Impaired (qualifier value)"/>
+                </expression>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>a0a1854b-f3df-4d75-8b6e-fc5e1ceaf1c5</legoUUID>
+        <stamp status="Active" time="2014-01-08T11:38:29.122-05:00" author="hsaitwal" module="default module" path="default path" uuid="22b347c7-7bc2-40f7-abf6-b38f041dd2c3"/>
+        <pncs id="29639" name="Medical history - Brief summary of Veteran's hypertension" value="Free text"/>
+        <assertion>
+            <assertionUUID>ad59e743-1b1a-42a3-9f02-d029192831e5</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept/>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value/>
+        </assertion>
+        <comment>DO NOT MODEL QUESTIONS WITH FREE TEXT ANSWERS</comment>
+    </lego>
+    <lego>
+        <legoUUID>25b93ba8-c15d-4baf-87c1-fbc8648a313d</legoUUID>
+        <stamp status="Active" time="2014-01-09T11:00:01.230-05:00" author="hsaitwal" module="default module" path="default path" uuid="af61985a-2d03-47db-a2e0-34c8d8187442"/>
+        <pncs id="29402" name="Medical history - Diagnosis of hypertension or isolated systolic hypertension confirmed by blood pressure (BP) readings taken 2 or more times on at least 3 different days - No - BP reading - Date" value="Free text"/>
+        <assertion>
+            <assertionUUID>565ca340-ac2f-430d-ba9a-cdd195a2d888</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="439272007" uuid="c909e67a-9925-3ebc-9e77-65227a329bea" desc="Date of procedure (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="53" uuid="d82c8d16-19ad-3176-9665-453cfb2e55f0" desc="IS ABOUT (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="46973005" uuid="215fd598-e21d-3e27-a0a2-8e23b1b36dfc" desc="Blood pressure taking (procedure)"/>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <measurement>
+                    <point xsi:type="pointMeasurementConstant">
+                        <value>PNCS Value Field</value>
+                    </point>
+                </measurement>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>bccc23f1-046d-4ac7-a3d0-e0df03b2df1d</legoUUID>
+        <stamp status="Active" time="2014-01-09T11:00:05.352-05:00" author="hsaitwal" module="default module" path="default path" uuid="84c5dc70-6c13-468e-aba6-19d7d4d033ad"/>
+        <pncs id="29392" name="Medical history - Diagnosis of hypertension or isolated systolic hypertension confirmed by blood pressure (BP) readings taken 2 or more times on at least 3 different days - No - BP reading 1 and 2- Date" value="Free text"/>
+        <assertion>
+            <assertionUUID>1fe44fcf-e415-4b55-b36a-d3101d9a9347</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="439272007" uuid="c909e67a-9925-3ebc-9e77-65227a329bea" desc="Date of procedure (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="53" uuid="d82c8d16-19ad-3176-9665-453cfb2e55f0" desc="IS ABOUT (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="46973005" uuid="215fd598-e21d-3e27-a0a2-8e23b1b36dfc" desc="Blood pressure taking (procedure)"/>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <measurement>
+                    <point xsi:type="pointMeasurementConstant">
+                        <value>PNCS Value Field</value>
+                    </point>
+                </measurement>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>19774164-7af7-4d0d-a780-e16c22876107</legoUUID>
+        <stamp status="Active" time="2014-01-09T11:00:07.518-05:00" author="hsaitwal" module="default module" path="default path" uuid="e6c0846e-0150-4485-aaad-b9a2011d65bd"/>
+        <pncs id="29397" name="Medical history - Diagnosis of hypertension or isolated systolic hypertension confirmed by blood pressure (BP) readings taken 2 or more times on at least 3 different days - No - BP reading 1 and 2 - Date" value="Free text"/>
+        <assertion>
+            <assertionUUID>e928ed7e-996f-4b5a-8554-55ae52f44f5d</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="439272007" uuid="c909e67a-9925-3ebc-9e77-65227a329bea" desc="Date of procedure (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="53" uuid="d82c8d16-19ad-3176-9665-453cfb2e55f0" desc="IS ABOUT (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="46973005" uuid="215fd598-e21d-3e27-a0a2-8e23b1b36dfc" desc="Blood pressure taking (procedure)"/>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <measurement>
+                    <point xsi:type="pointMeasurementConstant">
+                        <value>PNCS Value Field</value>
+                    </point>
+                </measurement>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>d5a39f11-c735-4b5e-b7fd-edd06c25377b</legoUUID>
+        <stamp status="Active" time="2014-01-09T11:00:59.946-05:00" author="hsaitwal" module="default module" path="default path" uuid="3fe63986-2463-4e53-a334-cc9e2079662f"/>
+        <pncs id="29358" name="Medical history - Diagnosis of hypertension or isolated systolic hypertension confirmed by blood pressure (BP) readings taken 2 or more times on at least 3 different days - Yes - BP reading -Date" value="Free text"/>
+        <assertion>
+            <assertionUUID>fa8ba52d-6608-44e4-aacb-bd2036b73f5c</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="439272007" uuid="c909e67a-9925-3ebc-9e77-65227a329bea" desc="Date of procedure (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="53" uuid="d82c8d16-19ad-3176-9665-453cfb2e55f0" desc="IS ABOUT (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="46973005" uuid="215fd598-e21d-3e27-a0a2-8e23b1b36dfc" desc="Blood pressure taking (procedure)"/>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <measurement>
+                    <point xsi:type="pointMeasurementConstant">
+                        <value>PNCS Value Field</value>
+                    </point>
+                </measurement>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>133cd2cb-019f-4d8a-9102-88dd31b9824a</legoUUID>
+        <stamp status="Active" time="2014-01-09T11:01:03.129-05:00" author="hsaitwal" module="default module" path="default path" uuid="8478379b-a462-43b4-8ccb-7f1b92cc520c"/>
+        <pncs id="29368" name="Medical history - Diagnosis of hypertension or isolated systolic hypertension confirmed by blood pressure (BP) readings taken 2 or more times on at least 3 different days - Yes - BP reading 1 and 2- Date" value="Free text"/>
+        <assertion>
+            <assertionUUID>29b45e5e-b84b-4eef-b72b-06b80b9ec63f</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="439272007" uuid="c909e67a-9925-3ebc-9e77-65227a329bea" desc="Date of procedure (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="53" uuid="d82c8d16-19ad-3176-9665-453cfb2e55f0" desc="IS ABOUT (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="46973005" uuid="215fd598-e21d-3e27-a0a2-8e23b1b36dfc" desc="Blood pressure taking (procedure)"/>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <measurement>
+                    <point xsi:type="pointMeasurementConstant">
+                        <value>PNCS Value Field</value>
+                    </point>
+                </measurement>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>67390d97-055c-4d98-8113-67aef2c0be66</legoUUID>
+        <stamp status="Active" time="2014-01-09T11:01:05.346-05:00" author="hsaitwal" module="default module" path="default path" uuid="2107d14e-43fa-40a1-ae59-ca8a06a0b943"/>
+        <pncs id="29363" name="Medical history - Diagnosis of hypertension or isolated systolic hypertension confirmed by blood pressure (BP) readings taken 2 or more times on at least 3 different days - Yes - BP reading 1 and 2 - Date" value="Free text"/>
+        <assertion>
+            <assertionUUID>89cf1075-d7b1-48b0-95e1-9eb328c9dec7</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="439272007" uuid="c909e67a-9925-3ebc-9e77-65227a329bea" desc="Date of procedure (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="53" uuid="d82c8d16-19ad-3176-9665-453cfb2e55f0" desc="IS ABOUT (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="46973005" uuid="215fd598-e21d-3e27-a0a2-8e23b1b36dfc" desc="Blood pressure taking (procedure)"/>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <measurement>
+                    <point xsi:type="pointMeasurementConstant">
+                        <value>PNCS Value Field</value>
+                    </point>
+                </measurement>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>7dcbf4c2-fede-4f6a-855a-2e6cfb52fb38</legoUUID>
+        <stamp status="Active" time="2014-01-09T11:39:32.138-05:00" author="hsaitwal" module="default module" path="default path" uuid="33208119-69cb-44cd-b7f8-8728979d71fe"/>
+        <pncs id="29393" name="Medical history - Diagnosis of hypertension or isolated systolic hypertension confirmed by blood pressure (BP) readings taken 2 or more times on at least 3 different days - No - Diastolic BP reading1" value="Free text"/>
+        <assertion>
+            <assertionUUID>97097fd4-200c-4497-82d8-2ceeda7dbd04</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="271650006" uuid="8176ed59-8151-37de-a28a-0e1cbbec39a7" desc="Diastolic blood pressure (observable entity)"/>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <measurement>
+                    <units>
+                        <concept sctid="259018001" uuid="707f5dec-7899-39fc-83dd-07fd452f18a2" desc="mmHg (qualifier value)"/>
+                    </units>
+                    <point xsi:type="pointMeasurementConstant">
+                        <value>PNCS Value Field</value>
+                    </point>
+                </measurement>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>6b6d6fb4-59ad-4701-a7e3-95e072b5fed2</legoUUID>
+        <stamp status="Active" time="2014-01-09T11:39:49.196-05:00" author="hsaitwal" module="default module" path="default path" uuid="8c2b6816-f747-4202-96dc-bf0d1d760ca1"/>
+        <pncs id="29395" name="Medical history - Diagnosis of hypertension or isolated systolic hypertension confirmed by blood pressure (BP) readings taken 2 or more times on at least 3 different days - No - Diastolic BP reading2" value="Free text"/>
+        <assertion>
+            <assertionUUID>b91aefec-6d4d-4f70-b57f-4dbf95ecc8e7</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="271650006" uuid="8176ed59-8151-37de-a28a-0e1cbbec39a7" desc="Diastolic blood pressure (observable entity)"/>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <measurement>
+                    <units>
+                        <concept sctid="259018001" uuid="707f5dec-7899-39fc-83dd-07fd452f18a2" desc="mmHg (qualifier value)"/>
+                    </units>
+                    <point xsi:type="pointMeasurementConstant">
+                        <value>PNCS Value Field</value>
+                    </point>
+                </measurement>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>3dd5058a-a1be-4156-b730-57bf370853fc</legoUUID>
+        <stamp status="Active" time="2014-01-09T11:40:46.553-05:00" author="hsaitwal" module="default module" path="default path" uuid="0a90c154-95f4-40ab-bf3c-fd2fd96d8fa2"/>
+        <pncs id="29388" name="Medical history - Diagnosis of hypertension or isolated systolic hypertension confirmed by blood pressure (BP) readings taken 2 or more times on at least 3 different days - No - Diastolic BP reading 1" value="Free text"/>
+        <assertion>
+            <assertionUUID>7d1e4bf6-cac2-485a-887f-3988552b6ecd</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="271650006" uuid="8176ed59-8151-37de-a28a-0e1cbbec39a7" desc="Diastolic blood pressure (observable entity)"/>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <measurement>
+                    <units>
+                        <concept sctid="259018001" uuid="707f5dec-7899-39fc-83dd-07fd452f18a2" desc="mmHg (qualifier value)"/>
+                    </units>
+                    <point xsi:type="pointMeasurementConstant">
+                        <value>PNCS Value Field</value>
+                    </point>
+                </measurement>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>7e86df32-ef37-474c-b568-621a793c94f3</legoUUID>
+        <stamp status="Active" time="2014-01-09T11:41:11.245-05:00" author="hsaitwal" module="default module" path="default path" uuid="ca4fe7fe-0ba1-49a2-b1f4-75380be7fa15"/>
+        <pncs id="29390" name="Medical history - Diagnosis of hypertension or isolated systolic hypertension confirmed by blood pressure (BP) readings taken 2 or more times on at least 3 different days - No - Diastolic BP reading 2" value="Free text"/>
+        <assertion>
+            <assertionUUID>c4645bdb-e502-4f0b-8ced-87eb90934346</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="271650006" uuid="8176ed59-8151-37de-a28a-0e1cbbec39a7" desc="Diastolic blood pressure (observable entity)"/>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <measurement>
+                    <units>
+                        <concept sctid="259018001" uuid="707f5dec-7899-39fc-83dd-07fd452f18a2" desc="mmHg (qualifier value)"/>
+                    </units>
+                    <point xsi:type="pointMeasurementConstant">
+                        <value>PNCS Value Field</value>
+                    </point>
+                </measurement>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>2e099db4-bae9-494c-8616-9351dad3ada5</legoUUID>
+        <stamp status="Active" time="2014-01-09T11:41:39.593-05:00" author="hsaitwal" module="default module" path="default path" uuid="cfefc248-bb78-436f-b418-63efc285e7a5"/>
+        <pncs id="29400" name="Medical history - Diagnosis of hypertension or isolated systolic hypertension confirmed by blood pressure (BP) readings taken 2 or more times on at least 3 different days - No -Diastolic BP reading 2" value="Free text"/>
+        <assertion>
+            <assertionUUID>4be35a51-52a5-4d5c-90aa-16a805a0e294</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="271650006" uuid="8176ed59-8151-37de-a28a-0e1cbbec39a7" desc="Diastolic blood pressure (observable entity)"/>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <measurement>
+                    <units>
+                        <concept sctid="259018001" uuid="707f5dec-7899-39fc-83dd-07fd452f18a2" desc="mmHg (qualifier value)"/>
+                    </units>
+                    <point xsi:type="pointMeasurementConstant">
+                        <value>PNCS Value Field</value>
+                    </point>
+                </measurement>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>a6c357fe-0ed8-492d-b11e-227a1d3b4b86</legoUUID>
+        <stamp status="Active" time="2014-01-09T11:41:42.195-05:00" author="hsaitwal" module="default module" path="default path" uuid="cd7539b4-65aa-4e93-abfa-4aaf7f98e3f4"/>
+        <pncs id="29398" name="Medical history - Diagnosis of hypertension or isolated systolic hypertension confirmed by blood pressure (BP) readings taken 2 or more times on at least 3 different days - No -Diastolic BP reading 1" value="Free text"/>
+        <assertion>
+            <assertionUUID>f3149db5-2d67-4c21-97af-9b628672b81b</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="271650006" uuid="8176ed59-8151-37de-a28a-0e1cbbec39a7" desc="Diastolic blood pressure (observable entity)"/>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <measurement>
+                    <units>
+                        <concept sctid="259018001" uuid="707f5dec-7899-39fc-83dd-07fd452f18a2" desc="mmHg (qualifier value)"/>
+                    </units>
+                    <point xsi:type="pointMeasurementConstant">
+                        <value>PNCS Value Field</value>
+                    </point>
+                </measurement>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>efe5b4e5-8ff4-45d1-9596-9b2614196aa3</legoUUID>
+        <stamp status="Active" time="2014-01-09T11:42:38.230-05:00" author="hsaitwal" module="default module" path="default path" uuid="6ac62021-ef70-449d-9736-0798c559cb45"/>
+        <pncs id="29366" name="Medical history - Diagnosis of hypertension or isolated systolic hypertension confirmed by blood pressure (BP) readings taken 2 or more times on at least 3 different days - Yes -Diastolic BP reading 2" value="Free text"/>
+        <assertion>
+            <assertionUUID>ae98819f-14aa-41b6-9f6f-b94c3508a623</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="271650006" uuid="8176ed59-8151-37de-a28a-0e1cbbec39a7" desc="Diastolic blood pressure (observable entity)"/>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <measurement>
+                    <units>
+                        <concept sctid="259018001" uuid="707f5dec-7899-39fc-83dd-07fd452f18a2" desc="mmHg (qualifier value)"/>
+                    </units>
+                    <point xsi:type="pointMeasurementConstant">
+                        <value>PNCS Value Field</value>
+                    </point>
+                </measurement>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>7f13f1e4-f523-4fdc-a86c-a5d1f3ebf57d</legoUUID>
+        <stamp status="Active" time="2014-01-09T11:42:41.279-05:00" author="hsaitwal" module="default module" path="default path" uuid="5c9a3e81-c559-41ef-8f83-9e291e8f838a"/>
+        <pncs id="29359" name="Medical history - Diagnosis of hypertension or isolated systolic hypertension confirmed by blood pressure (BP) readings taken 2 or more times on at least 3 different days - Yes -Diastolic BP reading 1" value="Free text"/>
+        <assertion>
+            <assertionUUID>846598aa-a953-404d-93a1-1023b8e30d43</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="271650006" uuid="8176ed59-8151-37de-a28a-0e1cbbec39a7" desc="Diastolic blood pressure (observable entity)"/>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <measurement>
+                    <units>
+                        <concept sctid="259018001" uuid="707f5dec-7899-39fc-83dd-07fd452f18a2" desc="mmHg (qualifier value)"/>
+                    </units>
+                    <point xsi:type="pointMeasurementConstant">
+                        <value>PNCS Value Field</value>
+                    </point>
+                </measurement>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>1d45ca9b-d10f-4106-8417-cc1d42eed178</legoUUID>
+        <stamp status="Active" time="2014-01-09T11:42:49.359-05:00" author="hsaitwal" module="default module" path="default path" uuid="5fc2c358-2447-4f7f-9d79-8bdc10caaa5f"/>
+        <pncs id="29356" name="Medical history - Diagnosis of hypertension or isolated systolic hypertension confirmed by blood pressure (BP) readings taken 2 or more times on at least 3 different days - Yes - Diastolic BP reading 2" value="Free text"/>
+        <assertion>
+            <assertionUUID>04d05fb9-64f4-41af-ad65-46316f5df094</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="271650006" uuid="8176ed59-8151-37de-a28a-0e1cbbec39a7" desc="Diastolic blood pressure (observable entity)"/>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <measurement>
+                    <units>
+                        <concept sctid="259018001" uuid="707f5dec-7899-39fc-83dd-07fd452f18a2" desc="mmHg (qualifier value)"/>
+                    </units>
+                    <point xsi:type="pointMeasurementConstant">
+                        <value>PNCS Value Field</value>
+                    </point>
+                </measurement>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>ccb46bbe-364e-47eb-87cf-803c38c3ce79</legoUUID>
+        <stamp status="Active" time="2014-01-09T11:42:51.938-05:00" author="hsaitwal" module="default module" path="default path" uuid="d8ac2807-d3fe-44dd-bd68-a1449ed6f5e8"/>
+        <pncs id="29364" name="Medical history - Diagnosis of hypertension or isolated systolic hypertension confirmed by blood pressure (BP) readings taken 2 or more times on at least 3 different days - Yes - Diastolic BP reading 1" value="Free text"/>
+        <assertion>
+            <assertionUUID>f642b64c-e838-41f3-9e9e-14cf4f81d903</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="271650006" uuid="8176ed59-8151-37de-a28a-0e1cbbec39a7" desc="Diastolic blood pressure (observable entity)"/>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <measurement>
+                    <units>
+                        <concept sctid="259018001" uuid="707f5dec-7899-39fc-83dd-07fd452f18a2" desc="mmHg (qualifier value)"/>
+                    </units>
+                    <point xsi:type="pointMeasurementConstant">
+                        <value>PNCS Value Field</value>
+                    </point>
+                </measurement>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>2948cea2-945b-4763-baa5-57fde82643b2</legoUUID>
+        <stamp status="Active" time="2014-01-09T11:42:54.466-05:00" author="hsaitwal" module="default module" path="default path" uuid="e932fb0f-c489-409c-88e7-d40e5b2c34d8"/>
+        <pncs id="29361" name="Medical history - Diagnosis of hypertension or isolated systolic hypertension confirmed by blood pressure (BP) readings taken 2 or more times on at least 3 different days - Yes - Diastolic BP reading2" value="Free text"/>
+        <assertion>
+            <assertionUUID>7fb7d746-c3c0-4f07-97b4-09aa4894a5d8</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="271650006" uuid="8176ed59-8151-37de-a28a-0e1cbbec39a7" desc="Diastolic blood pressure (observable entity)"/>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <measurement>
+                    <units>
+                        <concept sctid="259018001" uuid="707f5dec-7899-39fc-83dd-07fd452f18a2" desc="mmHg (qualifier value)"/>
+                    </units>
+                    <point xsi:type="pointMeasurementConstant">
+                        <value>PNCS Value Field</value>
+                    </point>
+                </measurement>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>70111b11-b5d1-4910-a94a-6e7dbe8f6b86</legoUUID>
+        <stamp status="Active" time="2014-01-09T11:42:56.650-05:00" author="hsaitwal" module="default module" path="default path" uuid="fbfb61bf-77a9-4840-b5b2-e33c95f924af"/>
+        <pncs id="29354" name="Medical history - Diagnosis of hypertension or isolated systolic hypertension confirmed by blood pressure (BP) readings taken 2 or more times on at least 3 different days - Yes - Diastolic BP reading1" value="Free text"/>
+        <assertion>
+            <assertionUUID>f4a3679b-9f1d-42d4-a752-9c8fde355f54</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="271650006" uuid="8176ed59-8151-37de-a28a-0e1cbbec39a7" desc="Diastolic blood pressure (observable entity)"/>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <measurement>
+                    <units>
+                        <concept sctid="259018001" uuid="707f5dec-7899-39fc-83dd-07fd452f18a2" desc="mmHg (qualifier value)"/>
+                    </units>
+                    <point xsi:type="pointMeasurementConstant">
+                        <value>PNCS Value Field</value>
+                    </point>
+                </measurement>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>d4d8e700-1c26-440c-9e15-581f115b3ab5</legoUUID>
+        <stamp status="Active" time="2014-01-09T11:46:53.840-05:00" author="hsaitwal" module="default module" path="default path" uuid="d8b621e8-c64c-4081-9e30-f6be6e8f84e2"/>
+        <pncs id="29355" name="Medical history - Diagnosis of hypertension or isolated systolic hypertension confirmed by blood pressure (BP) readings taken 2 or more times on at least 3 different days - Yes - Systolic BP reading 1" value="Free text"/>
+        <assertion>
+            <assertionUUID>75fcf5f8-e292-4d58-bf1a-e06b5c8564ce</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="72313002" uuid="93f1946a-4ecd-319c-a47c-5363ff2ec6e3" desc="Systolic arterial pressure (observable entity)"/>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <measurement>
+                    <units>
+                        <concept sctid="259018001" uuid="707f5dec-7899-39fc-83dd-07fd452f18a2" desc="mmHg (qualifier value)"/>
+                    </units>
+                    <point xsi:type="pointMeasurementConstant">
+                        <value>PNCS Value Field</value>
+                    </point>
+                </measurement>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>21b5b29e-7930-4cb9-b77e-829f1b3f052a</legoUUID>
+        <stamp status="Active" time="2014-01-09T11:47:20.639-05:00" author="hsaitwal" module="default module" path="default path" uuid="bfd45429-2ad7-4ec7-9997-27fd6fc4f06c"/>
+        <pncs id="29362" name="Medical history - Diagnosis of hypertension or isolated systolic hypertension confirmed by blood pressure (BP) readings taken 2 or more times on at least 3 different days - Yes - Systolic BP reading2" value="Free text"/>
+        <assertion>
+            <assertionUUID>706dd939-f8fb-43b0-9bd8-040554bab0c5</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="72313002" uuid="93f1946a-4ecd-319c-a47c-5363ff2ec6e3" desc="Systolic arterial pressure (observable entity)"/>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <measurement>
+                    <units>
+                        <concept sctid="259018001" uuid="707f5dec-7899-39fc-83dd-07fd452f18a2" desc="mmHg (qualifier value)"/>
+                    </units>
+                    <point xsi:type="pointMeasurementConstant">
+                        <value>PNCS Value Field</value>
+                    </point>
+                </measurement>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>9b0858bb-3e24-47d0-b26a-9269ca0b413c</legoUUID>
+        <stamp status="Active" time="2014-01-09T11:54:21.413-05:00" author="hsaitwal" module="default module" path="default path" uuid="93c3a83b-2161-428f-b2c4-07de044b9f6b"/>
+        <pncs id="29332" name="Current blood pressure readings - Systolic - Reading 1" value="Free text"/>
+        <assertion>
+            <assertionUUID>f72ff154-d047-42a4-87f8-bf575aecec0c</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="271649006" uuid="f251d463-f346-340a-b17c-d4a4622c7a91" desc="Systolic blood pressure (observable entity)"/>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <measurement>
+                    <units>
+                        <concept sctid="259018001" uuid="707f5dec-7899-39fc-83dd-07fd452f18a2" desc="mmHg (qualifier value)"/>
+                    </units>
+                    <point xsi:type="pointMeasurementConstant">
+                        <value>PNCS Value Field</value>
+                    </point>
+                </measurement>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>5e48874e-dd82-4a99-ac60-c2162ef99ff2</legoUUID>
+        <stamp status="Active" time="2014-01-09T11:54:50.157-05:00" author="hsaitwal" module="default module" path="default path" uuid="f0974d03-598d-405b-8cad-89b8263b375a"/>
+        <pncs id="29335" name="Current blood pressure readings - Systolic - Reading 2" value="Free text"/>
+        <assertion>
+            <assertionUUID>96028490-34df-4bd6-a91b-97f5724de738</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="271649006" uuid="f251d463-f346-340a-b17c-d4a4622c7a91" desc="Systolic blood pressure (observable entity)"/>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <measurement>
+                    <units>
+                        <concept sctid="259018001" uuid="707f5dec-7899-39fc-83dd-07fd452f18a2" desc="mmHg (qualifier value)"/>
+                    </units>
+                    <point xsi:type="pointMeasurementConstant">
+                        <value>PNCS Value Field</value>
+                    </point>
+                </measurement>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>40c48292-8d15-477a-86e8-8a649ef4dad8</legoUUID>
+        <stamp status="Active" time="2014-01-09T11:54:56.731-05:00" author="hsaitwal" module="default module" path="default path" uuid="2112f455-f10f-4800-a6f3-87a87c7f9a20"/>
+        <pncs id="29338" name="Current blood pressure readings - Systolic - Reading 3" value="Free text"/>
+        <assertion>
+            <assertionUUID>7d00f13f-76c3-45b0-b860-374b4ccc67ee</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="271649006" uuid="f251d463-f346-340a-b17c-d4a4622c7a91" desc="Systolic blood pressure (observable entity)"/>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <measurement>
+                    <units>
+                        <concept sctid="259018001" uuid="707f5dec-7899-39fc-83dd-07fd452f18a2" desc="mmHg (qualifier value)"/>
+                    </units>
+                    <point xsi:type="pointMeasurementConstant">
+                        <value>PNCS Value Field</value>
+                    </point>
+                </measurement>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>935cc22e-b8ce-44cc-b40c-2430e48005c9</legoUUID>
+        <stamp status="Active" time="2014-01-09T11:55:40.298-05:00" author="hsaitwal" module="default module" path="default path" uuid="351cb615-358f-49fb-b6d3-fee37b41411f"/>
+        <pncs id="29394" name="Medical history - Diagnosis of hypertension or isolated systolic hypertension confirmed by blood pressure (BP) readings taken 2 or more times on at least 3 different days - No - Systolic BP reading1" value="Free text"/>
+        <assertion>
+            <assertionUUID>d7987255-3588-4d3d-a5da-4a2f5238f8a5</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="271649006" uuid="f251d463-f346-340a-b17c-d4a4622c7a91" desc="Systolic blood pressure (observable entity)"/>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <measurement>
+                    <units>
+                        <concept sctid="259018001" uuid="707f5dec-7899-39fc-83dd-07fd452f18a2" desc="mmHg (qualifier value)"/>
+                    </units>
+                    <point xsi:type="pointMeasurementConstant">
+                        <value>PNCS Value Field</value>
+                    </point>
+                </measurement>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>03f0e957-bd0a-4ed3-b552-616ca3d72ff8</legoUUID>
+        <stamp status="Active" time="2014-01-09T11:55:46.442-05:00" author="hsaitwal" module="default module" path="default path" uuid="9aa7bef5-4294-49e2-ab02-6184c1c803e9"/>
+        <pncs id="29391" name="Medical history - Diagnosis of hypertension or isolated systolic hypertension confirmed by blood pressure (BP) readings taken 2 or more times on at least 3 different days - No - Systolic BP reading2" value="Free text"/>
+        <assertion>
+            <assertionUUID>84d47059-96ac-42fa-aa5b-ba9a9a964802</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="271649006" uuid="f251d463-f346-340a-b17c-d4a4622c7a91" desc="Systolic blood pressure (observable entity)"/>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <measurement>
+                    <units>
+                        <concept sctid="259018001" uuid="707f5dec-7899-39fc-83dd-07fd452f18a2" desc="mmHg (qualifier value)"/>
+                    </units>
+                    <point xsi:type="pointMeasurementConstant">
+                        <value>PNCS Value Field</value>
+                    </point>
+                </measurement>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>b8fe93d6-4692-48c1-915f-52bb7f4a36b7</legoUUID>
+        <stamp status="Active" time="2014-01-09T11:55:53.484-05:00" author="hsaitwal" module="default module" path="default path" uuid="85b32d9c-83af-4e86-a82c-487c722beee1"/>
+        <pncs id="29389" name="Medical history - Diagnosis of hypertension or isolated systolic hypertension confirmed by blood pressure (BP) readings taken 2 or more times on at least 3 different days - No - Systolic BP reading 1" value="Free text"/>
+        <assertion>
+            <assertionUUID>bcf0c227-b7d8-4bb5-951f-5ad90ca9e8f9</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="271649006" uuid="f251d463-f346-340a-b17c-d4a4622c7a91" desc="Systolic blood pressure (observable entity)"/>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <measurement>
+                    <units>
+                        <concept sctid="259018001" uuid="707f5dec-7899-39fc-83dd-07fd452f18a2" desc="mmHg (qualifier value)"/>
+                    </units>
+                    <point xsi:type="pointMeasurementConstant">
+                        <value>PNCS Value Field</value>
+                    </point>
+                </measurement>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>ebed8d74-2188-498e-be67-cac3b212f89c</legoUUID>
+        <stamp status="Active" time="2014-01-09T11:56:00.781-05:00" author="hsaitwal" module="default module" path="default path" uuid="6c34a3a7-8992-4c40-a93c-323a32aa8f70"/>
+        <pncs id="29401" name="Medical history - Diagnosis of hypertension or isolated systolic hypertension confirmed by blood pressure (BP) readings taken 2 or more times on at least 3 different days - No - Systolic BP reading 2" value="Free text"/>
+        <assertion>
+            <assertionUUID>f94976d2-ffb4-48ba-a4a5-fc4fad41f2d9</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="271649006" uuid="f251d463-f346-340a-b17c-d4a4622c7a91" desc="Systolic blood pressure (observable entity)"/>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <measurement>
+                    <units>
+                        <concept sctid="259018001" uuid="707f5dec-7899-39fc-83dd-07fd452f18a2" desc="mmHg (qualifier value)"/>
+                    </units>
+                    <point xsi:type="pointMeasurementConstant">
+                        <value>PNCS Value Field</value>
+                    </point>
+                </measurement>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>dec967bf-9adb-495a-9d04-2bd4a6ca6046</legoUUID>
+        <stamp status="Active" time="2014-01-09T11:56:22.713-05:00" author="hsaitwal" module="default module" path="default path" uuid="67df0728-18b1-403c-aa78-d05263ad1170"/>
+        <pncs id="29399" name="Medical history - Diagnosis of hypertension or isolated systolic hypertension confirmed by blood pressure (BP) readings taken 2 or more times on at least 3 different days - No -Systolic BP reading 1" value="Free text"/>
+        <assertion>
+            <assertionUUID>f62f7c1a-e5e9-47de-b825-08966960e673</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="271649006" uuid="f251d463-f346-340a-b17c-d4a4622c7a91" desc="Systolic blood pressure (observable entity)"/>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <measurement>
+                    <units>
+                        <concept sctid="259018001" uuid="707f5dec-7899-39fc-83dd-07fd452f18a2" desc="mmHg (qualifier value)"/>
+                    </units>
+                    <point xsi:type="pointMeasurementConstant">
+                        <value>PNCS Value Field</value>
+                    </point>
+                </measurement>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>56e0a535-d477-4144-bf21-402fe35443e1</legoUUID>
+        <stamp status="Active" time="2014-01-09T11:56:25.880-05:00" author="hsaitwal" module="default module" path="default path" uuid="ab92b1ab-b4f3-4abc-aacf-28e0d2e16de7"/>
+        <pncs id="29396" name="Medical history - Diagnosis of hypertension or isolated systolic hypertension confirmed by blood pressure (BP) readings taken 2 or more times on at least 3 different days - No -Systolic BP reading 2" value="Free text"/>
+        <assertion>
+            <assertionUUID>d6a7434e-2806-43ca-a335-c852388d6714</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="271649006" uuid="f251d463-f346-340a-b17c-d4a4622c7a91" desc="Systolic blood pressure (observable entity)"/>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <measurement>
+                    <units>
+                        <concept sctid="259018001" uuid="707f5dec-7899-39fc-83dd-07fd452f18a2" desc="mmHg (qualifier value)"/>
+                    </units>
+                    <point xsi:type="pointMeasurementConstant">
+                        <value>PNCS Value Field</value>
+                    </point>
+                </measurement>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>f1b9191b-55e7-442f-aae2-f01432f7ea69</legoUUID>
+        <stamp status="Active" time="2014-01-09T11:57:01.394-05:00" author="hsaitwal" module="default module" path="default path" uuid="6c45a1f0-6d3e-40c9-9678-3da17bbe87ac"/>
+        <pncs id="29360" name="Medical history - Diagnosis of hypertension or isolated systolic hypertension confirmed by blood pressure (BP) readings taken 2 or more times on at least 3 different days - Yes - Systolic BP reading1" value="Free text"/>
+        <assertion>
+            <assertionUUID>f20c2c03-7932-41fe-bef3-74e19bfcb8eb</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="271649006" uuid="f251d463-f346-340a-b17c-d4a4622c7a91" desc="Systolic blood pressure (observable entity)"/>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <measurement>
+                    <units>
+                        <concept sctid="259018001" uuid="707f5dec-7899-39fc-83dd-07fd452f18a2" desc="mmHg (qualifier value)"/>
+                    </units>
+                    <point xsi:type="pointMeasurementConstant">
+                        <value>PNCS Value Field</value>
+                    </point>
+                </measurement>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>7bf2489b-1da2-4eb9-9b27-5211a635ccda</legoUUID>
+        <stamp status="Active" time="2014-01-09T11:57:12.672-05:00" author="hsaitwal" module="default module" path="default path" uuid="641d569c-da54-4f3c-9f38-31a38779a581"/>
+        <pncs id="29357" name="Medical history - Diagnosis of hypertension or isolated systolic hypertension confirmed by blood pressure (BP) readings taken 2 or more times on at least 3 different days - Yes - Systolic BP reading 2" value="Free text"/>
+        <assertion>
+            <assertionUUID>dfee60a4-a487-4ebe-bd3c-64b96e8bb0bc</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="271649006" uuid="f251d463-f346-340a-b17c-d4a4622c7a91" desc="Systolic blood pressure (observable entity)"/>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <measurement>
+                    <units>
+                        <concept sctid="259018001" uuid="707f5dec-7899-39fc-83dd-07fd452f18a2" desc="mmHg (qualifier value)"/>
+                    </units>
+                    <point xsi:type="pointMeasurementConstant">
+                        <value>PNCS Value Field</value>
+                    </point>
+                </measurement>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>60af28c7-9f8d-41ce-a25c-348911ccb0d4</legoUUID>
+        <stamp status="Active" time="2014-01-09T11:57:38.275-05:00" author="hsaitwal" module="default module" path="default path" uuid="63ba1b64-fe6e-4ac0-83e3-292ccb53cd00"/>
+        <pncs id="29367" name="Medical history - Diagnosis of hypertension or isolated systolic hypertension confirmed by blood pressure (BP) readings taken 2 or more times on at least 3 different days - Yes -Systolic BP reading 2" value="Free text"/>
+        <assertion>
+            <assertionUUID>d51d93af-4385-48d8-b5d5-a911e559de2b</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="271649006" uuid="f251d463-f346-340a-b17c-d4a4622c7a91" desc="Systolic blood pressure (observable entity)"/>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <measurement>
+                    <units>
+                        <concept sctid="259018001" uuid="707f5dec-7899-39fc-83dd-07fd452f18a2" desc="mmHg (qualifier value)"/>
+                    </units>
+                    <point xsi:type="pointMeasurementConstant">
+                        <value>PNCS Value Field</value>
+                    </point>
+                </measurement>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>4c9e3f3e-68e6-4011-8363-17ab6ef9a204</legoUUID>
+        <stamp status="Active" time="2014-01-09T11:57:42.783-05:00" author="hsaitwal" module="default module" path="default path" uuid="957f17a6-2080-4f01-ae7d-5996f57a747a"/>
+        <pncs id="29365" name="Medical history - Diagnosis of hypertension or isolated systolic hypertension confirmed by blood pressure (BP) readings taken 2 or more times on at least 3 different days - Yes -Systolic BP reading 1" value="Free text"/>
+        <assertion>
+            <assertionUUID>babfb5f0-625a-4eb8-97a1-17a69e2487a1</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="271649006" uuid="f251d463-f346-340a-b17c-d4a4622c7a91" desc="Systolic blood pressure (observable entity)"/>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <measurement>
+                    <units>
+                        <concept sctid="259018001" uuid="707f5dec-7899-39fc-83dd-07fd452f18a2" desc="mmHg (qualifier value)"/>
+                    </units>
+                    <point xsi:type="pointMeasurementConstant">
+                        <value>PNCS Value Field</value>
+                    </point>
+                </measurement>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>5f7aea8d-502b-4fbf-9f4b-19a37f0bd05f</legoUUID>
+        <stamp status="Active" time="2014-01-13T10:36:38.155-05:00" author="hsaitwal" module="default module" path="default path" uuid="d6a72ee6-805b-4b38-9589-8fce39543470"/>
+        <pncs id="29638" name="Medical history - History of a diastolic BP elevation to predominantly 100 or more - Describe frequency and severity" value="Free text"/>
+        <assertion>
+            <assertionUUID>5a1e4a8b-4e66-492d-8b38-a4954f0028de</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept/>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value/>
+        </assertion>
+        <comment>DO NOT MODEL QUESTIONS WITH FREE TEXT ANSWERS</comment>
+    </lego>
+    <lego>
+        <legoUUID>d92e182e-1dcc-48d2-885c-455e0d721853</legoUUID>
+        <stamp status="Active" time="2014-01-13T10:42:15.320-05:00" author="hsaitwal" module="default module" path="default path" uuid="ff43c213-5e96-485a-8f56-8214bba2a090"/>
+        <pncs id="29370" name="Medical history - History of a diastolic BP elevation to predominantly 100 or more?" value="No"/>
+        <assertion>
+            <assertionUUID>69a1fbc1-9a48-4d5b-b091-b6dbdeffd0c7</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="271650006" uuid="8176ed59-8151-37de-a28a-0e1cbbec39a7" desc="Diastolic blood pressure (observable entity)"/>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <measurement>
+                    <units>
+                        <concept sctid="259018001" uuid="707f5dec-7899-39fc-83dd-07fd452f18a2" desc="mmHg (qualifier value)"/>
+                    </units>
+                    <bound upperPointInclusive="false">
+                        <upperPoint xsi:type="pointLong">
+                            <value>100</value>
+                        </upperPoint>
+                    </bound>
+                </measurement>
+            </value>
+            <timing>
+                <bound>
+                    <lowerPoint xsi:type="pointMeasurementConstant">
+                        <value>DOB</value>
+                    </lowerPoint>
+                    <upperPoint xsi:type="pointMeasurementConstant">
+                        <value>NOW</value>
+                    </upperPoint>
+                </bound>
+            </timing>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>6a0dc547-8269-43e0-bada-3f15ac7ea81d</legoUUID>
+        <stamp status="Active" time="2014-01-13T10:42:45.566-05:00" author="hsaitwal" module="default module" path="default path" uuid="e3c75514-4dd5-40fb-9171-11a004efb1e5"/>
+        <pncs id="29370" name="Medical history - History of a diastolic BP elevation to predominantly 100 or more?" value="Yes"/>
+        <assertion>
+            <assertionUUID>c13cd2ef-1254-4d95-8016-fe02bbe837b4</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="271650006" uuid="8176ed59-8151-37de-a28a-0e1cbbec39a7" desc="Diastolic blood pressure (observable entity)"/>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <measurement>
+                    <units>
+                        <concept sctid="259018001" uuid="707f5dec-7899-39fc-83dd-07fd452f18a2" desc="mmHg (qualifier value)"/>
+                    </units>
+                    <bound upperPointInclusive="false">
+                        <lowerPoint xsi:type="pointLong">
+                            <value>100</value>
+                        </lowerPoint>
+                    </bound>
+                </measurement>
+            </value>
+            <timing>
+                <bound>
+                    <lowerPoint xsi:type="pointMeasurementConstant">
+                        <value>DOB</value>
+                    </lowerPoint>
+                    <upperPoint xsi:type="pointMeasurementConstant">
+                        <value>NOW</value>
+                    </upperPoint>
+                </bound>
+            </timing>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>cae80d47-617f-4c51-836a-9cf25b83545d</legoUUID>
+        <stamp status="Active" time="2014-01-13T10:43:15.632-05:00" author="hsaitwal" module="default module" path="default path" uuid="6fbfb520-b06c-4064-a905-d1b796c8cb87"/>
+        <pncs id="29373" name="Medical history - Required continuous medication for Hypertension or isolated systolic hypertension - List medications used for hypertension or isolated systolic hypertension" value="Free text"/>
+        <assertion>
+            <assertionUUID>f42ed6fc-5281-4d5f-bd59-5f69b2dfa807</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept/>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value/>
+        </assertion>
+        <comment>DO NOT MODEL QUESTIONS WITH FREE TEXT ANSWERS</comment>
+    </lego>
+    <lego>
+        <legoUUID>4365e9b1-bb21-46af-88da-64558733c50d</legoUUID>
+        <stamp status="Active" time="2014-01-13T10:45:58.408-05:00" author="hsaitwal" module="default module" path="default path" uuid="c0feeedf-5582-41ca-a1c4-0a86a6374aab"/>
+        <pncs id="29372" name="Medical history - Required continuous medication for Hypertension or isolated systolic hypertension?" value="No"/>
+        <assertion>
+            <assertionUUID>678b32eb-3aa5-47eb-b92c-a31e1dbf9960</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="129019007" uuid="51a63b94-5b60-35d2-8216-95aa765152dc" desc="Taking medication (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="53" uuid="d82c8d16-19ad-3176-9665-453cfb2e55f0" desc="IS ABOUT (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="38341003" uuid="352b93a4-a278-38a0-8406-b521c47f9f97" desc="Hypertensive disorder, systemic arterial (disorder)"/>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <expression>
+                    <concept sctid="2667000" uuid="23dfdcb1-bfa8-3bad-a32a-49ed6d0ca6d7" desc="Absent (qualifier value)"/>
+                </expression>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>afc5df59-4803-4e19-b7a2-b9752b193d81</legoUUID>
+        <stamp status="Active" time="2014-01-13T10:46:18.526-05:00" author="hsaitwal" module="default module" path="default path" uuid="73c92995-4f5d-4856-8c45-51f0f5d92cd2"/>
+        <pncs id="29372" name="Medical history - Required continuous medication for Hypertension or isolated systolic hypertension?" value="No"/>
+        <assertion>
+            <assertionUUID>4f8b755f-c1d6-4e47-bf52-a315f1f29883</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="129019007" uuid="51a63b94-5b60-35d2-8216-95aa765152dc" desc="Taking medication (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="53" uuid="d82c8d16-19ad-3176-9665-453cfb2e55f0" desc="IS ABOUT (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="194759009" uuid="6a12d1c1-c031-33d7-adb6-c49bbe3ff1f8" desc="Systolic hypertension (disorder)"/>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <expression>
+                    <concept sctid="2667000" uuid="23dfdcb1-bfa8-3bad-a32a-49ed6d0ca6d7" desc="Absent (qualifier value)"/>
+                </expression>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>841bbb34-6408-477c-9e4a-26a6f9c1d464</legoUUID>
+        <stamp status="Active" time="2014-01-13T10:46:37.353-05:00" author="hsaitwal" module="default module" path="default path" uuid="1cecb802-ad4b-4dc9-bd5f-f25231189603"/>
+        <pncs id="29372" name="Medical history - Required continuous medication for Hypertension or isolated systolic hypertension?" value="Yes"/>
+        <assertion>
+            <assertionUUID>10198c56-7a80-4ea7-a92f-1d688b2751e4</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="129019007" uuid="51a63b94-5b60-35d2-8216-95aa765152dc" desc="Taking medication (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="53" uuid="d82c8d16-19ad-3176-9665-453cfb2e55f0" desc="IS ABOUT (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="38341003" uuid="352b93a4-a278-38a0-8406-b521c47f9f97" desc="Hypertensive disorder, systemic arterial (disorder)"/>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <expression>
+                    <concept sctid="52101004" uuid="850e9dff-7c45-3db4-8cf9-34c8fb7359fd" desc="Present (qualifier value)"/>
+                </expression>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>be7ab5cc-a787-457f-b960-04fc7b01d5eb</legoUUID>
+        <stamp status="Active" time="2014-01-13T10:46:46.834-05:00" author="hsaitwal" module="default module" path="default path" uuid="2b0e0d23-b85a-4bc2-a57c-a8104d194c63"/>
+        <pncs id="29372" name="Medical history - Required continuous medication for Hypertension or isolated systolic hypertension?" value="Yes"/>
+        <assertion>
+            <assertionUUID>0097b07d-c1ea-42fb-9a4d-63253f87f30c</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="129019007" uuid="51a63b94-5b60-35d2-8216-95aa765152dc" desc="Taking medication (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="53" uuid="d82c8d16-19ad-3176-9665-453cfb2e55f0" desc="IS ABOUT (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="194759009" uuid="6a12d1c1-c031-33d7-adb6-c49bbe3ff1f8" desc="Systolic hypertension (disorder)"/>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <expression>
+                    <concept sctid="52101004" uuid="850e9dff-7c45-3db4-8cf9-34c8fb7359fd" desc="Present (qualifier value)"/>
+                </expression>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>a96c655f-05b3-4570-9ba7-301c1e8f970f</legoUUID>
+        <stamp status="Active" time="2014-01-13T10:47:06.602-05:00" author="hsaitwal" module="default module" path="default path" uuid="eab89728-705e-4eba-97e6-f74d47d0ba2f"/>
+        <pncs id="29374" name="Other pertinent physical findings - Does the veteran have any other pertinent physical findings complications conditions signs and/or symptoms related to any conditions listed in the diagnosis section above?" value="No"/>
+        <assertion>
+            <assertionUUID>e5f44252-0086-4f34-9654-832d0bd3fea9</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept/>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value/>
+        </assertion>
+        <comment>DO NOT MODEL OTHER</comment>
+    </lego>
+    <lego>
+        <legoUUID>69b5aad2-7857-4c63-b7a5-633e6da90335</legoUUID>
+        <stamp status="Active" time="2014-01-13T10:47:16.895-05:00" author="hsaitwal" module="default module" path="default path" uuid="c724c128-569c-4046-8d99-843d52a80bc0"/>
+        <pncs id="29374" name="Other pertinent physical findings - Does the veteran have any other pertinent physical findings complications conditions signs and/or symptoms related to any conditions listed in the diagnosis section above?" value="Yes"/>
+        <assertion>
+            <assertionUUID>974e7ecc-4e7d-4798-b78f-8f6eb8d171ae</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept/>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value/>
+        </assertion>
+        <comment>DO NOT MODEL OTHER</comment>
+    </lego>
+    <lego>
+        <legoUUID>551af316-4e7a-4dfa-b5c4-c2aeeabff4a6</legoUUID>
+        <stamp status="Active" time="2014-01-13T10:50:52.995-05:00" author="hsaitwal" module="default module" path="default path" uuid="6a6837c9-3b5d-4ecf-b2e2-25f910880d6c"/>
+        <pncs id="29403" name="Other pertinent physical findings - Does the veteran have any scars related to any conditions or to the treatment of any conditions listed in the diagnosis section above - are any scars painful or unstable or is total area of all related scars greater than 39 square cm?" value="No"/>
+        <assertion>
+            <assertionUUID>cdd462af-afbe-4ff7-bcc0-ef031ba414be</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="364539003" uuid="3e16f122-52b7-3cc6-9727-985c0528ac2a" desc="Measure of skin (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="53" uuid="d82c8d16-19ad-3176-9665-453cfb2e55f0" desc="IS ABOUT (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="275322007" uuid="ff37a4f6-d544-3069-b418-54e1d28ec26f" desc="Scar (disorder)"/>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <measurement>
+                    <units>
+                        <concept sctid="259022006" uuid="a833b02a-9407-3ffe-b85f-6257c5120621" desc="square centimeter (qualifier value)"/>
+                    </units>
+                    <bound upperPointInclusive="false">
+                        <upperPoint xsi:type="pointLong">
+                            <value>39</value>
+                        </upperPoint>
+                    </bound>
+                </measurement>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>680957f7-6148-49c0-9235-22bf2ec80f2b</legoUUID>
+        <stamp status="Active" time="2014-01-13T10:51:00.749-05:00" author="hsaitwal" module="default module" path="default path" uuid="6080893c-d348-4213-af5e-60d98ab90432"/>
+        <pncs id="29403" name="Other pertinent physical findings - Does the veteran have any scars related to any conditions or to the treatment of any conditions listed in the diagnosis section above - are any scars painful or unstable or is total area of all related scars greater than 39 square cm?" value="No"/>
+        <assertion>
+            <assertionUUID>2a078cfe-62f3-4428-adf1-43f602bbea02</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="406189006" uuid="ef238c5e-ccbc-3bb0-9ad4-c853e9203e6e" desc="Pain observable (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="53" uuid="d82c8d16-19ad-3176-9665-453cfb2e55f0" desc="IS ABOUT (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="275322007" uuid="ff37a4f6-d544-3069-b418-54e1d28ec26f" desc="Scar (disorder)"/>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <expression>
+                    <concept sctid="2667000" uuid="23dfdcb1-bfa8-3bad-a32a-49ed6d0ca6d7" desc="Absent (qualifier value)"/>
+                </expression>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>7fdfcb1c-f1b3-4d24-9a4b-f6bdd6721fb4</legoUUID>
+        <stamp status="Active" time="2014-01-13T10:51:05.060-05:00" author="hsaitwal" module="default module" path="default path" uuid="a774173c-f601-49ed-bbd7-377a7c30cefa"/>
+        <pncs id="29403" name="Other pertinent physical findings - Does the veteran have any scars related to any conditions or to the treatment of any conditions listed in the diagnosis section above - are any scars painful or unstable or is total area of all related scars greater than 39 square cm?" value="No"/>
+        <assertion>
+            <assertionUUID>99e324c2-80e0-4071-b363-f8e7d7284e4c</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="364528001" uuid="459e6b57-b4ed-3fb6-8ddc-99ce2fd247e8" desc="Skin observable (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="53" uuid="d82c8d16-19ad-3176-9665-453cfb2e55f0" desc="IS ABOUT (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="275322007" uuid="ff37a4f6-d544-3069-b418-54e1d28ec26f" desc="Scar (disorder)"/>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <expression>
+                    <concept sctid="58158008" uuid="a55c9360-268b-3ceb-880e-00f82ed56565" desc="Stable (qualifier value)"/>
+                </expression>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>aba5cbdd-ee8f-47ac-9c8f-d5d310dcd7fa</legoUUID>
+        <stamp status="Active" time="2014-01-13T10:52:06.253-05:00" author="hsaitwal" module="default module" path="default path" uuid="61ae2b3d-e559-43ed-8d03-7e219a1092cc"/>
+        <pncs id="29403" name="Other pertinent physical findings - Does the veteran have any scars related to any conditions or to the treatment of any conditions listed in the diagnosis section above - are any scars painful or unstable or is total area of all related scars greater than 39 square cm?" value="Yes"/>
+        <assertion>
+            <assertionUUID>862f316a-c111-44e4-9437-dba4b0873ac6</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="364411001" uuid="e76b86ab-944b-3539-8064-4df19e27bb34" desc="Neck region observable (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="53" uuid="d82c8d16-19ad-3176-9665-453cfb2e55f0" desc="IS ABOUT (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="275322007" uuid="ff37a4f6-d544-3069-b418-54e1d28ec26f" desc="Scar (disorder)"/>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <expression>
+                    <concept sctid="263922001" uuid="640c4a92-354e-3b2f-86e2-7d57a0b21f95" desc="Unstable status (qualifier value)"/>
+                </expression>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>c2c6411f-b6ab-4e24-8d1b-98cd9242b287</legoUUID>
+        <stamp status="Active" time="2014-01-13T10:52:11.584-05:00" author="hsaitwal" module="default module" path="default path" uuid="9db4e5af-09f8-4820-938a-c6c7c5090cb6"/>
+        <pncs id="29403" name="Other pertinent physical findings - Does the veteran have any scars related to any conditions or to the treatment of any conditions listed in the diagnosis section above - are any scars painful or unstable or is total area of all related scars greater than 39 square cm?" value="Yes"/>
+        <assertion>
+            <assertionUUID>ed990b6e-0f87-47ef-a0e1-26f251b8b595</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="406189006" uuid="ef238c5e-ccbc-3bb0-9ad4-c853e9203e6e" desc="Pain observable (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="53" uuid="d82c8d16-19ad-3176-9665-453cfb2e55f0" desc="IS ABOUT (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="275322007" uuid="ff37a4f6-d544-3069-b418-54e1d28ec26f" desc="Scar (disorder)"/>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <expression>
+                    <concept sctid="52101004" uuid="850e9dff-7c45-3db4-8cf9-34c8fb7359fd" desc="Present (qualifier value)"/>
+                </expression>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>d99bc4b5-dd05-402b-ba44-3a4e58c43268</legoUUID>
+        <stamp status="Active" time="2014-01-13T10:52:14.281-05:00" author="hsaitwal" module="default module" path="default path" uuid="20ae10b4-a655-43a3-ad01-32bd2718039d"/>
+        <pncs id="29403" name="Other pertinent physical findings - Does the veteran have any scars related to any conditions or to the treatment of any conditions listed in the diagnosis section above - are any scars painful or unstable or is total area of all related scars greater than 39 square cm?" value="Yes"/>
+        <assertion>
+            <assertionUUID>6773429e-20e0-4518-84ca-da105fecd57f</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="364539003" uuid="3e16f122-52b7-3cc6-9727-985c0528ac2a" desc="Measure of skin (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="53" uuid="d82c8d16-19ad-3176-9665-453cfb2e55f0" desc="IS ABOUT (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="275322007" uuid="ff37a4f6-d544-3069-b418-54e1d28ec26f" desc="Scar (disorder)"/>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <measurement>
+                    <units>
+                        <concept sctid="259022006" uuid="a833b02a-9407-3ffe-b85f-6257c5120621" desc="square centimeter (qualifier value)"/>
+                    </units>
+                    <bound upperPointInclusive="false">
+                        <lowerPoint xsi:type="pointLong">
+                            <value>39</value>
+                        </lowerPoint>
+                    </bound>
+                </measurement>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>c399f259-2477-4f9c-b41c-360210ff3042</legoUUID>
+        <stamp status="Active" time="2014-01-13T11:04:05.717-05:00" author="hsaitwal" module="default module" path="default path" uuid="1bd76c97-4f04-4a40-8e84-bddeaf23a193"/>
+        <pncs id="29376" name="Other pertinent physical findings - Does the veteran have any scars related to any conditions or to the treatment of any conditions listed in the diagnosis section above?" value="No"/>
+        <assertion>
+            <assertionUUID>9be1481b-6d07-42cc-9143-c7bb4d6e8eba</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="364066008" uuid="c2a29890-2bfa-30b9-ab3c-fd75d879166c" desc="Cardiovascular observable (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="53" uuid="d82c8d16-19ad-3176-9665-453cfb2e55f0" desc="IS ABOUT (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="38341003" uuid="352b93a4-a278-38a0-8406-b521c47f9f97" desc="Hypertensive disorder, systemic arterial (disorder)"/>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <expression>
+                    <concept sctid="52101004" uuid="850e9dff-7c45-3db4-8cf9-34c8fb7359fd" desc="Present (qualifier value)"/>
+                </expression>
+            </value>
+            <timing>
+                <bound>
+                    <lowerPoint xsi:type="pointMeasurementConstant">
+                        <value>DOB</value>
+                    </lowerPoint>
+                    <upperPoint xsi:type="pointMeasurementConstant">
+                        <value>NOW</value>
+                    </upperPoint>
+                </bound>
+            </timing>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>895150b0-acd0-4c37-b366-408f126de23a</legoUUID>
+        <stamp status="Active" time="2014-01-13T11:04:54.001-05:00" author="hsaitwal" module="default module" path="default path" uuid="4d87ad32-2ac0-475c-bf51-8de44ec89de3"/>
+        <pncs id="29376" name="Other pertinent physical findings - Does the veteran have any scars related to any conditions or to the treatment of any conditions listed in the diagnosis section above?" value="Yes"/>
+        <assertion>
+            <assertionUUID>3c5fe289-f842-41b0-849a-a46e7263c376</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="364066008" uuid="c2a29890-2bfa-30b9-ab3c-fd75d879166c" desc="Cardiovascular observable (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="53" uuid="d82c8d16-19ad-3176-9665-453cfb2e55f0" desc="IS ABOUT (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="38341003" uuid="352b93a4-a278-38a0-8406-b521c47f9f97" desc="Hypertensive disorder, systemic arterial (disorder)"/>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <expression>
+                    <concept sctid="52101004" uuid="850e9dff-7c45-3db4-8cf9-34c8fb7359fd" desc="Present (qualifier value)"/>
+                </expression>
+            </value>
+            <timing>
+                <bound>
+                    <lowerPoint xsi:type="pointMeasurementConstant">
+                        <value>DOB</value>
+                    </lowerPoint>
+                    <upperPoint xsi:type="pointMeasurementConstant">
+                        <value>NOW</value>
+                    </upperPoint>
+                </bound>
+            </timing>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>0d8e8c78-d0be-4b70-b773-a96f8ad5e4a3</legoUUID>
+        <stamp status="Active" time="2014-01-13T12:03:02.411-05:00" author="hsaitwal" module="default module" path="default path" uuid="6de5facc-9e79-4827-8bad-ab84c15854db"/>
+        <pncs id="29376" name="Other pertinent physical findings - Does the veteran have any scars related to any conditions or to the treatment of any conditions listed in the diagnosis section above?" value="No"/>
+        <assertion>
+            <assertionUUID>aebff158-74e7-42d6-b227-a85372693ddc</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="129019007" uuid="51a63b94-5b60-35d2-8216-95aa765152dc" desc="Taking medication (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="53" uuid="d82c8d16-19ad-3176-9665-453cfb2e55f0" desc="IS ABOUT (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="38341003" uuid="352b93a4-a278-38a0-8406-b521c47f9f97" desc="Hypertensive disorder, systemic arterial (disorder)"/>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <expression>
+                    <concept sctid="52101004" uuid="850e9dff-7c45-3db4-8cf9-34c8fb7359fd" desc="Present (qualifier value)"/>
+                </expression>
+            </value>
+            <timing>
+                <bound>
+                    <lowerPoint xsi:type="pointMeasurementConstant">
+                        <value>DOB</value>
+                    </lowerPoint>
+                    <upperPoint xsi:type="pointMeasurementConstant">
+                        <value>NOW</value>
+                    </upperPoint>
+                </bound>
+            </timing>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>396fac71-24ae-4414-977e-4ad66c84142a</legoUUID>
+        <stamp status="Active" time="2014-01-13T12:03:41.804-05:00" author="hsaitwal" module="default module" path="default path" uuid="c42173c8-e9f2-4d3e-922a-82ccdb53e4fc"/>
+        <pncs id="29376" name="Other pertinent physical findings - Does the veteran have any scars related to any conditions or to the treatment of any conditions listed in the diagnosis section above?" value="No"/>
+        <assertion>
+            <assertionUUID>ca0dce29-5c00-4be8-aac3-3de6a16cc1fa</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="364528001" uuid="459e6b57-b4ed-3fb6-8ddc-99ce2fd247e8" desc="Skin observable (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="53" uuid="d82c8d16-19ad-3176-9665-453cfb2e55f0" desc="IS ABOUT (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="275322007" uuid="ff37a4f6-d544-3069-b418-54e1d28ec26f" desc="Scar (disorder)"/>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <expression>
+                    <concept sctid="2667000" uuid="23dfdcb1-bfa8-3bad-a32a-49ed6d0ca6d7" desc="Absent (qualifier value)"/>
+                </expression>
+            </value>
+            <assertionComponent>
+                <assertionUUID>9be1481b-6d07-42cc-9143-c7bb4d6e8eba</assertionUUID>
+                <type>
+                    <concept sctid="1081" uuid="36a16a25-0536-3e0c-922b-6ea7a23a56d2" desc="Refers to observation (link assertion)"/>
+                </type>
+            </assertionComponent>
+            <assertionComponent>
+                <assertionUUID>aebff158-74e7-42d6-b227-a85372693ddc</assertionUUID>
+                <type>
+                    <concept sctid="1081" uuid="36a16a25-0536-3e0c-922b-6ea7a23a56d2" desc="Refers to observation (link assertion)"/>
+                </type>
+            </assertionComponent>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>7f2f4263-3b84-4040-8c1b-0ce4e23cc9b6</legoUUID>
+        <stamp status="Active" time="2014-01-13T12:04:05.451-05:00" author="hsaitwal" module="default module" path="default path" uuid="0cdeec6c-c25a-4067-a4dc-b40a604cb9a0"/>
+        <pncs id="29376" name="Other pertinent physical findings - Does the veteran have any scars related to any conditions or to the treatment of any conditions listed in the diagnosis section above?" value="Yes"/>
+        <assertion>
+            <assertionUUID>905aa636-b775-4236-8eaf-f7e833424cff</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="129019007" uuid="51a63b94-5b60-35d2-8216-95aa765152dc" desc="Taking medication (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="53" uuid="d82c8d16-19ad-3176-9665-453cfb2e55f0" desc="IS ABOUT (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="38341003" uuid="352b93a4-a278-38a0-8406-b521c47f9f97" desc="Hypertensive disorder, systemic arterial (disorder)"/>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <expression>
+                    <concept sctid="52101004" uuid="850e9dff-7c45-3db4-8cf9-34c8fb7359fd" desc="Present (qualifier value)"/>
+                </expression>
+            </value>
+            <timing>
+                <bound>
+                    <lowerPoint xsi:type="pointMeasurementConstant">
+                        <value>DOB</value>
+                    </lowerPoint>
+                    <upperPoint xsi:type="pointMeasurementConstant">
+                        <value>NOW</value>
+                    </upperPoint>
+                </bound>
+            </timing>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>8a50d4ca-d0bf-4db1-bc56-8ab52b3df07a</legoUUID>
+        <stamp status="Active" time="2014-01-13T12:04:19.460-05:00" author="hsaitwal" module="default module" path="default path" uuid="279ac21e-6731-4e0b-bc83-6db4d093680a"/>
+        <pncs id="29376" name="Other pertinent physical findings - Does the veteran have any scars related to any conditions or to the treatment of any conditions listed in the diagnosis section above?" value="Yes"/>
+        <assertion>
+            <assertionUUID>eb98944d-73e3-46fa-be86-b86b7aeaaffb</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="364528001" uuid="459e6b57-b4ed-3fb6-8ddc-99ce2fd247e8" desc="Skin observable (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="53" uuid="d82c8d16-19ad-3176-9665-453cfb2e55f0" desc="IS ABOUT (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="275322007" uuid="ff37a4f6-d544-3069-b418-54e1d28ec26f" desc="Scar (disorder)"/>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <expression>
+                    <concept sctid="52101004" uuid="850e9dff-7c45-3db4-8cf9-34c8fb7359fd" desc="Present (qualifier value)"/>
+                </expression>
+            </value>
+            <assertionComponent>
+                <assertionUUID>3c5fe289-f842-41b0-849a-a46e7263c376</assertionUUID>
+                <type>
+                    <concept sctid="1081" uuid="36a16a25-0536-3e0c-922b-6ea7a23a56d2" desc="Refers to observation (link assertion)"/>
+                </type>
+            </assertionComponent>
+            <assertionComponent>
+                <assertionUUID>905aa636-b775-4236-8eaf-f7e833424cff</assertionUUID>
+                <type>
+                    <concept sctid="1081" uuid="36a16a25-0536-3e0c-922b-6ea7a23a56d2" desc="Refers to observation (link assertion)"/>
+                </type>
+            </assertionComponent>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>0921bb01-4af5-4439-af34-6939df46899e</legoUUID>
+        <stamp status="Active" time="2014-01-23T14:11:01.225-05:00" author="hsaitwal" module="default module" path="default path" uuid="b7626a7e-c8b4-4a42-b4eb-e758e586fa37"/>
+        <pncs id="29371" name="Medical history - Diagnosis of hypertension or isolated systolic hypertension confirmed by blood pressure readings taken 2 or more times on at least 3 different days" value="No"/>
+        <assertion>
+            <assertionUUID>902c50f3-3986-403e-9740-9fbb5f950171</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="364066008" uuid="c2a29890-2bfa-30b9-ab3c-fd75d879166c" desc="Cardiovascular observable (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="53" uuid="d82c8d16-19ad-3176-9665-453cfb2e55f0" desc="IS ABOUT (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="38341003" uuid="352b93a4-a278-38a0-8406-b521c47f9f97" desc="Hypertensive disorder, systemic arterial (disorder)"/>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <expression>
+                    <concept sctid="2667000" uuid="23dfdcb1-bfa8-3bad-a32a-49ed6d0ca6d7" desc="Absent (qualifier value)"/>
+                </expression>
+            </value>
+        </assertion>
+        <comment>Cannot Model Fully</comment>
+    </lego>
+    <lego>
+        <legoUUID>3ddf7616-7d41-457c-89d2-93690f912fd5</legoUUID>
+        <stamp status="Active" time="2014-01-23T14:11:30.600-05:00" author="hsaitwal" module="default module" path="default path" uuid="01803269-bb80-4f59-8f65-387251b0f1fb"/>
+        <pncs id="29371" name="Medical history - Diagnosis of hypertension or isolated systolic hypertension confirmed by blood pressure readings taken 2 or more times on at least 3 different days" value="No"/>
+        <assertion>
+            <assertionUUID>4b258cab-0d70-4376-9d2e-792e27a33845</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="364066008" uuid="c2a29890-2bfa-30b9-ab3c-fd75d879166c" desc="Cardiovascular observable (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="53" uuid="d82c8d16-19ad-3176-9665-453cfb2e55f0" desc="IS ABOUT (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="194759009" uuid="6a12d1c1-c031-33d7-adb6-c49bbe3ff1f8" desc="Systolic hypertension (disorder)"/>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <expression>
+                    <concept sctid="2667000" uuid="23dfdcb1-bfa8-3bad-a32a-49ed6d0ca6d7" desc="Absent (qualifier value)"/>
+                </expression>
+            </value>
+        </assertion>
+        <comment>Cannot Model Fully</comment>
+    </lego>
+    <lego>
+        <legoUUID>03030ca6-fd74-4111-b9aa-303ef47d2a68</legoUUID>
+        <stamp status="Active" time="2014-01-23T17:07:07.439-05:00" author="hsaitwal" module="default module" path="default path" uuid="22d809b7-594f-4a5b-aaa6-e0a2e03c49a3"/>
+        <pncs id="29371" name="Medical history - Diagnosis of hypertension or isolated systolic hypertension confirmed by blood pressure readings taken 2 or more times on at least 3 different days" value="Unknown"/>
+        <assertion>
+            <assertionUUID>bcbd6f94-5da9-4c16-845e-1fc491628d7c</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="364066008" uuid="c2a29890-2bfa-30b9-ab3c-fd75d879166c" desc="Cardiovascular observable (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="53" uuid="d82c8d16-19ad-3176-9665-453cfb2e55f0" desc="IS ABOUT (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="38341003" uuid="352b93a4-a278-38a0-8406-b521c47f9f97" desc="Hypertensive disorder, systemic arterial (disorder)"/>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <expression>
+                    <concept sctid="261665006" uuid="9265522f-cfde-3d04-aeee-9ea6fae3ad0c" desc="Unknown (qualifier value)"/>
+                </expression>
+            </value>
+        </assertion>
+        <comment>Cannot model fully</comment>
+    </lego>
+    <lego>
+        <legoUUID>9f0b41c7-de8c-4d01-b522-5130348d8a02</legoUUID>
+        <stamp status="Active" time="2014-01-23T17:07:18.138-05:00" author="hsaitwal" module="default module" path="default path" uuid="2cd61878-08ee-43c4-96e8-27f763f0150a"/>
+        <pncs id="29371" name="Medical history - Diagnosis of hypertension or isolated systolic hypertension confirmed by blood pressure readings taken 2 or more times on at least 3 different days" value="Unknown"/>
+        <assertion>
+            <assertionUUID>1d3101fc-07cc-47b2-b717-07b4454a7ba7</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="364066008" uuid="c2a29890-2bfa-30b9-ab3c-fd75d879166c" desc="Cardiovascular observable (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="53" uuid="d82c8d16-19ad-3176-9665-453cfb2e55f0" desc="IS ABOUT (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="194759009" uuid="6a12d1c1-c031-33d7-adb6-c49bbe3ff1f8" desc="Systolic hypertension (disorder)"/>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <expression>
+                    <concept sctid="261665006" uuid="9265522f-cfde-3d04-aeee-9ea6fae3ad0c" desc="Unknown (qualifier value)"/>
+                </expression>
+            </value>
+        </assertion>
+        <comment>Cannot model fully</comment>
+    </lego>
+    <lego>
+        <legoUUID>303026d1-120a-4f68-9654-00981addd3d4</legoUUID>
+        <stamp status="Active" time="2014-01-23T17:07:43.331-05:00" author="hsaitwal" module="default module" path="default path" uuid="c63d13c8-c860-47fd-b75c-8ec4e60c55da"/>
+        <pncs id="29371" name="Medical history - Diagnosis of hypertension or isolated systolic hypertension confirmed by blood pressure readings taken 2 or more times on at least 3 different days" value="Yes"/>
+        <assertion>
+            <assertionUUID>5c329aba-3b15-4473-81ed-0da435eb67f7</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="364066008" uuid="c2a29890-2bfa-30b9-ab3c-fd75d879166c" desc="Cardiovascular observable (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="53" uuid="d82c8d16-19ad-3176-9665-453cfb2e55f0" desc="IS ABOUT (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="194759009" uuid="6a12d1c1-c031-33d7-adb6-c49bbe3ff1f8" desc="Systolic hypertension (disorder)"/>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <expression>
+                    <concept sctid="52101004" uuid="850e9dff-7c45-3db4-8cf9-34c8fb7359fd" desc="Present (qualifier value)"/>
+                </expression>
+            </value>
+        </assertion>
+        <comment>Cannot model fully</comment>
+    </lego>
+    <lego>
+        <legoUUID>721478ce-9d63-462f-934e-e7ff609ff79f</legoUUID>
+        <stamp status="Active" time="2014-01-23T17:07:52.099-05:00" author="hsaitwal" module="default module" path="default path" uuid="e24cceda-0bc1-49db-a869-8485a17d22ef"/>
+        <pncs id="29371" name="Medical history - Diagnosis of hypertension or isolated systolic hypertension confirmed by blood pressure readings taken 2 or more times on at least 3 different days" value="Yes"/>
+        <assertion>
+            <assertionUUID>4e64dab8-8549-45c3-a7d9-058941dce8e5</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="364066008" uuid="c2a29890-2bfa-30b9-ab3c-fd75d879166c" desc="Cardiovascular observable (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="53" uuid="d82c8d16-19ad-3176-9665-453cfb2e55f0" desc="IS ABOUT (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="38341003" uuid="352b93a4-a278-38a0-8406-b521c47f9f97" desc="Hypertensive disorder, systemic arterial (disorder)"/>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <expression>
+                    <concept sctid="52101004" uuid="850e9dff-7c45-3db4-8cf9-34c8fb7359fd" desc="Present (qualifier value)"/>
+                </expression>
+            </value>
+        </assertion>
+        <comment>Cannot model fully</comment>
+    </lego>
+</legoList>
