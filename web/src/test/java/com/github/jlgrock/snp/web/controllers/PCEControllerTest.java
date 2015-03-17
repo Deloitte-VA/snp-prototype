@@ -3,7 +3,7 @@ package com.github.jlgrock.snp.web.controllers;
 import com.github.jlgrock.snp.core.converters.PCEWriteConverter;
 import com.github.jlgrock.snp.core.domain.PCE;
 import org.glassfish.jersey.server.ResourceConfig;
-import org.glassfish.jersey.test.JerseyTest;
+import org.glassfish.jersey.test.JerseyTestNg;
 import org.testng.annotations.Test;
 
 import javax.ws.rs.core.Application;
@@ -13,7 +13,7 @@ import static org.testng.Assert.assertEquals;
 /**
  *
  */
-public class PCEControllerTest extends JerseyTest {
+public class PCEControllerTest extends JerseyTestNg.ContainerPerClassTest {
     @Override
     protected Application configure() {
         return new ResourceConfig(PCEController.class);

@@ -1,8 +1,5 @@
 package com.github.jlgrock.snp.web.controllers;
 
-import com.github.jlgrock.snp.core.data.EncounterRepository;
-import com.github.jlgrock.snp.core.domain.Encounter;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,7 +19,7 @@ public class EncounterController {
     private static final Logger LOGGER = LoggerFactory.getLogger(EncounterController.class);
    
 //    private final EncounterRepository repository;
-//
+
 //    @Inject
 //    EncounterController(final EncounterRepository repositoryIn) {
 //        repository = repositoryIn;
@@ -30,7 +27,7 @@ public class EncounterController {
 
     /**
      * 
-     * @param pid encounter id used for search
+     * @param id encounter id used for search
      * @return returns an encounter
      */
     @GET @Path("/{id}")
