@@ -57,6 +57,7 @@
         <hk2.version>2.4.0-b10</hk2.version>
         <guava.version>18.0</guava.version>
         <jersey.version>2.17</jersey.version>
+        <jersey-json.version>1.19</jersey-json.version>
         <testng.version>6.8.21</testng.version>
         <hk2testing.version>2.4.0-b11</hk2testing.version>
 
@@ -159,6 +160,12 @@
                 <version>${jersey.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>com.sun.jersey</groupId>
+                <artifactId>jersey-json</artifactId>
+                <version>${jersey-json.version}</version>
+            </dependency>
+
             <!-- When you need to bind to the console -->
             <dependency>
                 <groupId>org.slf4j</groupId>
@@ -167,12 +174,6 @@
             </dependency>
 
             <!-- Testing dependencies -->
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-simple</artifactId>
-                <version>${slf4j.version}</version>
-            </dependency>
-
             <dependency>
                 <groupId>org.testng</groupId>
                 <artifactId>testng</artifactId>

@@ -4,7 +4,7 @@ import com.github.jlgrock.snp.core.converters.EncounterWriteConverter;
 import com.github.jlgrock.snp.core.converters.ObservationWriteConverter;
 import com.github.jlgrock.snp.core.domain.Encounter;
 import org.glassfish.jersey.server.ResourceConfig;
-import org.glassfish.jersey.test.JerseyTest;
+import org.glassfish.jersey.test.JerseyTestNg;
 import org.testng.annotations.Test;
 
 import javax.ws.rs.core.Application;
@@ -15,12 +15,18 @@ import static org.testng.Assert.assertEquals;
 /**
  *
  */
-public class EncounterControllerTest extends JerseyTest {
+public class EncounterControllerTest extends JerseyTestNg.ContainerPerClassTest {
     @Override
     protected Application configure() {
         return new ResourceConfig(EncounterController.class);
     }
 
+    @Test
+    public void testIndex() {
+        final String response = target("encounter").request().get(String.class);
+        assertEquals("Hello", response);
+
+    }
     @Test
     public void testFindById() {
         final Long id = 1l, patientId = 2l;
