@@ -1,17 +1,20 @@
 package com.github.jlgrock.snp.core.converters;
 
+import com.github.jlgrock.snp.apis.converters.WriteConverter;
 import com.github.jlgrock.snp.core.data.ObservationTags;
 import com.github.jlgrock.snp.core.domain.Observation;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
-import org.springframework.core.convert.converter.Converter;
-import org.springframework.stereotype.Component;
+import org.jvnet.hk2.annotations.Service;
+
+import javax.inject.Named;
 
 /**
  * A Conversion class to convert between an Observation objects and a MongoDB DBObject.
  */
-@Component
-public class ObservationWriteConverter  implements Converter<Observation, DBObject> {
+@Service
+@Named
+public class ObservationWriteConverter  implements WriteConverter<Observation, DBObject> {
 
     @Override
     public DBObject convert(final Observation source) {
@@ -23,7 +26,7 @@ public class ObservationWriteConverter  implements Converter<Observation, DBObje
         dbo.put(ObservationTags.VALUE_TYPE_TAG, source.getValue().getType().getId());
         dbo.put(ObservationTags.APPLIES_TAG, source.getApplies());
         dbo.put(ObservationTags.SUBJECT_TAG, source.getSubject());
-        dbo.put(ObservationTags.ISSUED_TAG, source.getIssued().getMillis());
+        dbo.put(ObservationTags.ISSUED_TAG, source.getIssued().getEpochSecond());
         return dbo;
     }
 }

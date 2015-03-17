@@ -1,16 +1,16 @@
 package com.github.jlgrock.snp.core.domain.primitives;
 
-import org.joda.time.DateTime;
+import java.time.Instant;
 
 /**
- * The primitive representing Date + Time values.  The underlying type is the JodaTime DateTime object.
+ * The primitive representing Date + Time values.  The underlying type is the Java 8 Instant object.
  */
-class DateTimePrimitive extends AbstractSimplePrimitive<DateTime> {
+class DateTimePrimitive extends AbstractSimplePrimitive<Instant> {
 
     /**
      * @param value The value to store.
      */
-    DateTimePrimitive(final DateTime value) {
+    DateTimePrimitive(final Instant value) {
         super(value);
     }
 

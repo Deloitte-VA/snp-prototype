@@ -1,6 +1,6 @@
 package com.github.jlgrock.snp.core.domain.primitives;
 
-import org.joda.time.LocalDate;
+import java.time.LocalDate;
 
 /**
  * The primitive representing Date values.  The underlying type is the JodaTime LocalDate object.

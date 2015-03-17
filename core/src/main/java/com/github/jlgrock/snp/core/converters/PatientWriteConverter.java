@@ -1,17 +1,20 @@
 package com.github.jlgrock.snp.core.converters;
 
+import com.github.jlgrock.snp.apis.converters.WriteConverter;
 import com.github.jlgrock.snp.core.data.PatientTags;
 import com.github.jlgrock.snp.core.domain.Patient;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
-import org.springframework.core.convert.converter.Converter;
-import org.springframework.stereotype.Component;
+import org.jvnet.hk2.annotations.Service;
+
+import javax.inject.Named;
 
 /**
  * A Conversion class to convert between an Patient objects and a MongoDB DBObject.
  */
-@Component
-public class PatientWriteConverter implements Converter<Patient, DBObject> {
+@Service
+@Named
+public class PatientWriteConverter implements WriteConverter<Patient, DBObject> {
 
     @Override
     public DBObject convert(final Patient source) {
@@ -22,7 +25,7 @@ public class PatientWriteConverter implements Converter<Patient, DBObject> {
         dbo.put(PatientTags.LAST_NAME_TAG, source.getLastName());
         dbo.put(PatientTags.GENDER_TAG, source.getGender().getId());
         dbo.put(PatientTags.RACE_TAG, source.getRace().getId());
-        dbo.put(PatientTags.DATE_OF_BIRTH_TAG, source.getDateOfBirth().getMillis());
+        dbo.put(PatientTags.DATE_OF_BIRTH_TAG, source.getDateOfBirth().toEpochDay());
         return dbo;
     }
 }

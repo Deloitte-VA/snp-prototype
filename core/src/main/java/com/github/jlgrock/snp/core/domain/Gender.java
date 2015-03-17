@@ -11,11 +11,11 @@ import java.util.Map;
 public enum Gender {
     MALE(1), FEMALE(2), OTHER(3);
 
-    private static Map<Integer, Gender> valuesById;
+    private static final Map<Integer, Gender> VALUES_BY_ID;
 
     static {
-        valuesById = new HashMap<>();
-        Arrays.asList(Gender.values()).forEach(gender -> valuesById.put(gender.getId(), gender));
+        VALUES_BY_ID = new HashMap<>();
+        Arrays.asList(Gender.values()).forEach(gender -> VALUES_BY_ID.put(gender.getId(), gender));
     }
 
     private final Integer id;
@@ -38,7 +38,7 @@ public enum Gender {
      * @return the Gender enumeration that matches the integer.
      */
     public static Gender getValueById(final Integer id) {
-        return valuesById.get(id);
+        return VALUES_BY_ID.get(id);
     }
 }
 
