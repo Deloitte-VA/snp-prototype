@@ -1,57 +1,58 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>com.github.jlgrock.snp</groupId>
-        <artifactId>snp</artifactId>
-        <version>0.2-SNAPSHOT</version>
-    </parent>
+	<parent>
+		<groupId>com.github.jlgrock.snp</groupId>
+		<artifactId>snp</artifactId>
+		<version>0.2-SNAPSHOT</version>
+	</parent>
 
-    <artifactId>web</artifactId>
-    <name>web</name>
-    <packaging>war</packaging>
+	<artifactId>web</artifactId>
+	<name>web</name>
+	<packaging>war</packaging>
 
-    <properties>
-        <project.rootdir>${project.parent.basedir}</project.rootdir>
-    </properties>
+	<properties>
+		<project.rootdir>${project.parent.basedir}</project.rootdir>
+	</properties>
 
-    <dependencies>
-        <!-- internal dependencies -->
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>apis</artifactId>
-        </dependency>
+	<dependencies>
+		<!-- internal dependencies -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>apis</artifactId>
+		</dependency>
 
-        <dependency>
-            <groupId>com.github.jlgrock.snp</groupId>
-            <artifactId>core</artifactId>
-        </dependency>
+		<dependency>
+			<groupId>com.github.jlgrock.snp</groupId>
+			<artifactId>core</artifactId>
+		</dependency>
 
-        <dependency>
-            <groupId>com.github.jlgrock.snp</groupId>
-            <artifactId>defaultconfig</artifactId>
-        </dependency>
+		<dependency>
+			<groupId>com.github.jlgrock.snp</groupId>
+			<artifactId>defaultconfig</artifactId>
+		</dependency>
 
-        <!-- external dependencies -->
-        <dependency>
-            <groupId>org.glassfish.jersey.core</groupId>
-            <artifactId>jersey-common</artifactId>
-        </dependency>
+		<!-- external dependencies -->
+		<dependency>
+			<groupId>org.glassfish.jersey.core</groupId>
+			<artifactId>jersey-common</artifactId>
+		</dependency>
 
-        <dependency>
-            <groupId>org.glassfish.jersey.core</groupId>
-            <artifactId>jersey-server</artifactId>
-        </dependency>
+		<dependency>
+			<groupId>org.glassfish.jersey.core</groupId>
+			<artifactId>jersey-server</artifactId>
+		</dependency>
 
-        <dependency>
-            <groupId>org.glassfish.jersey.containers</groupId>
-            <artifactId>jersey-container-servlet</artifactId>
-        </dependency>
+		<dependency>
+			<groupId>org.glassfish.jersey.containers</groupId>
+			<artifactId>jersey-container-servlet</artifactId>
+		</dependency>
 
-        <dependency>
-            <groupId>org.glassfish.jersey.media</groupId>
-            <artifactId>jersey-media-json-jackson</artifactId>
-        </dependency>
+		<dependency>
+			<groupId>org.glassfish.jersey.media</groupId>
+			<artifactId>jersey-media-json-jackson</artifactId>
+		</dependency>
 
         <dependency>
             <groupId>org.glassfish.jersey.test-framework.providers</groupId>
@@ -77,18 +78,25 @@
         </dependency>
         -->
 
-    </dependencies>
+		<!-- temporary -->
+		<dependency>
+			<groupId>org.glassfish.jersey.containers</groupId>
+			<artifactId>jersey-container-jdk-http</artifactId>
+			<version>2.17</version>
+		</dependency>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>${maven-war-plugin.version}</version>
-                <configuration>
-                    <failOnMissingWebXml>false</failOnMissingWebXml>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>${maven-war-plugin.version}</version>
+				<configuration>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>
