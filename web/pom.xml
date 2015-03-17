@@ -53,6 +53,12 @@
             <artifactId>jersey-media-json-jackson</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.glassfish.jersey.test-framework.providers</groupId>
+            <artifactId>jersey-test-framework-provider-grizzly2</artifactId>
+            <scope>test</scope>
+        </dependency>
+
         <!-- To Use Guice with HK2 -->
         <!-- <dependency>
             <groupId>com.google.inject</groupId>

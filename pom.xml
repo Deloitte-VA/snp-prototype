@@ -56,7 +56,7 @@
         <mockito.version>1.10.8</mockito.version>
         <hk2.version>2.4.0-b10</hk2.version>
         <guava.version>18.0</guava.version>
-        <jersey.version>2.16</jersey.version>
+        <jersey.version>2.17</jersey.version>
         <testng.version>6.8.21</testng.version>
         <hk2testing.version>2.4.0-b11</hk2testing.version>
 
@@ -245,6 +245,12 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.glassfish.jersey.test-framework.providers</groupId>
+            <artifactId>jersey-test-framework-provider-grizzly2</artifactId>
+            <version>${jersey.version}</version>
+            <scope>test</scope>
+        </dependency>
 
     </dependencies>
 
@@ -253,7 +259,7 @@
         <module>defaultconfig</module>
         <module>core</module>
         <!--<module>integration</module>-->
-        <!--<module>web</module>-->
+        <module>web</module>
         <!--<module>client</module>-->
     </modules>
 
