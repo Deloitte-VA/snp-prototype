@@ -3,7 +3,6 @@ package com.github.jlgrock.snp.web.controllers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 
 //import org.springframework.beans.factory.annotation.Autowired;
@@ -30,11 +29,6 @@ public class EncounterController {
 //    EncounterController(final EncounterRepository repositoryIn) {
 //        repository = repositoryIn;
 //    }
-
-    @GET
-    public String index() {
-        return "Hello";
-    }
 
     /**
      * 

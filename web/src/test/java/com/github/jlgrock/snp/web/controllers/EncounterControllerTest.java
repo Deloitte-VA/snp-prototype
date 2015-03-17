@@ -22,11 +22,6 @@ public class EncounterControllerTest extends JerseyTest {
     }
 
     @Test
-    public void testHello() {
-        final String response = target("encounter").request().get(String.class);
-        assertEquals("Hello", response);
-    }
-    @Test
     public void testFindById() {
         final Long id = 1l, patientId = 2l;
         final int type = 9;
