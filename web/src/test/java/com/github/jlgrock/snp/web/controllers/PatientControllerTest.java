@@ -5,7 +5,7 @@ import com.github.jlgrock.snp.core.domain.Gender;
 import com.github.jlgrock.snp.core.domain.Patient;
 import com.github.jlgrock.snp.core.domain.Race;
 import org.glassfish.jersey.server.ResourceConfig;
-import org.glassfish.jersey.test.JerseyTest;
+import org.glassfish.jersey.test.JerseyTestNg;
 import org.testng.annotations.Test;
 
 import javax.ws.rs.core.Application;
@@ -15,7 +15,7 @@ import static org.testng.Assert.assertEquals;
 /**
  *
  */
-public class PatientControllerTest extends JerseyTest {
+public class PatientControllerTest extends JerseyTestNg.ContainerPerClassTest {
     @Override
     protected Application configure() {
         return new ResourceConfig(PatientController.class);
