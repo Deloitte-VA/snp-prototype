@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 
 import com.sun.net.httpserver.HttpServer;
 import com.github.jlgrock.snp.web.controllers.PCEController;
+import com.github.jlgrock.snp.web.controllers.PatientController;
 //import org.springframework.boot.SpringApplication;
 //import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 //import org.springframework.boot.autoconfigure.data.mongo.MongoRepositoriesAutoConfiguration;
@@ -26,9 +27,11 @@ import com.github.jlgrock.snp.web.controllers.PCEController;
 public class MongoRestApplication extends ResourceConfig {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MongoRestApplication.class);
+    
+    private final ResourceConfig config;
 
     private MongoRestApplication(){
-    	packages("com.github.jlgrock.snp.web.controllers");
+    	config = packages("com.github.jlgrock.snp.web.controllers");
     }
 
     /**
@@ -42,8 +45,8 @@ public class MongoRestApplication extends ResourceConfig {
         MongoRestApplication app = new MongoRestApplication();
         
         URI baseUri = UriBuilder.fromUri("http://localhost/").port(9998).build();
-        ResourceConfig config = new ResourceConfig(PCEController.class);
-        HttpServer server = JdkHttpServerFactory.createHttpServer(baseUri, config);
+//        ResourceConfig config = new ResourceConfig(PatientController.class, PCEController.class);
+        HttpServer server = JdkHttpServerFactory.createHttpServer(baseUri, app.config);
     }
 
 }
