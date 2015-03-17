@@ -1,6 +1,6 @@
 package com.github.jlgrock.snp.core.parser;
 
-import static org.junit.Assert.assertEquals;
+import static org.testng.Assert.assertEquals;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,10 +11,9 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactoryConfigurationError;
 
-import org.junit.Test;
+import org.testng.annotations.Test;
 
 import com.github.jlgrock.snp.core.model.LegoList;
-import com.github.jlgrock.snp.core.parser.LegoXmlParser;
 
 public class LegoXmlParserTest {
 
