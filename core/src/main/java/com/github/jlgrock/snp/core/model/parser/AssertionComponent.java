@@ -1,5 +1,9 @@
-package com.github.jlgrock.snp.core.model;
+package com.github.jlgrock.snp.core.model.parser;
 
+/**
+ * The AssertionComponent class represents the assertionComponent element in the LEGO XML document.
+ *
+ */
 public class AssertionComponent {
 	private String uuid;
 	private Type type;
@@ -7,14 +11,14 @@ public class AssertionComponent {
 	public String getUuid() {
 		return uuid;
 	}
-	public void setUuid(String uuid) {
-		this.uuid = uuid;
+	public void setUuid(final String pUuid) {
+		uuid = pUuid;
 	}
 	public Type getType() {
 		return type;
 	}
-	public void setType(Type type) {
-		this.type = type;
+	public void setType(final Type pType) {
+		type = pType;
 	}
 	
 	@Override

@@ -1,5 +1,9 @@
-package com.github.jlgrock.snp.core.model;
+package com.github.jlgrock.snp.core.model.parser;
 
+/**
+ * The Pncs class represents the pncs element in the LEGO XML document.
+ *
+ */
 public class Pncs {
 	private String value;
 	private String name;
@@ -9,24 +13,24 @@ public class Pncs {
 		return value;
 	}
 	
-	public void setValue(String value) {
-		this.value = value;
+	public void setValue(final String pValue) {
+		value = pValue;
 	}
 	
 	public String getName() {
 		return name;
 	}
 	
-	public void setName(String name) {
-		this.name = name;
+	public void setName(final String pName) {
+		name = pName;
 	}
 	
 	public String getId() {
 		return id;
 	}
 	
-	public void setId(String id) {
-		this.id = id;
+	public void setId(final String pId) {
+		id = pId;
 	}
 
 	@Override

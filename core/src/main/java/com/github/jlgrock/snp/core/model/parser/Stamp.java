@@ -1,5 +1,9 @@
-package com.github.jlgrock.snp.core.model;
+package com.github.jlgrock.snp.core.model.parser;
 
+/**
+ * The Stamp class represents the stamp element in the LEGO XML document.
+ *
+ */
 public class Stamp {
 	private String status;
 	private String time;
@@ -12,48 +16,48 @@ public class Stamp {
 		return status;
 	}
 
-	public void setStatus(String status) {
-		this.status = status;
+	public void setStatus(final String pStatus) {
+		status = pStatus;
 	}
 
 	public String getTime() {
 		return time;
 	}
 
-	public void setTime(String time) {
-		this.time = time;
+	public void setTime(final String pTime) {
+		time = pTime;
 	}
 
 	public String getAuthor() {
 		return author;
 	}
 
-	public void setAuthor(String author) {
-		this.author = author;
+	public void setAuthor(final String pAuthor) {
+		author = pAuthor;
 	}
 
 	public String getModule() {
 		return module;
 	}
 
-	public void setModule(String module) {
-		this.module = module;
+	public void setModule(final String pModule) {
+		module = pModule;
 	}
 
 	public String getPath() {
 		return path;
 	}
 
-	public void setPath(String path) {
-		this.path = path;
+	public void setPath(final String pPath) {
+		path = pPath;
 	}
 
 	public String getUuid() {
 		return uuid;
 	}
 
-	public void setUuid(String uuid) {
-		this.uuid = uuid;
+	public void setUuid(final String pUuid) {
+		uuid = pUuid;
 	}
 
 	@Override

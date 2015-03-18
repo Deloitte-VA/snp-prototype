@@ -1,6 +1,9 @@
-package com.github.jlgrock.snp.core.model;
+package com.github.jlgrock.snp.core.model.parser;
 
-
+/**
+ * The Value class represents the value element in the LEGO XML document.
+ *
+ */
 public class Value {
 	private Expression expression;
 	private Measurement measurement;
@@ -9,16 +12,16 @@ public class Value {
 		return expression;
 	}
 
-	public void setExpression(Expression expression) {
-		this.expression = expression;
+	public void setExpression(final Expression pExpression) {
+		expression = pExpression;
 	}
 	
 	public Measurement getMeasurement() {
 		return measurement;
 	}
 
-	public void setMeasurement(Measurement measurement) {
-		this.measurement = measurement;
+	public void setMeasurement(final Measurement pMeasurement) {
+		measurement = pMeasurement;
 	}
 
 	@Override

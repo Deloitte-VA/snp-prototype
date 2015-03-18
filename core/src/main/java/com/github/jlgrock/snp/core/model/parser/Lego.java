@@ -1,5 +1,9 @@
-package com.github.jlgrock.snp.core.model;
+package com.github.jlgrock.snp.core.model.parser;
 
+/**
+ * The Lego class represents the lego element in the LEGO XML document.
+ *
+ */
 public class Lego {
 	private String uuid;
 	private Stamp stamp;
@@ -11,40 +15,40 @@ public class Lego {
 		return uuid;
 	}
 
-	public void setUuid(String uuid) {
-		this.uuid = uuid;
+	public void setUuid(final String pUuid) {
+		uuid = pUuid;
 	}
 	
 	public Stamp getStamp() {
 		return stamp;
 	}
 
-	public void setStamp(Stamp stamp) {
-		this.stamp = stamp;
+	public void setStamp(final Stamp pStamp) {
+		stamp = pStamp;
 	}
 	
 	public Pncs getPncs() {
 		return pncs;
 	}
 
-	public void setPncs(Pncs pncs) {
-		this.pncs = pncs;
+	public void setPncs(final Pncs pPncs) {
+		pncs = pPncs;
 	}
 
 	public Assertion getAssertion() {
 		return assertion;
 	}
 
-	public void setAssertion(Assertion assertion) {
-		this.assertion = assertion;
+	public void setAssertion(final Assertion pAssertion) {
+		assertion = pAssertion;
 	}
 	
 	public String getComment() {
 		return comment;
 	}
 
-	public void setComment(String comment) {
-		this.comment = comment;
+	public void setComment(final String pComment) {
+		comment = pComment;
 	}
 
 	@Override

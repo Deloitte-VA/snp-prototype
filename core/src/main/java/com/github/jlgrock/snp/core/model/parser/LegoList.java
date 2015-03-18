@@ -1,6 +1,5 @@
-package com.github.jlgrock.snp.core.model;
+package com.github.jlgrock.snp.core.model.parser;
 
-import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.ArrayList;
@@ -11,9 +10,7 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.TransformerFactoryConfigurationError;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 /**
@@ -31,47 +28,56 @@ public class LegoList {
 		return groupName;
 	}
 	
-	public void setGroupName(String groupName) {
-		this.groupName = groupName;
+	public void setGroupName(final String pGroupName) {
+		groupName = pGroupName;
 	}
 	
 	public String getUuid() {
 		return uuid;
 	}
 	
-	public void setUuid(String uuid) {
-		this.uuid = uuid;
+	public void setUuid(final String pUuid) {
+		uuid = pUuid;
 	}
 	
 	public String getGroupDescription() {
 		return groupDescription;
 	}
 	
-	public void setGroupDescription(String groupDescription) {
-		this.groupDescription = groupDescription;
+	public void setGroupDescription(final String pGroupDescription) {
+		groupDescription = pGroupDescription;
 	}
 	
 	public String getComment() {
 		return comment;
 	}
 	
-	public void setComment(String comment) {
-		this.comment = comment;
+	public void setComment(final String pComment) {
+		comment = pComment;
 	}
 	
 	public List<Lego> getLegos() {
 		return legos;
 	}
 	
-	public void setLegos(List<Lego> legos) {
-		this.legos = legos;
+	public void setLegos(final List<Lego> pLegos) {
+		legos = pLegos;
 	}
 
-	public void addLego(Lego lego) {
+	/**
+	 * Appends the Lego to the end of a list
+	 * @param lego Lego to be appended to the list
+	 */
+	public void addLego(final Lego lego) {
 		legos.add(lego);
 	}
 	
-	public void writeLegosElem(XMLStreamWriter xmlStreamWriter) throws XMLStreamException {
+	/**
+	 * Write the Lego class as an XML element
+	 * @param xmlStreamWriter XMLStreamWriter
+	 * @throws XMLStreamException XMLStreamException
+	 */
+	public void writeLegosElem(final XMLStreamWriter xmlStreamWriter) throws XMLStreamException {
 		for(Lego lego : legos) {
 			//start lego element
 			xmlStreamWriter.writeStartElement("lego");
@@ -99,8 +105,8 @@ public class LegoList {
             writeAssertionElem(lego.getAssertion(), xmlStreamWriter);
             
             //lego element does not always have an comment element
-            String comment = lego.getComment();            
-            if(comment != null) {
+            String commentStr = lego.getComment();            
+            if(commentStr != null) {
             	//start comment element
             	xmlStreamWriter.writeStartElement("comment");
             	xmlStreamWriter.writeCharacters(lego.getComment());
@@ -113,7 +119,13 @@ public class LegoList {
 		}
 	}
 	
-	public void writeAssertionElem(Assertion assertion, XMLStreamWriter xmlStreamWriter) throws XMLStreamException {
+	/**
+	 * Write the Assertion class as an XML element
+	 * @param assertion Assertion
+	 * @param xmlStreamWriter XMLStreamWriter
+	 * @throws XMLStreamException XMLStreamException
+	 */
+	public void writeAssertionElem(final Assertion assertion, final XMLStreamWriter xmlStreamWriter) throws XMLStreamException {
 		//start assertion element
 		xmlStreamWriter.writeStartElement("assertion");
 		//start assertionUUID element
@@ -137,7 +149,13 @@ public class LegoList {
 		xmlStreamWriter.writeEndElement();	
 	}
 	
-	public void writeDiscernibleElem(Discernible discernible, XMLStreamWriter xmlStreamWriter) throws XMLStreamException {
+	/**
+	 * Write the Discernible class as an XML element
+	 * @param discernible Discernible
+	 * @param xmlStreamWriter XMLStreamWriter
+	 * @throws XMLStreamException XMLStreamException
+	 */
+	public void writeDiscernibleElem(final Discernible discernible, final XMLStreamWriter xmlStreamWriter) throws XMLStreamException {
 		//start discernible element
 		xmlStreamWriter.writeStartElement("discernible");
 		writeExpressionElem(discernible.getExpression(), xmlStreamWriter);
@@ -145,7 +163,13 @@ public class LegoList {
 		xmlStreamWriter.writeEndElement();	
 	}
 	
-	public void writeQualifierElem(Qualifier qualifier, XMLStreamWriter xmlStreamWriter) throws XMLStreamException {
+	/**
+	 * Write the Qualifier class as an XML element
+	 * @param qualifier Qualifier
+	 * @param xmlStreamWriter XMLStreamWriter
+	 * @throws XMLStreamException XMLStreamException
+	 */
+	public void writeQualifierElem(final Qualifier qualifier, final XMLStreamWriter xmlStreamWriter) throws XMLStreamException {
 		//start qualifier element
 		xmlStreamWriter.writeStartElement("qualifier");
 		writeExpressionElem(qualifier.getExpression(), xmlStreamWriter);
@@ -153,7 +177,13 @@ public class LegoList {
 		xmlStreamWriter.writeEndElement();	
 	}
 	
-	public void writeValueElem(Value value, XMLStreamWriter xmlStreamWriter) throws XMLStreamException {
+	/**
+	 * Write the Value class as an XML element
+	 * @param value Value
+	 * @param xmlStreamWriter XMLStreamWriter
+	 * @throws XMLStreamException XMLStreamException
+	 */
+	public void writeValueElem(final Value value, final XMLStreamWriter xmlStreamWriter) throws XMLStreamException {
 		if(value.getExpression() == null && value.getMeasurement() == null) {
 			//start/end value element
 			xmlStreamWriter.writeEmptyElement("value");
@@ -174,7 +204,13 @@ public class LegoList {
 		}
 	}
 	
-	public void writeExpressionElem(Expression expression, XMLStreamWriter xmlStreamWriter) throws XMLStreamException {
+	/**
+	 * Write the Expression class as an XML element
+	 * @param expression Expression
+	 * @param xmlStreamWriter XMLStreamWriter
+	 * @throws XMLStreamException XMLStreamException
+	 */
+	public void writeExpressionElem(final Expression expression, final XMLStreamWriter xmlStreamWriter) throws XMLStreamException {
 		//start expression element
 		xmlStreamWriter.writeStartElement("expression");
 		Concept concept = expression.getConcept();
@@ -198,7 +234,13 @@ public class LegoList {
 		xmlStreamWriter.writeEndElement();
 	}
 	
-	public void writeMeasurementElem(Measurement measurement, XMLStreamWriter xmlStreamWriter) throws XMLStreamException {
+	/**
+	 * Write the Measurement class as an XML element
+	 * @param measurement Measurement
+	 * @param xmlStreamWriter XMLStreamWriter
+	 * @throws XMLStreamException XMLStreamException
+	 */
+	public void writeMeasurementElem(final Measurement measurement, final XMLStreamWriter xmlStreamWriter) throws XMLStreamException {
 		//start measurement element
 		xmlStreamWriter.writeStartElement("measurement");
 		//measurement element does not always have a units element
@@ -240,7 +282,13 @@ public class LegoList {
 		xmlStreamWriter.writeEndElement();
 	}
 	
-	public void writeRelationElem(List<Relation> relations, XMLStreamWriter xmlStreamWriter) throws XMLStreamException {
+	/**
+	 * Write the Relation class as an XML element
+	 * @param relations collection of Relation objects
+	 * @param xmlStreamWriter XMLStreamWriter
+	 * @throws XMLStreamException XMLStreamException
+	 */
+	public void writeRelationElem(final List<Relation> relations, final XMLStreamWriter xmlStreamWriter) throws XMLStreamException {
 		for(Relation relation : relations) {
 			//start relation element
 			xmlStreamWriter.writeStartElement("relation");
@@ -294,7 +342,13 @@ public class LegoList {
 		}
 	}
 	
-	public void writeTimingElem(Timing timing, XMLStreamWriter xmlStreamWriter) throws XMLStreamException {
+	/**
+	 * Write the Timing class as an XML element
+	 * @param timing Timing
+	 * @param xmlStreamWriter XMLStreamWriter
+	 * @throws XMLStreamException XMLStreamException
+	 */
+	public void writeTimingElem(final Timing timing, final XMLStreamWriter xmlStreamWriter) throws XMLStreamException {
 		//start timing element
 		xmlStreamWriter.writeStartElement("timing");
 		
@@ -322,7 +376,13 @@ public class LegoList {
 		xmlStreamWriter.writeEndElement();
 	}
 	
-	public void writeBoundElem(Bound bound,  XMLStreamWriter xmlStreamWriter) throws XMLStreamException {
+	/**
+	 * Write the Bound class as an XML element
+	 * @param bound Bound
+	 * @param xmlStreamWriter XMLStreamWriter
+	 * @throws XMLStreamException XMLStreamException
+	 */
+	public void writeBoundElem(final Bound bound,  final XMLStreamWriter xmlStreamWriter) throws XMLStreamException {
 		//start bound element
 		xmlStreamWriter.writeStartElement("bound");
 		String lowerPointInclusive = bound.getLowerPointInclusive();
@@ -365,7 +425,14 @@ public class LegoList {
 		xmlStreamWriter.writeEndElement();
 	}
 	
-	public void writeAssertionComponentElem(List<AssertionComponent> assertionComponents, XMLStreamWriter xmlStreamWriter) throws XMLStreamException {
+	/**
+	 * Write the AssertionComponent class as an XML element
+	 * @param assertionComponents collection of AssertionComponent objects
+	 * @param xmlStreamWriter XMLStreamWriter
+	 * @throws XMLStreamException XMLStreamException
+	 */
+	public void writeAssertionComponentElem(final List<AssertionComponent> assertionComponents, final XMLStreamWriter xmlStreamWriter)
+			throws XMLStreamException {
 		for(AssertionComponent assertionComponent : assertionComponents) {
 			//start assertionComponent element
 			xmlStreamWriter.writeStartElement("assertionComponent");
@@ -391,13 +458,10 @@ public class LegoList {
 	
 	/**
 	 * Returns a formatted XML representation of the object
-	 * @return
-	 * @throws TransformerFactoryConfigurationError
-	 * @throws TransformerException
-	 * @throws XMLStreamException
-	 * @throws IOException
+	 * @return a formatted XML representation of the object
+	 * @throws Exception Exception
 	 */
-	public String prettyPrintXml() throws TransformerFactoryConfigurationError, TransformerException, XMLStreamException, IOException {
+	public String prettyPrintXml() throws Exception {
 		Transformer transformer = TransformerFactory.newInstance().newTransformer();
 		transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 		transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
@@ -412,11 +476,10 @@ public class LegoList {
 	
 	/**
 	 * Returns an XML representation of the object
-	 * @return
-	 * @throws XMLStreamException
-	 * @throws IOException
+	 * @return an xml representation of the object
+	 * @throws Exception Exception
 	 */
-	public String toXml() throws XMLStreamException, IOException {
+	public String toXml() throws Exception {
 		String xmlStr = "";
 		StringWriter stringWriter = new StringWriter();
 		XMLStreamWriter xmlStreamWriter = null;
@@ -426,7 +489,8 @@ public class LegoList {
 			//start legoList element
 			xmlStreamWriter.writeStartElement("legoList");
 			xmlStreamWriter.writeNamespace("xsi", "http://www.w3.org/2001/XMLSchema-instance");
-			xmlStreamWriter.writeAttribute("xsi", "http://www.w3.org/2001/XMLSchema-instance", "noNamespaceSchemaLocation", "LEGO.xsd");
+			xmlStreamWriter.writeAttribute("xsi", "http://www.w3.org/2001/XMLSchema-instance",
+					"noNamespaceSchemaLocation", "LEGO.xsd");
 			//start groupName element
 			xmlStreamWriter.writeStartElement("groupName");
 			xmlStreamWriter.writeCharacters(groupName);

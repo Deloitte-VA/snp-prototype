@@ -1,8 +1,11 @@
-package com.github.jlgrock.snp.core.model;
+package com.github.jlgrock.snp.core.model.parser;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * The Assertion class represents the assertion element in the LEGO XML document.
+ *
+ */
 public class Assertion {
 	private String uuid;
 	private Discernible discernible;
@@ -15,51 +18,55 @@ public class Assertion {
 		return uuid;
 	}
 	
-	public void setUuid(String uuid) {
-		this.uuid = uuid;
+	public void setUuid(final String pUuid) {
+		uuid = pUuid;
 	}
 	
 	public Discernible getDiscernible() {
 		return discernible;
 	}
 	
-	public void setDiscernible(Discernible discernible) {
-		this.discernible = discernible;
+	public void setDiscernible(final Discernible pDiscernible) {
+		discernible = pDiscernible;
 	}
 	
 	public Qualifier getQualifier() {
 		return qualifier;
 	}
 
-	public void setQualifier(Qualifier qualifier) {
-		this.qualifier = qualifier;
+	public void setQualifier(final Qualifier pQualifier) {
+		qualifier = pQualifier;
 	}
 
 	public Value getValue() {
 		return value;
 	}
 
-	public void setValue(Value value) {
-		this.value = value;
+	public void setValue(final Value pValue) {
+		value = pValue;
 	}
 
 	public Timing getTiming() {
 		return timing;
 	}
 
-	public void setTiming(Timing timing) {
-		this.timing = timing;
+	public void setTiming(final Timing pTiming) {
+		timing = pTiming;
 	}
 
 	public List<AssertionComponent> getAssertionComponents() {
 		return assertionComponents;
 	}
 
-	public void setAssertionComponents(List<AssertionComponent> assertionComponents) {
-		this.assertionComponents = assertionComponents;
+	public void setAssertionComponents(final List<AssertionComponent> pAssertionComponents) {
+		assertionComponents = pAssertionComponents;
 	}
-
-	public void addAssertionComponent(AssertionComponent assertionComponent) {
+	
+	/**
+	 * Appends the AssertionComponet to the end of a list
+	 * @param assertionComponent AssertionComponent to be appended to the list
+	 */
+	public void addAssertionComponent(final AssertionComponent assertionComponent) {
 		assertionComponents.add(assertionComponent);
 	}
 	

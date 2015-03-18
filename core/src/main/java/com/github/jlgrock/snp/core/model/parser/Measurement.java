@@ -1,5 +1,9 @@
-package com.github.jlgrock.snp.core.model;
+package com.github.jlgrock.snp.core.model.parser;
 
+/**
+ * The Measurement class represents the measurement element in the LEGO XML document.
+ *
+ */
 public class Measurement {
 	private Units units;
 	private Point point;
@@ -9,24 +13,24 @@ public class Measurement {
 		return units;
 	}
 	
-	public void setUnits(Units units) {
-		this.units = units;
+	public void setUnits(final Units pUnits) {
+		units = pUnits;
 	}
 	
 	public Point getPoint() {
 		return point;
 	}
 	
-	public void setPoint(Point point) {
-		this.point = point;
+	public void setPoint(final Point pPoint) {
+		point = pPoint;
 	}
 
 	public Bound getBound() {
 		return bound;
 	}
 
-	public void setBound(Bound bound) {
-		this.bound = bound;
+	public void setBound(final Bound pBound) {
+		bound = pBound;
 	}
 
 	@Override

@@ -8,25 +8,25 @@ import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 
-import com.github.jlgrock.snp.core.model.Assertion;
-import com.github.jlgrock.snp.core.model.AssertionComponent;
-import com.github.jlgrock.snp.core.model.Bound;
-import com.github.jlgrock.snp.core.model.Concept;
-import com.github.jlgrock.snp.core.model.Destination;
-import com.github.jlgrock.snp.core.model.Discernible;
-import com.github.jlgrock.snp.core.model.Expression;
-import com.github.jlgrock.snp.core.model.Lego;
-import com.github.jlgrock.snp.core.model.LegoList;
-import com.github.jlgrock.snp.core.model.Measurement;
-import com.github.jlgrock.snp.core.model.Pncs;
-import com.github.jlgrock.snp.core.model.Point;
-import com.github.jlgrock.snp.core.model.Qualifier;
-import com.github.jlgrock.snp.core.model.Relation;
-import com.github.jlgrock.snp.core.model.Stamp;
-import com.github.jlgrock.snp.core.model.Timing;
-import com.github.jlgrock.snp.core.model.Type;
-import com.github.jlgrock.snp.core.model.Units;
-import com.github.jlgrock.snp.core.model.Value;
+import com.github.jlgrock.snp.core.model.parser.Assertion;
+import com.github.jlgrock.snp.core.model.parser.AssertionComponent;
+import com.github.jlgrock.snp.core.model.parser.Bound;
+import com.github.jlgrock.snp.core.model.parser.Concept;
+import com.github.jlgrock.snp.core.model.parser.Destination;
+import com.github.jlgrock.snp.core.model.parser.Discernible;
+import com.github.jlgrock.snp.core.model.parser.Expression;
+import com.github.jlgrock.snp.core.model.parser.Lego;
+import com.github.jlgrock.snp.core.model.parser.LegoList;
+import com.github.jlgrock.snp.core.model.parser.Measurement;
+import com.github.jlgrock.snp.core.model.parser.Pncs;
+import com.github.jlgrock.snp.core.model.parser.Point;
+import com.github.jlgrock.snp.core.model.parser.Qualifier;
+import com.github.jlgrock.snp.core.model.parser.Relation;
+import com.github.jlgrock.snp.core.model.parser.Stamp;
+import com.github.jlgrock.snp.core.model.parser.Timing;
+import com.github.jlgrock.snp.core.model.parser.Type;
+import com.github.jlgrock.snp.core.model.parser.Units;
+import com.github.jlgrock.snp.core.model.parser.Value;
 
 /**
  * Parses LEGO XML document for retrieving Post Coordinated Expressions (PCEs)
@@ -36,7 +36,7 @@ public class LegoXmlParser {
 	//this is the list which shall be populated while parsing the XML
 	private LegoList legoList;
 		
-	public LegoList parseDocument(InputStream xmlInput) {
+	public LegoList parseDocument(final InputStream xmlInput) {
 		legoList = new LegoList();
 		String tagContent = null;
 		try {
@@ -82,7 +82,7 @@ public class LegoXmlParser {
 		return legoList;
 	}
 	
-	public void parseLegoAndAllChildren(XMLStreamReader reader) throws XMLStreamException {
+	public void parseLegoAndAllChildren(final XMLStreamReader reader) throws XMLStreamException {
 		Lego currentLego = new Lego();
 		String tagContent = null;
 		boolean inComment = false;
@@ -156,11 +156,14 @@ public class LegoXmlParser {
 							break;
 					}
 					break;
+				default :
+					//ignore unnecessary events
+					break;
 			}
 		}
 	}
 	
-	public Assertion parseAssertionAndAllChildren(XMLStreamReader reader) throws XMLStreamException {
+	public Assertion parseAssertionAndAllChildren(final XMLStreamReader reader) throws XMLStreamException {
 		Assertion assertion = new Assertion();
 		String tagContent = null;
 		boolean exit = false;
@@ -200,6 +203,9 @@ public class LegoXmlParser {
 							break;
 					}
 					break;
+				default :
+					//ignore unnecessary events
+					break;
 			}
 			//stop processing element
 			if(exit) {
@@ -209,7 +215,7 @@ public class LegoXmlParser {
 		return assertion;
 	}
 	
-	public Discernible parseDiscernibleAndAllChildren(XMLStreamReader reader) throws XMLStreamException {
+	public Discernible parseDiscernibleAndAllChildren(final XMLStreamReader reader) throws XMLStreamException {
 		Discernible discernible = new Discernible();
 		boolean exit = false;
 		while(reader.hasNext()) {
@@ -229,6 +235,9 @@ public class LegoXmlParser {
 							break;
 					}
 					break;
+				default :
+					//ignore unnecessary events
+					break;
 			}
 			//stop processing element
 			if(exit) {
@@ -238,7 +247,7 @@ public class LegoXmlParser {
 		return discernible;
 	}
 	
-	public Qualifier parseQualifierAndAllChildren(XMLStreamReader reader) throws XMLStreamException {
+	public Qualifier parseQualifierAndAllChildren(final XMLStreamReader reader) throws XMLStreamException {
 		Qualifier qualifier = new Qualifier();
 		boolean exit = false;
 		while(reader.hasNext()) {
@@ -258,6 +267,9 @@ public class LegoXmlParser {
 							break;
 					}
 					break;
+				default :
+					//ignore unnecessary events
+					break;
 			}
 			//stop processing element
 			if(exit) {
@@ -267,7 +279,7 @@ public class LegoXmlParser {
 		return qualifier;
 	}
 	
-	public Value parseValueAndAllChildren(XMLStreamReader reader) throws XMLStreamException {
+	public Value parseValueAndAllChildren(final XMLStreamReader reader) throws XMLStreamException {
 		Value value = new Value();
 		boolean exit = false;
 		while(reader.hasNext()) {
@@ -290,6 +302,9 @@ public class LegoXmlParser {
 							break;
 					}
 					break;
+				default :
+					//ignore unnecessary events
+					break;
 			}
 			//stop processing element
 			if(exit) {
@@ -299,7 +314,7 @@ public class LegoXmlParser {
 		return value;
 	}
 	
-	public Expression parseExpressionAndAllChildren(XMLStreamReader reader) throws XMLStreamException {
+	public Expression parseExpressionAndAllChildren(final XMLStreamReader reader) throws XMLStreamException {
 		Expression expression = new Expression();
 		boolean exit = false;
 		while(reader.hasNext()) {
@@ -322,6 +337,9 @@ public class LegoXmlParser {
 							break;
 					}
 					break;
+				default :
+					//ignore unnecessary events
+					break;
 			}
 			//stop processing element
 			if(exit) {
@@ -331,7 +349,7 @@ public class LegoXmlParser {
 		return expression;
 	}
 	
-	public Relation parseRelationAndAllChildren(XMLStreamReader reader) throws XMLStreamException {
+	public Relation parseRelationAndAllChildren(final XMLStreamReader reader) throws XMLStreamException {
 		Relation relation = new Relation();
 		boolean exit = false;
 		while(reader.hasNext()) {
@@ -354,6 +372,9 @@ public class LegoXmlParser {
 							break;
 				}
 					break;
+				default :
+					//ignore unnecessary events
+					break;
 			}
 			//stop processing element
 			if(exit) {
@@ -363,7 +384,7 @@ public class LegoXmlParser {
 		return relation;
 	}
 	
-	public Type parseTypeAndAllChildren(XMLStreamReader reader) throws XMLStreamException {
+	public Type parseTypeAndAllChildren(final XMLStreamReader reader) throws XMLStreamException {
 		Type type = new Type();
 		boolean exit = false;
 		while(reader.hasNext()) {
@@ -383,6 +404,9 @@ public class LegoXmlParser {
 							break;
 				}
 					break;
+				default :
+					//ignore unnecessary events
+					break;
 			}
 			if(exit) {
 				break;
@@ -392,7 +416,7 @@ public class LegoXmlParser {
 		return type;
 	}
 	
-	public Destination parseDestinationAndAllChildren(XMLStreamReader reader) throws XMLStreamException {
+	public Destination parseDestinationAndAllChildren(final XMLStreamReader reader) throws XMLStreamException {
 		Destination destination = new Destination();
 		boolean exit = false;
 		while(reader.hasNext()) {
@@ -415,6 +439,9 @@ public class LegoXmlParser {
 							break;
 					}
 					break;
+				default :
+					//ignore unnecessary events
+					break;
 			}
 			//stop processing element
 			if(exit) {
@@ -424,7 +451,7 @@ public class LegoXmlParser {
 		return destination;
 	}
 	
-	public Measurement parseMeasurementAndAllChildren(XMLStreamReader reader) throws XMLStreamException {
+	public Measurement parseMeasurementAndAllChildren(final XMLStreamReader reader) throws XMLStreamException {
 		Measurement measurement = new Measurement();
 		boolean exit = false;
 		while(reader.hasNext()) {
@@ -454,6 +481,9 @@ public class LegoXmlParser {
 							break;
 				}
 					break;
+				default :
+					//ignore unnecessary events
+					break;
 			}
 			//stop processing element
 			if(exit) {
@@ -463,7 +493,7 @@ public class LegoXmlParser {
 		return measurement;
 	}
 	
-	public Units parseUnitsAndAllChildren(XMLStreamReader reader) throws XMLStreamException {
+	public Units parseUnitsAndAllChildren(final XMLStreamReader reader) throws XMLStreamException {
 		Units units = new Units();
 		boolean exit = false;
 		while(reader.hasNext()) {
@@ -483,6 +513,9 @@ public class LegoXmlParser {
 							break;
 				}
 					break;
+				default :
+					//ignore unnecessary events
+					break;
 			}
 			//stop processing element
 			if(exit) {
@@ -492,7 +525,7 @@ public class LegoXmlParser {
 		return units;
 	}
 	
-	public Point parsePointAndAllChildren(XMLStreamReader reader) throws XMLStreamException {
+	public Point parsePointAndAllChildren(final XMLStreamReader reader) throws XMLStreamException {
 		String tagContent = null;
 		boolean exit = false;
 		Point point = new Point();
@@ -519,6 +552,9 @@ public class LegoXmlParser {
 							break;
 				}
 					break;
+				default :
+					//ignore unnecessary events
+					break;
 			}
 			//stop processing element
 			if(exit) {
@@ -528,7 +564,7 @@ public class LegoXmlParser {
 		return point;
 	}
 	
-	public Timing parseTimingAndAllChildren(XMLStreamReader reader) throws XMLStreamException {
+	public Timing parseTimingAndAllChildren(final XMLStreamReader reader) throws XMLStreamException {
 		Timing timing = new Timing();
 		boolean exit = false;
 		while(reader.hasNext()) {
@@ -551,6 +587,9 @@ public class LegoXmlParser {
 							break;
 				}
 					break;
+				default :
+					//ignore unnecessary events
+					break;
 			}
 			//stop processing element
 			if(exit) {
@@ -560,7 +599,7 @@ public class LegoXmlParser {
 		return timing;
 	}
 	
-	public Bound parseBoundAndAllChildren(XMLStreamReader reader) throws XMLStreamException {
+	public Bound parseBoundAndAllChildren(final XMLStreamReader reader) throws XMLStreamException {
 		Bound bound = new Bound();
 		boolean exit = false;
 		
@@ -594,6 +633,9 @@ public class LegoXmlParser {
 						break;
 					}
 					break;
+				default :
+					//ignore unnecessary events
+					break;
 			}
 			//stop processing element
 			if(exit) {
@@ -603,7 +645,7 @@ public class LegoXmlParser {
 		return bound;
 	}
 	
-	public AssertionComponent parseAssertionComponentAndAllChildren(XMLStreamReader reader) throws XMLStreamException {
+	public AssertionComponent parseAssertionComponentAndAllChildren(final XMLStreamReader reader) throws XMLStreamException {
 		AssertionComponent assertionComponent = new AssertionComponent();
 		String tagContent = null;
 		boolean exit = false;
@@ -629,7 +671,9 @@ public class LegoXmlParser {
 							exit = true;
 							break;
 					}
-				break;
+				default :
+					//ignore unnecessary events
+					break;
 			}
 			//stop processing element
 			if(exit) {
@@ -639,7 +683,7 @@ public class LegoXmlParser {
 		return assertionComponent;
 	}
 	
-	public Concept parseConcept(XMLStreamReader reader) throws XMLStreamException {
+	public Concept parseConcept(final XMLStreamReader reader) throws XMLStreamException {
 		Concept concept = new Concept();
 		for(int index = 0;index < reader.getAttributeCount();index++) {
 			if ("uuid".equals(reader.getAttributeLocalName(index))) {

@@ -1,5 +1,8 @@
-package com.github.jlgrock.snp.core.model;
-
+package com.github.jlgrock.snp.core.model.parser;
+/**
+ * The Bound class represents the bound element in the LEGO XML document.
+ *
+ */
 public class Bound {
 	private Point lowerPoint;
 	private Point upperPoint;
@@ -10,32 +13,32 @@ public class Bound {
 		return lowerPoint;
 	}
 
-	public void setLowerPoint(Point lowerPoint) {
-		this.lowerPoint = lowerPoint;
+	public void setLowerPoint(final Point pLowerPoint) {
+		lowerPoint = pLowerPoint;
 	}
 
 	public Point getUpperPoint() {
 		return upperPoint;
 	}
 
-	public void setUpperPoint(Point upperPoint) {
-		this.upperPoint = upperPoint;
+	public void setUpperPoint(final Point pUpperPoint) {
+		upperPoint = pUpperPoint;
 	}
 
 	public String getLowerPointInclusive() {
 		return lowerPointInclusive;
 	}
 
-	public void setLowerPointInclusive(String lowerPointInclusive) {
-		this.lowerPointInclusive = lowerPointInclusive;
+	public void setLowerPointInclusive(final String pLowerPointInclusive) {
+		lowerPointInclusive = pLowerPointInclusive;
 	}
 
 	public String getUpperPointInclusive() {
 		return upperPointInclusive;
 	}
 
-	public void setUpperPointInclusive(String upperPointInclusive) {
-		this.upperPointInclusive = upperPointInclusive;
+	public void setUpperPointInclusive(final String pUpperPointInclusive) {
+		upperPointInclusive = pUpperPointInclusive;
 	}
 
 	@Override

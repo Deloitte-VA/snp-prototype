@@ -1,5 +1,9 @@
-package com.github.jlgrock.snp.core.model;
+package com.github.jlgrock.snp.core.model.parser;
 
+/**
+ * The Point class represents the point element in the LEGO XML document.
+ *
+ */
 public class Point {
 	private String type;
 	private String value;
@@ -8,16 +12,16 @@ public class Point {
 		return type;
 	}
 
-	public void setType(String type) {
-		this.type = type;
+	public void setType(final String pType) {
+		type = pType;
 	}
 
 	public String getValue() {
 		return value;
 	}
 
-	public void setValue(String value) {
-		this.value = value;
+	public void setValue(final String pValue) {
+		value = pValue;
 	}
 
 	@Override

@@ -1,5 +1,9 @@
-package com.github.jlgrock.snp.core.model;
+package com.github.jlgrock.snp.core.model.parser;
 
+/**
+ * The Relation class represents the relation element in the LEGO XML document.
+ *
+ */
 public class Relation {
 	private Type type;
 	private Destination destination;
@@ -8,16 +12,16 @@ public class Relation {
 		return type;
 	}
 	
-	public void setType(Type type) {
-		this.type = type;
+	public void setType(final Type pType) {
+		type = pType;
 	}
 	
 	public Destination getDestination() {
 		return destination;
 	}
 	
-	public void setDestination(Destination destination) {
-		this.destination = destination;
+	public void setDestination(final Destination pDestination) {
+		destination = pDestination;
 	}
 	
 	@Override

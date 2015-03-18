@@ -7,18 +7,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import javax.xml.stream.XMLStreamException;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactoryConfigurationError;
-
 import org.testng.annotations.Test;
 
-import com.github.jlgrock.snp.core.model.LegoList;
+import com.github.jlgrock.snp.core.model.parser.LegoList;
 
 public class LegoXmlParserTest {
 
 	@Test
-	public void testParserAudiologyObservables() throws XMLStreamException, IOException, TransformerFactoryConfigurationError, TransformerException {
+	public void testParserAudiologyObservables() throws Exception {
 		InputStream xmlInput = getClass().getClassLoader().getResourceAsStream("Audiology OBSERVABLES.xml");
 		LegoList legoList = new LegoXmlParser().parseDocument(xmlInput);
 				
@@ -28,7 +24,7 @@ public class LegoXmlParserTest {
 	}
 	
 	@Test
-	public void testParserEndocrineDiseasesHistory() throws XMLStreamException, IOException, TransformerFactoryConfigurationError, TransformerException {
+	public void testParserEndocrineDiseasesHistory() throws Exception {
 		InputStream xmlInput = getClass().getClassLoader().getResourceAsStream("Endocrine Diseases History.xml");
 		LegoList legoList = new LegoXmlParser().parseDocument(xmlInput);
 				
@@ -38,7 +34,7 @@ public class LegoXmlParserTest {
 	}
 	
 	@Test
-	public void testParserHypertensionDisabliityBenefitsQuestionnaire() throws XMLStreamException, IOException, TransformerFactoryConfigurationError, TransformerException {
+	public void testParserHypertensionDisabliityBenefitsQuestionnaire() throws Exception {
 		InputStream xmlInput = getClass().getClassLoader().getResourceAsStream("Hypertension Disability Benefits Questionnaire.xml");
 		LegoList legoList = new LegoXmlParser().parseDocument(xmlInput);
 				
