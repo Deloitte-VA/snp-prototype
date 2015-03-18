@@ -1,4 +1,7 @@
 package com.github.jlgrock.snp.core.model.parser;
+
+import com.google.common.base.MoreObjects;
+
 /**
  * The Bound class represents the bound element in the LEGO XML document.
  *
@@ -43,8 +46,12 @@ public class Bound {
 
 	@Override
 	public String toString() {
-		return "Bound [lowerPoint=" + lowerPoint + ", upperPoint=" + upperPoint + ", lowerPointInclusive="
-				+ lowerPointInclusive + ", upperPointInclusive=" + upperPointInclusive + "]";
+		return MoreObjects.toStringHelper(this)
+		.add("lowerPoint", lowerPoint)
+		.add("upperPoint", upperPoint)
+		.add("lowerPointInclusive", lowerPointInclusive)
+		.add("upperPointInclusive", upperPointInclusive)
+		.toString();
 	}
 	
 }

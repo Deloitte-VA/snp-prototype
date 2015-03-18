@@ -1,5 +1,7 @@
 package com.github.jlgrock.snp.core.model.parser;
 
+import com.google.common.base.MoreObjects;
+
 /**
  * The Measurement class represents the measurement element in the LEGO XML document.
  *
@@ -35,7 +37,11 @@ public class Measurement {
 
 	@Override
 	public String toString() {
-		return "Measurement [units=" + units + ", point=" + point + ", bound=" + bound + "]";
+		return MoreObjects.toStringHelper(this)
+		.add("units", units)
+		.add("point", point)
+		.add("bound", bound)
+		.toString();
 	}
 	
 }

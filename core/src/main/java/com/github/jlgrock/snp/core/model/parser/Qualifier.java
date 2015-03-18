@@ -1,5 +1,7 @@
 package com.github.jlgrock.snp.core.model.parser;
 
+import com.google.common.base.MoreObjects;
+
 /**
  * The Qualifier class represents the qualifier element in the LEGO XML document.
  *
@@ -17,7 +19,9 @@ public class Qualifier {
 
 	@Override
 	public String toString() {
-		return "Qualifier [expression=" + expression + "]";
+		return MoreObjects.toStringHelper(this)
+				.add("expression", expression)
+				.toString();
 	}
 	
 }

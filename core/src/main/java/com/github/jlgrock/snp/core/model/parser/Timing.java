@@ -1,5 +1,7 @@
 package com.github.jlgrock.snp.core.model.parser;
 
+import com.google.common.base.MoreObjects;
+
 /**
  * The Timing class represents the timing element in the LEGO XML document.
  *
@@ -26,7 +28,10 @@ public class Timing {
 
 	@Override
 	public String toString() {
-		return "Timing [bound=" + bound + ", units=" + units + "]";
+		return MoreObjects.toStringHelper(this)
+				.add("bound", bound)
+				.add("units", units)
+				.toString();
 	}
 	
 }

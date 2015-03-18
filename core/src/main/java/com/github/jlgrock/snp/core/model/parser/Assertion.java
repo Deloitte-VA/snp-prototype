@@ -2,6 +2,8 @@ package com.github.jlgrock.snp.core.model.parser;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.google.common.base.MoreObjects;
 /**
  * The Assertion class represents the assertion element in the LEGO XML document.
  *
@@ -72,8 +74,14 @@ public class Assertion {
 	
 	@Override
 	public String toString() {
-		return "Assertion [uuid=" + uuid + ", discernible=" + discernible + ", qualifier=" + qualifier + ", value="
-				+ value + ", timing=" + timing + ", assertionComponents=" + assertionComponents + "]";
+		return MoreObjects.toStringHelper(this)
+		.add("uuid", uuid)
+		.add("discernible", discernible)
+		.add("qualifier", qualifier)
+		.add("value", value)
+		.add("timing", timing)
+		.add("assertionComponents", assertionComponents)
+		.toString();
 	}
 	
 }

@@ -3,6 +3,8 @@ package com.github.jlgrock.snp.core.model.parser;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.common.base.MoreObjects;
+
 /**
  * The Expression class represents the expression element in the LEGO XML document.
  *
@@ -37,7 +39,10 @@ public class Expression {
 	
 	@Override
 	public String toString() {
-		return "Expression [concept=" + concept + ", relations=" + relations + "]";
+		return MoreObjects.toStringHelper(this)
+		.add("concept", concept)
+		.add("relations", relations)
+		.toString();
 	}	
 	
 }

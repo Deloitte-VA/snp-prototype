@@ -1,5 +1,7 @@
 package com.github.jlgrock.snp.core.model.parser;
 
+import com.google.common.base.MoreObjects;
+
 /**
  * The Discernible class represents the discernible element in the LEGO XML document.
  *
@@ -17,7 +19,9 @@ public class Discernible {
 
 	@Override
 	public String toString() {
-		return "Discernible [expression=" + expression + "]";
+		return MoreObjects.toStringHelper(this)
+		.add("expression", expression)
+		.toString();
 	}
 	
 }

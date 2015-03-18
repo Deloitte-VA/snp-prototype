@@ -13,6 +13,8 @@ import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
+
+import com.google.common.base.MoreObjects;
 /**
  * Represents the content of LEGO XML document
  *
@@ -536,8 +538,13 @@ public class LegoList {
 	
 	@Override
 	public String toString() {
-		return "LegoList [groupName=" + groupName + ", uuid=" + uuid + ", groupDescription=" + groupDescription
-				+ ", comment=" + comment + ", legos=" + legos + "]";
+		return MoreObjects.toStringHelper(this)
+		.add("groupName", groupName)
+		.add("uuid", uuid)
+		.add("groupDescription", groupDescription)
+		.add("comment", comment)
+		.add("legos", legos)
+		.toString();
 	}
 	
 }

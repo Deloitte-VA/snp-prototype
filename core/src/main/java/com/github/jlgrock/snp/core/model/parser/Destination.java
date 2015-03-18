@@ -1,5 +1,7 @@
 package com.github.jlgrock.snp.core.model.parser;
 
+import com.google.common.base.MoreObjects;
+
 /**
  * The Destination class represents the destination element in the LEGO XML document.
  *
@@ -26,7 +28,10 @@ public class Destination {
 
 	@Override
 	public String toString() {
-		return "Destination [expression=" + expression + ", measurement=" + measurement + "]";
+		return MoreObjects.toStringHelper(this)
+		.add("expression", expression)
+		.add("measurement", measurement)
+		.toString();
 	}
 	
 }

@@ -1,5 +1,7 @@
 package com.github.jlgrock.snp.core.model.parser;
 
+import com.google.common.base.MoreObjects;
+
 /**
  * The AssertionComponent class represents the assertionComponent element in the LEGO XML document.
  *
@@ -23,7 +25,10 @@ public class AssertionComponent {
 	
 	@Override
 	public String toString() {
-		return "AssertionComponent [uuid=" + uuid + ", type=" + type + "]";
+		return MoreObjects.toStringHelper(this)
+		.add("uuid", uuid)
+		.add("type", type)
+		.toString();
 	}
 	
 }

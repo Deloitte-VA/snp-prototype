@@ -1,5 +1,7 @@
 package com.github.jlgrock.snp.core.model.parser;
 
+import com.google.common.base.MoreObjects;
+
 /**
  * The Relation class represents the relation element in the LEGO XML document.
  *
@@ -26,7 +28,10 @@ public class Relation {
 	
 	@Override
 	public String toString() {
-		return "Relation [type=" + type + ", destination=" + destination + "]";
+		return MoreObjects.toStringHelper(this)
+				.add("type", type)
+				.add("destination", destination)
+				.toString();
 	}	
 	
 }

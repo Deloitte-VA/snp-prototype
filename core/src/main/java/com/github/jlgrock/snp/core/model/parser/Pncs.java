@@ -1,5 +1,7 @@
 package com.github.jlgrock.snp.core.model.parser;
 
+import com.google.common.base.MoreObjects;
+
 /**
  * The Pncs class represents the pncs element in the LEGO XML document.
  *
@@ -35,7 +37,11 @@ public class Pncs {
 
 	@Override
 	public String toString() {
-		return "Pncs [value=" + value + ", name=" + name + ", id=" + id + "]";
+		return MoreObjects.toStringHelper(this)
+				.add("value", value)
+				.add("name", name)
+				.add("id", id)
+				.toString();
 	}	
 	
 }

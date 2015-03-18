@@ -1,5 +1,7 @@
 package com.github.jlgrock.snp.core.model.parser;
 
+import com.google.common.base.MoreObjects;
+
 /**
  * The Lego class represents the lego element in the LEGO XML document.
  *
@@ -53,8 +55,13 @@ public class Lego {
 
 	@Override
 	public String toString() {
-		return "Lego [uuid=" + uuid + ", stamp=" + stamp + ", pncs=" + pncs + ", assertion=" + assertion + ", comment="
-				+ comment + "]";
+		return MoreObjects.toStringHelper(this)
+		.add("uuid", uuid)
+		.add("stamp", stamp)
+		.add("pncs", pncs)
+		.add("assertion", assertion)
+		.add("comment", comment)
+		.toString();
 	}
 	
 }

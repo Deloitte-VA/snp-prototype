@@ -1,5 +1,7 @@
 package com.github.jlgrock.snp.core.model.parser;
 
+import com.google.common.base.MoreObjects;
+
 /**
  * The Concept class represents the concept element in the LEGO XML document.
  *
@@ -35,7 +37,11 @@ public class Concept {
 	
 	@Override
 	public String toString() {
-		return "Concept [uuid=" + uuid + ", desc=" + desc + ", sctid=" + sctid + "]";
+		return MoreObjects.toStringHelper(this)
+		.add("uuid", uuid)
+		.add("desc", desc)
+		.add("sctid", sctid)
+		.toString();
 	}	
 	
 }

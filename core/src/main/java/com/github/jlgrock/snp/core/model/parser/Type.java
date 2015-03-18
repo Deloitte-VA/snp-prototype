@@ -1,5 +1,7 @@
 package com.github.jlgrock.snp.core.model.parser;
 
+import com.google.common.base.MoreObjects;
+
 /**
  * The Type class represents the type element in the LEGO XML document.
  *
@@ -17,7 +19,9 @@ public class Type {
 
 	@Override
 	public String toString() {
-		return "Type [concept=" + concept + "]";
+		return MoreObjects.toStringHelper(this)
+				.add("concept", concept)
+				.toString();
 	}
 	
 }

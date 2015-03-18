@@ -1,5 +1,7 @@
 package com.github.jlgrock.snp.core.model.parser;
 
+import com.google.common.base.MoreObjects;
+
 /**
  * The Point class represents the point element in the LEGO XML document.
  *
@@ -26,7 +28,10 @@ public class Point {
 
 	@Override
 	public String toString() {
-		return "Point [type=" + type + ", value=" + value + "]";
+		return MoreObjects.toStringHelper(this)
+				.add("type", type)
+				.add(value, value)
+				.toString();
 	}
 	
 }

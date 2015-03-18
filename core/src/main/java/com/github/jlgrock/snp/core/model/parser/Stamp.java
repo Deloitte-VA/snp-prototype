@@ -1,5 +1,7 @@
 package com.github.jlgrock.snp.core.model.parser;
 
+import com.google.common.base.MoreObjects;
+
 /**
  * The Stamp class represents the stamp element in the LEGO XML document.
  *
@@ -62,8 +64,14 @@ public class Stamp {
 
 	@Override
 	public String toString() {
-		return "Stamp [status=" + status + ", time=" + time + ", author=" + author + ", module=" + module + ", path="
-				+ path + ", uuid=" + uuid + "]";
+		return MoreObjects.toStringHelper(this)
+				.add("status", status)
+				.add("time", time)
+				.add("author", author)
+				.add("module", module)
+				.add("path", path)
+				.add("uuid", uuid)
+				.toString();
 	}	
 	
 }

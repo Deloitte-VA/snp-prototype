@@ -1,5 +1,7 @@
 package com.github.jlgrock.snp.core.model.parser;
 
+import com.google.common.base.MoreObjects;
+
 /**
  * The Units class represents the units element in the LEGO XML document.
  *
@@ -17,7 +19,9 @@ public class Units {
 
 	@Override
 	public String toString() {
-		return "Units [concept=" + concept + "]";
+		return MoreObjects.toStringHelper(this)
+				.add("concept", concept)
+				.toString();
 	}
 	
 }
