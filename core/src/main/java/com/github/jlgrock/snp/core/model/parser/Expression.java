@@ -11,7 +11,7 @@ import com.google.common.base.MoreObjects;
  */
 public class Expression {
 	private Concept concept;
-	private List<Relation> relations = new ArrayList<Relation>();
+	private List<Relation> relations = new ArrayList<>();
 	
 	public Concept getConcept() {
 		return concept;

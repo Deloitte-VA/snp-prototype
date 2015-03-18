@@ -24,7 +24,7 @@ public class LegoList {
 	private String uuid;
 	private String groupDescription;
 	private String comment;
-	private List<Lego> legos = new ArrayList<Lego>();
+	private List<Lego> legos = new ArrayList<>();
 	
 	public String getGroupName() {
 		return groupName;

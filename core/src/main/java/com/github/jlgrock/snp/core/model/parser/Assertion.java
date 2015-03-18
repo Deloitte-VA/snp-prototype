@@ -14,7 +14,7 @@ public class Assertion {
 	private Qualifier qualifier;
 	private Value value;
 	private Timing timing;
-	private List<AssertionComponent> assertionComponents = new ArrayList<AssertionComponent>();
+	private List<AssertionComponent> assertionComponents = new ArrayList<>();
 	
 	public String getUuid() {
 		return uuid;
