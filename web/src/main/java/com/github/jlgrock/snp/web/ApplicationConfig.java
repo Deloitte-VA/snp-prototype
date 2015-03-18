@@ -16,7 +16,7 @@ public class ApplicationConfig extends ResourceConfig {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ApplicationConfig.class);
     
-    private ApplicationConfig(){
+    public ApplicationConfig() {
         // Register Jackson Features
         register( JacksonFeature.class );
 
