@@ -4,8 +4,9 @@ import com.github.jlgrock.snp.core.converters.PatientWriteConverter;
 import com.github.jlgrock.snp.core.domain.Gender;
 import com.github.jlgrock.snp.core.domain.Patient;
 import com.github.jlgrock.snp.core.domain.Race;
-import org.glassfish.jersey.server.ResourceConfig;
+import com.github.jlgrock.snp.web.ApplicationConfig;
 import org.glassfish.jersey.test.JerseyTestNg;
+import org.glassfish.jersey.test.TestProperties;
 import org.testng.annotations.Test;
 
 import javax.ws.rs.core.Application;
@@ -16,9 +17,14 @@ import static org.testng.Assert.assertEquals;
  *
  */
 public class PatientControllerTest extends JerseyTestNg.ContainerPerClassTest {
+
     @Override
     protected Application configure() {
-        return new ResourceConfig(PatientController.class);
+        enable(TestProperties.LOG_TRAFFIC);
+        enable(TestProperties.DUMP_ENTITY);
+
+        //return all of the rest endpoints
+        return ApplicationConfig.createApp();
     }
 
     @Test

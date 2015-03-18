@@ -20,8 +20,10 @@ public class ObservationWriteConverter  implements WriteConverter<Observation, D
     public DBObject convert(final Observation source) {
         DBObject dbo = new BasicDBObject();
         dbo.put(ObservationTags.ID_TAG, source.getIdentifier());
+        dbo.put(ObservationTags.NAME_TYPE_TAG, null);
         dbo.put(ObservationTags.NAME_TAG, source.getName().getValue());
         dbo.put(ObservationTags.NAME_TYPE_TAG, source.getName().getType().getId());
+        dbo.put(ObservationTags.VALUE_TAG, source.getValue().getValue());
         dbo.put(ObservationTags.VALUE_TAG, source.getValue().getValue());
         dbo.put(ObservationTags.VALUE_TYPE_TAG, source.getValue().getType().getId());
         dbo.put(ObservationTags.APPLIES_TAG, source.getApplies());

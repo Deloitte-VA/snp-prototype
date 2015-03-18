@@ -1,9 +1,9 @@
 package com.github.jlgrock.snp.web.controllers;
 
+import com.github.jlgrock.snp.core.domain.Encounter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -25,6 +25,11 @@ public class EncounterController {
 //        repository = repositoryIn;
 //    }
 
+    @GET
+    public String index() {
+        return "Hello";
+    }
+
     /**
      * 
      * @param id encounter id used for search
@@ -32,9 +37,12 @@ public class EncounterController {
      */
     @GET @Path("/{id}")
     @Produces("application/json")
-    public String getEncounter(@PathParam("id") final Long id) {
+    public Encounter getEncounter(@PathParam("id") final Long id) {
         LOGGER.debug("getting encounter");
-        return "{\"encounter\": \"example\", \"id\":" + id + "}";
+        Encounter encounter = new Encounter();
+        encounter.setId(1l);
+        return encounter;
+        //return "{\"encounter\": \"example\", \"id\":" + id + "}";
 //        return repository.findOne(id);
     }
     
