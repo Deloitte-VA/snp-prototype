@@ -3,8 +3,12 @@ package com.github.jlgrock.snp.web.controllers;
 import com.github.jlgrock.snp.core.converters.EncounterWriteConverter;
 import com.github.jlgrock.snp.core.converters.ObservationWriteConverter;
 import com.github.jlgrock.snp.core.domain.Encounter;
-import org.glassfish.jersey.server.ResourceConfig;
+import com.github.jlgrock.snp.web.ApplicationObjectMapper;
+import com.github.jlgrock.snp.web.ApplicationConfig;
+import org.glassfish.jersey.client.ClientConfig;
+import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.test.JerseyTestNg;
+import org.glassfish.jersey.test.TestProperties;
 import org.testng.annotations.Test;
 
 import javax.ws.rs.core.Application;
@@ -17,16 +21,19 @@ import static org.testng.Assert.assertEquals;
  */
 public class EncounterControllerTest extends JerseyTestNg.ContainerPerClassTest {
     @Override
+    protected void configureClient(ClientConfig config) {
+        config.register(new JacksonFeature()).register(ApplicationObjectMapper.class);
+    }
+
+    @Override
     protected Application configure() {
-        return new ResourceConfig(EncounterController.class);
+        enable(TestProperties.LOG_TRAFFIC);
+        enable(TestProperties.DUMP_ENTITY);
+
+        //return all of the rest endpoints
+        return ApplicationConfig.createApp();
     }
 
-    @Test
-    public void testIndex() {
-        final String response = target("encounter").request().get(String.class);
-        assertEquals("Hello", response);
-
-    }
     @Test
     public void testFindById() {
         final Long id = 1l, patientId = 2l;

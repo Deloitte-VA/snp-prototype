@@ -33,6 +33,18 @@
 			<artifactId>defaultconfig</artifactId>
 		</dependency>
 
+        <dependency>
+            <groupId>com.fasterxml.jackson.jaxrs</groupId>
+            <artifactId>jackson-jaxrs-json-provider</artifactId>
+            <version>2.5.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.2.3</version>
+        </dependency>
+
 		<!-- external dependencies -->
 		<dependency>
 			<groupId>org.glassfish.jersey.core</groupId>
@@ -66,11 +78,6 @@
             <!--<version>2.3.0</version>-->
         <!--</dependency>-->
 
-        <dependency>
-            <groupId>com.sun.jersey</groupId>
-            <artifactId>jersey-json</artifactId>
-        </dependency>
-
         <!-- Test dependencies -->
         <dependency>
             <groupId>org.glassfish.jersey.test-framework</groupId>
@@ -80,7 +87,7 @@
 
         <dependency>
             <groupId>org.glassfish.jersey.test-framework.providers</groupId>
-            <artifactId>jersey-test-framework-provider-inmemory</artifactId>
+            <artifactId>jersey-test-framework-provider-jetty</artifactId>
             <version>2.17</version>
         </dependency>
 
