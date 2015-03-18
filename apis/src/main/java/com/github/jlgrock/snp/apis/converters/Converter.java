@@ -1,7 +1,5 @@
 package com.github.jlgrock.snp.apis.converters;
 
-import com.github.jlgrock.snp.apis.exceptions.ConversionException;
-
 /**
  * Simple interface used to help in conversion between known object types.
  * @param <T1> The class indicating the object to store
@@ -13,7 +11,6 @@ public interface Converter<T1, ID> {
      * Will convert from type T1 to type T2.
      * @param source the source object to convert
      * @return the output that is a converted object
-     * @throws com.github.jlgrock.snp.apis.exceptions.ConversionException if there is an issue converting
      */
-    ID convert(T1 source) throws ConversionException;
+    ID convert(T1 source);
 }
