@@ -5,6 +5,9 @@ import com.github.jlgrock.snp.core.domain.Gender;
 import com.github.jlgrock.snp.core.domain.Patient;
 import com.github.jlgrock.snp.core.domain.Race;
 import com.github.jlgrock.snp.web.ApplicationConfig;
+import com.github.jlgrock.snp.web.ApplicationObjectMapper;
+import org.glassfish.jersey.client.ClientConfig;
+import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.test.JerseyTestNg;
 import org.glassfish.jersey.test.TestProperties;
 import org.mockito.MockitoAnnotations;
@@ -24,6 +27,12 @@ public class PatientControllerTest extends JerseyTestNg.ContainerPerClassTest {
     public void setUp() throws Exception {
         // Required to make this work on TestNG
         MockitoAnnotations.initMocks(this);
+    }
+
+
+    @Override
+    protected void configureClient(ClientConfig config) {
+        config.register(new JacksonFeature()).register(ApplicationObjectMapper.class);
     }
 
     @Override
