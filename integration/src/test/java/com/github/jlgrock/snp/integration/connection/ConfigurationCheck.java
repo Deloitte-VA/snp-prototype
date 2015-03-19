@@ -1,6 +1,6 @@
-package com.github.jlgrock.integration.connection;
+package com.github.jlgrock.snp.integration.connection;
 
-import com.github.jlgrock.snp.apis.connection.MongoDBConfiguration;
+import com.github.jlgrock.snp.apis.connection.MongoDbConfiguration;
 import org.glassfish.hk2.api.ServiceLocator;
 import org.glassfish.hk2.utilities.ServiceLocatorUtilities;
 import org.slf4j.Logger;
@@ -23,7 +23,7 @@ public final class ConfigurationCheck {
     public static void main(final String[] args) {
         ServiceLocator locator = ServiceLocatorUtilities.createAndPopulateServiceLocator();
 
-        MongoDBConfiguration myService = locator.getService(MongoDBConfiguration.class);
+        MongoDbConfiguration myService = locator.getService(MongoDbConfiguration.class);
 
         if (myService == null) {
             LOGGER.info("Configuration has not been set.");

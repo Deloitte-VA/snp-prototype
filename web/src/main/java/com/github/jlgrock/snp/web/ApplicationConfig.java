@@ -1,6 +1,7 @@
 package com.github.jlgrock.snp.web;
 
 import org.glassfish.jersey.jackson.JacksonFeature;
+import org.glassfish.jersey.media.multipart.MultiPartFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.server.ServerProperties;
 import org.slf4j.Logger;
@@ -18,7 +19,10 @@ public class ApplicationConfig extends ResourceConfig {
     
     public ApplicationConfig() {
         // Register Jackson Features
-        register( JacksonFeature.class );
+        register(
+            JacksonFeature.class,
+            MultiPartFeature.class
+        );
 
         LOGGER.info("Starting MongoRestApplication...");
     	packages("com.github.jlgrock.snp.web");
