@@ -27,11 +27,12 @@ public class PCEControllerTest extends JerseyTestNg.ContainerPerClassTest {
     @Test
     public void testFindById() {
         final Long id = 1l;
-        final PCE p = new PCE();
-        p.setId(id);
-        p.setDesc("bla");
+//        final PCE p = new PCE();
+//        p.setId(id);
+//        p.setDesc("bla");
         final String response = target("pce/" + id).request().get(String.class);
-        final String converted = new PCEWriteConverter().convert(p).toString();
-        assertEquals(converted, response);
+//        final String converted = new PCEWriteConverter().convert(p).toString();
+        final String converted = "{\r\n  \"id\" : 1,\r\n  \"desc\" : \"bla\"\r\n}";
+        assertEquals(response, converted);
     }
 }

@@ -17,9 +17,12 @@ import javax.ws.rs.ext.Provider;
 @Provider
 public class ApplicationObjectMapper implements ContextResolver<ObjectMapper>{
 
-    final ObjectMapper defaultObjectMapper;
-    final ObjectMapper combinedObjectMapper;
+    private final ObjectMapper defaultObjectMapper;
+    private final ObjectMapper combinedObjectMapper;
 
+    /**
+     * Creates a new instance of ApplicationObjectMapper with default mappers.
+     */
     public ApplicationObjectMapper() {
         defaultObjectMapper = createDefaultMapper();
         combinedObjectMapper = createCombinedObjectMapper();

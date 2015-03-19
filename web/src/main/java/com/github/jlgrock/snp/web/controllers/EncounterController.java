@@ -1,6 +1,7 @@
 package com.github.jlgrock.snp.web.controllers;
 
 import com.github.jlgrock.snp.core.domain.Encounter;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -8,6 +9,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
 /**
  * The Controller serving up domain objects for Encounter objects.
@@ -25,22 +27,22 @@ public class EncounterController {
 //        repository = repositoryIn;
 //    }
 
-    @GET
-    public String index() {
-        return "Hello";
-    }
+//    @GET
+//    public String index() {
+//        return "Hello";
+//    }
 
     /**
-     * 
+     * Returns the encounter for the respective <code>id</code>.
      * @param id encounter id used for search
      * @return returns an encounter
      */
     @GET @Path("/{id}")
-    @Produces("application/json")
+    @Produces(MediaType.APPLICATION_JSON)
     public Encounter getEncounter(@PathParam("id") final Long id) {
         LOGGER.debug("getting encounter");
         Encounter encounter = new Encounter();
-        encounter.setId(1l);
+        encounter.setId(1L);
         return encounter;
         //return "{\"encounter\": \"example\", \"id\":" + id + "}";
 //        return repository.findOne(id);
