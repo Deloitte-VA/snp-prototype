@@ -71,7 +71,13 @@ public class LegoXmlParser {
 							case LegoXmlConstants.COMMENT :
 								legoList.setComment(tagContent);
 								break;
+							default :
+								//not all local names are processed in this event
+								break;
 						}
+						break;
+					default :
+						//ignore unnecessary events
 						break;
 				}
 			}
@@ -134,6 +140,11 @@ public class LegoXmlParser {
 							break;
 						case LegoXmlConstants.COMMENT :
 							inComment = true;
+							break;
+						default :
+							//not all local names are processed in this event
+							break;
+							
 					}
 					break;
 				case XMLStreamConstants.CHARACTERS :
@@ -154,6 +165,9 @@ public class LegoXmlParser {
 							currentLego.setComment(comment);
 							inComment = false;
 							comment = "";
+							break;
+						default :
+							//not all local names are processed in this event
 							break;
 					}
 					break;
@@ -189,6 +203,9 @@ public class LegoXmlParser {
 						case LegoXmlConstants.ASSERTION_COMPONENT :
 							assertion.addAssertionComponent(parseAssertionComponentAndAllChildren(reader));
 							break;
+						default :
+							//not all local names are processed in this event
+							break;
 					}
 					break;
 				case XMLStreamConstants.CHARACTERS :
@@ -201,6 +218,9 @@ public class LegoXmlParser {
 							break;
 						case LegoXmlConstants.ASSERTION :
 							exit = true;
+							break;
+						default :
+							//not all local names are processed in this event
 							break;
 					}
 					break;
@@ -227,12 +247,18 @@ public class LegoXmlParser {
 						case LegoXmlConstants.EXPRESSION :
 							discernible.setExpression(parseExpressionAndAllChildren(reader));
 							break;
+						default :
+							//not all local names are processed in this event
+							break;
 					}
 					break;
 				case XMLStreamConstants.END_ELEMENT :
 					switch(reader.getLocalName()) {
 						case LegoXmlConstants.DISCERNIBLE :
 							exit = true;
+							break;
+						default :
+							//not all local names are processed in this event
 							break;
 					}
 					break;
@@ -259,12 +285,18 @@ public class LegoXmlParser {
 						case LegoXmlConstants.EXPRESSION :
 							qualifier.setExpression(parseExpressionAndAllChildren(reader));
 							break;
+						default :
+							//not all local names are processed in this event
+							break;
 					}
 					break;
 				case XMLStreamConstants.END_ELEMENT :
 					switch(reader.getLocalName()) {
 						case LegoXmlConstants.QUALIFIER :
 							exit = true;
+							break;
+						default :
+							//not all local names are processed in this event
 							break;
 					}
 					break;
@@ -294,12 +326,18 @@ public class LegoXmlParser {
 						case LegoXmlConstants.MEASUREMENT :
 							value.setMeasurement(parseMeasurementAndAllChildren(reader));
 							break;
+						default :
+							//not all local names are processed in this event
+							break;
 					}
 					break;
 				case XMLStreamConstants.END_ELEMENT :
 					switch(reader.getLocalName()) {
 						case LegoXmlConstants.VALUE :
 							exit = true;
+							break;
+						default :
+							//not all local names are processed in this event
 							break;
 					}
 					break;
@@ -329,12 +367,18 @@ public class LegoXmlParser {
 						case LegoXmlConstants.RELATION :
 							expression.addRelation(parseRelationAndAllChildren(reader));
 							break;
+						default :
+							//not all local names are processed in this event
+							break;
 					}
 					break;
 				case XMLStreamConstants.END_ELEMENT :
 					switch(reader.getLocalName()) {
 						case LegoXmlConstants.EXPRESSION :
 							exit = true;
+							break;
+						default :
+							//not all local names are processed in this event
 							break;
 					}
 					break;
@@ -358,20 +402,26 @@ public class LegoXmlParser {
 			switch (event) {
 				case XMLStreamConstants.START_ELEMENT :
 					switch(reader.getLocalName()) {
-					case LegoXmlConstants.DESTINATION :
-						relation.setDestination(parseDestinationAndAllChildren(reader));
-						break;
-					case LegoXmlConstants.TYPE :
-						relation.setType(parseTypeAndAllChildren(reader));
-						break;
-				}
+						case LegoXmlConstants.DESTINATION :
+							relation.setDestination(parseDestinationAndAllChildren(reader));
+							break;
+						case LegoXmlConstants.TYPE :
+							relation.setType(parseTypeAndAllChildren(reader));
+							break;
+						default :
+							//not all local names are processed in this event
+							break;
+					}
 					break;
 				case XMLStreamConstants.END_ELEMENT :
 					switch(reader.getLocalName()) {
 						case LegoXmlConstants.RELATION :
 							exit = true;
 							break;
-				}
+						default :
+							//not all local names are processed in this event
+							break;
+					}
 					break;
 				default :
 					//ignore unnecessary events
@@ -395,15 +445,21 @@ public class LegoXmlParser {
 					switch(reader.getLocalName()) {
 						case LegoXmlConstants.CONCEPT :
 							type.setConcept(parseConcept(reader));
-						break;
-				}
+							break;
+						default :
+							//not all local names are processed in this event
+							break;
+					}
 					break;
 				case XMLStreamConstants.END_ELEMENT :
 					switch(reader.getLocalName()) {
 						case LegoXmlConstants.TYPE :
 							exit = true;
 							break;
-				}
+						default :
+							//not all local names are processed in this event
+							break;
+					}
 					break;
 				default :
 					//ignore unnecessary events
@@ -431,12 +487,18 @@ public class LegoXmlParser {
 						case LegoXmlConstants.MEASUREMENT :
 							destination.setMeasurement(parseMeasurementAndAllChildren(reader));
 							break;
-						}
+						default :
+							//not all local names are processed in this event
+							break;
+					}
 					break;
 				case XMLStreamConstants.END_ELEMENT :
 					switch(reader.getLocalName()) {
 						case LegoXmlConstants.DESTINATION :
 							exit = true;
+							break;
+						default :
+							//not all local names are processed in this event
 							break;
 					}
 					break;
@@ -460,23 +522,29 @@ public class LegoXmlParser {
 			switch (event) {
 				case XMLStreamConstants.START_ELEMENT :
 					switch(reader.getLocalName()) {
-					case LegoXmlConstants.UNITS :
-						measurement.setUnits(parseUnitsAndAllChildren(reader));
-						break;
-					case LegoXmlConstants.POINT :
-						measurement.setPoint(parsePointAndAllChildren(reader));
-						break;
-					case LegoXmlConstants.BOUND :
-						measurement.setBound(parseBoundAndAllChildren(reader));
-						break;
-				}
+						case LegoXmlConstants.UNITS :
+							measurement.setUnits(parseUnitsAndAllChildren(reader));
+							break;
+						case LegoXmlConstants.POINT :
+							measurement.setPoint(parsePointAndAllChildren(reader));
+							break;
+						case LegoXmlConstants.BOUND :
+							measurement.setBound(parseBoundAndAllChildren(reader));
+							break;
+						default :
+							//not all local names are processed in this event
+							break;
+					}
 					break;
 				case XMLStreamConstants.END_ELEMENT :
 					switch(reader.getLocalName()) {
 						case LegoXmlConstants.MEASUREMENT :
 							exit = true;
 							break;
-				}
+						default :
+							//not all local names are processed in this event
+							break;
+					}
 					break;
 				default :
 					//ignore unnecessary events
@@ -501,6 +569,9 @@ public class LegoXmlParser {
 						case LegoXmlConstants.CONCEPT :
 							units.setConcept(parseConcept(reader));
 							break;
+						default :
+							//not all local names are processed in this event
+							break;
 					}
 					break;
 				case XMLStreamConstants.END_ELEMENT :
@@ -508,7 +579,10 @@ public class LegoXmlParser {
 						case LegoXmlConstants.UNITS :
 							exit = true;
 							break;
-				}
+						default :
+							//not all local names are processed in this event
+							break;
+					}
 					break;
 				default :
 					//ignore unnecessary events
@@ -547,7 +621,10 @@ public class LegoXmlParser {
 							point.setValue(tagContent);
 							exit = true;
 							break;
-				}
+						default :
+							//not all local names are processed in this event
+							break;
+					}
 					break;
 				default :
 					//ignore unnecessary events
@@ -575,14 +652,20 @@ public class LegoXmlParser {
 						case LegoXmlConstants.UNITS :
 							timing.setUnits(parseUnitsAndAllChildren(reader));
 							break;
-				}
+						default :
+							//not all local names are processed in this event
+							break;
+					}
 					break;
 				case XMLStreamConstants.END_ELEMENT :
 					switch(reader.getLocalName()) {
 						case LegoXmlConstants.TIMING :
 							exit = true;
 							break;
-				}
+						default :
+							//not all local names are processed in this event
+							break;
+					}
 					break;
 				default :
 					//ignore unnecessary events
@@ -613,21 +696,27 @@ public class LegoXmlParser {
 			switch (event) {
 				case XMLStreamConstants.START_ELEMENT :
 					switch(reader.getLocalName()) {
-					case LegoXmlConstants.LOWER_POINT :
-						bound.setLowerPoint(parsePointAndAllChildren(reader));
-						break;
-					case LegoXmlConstants.UPPER_POINT :
-						bound.setUpperPoint(parsePointAndAllChildren(reader));
-						break;
+						case LegoXmlConstants.LOWER_POINT :
+							bound.setLowerPoint(parsePointAndAllChildren(reader));
+							break;
+						case LegoXmlConstants.UPPER_POINT :
+							bound.setUpperPoint(parsePointAndAllChildren(reader));
+							break;
+						default :
+							//not all local names are processed in this event
+							break;
 					}
 					break;
 				case XMLStreamConstants.CHARACTERS :
 					break;
 				case XMLStreamConstants.END_ELEMENT :
 					switch(reader.getLocalName()) {
-					case LegoXmlConstants.BOUND :
-						exit = true;
-						break;
+						case LegoXmlConstants.BOUND :
+							exit = true;
+							break;
+						default :
+							//not all local names are processed in this event
+							break;
 					}
 					break;
 				default :
@@ -651,9 +740,12 @@ public class LegoXmlParser {
 			switch (event) {
 				case XMLStreamConstants.START_ELEMENT :
 					switch(reader.getLocalName()) {
-					case LegoXmlConstants.TYPE :
-						assertionComponent.setType(parseTypeAndAllChildren(reader));
-						break;
+						case LegoXmlConstants.TYPE :
+							assertionComponent.setType(parseTypeAndAllChildren(reader));
+							break;
+						default :
+							//not all local names are processed in this event
+							break;
 					}
 					break;
 				case XMLStreamConstants.CHARACTERS :
@@ -666,6 +758,9 @@ public class LegoXmlParser {
 							break;
 						case LegoXmlConstants.ASSERTION_COMPONENT :
 							exit = true;
+							break;
+						default :
+							//not all local names are processed in this event
 							break;
 					}
 				default :
