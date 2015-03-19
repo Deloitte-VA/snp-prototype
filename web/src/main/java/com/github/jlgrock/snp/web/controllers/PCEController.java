@@ -1,12 +1,12 @@
 package com.github.jlgrock.snp.web.controllers;
 
-//import com.github.jlgrock.snp.core.data.PCERepository;
+import com.github.jlgrock.snp.core.data.PCERepository;
 import com.github.jlgrock.snp.core.domain.PCE;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-//import javax.inject.Inject;
+import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -21,12 +21,12 @@ public class PCEController {
     private static final Logger LOGGER = LoggerFactory.getLogger(PCEController.class);
 
 
-//    private PCERepository repository;
+    private PCERepository repository;
 
-//    @Inject
-//    public PCEController(final PCERepository repositoryIn) {
-//        repository = repositoryIn;
-//    }
+    @Inject
+    public PCEController(final PCERepository repositoryIn) {
+        repository = repositoryIn;
+    }
 
     /**
      * Returns the PCE for the respective <code>id</code>.
@@ -42,7 +42,6 @@ public class PCEController {
         p.setId(id);
         p.setDesc("bla");
         return p;
-//        return "{\"pce\": \"example\", \"id\":" + id + "}";
 //        return repository.findOne(id);
     }
 }

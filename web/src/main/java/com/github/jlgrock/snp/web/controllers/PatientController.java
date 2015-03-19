@@ -1,6 +1,6 @@
 package com.github.jlgrock.snp.web.controllers;
 
-//import com.github.jlgrock.snp.core.data.PatientRepository;
+import com.github.jlgrock.snp.core.data.PatientRepository;
 import com.github.jlgrock.snp.core.domain.Gender;
 import com.github.jlgrock.snp.core.domain.Patient;
 import com.github.jlgrock.snp.core.domain.Race;
@@ -8,7 +8,7 @@ import com.github.jlgrock.snp.core.domain.Race;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-//import javax.inject.Inject;
+import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -23,12 +23,12 @@ import javax.ws.rs.core.MediaType;
 public class PatientController {
     private static final Logger LOGGER = LoggerFactory.getLogger(PatientController.class);
 
-//    private PatientRepository repository;
-//
-//    @Inject
-//    public PatientController(final PatientRepository repositoryIn) {
-//        repository = repositoryIn;
-//    }
+    private PatientRepository repository;
+
+    @Inject
+    public PatientController(final PatientRepository repositoryIn) {
+        repository = repositoryIn;
+    }
 
     /** 
      * @param id used to find encounter
@@ -46,7 +46,6 @@ public class PatientController {
         p.setGender(Gender.FEMALE);
         p.setRace(Race.AMERICAN_INDIAN);
         return p;
-//        return "{\"patient\": \"example\", \"id\":" + id + "}";
 //        return repository.findOne(id);
     }
 }

@@ -1,10 +1,12 @@
 package com.github.jlgrock.snp.web.controllers;
 
+import com.github.jlgrock.snp.core.data.EncounterRepository;
 import com.github.jlgrock.snp.core.domain.Encounter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -20,17 +22,12 @@ public class EncounterController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(EncounterController.class);
    
-//    private final EncounterRepository repository;
+    private final EncounterRepository repository;
 
-//    @Inject
-//    EncounterController(final EncounterRepository repositoryIn) {
-//        repository = repositoryIn;
-//    }
-
-//    @GET
-//    public String index() {
-//        return "Hello";
-//    }
+    @Inject
+    EncounterController(final EncounterRepository repositoryIn) {
+        repository = repositoryIn;
+    }
 
     /**
      * Returns the encounter for the respective <code>id</code>.
@@ -44,7 +41,6 @@ public class EncounterController {
         Encounter encounter = new Encounter();
         encounter.setId(1L);
         return encounter;
-        //return "{\"encounter\": \"example\", \"id\":" + id + "}";
 //        return repository.findOne(id);
     }
     
