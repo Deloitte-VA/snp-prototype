@@ -17,6 +17,7 @@ import com.github.jlgrock.snp.core.model.parser.Discernible;
 import com.github.jlgrock.snp.core.model.parser.Expression;
 import com.github.jlgrock.snp.core.model.parser.Lego;
 import com.github.jlgrock.snp.core.model.parser.LegoList;
+import com.github.jlgrock.snp.core.model.parser.LegoXmlConstants;
 import com.github.jlgrock.snp.core.model.parser.Measurement;
 import com.github.jlgrock.snp.core.model.parser.Pncs;
 import com.github.jlgrock.snp.core.model.parser.Point;
@@ -49,7 +50,7 @@ public class LegoXmlParser {
 
 				switch (event) {
 					case XMLStreamConstants.START_ELEMENT :
-						if ("lego".equals(reader.getLocalName())) {
+						if (LegoXmlConstants.LEGO.equals(reader.getLocalName())) {
 							parseLegoAndAllChildren(reader);
 						}
 						break;
@@ -58,16 +59,16 @@ public class LegoXmlParser {
 						break;
 					case XMLStreamConstants.END_ELEMENT :
 						switch(reader.getLocalName()) {
-							case "groupName" :
+							case LegoXmlConstants.GROUP_NAME :
 								legoList.setGroupName(tagContent);
 								break;
-							case "legoListUUID" :
+							case LegoXmlConstants.LEGO_LIST_UUID :
 								legoList.setUuid(tagContent);
 								break;
-							case "groupDescription" :
+							case LegoXmlConstants.GROUP_DESCRIPTION :
 								legoList.setGroupDescription(tagContent);
 								break;
-							case "comment" :
+							case LegoXmlConstants.COMMENT :
 								legoList.setComment(tagContent);
 								break;
 						}
@@ -93,45 +94,45 @@ public class LegoXmlParser {
 			switch (event) {
 				case XMLStreamConstants.START_ELEMENT :
 					switch(reader.getLocalName()) {
-						case "lego" :
+						case LegoXmlConstants.LEGO :
 							currentLego = new Lego();
 							break;
-						case "stamp" :
+						case LegoXmlConstants.STAMP :
 							Stamp stamp = new Stamp();
 							for(int index = 0;index < reader.getAttributeCount();index++) {
-								if ("status".equals(reader.getAttributeLocalName(index))) {
+								if (LegoXmlConstants.STATUS.equals(reader.getAttributeLocalName(index))) {
 									stamp.setStatus(reader.getAttributeValue(index));
-								} else if ("uuid".equals(reader.getAttributeLocalName(index))) {
+								} else if (LegoXmlConstants.UUID.equals(reader.getAttributeLocalName(index))) {
 									stamp.setUuid(reader.getAttributeValue(index));
-								} else if ("path".equals(reader.getAttributeLocalName(index))) {
+								} else if (LegoXmlConstants.PATH.equals(reader.getAttributeLocalName(index))) {
 									stamp.setPath(reader.getAttributeValue(index));
-								} else if ("module".equals(reader.getAttributeLocalName(index))) {
+								} else if (LegoXmlConstants.MODULE.equals(reader.getAttributeLocalName(index))) {
 									stamp.setModule(reader.getAttributeValue(index));
-								} else if ("author".equals(reader.getAttributeLocalName(index))) {
+								} else if (LegoXmlConstants.AUTHOR.equals(reader.getAttributeLocalName(index))) {
 									stamp.setAuthor(reader.getAttributeValue(index));
-								} else if ("time".equals(reader.getAttributeLocalName(index))) {
+								} else if (LegoXmlConstants.TIME.equals(reader.getAttributeLocalName(index))) {
 									stamp.setTime(reader.getAttributeValue(index));
 								}
 							}
 							currentLego.setStamp(stamp);
 							break;
-						case "pncs" :
+						case LegoXmlConstants.PNCS :
 							Pncs pncs = new Pncs();
 							for(int index = 0;index < reader.getAttributeCount();index++) {
-								if ("value".equals(reader.getAttributeLocalName(index))) {
+								if (LegoXmlConstants.VALUE.equals(reader.getAttributeLocalName(index))) {
 									pncs.setValue(reader.getAttributeValue(index));
-								} else if ("name".equals(reader.getAttributeLocalName(index))) {
+								} else if (LegoXmlConstants.NAME.equals(reader.getAttributeLocalName(index))) {
 									pncs.setName(reader.getAttributeValue(index));
-								} else if ("id".equals(reader.getAttributeLocalName(index))) {
+								} else if (LegoXmlConstants.ID.equals(reader.getAttributeLocalName(index))) {
 									pncs.setId(reader.getAttributeValue(index));
 								}
 							}
 							currentLego.setPncs(pncs);
 							break;
-						case "assertion" :
+						case LegoXmlConstants.ASSERTION :
 							currentLego.setAssertion(parseAssertionAndAllChildren(reader));
 							break;
-						case "comment" :
+						case LegoXmlConstants.COMMENT :
 							inComment = true;
 					}
 					break;
@@ -143,13 +144,13 @@ public class LegoXmlParser {
 					break;
 				case XMLStreamConstants.END_ELEMENT :
 					switch(reader.getLocalName()) {
-						case "lego" :
+						case LegoXmlConstants.LEGO :
 							legoList.addLego(currentLego);
 							break;
-						case "legoUUID" :
+						case LegoXmlConstants.LEGO_UUID :
 							currentLego.setUuid(tagContent);
 							break;
-						case "comment" :
+						case LegoXmlConstants.COMMENT :
 							currentLego.setComment(comment);
 							inComment = false;
 							comment = "";
@@ -173,19 +174,19 @@ public class LegoXmlParser {
 			switch (event) {
 				case XMLStreamConstants.START_ELEMENT :
 					switch(reader.getLocalName()) {
-						case "discernible" :
+						case LegoXmlConstants.DISCERNIBLE :
 							assertion.setDiscernible(parseDiscernibleAndAllChildren(reader));
 							break;
-						case "qualifier" :
+						case LegoXmlConstants.QUALIFIER :
 							assertion.setQualifier(parseQualifierAndAllChildren(reader));
 							break;
-						case "value" :
+						case LegoXmlConstants.VALUE :
 							assertion.setValue(parseValueAndAllChildren(reader));
 							break;
-						case "timing" :
+						case LegoXmlConstants.TIMING :
 							assertion.setTiming(parseTimingAndAllChildren(reader));
 							break;
-						case "assertionComponent" :
+						case LegoXmlConstants.ASSERTION_COMPONENT :
 							assertion.addAssertionComponent(parseAssertionComponentAndAllChildren(reader));
 							break;
 					}
@@ -195,10 +196,10 @@ public class LegoXmlParser {
 					break;
 				case XMLStreamConstants.END_ELEMENT :
 					switch(reader.getLocalName()) {
-						case "assertionUUID" :
+						case LegoXmlConstants.ASSERTION_UUID :
 							assertion.setUuid(tagContent);
 							break;
-						case "assertion" :
+						case LegoXmlConstants.ASSERTION :
 							exit = true;
 							break;
 					}
@@ -223,14 +224,14 @@ public class LegoXmlParser {
 			switch (event) {
 				case XMLStreamConstants.START_ELEMENT :
 					switch(reader.getLocalName()) {
-						case "expression" :
+						case LegoXmlConstants.EXPRESSION :
 							discernible.setExpression(parseExpressionAndAllChildren(reader));
 							break;
 					}
 					break;
 				case XMLStreamConstants.END_ELEMENT :
 					switch(reader.getLocalName()) {
-						case "discernible" :
+						case LegoXmlConstants.DISCERNIBLE :
 							exit = true;
 							break;
 					}
@@ -255,14 +256,14 @@ public class LegoXmlParser {
 			switch (event) {
 				case XMLStreamConstants.START_ELEMENT :
 					switch(reader.getLocalName()) {
-						case "expression" :
+						case LegoXmlConstants.EXPRESSION :
 							qualifier.setExpression(parseExpressionAndAllChildren(reader));
 							break;
 					}
 					break;
 				case XMLStreamConstants.END_ELEMENT :
 					switch(reader.getLocalName()) {
-						case "qualifier" :
+						case LegoXmlConstants.QUALIFIER :
 							exit = true;
 							break;
 					}
@@ -287,17 +288,17 @@ public class LegoXmlParser {
 			switch (event) {
 				case XMLStreamConstants.START_ELEMENT :
 					switch(reader.getLocalName()) {
-						case "expression" :
+						case LegoXmlConstants.EXPRESSION :
 							value.setExpression(parseExpressionAndAllChildren(reader));
 							break;
-						case "measurement" :
+						case LegoXmlConstants.MEASUREMENT :
 							value.setMeasurement(parseMeasurementAndAllChildren(reader));
 							break;
 					}
 					break;
 				case XMLStreamConstants.END_ELEMENT :
 					switch(reader.getLocalName()) {
-						case "value" :
+						case LegoXmlConstants.VALUE :
 							exit = true;
 							break;
 					}
@@ -322,17 +323,17 @@ public class LegoXmlParser {
 			switch (event) {
 				case XMLStreamConstants.START_ELEMENT :
 					switch(reader.getLocalName()) {
-						case "concept" :
+						case LegoXmlConstants.CONCEPT :
 							expression.setConcept(parseConcept(reader));
 							break;
-						case "relation" :
+						case LegoXmlConstants.RELATION :
 							expression.addRelation(parseRelationAndAllChildren(reader));
 							break;
 					}
 					break;
 				case XMLStreamConstants.END_ELEMENT :
 					switch(reader.getLocalName()) {
-						case "expression" :
+						case LegoXmlConstants.EXPRESSION :
 							exit = true;
 							break;
 					}
@@ -357,17 +358,17 @@ public class LegoXmlParser {
 			switch (event) {
 				case XMLStreamConstants.START_ELEMENT :
 					switch(reader.getLocalName()) {
-					case "destination" :
+					case LegoXmlConstants.DESTINATION :
 						relation.setDestination(parseDestinationAndAllChildren(reader));
 						break;
-					case "type" :
+					case LegoXmlConstants.TYPE :
 						relation.setType(parseTypeAndAllChildren(reader));
 						break;
 				}
 					break;
 				case XMLStreamConstants.END_ELEMENT :
 					switch(reader.getLocalName()) {
-						case "relation" :
+						case LegoXmlConstants.RELATION :
 							exit = true;
 							break;
 				}
@@ -392,14 +393,14 @@ public class LegoXmlParser {
 			switch (event) {
 				case XMLStreamConstants.START_ELEMENT :
 					switch(reader.getLocalName()) {
-						case "concept" :
+						case LegoXmlConstants.CONCEPT :
 							type.setConcept(parseConcept(reader));
 						break;
 				}
 					break;
 				case XMLStreamConstants.END_ELEMENT :
 					switch(reader.getLocalName()) {
-						case "type" :
+						case LegoXmlConstants.TYPE :
 							exit = true;
 							break;
 				}
@@ -424,17 +425,17 @@ public class LegoXmlParser {
 			switch (event) {
 				case XMLStreamConstants.START_ELEMENT :
 					switch(reader.getLocalName()) {
-						case "expression" :
+						case LegoXmlConstants.EXPRESSION :
 							destination.setExpression(parseExpressionAndAllChildren(reader));
 							break;
-						case "measurement" :
+						case LegoXmlConstants.MEASUREMENT :
 							destination.setMeasurement(parseMeasurementAndAllChildren(reader));
 							break;
 						}
 					break;
 				case XMLStreamConstants.END_ELEMENT :
 					switch(reader.getLocalName()) {
-						case "destination" :
+						case LegoXmlConstants.DESTINATION :
 							exit = true;
 							break;
 					}
@@ -459,24 +460,20 @@ public class LegoXmlParser {
 			switch (event) {
 				case XMLStreamConstants.START_ELEMENT :
 					switch(reader.getLocalName()) {
-					case "units" :
+					case LegoXmlConstants.UNITS :
 						measurement.setUnits(parseUnitsAndAllChildren(reader));
 						break;
-					case "point" :
-						switch(reader.getLocalName()) {
-							case "point" :
-								measurement.setPoint(parsePointAndAllChildren(reader));
-								break;
-						}
+					case LegoXmlConstants.POINT :
+						measurement.setPoint(parsePointAndAllChildren(reader));
 						break;
-					case "bound" :
+					case LegoXmlConstants.BOUND :
 						measurement.setBound(parseBoundAndAllChildren(reader));
 						break;
 				}
 					break;
 				case XMLStreamConstants.END_ELEMENT :
 					switch(reader.getLocalName()) {
-						case "measurement" :
+						case LegoXmlConstants.MEASUREMENT :
 							exit = true;
 							break;
 				}
@@ -501,14 +498,14 @@ public class LegoXmlParser {
 			switch (event) {
 				case XMLStreamConstants.START_ELEMENT :
 					switch(reader.getLocalName()) {
-						case "concept" :
+						case LegoXmlConstants.CONCEPT :
 							units.setConcept(parseConcept(reader));
 							break;
 					}
 					break;
 				case XMLStreamConstants.END_ELEMENT :
 					switch(reader.getLocalName()) {
-						case "units" :
+						case LegoXmlConstants.UNITS :
 							exit = true;
 							break;
 				}
@@ -531,7 +528,7 @@ public class LegoXmlParser {
 		Point point = new Point();
 		
 		for(int index = 0;index < reader.getAttributeCount();index++) {
-			if ("type".equals(reader.getAttributeLocalName(index))) {
+			if (LegoXmlConstants.TYPE.equals(reader.getAttributeLocalName(index))) {
 				point.setType(reader.getAttributeValue(index));
 			}
 		}
@@ -546,7 +543,7 @@ public class LegoXmlParser {
 					break;
 				case XMLStreamConstants.END_ELEMENT :
 					switch(reader.getLocalName()) {
-						case "value" :
+						case LegoXmlConstants.VALUE :
 							point.setValue(tagContent);
 							exit = true;
 							break;
@@ -572,17 +569,17 @@ public class LegoXmlParser {
 			switch (event) {
 				case XMLStreamConstants.START_ELEMENT :
 					switch(reader.getLocalName()) {
-						case "bound" :
+						case LegoXmlConstants.BOUND :
 							timing.setBound(parseBoundAndAllChildren(reader));
 							break;
-						case "units" :
+						case LegoXmlConstants.UNITS :
 							timing.setUnits(parseUnitsAndAllChildren(reader));
 							break;
 				}
 					break;
 				case XMLStreamConstants.END_ELEMENT :
 					switch(reader.getLocalName()) {
-						case "timing" :
+						case LegoXmlConstants.TIMING :
 							exit = true;
 							break;
 				}
@@ -604,9 +601,9 @@ public class LegoXmlParser {
 		boolean exit = false;
 		
 		for(int index = 0;index < reader.getAttributeCount();index++) {
-			if ("lowerPointInclusive".equals(reader.getAttributeLocalName(index))) {
+			if (LegoXmlConstants.LOWER_POINT_INCLUSIVE.equals(reader.getAttributeLocalName(index))) {
 				bound.setLowerPointInclusive(reader.getAttributeValue(index));
-			} else if ("upperPointInclusive".equals(reader.getAttributeLocalName(index))) {
+			} else if (LegoXmlConstants.UPPER_POINT_INCLUSIVE.equals(reader.getAttributeLocalName(index))) {
 				bound.setUpperPointInclusive(reader.getAttributeValue(index));
 			}
 		}
@@ -616,10 +613,10 @@ public class LegoXmlParser {
 			switch (event) {
 				case XMLStreamConstants.START_ELEMENT :
 					switch(reader.getLocalName()) {
-					case "lowerPoint" :
+					case LegoXmlConstants.LOWER_POINT :
 						bound.setLowerPoint(parsePointAndAllChildren(reader));
 						break;
-					case "upperPoint" :
+					case LegoXmlConstants.UPPER_POINT :
 						bound.setUpperPoint(parsePointAndAllChildren(reader));
 						break;
 					}
@@ -628,7 +625,7 @@ public class LegoXmlParser {
 					break;
 				case XMLStreamConstants.END_ELEMENT :
 					switch(reader.getLocalName()) {
-					case "bound" :
+					case LegoXmlConstants.BOUND :
 						exit = true;
 						break;
 					}
@@ -654,7 +651,7 @@ public class LegoXmlParser {
 			switch (event) {
 				case XMLStreamConstants.START_ELEMENT :
 					switch(reader.getLocalName()) {
-					case "type" :
+					case LegoXmlConstants.TYPE :
 						assertionComponent.setType(parseTypeAndAllChildren(reader));
 						break;
 					}
@@ -664,10 +661,10 @@ public class LegoXmlParser {
 					break;
 				case XMLStreamConstants.END_ELEMENT :
 					switch(reader.getLocalName()) {
-						case "assertionUUID" :
+						case LegoXmlConstants.ASSERTION_UUID :
 							assertionComponent.setUuid(tagContent);
 							break;
-						case "assertionComponent" :
+						case LegoXmlConstants.ASSERTION_COMPONENT :
 							exit = true;
 							break;
 					}
@@ -686,11 +683,11 @@ public class LegoXmlParser {
 	public Concept parseConcept(final XMLStreamReader reader) throws XMLStreamException {
 		Concept concept = new Concept();
 		for(int index = 0;index < reader.getAttributeCount();index++) {
-			if ("uuid".equals(reader.getAttributeLocalName(index))) {
+			if (LegoXmlConstants.UUID.equals(reader.getAttributeLocalName(index))) {
 				concept.setUuid(reader.getAttributeValue(index));
-			} else if ("desc".equals(reader.getAttributeLocalName(index))) {
+			} else if (LegoXmlConstants.DESC.equals(reader.getAttributeLocalName(index))) {
 				concept.setDesc(reader.getAttributeValue(index));
-			} else if ("sctid".equals(reader.getAttributeLocalName(index))) {
+			} else if (LegoXmlConstants.SCTID.equals(reader.getAttributeLocalName(index))) {
 				concept.setSctid(reader.getAttributeValue(index));
 			}
 		}

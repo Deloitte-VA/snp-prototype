@@ -24,7 +24,25 @@ public class LegoXmlConstants {
 	public static final String DESTINATION = "destination";
 	public static final String QUALIFIER = "qualifier";
 	public static final String VALUE = "value";
-	public static final String measurement = "measurement";
+	public static final String MEASUREMENT = "measurement";
 	public static final String UNITS = "units";
 	public static final String POINT = "point";
+	public static final String STATUS = "status";
+	public static final String UUID = "uuid";
+	public static final String PATH = "path";
+	public static final String MODULE = "module";
+	public static final String AUTHOR = "author";
+	public static final String TIME = "time";
+	public static final String NAME = "name";
+	public static final String ID = "id";
+	public static final String TIMING = "timing";
+	public static final String ASSERTION_COMPONENT = "assertionComponent";
+	public static final String BOUND = "bound";
+	public static final String LOWER_POINT_INCLUSIVE = "lowerPointInclusive";
+	public static final String UPPER_POINT_INCLUSIVE = "upperPointInclusive";
+	public static final String LOWER_POINT = "lowerPoint";
+	public static final String UPPER_POINT = "upperPoint";
+	public static final String DESC = "desc";
+	public static final String SCTID = "sctid";
+	public static final String XSI = "xsi";
 }

@@ -82,27 +82,27 @@ public class LegoList {
 	public void writeLegosElem(final XMLStreamWriter xmlStreamWriter) throws XMLStreamException {
 		for(Lego lego : legos) {
 			//start lego element
-			xmlStreamWriter.writeStartElement("lego");
+			xmlStreamWriter.writeStartElement(LegoXmlConstants.LEGO);
 			//start legoUUID element
-			xmlStreamWriter.writeStartElement("legoUUID");
+			xmlStreamWriter.writeStartElement(LegoXmlConstants.LEGO_UUID);
 			xmlStreamWriter.writeCharacters(lego.getUuid());
 			//end legoUUID element
 			xmlStreamWriter.writeEndElement();			
 			Stamp stamp = lego.getStamp();
 			//start/end stamp element
-			xmlStreamWriter.writeEmptyElement("stamp");
-            xmlStreamWriter.writeAttribute("status", stamp.getStatus());
-            xmlStreamWriter.writeAttribute("time", stamp.getTime());
-            xmlStreamWriter.writeAttribute("author", stamp.getAuthor());
-            xmlStreamWriter.writeAttribute("module", stamp.getModule());
-            xmlStreamWriter.writeAttribute("path", stamp.getPath());
-            xmlStreamWriter.writeAttribute("uuid", stamp.getUuid());
+			xmlStreamWriter.writeEmptyElement(LegoXmlConstants.STAMP);
+            xmlStreamWriter.writeAttribute(LegoXmlConstants.STATUS, stamp.getStatus());
+            xmlStreamWriter.writeAttribute(LegoXmlConstants.TIME, stamp.getTime());
+            xmlStreamWriter.writeAttribute(LegoXmlConstants.AUTHOR, stamp.getAuthor());
+            xmlStreamWriter.writeAttribute(LegoXmlConstants.MODULE, stamp.getModule());
+            xmlStreamWriter.writeAttribute(LegoXmlConstants.PATH, stamp.getPath());
+            xmlStreamWriter.writeAttribute(LegoXmlConstants.UUID, stamp.getUuid());
 			Pncs pncs = lego.getPncs();
 			//start/end pncs element
-			xmlStreamWriter.writeEmptyElement("pncs");
-            xmlStreamWriter.writeAttribute("id", pncs.getId());
-            xmlStreamWriter.writeAttribute("name", pncs.getName());
-            xmlStreamWriter.writeAttribute("value", pncs.getValue());
+			xmlStreamWriter.writeEmptyElement(LegoXmlConstants.PNCS);
+            xmlStreamWriter.writeAttribute(LegoXmlConstants.ID, pncs.getId());
+            xmlStreamWriter.writeAttribute(LegoXmlConstants.NAME, pncs.getName());
+            xmlStreamWriter.writeAttribute(LegoXmlConstants.VALUE, pncs.getValue());
             
             writeAssertionElem(lego.getAssertion(), xmlStreamWriter);
             
@@ -110,7 +110,7 @@ public class LegoList {
             String commentStr = lego.getComment();            
             if(commentStr != null) {
             	//start comment element
-            	xmlStreamWriter.writeStartElement("comment");
+            	xmlStreamWriter.writeStartElement(LegoXmlConstants.COMMENT);
             	xmlStreamWriter.writeCharacters(lego.getComment());
                 //end comment element
             	xmlStreamWriter.writeEndElement();
@@ -129,9 +129,9 @@ public class LegoList {
 	 */
 	public void writeAssertionElem(final Assertion assertion, final XMLStreamWriter xmlStreamWriter) throws XMLStreamException {
 		//start assertion element
-		xmlStreamWriter.writeStartElement("assertion");
+		xmlStreamWriter.writeStartElement(LegoXmlConstants.ASSERTION);
 		//start assertionUUID element
-		xmlStreamWriter.writeStartElement("assertionUUID");
+		xmlStreamWriter.writeStartElement(LegoXmlConstants.ASSERTION_UUID);
 		xmlStreamWriter.writeCharacters(assertion.getUuid());
 		//end assertionUUID element
 		xmlStreamWriter.writeEndElement();
@@ -159,7 +159,7 @@ public class LegoList {
 	 */
 	public void writeDiscernibleElem(final Discernible discernible, final XMLStreamWriter xmlStreamWriter) throws XMLStreamException {
 		//start discernible element
-		xmlStreamWriter.writeStartElement("discernible");
+		xmlStreamWriter.writeStartElement(LegoXmlConstants.DISCERNIBLE);
 		writeExpressionElem(discernible.getExpression(), xmlStreamWriter);
 		//end discernible element
 		xmlStreamWriter.writeEndElement();	
@@ -173,7 +173,7 @@ public class LegoList {
 	 */
 	public void writeQualifierElem(final Qualifier qualifier, final XMLStreamWriter xmlStreamWriter) throws XMLStreamException {
 		//start qualifier element
-		xmlStreamWriter.writeStartElement("qualifier");
+		xmlStreamWriter.writeStartElement(LegoXmlConstants.QUALIFIER);
 		writeExpressionElem(qualifier.getExpression(), xmlStreamWriter);
 		//end qualifier element
 		xmlStreamWriter.writeEndElement();	
@@ -188,10 +188,10 @@ public class LegoList {
 	public void writeValueElem(final Value value, final XMLStreamWriter xmlStreamWriter) throws XMLStreamException {
 		if(value.getExpression() == null && value.getMeasurement() == null) {
 			//start/end value element
-			xmlStreamWriter.writeEmptyElement("value");
+			xmlStreamWriter.writeEmptyElement(LegoXmlConstants.VALUE);
 		} else {
 			//start value element
-			xmlStreamWriter.writeStartElement("value");
+			xmlStreamWriter.writeStartElement(LegoXmlConstants.VALUE);
 			//value element does not always have an expression element
 			if(value.getExpression() != null) {
 				writeExpressionElem(value.getExpression(), xmlStreamWriter);
@@ -214,20 +214,20 @@ public class LegoList {
 	 */
 	public void writeExpressionElem(final Expression expression, final XMLStreamWriter xmlStreamWriter) throws XMLStreamException {
 		//start expression element
-		xmlStreamWriter.writeStartElement("expression");
+		xmlStreamWriter.writeStartElement(LegoXmlConstants.EXPRESSION);
 		Concept concept = expression.getConcept();
 		//start/end concpet element
-		xmlStreamWriter.writeEmptyElement("concept");
+		xmlStreamWriter.writeEmptyElement(LegoXmlConstants.CONCEPT);
 		if(concept.getSctid() != null) {
-			 xmlStreamWriter.writeAttribute("sctid", concept.getSctid());
+			 xmlStreamWriter.writeAttribute(LegoXmlConstants.SCTID, concept.getSctid());
 		}
        
 		if(concept.getUuid() != null) {
-			xmlStreamWriter.writeAttribute("uuid", concept.getUuid());
+			xmlStreamWriter.writeAttribute(LegoXmlConstants.UUID, concept.getUuid());
 		}
         
 		if(concept.getDesc() != null) {
-			xmlStreamWriter.writeAttribute("desc", concept.getDesc());
+			xmlStreamWriter.writeAttribute(LegoXmlConstants.DESC, concept.getDesc());
 		}        
         
         writeRelationElem(expression.getRelations(), xmlStreamWriter);
@@ -244,17 +244,17 @@ public class LegoList {
 	 */
 	public void writeMeasurementElem(final Measurement measurement, final XMLStreamWriter xmlStreamWriter) throws XMLStreamException {
 		//start measurement element
-		xmlStreamWriter.writeStartElement("measurement");
+		xmlStreamWriter.writeStartElement(LegoXmlConstants.MEASUREMENT);
 		//measurement element does not always have a units element
 		Units units = measurement.getUnits();
 		if(units != null) {
 			//start units element
-			xmlStreamWriter.writeStartElement("units");
+			xmlStreamWriter.writeStartElement(LegoXmlConstants.UNITS);
 			//start/end concept element
-			xmlStreamWriter.writeEmptyElement("concept");
-	        xmlStreamWriter.writeAttribute("sctid", units.getConcept().getSctid());
-	        xmlStreamWriter.writeAttribute("uuid", units.getConcept().getUuid());
-	        xmlStreamWriter.writeAttribute("desc", units.getConcept().getDesc());
+			xmlStreamWriter.writeEmptyElement(LegoXmlConstants.CONCEPT);
+	        xmlStreamWriter.writeAttribute(LegoXmlConstants.SCTID, units.getConcept().getSctid());
+	        xmlStreamWriter.writeAttribute(LegoXmlConstants.UUID, units.getConcept().getUuid());
+	        xmlStreamWriter.writeAttribute(LegoXmlConstants.DESC, units.getConcept().getDesc());
 			//end units element
 			xmlStreamWriter.writeEndElement();
 		}
@@ -263,10 +263,10 @@ public class LegoList {
 		//measurement element does not always have a point element
 		if(point != null) {
 			//start point element
-			xmlStreamWriter.writeStartElement("point");
-			xmlStreamWriter.writeAttribute("xsi", "", "type", point.getType());
+			xmlStreamWriter.writeStartElement(LegoXmlConstants.POINT);
+			xmlStreamWriter.writeAttribute(LegoXmlConstants.XSI, "", LegoXmlConstants.TYPE, point.getType());
 			//start value element
-			xmlStreamWriter.writeStartElement("value");
+			xmlStreamWriter.writeStartElement(LegoXmlConstants.VALUE);
 			xmlStreamWriter.writeCharacters(point.getValue());
 			//end value element
 			xmlStreamWriter.writeEndElement();
@@ -293,19 +293,19 @@ public class LegoList {
 	public void writeRelationElem(final List<Relation> relations, final XMLStreamWriter xmlStreamWriter) throws XMLStreamException {
 		for(Relation relation : relations) {
 			//start relation element
-			xmlStreamWriter.writeStartElement("relation");
+			xmlStreamWriter.writeStartElement(LegoXmlConstants.RELATION);
 			//start type element
-			xmlStreamWriter.writeStartElement("type");
+			xmlStreamWriter.writeStartElement(LegoXmlConstants.TYPE);
 			Type type = relation.getType();
 			//start/end concept element			
-			xmlStreamWriter.writeEmptyElement("concept");
-	        xmlStreamWriter.writeAttribute("sctid", type.getConcept().getSctid());
-	        xmlStreamWriter.writeAttribute("uuid", type.getConcept().getUuid());
-	        xmlStreamWriter.writeAttribute("desc", type.getConcept().getDesc());
+			xmlStreamWriter.writeEmptyElement(LegoXmlConstants.CONCEPT);
+	        xmlStreamWriter.writeAttribute(LegoXmlConstants.SCTID, type.getConcept().getSctid());
+	        xmlStreamWriter.writeAttribute(LegoXmlConstants.UUID, type.getConcept().getUuid());
+	        xmlStreamWriter.writeAttribute(LegoXmlConstants.DESC, type.getConcept().getDesc());
 			//end type element
 			xmlStreamWriter.writeEndElement();
 			//start destination element
-			xmlStreamWriter.writeStartElement("destination");
+			xmlStreamWriter.writeStartElement(LegoXmlConstants.DESTINATION);
 			Expression expression = relation.getDestination().getExpression();
 			if(expression != null) {
 				writeExpressionElem(expression, xmlStreamWriter);
@@ -313,22 +313,22 @@ public class LegoList {
 			Measurement measurement = relation.getDestination().getMeasurement();
 			if(measurement != null) {
 				//start measurement element
-				xmlStreamWriter.writeStartElement("measurement");
+				xmlStreamWriter.writeStartElement(LegoXmlConstants.MEASUREMENT);
 				Units units = measurement.getUnits();
 				//start units element			
-				xmlStreamWriter.writeStartElement("units");
+				xmlStreamWriter.writeStartElement(LegoXmlConstants.UNITS);
 				//start/end concept element			
-				xmlStreamWriter.writeEmptyElement("concept");
-		        xmlStreamWriter.writeAttribute("sctid", units.getConcept().getSctid());
-		        xmlStreamWriter.writeAttribute("uuid", units.getConcept().getUuid());
-		        xmlStreamWriter.writeAttribute("desc", units.getConcept().getDesc());
+				xmlStreamWriter.writeEmptyElement(LegoXmlConstants.CONCEPT);
+		        xmlStreamWriter.writeAttribute(LegoXmlConstants.SCTID, units.getConcept().getSctid());
+		        xmlStreamWriter.writeAttribute(LegoXmlConstants.UUID, units.getConcept().getUuid());
+		        xmlStreamWriter.writeAttribute(LegoXmlConstants.DESC, units.getConcept().getDesc());
 				//end units element
 		        xmlStreamWriter.writeEndElement();
 		        //start point element			
-				xmlStreamWriter.writeStartElement("point");
-				xmlStreamWriter.writeAttribute("xsi", "", "type", measurement.getPoint().getType());
+				xmlStreamWriter.writeStartElement(LegoXmlConstants.POINT);
+				xmlStreamWriter.writeAttribute(LegoXmlConstants.XSI, "", LegoXmlConstants.TYPE, measurement.getPoint().getType());
 				//start value element			
-				xmlStreamWriter.writeStartElement("value");
+				xmlStreamWriter.writeStartElement(LegoXmlConstants.VALUE);
 				xmlStreamWriter.writeCharacters(measurement.getPoint().getValue());
 				//end value element
 				xmlStreamWriter.writeEndElement();
@@ -352,18 +352,18 @@ public class LegoList {
 	 */
 	public void writeTimingElem(final Timing timing, final XMLStreamWriter xmlStreamWriter) throws XMLStreamException {
 		//start timing element
-		xmlStreamWriter.writeStartElement("timing");
+		xmlStreamWriter.writeStartElement(LegoXmlConstants.TIMING);
 		
 		//timing element does not always have a units element
 		Units units = timing.getUnits();
 		if(units != null) {
 			//start units element
-			xmlStreamWriter.writeStartElement("units");
+			xmlStreamWriter.writeStartElement(LegoXmlConstants.UNITS);
 			//start/end concept element
-			xmlStreamWriter.writeEmptyElement("concept");
-			xmlStreamWriter.writeAttribute("sctid", units.getConcept().getSctid());
-			xmlStreamWriter.writeAttribute("uuid", units.getConcept().getUuid());
-			xmlStreamWriter.writeAttribute("desc", units.getConcept().getDesc());
+			xmlStreamWriter.writeEmptyElement(LegoXmlConstants.CONCEPT);
+			xmlStreamWriter.writeAttribute(LegoXmlConstants.SCTID, units.getConcept().getSctid());
+			xmlStreamWriter.writeAttribute(LegoXmlConstants.UUID, units.getConcept().getUuid());
+			xmlStreamWriter.writeAttribute(LegoXmlConstants.DESC, units.getConcept().getDesc());
 			//end units element
 			xmlStreamWriter.writeEndElement();
 		}
@@ -386,22 +386,22 @@ public class LegoList {
 	 */
 	public void writeBoundElem(final Bound bound,  final XMLStreamWriter xmlStreamWriter) throws XMLStreamException {
 		//start bound element
-		xmlStreamWriter.writeStartElement("bound");
+		xmlStreamWriter.writeStartElement(LegoXmlConstants.BOUND);
 		String lowerPointInclusive = bound.getLowerPointInclusive();
 		if(lowerPointInclusive != null) {
-			xmlStreamWriter.writeAttribute("lowerPointInclusive", lowerPointInclusive);
+			xmlStreamWriter.writeAttribute(LegoXmlConstants.LOWER_POINT_INCLUSIVE, lowerPointInclusive);
 		}
 		String upperPointInclusive = bound.getUpperPointInclusive();
 		if(upperPointInclusive != null) {
-			xmlStreamWriter.writeAttribute("upperPointInclusive", upperPointInclusive);
+			xmlStreamWriter.writeAttribute(LegoXmlConstants.UPPER_POINT_INCLUSIVE, upperPointInclusive);
 		}
 		Point lowerPoint = bound.getLowerPoint();
 		if(lowerPoint != null) {
 			//start lowerPoint element
-			xmlStreamWriter.writeStartElement("lowerPoint");
-			xmlStreamWriter.writeAttribute("xsi", "", "type", lowerPoint.getType());
+			xmlStreamWriter.writeStartElement(LegoXmlConstants.LOWER_POINT);
+			xmlStreamWriter.writeAttribute(LegoXmlConstants.XSI, "", LegoXmlConstants.TYPE, lowerPoint.getType());
 			//start value element
-			xmlStreamWriter.writeStartElement("value");
+			xmlStreamWriter.writeStartElement(LegoXmlConstants.VALUE);
 			xmlStreamWriter.writeCharacters(lowerPoint.getValue());
 			//end value element
 			xmlStreamWriter.writeEndElement();
@@ -412,10 +412,10 @@ public class LegoList {
 		Point upperPoint = bound.getUpperPoint();
 		if(upperPoint != null) {
 			//start upperPoint element
-			xmlStreamWriter.writeStartElement("upperPoint");
-			xmlStreamWriter.writeAttribute("xsi", "", "type", upperPoint.getType());
+			xmlStreamWriter.writeStartElement(LegoXmlConstants.UPPER_POINT);
+			xmlStreamWriter.writeAttribute(LegoXmlConstants.XSI, "", LegoXmlConstants.TYPE, upperPoint.getType());
 			//start value element
-			xmlStreamWriter.writeStartElement("value");
+			xmlStreamWriter.writeStartElement(LegoXmlConstants.VALUE);
 			xmlStreamWriter.writeCharacters(upperPoint.getValue());
 			//end value element
 			xmlStreamWriter.writeEndElement();
@@ -437,20 +437,20 @@ public class LegoList {
 			throws XMLStreamException {
 		for(AssertionComponent assertionComponent : assertionComponents) {
 			//start assertionComponent element
-			xmlStreamWriter.writeStartElement("assertionComponent");
+			xmlStreamWriter.writeStartElement(LegoXmlConstants.ASSERTION_COMPONENT);
 			//start assertionUUID element
-			xmlStreamWriter.writeStartElement("assertionUUID");
+			xmlStreamWriter.writeStartElement(LegoXmlConstants.ASSERTION_UUID);
 			xmlStreamWriter.writeCharacters(assertionComponent.getUuid());
 			//end assertionUUID element
 			xmlStreamWriter.writeEndElement();
 			//start type element
-			xmlStreamWriter.writeStartElement("type");
+			xmlStreamWriter.writeStartElement(LegoXmlConstants.TYPE);
 			Type type = assertionComponent.getType();
 			//start/end concept element			
-			xmlStreamWriter.writeEmptyElement("concept");
-			xmlStreamWriter.writeAttribute("sctid", type.getConcept().getSctid());
-			xmlStreamWriter.writeAttribute("uuid", type.getConcept().getUuid());
-			xmlStreamWriter.writeAttribute("desc", type.getConcept().getDesc());
+			xmlStreamWriter.writeEmptyElement(LegoXmlConstants.CONCEPT);
+			xmlStreamWriter.writeAttribute(LegoXmlConstants.SCTID, type.getConcept().getSctid());
+			xmlStreamWriter.writeAttribute(LegoXmlConstants.UUID, type.getConcept().getUuid());
+			xmlStreamWriter.writeAttribute(LegoXmlConstants.DESC, type.getConcept().getDesc());
 			//end type element
 			xmlStreamWriter.writeEndElement();
 			//end assertionComponent element
@@ -489,27 +489,27 @@ public class LegoList {
 			XMLOutputFactory outputFactory = XMLOutputFactory.newFactory();
 			xmlStreamWriter = outputFactory.createXMLStreamWriter(stringWriter);			
 			//start legoList element
-			xmlStreamWriter.writeStartElement("legoList");
+			xmlStreamWriter.writeStartElement(LegoXmlConstants.LEGO_LIST);
 			xmlStreamWriter.writeNamespace("xsi", "http://www.w3.org/2001/XMLSchema-instance");
 			xmlStreamWriter.writeAttribute("xsi", "http://www.w3.org/2001/XMLSchema-instance",
 					"noNamespaceSchemaLocation", "LEGO.xsd");
 			//start groupName element
-			xmlStreamWriter.writeStartElement("groupName");
+			xmlStreamWriter.writeStartElement(LegoXmlConstants.GROUP_NAME);
 			xmlStreamWriter.writeCharacters(groupName);
 			//end groupName element
 			xmlStreamWriter.writeEndElement();
 			//start legoListUUID element
-			xmlStreamWriter.writeStartElement("legoListUUID");
+			xmlStreamWriter.writeStartElement(LegoXmlConstants.LEGO_LIST_UUID);
 			xmlStreamWriter.writeCharacters(uuid);
 			//end legoListUUID element
 			xmlStreamWriter.writeEndElement();
 			//start groupDescription element
-			xmlStreamWriter.writeStartElement("groupDescription");
+			xmlStreamWriter.writeStartElement(LegoXmlConstants.GROUP_DESCRIPTION);
 			xmlStreamWriter.writeCharacters(groupDescription);
 			//end groupDescription element
 			xmlStreamWriter.writeEndElement();
 			//start comment element
-			xmlStreamWriter.writeStartElement("comment");
+			xmlStreamWriter.writeStartElement(LegoXmlConstants.COMMENT);
 			xmlStreamWriter.writeCharacters(comment.trim());
 			//end comment element
 			xmlStreamWriter.writeEndElement();			
