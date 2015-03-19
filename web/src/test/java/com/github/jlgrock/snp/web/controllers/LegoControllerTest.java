@@ -4,6 +4,10 @@ import com.github.jlgrock.snp.web.ApplicationConfig;
 import com.github.jlgrock.snp.web.ApplicationObjectMapper;
 import org.glassfish.jersey.client.ClientConfig;
 import org.glassfish.jersey.jackson.JacksonFeature;
+import org.glassfish.jersey.test.JerseyTestNg;
+import org.glassfish.jersey.test.TestProperties;
+import org.mockito.MockitoAnnotations;
+import org.testng.annotations.BeforeMethod;
 
 import javax.ws.rs.core.Application;
 
