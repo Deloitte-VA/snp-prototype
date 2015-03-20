@@ -38,10 +38,7 @@ public class EncounterController {
     @Produces(MediaType.APPLICATION_JSON)
     public Encounter getEncounter(@PathParam("id") final Long id) {
         LOGGER.debug("getting encounter");
-        Encounter encounter = new Encounter();
-        encounter.setId(1L);
-        return encounter;
-//        return repository.findOne(id);
+        return repository.findOne(id);
     }
     
     
