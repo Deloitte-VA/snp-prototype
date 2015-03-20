@@ -1,4 +1,4 @@
 /**
  * Contains all integration testing for the SNP Prototype
  */
-package com.github.jlgrock.integration;
+package com.github.jlgrock.snp.integration;
