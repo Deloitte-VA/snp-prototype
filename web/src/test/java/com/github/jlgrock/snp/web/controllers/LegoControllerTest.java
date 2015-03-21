@@ -5,6 +5,8 @@ import com.github.jlgrock.snp.web.configuration.ApplicationConfig;
 import com.github.jlgrock.snp.web.configuration.ApplicationObjectMapper;
 import com.github.jlgrock.snp.web.configuration.JacksonConfig;
 import io.dropwizard.jersey.jackson.JacksonMessageBodyProvider;
+import org.glassfish.hk2.api.Factory;
+import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import org.glassfish.jersey.client.ClientConfig;
 import org.glassfish.jersey.media.multipart.FormDataBodyPart;
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
@@ -13,6 +15,8 @@ import org.glassfish.jersey.media.multipart.MultiPartFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTestNg;
 import org.glassfish.jersey.test.TestProperties;
+import org.jvnet.testing.hk2testng.HK2;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.testng.Assert;
@@ -28,13 +32,23 @@ import javax.ws.rs.core.Response;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Path;
 
-/**
- *
- */
+@HK2(populate = false)
 public class LegoControllerTest extends JerseyTestNg.ContainerPerClassTest {
 
-    final WebConfiguration webConfiguration = Mockito.mock(WebConfiguration.class);
+    WebConfiguration webconfiguration = new WebConfiguration() {
+        @Override
+        public Path fileLocation() {
+            return Mockito.mock(Path.class);
+        }
+    };
+
+    @Mock
+    Path path;
+
+    @Mock
+    MultiPartFileUtils multiPartFileUtils;
 
     @BeforeMethod
     public void setUpTests() throws Exception {
@@ -56,7 +70,40 @@ public class LegoControllerTest extends JerseyTestNg.ContainerPerClassTest {
         enable(TestProperties.DUMP_ENTITY);
 
         ResourceConfig application = ApplicationConfig.createApp();
-        //application.register(webConfiguration);
+
+        // register the WebConfiguration in HK2
+        application.registerInstances(new AbstractBinder() {
+            @Override
+            protected void configure() {
+                bindFactory(new Factory<WebConfiguration>() {
+                    @Override
+                    public WebConfiguration provide() {
+                        return webconfiguration;
+                    }
+
+                    @Override
+                    public void dispose(WebConfiguration instance) {
+                    }
+                }).to(WebConfiguration.class);
+            }
+        });
+
+        // register the WebConfiguration in HK2
+        application.registerInstances(new AbstractBinder() {
+            @Override
+            protected void configure() {
+                bindFactory(new Factory<MultiPartFileUtils>() {
+                    @Override
+                    public MultiPartFileUtils provide() {
+                        return multiPartFileUtils;
+                    }
+
+                    @Override
+                    public void dispose(MultiPartFileUtils instance) {
+                    }
+                }).to(MultiPartFileUtils.class);
+            }
+        });
 
         //return all of the rest endpoints
         return application;
@@ -80,6 +127,10 @@ public class LegoControllerTest extends JerseyTestNg.ContainerPerClassTest {
         final Entity<FormDataMultiPart> form = Entity.entity(mp, MediaType.MULTIPART_FORM_DATA_TYPE);
         final Response response = target.request().post(form);
 
+        // Verify that this writes to disk
+        Mockito.verify(multiPartFileUtils).writeToFile(Mockito.any(), Mockito.any());
+
+        //Verify the "OK" return type
         Assert.assertEquals(response.getStatus(), 200);
     }
 

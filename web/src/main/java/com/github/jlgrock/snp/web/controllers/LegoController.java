@@ -46,7 +46,7 @@ public class LegoController {
         // save it
         multipartFileUtils.writeToFile(fileInputStream, uploadedFileLocation);
 
-        LOGGER.debug("File uploaded to : " + uploadedFileLocation.toAbsolutePath());
+        LOGGER.debug("File uploaded to : " + uploadedFileLocation);
 
         //TODO this is where we add the connection to the XML parser
 
