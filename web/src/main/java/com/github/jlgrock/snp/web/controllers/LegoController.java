@@ -1,73 +1,56 @@
 package com.github.jlgrock.snp.web.controllers;
 
+import com.github.jlgrock.snp.apis.connection.configuration.WebConfiguration;
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
-import java.nio.file.Paths;
 
 /**
  *
  */
 @Path("/lego")
-public class LegoController extends JerseyTestNg.ContainerPerClassTest {
+public class LegoController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(LegoController.class);
+
+    private MultiPartFileUtils multipartFileUtils;
+
+    private WebConfiguration webConfiguration;
+
+    @Inject
+    public LegoController(final WebConfiguration webConfigurationIn, final MultiPartFileUtils multipartFileUtilsIn) {
+        webConfiguration = webConfigurationIn;
+        multipartFileUtils = multipartFileUtilsIn;
+    }
 
     @POST
     @Path("/upload")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     public Response uploadFile(
-            @FormDataParam("file") InputStream uploadedInputStream,
-            @FormDataParam("file") FormDataContentDisposition fileDetail) {
+            @FormDataParam("file") InputStream fileInputStream,
+            @FormDataParam("file") FormDataContentDisposition formDataContentDisposition) {
+        LOGGER.debug("fileInputStream provided?=[{}], formDataContentDisposition provided?=[{}]", (fileInputStream != null), (formDataContentDisposition != null));
+        LOGGER.debug("fileInputStream={}, fileName={}", fileInputStream, formDataContentDisposition.getFileName());
 
-        String uploadedFileLocation = "d://uploaded/" + fileDetail.getFileName();
+        java.nio.file.Path uploadedFileLocation = webConfiguration.fileLocation().resolve(formDataContentDisposition.getFileName());
 
         // save it
-        writeToFile(uploadedInputStream, uploadedFileLocation);
+        multipartFileUtils.writeToFile(fileInputStream, uploadedFileLocation);
 
-        String output = "File uploaded to : " + uploadedFileLocation;
+        LOGGER.debug("File uploaded to : " + uploadedFileLocation.toAbsolutePath());
 
-        return Response.status(200).entity(output).build();
+        //TODO this is where we add the connection to the XML parser
 
+        return Response.ok().build();
     }
 
-    /**
-     * Save the uploaded file to new location
-     */
-    private void writeToFile(final InputStream uploadedInputStream,
-                             final String uploadedFileLocation) {
-
-        try {
-            int read = 0;
-            byte[] bytes = new byte[1024];
-
-            OutputStream out = new FileOutputStream(Paths.get(uploadedFileLocation).toFile());
-            while ((read = uploadedInputStream.read(bytes)) != -1) {
-                out.write(bytes, 0, read);
-            }
-            out.flush();
-            out.close();
-        } catch (IOException e) {
-            LOGGER.error(e.getMessage(), e);
-        }
-
-    }
-
-    @POST
-    @Path("/")
-    @Consumes(MediaType.TEXT_XML)
-    public String consume(@FormDataParam("part") String s) {
-        return s;
-    }
 }

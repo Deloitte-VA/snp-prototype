@@ -1,6 +1,6 @@
 package com.github.jlgrock.snp.core.defaultconfig;
 
-import com.github.jlgrock.snp.apis.connection.MongoDbConfiguration;
+import com.github.jlgrock.snp.apis.connection.configuration.MongoDbConfiguration;
 import com.mongodb.MongoCredential;
 import com.mongodb.ServerAddress;
 import org.jvnet.hk2.annotations.Service;

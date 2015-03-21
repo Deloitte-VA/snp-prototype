@@ -1,7 +1,7 @@
 package com.github.jlgrock.snp.integration.connection;
 
 import com.github.jlgrock.snp.apis.connection.MongoDatabaseManager;
-import com.github.jlgrock.snp.apis.connection.MongoDbConfiguration;
+import com.github.jlgrock.snp.apis.connection.configuration.MongoDbConfiguration;
 import com.github.jlgrock.snp.apis.connection.synchronization.TransactionSynchronizationManager;
 import com.github.jlgrock.snp.core.connection.SimpleMongoDbFactory;
 import com.mongodb.DB;

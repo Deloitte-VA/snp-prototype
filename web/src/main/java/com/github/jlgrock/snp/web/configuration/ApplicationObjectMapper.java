@@ -1,4 +1,4 @@
-package com.github.jlgrock.snp.web;
+package com.github.jlgrock.snp.web.configuration;
 
 import com.fasterxml.jackson.databind.AnnotationIntrospector;
 import com.fasterxml.jackson.databind.DeserializationFeature;

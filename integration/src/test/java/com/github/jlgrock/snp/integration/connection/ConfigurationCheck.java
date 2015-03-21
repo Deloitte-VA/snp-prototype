@@ -1,6 +1,6 @@
 package com.github.jlgrock.snp.integration.connection;
 
-import com.github.jlgrock.snp.apis.connection.MongoDbConfiguration;
+import com.github.jlgrock.snp.apis.connection.configuration.MongoDbConfiguration;
 import org.glassfish.hk2.api.ServiceLocator;
 import org.glassfish.hk2.utilities.ServiceLocatorUtilities;
 import org.slf4j.Logger;
