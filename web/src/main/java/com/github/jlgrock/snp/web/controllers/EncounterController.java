@@ -1,13 +1,17 @@
 package com.github.jlgrock.snp.web.controllers;
 
+import com.github.jlgrock.snp.core.data.EncounterRepository;
 import com.github.jlgrock.snp.core.domain.Encounter;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
 /**
  * The Controller serving up domain objects for Encounter objects.
@@ -18,32 +22,23 @@ public class EncounterController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(EncounterController.class);
    
-//    private final EncounterRepository repository;
+    private final EncounterRepository repository;
 
-//    @Inject
-//    EncounterController(final EncounterRepository repositoryIn) {
-//        repository = repositoryIn;
-//    }
-
-    @GET
-    public String index() {
-        return "Hello";
+    @Inject
+    EncounterController(final EncounterRepository repositoryIn) {
+        repository = repositoryIn;
     }
 
     /**
-     * 
+     * Returns the encounter for the respective <code>id</code>.
      * @param id encounter id used for search
      * @return returns an encounter
      */
     @GET @Path("/{id}")
-    @Produces("application/json")
+    @Produces(MediaType.APPLICATION_JSON)
     public Encounter getEncounter(@PathParam("id") final Long id) {
         LOGGER.debug("getting encounter");
-        Encounter encounter = new Encounter();
-        encounter.setId(1l);
-        return encounter;
-        //return "{\"encounter\": \"example\", \"id\":" + id + "}";
-//        return repository.findOne(id);
+        return repository.findOne(id);
     }
     
     

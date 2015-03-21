@@ -1,53 +1,121 @@
 package com.github.jlgrock.snp.web.controllers;
 
-import com.github.jlgrock.snp.core.converters.PCEWriteConverter;
-import com.github.jlgrock.snp.core.domain.PCE;
-import com.github.jlgrock.snp.web.ApplicationConfig;
-import com.github.jlgrock.snp.web.ApplicationObjectMapper;
-import org.glassfish.jersey.client.ClientConfig;
-import org.glassfish.jersey.jackson.JacksonFeature;
-import org.glassfish.jersey.test.JerseyTestNg;
-import org.glassfish.jersey.test.TestProperties;
+import static org.testng.Assert.assertEquals;
+
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.Spy;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import javax.ws.rs.core.Application;
-
-import static org.testng.Assert.assertEquals;
+import com.github.jlgrock.snp.apis.data.Page;
+import com.github.jlgrock.snp.apis.data.Pageable;
+import com.github.jlgrock.snp.apis.data.Sort;
+import com.github.jlgrock.snp.core.data.PceRepository;
+import com.github.jlgrock.snp.core.domain.PCE;
 
 /**
  *
  */
-public class PCEControllerTest extends JerseyTestNg.ContainerPerClassTest {
+public class PCEControllerTest {
+	
+	@Mock
+	PCE pce;
+	
+	@Spy
+	PceRepository pceRepo = new PceRepository() {
+		
+		@Override
+		public <S extends PCE> Iterable<S> save(Iterable<S> entities) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+		
+		@Override
+		public <S extends PCE> PCE save(S entity) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+		
+		@Override
+		public PCE findOne(Long id) {
+			pce.setId(id);
+			return pce;
+		}
+		
+		@Override
+		public Iterable<PCE> findAll(Iterable<Long> ids) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+		
+		@Override
+		public Iterable<PCE> findAll() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+		
+		@Override
+		public Page<PCE> findAll(Pageable pageable) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+		
+		@Override
+		public Iterable<PCE> findAll(Sort sort) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+		
+		@Override
+		public boolean exists(Long id) {
+			// TODO Auto-generated method stub
+			return false;
+		}
+		
+		@Override
+		public void deleteById(Long id) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+		@Override
+		public void deleteAll() {
+			// TODO Auto-generated method stub
+			
+		}
+		
+		@Override
+		public void delete(Iterable<? extends PCE> entities) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+		@Override
+		public void delete(PCE entity) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+		@Override
+		public long count() {
+			// TODO Auto-generated method stub
+			return 0;
+		}
+	};
+	
+	PceController pceCntlr = new PceController(pceRepo);
+	
     @BeforeMethod
     public void setUp() throws Exception {
         // Required to make this work on TestNG
         MockitoAnnotations.initMocks(this);
     }
-
-    @Override
-    protected void configureClient(ClientConfig config) {
-        config.register(new JacksonFeature()).register(ApplicationObjectMapper.class);
-    }
-
-    @Override
-    protected Application configure() {
-        enable(TestProperties.LOG_TRAFFIC);
-        enable(TestProperties.DUMP_ENTITY);
-
-        //return all of the rest endpoints
-        return ApplicationConfig.createApp();
-    }
-
+    
     @Test
-    public void testFindById() {
-        final Long id = 1l;
-        final PCE p = new PCE();
-        p.setId(id);
-        p.setDesc("bla");
-        final String response = target("pce/" + id).request().get(String.class);
-        final String converted = new PCEWriteConverter().convert(p).toString();
-        assertEquals(converted, response);
+    public void testGetPce() {
+    	PCE actual = pceCntlr.getPce(pce.getId());
+
+    	assertEquals(actual, pce);
     }
 }

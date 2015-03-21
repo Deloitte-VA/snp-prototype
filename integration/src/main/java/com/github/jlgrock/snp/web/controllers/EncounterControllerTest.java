@@ -3,14 +3,25 @@ package com.github.jlgrock.snp.web.controllers;
 import com.github.jlgrock.snp.apis.data.Page;
 import com.github.jlgrock.snp.apis.data.Pageable;
 import com.github.jlgrock.snp.apis.data.Sort;
+import com.github.jlgrock.snp.core.converters.EncounterWriteConverter;
+import com.github.jlgrock.snp.core.converters.ObservationWriteConverter;
 import com.github.jlgrock.snp.core.data.EncounterRepository;
 import com.github.jlgrock.snp.core.domain.Encounter;
-import org.mockito.Mock;
+import com.github.jlgrock.snp.web.ApplicationConfig;
+import com.github.jlgrock.snp.web.ApplicationObjectMapper;
+
+import org.glassfish.jersey.client.ClientConfig;
+import org.glassfish.jersey.jackson.JacksonFeature;
+import org.glassfish.jersey.test.JerseyTestNg;
+import org.glassfish.jersey.test.TestProperties;
 import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import javax.ws.rs.core.Application;
+
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -18,10 +29,7 @@ import static org.testng.Assert.assertEquals;
 /**
  *
  */
-public class EncounterControllerTest {
-	
-	@Mock
-	Encounter encounter;	
+public class EncounterControllerTest extends JerseyTestNg.ContainerPerClassTest {
 	
 	@Spy
 	EncounterRepository encntrRepo = new EncounterRepository() {
@@ -40,6 +48,7 @@ public class EncounterControllerTest {
 		
 		@Override
 		public Encounter findOne(Long id) {
+			Encounter encounter = new Encounter();
 	        encounter.setId(id);
 	        return encounter;
 		}
@@ -119,13 +128,38 @@ public class EncounterControllerTest {
         MockitoAnnotations.initMocks(this);
         
     }
-    
-    @Test
-    public void testGetEncounter() {
-    	Encounter actual = encntrCntlr.getEncounter(encounter.getId());
 
-    	assertEquals(actual, encounter);
+    @Override
+    protected void configureClient(ClientConfig config) {
+        config.register(new JacksonFeature()).register(ApplicationObjectMapper.class);
     }
 
+    @Override
+    protected Application configure() {
+        enable(TestProperties.LOG_TRAFFIC);
+        enable(TestProperties.DUMP_ENTITY);
+
+        //return all of the rest endpoints
+        return ApplicationConfig.createApp();
+    }
+
+    @Test
+    public void testFindById() {
+        final Long id = 1L;
+//        final Long patientId = 2l;
+//        final int type = 9;
+//        final String reason = "stuff";
+//        final Encounter e = new Encounter();
+//        e.setId(id);
+//        e.setDate(LocalDate.now());
+//        e.setPatientId(patientId);
+//        e.setReasonForVisit(reason);
+//        e.setType(type);
+        final String response = target("encounter/" + id).request().get(String.class);
+//        final String converted = new EncounterWriteConverter(mock(ObservationWriteConverter.class)).
+//                convert(e).toString();
+        final String converted = "{\r\n  \"id\" : 1,\r\n  \"patientId\" : null,\r\n  \"date\" : null,\r\n  \"type\" : null,\r\n  \"reasonForVisit\" : null,\r\n  \"observations\" : null\r\n}";
+        assertEquals(response, converted);
+    }
 }
 
