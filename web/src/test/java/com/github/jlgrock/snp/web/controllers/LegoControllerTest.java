@@ -1,12 +1,11 @@
 package com.github.jlgrock.snp.web.controllers;
 
 import com.github.jlgrock.snp.apis.connection.configuration.WebConfiguration;
+import com.github.jlgrock.snp.apis.hk2.SimpleBinder;
 import com.github.jlgrock.snp.web.configuration.ApplicationConfig;
 import com.github.jlgrock.snp.web.configuration.ApplicationObjectMapper;
 import com.github.jlgrock.snp.web.configuration.JacksonConfig;
 import io.dropwizard.jersey.jackson.JacksonMessageBodyProvider;
-import org.glassfish.hk2.api.Factory;
-import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import org.glassfish.jersey.client.ClientConfig;
 import org.glassfish.jersey.media.multipart.FormDataBodyPart;
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
@@ -71,39 +70,9 @@ public class LegoControllerTest extends JerseyTestNg.ContainerPerClassTest {
 
         ResourceConfig application = ApplicationConfig.createApp();
 
-        // register the WebConfiguration in HK2
-        application.registerInstances(new AbstractBinder() {
-            @Override
-            protected void configure() {
-                bindFactory(new Factory<WebConfiguration>() {
-                    @Override
-                    public WebConfiguration provide() {
-                        return webconfiguration;
-                    }
-
-                    @Override
-                    public void dispose(WebConfiguration instance) {
-                    }
-                }).to(WebConfiguration.class);
-            }
-        });
-
-        // register the WebConfiguration in HK2
-        application.registerInstances(new AbstractBinder() {
-            @Override
-            protected void configure() {
-                bindFactory(new Factory<MultiPartFileUtils>() {
-                    @Override
-                    public MultiPartFileUtils provide() {
-                        return multiPartFileUtils;
-                    }
-
-                    @Override
-                    public void dispose(MultiPartFileUtils instance) {
-                    }
-                }).to(MultiPartFileUtils.class);
-            }
-        });
+        // register the injection points in HK2
+        application.registerInstances(new SimpleBinder<>(webconfiguration, WebConfiguration.class));
+        application.registerInstances(new SimpleBinder<>(multiPartFileUtils, MultiPartFileUtils.class));
 
         //return all of the rest endpoints
         return application;
