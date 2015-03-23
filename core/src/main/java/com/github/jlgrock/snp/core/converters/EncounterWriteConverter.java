@@ -38,7 +38,11 @@ public class EncounterWriteConverter implements WriteConverter<Encounter, DBObje
         DBObject dbo = new BasicDBObject();
         dbo.put(EncounterTags.ID_TAG, source.getId());
         dbo.put(EncounterTags.PATIENT_TAG, source.getPatientId());
-        dbo.put(EncounterTags.DATE_TAG, source.getDate().toEpochDay());
+        if (source.getDate() == null) {
+            dbo.put(EncounterTags.DATE_TAG, null);
+        } else {
+            dbo.put(EncounterTags.DATE_TAG, source.getDate().toEpochDay());
+        }
         dbo.put(EncounterTags.TYPE_TAG, source.getType());
         dbo.put(EncounterTags.REASON_FOR_VISIT_TAG, source.getReasonForVisit());
 
