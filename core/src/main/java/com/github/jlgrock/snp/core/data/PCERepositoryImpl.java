@@ -5,6 +5,6 @@ import com.github.jlgrock.snp.core.domain.PCE;
 /**
  *
  */
-public class PCERepositoryImpl extends AbstractRepositoryImpl<PCE, Long> implements PCERepository {
+public class PCERepositoryImpl extends AbstractRepositoryImpl<PCE, Long> implements PceRepository {
 
 }

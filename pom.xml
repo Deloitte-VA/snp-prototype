@@ -56,10 +56,13 @@
         <mockito.version>1.10.8</mockito.version>
         <hk2.version>2.4.0-b10</hk2.version>
         <guava.version>18.0</guava.version>
-        <jersey.version>2.16</jersey.version>
+        <jersey.version>2.17</jersey.version>
+        <jersey-json.version>1.19</jersey-json.version>
         <testng.version>6.8.21</testng.version>
         <hk2testing.version>2.4.0-b11</hk2testing.version>
+        <jackson-jaxrs-json-provider.version>2.5.1</jackson-jaxrs-json-provider.version>
 
+        <jetty-plugin.version>9.3.0.M1</jetty-plugin.version>
         <findbugs-maven-plugin.version>3.0.0</findbugs-maven-plugin.version>
         <pmd-maven-plugin.version>3.3</pmd-maven-plugin.version>
         <cobertura-maven-plugin.version>2.6</cobertura-maven-plugin.version>
@@ -100,18 +103,6 @@
 
             <!-- external dependencies -->
             <dependency>
-                <groupId>com.fasterxml.jackson.core</groupId>
-                <artifactId>jackson-core</artifactId>
-                <version>${jackson.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.fasterxml.jackson.core</groupId>
-                <artifactId>jackson-databind</artifactId>
-                <version>${jackson.version}</version>
-            </dependency>
-
-            <dependency>
                 <groupId>org.mongodb</groupId>
                 <artifactId>mongo-java-driver</artifactId>
                 <version>${mongo.driver.version}</version>
@@ -133,6 +124,44 @@
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
                 <version>${guava.version}</version>
+            </dependency>
+
+            <!-- Jackson Dependencies -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fasterxml.jackson.jaxrs</groupId>
+                <artifactId>jackson-jaxrs-json-provider</artifactId>
+                <version>${jackson-jaxrs-json-provider.version}</version>
+            </dependency>
+
+            <!-- Jersey Dependencies -->
+            <dependency>
+                <groupId>org.glassfish.jersey.test-framework</groupId>
+                <artifactId>jersey-test-framework-core</artifactId>
+                <version>${jersey.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.glassfish.jersey.media</groupId>
+                <artifactId>jersey-media-json-jackson</artifactId>
+                <version>${jersey.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.glassfish.jersey.test-framework.providers</groupId>
+                <artifactId>jersey-test-framework-provider-jetty</artifactId>
+                <version>${jersey.version}</version>
             </dependency>
 
             <dependency>
@@ -159,6 +188,12 @@
                 <version>${jersey.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>org.glassfish.jersey.media</groupId>
+                <artifactId>jersey-media-multipart</artifactId>
+                <version>${jersey.version}</version>
+            </dependency>
+
             <!-- When you need to bind to the console -->
             <dependency>
                 <groupId>org.slf4j</groupId>
@@ -167,12 +202,6 @@
             </dependency>
 
             <!-- Testing dependencies -->
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-simple</artifactId>
-                <version>${slf4j.version}</version>
-            </dependency>
-
             <dependency>
                 <groupId>org.testng</groupId>
                 <artifactId>testng</artifactId>
@@ -245,7 +274,6 @@
             <scope>test</scope>
         </dependency>
 
-
     </dependencies>
 
     <modules>
@@ -253,7 +281,7 @@
         <module>defaultconfig</module>
         <module>core</module>
         <!--<module>integration</module>-->
-        <!--<module>web</module>-->
+        <module>web</module>
         <!--<module>client</module>-->
     </modules>
 
@@ -402,9 +430,23 @@
                         </execution>
                     </executions>
                 </plugin>
+
+                <plugin>
+                    <groupId>org.eclipse.jetty</groupId>
+                    <artifactId>jetty-maven-plugin</artifactId>
+                    <version>${jetty-plugin.version}</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>${maven-war-plugin.version}</version>
+                    <configuration>
+                        <failOnMissingWebXml>false</failOnMissingWebXml>
+                    </configuration>
+                </plugin>
+
             </plugins>
-
-
         </pluginManagement>
 
         <plugins>
