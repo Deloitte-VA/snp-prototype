@@ -1,21 +1,20 @@
 package com.github.jlgrock.snp.web.controllers;
 
-import static org.testng.Assert.assertEquals;
-
-import java.util.Date;
-import java.util.List;
-
+import com.github.jlgrock.snp.apis.data.Page;
+import com.github.jlgrock.snp.apis.data.Pageable;
+import com.github.jlgrock.snp.apis.data.Sort;
+import com.github.jlgrock.snp.core.data.EncounterRepository;
+import com.github.jlgrock.snp.core.domain.Encounter;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.github.jlgrock.snp.apis.data.Page;
-import com.github.jlgrock.snp.apis.data.Pageable;
-import com.github.jlgrock.snp.apis.data.Sort;
-import com.github.jlgrock.snp.core.data.EncounterRepository;
-import com.github.jlgrock.snp.core.domain.Encounter;
+import java.util.Date;
+import java.util.List;
+
+import static org.testng.Assert.assertEquals;
 /**
  *
  */

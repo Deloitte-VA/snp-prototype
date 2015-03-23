@@ -148,3 +148,6 @@ release.properties
 *.doc
 *.docx
 *.exe
+
+#TestNG reports directory
+test-output/

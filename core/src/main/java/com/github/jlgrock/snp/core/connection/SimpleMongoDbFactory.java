@@ -1,7 +1,7 @@
 package com.github.jlgrock.snp.core.connection;
 
 import com.github.jlgrock.snp.apis.connection.MongoDatabaseManager;
-import com.github.jlgrock.snp.apis.connection.MongoDbConfiguration;
+import com.github.jlgrock.snp.apis.connection.configuration.MongoDbConfiguration;
 import com.github.jlgrock.snp.apis.connection.MongoDbFactory;
 import com.github.jlgrock.snp.apis.connection.synchronization.TransactionSynchronizationManager;
 import com.github.jlgrock.snp.apis.exceptions.DataAccessException;

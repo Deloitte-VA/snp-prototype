@@ -1,14 +1,12 @@
 package com.github.jlgrock.snp.web;
 
 import org.glassfish.jersey.jackson.JacksonFeature;
-import org.glassfish.jersey.media.multipart.MultiPartFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.server.ServerProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.ApplicationPath;
-import javax.ws.rs.core.Application;
 
 /**
  * The entry point for Spring to start a web application in a Servlet 3.0 container.
@@ -24,10 +22,7 @@ public class ApplicationConfig extends ResourceConfig {
      */
     public ApplicationConfig() {
         // Register Jackson Features
-        register(
-            JacksonFeature.class,
-            MultiPartFeature.class
-        );
+        register( JacksonFeature.class );
 
         LOGGER.info("Starting MongoRestApplication...");
     	packages("com.github.jlgrock.snp.web");
@@ -40,7 +35,7 @@ public class ApplicationConfig extends ResourceConfig {
      * Returns a new ApplicationConfig instance.
      * @return New instance of ApplicationConfig
      */
-    public static Application createApp() {
+    public static ResourceConfig createApp() {
         return new ApplicationConfig();
     }
 }
