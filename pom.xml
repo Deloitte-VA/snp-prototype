@@ -61,7 +61,8 @@
         <testng.version>6.8.21</testng.version>
         <hk2testing.version>2.4.0-b11</hk2testing.version>
         <jackson-jaxrs-json-provider.version>2.5.1</jackson-jaxrs-json-provider.version>
-
+        <vha-isaac-logic.version>1.4</vha-isaac-logic.version>
+        
         <jetty-plugin.version>9.3.0.M1</jetty-plugin.version>
         <findbugs-maven-plugin.version>3.0.0</findbugs-maven-plugin.version>
         <pmd-maven-plugin.version>3.3</pmd-maven-plugin.version>
@@ -126,6 +127,12 @@
                 <version>${guava.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>gov.vha.isaac</groupId>
+                <artifactId>logic</artifactId>
+                <version>${vha-isaac-logic.version}</version>
+            </dependency>
+        
             <!-- Jackson Dependencies -->
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
