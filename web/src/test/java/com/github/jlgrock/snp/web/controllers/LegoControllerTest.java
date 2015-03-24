@@ -157,13 +157,14 @@ public class LegoControllerTest extends JerseyTestNg.ContainerPerClassTest {
     
     @Test
     public void testStreamingXml() {
+    	final String testXml = "<xml>test</xml>";
     	final WebTarget target = target().path("lego/pce");
     	final Response response = target.request(MediaType.APPLICATION_XML_TYPE)
-    			.post(Entity.xml("<xml>test</xml>"));
+    			.post(Entity.xml(testXml));
     	final String body = response.readEntity(String.class);
     	
     	Assert.assertEquals(response.getStatus(), 200);
-    	Assert.assertEquals(body, "<xml>test</xml>");
+    	Assert.assertEquals(body, testXml);
     }
 
 }
