@@ -1,5 +1,6 @@
 package com.github.jlgrock.snp.web.controllers;
 
+import com.github.jlgrock.snp.apis.data.MultiPartFileUtils;
 import org.jvnet.hk2.annotations.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,25 +12,23 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 /**
- *
+ * A service that will do simple File utilities
  */
 @Singleton
 @Service
 public class MultipartFileUtilsImpl implements MultiPartFileUtils {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MultipartFileUtilsImpl.class);
+    private static final int BYTE_SIZE = 1024;
 
-    /**
-     * Save the uploaded file to new location
-     */
+    @Override
     public void writeToFile(final InputStream uploadedInputStream,
                              final java.nio.file.Path uploadedFileLocation) {
 
-        try {
+        try (OutputStream out = new FileOutputStream(uploadedFileLocation.toFile())) {
             int read = 0;
-            byte[] bytes = new byte[1024];
+            byte[] bytes = new byte[MultipartFileUtilsImpl.BYTE_SIZE];
 
-            OutputStream out = new FileOutputStream(uploadedFileLocation.toFile());
             while ((read = uploadedInputStream.read(bytes)) != -1) {
                 out.write(bytes, 0, read);
             }
@@ -37,6 +36,5 @@ public class MultipartFileUtilsImpl implements MultiPartFileUtils {
         } catch (IOException e) {
             LOGGER.error(e.getMessage(), e);
         }
-
     }
 }

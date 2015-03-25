@@ -23,6 +23,9 @@ public class PceController {
 
     private PceRepository repository;
 
+    /**
+     * @param repositoryIn the repository to get PCEs from
+     */
     @Inject
     public PceController(final PceRepository repositoryIn) {
         repository = repositoryIn;

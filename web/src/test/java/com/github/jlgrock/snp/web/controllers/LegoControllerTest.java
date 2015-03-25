@@ -1,31 +1,23 @@
 package com.github.jlgrock.snp.web.controllers;
 
 import com.github.jlgrock.snp.apis.connection.configuration.WebConfiguration;
-import com.github.jlgrock.snp.apis.hk2.SimpleBinder;
-import com.github.jlgrock.snp.web.configuration.ApplicationConfig;
-import com.github.jlgrock.snp.web.configuration.ApplicationObjectMapper;
-import com.github.jlgrock.snp.web.configuration.JacksonConfig;
-import io.dropwizard.jersey.jackson.JacksonMessageBodyProvider;
-import org.glassfish.jersey.client.ClientConfig;
+import com.github.jlgrock.snp.apis.data.MultiPartFileUtils;
+import org.glassfish.hk2.api.Factory;
+import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import org.glassfish.jersey.media.multipart.FormDataBodyPart;
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataMultiPart;
-import org.glassfish.jersey.media.multipart.MultiPartFeature;
 import org.glassfish.jersey.server.ResourceConfig;
-import org.glassfish.jersey.test.JerseyTestNg;
-import org.glassfish.jersey.test.TestProperties;
 import org.jvnet.testing.hk2testng.HK2;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import javax.validation.Validation;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
-import javax.ws.rs.core.Application;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.ByteArrayInputStream;
@@ -34,52 +26,69 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 
 @HK2(populate = false)
-public class LegoControllerTest extends JerseyTestNg.ContainerPerClassTest {
+public class LegoControllerTest extends GenericControllerTest {
+    private static final Logger LOGGER = LoggerFactory.getLogger(LegoControllerTest.class);
 
     WebConfiguration webconfiguration = new WebConfiguration() {
         @Override
         public Path fileLocation() {
-            return Mockito.mock(Path.class);
+            return path;
         }
     };
+
+
+    private MultiPartFileUtils multiPartFileUtils;
+
 
     @Mock
     Path path;
 
-    @Mock
-    MultiPartFileUtils multiPartFileUtils;
-
-    @BeforeMethod
-    public void setUpTests() throws Exception {
-        // Required to make this work on TestNG
-        MockitoAnnotations.initMocks(this);
-    }
-
     @Override
-    protected void configureClient(ClientConfig config) {
-        config.register(MultiPartFeature.class);
-        config.register(
-                new JacksonMessageBodyProvider(JacksonConfig.newObjectMapper(), Validation.buildDefaultValidatorFactory().getValidator())).
-                register(ApplicationObjectMapper.class);
-    }
-
-    @Override
-    protected Application configure() {
-        enable(TestProperties.LOG_TRAFFIC);
-        enable(TestProperties.DUMP_ENTITY);
-
-        ResourceConfig application = ApplicationConfig.createApp();
-
+    public void registerInjectionPoints(final ResourceConfig application) {
         // register the injection points in HK2
-        application.registerInstances(new SimpleBinder<>(webconfiguration, WebConfiguration.class));
-        application.registerInstances(new SimpleBinder<>(multiPartFileUtils, MultiPartFileUtils.class));
+        LOGGER.debug("webconfiguration = " + webconfiguration);
 
-        //return all of the rest endpoints
-        return application;
+        //TODO figure out how to swap this out for the anonymous methods
+        //application.registerInstances(new SimpleBinder<WebConfiguration>(webconfiguration, WebConfiguration.class));
+        //application.registerInstances(new SimpleBinder<>(multiPartFileUtils, MultiPartFileUtils.class));
+        application.registerInstances(new AbstractBinder() {
+            @Override
+            protected void configure() {
+                bindFactory(new Factory<WebConfiguration>() {
+                    @Override
+                    public WebConfiguration provide() {
+                        return webconfiguration;
+                    }
+
+                    @Override
+                    public void dispose(WebConfiguration instance) {
+                    }
+                }).to(WebConfiguration.class);
+            }
+        });
+
+        application.registerInstances(new AbstractBinder() {
+            @Override
+            protected void configure() {
+                bindFactory(new Factory<MultiPartFileUtils>() {
+                    @Override
+                    public MultiPartFileUtils provide() {
+                        return multiPartFileUtils;
+                    }
+
+                    @Override
+                    public void dispose(MultiPartFileUtils instance) {
+                    }
+                }).to(MultiPartFileUtils.class);
+            }
+        });
     }
 
     @Test
     public void testPartWithFile() {
+        multiPartFileUtils = Mockito.mock(MultiPartFileUtils.class);
+        Mockito.when(path.resolve(Mockito.any(String.class))).thenReturn(path);
+
         final String value = "CONTENT";
         final WebTarget target = target().path("lego/upload");
 
@@ -106,6 +115,8 @@ public class LegoControllerTest extends JerseyTestNg.ContainerPerClassTest {
 
     @Test
     public void testMultiPartFileEmpty() {
+        multiPartFileUtils = Mockito.mock(MultiPartFileUtils.class);
+        Mockito.when(path.resolve(Mockito.any(String.class))).thenReturn(path);
         final WebTarget target = target().path("lego/upload");
 
         final FormDataMultiPart mp = new FormDataMultiPart();
@@ -122,5 +133,4 @@ public class LegoControllerTest extends JerseyTestNg.ContainerPerClassTest {
 
         Assert.assertEquals(response.getStatus(), 200);
     }
-
 }

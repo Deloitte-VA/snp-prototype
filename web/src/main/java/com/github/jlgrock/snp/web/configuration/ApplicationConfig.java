@@ -13,14 +13,18 @@ import javax.validation.Validation;
 import javax.ws.rs.ApplicationPath;
 
 /**
- * The entry point for Spring to start a web application in a Servlet 3.0 container.  This is a simple Jersey + HK2
- * application that can be bound to Spring IOC, Spring MVC, Guice, as well as a number of others.
+ * The entry point for Jersey to start a web application in a Servlet 3.0 container.
+ * This is a simple Jersey + HK2 application that can be bound to Spring IOC, Spring MVC,
+ * Guice, as well as a number of others.
  */
 @ApplicationPath("/")
 public class ApplicationConfig extends ResourceConfig {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ApplicationConfig.class);
 
+    /**
+     * Sets up all of the standard features.
+     */
     public ApplicationConfig() {
         LOGGER.info("Starting MongoRestApplication...");
 
@@ -45,6 +49,10 @@ public class ApplicationConfig extends ResourceConfig {
         property(ServerProperties.TRACING, "ALL");
     }
 
+    /**
+     * Create and return an application configuration, for use in starting a jersey server.
+     * @return the configuration object, which can be modified further.
+     */
     public static ResourceConfig createApp() {
         return new ApplicationConfig();
     }

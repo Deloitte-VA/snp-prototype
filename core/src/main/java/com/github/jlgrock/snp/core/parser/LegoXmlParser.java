@@ -1,13 +1,5 @@
 package com.github.jlgrock.snp.core.parser;
 
-import java.io.InputStream;
-
-import javax.xml.stream.FactoryConfigurationError;
-import javax.xml.stream.XMLInputFactory;
-import javax.xml.stream.XMLStreamConstants;
-import javax.xml.stream.XMLStreamException;
-import javax.xml.stream.XMLStreamReader;
-
 import com.github.jlgrock.snp.core.model.parser.Assertion;
 import com.github.jlgrock.snp.core.model.parser.AssertionComponent;
 import com.github.jlgrock.snp.core.model.parser.Bound;
@@ -29,6 +21,13 @@ import com.github.jlgrock.snp.core.model.parser.Type;
 import com.github.jlgrock.snp.core.model.parser.Units;
 import com.github.jlgrock.snp.core.model.parser.Value;
 
+import javax.xml.stream.FactoryConfigurationError;
+import javax.xml.stream.XMLInputFactory;
+import javax.xml.stream.XMLStreamConstants;
+import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.XMLStreamReader;
+import java.io.InputStream;
+
 /**
  * Parses LEGO XML document for retrieving Post Coordinated Expressions (PCEs)
  *
@@ -36,7 +35,12 @@ import com.github.jlgrock.snp.core.model.parser.Value;
 public class LegoXmlParser {
 	//this is the list which shall be populated while parsing the XML
 	private LegoList legoList;
-		
+
+    /**
+     * Parse the XML input stream into java objects
+     * @param xmlInput the input stream
+     * @return the deserialized java objects
+     */
 	public LegoList parseDocument(final InputStream xmlInput) {
 		legoList = new LegoList();
 		String tagContent = null;
@@ -88,8 +92,9 @@ public class LegoXmlParser {
 		}
 		return legoList;
 	}
-	
-	public void parseLegoAndAllChildren(final XMLStreamReader reader) throws XMLStreamException {
+
+
+	private void parseLegoAndAllChildren(final XMLStreamReader reader) throws XMLStreamException {
 		Lego currentLego = new Lego();
 		String tagContent = null;
 		boolean inComment = false;
@@ -178,7 +183,7 @@ public class LegoXmlParser {
 		}
 	}
 	
-	public Assertion parseAssertionAndAllChildren(final XMLStreamReader reader) throws XMLStreamException {
+	private Assertion parseAssertionAndAllChildren(final XMLStreamReader reader) throws XMLStreamException {
 		Assertion assertion = new Assertion();
 		String tagContent = null;
 		boolean exit = false;
@@ -236,7 +241,7 @@ public class LegoXmlParser {
 		return assertion;
 	}
 	
-	public Discernible parseDiscernibleAndAllChildren(final XMLStreamReader reader) throws XMLStreamException {
+	private Discernible parseDiscernibleAndAllChildren(final XMLStreamReader reader) throws XMLStreamException {
 		Discernible discernible = new Discernible();
 		boolean exit = false;
 		while(reader.hasNext()) {
@@ -274,7 +279,7 @@ public class LegoXmlParser {
 		return discernible;
 	}
 	
-	public Qualifier parseQualifierAndAllChildren(final XMLStreamReader reader) throws XMLStreamException {
+	private Qualifier parseQualifierAndAllChildren(final XMLStreamReader reader) throws XMLStreamException {
 		Qualifier qualifier = new Qualifier();
 		boolean exit = false;
 		while(reader.hasNext()) {
@@ -312,7 +317,7 @@ public class LegoXmlParser {
 		return qualifier;
 	}
 	
-	public Value parseValueAndAllChildren(final XMLStreamReader reader) throws XMLStreamException {
+	private Value parseValueAndAllChildren(final XMLStreamReader reader) throws XMLStreamException {
 		Value value = new Value();
 		boolean exit = false;
 		while(reader.hasNext()) {
@@ -353,7 +358,7 @@ public class LegoXmlParser {
 		return value;
 	}
 	
-	public Expression parseExpressionAndAllChildren(final XMLStreamReader reader) throws XMLStreamException {
+	private Expression parseExpressionAndAllChildren(final XMLStreamReader reader) throws XMLStreamException {
 		Expression expression = new Expression();
 		boolean exit = false;
 		while(reader.hasNext()) {
@@ -394,7 +399,7 @@ public class LegoXmlParser {
 		return expression;
 	}
 	
-	public Relation parseRelationAndAllChildren(final XMLStreamReader reader) throws XMLStreamException {
+	private Relation parseRelationAndAllChildren(final XMLStreamReader reader) throws XMLStreamException {
 		Relation relation = new Relation();
 		boolean exit = false;
 		while(reader.hasNext()) {
@@ -435,7 +440,7 @@ public class LegoXmlParser {
 		return relation;
 	}
 	
-	public Type parseTypeAndAllChildren(final XMLStreamReader reader) throws XMLStreamException {
+	private Type parseTypeAndAllChildren(final XMLStreamReader reader) throws XMLStreamException {
 		Type type = new Type();
 		boolean exit = false;
 		while(reader.hasNext()) {
@@ -473,7 +478,7 @@ public class LegoXmlParser {
 		return type;
 	}
 	
-	public Destination parseDestinationAndAllChildren(final XMLStreamReader reader) throws XMLStreamException {
+	private Destination parseDestinationAndAllChildren(final XMLStreamReader reader) throws XMLStreamException {
 		Destination destination = new Destination();
 		boolean exit = false;
 		while(reader.hasNext()) {
@@ -514,7 +519,7 @@ public class LegoXmlParser {
 		return destination;
 	}
 	
-	public Measurement parseMeasurementAndAllChildren(final XMLStreamReader reader) throws XMLStreamException {
+	private Measurement parseMeasurementAndAllChildren(final XMLStreamReader reader) throws XMLStreamException {
 		Measurement measurement = new Measurement();
 		boolean exit = false;
 		while(reader.hasNext()) {
@@ -558,7 +563,7 @@ public class LegoXmlParser {
 		return measurement;
 	}
 	
-	public Units parseUnitsAndAllChildren(final XMLStreamReader reader) throws XMLStreamException {
+	private Units parseUnitsAndAllChildren(final XMLStreamReader reader) throws XMLStreamException {
 		Units units = new Units();
 		boolean exit = false;
 		while(reader.hasNext()) {
@@ -596,7 +601,7 @@ public class LegoXmlParser {
 		return units;
 	}
 	
-	public Point parsePointAndAllChildren(final XMLStreamReader reader) throws XMLStreamException {
+	private Point parsePointAndAllChildren(final XMLStreamReader reader) throws XMLStreamException {
 		String tagContent = null;
 		boolean exit = false;
 		Point point = new Point();
@@ -638,7 +643,7 @@ public class LegoXmlParser {
 		return point;
 	}
 	
-	public Timing parseTimingAndAllChildren(final XMLStreamReader reader) throws XMLStreamException {
+	private Timing parseTimingAndAllChildren(final XMLStreamReader reader) throws XMLStreamException {
 		Timing timing = new Timing();
 		boolean exit = false;
 		while(reader.hasNext()) {
@@ -679,7 +684,7 @@ public class LegoXmlParser {
 		return timing;
 	}
 	
-	public Bound parseBoundAndAllChildren(final XMLStreamReader reader) throws XMLStreamException {
+	private Bound parseBoundAndAllChildren(final XMLStreamReader reader) throws XMLStreamException {
 		Bound bound = new Bound();
 		boolean exit = false;
 		
@@ -731,7 +736,7 @@ public class LegoXmlParser {
 		return bound;
 	}
 	
-	public AssertionComponent parseAssertionComponentAndAllChildren(final XMLStreamReader reader) throws XMLStreamException {
+	private AssertionComponent parseAssertionComponentAndAllChildren(final XMLStreamReader reader) throws XMLStreamException {
 		AssertionComponent assertionComponent = new AssertionComponent();
 		String tagContent = null;
 		boolean exit = false;
@@ -775,7 +780,7 @@ public class LegoXmlParser {
 		return assertionComponent;
 	}
 	
-	public Concept parseConcept(final XMLStreamReader reader) throws XMLStreamException {
+	private Concept parseConcept(final XMLStreamReader reader) throws XMLStreamException {
 		Concept concept = new Concept();
 		for(int index = 0;index < reader.getAttributeCount();index++) {
 			if (LegoXmlConstants.UUID.equals(reader.getAttributeLocalName(index))) {

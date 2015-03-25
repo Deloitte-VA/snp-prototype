@@ -1,6 +1,7 @@
 package com.github.jlgrock.snp.web.controllers;
 
 import com.github.jlgrock.snp.apis.connection.configuration.WebConfiguration;
+import com.github.jlgrock.snp.apis.data.MultiPartFileUtils;
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 import org.slf4j.Logger;
@@ -15,7 +16,7 @@ import javax.ws.rs.core.Response;
 import java.io.InputStream;
 
 /**
- *
+ * The controller for handling all xml uploads of lego data
  */
 @Path("/lego")
 public class LegoController {
@@ -26,19 +27,34 @@ public class LegoController {
 
     private WebConfiguration webConfiguration;
 
+    /**
+     * Default constructor.
+     * @param webConfigurationIn the configuration object for the web project
+     * @param multipartFileUtilsIn instance of the file helper utilities
+     */
     @Inject
-    public LegoController(final WebConfiguration webConfigurationIn, final MultiPartFileUtils multipartFileUtilsIn) {
+    public LegoController(final WebConfiguration webConfigurationIn,
+                          final MultiPartFileUtils multipartFileUtilsIn) {
         webConfiguration = webConfigurationIn;
         multipartFileUtils = multipartFileUtilsIn;
     }
 
+    /**
+     * Upload an XML file in Multi-part form to allow for posting from a website form.
+     * @param fileInputStream the inputstream of the file
+     * @param formDataContentDisposition the metadata associated with the file (which is treated like an attachment)
+     * @return the response for the HTML transaction
+     */
     @POST
     @Path("/upload")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     public Response uploadFile(
-            @FormDataParam("file") InputStream fileInputStream,
-            @FormDataParam("file") FormDataContentDisposition formDataContentDisposition) {
-        LOGGER.debug("fileInputStream provided?=[{}], formDataContentDisposition provided?=[{}]", (fileInputStream != null), (formDataContentDisposition != null));
+            @FormDataParam("file") final InputStream fileInputStream,
+            @FormDataParam("file") final FormDataContentDisposition formDataContentDisposition) {
+
+        LOGGER.debug("fileInputStream provided?=[{}], formDataContentDisposition provided?=[{}]",
+                fileInputStream != null, formDataContentDisposition != null);
+
         LOGGER.debug("fileInputStream={}, fileName={}", fileInputStream, formDataContentDisposition.getFileName());
 
         java.nio.file.Path uploadedFileLocation = webConfiguration.fileLocation().resolve(formDataContentDisposition.getFileName());

@@ -12,7 +12,8 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * The configuration object that will parse a properties file on the classpath and use it to connect to the database.
+ * The default configuration object for mongodb.  This will parse a properties
+ * file on the classpath and use it to connect to the database.
  */
 @Service
 public class MongoConfig implements MongoDbConfiguration {

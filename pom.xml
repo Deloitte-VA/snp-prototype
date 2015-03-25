@@ -64,7 +64,7 @@
 
         <jetty-plugin.version>9.3.0.M1</jetty-plugin.version>
         <findbugs-maven-plugin.version>3.0.0</findbugs-maven-plugin.version>
-        <pmd-maven-plugin.version>3.3</pmd-maven-plugin.version>
+        <pmd-maven-plugin.version>3.4</pmd-maven-plugin.version>
         <cobertura-maven-plugin.version>2.6</cobertura-maven-plugin.version>
         <maven-surefire-plugin.version>2.18.1</maven-surefire-plugin.version>
         <maven-compiler-plugin.version>3.2</maven-compiler-plugin.version>
@@ -412,7 +412,7 @@
                         <effort>Max</effort>
                         <threshold>Medium</threshold>
                         <xmlOutput>true</xmlOutput>
-                        <failOnError>true</failOnError>
+                        <failOnError>true</failOnError>\
                     </configuration>
                     <executions>
                         <execution>
