@@ -4,7 +4,12 @@ package com.github.jlgrock.snp.core.model.parser;
  * This interface declares the constants used parsing
  * LEGO xml documents
  */
-public class LegoXmlConstants {
+public final class LegoXmlConstants {
+    /**
+     * private constructor for utility class
+     */
+    private LegoXmlConstants() {}
+
 	public static final String LEGO_LIST = "legoList";
 	public static final String GROUP_NAME = "groupName";
 	public static final String LEGO_LIST_UUID = "legoListUUID";

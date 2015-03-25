@@ -1,4 +1,4 @@
-package com.github.jlgrock.snp.apis.connection;
+package com.github.jlgrock.snp.apis.connection.configuration;
 
 import com.mongodb.MongoCredential;
 import com.mongodb.ServerAddress;
