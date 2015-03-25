@@ -1,4 +1,4 @@
-package com.github.jlgrock.snp.web.controllers;
+package com.github.jlgrock.snp.apis.data;
 
 import org.jvnet.hk2.annotations.Contract;
 
