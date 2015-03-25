@@ -1,8 +1,9 @@
-package com.github.jlgrock.snp.core.connection;
+package com.github.jlgrock.snp.integration.connection;
 
 import com.github.jlgrock.snp.apis.connection.MongoDatabaseManager;
-import com.github.jlgrock.snp.apis.connection.MongoDbConfiguration;
+import com.github.jlgrock.snp.apis.connection.configuration.MongoDbConfiguration;
 import com.github.jlgrock.snp.apis.connection.synchronization.TransactionSynchronizationManager;
+import com.github.jlgrock.snp.core.connection.SimpleMongoDbFactory;
 import com.mongodb.DB;
 import com.mongodb.MongoCredential;
 import com.mongodb.ServerAddress;
@@ -14,6 +15,9 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 import java.util.Optional;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.anyString;
 
 @Test
 public class SimpleMongoDbFactoryTest {
@@ -87,19 +91,18 @@ public class SimpleMongoDbFactoryTest {
         MockitoAnnotations.initMocks(this);
     }
 
-    //TODO this will actually reach out and try to connect.  Need to work on this.
-//    @Test
-//    public void testThatCredentialsAreAccessed() throws Exception {
-//        SimpleMongoDbFactory simpleMongoDbFactory = new SimpleMongoDbFactory(mongoDBConfiguration, mongoDatabaseManagerIn, synchronizationManagerIn);
-//        simpleMongoDbFactory.db();
-//        verify(mongoDBConfiguration).getHost();
-//        verify(mongoDBConfiguration).getDefaultDatabase();
-//    }
-//
-//    @Test
-//    public void testThatManagerIsUsed() throws Exception {
-//        SimpleMongoDbFactory simpleMongoDbFactory = new SimpleMongoDbFactory(mongoDBConfiguration, mongoDatabaseManagerIn, synchronizationManagerIn);
-//        simpleMongoDbFactory.db();
-//        verify(mongoDatabaseManagerIn).addDb(anyString(), any(DB.class));
-//    }
+    @Test
+    public void testThatCredentialsAreAccessed() throws Exception {
+        SimpleMongoDbFactory simpleMongoDbFactory = new SimpleMongoDbFactory(mongoDBConfiguration, mongoDatabaseManagerIn, synchronizationManagerIn);
+        simpleMongoDbFactory.db();
+        verify(mongoDBConfiguration).getHost();
+        verify(mongoDBConfiguration).getDefaultDatabase();
+    }
+
+    @Test
+    public void testThatManagerIsUsed() throws Exception {
+        SimpleMongoDbFactory simpleMongoDbFactory = new SimpleMongoDbFactory(mongoDBConfiguration, mongoDatabaseManagerIn, synchronizationManagerIn);
+        simpleMongoDbFactory.db();
+        verify(mongoDatabaseManagerIn).addDb(anyString(), any(DB.class));
+    }
 }
