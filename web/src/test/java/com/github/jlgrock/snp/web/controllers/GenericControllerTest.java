@@ -9,6 +9,7 @@ import org.glassfish.jersey.media.multipart.MultiPartFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTestNg;
 import org.glassfish.jersey.test.TestProperties;
+import org.jvnet.testing.hk2testng.HK2;
 import org.mockito.MockitoAnnotations;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +18,7 @@ import org.testng.annotations.BeforeClass;
 import javax.validation.Validation;
 import javax.ws.rs.core.Application;
 
-//@HK2(populate = false)
+@HK2(populate = false)
 public abstract class GenericControllerTest extends JerseyTestNg.ContainerPerClassTest {
     private static final Logger LOGGER = LoggerFactory.getLogger(GenericControllerTest.class);
 

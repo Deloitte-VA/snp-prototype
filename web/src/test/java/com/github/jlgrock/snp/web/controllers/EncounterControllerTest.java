@@ -7,6 +7,7 @@ import com.github.jlgrock.snp.web.configuration.JacksonConfig;
 import org.glassfish.hk2.api.Factory;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import org.glassfish.jersey.server.ResourceConfig;
+import org.jvnet.testing.hk2testng.HK2;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.testng.Assert;
@@ -16,10 +17,10 @@ import javax.ws.rs.client.WebTarget;
 
 import java.time.LocalDate;
 
-import static org.testng.Assert.assertEquals;
 /**
  *
  */
+@HK2(populate = false)
 public class EncounterControllerTest extends GenericControllerTest {
 
 	@Mock
@@ -57,7 +58,7 @@ public class EncounterControllerTest extends GenericControllerTest {
     	Mockito.when(encounterRepository.findOne(encounter.getId())).thenReturn(encounter);
         encounterController = new EncounterController(encounterRepository);
     	Encounter actual = encounterController.getEncounter(encounter.getId());
-    	assertEquals(actual, encounter);
+    	Assert.assertEquals(actual, encounter);
     }
 
     @Test
