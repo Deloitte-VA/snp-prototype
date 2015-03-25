@@ -11,6 +11,7 @@ import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.InputStream;
@@ -67,6 +68,22 @@ public class LegoController {
         //TODO this is where we add the connection to the XML parser
 
         return Response.ok().build();
+    }
+    
+    /**
+     * Method handling HTTP GET requests. The returned object will be sent
+     * to the client as "application/xml" media type.
+     *
+     * @param xml the xml content body to ingest
+     *
+     * @return String that will be returned as a application/xml response.
+     */
+    @POST
+    @Path("/")
+    @Consumes(MediaType.APPLICATION_XML)
+    @Produces(MediaType.APPLICATION_XML)
+    public String getLego(final String xml) {
+    	return xml;
     }
 
 }

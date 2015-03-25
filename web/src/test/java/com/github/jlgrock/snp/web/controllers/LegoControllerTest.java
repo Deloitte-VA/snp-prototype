@@ -133,4 +133,18 @@ public class LegoControllerTest extends GenericControllerTest {
 
         Assert.assertEquals(response.getStatus(), 200);
     }
+    
+    
+    @Test
+    public void testStreamingXml() {
+    	final String testXml = "<xml>test</xml>";
+    	final WebTarget target = target().path("lego");
+    	final Response response = target.request(MediaType.APPLICATION_XML_TYPE)
+    			.post(Entity.xml(testXml));
+    	final String body = response.readEntity(String.class);
+    	
+    	Assert.assertEquals(response.getStatus(), 200);
+    	Assert.assertEquals(body, testXml);
+    }
+
 }
