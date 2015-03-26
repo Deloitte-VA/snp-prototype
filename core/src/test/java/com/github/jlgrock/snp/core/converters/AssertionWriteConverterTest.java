@@ -1,7 +1,7 @@
 package com.github.jlgrock.snp.core.converters;
 
 import com.github.jlgrock.snp.core.data.PCETags;
-import com.github.jlgrock.snp.core.domain.PCE;
+import com.github.jlgrock.snp.core.domain.Assertion;
 import com.mongodb.DBObject;
 import org.testng.annotations.Test;
 
@@ -14,7 +14,7 @@ import static org.testng.Assert.assertEquals;
 /**
  *
  */
-public class PCEWriteConverterTest {
+public class AssertionWriteConverterTest {
     /**
      * public function returns void
      */
@@ -22,12 +22,12 @@ public class PCEWriteConverterTest {
     public void testConvert() {
         LocalDate dob = LocalDate.now(); //final
 
-        PCE pce = mock(PCE.class);
-        when(pce.getId()).thenReturn((Long) 123l);
-        when(pce.getDesc()).thenReturn("bla");
+        Assertion assertion = mock(Assertion.class);
+        when(assertion.getId()).thenReturn((Long) 123l);
+        when(assertion.getDesc()).thenReturn("bla");
 
         PCEWriteConverter pceWriteConverter = new PCEWriteConverter();
-        DBObject dbObj = pceWriteConverter.convert(pce);
+        DBObject dbObj = pceWriteConverter.convert(assertion);
 
         assertEquals((Long) 123l, dbObj.get(PCETags.ID_TAG));
         assertEquals("bla", dbObj.get(PCETags.DESCRIPTION_TAG));

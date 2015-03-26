@@ -7,7 +7,7 @@ import static org.testng.Assert.assertNotEquals;
 import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.assertFalse;
 
-public class PCETest {
+public class AssertionTest {
     /**
      * public function returns void
      */
@@ -20,8 +20,8 @@ public class PCETest {
         Long ln2 = new Long(201522l);
         String st2 = "Field Goal";
 
-        PCE pc1 = new PCE();
-        PCE pc2 = new PCE();
+        Assertion pc1 = new Assertion();
+        Assertion pc2 = new Assertion();
 
         pc1.setId(ln1);
         pc1.setDesc(st1);

@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 /**
  * The post-coordinated expression and the unique identifier, for reference purposes.
  */
-public class PCE {
+public class Assertion {
     @NotNull
     private Long id;
 
@@ -19,7 +19,7 @@ public class PCE {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        PCE that = (PCE) o;
+        Assertion that = (Assertion) o;
 
         return Objects.equal(id, that.id) &&
                 Objects.equal(desc, that.desc);

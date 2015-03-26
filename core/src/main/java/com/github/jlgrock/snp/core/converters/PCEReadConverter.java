@@ -2,7 +2,7 @@ package com.github.jlgrock.snp.core.converters;
 
 import com.github.jlgrock.snp.apis.converters.ReadConverter;
 import com.github.jlgrock.snp.core.data.PCETags;
-import com.github.jlgrock.snp.core.domain.PCE;
+import com.github.jlgrock.snp.core.domain.Assertion;
 import com.mongodb.DBObject;
 import org.jvnet.hk2.annotations.Service;
 
@@ -13,12 +13,12 @@ import javax.inject.Named;
  */
 @Service
 @Named
-public class PCEReadConverter implements ReadConverter<DBObject, PCE> {
+public class PCEReadConverter implements ReadConverter<DBObject, Assertion> {
     @Override
-    public PCE convert(final DBObject source) {
-        PCE pce = new PCE();
-        pce.setId(((Number) source.get(PCETags.ID_TAG)).longValue());
-        pce.setDesc((String) source.get(PCETags.DESCRIPTION_TAG));
-        return pce;
+    public Assertion convert(final DBObject source) {
+        Assertion assertion = new Assertion();
+        assertion.setId(((Number) source.get(PCETags.ID_TAG)).longValue());
+        assertion.setDesc((String) source.get(PCETags.DESCRIPTION_TAG));
+        return assertion;
     }
 }

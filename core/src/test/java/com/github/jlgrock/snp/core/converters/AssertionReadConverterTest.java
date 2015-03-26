@@ -1,7 +1,7 @@
 package com.github.jlgrock.snp.core.converters;
 
 import com.github.jlgrock.snp.core.data.PCETags;
-import com.github.jlgrock.snp.core.domain.PCE;
+import com.github.jlgrock.snp.core.domain.Assertion;
 import com.mongodb.DBObject;
 import org.testng.annotations.Test;
 
@@ -12,7 +12,7 @@ import static org.testng.Assert.assertEquals;
 /**
  *
  */
-public class PCEReadConverterTest {
+public class AssertionReadConverterTest {
 
     /**
      * public function returns void
@@ -24,9 +24,9 @@ public class PCEReadConverterTest {
         when(dbObj.get(PCETags.DESCRIPTION_TAG)).thenReturn("bla");
 
         PCEReadConverter patientReadConverter = new PCEReadConverter();
-        PCE pce = patientReadConverter.convert(dbObj);
+        Assertion assertion = patientReadConverter.convert(dbObj);
 
-        assertEquals((Long) 123l, pce.getId());
-        assertEquals("bla", pce.getDesc());
+        assertEquals((Long) 123l, assertion.getId());
+        assertEquals("bla", assertion.getDesc());
     }
 }

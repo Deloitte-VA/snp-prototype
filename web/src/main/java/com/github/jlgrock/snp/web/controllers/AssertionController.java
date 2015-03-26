@@ -1,7 +1,7 @@
 package com.github.jlgrock.snp.web.controllers;
 
 import com.github.jlgrock.snp.core.data.PceRepository;
-import com.github.jlgrock.snp.core.domain.PCE;
+import com.github.jlgrock.snp.core.domain.Assertion;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,9 +16,9 @@ import javax.ws.rs.core.MediaType;
 /**
  * The Controller serving up domain objects for PCE objects.
  */
-@Path("/pce")
-public class PceController {
-    private static final Logger LOGGER = LoggerFactory.getLogger(PceController.class);
+@Path("/assertion")
+public class AssertionController {
+    private static final Logger LOGGER = LoggerFactory.getLogger(AssertionController.class);
 
 
     private PceRepository repository;
@@ -27,7 +27,7 @@ public class PceController {
      * @param repositoryIn the repository to get PCEs from
      */
     @Inject
-    public PceController(final PceRepository repositoryIn) {
+    public AssertionController(final PceRepository repositoryIn) {
         repository = repositoryIn;
     }
 
@@ -39,7 +39,7 @@ public class PceController {
      */
     @GET @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public PCE getPce(@PathParam("id") final Long id) {
+    public Assertion getPce(@PathParam("id") final Long id) {
         LOGGER.debug("getting PCE");
         return repository.findOne(id);
     }
