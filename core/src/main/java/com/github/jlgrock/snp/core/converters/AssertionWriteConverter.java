@@ -14,7 +14,7 @@ import javax.inject.Named;
  */
 @Service
 @Named
-public class PCEWriteConverter implements WriteConverter<Assertion, DBObject> {
+public class AssertionWriteConverter implements WriteConverter<Assertion, DBObject> {
     @Override
     public DBObject convert(final Assertion source) {
         DBObject dbo = new BasicDBObject();

@@ -13,7 +13,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 /**
- * The Controller serving up domain objects for PCE objects.
+ * The Controller serving up domain objects for Assertion objects.
  */
 @Path("/assertion")
 public class AssertionController {
@@ -23,7 +23,7 @@ public class AssertionController {
     private ClassifiedAssertionRepository repository;
 
     /**
-     * @param repositoryIn the repository to get PCEs from
+     * @param repositoryIn the repository to get Assertion objects from
      */
     @Inject
     public AssertionController(final ClassifiedAssertionRepository repositoryIn) {
@@ -31,15 +31,15 @@ public class AssertionController {
     }
 
     /**
-     * Returns the PCE for the respective <code>id</code>.
+     * Returns the Assertion for the respective <code>id</code>.
      *
-     * @param id the id of the PCE to get
-     * @return Returns a PCE
+     * @param id the id of the Assertion to get
+     * @return Returns a Assertion
      */
     @GET @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Assertion getPce(@PathParam("id") final Long id) {
-        LOGGER.debug("getting PCE");
+    public Assertion getAssertion(@PathParam("id") final Long id) {
+        LOGGER.debug("getting Assertion");
         return repository.findOne(id);
     }
 }

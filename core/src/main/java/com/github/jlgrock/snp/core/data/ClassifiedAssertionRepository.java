@@ -4,7 +4,7 @@ import com.github.jlgrock.snp.apis.data.MongoRepository;
 import com.github.jlgrock.snp.core.domain.ClassifiedAssertion;
 
 /**
- * The PCE Repository provides an abstraction layer to executing queries against the PCE
+ * The Assertion Repository provides an abstraction layer to executing queries against the Assertion
  * Collection within MongoDB.
  */
 public interface ClassifiedAssertionRepository extends MongoRepository<ClassifiedAssertion, Long> {

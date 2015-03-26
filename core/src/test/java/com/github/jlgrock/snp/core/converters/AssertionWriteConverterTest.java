@@ -26,8 +26,8 @@ public class AssertionWriteConverterTest {
         when(assertion.getId()).thenReturn((Long) 123l);
         when(assertion.getDesc()).thenReturn("bla");
 
-        PCEWriteConverter pceWriteConverter = new PCEWriteConverter();
-        DBObject dbObj = pceWriteConverter.convert(assertion);
+        AssertionWriteConverter assertionWriteConverter = new AssertionWriteConverter();
+        DBObject dbObj = assertionWriteConverter.convert(assertion);
 
         assertEquals((Long) 123l, dbObj.get(AssertionTags.ID_TAG));
         assertEquals("bla", dbObj.get(AssertionTags.DESCRIPTION_TAG));

@@ -23,7 +23,7 @@ public class AssertionReadConverterTest {
         when(dbObj.get(AssertionTags.ID_TAG)).thenReturn((Long) 123l);
         when(dbObj.get(AssertionTags.DESCRIPTION_TAG)).thenReturn("bla");
 
-        PCEReadConverter patientReadConverter = new PCEReadConverter();
+        AssertionReadConverter patientReadConverter = new AssertionReadConverter();
         Assertion assertion = patientReadConverter.convert(dbObj);
 
         assertEquals((Long) 123l, assertion.getId());
