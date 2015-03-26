@@ -11,9 +11,9 @@ import java.util.List;
  *
  */
 public class StoreClassifiedAssertion {
-	private final AssertionRepository repository;
+	private final ClassifiedAssertionRepository repository;
 		
-	public StoreClassifiedAssertion(final AssertionRepository repositoryIn) {
+	public StoreClassifiedAssertion(final ClassifiedAssertionRepository repositoryIn) {
 		repository = repositoryIn;
 	}
 	
