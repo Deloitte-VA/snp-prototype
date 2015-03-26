@@ -1,6 +1,6 @@
 package com.github.jlgrock.snp.web.controllers;
 
-import com.github.jlgrock.snp.core.data.AssertionRepository;
+import com.github.jlgrock.snp.core.data.ClassifiedAssertionRepository;
 import com.github.jlgrock.snp.core.domain.Assertion;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,13 +20,13 @@ public class AssertionController {
     private static final Logger LOGGER = LoggerFactory.getLogger(AssertionController.class);
 
 
-    private AssertionRepository repository;
+    private ClassifiedAssertionRepository repository;
 
     /**
      * @param repositoryIn the repository to get PCEs from
      */
     @Inject
-    public AssertionController(final AssertionRepository repositoryIn) {
+    public AssertionController(final ClassifiedAssertionRepository repositoryIn) {
         repository = repositoryIn;
     }
 
