@@ -1,6 +1,9 @@
 package com.github.jlgrock.snp.core.data;
 
+import java.util.List;
+
 import com.github.jlgrock.snp.core.domain.PCE;
+import com.github.jlgrock.snp.core.model.parser.Lego;
 
 /**
  * Store PCEs from LEGO document which have been replaced
@@ -14,9 +17,8 @@ public class StorePCE {
 		repository = repositoryIn;
 	}
 	
-	public void save(final String classifierID) {
+	public void save(final List<Lego> legos, final String classifierID) {
 		PCE pce = new PCE();
-		pce.setId(classifierID);
 		repository.save(pce);
 	}
 	

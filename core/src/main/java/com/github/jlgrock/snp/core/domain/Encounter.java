@@ -1,11 +1,11 @@
 package com.github.jlgrock.snp.core.domain;
 
 import com.google.common.base.MoreObjects;
-import com.google.common.base.Objects;
 
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * The domain object that represents a single encounter in a patient visit.  Each encounter can consist
@@ -19,26 +19,6 @@ public class Encounter {
     private Long patientId;
 
     @Override
-    public boolean equals(final Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Encounter that = (Encounter) o;
-
-        return Objects.equal(id, that.id) &&
-                Objects.equal(patientId, that.patientId) &&
-                Objects.equal(date, that.date) &&
-                Objects.equal(type, that.type) &&
-                Objects.equal(reasonForVisit, that.reasonForVisit) &&
-                Objects.equal(observations, that.observations);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(id, patientId, date, type, reasonForVisit, observations);
-    }
-
-    @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
                 .add("id", id)
@@ -48,6 +28,28 @@ public class Encounter {
                 .add("reasonForVisit", reasonForVisit)
                 .add("observations", observations)
                 .toString();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, patientId, date, type, reasonForVisit, observations);
+    }
+
+    @Override
+    public boolean equals(final Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        final Encounter other = (Encounter) obj;
+        return Objects.equals(this.id, other.id)
+                && Objects.equals(this.patientId, other.patientId)
+                && Objects.equals(this.date, other.date)
+                && Objects.equals(this.type, other.type)
+                && Objects.equals(this.reasonForVisit, other.reasonForVisit)
+                && Objects.equals(this.observations, other.observations);
     }
 
     @NotNull

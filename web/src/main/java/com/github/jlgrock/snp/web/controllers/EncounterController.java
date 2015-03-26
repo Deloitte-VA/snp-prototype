@@ -16,7 +16,6 @@ import javax.ws.rs.core.MediaType;
 /**
  * The Controller serving up domain objects for Encounter objects.
  */
-
 @Path("/encounter")
 public class EncounterController {
 
@@ -24,8 +23,12 @@ public class EncounterController {
    
     private final EncounterRepository repository;
 
+    /**
+     * Default constructor.
+     * @param repositoryIn the repository that is used to get repository objects
+     */
     @Inject
-    EncounterController(final EncounterRepository repositoryIn) {
+    public EncounterController(final EncounterRepository repositoryIn) {
         repository = repositoryIn;
     }
 

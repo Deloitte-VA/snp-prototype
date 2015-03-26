@@ -1,4 +1,4 @@
-package com.github.jlgrock.integration.sample;
+package com.github.jlgrock.snp.integration.sample;
 
 import com.github.jlgrock.snp.core.sample.PocDemo;
 import org.glassfish.hk2.api.ServiceLocator;
