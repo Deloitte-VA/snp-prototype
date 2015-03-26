@@ -1,9 +1,7 @@
 package com.github.jlgrock.snp.core.data;
 
 import com.github.jlgrock.snp.core.domain.ClassifiedAssertion;
-import com.github.jlgrock.snp.core.model.parser.Lego;
-
-import java.util.List;
+import com.github.jlgrock.snp.core.domain.Patient;
 
 /**
  * Store PCEs from LEGO document which have been replaced
@@ -11,15 +9,21 @@ import java.util.List;
  *
  */
 public class StoreClassifiedAssertion {
-	private final ClassifiedAssertionRepository repository;
-		
-	public StoreClassifiedAssertion(final ClassifiedAssertionRepository repositoryIn) {
-		repository = repositoryIn;
+	private final ClassifiedAssertionRepository classifiedAssertionRepository;
+	private final PatientRepository patientRepository;
+	
+	public StoreClassifiedAssertion(final ClassifiedAssertionRepository classifiedAssertionRepositoryIn,
+			PatientRepository patientRepositoryIn) {
+		classifiedAssertionRepository = classifiedAssertionRepositoryIn;
+		patientRepository = patientRepositoryIn;
 	}
 	
-	public void save(final List<Lego> legos, final String classifierID) {
+	public void save(final Long patientId, final String classifierID) {
 		ClassifiedAssertion classifiedAssertion = new ClassifiedAssertion();
-		repository.save(classifiedAssertion);
+		Patient patient = patientRepository.findOne(patientId);
+		if(patient != null) {
+			classifiedAssertionRepository.save(classifiedAssertion);
+		}		
 	}
 	
 }
