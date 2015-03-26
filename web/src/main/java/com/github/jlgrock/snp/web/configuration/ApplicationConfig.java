@@ -2,6 +2,8 @@ package com.github.jlgrock.snp.web.configuration;
 
 import io.dropwizard.jersey.jackson.JacksonMessageBodyProvider;
 import io.dropwizard.jersey.jackson.JsonProcessingExceptionMapper;
+import org.glassfish.hk2.api.ServiceLocator;
+import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.media.multipart.MultiPartFeature;
 import org.glassfish.jersey.server.ResourceConfig;
@@ -22,6 +24,9 @@ public class ApplicationConfig extends ResourceConfig {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ApplicationConfig.class);
 
+    // won't be initialized until onStartup()
+    ServiceLocator serviceLocator;
+
     /**
      * Sets up all of the standard features.
      */
@@ -30,6 +35,7 @@ public class ApplicationConfig extends ResourceConfig {
 
         // Register Features
 
+        //register(Binder.class);
         // Feature allowing for Multipart file uploads
         register(MultiPartFeature.class);
 
@@ -42,12 +48,27 @@ public class ApplicationConfig extends ResourceConfig {
         // Feature allowing jackson to use additional annotations and validations
         register(new JacksonMessageBodyProvider(JacksonConfig.newObjectMapper(), Validation.buildDefaultValidatorFactory().getValidator()));
 
-        // instruct jackson to know where the resources/controllers are
-    	packages("com.github.jlgrock.snp.web");
-
         // Enable Tracing support.
         property(ServerProperties.TRACING, "ALL");
+
+        packages("com.github.jlgrock.snp.web");
+        //doesn't work
+        // ServiceLocator locator = ServiceLocatorUtilities.createAndPopulateServiceLocator();
+
+        //doesn't work
+        //register(EncounterRepository.class);
+
+        // TODO this is supposed to work with just the packages(String...) function, but it doesn't seem to be working.
+        // The scan of packages doesn't seem to be working, so I have to create an abstract binder to bind classes
+        register(new AbstractBinder() {
+            @Override
+            protected void configure() {
+                //bind(EncounterRepositoryImpl.class).to(EncounterRepository.class);
+
+            }
+        });
     }
+
 
     /**
      * Create and return an application configuration, for use in starting a jersey server.
@@ -56,5 +77,6 @@ public class ApplicationConfig extends ResourceConfig {
     public static ResourceConfig createApp() {
         return new ApplicationConfig();
     }
+
 }
 
