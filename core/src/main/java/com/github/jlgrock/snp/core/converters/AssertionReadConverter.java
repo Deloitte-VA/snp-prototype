@@ -13,7 +13,7 @@ import javax.inject.Named;
  */
 @Service
 @Named
-public class PCEReadConverter implements ReadConverter<DBObject, Assertion> {
+public class AssertionReadConverter implements ReadConverter<DBObject, Assertion> {
     @Override
     public Assertion convert(final DBObject source) {
         Assertion assertion = new Assertion();

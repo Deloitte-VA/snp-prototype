@@ -1,8 +1,9 @@
 package com.github.jlgrock.snp.web.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.github.jlgrock.snp.core.data.AssertionRepository;
+import com.github.jlgrock.snp.core.data.ClassifiedAssertionRepository;
 import com.github.jlgrock.snp.core.domain.Assertion;
+import com.github.jlgrock.snp.core.domain.ClassifiedAssertion;
 import com.github.jlgrock.snp.web.configuration.JacksonConfig;
 import org.glassfish.hk2.api.Factory;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
@@ -22,10 +23,10 @@ import static org.testng.Assert.assertEquals;
 public class AssertionControllerTest extends GenericControllerTest {
 	
 	@Mock
-	private Assertion assertion;
+	private ClassifiedAssertion assertion;
 	
 	@Mock
-	private AssertionRepository assertionRepository;
+	private ClassifiedAssertionRepository classifiedAssertionRepository;
 	
 	private AssertionController assertionController;
 
@@ -36,34 +37,34 @@ public class AssertionControllerTest extends GenericControllerTest {
         application.register(new AbstractBinder() {
             @Override
             protected void configure() {
-                bindFactory(new Factory<AssertionRepository>() {
+                bindFactory(new Factory<ClassifiedAssertionRepository>() {
                     @Override
-                    public AssertionRepository provide() {
-                        return assertionRepository;
+                    public ClassifiedAssertionRepository provide() {
+                        return classifiedAssertionRepository;
                     }
 
                     @Override
-                    public void dispose(AssertionRepository instance) {
+                    public void dispose(ClassifiedAssertionRepository instance) {
                     }
-                }).to(AssertionRepository.class);
+                }).to(ClassifiedAssertionRepository.class);
             }
         });
     }
 
     @Test
     public void testGetPce() {
-    	Mockito.when(assertionRepository.findOne(assertion.getId())).thenReturn(assertion);
-        assertionController = new AssertionController(assertionRepository);
-    	Assertion actual = assertionController.getPce(assertion.getId());
+    	Mockito.when(classifiedAssertionRepository.findOne(assertion.getId())).thenReturn(assertion);
+        assertionController = new AssertionController(classifiedAssertionRepository);
+    	Assertion actual = assertionController.getAssertion(assertion.getId());
 
     	assertEquals(actual, assertion);
     }
 
     @Test
     public void testGetPatientRestCall() throws JsonProcessingException {
-        Assertion assertionTemp = new Assertion();
+        ClassifiedAssertion assertionTemp = new ClassifiedAssertion();
         assertionTemp.setId(1l);
-        Mockito.when(assertionRepository.findOne(Mockito.any())).thenReturn(assertionTemp);
+        Mockito.when(classifiedAssertionRepository.findOne(Mockito.any())).thenReturn(assertionTemp);
         final WebTarget target = target("pce/1");
         String response = target.request().get(String.class);
         String serialized = JacksonConfig.newObjectMapper().writeValueAsString(assertionTemp);

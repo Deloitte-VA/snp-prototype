@@ -4,7 +4,7 @@ import com.github.jlgrock.snp.core.domain.ClassifiedAssertion;
 import com.github.jlgrock.snp.core.domain.Patient;
 
 /**
- * Store PCEs from LEGO document which have been replaced
+ * Store Assertions from LEGO document which have been replaced
  * with a classifier ID to the MongoDB
  *
  */

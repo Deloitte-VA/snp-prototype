@@ -42,7 +42,7 @@ public class AssertionTest {
         assertNotEquals(pc1.getId(), pc2.getId());
         assertNotEquals(pc1.getDesc(), pc2.getDesc());
 
-        assertEquals("PCE{id=201521, desc=Touchdown}", pc1.toString());
+        assertEquals("Assertion{id=201521, desc=Touchdown}", pc1.toString());
         assertNotEquals(pc1.hashCode(), pc2.hashCode());
 
     }
