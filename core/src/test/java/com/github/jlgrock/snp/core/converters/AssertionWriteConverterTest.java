@@ -1,6 +1,6 @@
 package com.github.jlgrock.snp.core.converters;
 
-import com.github.jlgrock.snp.core.data.PCETags;
+import com.github.jlgrock.snp.core.data.AssertionTags;
 import com.github.jlgrock.snp.core.domain.Assertion;
 import com.mongodb.DBObject;
 import org.testng.annotations.Test;
@@ -29,8 +29,8 @@ public class AssertionWriteConverterTest {
         PCEWriteConverter pceWriteConverter = new PCEWriteConverter();
         DBObject dbObj = pceWriteConverter.convert(assertion);
 
-        assertEquals((Long) 123l, dbObj.get(PCETags.ID_TAG));
-        assertEquals("bla", dbObj.get(PCETags.DESCRIPTION_TAG));
+        assertEquals((Long) 123l, dbObj.get(AssertionTags.ID_TAG));
+        assertEquals("bla", dbObj.get(AssertionTags.DESCRIPTION_TAG));
 
     }
 }

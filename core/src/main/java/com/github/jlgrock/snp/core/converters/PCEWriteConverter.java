@@ -1,7 +1,7 @@
 package com.github.jlgrock.snp.core.converters;
 
 import com.github.jlgrock.snp.apis.converters.WriteConverter;
-import com.github.jlgrock.snp.core.data.PCETags;
+import com.github.jlgrock.snp.core.data.AssertionTags;
 import com.github.jlgrock.snp.core.domain.Assertion;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
@@ -18,8 +18,8 @@ public class PCEWriteConverter implements WriteConverter<Assertion, DBObject> {
     @Override
     public DBObject convert(final Assertion source) {
         DBObject dbo = new BasicDBObject();
-        dbo.put(PCETags.ID_TAG, source.getId());
-        dbo.put(PCETags.DESCRIPTION_TAG, source.getDesc());
+        dbo.put(AssertionTags.ID_TAG, source.getId());
+        dbo.put(AssertionTags.DESCRIPTION_TAG, source.getDesc());
         return dbo;
 
     }

@@ -7,6 +7,6 @@ import com.github.jlgrock.snp.core.domain.Assertion;
  * The PCE Repository provides an abstraction layer to executing queries against the PCE
  * Collection within MongoDB.
  */
-public interface PceRepository extends MongoRepository<Assertion, Long> {
+public interface AssertionRepository extends MongoRepository<Assertion, Long> {
 }
 

@@ -1,6 +1,6 @@
 package com.github.jlgrock.snp.core.converters;
 
-import com.github.jlgrock.snp.core.data.PCETags;
+import com.github.jlgrock.snp.core.data.AssertionTags;
 import com.github.jlgrock.snp.core.domain.Assertion;
 import com.mongodb.DBObject;
 import org.testng.annotations.Test;
@@ -20,8 +20,8 @@ public class AssertionReadConverterTest {
     @Test
     public void testConvert() {
         DBObject dbObj = mock(DBObject.class);
-        when(dbObj.get(PCETags.ID_TAG)).thenReturn((Long) 123l);
-        when(dbObj.get(PCETags.DESCRIPTION_TAG)).thenReturn("bla");
+        when(dbObj.get(AssertionTags.ID_TAG)).thenReturn((Long) 123l);
+        when(dbObj.get(AssertionTags.DESCRIPTION_TAG)).thenReturn("bla");
 
         PCEReadConverter patientReadConverter = new PCEReadConverter();
         Assertion assertion = patientReadConverter.convert(dbObj);

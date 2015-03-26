@@ -1,7 +1,7 @@
 package com.github.jlgrock.snp.web.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.github.jlgrock.snp.core.data.PceRepository;
+import com.github.jlgrock.snp.core.data.AssertionRepository;
 import com.github.jlgrock.snp.core.domain.Assertion;
 import com.github.jlgrock.snp.web.configuration.JacksonConfig;
 import org.glassfish.hk2.api.Factory;
@@ -25,7 +25,7 @@ public class AssertionControllerTest extends GenericControllerTest {
 	private Assertion assertion;
 	
 	@Mock
-	private PceRepository pceRepository;
+	private AssertionRepository assertionRepository;
 	
 	private AssertionController assertionController;
 
@@ -36,24 +36,24 @@ public class AssertionControllerTest extends GenericControllerTest {
         application.register(new AbstractBinder() {
             @Override
             protected void configure() {
-                bindFactory(new Factory<PceRepository>() {
+                bindFactory(new Factory<AssertionRepository>() {
                     @Override
-                    public PceRepository provide() {
-                        return pceRepository;
+                    public AssertionRepository provide() {
+                        return assertionRepository;
                     }
 
                     @Override
-                    public void dispose(PceRepository instance) {
+                    public void dispose(AssertionRepository instance) {
                     }
-                }).to(PceRepository.class);
+                }).to(AssertionRepository.class);
             }
         });
     }
 
     @Test
     public void testGetPce() {
-    	Mockito.when(pceRepository.findOne(assertion.getId())).thenReturn(assertion);
-        assertionController = new AssertionController(pceRepository);
+    	Mockito.when(assertionRepository.findOne(assertion.getId())).thenReturn(assertion);
+        assertionController = new AssertionController(assertionRepository);
     	Assertion actual = assertionController.getPce(assertion.getId());
 
     	assertEquals(actual, assertion);
@@ -63,7 +63,7 @@ public class AssertionControllerTest extends GenericControllerTest {
     public void testGetPatientRestCall() throws JsonProcessingException {
         Assertion assertionTemp = new Assertion();
         assertionTemp.setId(1l);
-        Mockito.when(pceRepository.findOne(Mockito.any())).thenReturn(assertionTemp);
+        Mockito.when(assertionRepository.findOne(Mockito.any())).thenReturn(assertionTemp);
         final WebTarget target = target("pce/1");
         String response = target.request().get(String.class);
         String serialized = JacksonConfig.newObjectMapper().writeValueAsString(assertionTemp);
