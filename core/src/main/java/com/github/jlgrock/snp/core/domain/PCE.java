@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
  */
 public class PCE {
     @NotNull
-    private Long id;
+    private String id;
 
     private String desc;
 
@@ -38,11 +38,11 @@ public class PCE {
                 .toString();
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(final Long pId) {
+    public void setId(final String pId) {
         this.id = pId;
     }
 

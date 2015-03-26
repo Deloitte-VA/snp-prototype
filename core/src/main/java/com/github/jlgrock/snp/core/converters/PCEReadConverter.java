@@ -17,7 +17,7 @@ public class PCEReadConverter implements ReadConverter<DBObject, PCE> {
     @Override
     public PCE convert(final DBObject source) {
         PCE pce = new PCE();
-        pce.setId(((Number) source.get(PCETags.ID_TAG)).longValue());;
+        pce.setId(((String) source.get(PCETags.ID_TAG)));;
         pce.setDesc((String) source.get(PCETags.DESCRIPTION_TAG));
         return pce;
     }

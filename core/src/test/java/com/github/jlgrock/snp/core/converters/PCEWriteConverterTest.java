@@ -23,7 +23,7 @@ public class PCEWriteConverterTest {
         LocalDate dob = LocalDate.now(); //final
 
         PCE pce = mock(PCE.class);
-        when(pce.getId()).thenReturn((Long) 123l);
+        when(pce.getId()).thenReturn("123-456");
         when(pce.getDesc()).thenReturn("bla");
 
         PCEWriteConverter pceWriteConverter = new PCEWriteConverter();
