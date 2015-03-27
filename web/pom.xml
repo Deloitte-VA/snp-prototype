@@ -134,6 +134,20 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <!--
+                        Exclude application.properties and LOG4J since all logging should go through SLF4J
+                        and configuration will be set by the web container.
+                        Note that we're excluding log4j-<version>.jar but keeping
+                        log4j-over-slf4j-<version>.jar
+                      -->
+                    <packagingExcludes>
+                        WEB-INF/lib/commons-logging-*.jar,
+                        %regex[WEB-INF/lib/log4j-(?!over-slf4j).*.jar]
+                        WEB-INF/classes/application.properties
+                        WEB-INF/classes/log4j.properties
+                    </packagingExcludes>
+                </configuration>
 			</plugin>
 
             <plugin>
