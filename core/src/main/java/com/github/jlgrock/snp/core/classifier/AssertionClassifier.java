@@ -1,5 +1,6 @@
 package com.github.jlgrock.snp.core.classifier;
 
+import com.github.jlgrock.snp.core.domain.ClassifiedAssertion;
 import com.github.jlgrock.snp.core.model.parser.Assertion;
 
 /**
@@ -12,5 +13,6 @@ public interface AssertionClassifier {
      * @param assertion
      * @return
      */
-    AssertionClassifier classify(Assertion assertion);
+	ClassifiedAssertion classify(Assertion assertion);
+
 }
