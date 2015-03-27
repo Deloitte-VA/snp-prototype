@@ -2,7 +2,7 @@ package com.github.jlgrock.snp.core.classifier;
 
 import gov.vha.isaac.logic.LogicGraph;
 
-import com.github.jlgrock.snp.core.domain.ClassifiedAssertion;
+import java.util.UUID;
 
 /**
  * Classify Post Coordinated Expressions
@@ -16,5 +16,5 @@ public interface LogicGraphClassifier {
 	 * @param logicGraph LogicGraph
 	 * @return ClassifiedAssertion ClassifiedAssertion
 	 */
-	ClassifiedAssertion classify(LogicGraph logicGraph);
+	UUID classify(LogicGraph logicGraph);
 }

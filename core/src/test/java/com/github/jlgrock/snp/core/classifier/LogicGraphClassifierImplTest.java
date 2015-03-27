@@ -9,6 +9,8 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
+import java.util.UUID;
+
 import static org.testng.Assert.assertNotNull;
 
 public class LogicGraphClassifierImplTest {
@@ -32,7 +34,7 @@ public class LogicGraphClassifierImplTest {
 	@Test
 	public void testClassify() {
         LogicGraphClassifierImpl logicGraphClassifier = new LogicGraphClassifierImpl();
-		String classifierID = logicGraphClassifier.classify((createLogicGraph()));
+		UUID classifierID = logicGraphClassifier.classify((createLogicGraph()));
 		assertNotNull(classifierID);
 	}
 	
