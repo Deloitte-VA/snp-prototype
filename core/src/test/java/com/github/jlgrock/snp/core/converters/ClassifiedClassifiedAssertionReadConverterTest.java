@@ -12,7 +12,7 @@ import static org.testng.Assert.assertEquals;
 /**
  *
  */
-public class ClassifiedAssertionReadConverterTest {
+public class ClassifiedClassifiedAssertionReadConverterTest {
 
     /**
      * public function returns void
@@ -23,7 +23,7 @@ public class ClassifiedAssertionReadConverterTest {
         when(dbObj.get(AssertionTags.ID_TAG)).thenReturn((Long) 123l);
         when(dbObj.get(AssertionTags.DESCRIPTION_TAG)).thenReturn("bla");
 
-        AssertionReadConverter patientReadConverter = new AssertionReadConverter();
+        ClassifiedAssertionReadConverter patientReadConverter = new ClassifiedAssertionReadConverter();
         ClassifiedAssertion assertion = patientReadConverter.convert(dbObj);
 
         assertEquals((Long) 123l, assertion.getId());

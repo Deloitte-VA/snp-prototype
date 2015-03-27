@@ -13,7 +13,7 @@ import javax.inject.Named;
  */
 @Service
 @Named
-public class AssertionReadConverter implements ReadConverter<DBObject, ClassifiedAssertion> {
+public class ClassifiedAssertionReadConverter implements ReadConverter<DBObject, ClassifiedAssertion> {
     @Override
     public ClassifiedAssertion convert(final DBObject source) {
         ClassifiedAssertion assertion = new ClassifiedAssertion();

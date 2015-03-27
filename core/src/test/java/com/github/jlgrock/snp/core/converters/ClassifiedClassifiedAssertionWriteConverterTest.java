@@ -14,7 +14,7 @@ import static org.testng.Assert.assertEquals;
 /**
  *
  */
-public class ClassifiedAssertionWriteConverterTest {
+public class ClassifiedClassifiedAssertionWriteConverterTest {
     /**
      * public function returns void
      */
@@ -26,8 +26,8 @@ public class ClassifiedAssertionWriteConverterTest {
         when(assertion.getId()).thenReturn((Long) 123l);
         when(assertion.getDesc()).thenReturn("bla");
 
-        AssertionWriteConverter assertionWriteConverter = new AssertionWriteConverter();
-        DBObject dbObj = assertionWriteConverter.convert(assertion);
+        ClassifiedAssertionWriteConverter classifiedAssertionWriteConverter = new ClassifiedAssertionWriteConverter();
+        DBObject dbObj = classifiedAssertionWriteConverter.convert(assertion);
 
         assertEquals((Long) 123l, dbObj.get(AssertionTags.ID_TAG));
         assertEquals("bla", dbObj.get(AssertionTags.DESCRIPTION_TAG));

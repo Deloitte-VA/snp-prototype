@@ -14,7 +14,7 @@ import javax.inject.Named;
  */
 @Service
 @Named
-public class AssertionWriteConverter implements WriteConverter<ClassifiedAssertion, DBObject> {
+public class ClassifiedAssertionWriteConverter implements WriteConverter<ClassifiedAssertion, DBObject> {
     @Override
     public DBObject convert(final ClassifiedAssertion source) {
         DBObject dbo = new BasicDBObject();
