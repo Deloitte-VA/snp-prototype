@@ -6,7 +6,7 @@ import gov.vha.isaac.logic.LogicGraph;
  * Classify Post Coordinated Expressions
  *
  */
-public interface Classifier {
+public interface LogicGraphClassifier {
 
 	/**
 	 * replace Post Coordinated Expressions with a classifier ID

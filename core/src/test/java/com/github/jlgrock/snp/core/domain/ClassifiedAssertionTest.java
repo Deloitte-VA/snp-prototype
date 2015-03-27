@@ -7,7 +7,7 @@ import static org.testng.Assert.assertNotEquals;
 import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.assertFalse;
 
-public class AssertionTest {
+public class ClassifiedAssertionTest {
     /**
      * public function returns void
      */
@@ -20,8 +20,8 @@ public class AssertionTest {
         Long ln2 = new Long(201522l);
         String st2 = "Field Goal";
 
-        Assertion pc1 = new Assertion();
-        Assertion pc2 = new Assertion();
+        ClassifiedAssertion pc1 = new ClassifiedAssertion();
+        ClassifiedAssertion pc2 = new ClassifiedAssertion();
 
         pc1.setId(ln1);
         pc1.setDesc(st1);
