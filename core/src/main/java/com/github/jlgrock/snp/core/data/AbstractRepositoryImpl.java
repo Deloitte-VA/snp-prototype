@@ -26,53 +26,84 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- *
+ * This is an Abstract implementation of the Spring Framework repository class for Java
  */
 public abstract class AbstractRepositoryImpl<S, T extends Serializable> implements MongoRepository<S, T> {
 
-	public abstract S convertCollection(final DBObject dbObjectin);	
 	
-	public abstract DBObject convertToDBObject(final S s);
+	/**
+	 * 
+	 * @param dbObjectin Data Base Object is an input parameter used in this method
+	 * @return the method returns a Serializable S object as output
+	 */
+	protected abstract S convertCollection(final DBObject dbObjectin);	
 	
+	/**
+	 * 
+	 * @param an s Serializable object is used as an input parameter for this method
+	 * @return the method returns an object of type DBObject
+	 */
+	protected abstract DBObject convertToDBObject(final S s);
+	
+	/**
+	 * LOGGER is used to generate an error message if the database artifacts cannot be accesses
+	 */
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractRepositoryImpl.class);
 	
+    /**
+     * variable of type MongoDbFactory used to create/access an MongoDB instance
+     */
 	private final MongoDbFactory mongoDbFactory;
 
+	/**
+	 * 
+	 * @param mongoDbFactoryIn is set to the parameter mongoDbFactoryIn by the constructor
+	 */
 	protected AbstractRepositoryImpl(final MongoDbFactory mongoDbFactoryIn){
-		
 		mongoDbFactory = mongoDbFactoryIn;
-			
 	}
 	
+	/**
+	 * 
+	 * @return method will return a string 
+	 */
 	protected abstract String getCollection();
 
-
+	/**
+	 * 
+	 * @return method returns a DBCollection object which contains a collection of data from the MongoD instance
+	 */
 	private DBCollection dBCollection(){
        	DB db = null;
     	try {
 			db = mongoDbFactory.db();
 		} catch (DataAccessException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.error("Could not get access to the data.", e);
 		}   
        	return db.getCollection(getCollection());
-
 	}
 	
     @Override
     public Iterable<S> findAll(Sort sort) {
     	List<S> sList = new ArrayList<S>();
 	    DBCollection dbc1 = dBCollection();
-    	BasicDBObject query = new BasicDBObject ("$in", sort); 
+	    if(sort = Sort.ASC){
+	    
+	    	dbc1.find().sort()	
+	    }
+	    else{
+	    	
+	    	
+	    }
+	    	
+    	BasicDBObject query = new BasicDBObject (, sort); 
     	DBCursor x = dbc1.find(query);
         for(DBObject o:x){
         	sList.add(convertCollection(o));
         	}
 		return sList;
     }
-
-    
-    //To Do    
 
     @Override
     public Page<S> findAll(Pageable pageable) {
@@ -88,14 +119,12 @@ public abstract class AbstractRepositoryImpl<S, T extends Serializable> implemen
 
     @Override
     public <S1 extends S> S save(S1 entity) {
- 
     	DBCollection dbc1 = dBCollection();
     	dbc1.save(convertToDBObject(entity));
     }
 
     @Override
     public <S1 extends S> Iterable<S1> save(Iterable<S1> entities) {
-    	
     	DBCollection dbc1 = dBCollection();
         for(S1 o:entities){
     	dbc1.save(convertToDBObject(o));
@@ -105,7 +134,6 @@ public abstract class AbstractRepositoryImpl<S, T extends Serializable> implemen
     @Override
     public S findOne(T t) {
     	List<S> sList = new ArrayList<S>();
-    	
     	DBCollection dbc1 = dBCollection();
     	BasicDBObject query = new BasicDBObject ("$eq", t); 
     	DBObject x = dbc1.findOne(query);
@@ -114,7 +142,6 @@ public abstract class AbstractRepositoryImpl<S, T extends Serializable> implemen
 
     @Override
     public boolean exists(T t) { 
-    	
     	DBCollection dbc1 = dBCollection();
     	BasicDBObject query = new BasicDBObject ("$eq", t); 
     	DBCursor x = dbc1.find(query);
@@ -137,6 +164,7 @@ public abstract class AbstractRepositoryImpl<S, T extends Serializable> implemen
     public Iterable<S> findAll(Iterable<T> ids) {
     	List<S> sList = new ArrayList<S>();
     	DBCollection dbc1 = dBCollection();
+    	BasicDBObject query = new BasicDBObject ("$in", ids); 
     	DBCursor x = dbc1.find(query);
         for(DBObject o:x){
         	sList.add(convertCollection(o));
@@ -146,17 +174,20 @@ public abstract class AbstractRepositoryImpl<S, T extends Serializable> implemen
     
     @Override
     public long count() {
-        return 0;
+    	DBCollection dbc1 = dBCollection();
+    	long x = dbc1.count();
     }
 
     @Override
     public void deleteById(T t) {
-
+    	DBCollection dbc1 = dBCollection();
+    	dbc1.remove(t); 
     }
 
     @Override
     public void delete(S entity) {
-
+    	DBCollection dbc1 = dBCollection();
+    	dbc1.remove(convertToDBObject(entity));    	
     }
 
     @Override
@@ -166,6 +197,10 @@ public abstract class AbstractRepositoryImpl<S, T extends Serializable> implemen
 
     @Override
     public void deleteAll() {
-
+    	DBCollection dbc1 = dBCollection();
+    	DBCursor x = dbc1.find();
+    	while (x.hasNext()) {
+    		dbc1.remove(x.next());
+    	}
     }
 }
