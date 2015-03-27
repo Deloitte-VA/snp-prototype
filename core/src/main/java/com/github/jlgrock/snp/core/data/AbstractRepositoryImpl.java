@@ -6,6 +6,7 @@ import com.github.jlgrock.snp.apis.data.MongoRepository;
 import com.github.jlgrock.snp.apis.data.Page;
 import com.github.jlgrock.snp.apis.data.Pageable;
 import com.github.jlgrock.snp.apis.data.Sort;
+import com.github.jlgrock.snp.apis.domain.MongoDomainObject;
 import com.github.jlgrock.snp.apis.exceptions.DataAccessException;
 import com.github.jlgrock.snp.core.connection.SimpleMongoDbFactory;
 import com.mongodb.BasicDBObject;
@@ -18,6 +19,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import javax.inject.Inject;
@@ -30,7 +32,7 @@ import org.slf4j.LoggerFactory;
 /**
  * This is an Abstract implementation of the Spring Framework repository class for Java
  */
-public abstract class AbstractRepositoryImpl<S extends DomainObject, T extends Serializable> implements MongoRepository<S, T> {
+public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T extends Serializable> implements MongoRepository<S, T> {
 
 	
 	/**
@@ -73,7 +75,7 @@ public abstract class AbstractRepositoryImpl<S extends DomainObject, T extends S
 
 	/**
 	 * 
-	 * @return method returns a DBCollection object which contains a collection of data from the MongoD instance
+	 * @return method returns a DBCollection object which contains a collection of data from the MongoD instance.
 	 */
 	private DBCollection dBCollection(){
        	DB db = null;
@@ -86,11 +88,33 @@ public abstract class AbstractRepositoryImpl<S extends DomainObject, T extends S
        	return db.getCollection(getCollection());
 	}
 
-	private Object serializeId(T obj) {
+	/**
+	 * Determine the id to use.
+	 * @param obj the object to turn into an id
+	 * @return an id that can be serialized.  If it cannot be serialied, the optional is returned and an error is
+	 * logged.
+	 */
+	private Optional<?> serializeId(T obj) {
+		Optional<?> returnval = null;
 		if (obj instanceof Number || obj instanceof Binary || obj instanceof ObjectId || obj instanceof DBObject) {
-			return obj;
+			returnval = Optional.of(obj);
+		} else if (obj instanceof MongoDomainObject) {
+			returnval = Optional.of(((MongoDomainObject) obj).getId());
+		} else {
+			LOGGER.error("Cannot serialize id for class of type " + obj.getClass());
+			return Optional.empty();
 		}
-		return obj.toString();
+		return returnval;
+	}
+
+	private List<?> serializeId(List<T> objs) {
+		List<?> list = new ArrayList<>();
+		for (Object obj : objs) {
+			Optional<?> o = serializeId(obj);
+			if (o.isPresent()) {
+				list.add(o.get());
+			}
+		}
 	}
 	
     @Override

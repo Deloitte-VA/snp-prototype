@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 /**
  *
  */
-public abstract class AbstractMongoDomainObject implements MongoDomainObject {
+public abstract class AbstractMongoDomainObject implements MongoDomainObject<Long> {
     @NotNull
     private Long id;
 
