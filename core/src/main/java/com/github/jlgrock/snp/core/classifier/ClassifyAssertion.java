@@ -1,11 +1,16 @@
 package com.github.jlgrock.snp.core.classifier;
 
-import com.github.jlgrock.snp.core.domain.Assertion;
+import com.github.jlgrock.snp.core.model.parser.Assertion;
 
 /**
  * Classify an entire assertion object
  */
-public class ClassifyAssertion {
+public interface ClassifyAssertion {
 
-    Assertion classify()
+    /**
+     * Classify all of the PCEs within an assertion
+     * @param assertion
+     * @return
+     */
+    ClassifyAssertion classify(Assertion assertion);
 }
