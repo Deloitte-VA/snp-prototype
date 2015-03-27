@@ -22,13 +22,15 @@ import java.util.Set;
 
 import javax.inject.Inject;
 
+import org.bson.types.Binary;
+import org.bson.types.ObjectId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * This is an Abstract implementation of the Spring Framework repository class for Java
  */
-public abstract class AbstractRepositoryImpl<S, T extends Serializable> implements MongoRepository<S, T> {
+public abstract class AbstractRepositoryImpl<S extends DomainObject, T extends Serializable> implements MongoRepository<S, T> {
 
 	
 	/**
@@ -82,6 +84,13 @@ public abstract class AbstractRepositoryImpl<S, T extends Serializable> implemen
 			LOGGER.error("Could not get access to the data.", e);
 		}   
        	return db.getCollection(getCollection());
+	}
+
+	private Object serializeId(T obj) {
+		if (obj instanceof Number || obj instanceof Binary || obj instanceof ObjectId || obj instanceof DBObject) {
+			return obj;
+		}
+		return obj.toString();
 	}
 	
     @Override
@@ -198,7 +207,7 @@ public abstract class AbstractRepositoryImpl<S, T extends Serializable> implemen
     @Override
     public void deleteAll() {
     	DBCollection dbc1 = dBCollection();
-    	DBCursor x = dbc1.find();
+    	DBCursor x = dbc1.refind();
     	while (x.hasNext()) {
     		dbc1.remove(x.next());
     	}

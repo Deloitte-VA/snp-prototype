@@ -3,15 +3,10 @@ package com.github.jlgrock.snp.core.domain;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 
-import javax.validation.constraints.NotNull;
-
 /**
  * The post-coordinated expression and the unique identifier, for reference purposes.
  */
-public class PCE {
-    @NotNull
-    private Long id;
-
+public class PCE extends AbstractMongoDomainObject {
     private String desc;
 
     @Override
@@ -21,29 +16,21 @@ public class PCE {
 
         PCE that = (PCE) o;
 
-        return Objects.equal(id, that.id) &&
+        return Objects.equal(getId(), that.getId()) &&
                 Objects.equal(desc, that.desc);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(id, desc);
+        return Objects.hashCode(getId(), desc);
     }
 
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
-                .add("id", id)
+                .add("id", getId())
                 .add("desc", desc)
                 .toString();
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(final Long pId) {
-        this.id = pId;
     }
 
     public String getDesc() {

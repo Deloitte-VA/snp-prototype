@@ -3,16 +3,13 @@ package com.github.jlgrock.snp.core.domain;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
 
 /**
  * The patient and all of the immediate metadata about the patient.
  */
-public class Patient {
-    @NotNull
-    private Long id;
+public class Patient extends AbstractMongoDomainObject {
 
     private String firstName;
 
@@ -34,7 +31,7 @@ public class Patient {
 
         Patient that = (Patient) o;
 
-        return Objects.equal(id, that.id) &&
+        return Objects.equal(getId(), that.getId()) &&
                 Objects.equal(firstName, that.firstName) &&
                 Objects.equal(middleName, that.middleName) &&
                 Objects.equal(lastName, that.lastName) &&
@@ -46,7 +43,7 @@ public class Patient {
     @Override
     public int hashCode() {
         return Objects.hashCode(
-                id,
+                getId(),
                 firstName,
                 middleName,
                 lastName,
@@ -58,7 +55,7 @@ public class Patient {
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
-                .add("id", id)
+                .add("id", getId())
                 .add("firstName", firstName)
                 .add("middleName", middleName)
                 .add("lastName", lastName)
@@ -66,14 +63,6 @@ public class Patient {
                 .add("gender", gender)
                 .add("race", race)
                 .toString();
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(final Long pId) {
-        id = pId;
     }
 
     public String getFirstName() {
