@@ -1,8 +1,15 @@
 package com.github.jlgrock.snp.core.data;
 
+import java.io.IOException;
+
+import org.ihtsdo.otf.tcc.api.contradiction.ContradictionException;
+
 import com.github.jlgrock.snp.core.model.parser.Expression;
+
 import gov.vha.isaac.logic.LogicGraph;
 import gov.vha.isaac.logic.LogicGraphBuilder;
+import gov.vha.isaac.logic.node.AndNode;
+import gov.vha.isaac.logic.node.RootNode;
 
 /**
  * A Logic Graph Builder specific to Lego documents
@@ -22,10 +29,44 @@ public class LegoLogicGraphBuilder extends LogicGraphBuilder {
 
     @Override
     public void create() {
-        //TODO Prakash's code goes here
+        //TODO LogicGraph creation code goes here
+    	//Look for LegoLogicGraphBuilder constructor method below
     }
 
     public LogicGraph getLogicGraph() {
         return logicGraph;
+    }
+    
+    /**
+     * Constructor for LogicGraph using input parameters from LEGO XML expressions
+     * @param sourceConceptSctid
+     * @param isAboutSctid
+     * @param destinationSctid
+     * @throws IOException
+     * @throws ContradictionException
+     */
+    public LegoLogicGraphBuilder(int sourceConceptSctid,
+            String isAboutSctid, //isAboutUUID,
+            String destinationSctid //destinationUUID
+            ) throws IOException, ContradictionException {
+    	
+    	int sourceConceptNid = sourceConceptSctid;
+    	 //Convert from String to int
+    	int typeConceptNid = Integer.parseInt(isAboutSctid);  //Do we need any converter method call to transform sctid into Nid?
+    	int destinationNid = Integer.parseInt(destinationSctid); //Do we need any converter method call to transform sctid into Nid or seq id?
+    	
+    	 //Add the nodes to the logic graph based on LEGO XML parameters
+    	 //Create root node first
+    	 RootNode root = getRoot();
+    	 //Create AndNode
+         AndNode andNode = And();
+         
+        //For LEGO XML expressions, put SufficientSetNode at the top and AndNode next. For "IS ABOUT" type relationship,
+        //add RoleNodeSomeWithNids as child of AndNode. For the parameters of RoleNodeSomeWithNids, use typeConceptNid and 
+         //ConceptNodeWithNids as parameters.
+         
+         root.addChildren(SufficientSet(andNode));
+         andNode.addChildren(SomeRole(typeConceptNid, Concept(destinationNid)));
+        
     }
 }
