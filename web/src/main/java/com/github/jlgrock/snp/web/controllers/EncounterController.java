@@ -2,44 +2,46 @@ package com.github.jlgrock.snp.web.controllers;
 
 import com.github.jlgrock.snp.core.data.EncounterRepository;
 import com.github.jlgrock.snp.core.domain.Encounter;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import javax.inject.Inject;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
 /**
  * The Controller serving up domain objects for Encounter objects.
  */
-
-@RestController
-@RequestMapping("/encounter")
+@Path("/encounter")
 public class EncounterController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(EncounterController.class);
    
     private final EncounterRepository repository;
 
+    /**
+     * Default constructor.
+     * @param repositoryIn the repository that is used to get repository objects
+     */
     @Inject
-    EncounterController(final EncounterRepository repositoryIn) {
+    public EncounterController(final EncounterRepository repositoryIn) {
         repository = repositoryIn;
     }
 
     /**
-     * 
-     * @param pid encounter id used for search
+     * Returns the encounter for the respective <code>id</code>.
+     * @param id encounter id used for search
      * @return returns an encounter
      */
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    @ResponseBody
-    public Encounter getEncounter(@PathVariable final Long pid) {
+    @GET @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Encounter getEncounter(@PathParam("id") final Long id) {
         LOGGER.debug("getting encounter");
-        return repository.findOne(pid);
+        return repository.findOne(id);
     }
     
     

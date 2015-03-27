@@ -1,6 +1,6 @@
 package com.github.jlgrock.snp.core.defaultconfig;
 
-import com.github.jlgrock.snp.apis.connection.MongoDbConfiguration;
+import com.github.jlgrock.snp.apis.connection.configuration.MongoDbConfiguration;
 import com.mongodb.MongoCredential;
 import com.mongodb.ServerAddress;
 import org.jvnet.hk2.annotations.Service;
@@ -12,7 +12,8 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * The configuration object that will parse a properties file on the classpath and use it to connect to the database.
+ * The default configuration object for mongodb.  This will parse a properties
+ * file on the classpath and use it to connect to the database.
  */
 @Service
 public class MongoConfig implements MongoDbConfiguration {

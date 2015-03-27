@@ -68,14 +68,13 @@ public abstract class AbstractRepositoryImpl<S, T extends Serializable> implemen
 	 * @return method will return a string 
 	 */
 	protected abstract String getCollection();
-	
+
 	/**
 	 * 
 	 * @return method returns a DBCollection object which contains a collection of data from the MongoD instance
 	 */
 	private DBCollection dBCollection(){
-		
-       	DB db;
+       	DB db = null;
     	try {
 			db = mongoDbFactory.db();
 		} catch (DataAccessException e) {
@@ -91,15 +90,12 @@ public abstract class AbstractRepositoryImpl<S, T extends Serializable> implemen
 	    DBCollection dbc1 = dBCollection();
 	    if(sort = Sort.ASC){
 	    
-	    	
 	    	dbc1.find().sort()	
 	    }
 	    else{
 	    	
 	    	
 	    }
-	    	
-	    	
 	    	
     	BasicDBObject query = new BasicDBObject (, sort); 
     	DBCursor x = dbc1.find(query);
@@ -108,9 +104,6 @@ public abstract class AbstractRepositoryImpl<S, T extends Serializable> implemen
         	}
 		return sList;
     }
-
-    
-    //To Do    
 
     @Override
     public Page<S> findAll(Pageable pageable) {
@@ -126,14 +119,12 @@ public abstract class AbstractRepositoryImpl<S, T extends Serializable> implemen
 
     @Override
     public <S1 extends S> S save(S1 entity) {
- 
     	DBCollection dbc1 = dBCollection();
     	dbc1.save(convertToDBObject(entity));
     }
 
     @Override
     public <S1 extends S> Iterable<S1> save(Iterable<S1> entities) {
-    	
     	DBCollection dbc1 = dBCollection();
         for(S1 o:entities){
     	dbc1.save(convertToDBObject(o));
@@ -143,7 +134,6 @@ public abstract class AbstractRepositoryImpl<S, T extends Serializable> implemen
     @Override
     public S findOne(T t) {
     	List<S> sList = new ArrayList<S>();
-    	
     	DBCollection dbc1 = dBCollection();
     	BasicDBObject query = new BasicDBObject ("$eq", t); 
     	DBObject x = dbc1.findOne(query);
@@ -152,7 +142,6 @@ public abstract class AbstractRepositoryImpl<S, T extends Serializable> implemen
 
     @Override
     public boolean exists(T t) { 
-    	
     	DBCollection dbc1 = dBCollection();
     	BasicDBObject query = new BasicDBObject ("$eq", t); 
     	DBCursor x = dbc1.find(query);
@@ -175,6 +164,7 @@ public abstract class AbstractRepositoryImpl<S, T extends Serializable> implemen
     public Iterable<S> findAll(Iterable<T> ids) {
     	List<S> sList = new ArrayList<S>();
     	DBCollection dbc1 = dBCollection();
+    	BasicDBObject query = new BasicDBObject ("$in", ids); 
     	DBCursor x = dbc1.find(query);
         for(DBObject o:x){
         	sList.add(convertCollection(o));
@@ -185,17 +175,19 @@ public abstract class AbstractRepositoryImpl<S, T extends Serializable> implemen
     @Override
     public long count() {
     	DBCollection dbc1 = dBCollection();
-    	DBCursor x = dbc1.count();
+    	long x = dbc1.count();
     }
 
     @Override
     public void deleteById(T t) {
-
+    	DBCollection dbc1 = dBCollection();
+    	dbc1.remove(t); 
     }
 
     @Override
     public void delete(S entity) {
-
+    	DBCollection dbc1 = dBCollection();
+    	dbc1.remove(convertToDBObject(entity));    	
     }
 
     @Override
@@ -205,6 +197,10 @@ public abstract class AbstractRepositoryImpl<S, T extends Serializable> implemen
 
     @Override
     public void deleteAll() {
-
+    	DBCollection dbc1 = dBCollection();
+    	DBCursor x = dbc1.find();
+    	while (x.hasNext()) {
+    		dbc1.remove(x.next());
+    	}
     }
 }
