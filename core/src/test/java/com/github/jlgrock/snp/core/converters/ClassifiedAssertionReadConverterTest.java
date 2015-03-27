@@ -1,7 +1,7 @@
 package com.github.jlgrock.snp.core.converters;
 
 import com.github.jlgrock.snp.core.data.AssertionTags;
-import com.github.jlgrock.snp.core.domain.Assertion;
+import com.github.jlgrock.snp.core.domain.ClassifiedAssertion;
 import com.mongodb.DBObject;
 import org.testng.annotations.Test;
 
@@ -12,7 +12,7 @@ import static org.testng.Assert.assertEquals;
 /**
  *
  */
-public class AssertionReadConverterTest {
+public class ClassifiedAssertionReadConverterTest {
 
     /**
      * public function returns void
@@ -24,7 +24,7 @@ public class AssertionReadConverterTest {
         when(dbObj.get(AssertionTags.DESCRIPTION_TAG)).thenReturn("bla");
 
         AssertionReadConverter patientReadConverter = new AssertionReadConverter();
-        Assertion assertion = patientReadConverter.convert(dbObj);
+        ClassifiedAssertion assertion = patientReadConverter.convert(dbObj);
 
         assertEquals((Long) 123l, assertion.getId());
         assertEquals("bla", assertion.getDesc());

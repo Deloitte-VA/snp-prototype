@@ -2,7 +2,7 @@ package com.github.jlgrock.snp.core.converters;
 
 import com.github.jlgrock.snp.apis.converters.ReadConverter;
 import com.github.jlgrock.snp.core.data.AssertionTags;
-import com.github.jlgrock.snp.core.domain.Assertion;
+import com.github.jlgrock.snp.core.domain.ClassifiedAssertion;
 import com.mongodb.DBObject;
 import org.jvnet.hk2.annotations.Service;
 
@@ -13,10 +13,10 @@ import javax.inject.Named;
  */
 @Service
 @Named
-public class AssertionReadConverter implements ReadConverter<DBObject, Assertion> {
+public class AssertionReadConverter implements ReadConverter<DBObject, ClassifiedAssertion> {
     @Override
-    public Assertion convert(final DBObject source) {
-        Assertion assertion = new Assertion();
+    public ClassifiedAssertion convert(final DBObject source) {
+        ClassifiedAssertion assertion = new ClassifiedAssertion();
         assertion.setId(((Number) source.get(AssertionTags.ID_TAG)).longValue());
         assertion.setDesc((String) source.get(AssertionTags.DESCRIPTION_TAG));
         return assertion;

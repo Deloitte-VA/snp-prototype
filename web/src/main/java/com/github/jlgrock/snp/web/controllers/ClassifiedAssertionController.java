@@ -1,7 +1,7 @@
 package com.github.jlgrock.snp.web.controllers;
 
 import com.github.jlgrock.snp.core.data.ClassifiedAssertionRepository;
-import com.github.jlgrock.snp.core.domain.Assertion;
+import com.github.jlgrock.snp.core.domain.ClassifiedAssertion;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,8 +16,8 @@ import javax.ws.rs.core.MediaType;
  * The Controller serving up domain objects for Assertion objects.
  */
 @Path("/assertion")
-public class AssertionController {
-    private static final Logger LOGGER = LoggerFactory.getLogger(AssertionController.class);
+public class ClassifiedAssertionController {
+    private static final Logger LOGGER = LoggerFactory.getLogger(ClassifiedAssertionController.class);
 
 
     private ClassifiedAssertionRepository repository;
@@ -26,7 +26,7 @@ public class AssertionController {
      * @param repositoryIn the repository to get Assertion objects from
      */
     @Inject
-    public AssertionController(final ClassifiedAssertionRepository repositoryIn) {
+    public ClassifiedAssertionController(final ClassifiedAssertionRepository repositoryIn) {
         repository = repositoryIn;
     }
 
@@ -38,7 +38,7 @@ public class AssertionController {
      */
     @GET @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Assertion getAssertion(@PathParam("id") final Long id) {
+    public ClassifiedAssertion getAssertion(@PathParam("id") final Long id) {
         LOGGER.debug("getting Assertion");
         return repository.findOne(id);
     }

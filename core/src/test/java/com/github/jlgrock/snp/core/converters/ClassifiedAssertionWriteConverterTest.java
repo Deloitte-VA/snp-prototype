@@ -1,7 +1,7 @@
 package com.github.jlgrock.snp.core.converters;
 
 import com.github.jlgrock.snp.core.data.AssertionTags;
-import com.github.jlgrock.snp.core.domain.Assertion;
+import com.github.jlgrock.snp.core.domain.ClassifiedAssertion;
 import com.mongodb.DBObject;
 import org.testng.annotations.Test;
 
@@ -14,7 +14,7 @@ import static org.testng.Assert.assertEquals;
 /**
  *
  */
-public class AssertionWriteConverterTest {
+public class ClassifiedAssertionWriteConverterTest {
     /**
      * public function returns void
      */
@@ -22,7 +22,7 @@ public class AssertionWriteConverterTest {
     public void testConvert() {
         LocalDate dob = LocalDate.now(); //final
 
-        Assertion assertion = mock(Assertion.class);
+        ClassifiedAssertion assertion = mock(ClassifiedAssertion.class);
         when(assertion.getId()).thenReturn((Long) 123l);
         when(assertion.getDesc()).thenReturn("bla");
 
