@@ -2,7 +2,7 @@ package com.github.jlgrock.snp.core.converters;
 
 import com.github.jlgrock.snp.apis.converters.WriteConverter;
 import com.github.jlgrock.snp.core.data.AssertionTags;
-import com.github.jlgrock.snp.core.domain.Assertion;
+import com.github.jlgrock.snp.core.domain.ClassifiedAssertion;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 import org.jvnet.hk2.annotations.Service;
@@ -14,9 +14,9 @@ import javax.inject.Named;
  */
 @Service
 @Named
-public class AssertionWriteConverter implements WriteConverter<Assertion, DBObject> {
+public class ClassifiedAssertionWriteConverter implements WriteConverter<ClassifiedAssertion, DBObject> {
     @Override
-    public DBObject convert(final Assertion source) {
+    public DBObject convert(final ClassifiedAssertion source) {
         DBObject dbo = new BasicDBObject();
         dbo.put(AssertionTags.ID_TAG, source.getId());
         dbo.put(AssertionTags.DESCRIPTION_TAG, source.getDesc());
