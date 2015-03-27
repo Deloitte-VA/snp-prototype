@@ -13,5 +13,6 @@ public interface AssertionClassifier {
      * @param assertion
      * @return
      */
-    ClassifiedAssertion classify(Assertion assertion);
+	ClassifiedAssertion classify(Assertion assertion);
+
 }

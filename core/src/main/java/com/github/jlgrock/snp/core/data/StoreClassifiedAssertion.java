@@ -18,8 +18,7 @@ public class StoreClassifiedAssertion {
 		patientRepository = patientRepositoryIn;
 	}
 	
-	public void save(final Long patientId, final String classifierID) {
-		ClassifiedAssertion classifiedAssertion = new ClassifiedAssertion();
+	public void save(final Long patientId, final ClassifiedAssertion classifiedAssertion) {
 		Patient patient = patientRepository.findOne(patientId);
 		if(patient != null) {
 			classifiedAssertionRepository.save(classifiedAssertion);

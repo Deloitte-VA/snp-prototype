@@ -26,8 +26,8 @@ public class LogicGraphClassifierImpl implements LogicGraphClassifier {
 		legoLogicGraphBuilder.create();
 		legoLogicGraphBuilder.getLogicGraph();
 
-		//TODO more here for Shane
-
+		// TODO : call a service that takes a LogicGraph and returns a classifier ID
+		//classifierID = vaLogicService.classify(logicGraph);
 		return null;
 	}
 	

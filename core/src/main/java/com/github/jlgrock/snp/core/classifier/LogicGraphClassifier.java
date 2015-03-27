@@ -14,7 +14,7 @@ public interface LogicGraphClassifier {
 	 * replace Post Coordinated Expressions with a classifier ID
 	 * 
 	 * @param logicGraph LogicGraph
-	 * @return ClassifiedAssertion ClassifiedAssertion
+	 * @return UUID UUID
 	 */
 	UUID classify(LogicGraph logicGraph);
 }
