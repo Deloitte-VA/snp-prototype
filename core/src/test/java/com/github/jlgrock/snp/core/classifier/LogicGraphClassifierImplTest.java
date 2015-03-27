@@ -1,17 +1,17 @@
 package com.github.jlgrock.snp.core.classifier;
 
-import static org.testng.Assert.assertNotNull;
 import gov.vha.isaac.logic.LogicGraph;
 import gov.vha.isaac.logic.Node;
 import gov.vha.isaac.lookup.constants.Constants;
 import gov.vha.isaac.ochre.api.LookupService;
 import gov.vha.isaac.ochre.api.tree.TreeNodeVisitData;
-
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
-public class PCEClassifierTest {
+import static org.testng.Assert.assertNotNull;
+
+public class LogicGraphClassifierImplTest {
 	
 	@BeforeSuite
     public void setUpSuite() throws Exception {
@@ -31,8 +31,8 @@ public class PCEClassifierTest {
     
 	@Test
 	public void testClassify() {
-		PCEClassifier pceClassifier = new PCEClassifier();
-		String classifierID = pceClassifier.classify((createLogicGraph()));
+        LogicGraphClassifierImpl logicGraphClassifier = new LogicGraphClassifierImpl();
+		String classifierID = logicGraphClassifier.classify((createLogicGraph()));
 		assertNotNull(classifierID);
 	}
 	

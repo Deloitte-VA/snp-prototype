@@ -8,7 +8,7 @@ import com.github.jlgrock.snp.core.domain.ClassifiedAssertion;
  * Classify Post Coordinated Expressions
  *
  */
-public interface Classifier {
+public interface LogicGraphClassifier {
 
 	/**
 	 * replace Post Coordinated Expressions with a classifier ID

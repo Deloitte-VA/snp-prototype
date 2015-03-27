@@ -8,7 +8,7 @@ import com.github.jlgrock.snp.core.domain.ClassifiedAssertion;
  * Replace Post Coordinated Expressions in Logic Graph with Classifier ID
  *
  */
-public class PCEClassifier implements Classifier {
+public class LogicGraphClassifierImpl implements LogicGraphClassifier {
 
 	@Override
 	public ClassifiedAssertion classify(final LogicGraph logicGraph) {
