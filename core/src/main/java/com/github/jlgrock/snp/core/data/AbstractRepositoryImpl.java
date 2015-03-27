@@ -30,21 +30,20 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * This is an Abstract implementation of the Spring Framework repository class for Java
+ * This is an Abstract implementation of a repository class for Java
  */
 public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T extends Serializable> implements MongoRepository<S, T> {
 
-	
 	/**
-	 * 
+	 * Changes a DBObject into a domain object
 	 * @param dbObjectin Data Base Object is an input parameter used in this method
 	 * @return the method returns a Serializable S object as output
 	 */
 	protected abstract S convertCollection(final DBObject dbObjectin);	
 	
 	/**
-	 * 
-	 * @param an s Serializable object is used as an input parameter for this method
+	 * Changes an S object into a DBObject
+	 * @param the s Serializable object is used as an input parameter for this method
 	 * @return the method returns an object of type DBObject
 	 */
 	protected abstract DBObject convertToDBObject(final S s);
@@ -55,13 +54,13 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractRepositoryImpl.class);
 	
     /**
-     * variable of type MongoDbFactory used to create/access an MongoDB instance
+     * variable of type MongoDbFactory is used to create/access a MongoDB instance
      */
 	private final MongoDbFactory mongoDbFactory;
 
 	/**
-	 * 
-	 * @param mongoDbFactoryIn is set to the parameter mongoDbFactoryIn by the constructor
+	 * Constructor used to set values for class variables
+	 * @param thhe variable mongoDbFactory is set to the parameter mongoDbFactoryIn by the constructor
 	 */
 	protected AbstractRepositoryImpl(final MongoDbFactory mongoDbFactoryIn){
 		mongoDbFactory = mongoDbFactoryIn;
@@ -75,7 +74,7 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
 
 	/**
 	 * 
-	 * @return method returns a DBCollection object which contains a collection of data from the MongoD instance.
+	 * @return method returns a DBCollection object which contains a collection of data from a MongoDB instance.
 	 */
 	private DBCollection dBCollection(){
        	DB db = null;
@@ -91,7 +90,7 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
 	/**
 	 * Determine the id to use.
 	 * @param obj the object to turn into an id
-	 * @return an id that can be serialized.  If it cannot be serialied, the optional is returned and an error is
+	 * @return an id that can be serialized.  If it cannot be serialized, the optional is returned and an error is
 	 * logged.
 	 */
 	private Optional<?> serializeId(T obj) {
@@ -166,7 +165,6 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
 
     @Override
     public S findOne(T t) {
-    	List<S> sList = new ArrayList<S>();
     	DBCollection dbc1 = dBCollection();
     	BasicDBObject query = new BasicDBObject ("$eq", t); 
     	DBObject x = dbc1.findOne(query);
@@ -214,7 +212,8 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
     @Override
     public void deleteById(T t) {
     	DBCollection dbc1 = dBCollection();
-    	dbc1.remove(t); 
+    	BasicDBObject query = new BasicDBObject("$eq", t);
+    	dbc1.findAndRemove(query); 
     }
 
     @Override
@@ -225,15 +224,15 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
 
     @Override
     public void delete(Iterable<? extends S> entities) {
-
+    	DBCollection dbc1 = dBCollection();
+    	BasicDBObject query = new BasicDBObject("$in", entities);
+    	dbc1.findAndRemove(query);    
     }
 
     @Override
     public void deleteAll() {
     	DBCollection dbc1 = dBCollection();
-    	DBCursor x = dbc1.refind();
-    	while (x.hasNext()) {
-    		dbc1.remove(x.next());
+    	BasicDBObject query = new BasicDBObject();
+    	dbc1.findAndRemove(query);   		
     	}
     }
-}
