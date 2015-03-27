@@ -125,4 +125,5 @@ public interface MongoRepository<DT, ID extends Serializable> {
      * Deletes all entities managed by the repository.
      */
     void deleteAll();
+
 }
