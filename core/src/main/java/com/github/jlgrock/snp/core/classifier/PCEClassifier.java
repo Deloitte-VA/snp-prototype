@@ -11,9 +11,11 @@ import com.github.jlgrock.snp.core.domain.ClassifiedAssertion;
 public class PCEClassifier implements Classifier {
 
 	@Override
-	public String classify(final LogicGraph logicGraph) {
-		// TODO call a service that takes a LogicGraph and returns a classifier ID
-		return null;
+	public ClassifiedAssertion classify(final LogicGraph logicGraph) {
+		String classifierID = "";
+		// TODO : call a service that takes a LogicGraph and returns a classifier ID
+		//classifierID = vaLogicService.classify(logicGraph);
+		return transform(classifierID);
 	}
 	
 	public ClassifiedAssertion transform(String classifierID) {
