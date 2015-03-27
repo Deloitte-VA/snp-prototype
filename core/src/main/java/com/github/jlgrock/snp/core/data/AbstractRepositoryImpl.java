@@ -45,10 +45,10 @@ public abstract class AbstractRepositoryImpl<S, T extends Serializable> implemen
 	}
 	
 	protected abstract String getCollection();
-		
+
+
 	private DBCollection dBCollection(){
-		
-       	DB db;
+       	DB db = null;
     	try {
 			db = mongoDbFactory.db();
 		} catch (DataAccessException e) {
@@ -143,29 +143,6 @@ public abstract class AbstractRepositoryImpl<S, T extends Serializable> implemen
         	}
 		return sList;
     }
-    
-   
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     @Override
     public long count() {
