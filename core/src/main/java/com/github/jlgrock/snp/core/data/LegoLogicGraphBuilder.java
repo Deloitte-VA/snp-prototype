@@ -8,7 +8,7 @@ import gov.vha.isaac.logic.LogicGraphBuilder;
  */
 public class LegoLogicGraphBuilder extends LogicGraphBuilder {
 
-    private final Expression expression;
+    private Expression expression;
 
     /**
      * Set the expression to build the logic graph
