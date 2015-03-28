@@ -43,7 +43,7 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
 	
 	/**
 	 * Changes an S object into a DBObject
-	 * @param the s Serializable object is used as an input parameter for this method
+	 * @param s Serializable object is used as an input parameter for this method
 	 * @return the method returns an object of type DBObject
 	 */
 	protected abstract DBObject convertToDBObject(final S s);
