@@ -76,12 +76,11 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
 	 * 
 	 * @return method returns a DBCollection object which contains a collection of data from a MongoDB instance.
 	 */
-	private DBCollection dBCollection(){
+	protected DBCollection dBCollection(){
        	DB db = null;
     	try {
 			db = mongoDbFactory.db();
 		} catch (DataAccessException e) {
-			// TODO Auto-generated catch block
 			LOGGER.error("Could not get access to the data.", e);
 		}   
        	return db.getCollection(getCollection());
@@ -115,7 +114,7 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
 			}
 		}
 	}
-	
+/*	
     @Override
     public Iterable<S> findAll(Sort sort) {
     	List<S> sList = new ArrayList<S>();
@@ -136,7 +135,7 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
         	}
 		return sList;
     }
-
+*//*
     @Override
     public Page<S> findAll(Pageable pageable) {
     	List<S> sList = new ArrayList<S>();
@@ -148,7 +147,7 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
         	}
 		return sList;
     }
-
+*/
     @Override
     public <S1 extends S> S save(S1 entity) {
     	DBCollection dbc1 = dBCollection();
