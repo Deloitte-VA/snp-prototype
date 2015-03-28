@@ -60,7 +60,7 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
 
 	/**
 	 * Constructor used to set values for class variables
-	 * @param thhe variable mongoDbFactory is set to the parameter mongoDbFactoryIn by the constructor
+	 * @param mongoDbFactoryIn the variable mongoDbFactory is set to the parameter mongoDbFactoryIn by the constructor
 	 */
 	protected AbstractRepositoryImpl(final MongoDbFactory mongoDbFactoryIn){
 		mongoDbFactory = mongoDbFactoryIn;
@@ -92,8 +92,8 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
 	 * @return an id that can be serialized.  If it cannot be serialized, the optional is returned and an error is
 	 * logged.
 	 */
-	private Optional<?> serializeId(T obj) {
-		Optional<?> returnval = null;
+	private Optional<Object> serializeId(Object obj) {
+		Optional<Object> returnval = null;
 		if (obj instanceof Number || obj instanceof Binary || obj instanceof ObjectId || obj instanceof DBObject) {
 			returnval = Optional.of(obj);
 		} else if (obj instanceof MongoDomainObject) {
@@ -105,14 +105,15 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
 		return returnval;
 	}
 
-	private List<?> serializeId(List<T> objs) {
-		List<?> list = new ArrayList<>();
+	private List<Object> serializeIds(List<Object> objs) {
+		List<Object> list = new ArrayList<>();
 		for (Object obj : objs) {
-			Optional<?> o = serializeId(obj);
+			Optional<Object> o = serializeId(obj);
 			if (o.isPresent()) {
 				list.add(o.get());
 			}
 		}
+		return list;
 	}
 /*	
     @Override
@@ -205,7 +206,7 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
     @Override
     public long count() {
     	DBCollection dbc1 = dBCollection();
-    	long x = dbc1.count();
+    	return dbc1.count();
     }
 
     @Override
