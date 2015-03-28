@@ -95,35 +95,41 @@ public interface MongoRepository<DT, ID extends Serializable> {
     long count();
 
     /**
-     * Deletes the entity with the given id.
-     *
-     * @param id must not be {@literal null}.
-     *
-     * throws IllegalArgumentException in case the given {@code id} is {@literal null}
-     */
-    void deleteById(ID id);
+	 * Deletes the entity with the given id.
+	 *
+	 * @param id
+	 *            must not be {@literal null}.
+	 *
+	 *            throws IllegalArgumentException in case the given {@code id}
+	 *            is {@literal null}
+	 */
+	void deleteById(ID id);
 
-    /**
-     * Deletes a given entity.
-     *
-     * @param entity the entity to delete
-     *
-     * throws IllegalArgumentException in case the given entity is (@literal null}.
-     */
-    void delete(DT entity);
+	/**
+	 * Deletes a given entity.
+	 *
+	 * @param entity
+	 *            the entity to delete
+	 *
+	 *            throws IllegalArgumentException in case the given entity is
+	 *            (@literal null}.
+	 */
+	void delete(DT entity);
 
-    /**
-     * Deletes the given entities.
-     *
-     * @param entities the entitites to delete
-     *
-     * throws IllegalArgumentException in case the given {@link Iterable} is (@literal null}.
-     */
-    void delete(Iterable<? extends DT> entities);
+	/**
+	 * Deletes the given entities.
+	 *
+	 * @param entities
+	 *            the entitites to delete
+	 *
+	 *            throws IllegalArgumentException in case the given
+	 *            {@link Iterable} is (@literal null}.
+	 */
+	void delete(Iterable<? extends DT> entities);
 
-    /**
-     * Deletes all entities managed by the repository.
-     */
-    void deleteAll();
+	/**
+	 * Deletes all entities managed by the repository.
+	 */
+	void deleteAll();
 
 }

@@ -32,74 +32,90 @@ import org.slf4j.LoggerFactory;
 /**
  * This is an Abstract implementation of a repository class for Java
  */
-public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T extends Serializable> implements MongoRepository<S, T> {
+public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T extends Serializable>
+		implements MongoRepository<S, T> {
 
 	/**
 	 * Changes a DBObject into a domain object
-	 * @param dbObjectin Data Base Object is an input parameter used in this method
+	 * 
+	 * @param dbObjectin
+	 *            Data Base Object is an input parameter used in this method
 	 * @return the method returns a Serializable S object as output
 	 */
-	protected abstract S convertCollection(final DBObject dbObjectin);	
-	
+	protected abstract S convertCollection(final DBObject dbObjectin);
+
 	/**
 	 * Changes an S object into a DBObject
-	 * @param s Serializable object is used as an input parameter for this method
+	 * 
+	 * @param s
+	 *            Serializable object is used as an input parameter for this
+	 *            method
 	 * @return the method returns an object of type DBObject
 	 */
 	protected abstract DBObject convertToDBObject(final S s);
-	
+
 	/**
-	 * LOGGER is used to generate an error message if the database artifacts cannot be accesses
+	 * LOGGER is used to generate an error message if the database artifacts
+	 * cannot be accesses
 	 */
-    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractRepositoryImpl.class);
-	
-    /**
-     * variable of type MongoDbFactory is used to create/access a MongoDB instance
-     */
+	private static final Logger LOGGER = LoggerFactory
+			.getLogger(AbstractRepositoryImpl.class);
+
+	/**
+	 * variable of type MongoDbFactory is used to create/access a MongoDB
+	 * instance
+	 */
 	private final MongoDbFactory mongoDbFactory;
 
 	/**
 	 * Constructor used to set values for class variables
-	 * @param mongoDbFactoryIn the variable mongoDbFactory is set to the parameter mongoDbFactoryIn by the constructor
+	 * 
+	 * @param mongoDbFactoryIn the variable is set to the parameter
+	 *            mongoDbFactoryIn by the constructor
 	 */
-	protected AbstractRepositoryImpl(final MongoDbFactory mongoDbFactoryIn){
+	protected AbstractRepositoryImpl(final MongoDbFactory mongoDbFactoryIn) {
 		mongoDbFactory = mongoDbFactoryIn;
 	}
-	
+
 	/**
 	 * 
-	 * @return method will return a string 
+	 * @return method will return a string
 	 */
 	protected abstract String getCollection();
 
 	/**
 	 * 
-	 * @return method returns a DBCollection object which contains a collection of data from a MongoDB instance.
+	 * @return method returns a DBCollection object which contains a collection
+	 *         of data from a MongoDB instance.
 	 */
-	protected DBCollection dBCollection(){
-       	DB db = null;
-    	try {
+	protected DBCollection dBCollection() {
+		DB db = null;
+		try {
 			db = mongoDbFactory.db();
 		} catch (DataAccessException e) {
 			LOGGER.error("Could not get access to the data.", e);
-		}   
-       	return db.getCollection(getCollection());
+		}
+		return db.getCollection(getCollection());
 	}
 
 	/**
 	 * Determine the id to use.
-	 * @param obj the object to turn into an id
-	 * @return an id that can be serialized.  If it cannot be serialized, the optional is returned and an error is
-	 * logged.
+	 * 
+	 * @param obj
+	 *            the object to turn into an id
+	 * @return an id that can be serialized. If it cannot be serialized, the
+	 *         optional is returned and an error is logged.
 	 */
-	private Optional<Object> serializeId(Object obj) {
-		Optional<Object> returnval = null;
-		if (obj instanceof Number || obj instanceof Binary || obj instanceof ObjectId || obj instanceof DBObject) {
+	private Optional<?> serializeId(Object obj) {
+		Optional<?> returnval = null;
+		if (obj instanceof Number || obj instanceof Binary
+				|| obj instanceof ObjectId || obj instanceof DBObject) {
 			returnval = Optional.of(obj);
 		} else if (obj instanceof MongoDomainObject) {
 			returnval = Optional.of(((MongoDomainObject) obj).getId());
 		} else {
-			LOGGER.error("Cannot serialize id for class of type " + obj.getClass());
+			LOGGER.error("Cannot serialize id for class of type "
+					+ obj.getClass());
 			return Optional.empty();
 		}
 		return returnval;
@@ -108,131 +124,130 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
 	private List<Object> serializeIds(List<Object> objs) {
 		List<Object> list = new ArrayList<>();
 		for (Object obj : objs) {
-			Optional<Object> o = serializeId(obj);
+			Optional<?> o = serializeId(obj);
 			if (o.isPresent()) {
 				list.add(o.get());
 			}
 		}
 		return list;
 	}
-/*	
-    @Override
-    public Iterable<S> findAll(Sort sort) {
-    	List<S> sList = new ArrayList<S>();
-	    DBCollection dbc1 = dBCollection();
-	    if(sort = Sort.ASC){
-	    
-	    	dbc1.find().sort()	
-	    }
-	    else{
-	    	
-	    	
-	    }
-	    	
-    	BasicDBObject query = new BasicDBObject (, sort); 
-    	DBCursor x = dbc1.find(query);
-        for(DBObject o:x){
-        	sList.add(convertCollection(o));
-        	}
+
+	@Override
+	public Iterable<S> findAll(Sort sort) {
+		/*
+		 * List<S> sList = new ArrayList<S>(); DBCollection dbc1 =
+		 * dBCollection(); if(sort = Sort.ASC){
+		 * 
+		 * dbc1.find().sort() } else{
+		 * 
+		 * 
+		 * }
+		 * 
+		 * BasicDBObject query = new BasicDBObject (, sort); DBCursor x =
+		 * dbc1.find(query); for(DBObject o:x){ sList.add(convertCollection(o));
+		 * } return sList;
+		 */
+		return null;
+	}
+
+	@Override
+	public Page<S> findAll(Pageable pageable) {
+		/*
+		 * List<S> sList = new ArrayList<S>(); DBCollection dbc1 =
+		 * dBCollection(); BasicDBObject query = new BasicDBObject
+		 * (pageable).skip(start).limit(count); dbc1.find(query); for(DBObject
+		 * o:x){ sList.add(convertCollection(o)); } return sList;
+		 */
+		return null;
+	}
+
+	@Override
+	public <S1 extends S> S save(S1 entity) {
+		DBCollection dbc1 = dBCollection();
+		dbc1.save(convertToDBObject(entity));
+	}
+
+	@Override
+	public <S1 extends S> Iterable<S1> save(Iterable<S1> entities) {
+		DBCollection dbc1 = dBCollection();
+		for (S1 o : entities) {
+			dbc1.save(convertToDBObject(o));
+		}
+	}
+
+	@Override
+	public S findOne(T t) {
+		DBCollection dbc1 = dBCollection();
+		BasicDBObject query = new BasicDBObject("$eq", t);
+		DBObject x = dbc1.findOne(query);
+		return convertCollection(x);
+	}
+
+	@Override
+	public boolean exists(T t) {
+		DBCollection dbc1 = dBCollection();
+		BasicDBObject query = new BasicDBObject("$eq", t);
+		DBCursor x = dbc1.find(query);
+		if (x != null) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	@Override
+	public Iterable<S> findAll() {
+		List<S> sList = new ArrayList<S>();
+		DBCollection dbc1 = dBCollection();
+		DBCursor x = dbc1.find();
+		for (DBObject o : x) {
+			sList.add(convertCollection(o));
+		}
 		return sList;
-    }
-*//*
-    @Override
-    public Page<S> findAll(Pageable pageable) {
-    	List<S> sList = new ArrayList<S>();
-    	 DBCollection dbc1 = dBCollection();
-    	BasicDBObject query = new BasicDBObject (pageable).skip(start).limit(count); 
-    	dbc1.find(query);
-        for(DBObject o:x){
-        	sList.add(convertCollection(o));
-        	}
+	}
+
+	@Override
+	public Iterable<S> findAll(Iterable<T> ids) {
+		List<S> sList = new ArrayList<S>();
+		DBCollection dbc1 = dBCollection();
+		BasicDBObject query = new BasicDBObject("$in", ids);
+		DBCursor x = dbc1.find(query);
+		for (DBObject o : x) {
+			sList.add(convertCollection(o));
+		}
 		return sList;
-    }
-*/
-    @Override
-    public <S1 extends S> S save(S1 entity) {
-    	DBCollection dbc1 = dBCollection();
-    	dbc1.save(convertToDBObject(entity));
-    }
+	}
 
-    @Override
-    public <S1 extends S> Iterable<S1> save(Iterable<S1> entities) {
-    	DBCollection dbc1 = dBCollection();
-        for(S1 o:entities){
-    	dbc1.save(convertToDBObject(o));
-        }
-    }
+	@Override
+	public long count() {
+		DBCollection dbc1 = dBCollection();
+		long x = dbc1.count();
+	}
 
-    @Override
-    public S findOne(T t) {
-    	DBCollection dbc1 = dBCollection();
-    	BasicDBObject query = new BasicDBObject ("$eq", t); 
-    	DBObject x = dbc1.findOne(query);
-    	return convertCollection(x);
-    }
+	@Override
+	public void deleteById(T t) {
+		DBCollection dbc1 = dBCollection();
+		BasicDBObject query = new BasicDBObject("$eq", t);
+		dbc1.findAndRemove(query);
+	}
 
-    @Override
-    public boolean exists(T t) { 
-    	DBCollection dbc1 = dBCollection();
-    	BasicDBObject query = new BasicDBObject ("$eq", t); 
-    	DBCursor x = dbc1.find(query);
-    	if(x != null){ return true;}
-    	else{return false;}
-        	}
-     
-    @Override
-    public Iterable<S> findAll() {
-    	List<S> sList = new ArrayList<S>();
-    	DBCollection dbc1 = dBCollection();
-    	DBCursor x = dbc1.find();
-        for(DBObject o:x){
-        	sList.add(convertCollection(o));	
-        }
-		return sList;
-    }
+	@Override
+	public void delete(S entity) {
+		DBCollection dbc1 = dBCollection();
+		dbc1.remove(convertToDBObject(entity));
+	}
 
-    @Override
-    public Iterable<S> findAll(Iterable<T> ids) {
-    	List<S> sList = new ArrayList<S>();
-    	DBCollection dbc1 = dBCollection();
-    	BasicDBObject query = new BasicDBObject ("$in", ids); 
-    	DBCursor x = dbc1.find(query);
-        for(DBObject o:x){
-        	sList.add(convertCollection(o));
-        	}
-		return sList;
-    }
-    
-    @Override
-    public long count() {
-    	DBCollection dbc1 = dBCollection();
-    	return dbc1.count();
-    }
+	@Override
+	public void delete(Iterable<? extends S> entities) {
+		DBCollection dbc1 = dBCollection();
+		BasicDBObject query = new BasicDBObject("$in", entities);
+		dbc1.findAndRemove(query);
+	}
 
-    @Override
-    public void deleteById(T t) {
-    	DBCollection dbc1 = dBCollection();
-    	BasicDBObject query = new BasicDBObject("$eq", t);
-    	dbc1.findAndRemove(query); 
-    }
-
-    @Override
-    public void delete(S entity) {
-    	DBCollection dbc1 = dBCollection();
-    	dbc1.remove(convertToDBObject(entity));    	
-    }
-
-    @Override
-    public void delete(Iterable<? extends S> entities) {
-    	DBCollection dbc1 = dBCollection();
-    	BasicDBObject query = new BasicDBObject("$in", entities);
-    	dbc1.findAndRemove(query);    
-    }
-
-    @Override
-    public void deleteAll() {
-    	DBCollection dbc1 = dBCollection();
-    	BasicDBObject query = new BasicDBObject();
-    	dbc1.findAndRemove(query);   		
-    	}
-    }
+	@Override
+	public void deleteAll() {
+		DBCollection dbc1 = dBCollection();
+		BasicDBObject query = new BasicDBObject();
+		dbc1.findAndRemove(query);
+	}
+}

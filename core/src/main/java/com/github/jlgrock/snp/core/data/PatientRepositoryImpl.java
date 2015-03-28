@@ -16,72 +16,75 @@ import java.util.List;
 /**
  *
  */
-public class PatientRepositoryImpl extends AbstractRepositoryImpl<Patient, Long> implements PatientRepository {
-    
+public class PatientRepositoryImpl extends
+		AbstractRepositoryImpl<Patient, Long> implements PatientRepository {
+
 	protected PatientRepositoryImpl(MongoDbFactory mongoDbFactoryIn) {
 		mongoDbFactory = mongoDbFactoryIn;
 	}
 
 	@Override
-    public List<Patient> findAllByLastName(String lastName) {
-      
+	public List<Patient> findAllByLastName(String lastName) {
+
 		List<Patient> pList = new ArrayList<Patient>();
 		DBCollection dbc1 = dBCollection();
-		BasicDBObject query = new BasicDBObject ("Patient.lastName", lastName); 
+		BasicDBObject query = new BasicDBObject("Patient.lastName", lastName);
 		DBCursor x = dbc1.find(query);
-        for(Patient o:x){
-        	pList.add(o);	
-        }
+		for (Patient o : x) {
+			pList.add(o);
+		}
 		return pList;
-    }
+	}
 
-    @Override
-    public List<Patient> findAllByFirstNameAndLastName(String firstName, String lastName) {
+	@Override
+	public List<Patient> findAllByFirstNameAndLastName(String firstName,
+			String lastName) {
 		List<Patient> pList = new ArrayList<Patient>();
 		DBCollection dbc1 = dBCollection();
-		BasicDBObject query = new BasicDBObject ("Patient.firstName", firstName)
-		.append("Patient.lastName", lastName); 
+		BasicDBObject query = new BasicDBObject("Patient.firstName", firstName)
+				.append("Patient.lastName", lastName);
 		DBCursor x = dbc1.find(query);
-        for(Patient o:x){
-        	pList.add(o);	
-        }
+		for (Patient o : x) {
+			pList.add(o);
+		}
 		return pList;
-    }
+	}
 
-    @Override
-    public List<Patient> findAllByDateOfBirth(Date dateOfBirth) {
+	@Override
+	public List<Patient> findAllByDateOfBirth(Date dateOfBirth) {
 		List<Patient> pList = new ArrayList<Patient>();
 		DBCollection dbc1 = dBCollection();
-		BasicDBObject query = new BasicDBObject ("Patient.dateOfBirth", dateOfBirth);
+		BasicDBObject query = new BasicDBObject("Patient.dateOfBirth",
+				dateOfBirth);
 		DBCursor x = dbc1.find(query);
-        for(Patient o:x){
-        	pList.add(o);	
-        }
+		for (Patient o : x) {
+			pList.add(o);
+		}
 		return pList;
-    }
+	}
 
-    @Override
-    public List<Patient> findAllByGender(Gender gender) {
+	@Override
+	public List<Patient> findAllByGender(Gender gender) {
 		List<Patient> pList = new ArrayList<Patient>();
 		DBCollection dbc1 = dBCollection();
-		BasicDBObject query = new BasicDBObject ("Patient.gender", gender);
+		BasicDBObject query = new BasicDBObject("Patient.gender", gender);
 		DBCursor x = dbc1.find(query);
-        for(Patient o:x){
-        	pList.add(o);	
-        }
+		for (Patient o : x) {
+			pList.add(o);
+		}
 		return pList;
-    }
+	}
 
-    @Override
-    public List<Patient> findAllByRace(Race race) {
-    		List<Patient> pList = new ArrayList<Patient>();
-    		DBCollection dbc1 = dBCollection();
-    		BasicDBObject query = new BasicDBObject ("Patient.race", race);
-    		DBCursor x = dbc1.find(query);
-            for(Patient o:x){
-            	pList.add(o);	
-            }
-    		return pList;
-    }
+	@Override
+	public List<Patient> findAllByRace(Race race) {
+		List<Patient> pList = new ArrayList<Patient>();
+		DBCollection dbc1 = dBCollection();
+		BasicDBObject query = new BasicDBObject("Patient.race", race);
+		DBCursor x = dbc1.find(query);
+		for (Patient o : x) {
+			pList.add(o);
+		}
+		return pList;
+	}
 
 }
