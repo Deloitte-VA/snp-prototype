@@ -1,6 +1,5 @@
 package com.github.jlgrock.snp.core.data;
 
-import com.github.jlgrock.integration.sample.PocDemoCheck;
 import com.github.jlgrock.snp.apis.connection.MongoDbFactory;
 import com.github.jlgrock.snp.apis.data.MongoRepository;
 import com.github.jlgrock.snp.apis.data.Page;
@@ -24,6 +23,8 @@ import java.util.Set;
 
 import javax.inject.Inject;
 
+import com.mongodb.WriteConcern;
+import com.mongodb.WriteResult;
 import org.bson.types.Binary;
 import org.bson.types.ObjectId;
 import org.slf4j.Logger;
@@ -31,6 +32,9 @@ import org.slf4j.LoggerFactory;
 
 /**
  * This is an Abstract implementation of a repository class for Java
+ *
+ * @param <S> the type of the domain object to store
+ * @param <T> the type of the ID
  */
 public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T extends Serializable>
 		implements MongoRepository<S, T> {
@@ -95,7 +99,9 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
 		} catch (DataAccessException e) {
 			LOGGER.error("Could not get access to the data.", e);
 		}
-		return db.getCollection(getCollection());
+		DBCollection dbCollection = db.getCollection(getCollection());
+		dbCollection.setWriteConcern(WriteConcern.JOURNALED);
+		return dbCollection;
 	}
 
 	/**
@@ -165,6 +171,7 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
 	public <S1 extends S> S save(S1 entity) {
 		DBCollection dbc1 = dBCollection();
 		dbc1.save(convertToDBObject(entity));
+		return entity;
 	}
 
 	@Override
@@ -173,6 +180,7 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
 		for (S1 o : entities) {
 			dbc1.save(convertToDBObject(o));
 		}
+		return entities;
 	}
 
 	@Override
