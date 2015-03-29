@@ -54,19 +54,8 @@ public class LegoLogicGraphBuilder extends LogicGraphBuilder {
     	 //Convert from String to int
     	int typeConceptNid = Integer.parseInt(isAboutSctid);  //Do we need any converter method call to transform sctid into Nid?
     	int destinationNid = Integer.parseInt(destinationSctid); //Do we need any converter method call to transform sctid into Nid or seq id?
-    	
-    	 //Add the nodes to the logic graph based on LEGO XML parameters
-    	 //Create root node first
-    	 RootNode root = getRoot();
-    	 //Create AndNode
-         AndNode andNode = And();
-         
-        //For LEGO XML expressions, put SufficientSetNode at the top and AndNode next. For "IS ABOUT" type relationship,
-        //add RoleNodeSomeWithNids as child of AndNode. For the parameters of RoleNodeSomeWithNids, use typeConceptNid and 
-         //ConceptNodeWithNids as parameters.
-         
-         root.addChildren(SufficientSet(andNode));
-         andNode.addChildren(SomeRole(typeConceptNid, Concept(destinationNid)));
-        
+
+    	Root(SufficientSet(And(SomeRole(typeConceptNid, Concept(destinationNid))));
+
     }
 }
