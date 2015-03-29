@@ -1,5 +1,21 @@
 package com.github.jlgrock.snp.web.configuration;
 
+import com.github.jlgrock.snp.apis.connection.MongoDatabaseManager;
+import com.github.jlgrock.snp.apis.connection.MongoDbFactory;
+import com.github.jlgrock.snp.apis.connection.configuration.MongoDbConfiguration;
+import com.github.jlgrock.snp.apis.connection.configuration.WebConfiguration;
+import com.github.jlgrock.snp.apis.connection.synchronization.TransactionSynchronizationManager;
+import com.github.jlgrock.snp.core.connection.SimpleMongoDbFactory;
+import com.github.jlgrock.snp.core.connection.SynchronizedMongoDatabaseManager;
+import com.github.jlgrock.snp.core.connection.synchronization.CollectionSynchronizationManager;
+import com.github.jlgrock.snp.core.data.EncounterRepository;
+import com.github.jlgrock.snp.core.data.EncounterRepositoryImpl;
+import com.github.jlgrock.snp.core.data.PCERepositoryImpl;
+import com.github.jlgrock.snp.core.data.PatientRepository;
+import com.github.jlgrock.snp.core.data.PatientRepositoryImpl;
+import com.github.jlgrock.snp.core.data.PceRepository;
+import com.github.jlgrock.snp.core.defaultconfig.MongoConfig;
+import com.github.jlgrock.snp.core.defaultconfig.WebConfig;
 import io.dropwizard.jersey.jackson.JacksonMessageBodyProvider;
 import io.dropwizard.jersey.jackson.JsonProcessingExceptionMapper;
 import org.glassfish.hk2.api.ServiceLocator;
@@ -63,8 +79,28 @@ public class ApplicationConfig extends ResourceConfig {
         register(new AbstractBinder() {
             @Override
             protected void configure() {
-                //bind(EncounterRepositoryImpl.class).to(EncounterRepository.class);
+                bind(EncounterRepositoryImpl.class).to(EncounterRepository.class);
+                bind(PatientRepositoryImpl.class).to(PatientRepository.class);
+                bind(PCERepositoryImpl.class).to(PceRepository.class);
 
+//                bind(ObservationReadConverter.class).to(ObservationReadConverter.class);
+//                bind(ObservationWriteConverter.class).to();
+//
+//                bind(EncounterReadConverter.class).to();
+//                bind(EncounterWriteConverter.class).to();
+//
+//                bind(PatientReadConverter.class).to();
+//                bind(PatientWriteConverter.class).to();
+//
+//                bind(PCEReadConverter.class).to();
+//                bind(PCEWriteConverter.class).to();
+
+
+                bind(SimpleMongoDbFactory.class).to(MongoDbFactory.class);
+                bind(MongoConfig.class).to(MongoDbConfiguration.class);
+                bind(WebConfig.class).to(WebConfiguration.class);
+                bind(SynchronizedMongoDatabaseManager.class).to(MongoDatabaseManager.class);
+                bind(CollectionSynchronizationManager.class).to(TransactionSynchronizationManager.class);
             }
         });
     }

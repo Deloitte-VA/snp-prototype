@@ -8,7 +8,9 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
+import org.jvnet.hk2.annotations.Service;
 
+import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -16,6 +18,7 @@ import java.util.List;
 /**
  *
  */
+@Service
 public class PatientRepositoryImpl extends
 		AbstractRepositoryImpl<Patient, Long> implements PatientRepository {
 
@@ -29,13 +32,14 @@ public class PatientRepositoryImpl extends
 		return null;
 	}
 
+	@Inject
 	protected PatientRepositoryImpl(final MongoDbFactory mongoDbFactoryIn) {
 		super(mongoDbFactoryIn);
 	}
 
 	@Override
 	protected String getCollection() {
-		return null;
+		return "patient";
 	}
 
 	@Override
