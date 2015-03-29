@@ -8,11 +8,11 @@ import com.github.jlgrock.snp.core.domain.Patient;
  * with a classifier ID to the MongoDB
  *
  */
-public class StoreClassifiedAssertion {
+public class ClassifiedAssertionMongoDbStore implements ClassifiedAssertionStore {
 	private final ClassifiedAssertionRepository classifiedAssertionRepository;
 	private final PatientRepository patientRepository;
 	
-	public StoreClassifiedAssertion(final ClassifiedAssertionRepository classifiedAssertionRepositoryIn,
+	public ClassifiedAssertionMongoDbStore(final ClassifiedAssertionRepository classifiedAssertionRepositoryIn,
 			PatientRepository patientRepositoryIn) {
 		classifiedAssertionRepository = classifiedAssertionRepositoryIn;
 		patientRepository = patientRepositoryIn;

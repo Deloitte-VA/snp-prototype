@@ -109,6 +109,11 @@
             <artifactId>jersey-media-multipart</artifactId>
         </dependency>
 
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+		</dependency>
+
         <!-- To Use Guice with HK2 -->
         <!-- <dependency>
             <groupId>com.google.inject</groupId>

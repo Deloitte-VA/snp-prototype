@@ -22,7 +22,7 @@ public class LogicGraphClassifierImpl implements LogicGraphClassifier {
 		String classifierID = "";
 
 		//Set the expression from the
-		legoLogicGraphBuilder.setExpression(expression);
+//		legoLogicGraphBuilder.setExpression(expression);
 		legoLogicGraphBuilder.create();
 		legoLogicGraphBuilder.getLogicGraph();
 
