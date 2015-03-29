@@ -5,57 +5,58 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Properties;
 
 /**
  *
  */
-public class PropertiesFileReader {
+public final class PropertiesFileReader {
     private static final Logger LOGGER = LoggerFactory.getLogger(MongoConfig.class);
 
     private static final String PROPERTIES_FILE_NAME = "config.properties";
 
-    private String user;
-    private String password;
-    private String host;
-    private int port;
-    private String database;
-    private Path filelocation;
+    private static String user;
+    private static String password;
+    private static String host;
+    private static Integer port;
+    private static String database;
+    private static String filelocation;
 
-    public PropertiesFileReader() {
+    static {
         readFile();
     }
 
-    public String getUser() {
+    public static String getUser() {
         return user;
     }
 
-    public String getPassword() {
+    public static String getPassword() {
         return password;
     }
 
-    public String getHost() {
+    public static String getHost() {
         return host;
     }
 
-    public int getPort() {
+    public static Integer getPort() {
         return port;
     }
 
-    public String getDatabase() {
+    public static String getDatabase() {
         return database;
     }
 
-    public Path getFilelocation() {
+    public static String getFilelocation() {
         return filelocation;
     }
 
-    private void readFile() {
+    private PropertiesFileReader() {
+    }
+
+    private static void readFile() {
         Properties prop = new Properties();
 
-        InputStream inputStream = getClass().getClassLoader().getResourceAsStream(PROPERTIES_FILE_NAME);
+        InputStream inputStream = new PropertiesFileReader().getClass().getClassLoader().getResourceAsStream(PROPERTIES_FILE_NAME);
 
         if (inputStream != null) {
             try {
@@ -80,7 +81,7 @@ public class PropertiesFileReader {
         }
         database = prop.getProperty(" mongodb.database");
         try {
-            filelocation = Paths.get(prop.getProperty("webserver.filelocation"));
+            filelocation = prop.getProperty("webserver.filelocation");
         } catch(Exception e) {
             LOGGER.error("webserver.filelocation is not a valid path.  Ignoring");
         }

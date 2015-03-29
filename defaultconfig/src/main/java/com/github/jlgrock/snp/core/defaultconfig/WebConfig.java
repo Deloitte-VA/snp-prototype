@@ -15,9 +15,12 @@ public class WebConfig implements WebConfiguration {
 
     private static final String TEMP_DIR_LOCATION = "/data/uploads";
 
-    //TODO this should be parsing a config file for these properties
     @Override
     public Path fileLocation() {
-        return Paths.get(WebConfig.TEMP_DIR_LOCATION);
+        String filepath = PropertiesFileReader.getFilelocation();
+        if (filepath == null) {
+            filepath = WebConfig.TEMP_DIR_LOCATION;
+        }
+        return Paths.get(filepath);
     }
 }
