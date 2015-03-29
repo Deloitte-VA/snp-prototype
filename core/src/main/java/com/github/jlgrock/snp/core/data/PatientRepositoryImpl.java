@@ -1,11 +1,14 @@
 package com.github.jlgrock.snp.core.data;
 
 import com.github.jlgrock.snp.apis.connection.MongoDbFactory;
+<<<<<<< HEAD
 import com.github.jlgrock.snp.core.converters.EncounterReadConverter;
 import com.github.jlgrock.snp.core.converters.EncounterWriteConverter;
 import com.github.jlgrock.snp.core.converters.PatientReadConverter;
 import com.github.jlgrock.snp.core.converters.PatientWriteConverter;
 import com.github.jlgrock.snp.core.domain.Encounter;
+=======
+>>>>>>> 771057289f2add1a51aa8b3a3426b5dc01e16b5b
 import com.github.jlgrock.snp.core.domain.Gender;
 import com.github.jlgrock.snp.core.domain.Patient;
 import com.github.jlgrock.snp.core.domain.Race;
@@ -24,8 +27,23 @@ import java.util.List;
 public class PatientRepositoryImpl extends
 		AbstractRepositoryImpl<Patient, Long> implements PatientRepository {
 
-	protected PatientRepositoryImpl(MongoDbFactory mongoDbFactoryIn) {
-		mongoDbFactory = mongoDbFactoryIn;
+	@Override
+	protected Patient convertCollection(DBObject dbObjectin) {
+		return null;
+	}
+
+	@Override
+	protected DBObject convertToDBObject(Patient patient) {
+		return null;
+	}
+
+	protected PatientRepositoryImpl(final MongoDbFactory mongoDbFactoryIn) {
+		super(mongoDbFactoryIn);
+	}
+
+	@Override
+	protected String getCollection() {
+		return null;
 	}
 
 
@@ -58,7 +76,12 @@ public class PatientRepositoryImpl extends
 		BasicDBObject query = new BasicDBObject("Patient.lastName", lastName);
 		DBCursor x = dbc1.find(query);
 		for (DBObject o : x) {
+<<<<<<< HEAD
 			pList.add(convertCollection(o));
+=======
+			//pList.add(o);
+			//TODO convert
+>>>>>>> 771057289f2add1a51aa8b3a3426b5dc01e16b5b
 		}
 		return pList;
 	}
@@ -72,7 +95,12 @@ public class PatientRepositoryImpl extends
 				.append("Patient.lastName", lastName);
 		DBCursor x = dbc1.find(query);
 		for (DBObject o : x) {
+<<<<<<< HEAD
 			pList.add(convertCollection(o));
+=======
+			//pList.add(o);
+			//TODO convert
+>>>>>>> 771057289f2add1a51aa8b3a3426b5dc01e16b5b
 		}
 		return pList;
 	}
@@ -85,7 +113,12 @@ public class PatientRepositoryImpl extends
 				dateOfBirth);
 		DBCursor x = dbc1.find(query);
 		for (DBObject o : x) {
+<<<<<<< HEAD
 			pList.add(convertCollection(o));
+=======
+			//pList.add(o);
+			//TODO convert
+>>>>>>> 771057289f2add1a51aa8b3a3426b5dc01e16b5b
 		}
 		return pList;
 	}
@@ -97,7 +130,12 @@ public class PatientRepositoryImpl extends
 		BasicDBObject query = new BasicDBObject("Patient.gender", gender);
 		DBCursor x = dbc1.find(query);
 		for (DBObject o : x) {
+<<<<<<< HEAD
 			pList.add(convertCollection(o));
+=======
+			//pList.add(o);
+			//TODO convert
+>>>>>>> 771057289f2add1a51aa8b3a3426b5dc01e16b5b
 		}
 		return pList;
 	}
@@ -109,7 +147,12 @@ public class PatientRepositoryImpl extends
 		BasicDBObject query = new BasicDBObject("Patient.race", race);
 		DBCursor x = dbc1.find(query);
 		for (DBObject o : x) {
+<<<<<<< HEAD
 			pList.add(convertCollection(o));
+=======
+			//pList.add(o);
+			//TODO convert
+>>>>>>> 771057289f2add1a51aa8b3a3426b5dc01e16b5b
 		}
 		return pList;
 	}
