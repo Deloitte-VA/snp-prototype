@@ -7,28 +7,21 @@ import com.github.jlgrock.snp.apis.data.Pageable;
 import com.github.jlgrock.snp.apis.data.Sort;
 import com.github.jlgrock.snp.apis.domain.MongoDomainObject;
 import com.github.jlgrock.snp.apis.exceptions.DataAccessException;
-import com.github.jlgrock.snp.core.connection.SimpleMongoDbFactory;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
-
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-
-import javax.inject.Inject;
-
 import com.mongodb.WriteConcern;
-import com.mongodb.WriteResult;
 import org.bson.types.Binary;
 import org.bson.types.ObjectId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 /**
  * This is an Abstract implementation of a repository class for Java
@@ -229,7 +222,7 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
 	@Override
 	public long count() {
 		DBCollection dbc1 = dBCollection();
-		long x = dbc1.count();
+		return dbc1.count();
 	}
 
 	@Override
