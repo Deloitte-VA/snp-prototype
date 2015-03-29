@@ -27,26 +27,9 @@ import java.util.List;
 public class PatientRepositoryImpl extends
 		AbstractRepositoryImpl<Patient, Long> implements PatientRepository {
 
-	@Override
-	protected Patient convertCollection(DBObject dbObjectin) {
-		return null;
-	}
-
-	@Override
-	protected DBObject convertToDBObject(Patient patient) {
-		return null;
-	}
-
 	protected PatientRepositoryImpl(final MongoDbFactory mongoDbFactoryIn) {
 		super(mongoDbFactoryIn);
 	}
-
-	@Override
-	protected String getCollection() {
-		return null;
-	}
-
-
 	
 	private final PatientReadConverter patientReadConverter;
 	
@@ -54,18 +37,14 @@ public class PatientRepositoryImpl extends
 
 	@Override
 	protected Patient convertCollection(DBObject dbObjectin) {
-		
 		Patient patient = patientReadConverter.convert(dbObjectin);
 		return patient;
-		
 	}
 
 	@Override
 	protected DBObject convertToDBObject(Patient s) {
-		
 		DBObject dBObject = patientWriteConverter.convert(s);
 		return dBObject;
-		
 	}
 	
 	@Override
@@ -76,12 +55,7 @@ public class PatientRepositoryImpl extends
 		BasicDBObject query = new BasicDBObject("Patient.lastName", lastName);
 		DBCursor x = dbc1.find(query);
 		for (DBObject o : x) {
-<<<<<<< HEAD
 			pList.add(convertCollection(o));
-=======
-			//pList.add(o);
-			//TODO convert
->>>>>>> 771057289f2add1a51aa8b3a3426b5dc01e16b5b
 		}
 		return pList;
 	}
@@ -92,15 +66,10 @@ public class PatientRepositoryImpl extends
 		List<Patient> pList = new ArrayList<Patient>();
 		DBCollection dbc1 = dBCollection();
 		BasicDBObject query = new BasicDBObject("Patient.firstName", firstName)
-				.append("Patient.lastName", lastName);
+		.append("Patient.lastName", lastName);
 		DBCursor x = dbc1.find(query);
 		for (DBObject o : x) {
-<<<<<<< HEAD
 			pList.add(convertCollection(o));
-=======
-			//pList.add(o);
-			//TODO convert
->>>>>>> 771057289f2add1a51aa8b3a3426b5dc01e16b5b
 		}
 		return pList;
 	}
@@ -109,16 +78,10 @@ public class PatientRepositoryImpl extends
 	public List<Patient> findAllByDateOfBirth(Date dateOfBirth) {
 		List<Patient> pList = new ArrayList<Patient>();
 		DBCollection dbc1 = dBCollection();
-		BasicDBObject query = new BasicDBObject("Patient.dateOfBirth",
-				dateOfBirth);
+		BasicDBObject query = new BasicDBObject("Patient.dateOfBirth", dateOfBirth);
 		DBCursor x = dbc1.find(query);
 		for (DBObject o : x) {
-<<<<<<< HEAD
 			pList.add(convertCollection(o));
-=======
-			//pList.add(o);
-			//TODO convert
->>>>>>> 771057289f2add1a51aa8b3a3426b5dc01e16b5b
 		}
 		return pList;
 	}
@@ -130,12 +93,7 @@ public class PatientRepositoryImpl extends
 		BasicDBObject query = new BasicDBObject("Patient.gender", gender);
 		DBCursor x = dbc1.find(query);
 		for (DBObject o : x) {
-<<<<<<< HEAD
 			pList.add(convertCollection(o));
-=======
-			//pList.add(o);
-			//TODO convert
->>>>>>> 771057289f2add1a51aa8b3a3426b5dc01e16b5b
 		}
 		return pList;
 	}
@@ -147,19 +105,13 @@ public class PatientRepositoryImpl extends
 		BasicDBObject query = new BasicDBObject("Patient.race", race);
 		DBCursor x = dbc1.find(query);
 		for (DBObject o : x) {
-<<<<<<< HEAD
 			pList.add(convertCollection(o));
-=======
-			//pList.add(o);
-			//TODO convert
->>>>>>> 771057289f2add1a51aa8b3a3426b5dc01e16b5b
 		}
 		return pList;
 	}
 
 	@Override
 	protected String getCollection() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
