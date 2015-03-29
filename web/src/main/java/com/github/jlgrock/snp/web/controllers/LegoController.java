@@ -83,6 +83,19 @@ public class LegoController {
     @Consumes(MediaType.APPLICATION_XML)
     @Produces(MediaType.APPLICATION_XML)
     public String getLego(final String xml) {
+    	
+    	Long patientId = 0L;
+    	
+//    	ReaderInputStream ris = new ReaderInputStream(new StringReader(xml));
+//    	LegoXmlParser legoXmlParser = new LegoXmlParser();
+//    	LegoList legoList = legoXmlParser.parseDocument(ris);
+//    	List<Lego> legos = legoList.getLegos();
+//    	Assertion assertion = legos.get(0).getAssertion();
+//    	AssertionClassifier assertClassifier = new AssertionClassifierImpl();
+//    	ClassifiedAssertion cAssertion = assertClassifier.classify(assertion);
+//    	ClassifiedAssertionMongoDbStore store = new ClassifiedAssertionMongoDbStore(null, null);
+//    	store.save(patientId, cAssertion);
+    	
     	return xml;
     }
 

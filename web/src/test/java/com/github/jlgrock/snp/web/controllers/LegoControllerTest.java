@@ -2,6 +2,7 @@ package com.github.jlgrock.snp.web.controllers;
 
 import com.github.jlgrock.snp.apis.connection.configuration.WebConfiguration;
 import com.github.jlgrock.snp.apis.data.MultiPartFileUtils;
+
 import org.glassfish.hk2.api.Factory;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import org.glassfish.jersey.media.multipart.FormDataBodyPart;
@@ -20,8 +21,12 @@ import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
+import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 
@@ -137,7 +142,8 @@ public class LegoControllerTest extends GenericControllerTest {
     
     @Test
     public void testStreamingXml() {
-    	final String testXml = "<xml>test</xml>";
+//    	final String testXml = "<xml>test</xml>";
+    	String testXml = readFile("Assertion_Example_01.xml");
     	final WebTarget target = target().path("lego");
     	final Response response = target.request(MediaType.APPLICATION_XML_TYPE)
     			.post(Entity.xml(testXml));
@@ -147,4 +153,33 @@ public class LegoControllerTest extends GenericControllerTest {
     	Assert.assertEquals(body, testXml);
     }
 
+	/**
+	 * Prints the string content read from input stream
+	 * @return content in file
+	 */
+	private String readFile(String xmlFile) {
+		BufferedReader br = null;
+		StringBuilder out = new StringBuilder();
+		try {
+			InputStream in = getClass().getClassLoader().getResourceAsStream(xmlFile);
+	        BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+	        String line;
+	        while ((line = reader.readLine()) != null) {
+	        	if(!"<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>".equals(line.trim())) {
+	        		out.append(line.trim());
+	        	}
+	        }
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (br != null) {
+					br.close();
+				}
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
+		}
+		 return out.toString();
+	}
 }

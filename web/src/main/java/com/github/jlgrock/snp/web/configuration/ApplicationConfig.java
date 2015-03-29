@@ -1,7 +1,25 @@
 package com.github.jlgrock.snp.web.configuration;
 
+import com.github.jlgrock.snp.apis.connection.MongoDatabaseManager;
+import com.github.jlgrock.snp.apis.connection.MongoDbFactory;
+import com.github.jlgrock.snp.apis.connection.configuration.MongoDbConfiguration;
+import com.github.jlgrock.snp.apis.connection.configuration.WebConfiguration;
+import com.github.jlgrock.snp.apis.connection.synchronization.TransactionSynchronizationManager;
+import com.github.jlgrock.snp.core.connection.SimpleMongoDbFactory;
+import com.github.jlgrock.snp.core.connection.SynchronizedMongoDatabaseManager;
+import com.github.jlgrock.snp.core.connection.synchronization.CollectionSynchronizationManager;
+import com.github.jlgrock.snp.core.data.EncounterRepository;
+import com.github.jlgrock.snp.core.data.EncounterRepositoryImpl;
+import com.github.jlgrock.snp.core.data.PCERepositoryImpl;
+import com.github.jlgrock.snp.core.data.PatientRepository;
+import com.github.jlgrock.snp.core.data.PatientRepositoryImpl;
+import com.github.jlgrock.snp.core.data.PceRepository;
+import com.github.jlgrock.snp.core.defaultconfig.MongoConfig;
+import com.github.jlgrock.snp.core.defaultconfig.WebConfig;
 import io.dropwizard.jersey.jackson.JacksonMessageBodyProvider;
 import io.dropwizard.jersey.jackson.JsonProcessingExceptionMapper;
+import org.glassfish.hk2.api.ServiceLocator;
+import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.media.multipart.MultiPartFeature;
 import org.glassfish.jersey.server.ResourceConfig;
@@ -22,6 +40,9 @@ public class ApplicationConfig extends ResourceConfig {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ApplicationConfig.class);
 
+    // won't be initialized until onStartup()
+    ServiceLocator serviceLocator;
+
     /**
      * Sets up all of the standard features.
      */
@@ -30,6 +51,7 @@ public class ApplicationConfig extends ResourceConfig {
 
         // Register Features
 
+        //register(Binder.class);
         // Feature allowing for Multipart file uploads
         register(MultiPartFeature.class);
 
@@ -42,12 +64,47 @@ public class ApplicationConfig extends ResourceConfig {
         // Feature allowing jackson to use additional annotations and validations
         register(new JacksonMessageBodyProvider(JacksonConfig.newObjectMapper(), Validation.buildDefaultValidatorFactory().getValidator()));
 
-        // instruct jackson to know where the resources/controllers are
-    	packages("com.github.jlgrock.snp.web");
-
         // Enable Tracing support.
         property(ServerProperties.TRACING, "ALL");
+
+        packages("com.github.jlgrock.snp.web");
+        //doesn't work
+        // ServiceLocator locator = ServiceLocatorUtilities.createAndPopulateServiceLocator();
+
+        //doesn't work
+        //register(EncounterRepository.class);
+
+        // TODO this is supposed to work with just the packages(String...) function, but it doesn't seem to be working.
+        // The scan of packages doesn't seem to be working, so I have to create an abstract binder to bind classes
+        register(new AbstractBinder() {
+            @Override
+            protected void configure() {
+                bind(EncounterRepositoryImpl.class).to(EncounterRepository.class);
+                bind(PatientRepositoryImpl.class).to(PatientRepository.class);
+                bind(PCERepositoryImpl.class).to(PceRepository.class);
+
+//                bind(ObservationReadConverter.class).to(ObservationReadConverter.class);
+//                bind(ObservationWriteConverter.class).to();
+//
+//                bind(EncounterReadConverter.class).to();
+//                bind(EncounterWriteConverter.class).to();
+//
+//                bind(PatientReadConverter.class).to();
+//                bind(PatientWriteConverter.class).to();
+//
+//                bind(PCEReadConverter.class).to();
+//                bind(PCEWriteConverter.class).to();
+
+
+                bind(SimpleMongoDbFactory.class).to(MongoDbFactory.class);
+                bind(MongoConfig.class).to(MongoDbConfiguration.class);
+                bind(WebConfig.class).to(WebConfiguration.class);
+                bind(SynchronizedMongoDatabaseManager.class).to(MongoDatabaseManager.class);
+                bind(CollectionSynchronizationManager.class).to(TransactionSynchronizationManager.class);
+            }
+        });
     }
+
 
     /**
      * Create and return an application configuration, for use in starting a jersey server.
@@ -56,5 +113,6 @@ public class ApplicationConfig extends ResourceConfig {
     public static ResourceConfig createApp() {
         return new ApplicationConfig();
     }
+
 }
 

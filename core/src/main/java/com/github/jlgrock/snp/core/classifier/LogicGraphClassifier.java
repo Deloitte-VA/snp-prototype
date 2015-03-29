@@ -2,17 +2,19 @@ package com.github.jlgrock.snp.core.classifier;
 
 import gov.vha.isaac.logic.LogicGraph;
 
+import java.util.UUID;
+
 /**
  * Classify Post Coordinated Expressions
  *
  */
-public interface Classifier {
+public interface LogicGraphClassifier {
 
 	/**
 	 * replace Post Coordinated Expressions with a classifier ID
 	 * 
 	 * @param logicGraph LogicGraph
-	 * @return classifier ID
+	 * @return UUID UUID
 	 */
-	String classify(LogicGraph logicGraph);
+	UUID classify(LogicGraph logicGraph);
 }

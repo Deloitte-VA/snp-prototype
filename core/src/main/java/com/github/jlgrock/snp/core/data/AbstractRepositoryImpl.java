@@ -39,7 +39,7 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
 	 *            Data Base Object is an input parameter used in this method
 	 * @return the method returns a Serializable S object as output
 	 */
-	protected abstract S convertCollection(final DBObject dbObjectin);
+	protected abstract S convertToDomainObject(final DBObject dbObjectin);
 
 	/**
 	 * Changes an S object into a DBObject
@@ -78,7 +78,7 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
 	 * 
 	 * @return method will return a string
 	 */
-	protected abstract String getCollection();
+	protected abstract String getCollectionName();
 
 	/**
 	 * 
@@ -92,7 +92,12 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
 		} catch (DataAccessException e) {
 			LOGGER.error("Could not get access to the data.", e);
 		}
-		DBCollection dbCollection = db.getCollection(getCollection());
+		String collectionName = getCollectionName();
+		if (collectionName == null) {
+			LOGGER.error("Collection name has not been set on class " + this.getClass().getSimpleName() + ", code will fail until this is remedied");
+			return null;
+		}
+		DBCollection dbCollection = db.getCollection(collectionName);
 		dbCollection.setWriteConcern(WriteConcern.JOURNALED);
 		return dbCollection;
 	}
@@ -106,7 +111,7 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
 	 *         optional is returned and an error is logged.
 	 */
 	private Optional<?> serializeId(Object obj) {
-		Optional<?> returnval = null;
+		Optional<?> returnval;
 		if (obj instanceof Number || obj instanceof Binary
 				|| obj instanceof ObjectId || obj instanceof DBObject) {
 			returnval = Optional.of(obj);
@@ -179,42 +184,50 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
 	@Override
 	public S findOne(T t) {
 		DBCollection dbc1 = dBCollection();
-		BasicDBObject query = new BasicDBObject("$eq", t);
+		BasicDBObject query = new BasicDBObject() {{
+			put("_id", t);
+		}};
 		DBObject x = dbc1.findOne(query);
-		return convertCollection(x);
+		return convertToDomainObject(x);
 	}
 
 	@Override
 	public boolean exists(T t) {
 		DBCollection dbc1 = dBCollection();
-		BasicDBObject query = new BasicDBObject("$eq", t);
+		BasicDBObject query = new BasicDBObject() {{
+			put("_id", t);
+		}};
 		DBCursor x = dbc1.find(query);
 		if (x != null) {
 			return true;
-		} else {
-			return false;
 		}
+		return false;
 	}
 
 	@Override
 	public Iterable<S> findAll() {
-		List<S> sList = new ArrayList<S>();
+		List<S> sList = new ArrayList<>();
 		DBCollection dbc1 = dBCollection();
 		DBCursor x = dbc1.find();
 		for (DBObject o : x) {
-			sList.add(convertCollection(o));
+			sList.add(convertToDomainObject(o));
 		}
 		return sList;
 	}
 
 	@Override
 	public Iterable<S> findAll(Iterable<T> ids) {
-		List<S> sList = new ArrayList<S>();
+		List<S> sList = new ArrayList<>();
 		DBCollection dbc1 = dBCollection();
-		BasicDBObject query = new BasicDBObject("$in", ids);
+		BasicDBObject query = new BasicDBObject() {{
+			put("_id", new BasicDBObject() {{
+				put("$in", ids);
+			}});
+		}};
+
 		DBCursor x = dbc1.find(query);
 		for (DBObject o : x) {
-			sList.add(convertCollection(o));
+			sList.add(convertToDomainObject(o));
 		}
 		return sList;
 	}
@@ -228,7 +241,9 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
 	@Override
 	public void deleteById(T t) {
 		DBCollection dbc1 = dBCollection();
-		BasicDBObject query = new BasicDBObject("$eq", t);
+		BasicDBObject query = new BasicDBObject() {{
+			put("_id", t);
+		}};
 		dbc1.findAndRemove(query);
 	}
 
@@ -241,7 +256,11 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
 	@Override
 	public void delete(Iterable<? extends S> entities) {
 		DBCollection dbc1 = dBCollection();
-		BasicDBObject query = new BasicDBObject("$in", entities);
+		BasicDBObject query = new BasicDBObject() {{
+			put("_id", new BasicDBObject() {{
+				put("$in", entities);
+			}});
+		}};
 		dbc1.findAndRemove(query);
 	}
 
