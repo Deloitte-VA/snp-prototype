@@ -5,6 +5,8 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.Properties;
 
 /**
@@ -53,14 +55,27 @@ public final class PropertiesFileReader {
     private PropertiesFileReader() {
     }
 
-    private static void readFile() {
+    static void readFile() {
+        readFile(null);
+    }
+    static void readFile(final String filename) {
         Properties prop = new Properties();
 
-        InputStream inputStream = new PropertiesFileReader().getClass().getClassLoader().getResourceAsStream(PROPERTIES_FILE_NAME);
+
+        String fname = filename;
+        if (fname == null) {
+            fname = PROPERTIES_FILE_NAME;
+        }
+        LOGGER.info("Loading properties file [" + fname + "]");
+        InputStream inputStream = new PropertiesFileReader().getClass().getClassLoader().getResourceAsStream(fname);
 
         if (inputStream != null) {
             try {
                 prop.load(inputStream);
+                StringWriter s = new StringWriter();
+                PrintWriter p = new PrintWriter(s);
+                prop.list(p);
+                LOGGER.info(s.toString());
             } catch (IOException e) {
                 LOGGER.debug("Found no files for configuration on classpath");
                 return;
@@ -75,11 +90,12 @@ public final class PropertiesFileReader {
         password = prop.getProperty("mongodb.password");
         host = prop.getProperty("mongodb.host");
         try {
-            port = Integer.parseInt(prop.getProperty("mongodb.port"));
+            String parsedport = prop.getProperty("mongodb.port");
+            port = Integer.parseInt(parsedport);
         } catch(NumberFormatException nfe) {
             LOGGER.error("mongodb.port is not a valid number.  Ignoring");
         }
-        database = prop.getProperty(" mongodb.database");
+        database = prop.getProperty("mongodb.database");
         try {
             filelocation = prop.getProperty("webserver.filelocation");
         } catch(Exception e) {

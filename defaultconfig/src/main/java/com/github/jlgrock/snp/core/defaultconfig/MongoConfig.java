@@ -20,11 +20,11 @@ public class MongoConfig implements MongoDbConfiguration {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MongoConfig.class);
 
-    private static final String DEFAULT_HOST = "192.168.59.103";
+    static final String DEFAULT_HOST = "localhost";
 
-    private static final Integer DEFAULT_PORT = 27017;
+    static final Integer DEFAULT_PORT = 27017;
 
-    private static final String DEFAULT_DATABASE = "test";
+    static final String DEFAULT_DATABASE = "test";
 
     private final ServerAddress host;
 
@@ -43,8 +43,6 @@ public class MongoConfig implements MongoDbConfiguration {
      */
     public MongoConfig() {
         userCredentials = null;
-        LOGGER.info("Connecting to " + DEFAULT_HOST);
-
         ServerAddress hostSet;
         String server = PropertiesFileReader.getHost();
         if (server == null) {
@@ -60,6 +58,7 @@ public class MongoConfig implements MongoDbConfiguration {
             LOGGER.error("Unable to identify host=" + server, e);
             hostSet = null;
         }
+        LOGGER.info("Connecting to " + server + ":" + port);
 
         host = hostSet;
         hosts = null;

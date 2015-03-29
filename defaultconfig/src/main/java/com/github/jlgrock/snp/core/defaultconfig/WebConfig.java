@@ -13,14 +13,25 @@ import java.nio.file.Paths;
 @Service
 public class WebConfig implements WebConfiguration {
 
-    private static final String TEMP_DIR_LOCATION = "/data/uploads";
+    static final String TEMP_DIR_LOCATION = "/data/uploads";
 
-    @Override
-    public Path fileLocation() {
-        String filepath = PropertiesFileReader.getFilelocation();
+    private String filepath;
+
+    WebConfig() {
+        filepath = PropertiesFileReader.getFilelocation();
         if (filepath == null) {
             filepath = WebConfig.TEMP_DIR_LOCATION;
         }
+    }
+    /**
+     * @return the location, in string format
+     */
+    public String getFilepath() {
+        return filepath;
+    }
+
+    @Override
+    public Path fileLocation() {
         return Paths.get(filepath);
     }
 }
