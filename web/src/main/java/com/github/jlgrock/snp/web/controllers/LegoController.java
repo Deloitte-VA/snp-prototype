@@ -2,6 +2,16 @@ package com.github.jlgrock.snp.web.controllers;
 
 import com.github.jlgrock.snp.apis.connection.configuration.WebConfiguration;
 import com.github.jlgrock.snp.apis.data.MultiPartFileUtils;
+import com.github.jlgrock.snp.core.classifier.AssertionClassifier;
+import com.github.jlgrock.snp.core.classifier.AssertionClassifierImpl;
+import com.github.jlgrock.snp.core.data.ClassifiedAssertionMongoDbStore;
+import com.github.jlgrock.snp.core.domain.ClassifiedAssertion;
+import com.github.jlgrock.snp.core.model.parser.Assertion;
+import com.github.jlgrock.snp.core.model.parser.Lego;
+import com.github.jlgrock.snp.core.model.parser.LegoList;
+import com.github.jlgrock.snp.core.parser.LegoXmlParser;
+
+import org.apache.commons.io.input.ReaderInputStream;
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 import org.slf4j.Logger;
@@ -14,7 +24,10 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
 import java.io.InputStream;
+import java.io.StringReader;
+import java.util.List;
 
 /**
  * The controller for handling all xml uploads of lego data
@@ -83,6 +96,19 @@ public class LegoController {
     @Consumes(MediaType.APPLICATION_XML)
     @Produces(MediaType.APPLICATION_XML)
     public String getLego(final String xml) {
+    	
+    	Long patientId = 0L;
+    	
+//    	ReaderInputStream ris = new ReaderInputStream(new StringReader(xml));
+//    	LegoXmlParser legoXmlParser = new LegoXmlParser();
+//    	LegoList legoList = legoXmlParser.parseDocument(ris);
+//    	List<Lego> legos = legoList.getLegos();
+//    	Assertion assertion = legos.get(0).getAssertion();
+//    	AssertionClassifier assertClassifier = new AssertionClassifierImpl();
+//    	ClassifiedAssertion cAssertion = assertClassifier.classify(assertion);
+//    	ClassifiedAssertionMongoDbStore store = new ClassifiedAssertionMongoDbStore(null, null);
+//    	store.save(patientId, cAssertion);
+    	
     	return xml;
     }
 
