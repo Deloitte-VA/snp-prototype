@@ -22,6 +22,8 @@ public class MongoConfig implements MongoDbConfiguration {
 
     private static final String DEFAULT_HOST = "192.168.59.103";
 
+    private static final Integer DEFAULT_PORT = 27017;
+
     private static final String DEFAULT_DATABASE = "test";
 
     private final ServerAddress host;
@@ -41,19 +43,32 @@ public class MongoConfig implements MongoDbConfiguration {
      */
     public MongoConfig() {
         userCredentials = null;
-            LOGGER.info("Connecting to " + DEFAULT_HOST);
-            // TODO until this is pulled from a properties file, this will need to be edited by hand for each user
+        LOGGER.info("Connecting to " + DEFAULT_HOST);
 
         ServerAddress hostSet;
+        String server = PropertiesFileReader.getHost();
+        if (server == null) {
+            server = DEFAULT_HOST;
+        }
+        Integer port = PropertiesFileReader.getPort();
+        if (port == null) {
+            port = DEFAULT_PORT;
+        }
         try {
-            hostSet = new ServerAddress( DEFAULT_HOST );
+            hostSet = new ServerAddress( server, port );
         } catch (UnknownHostException e) {
-            LOGGER.error("Unable to identify host=" + DEFAULT_HOST, e);
+            LOGGER.error("Unable to identify host=" + server, e);
             hostSet = null;
         }
+
         host = hostSet;
         hosts = null;
-        defaultDatabase = DEFAULT_DATABASE;
+
+        String db = PropertiesFileReader.getDatabase();
+        if (db == null) {
+            db = DEFAULT_DATABASE;
+        }
+        defaultDatabase = db;
     }
 
     /**
@@ -64,8 +79,6 @@ public class MongoConfig implements MongoDbConfiguration {
      *               default to {@link MongoConfig#DEFAULT_DATABASE}
      * @param defaultDatabaseIn the name of the default database
      */
-    // TODO this needs to pull from a properties file
-    // TODO this needs to check that we aren't using multiple credentials for a single database
     public MongoConfig(final List<MongoCredential> userCredentialsIn,
                        final ServerAddress hostIn,
                        final String defaultDatabaseIn) {
