@@ -40,6 +40,6 @@ public class ClassifiedAssertionRepositoryImpl extends AbstractRepositoryImpl<Cl
 
     @Override
     protected String getCollectionName() {
-        return "pce";
+        return "pces";
     }
 }

@@ -44,7 +44,7 @@ public class PatientRepositoryImpl extends
 
 	@Override
 	protected String getCollectionName() {
-		return "patient";
+		return "patients";
 	}
 
 	@Override

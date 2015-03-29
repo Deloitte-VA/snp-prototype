@@ -37,7 +37,7 @@ public class EncounterRepositoryImpl extends
 
 	@Override
 	protected String getCollectionName() {
-		return "encounter";
+		return "encounters";
 	}
 
 

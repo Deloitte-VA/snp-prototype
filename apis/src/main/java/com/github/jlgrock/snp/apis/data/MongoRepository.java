@@ -59,7 +59,7 @@ public interface MongoRepository<DT, ID extends Serializable> {
      *
      * throws IllegalArgumentException if {@code id} is {@literal null}
      */
-    DT findOne(ID id);
+    DT findOneById(ID id);
 
     /**
      * Returns whether an entity with the given id exists.
@@ -69,7 +69,7 @@ public interface MongoRepository<DT, ID extends Serializable> {
      *
      * throws IllegalArgumentException if {@code id} is {@literal null}
      */
-    boolean exists(ID id);
+    boolean existsById(ID id);
 
     /**
      * Returns all instances of the type.
@@ -85,7 +85,7 @@ public interface MongoRepository<DT, ID extends Serializable> {
      * @return all of the results, brought back into a single iterable collection.  Please note, that you should be
      *          using Pageable versions if the expected output is large.
      */
-    Iterable<DT> findAll(Iterable<ID> ids);
+    Iterable<DT> findAllById(Iterable<ID> ids);
 
     /**
      * Returns the number of entities available.

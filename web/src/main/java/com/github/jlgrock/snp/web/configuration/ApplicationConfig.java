@@ -8,12 +8,20 @@ import com.github.jlgrock.snp.apis.connection.synchronization.TransactionSynchro
 import com.github.jlgrock.snp.core.connection.SimpleMongoDbFactory;
 import com.github.jlgrock.snp.core.connection.SynchronizedMongoDatabaseManager;
 import com.github.jlgrock.snp.core.connection.synchronization.CollectionSynchronizationManager;
+import com.github.jlgrock.snp.core.converters.ClassifiedAssertionReadConverter;
+import com.github.jlgrock.snp.core.converters.ClassifiedAssertionWriteConverter;
+import com.github.jlgrock.snp.core.converters.EncounterReadConverter;
+import com.github.jlgrock.snp.core.converters.EncounterWriteConverter;
+import com.github.jlgrock.snp.core.converters.ObservationReadConverter;
+import com.github.jlgrock.snp.core.converters.ObservationWriteConverter;
+import com.github.jlgrock.snp.core.converters.PatientReadConverter;
+import com.github.jlgrock.snp.core.converters.PatientWriteConverter;
+import com.github.jlgrock.snp.core.data.ClassifiedAssertionRepository;
+import com.github.jlgrock.snp.core.data.ClassifiedAssertionRepositoryImpl;
 import com.github.jlgrock.snp.core.data.EncounterRepository;
 import com.github.jlgrock.snp.core.data.EncounterRepositoryImpl;
-import com.github.jlgrock.snp.core.data.PCERepositoryImpl;
 import com.github.jlgrock.snp.core.data.PatientRepository;
 import com.github.jlgrock.snp.core.data.PatientRepositoryImpl;
-import com.github.jlgrock.snp.core.data.PceRepository;
 import com.github.jlgrock.snp.core.defaultconfig.MongoConfig;
 import com.github.jlgrock.snp.core.defaultconfig.WebConfig;
 import io.dropwizard.jersey.jackson.JacksonMessageBodyProvider;
@@ -81,19 +89,19 @@ public class ApplicationConfig extends ResourceConfig {
             protected void configure() {
                 bind(EncounterRepositoryImpl.class).to(EncounterRepository.class);
                 bind(PatientRepositoryImpl.class).to(PatientRepository.class);
-                bind(PCERepositoryImpl.class).to(PceRepository.class);
+                bind(ClassifiedAssertionRepositoryImpl.class).to(ClassifiedAssertionRepository.class);
 
-//                bind(ObservationReadConverter.class).to(ObservationReadConverter.class);
-//                bind(ObservationWriteConverter.class).to();
-//
-//                bind(EncounterReadConverter.class).to();
-//                bind(EncounterWriteConverter.class).to();
-//
-//                bind(PatientReadConverter.class).to();
-//                bind(PatientWriteConverter.class).to();
-//
-//                bind(PCEReadConverter.class).to();
-//                bind(PCEWriteConverter.class).to();
+                bind(ObservationReadConverter.class).to(ObservationReadConverter.class);
+                bind(ObservationWriteConverter.class).to(ObservationWriteConverter.class);
+
+                bind(EncounterReadConverter.class).to(EncounterReadConverter.class);
+                bind(EncounterWriteConverter.class).to(EncounterWriteConverter.class);
+
+                bind(PatientReadConverter.class).to(PatientReadConverter.class);
+                bind(PatientWriteConverter.class).to(PatientWriteConverter.class);
+
+                bind(ClassifiedAssertionReadConverter.class).to(ClassifiedAssertionReadConverter.class);
+                bind(ClassifiedAssertionWriteConverter.class).to(ClassifiedAssertionWriteConverter.class);
 
 
                 bind(SimpleMongoDbFactory.class).to(MongoDbFactory.class);

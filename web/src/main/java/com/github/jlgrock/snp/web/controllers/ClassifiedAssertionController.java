@@ -40,6 +40,6 @@ public class ClassifiedAssertionController {
     @Produces(MediaType.APPLICATION_JSON)
     public ClassifiedAssertion getAssertion(@PathParam("id") final Long id) {
         LOGGER.debug("getting Assertion");
-        return repository.findOne(id);
+        return repository.findOneById(id);
     }
 }
