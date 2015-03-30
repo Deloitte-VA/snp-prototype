@@ -4,7 +4,10 @@ import java.io.InputStream;
 import java.io.StringReader;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import org.apache.commons.io.input.ReaderInputStream;
+import org.jvnet.hk2.annotations.Service;
 
 import com.github.jlgrock.snp.core.classifier.AssertionClassifier;
 import com.github.jlgrock.snp.core.data.ClassifiedAssertionStore;
@@ -14,13 +17,15 @@ import com.github.jlgrock.snp.core.model.parser.Lego;
 import com.github.jlgrock.snp.core.model.parser.LegoList;
 import com.github.jlgrock.snp.core.parser.LegoXmlParser;
 
+@Service
 public class AssertionClassifierServiceImpl implements
 		AssertionClassifierService {
 	
 	AssertionClassifier assertClassifier;
 	ClassifiedAssertionStore classAssertStore; 
 	
-	public AssertionClassifierServiceImpl(AssertionClassifier assertClassifier, 
+	@Inject
+	protected AssertionClassifierServiceImpl(AssertionClassifier assertClassifier, 
 			ClassifiedAssertionStore classAssertStore) {
 		this.assertClassifier = assertClassifier;
 		this.classAssertStore = classAssertStore;

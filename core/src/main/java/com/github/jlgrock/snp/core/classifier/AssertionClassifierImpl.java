@@ -1,8 +1,11 @@
 package com.github.jlgrock.snp.core.classifier;
 
+import org.jvnet.hk2.annotations.Service;
+
 import com.github.jlgrock.snp.core.domain.ClassifiedAssertion;
 import com.github.jlgrock.snp.core.model.parser.Assertion;
 
+@Service
 public class AssertionClassifierImpl implements AssertionClassifier {
 
 	@Override

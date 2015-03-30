@@ -20,6 +20,7 @@ import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
+import java.nio.file.LinkOption;
 import java.nio.file.StandardOpenOption;
 
 /**
@@ -68,12 +69,24 @@ public class LegoController {
 
         LOGGER.debug("fileInputStream={}, fileName={}", fileInputStream, formDataContentDisposition.getFileName());
 
-        java.nio.file.Path uploadedFileLocation = webConfiguration.fileLocation().resolve(formDataContentDisposition.getFileName());
-
+//        java.nio.file.Path uploadedFileLocation = webConfiguration.fileLocation().resolve(formDataContentDisposition.getFileName());
+        java.nio.file.Path uploadedFileLocation;
+		try {
+			uploadedFileLocation = Files.createTempDirectory("LegoTempDir");
+		} catch (IOException e1) {
+			LOGGER.error(e1.toString());
+			return Response.serverError().build();
+		}
+        
         // save it
         multipartFileUtils.writeToFile(fileInputStream, uploadedFileLocation);
 
         LOGGER.debug("File uploaded to : " + uploadedFileLocation);
+        
+        if (Files.notExists(uploadedFileLocation)) {
+        	LOGGER.error("Uploaded file does not exist: " + uploadedFileLocation);
+        	return Response.serverError().build();
+        }
 
         try (InputStream inputStream = new BufferedInputStream(Files.newInputStream(
 				uploadedFileLocation, StandardOpenOption.READ));) {
