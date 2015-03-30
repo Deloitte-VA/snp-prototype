@@ -8,9 +8,7 @@ import com.github.jlgrock.snp.core.model.parser.Type;
 import gov.vha.isaac.logic.LogicGraph;
 import gov.vha.isaac.logic.LogicGraphBuilder;
 import gov.vha.isaac.logic.node.RootNode;
-import org.ihtsdo.otf.tcc.api.contradiction.ContradictionException;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -56,7 +54,7 @@ public class LegoLogicGraphBuilder extends LogicGraphBuilder {
         int destinationNid = Integer.parseInt(destinationSctId);
 
         RootNode root = Root(SufficientSet(And(SomeRole(typeConceptNid, Concept(destinationNid)))));
-        
+
     }
 
     public LogicGraph getLogicGraph() {
@@ -65,11 +63,9 @@ public class LegoLogicGraphBuilder extends LogicGraphBuilder {
     
     /**
      * Constructor for LogicGraph using input parameters from LEGO XML expressions
-     * @param expressionIn
-     * @throws IOException
-     * @throws ContradictionException
+     * @param expressionIn the complex expression to parse
      */
-    public LegoLogicGraphBuilder(final Expression expressionIn) throws IOException, ContradictionException {
+    public LegoLogicGraphBuilder(final Expression expressionIn) {
     	expression = expressionIn;
     }
 }
