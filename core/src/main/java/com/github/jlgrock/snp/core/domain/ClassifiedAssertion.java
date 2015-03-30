@@ -1,20 +1,22 @@
 package com.github.jlgrock.snp.core.domain;
 
-import com.google.common.base.MoreObjects;
+import java.util.UUID;
 
 import javax.validation.constraints.NotNull;
+
+import com.google.common.base.MoreObjects;
 
 /**
  * An object that has classified all of the PCEs
  */
 public class ClassifiedAssertion extends AbstractMongoDomainObject {
-	private String uuid;
+	private UUID uuid;
 
-	public String getUuid() {
+	public UUID getUuid() {
 		return uuid;
 	}
 
-	public void setUuid(final String uuidIn) {
+	public void setUuid(final UUID uuidIn) {
 		uuid = uuidIn;
 	}
 
