@@ -39,7 +39,10 @@ public class PatientRepositoryImpl extends
 
 	@Override
 	protected Patient convertToDomainObject(final DBObject dbObjectin) {
+		if (dbObjectin == null){return null;}
+		else{
 		return patientReadConverter.convert(dbObjectin);
+		}
 	}
 
 	@Override
@@ -49,7 +52,10 @@ public class PatientRepositoryImpl extends
 
 	@Override
 	protected DBObject convertToDBObject(final Patient s) {
+		if(s == null){return null;}
+		else{
 		return patientWriteConverter.convert(s);
+		}
 	}
 	
 	@Override

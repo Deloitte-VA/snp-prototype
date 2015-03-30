@@ -140,31 +140,12 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
 
 	@Override
 	public Iterable<S> findAll(final Sort sort) {
-		/*
-		 * List<S> sList = new ArrayList<S>(); DBCollection dbc1 =
-		 * dBCollection(); if(sort = Sort.ASC){
-		 * 
-		 * dbc1.find().sort() } else{
-		 * 
-		 * 
-		 * }
-		 * 
-		 * BasicDBObject query = new BasicDBObject (, sort); DBCursor x =
-		 * dbc1.find(query); for(DBObject o:x){ sList.add(convertCollection(o));
-		 * } return sList;
-		 */
-		return null;
+		throw new UnsupportedOperationException("Method is not currently being utilized.");
 	}
 
 	@Override
 	public Page<S> findAll(final Pageable pageable) {
-		/*
-		 * List<S> sList = new ArrayList<S>(); DBCollection dbc1 =
-		 * dBCollection(); BasicDBObject query = new BasicDBObject
-		 * (pageable).skip(start).limit(count); dbc1.find(query); for(DBObject
-		 * o:x){ sList.add(convertCollection(o)); } return sList;
-		 */
-		return null;
+		throw new UnsupportedOperationException("Method is not currently being utilized.");
 	}
 
 	@Override

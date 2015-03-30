@@ -57,12 +57,18 @@ public class EncounterRepositoryImpl extends
 
 	@Override
 	protected Encounter convertToDomainObject(final DBObject dbObjectin) {
+		if(dbObjectin == null){return null;}
+		else{
 		return encounterReadConverter.convert(dbObjectin);
+		}
 	}
 
 	@Override
 	protected DBObject convertToDBObject(final Encounter s) {
+		if(s == null){return null;}
+		else{
 		return encounterWriteConverter.convert(s);
+		}
 	}
 
 }

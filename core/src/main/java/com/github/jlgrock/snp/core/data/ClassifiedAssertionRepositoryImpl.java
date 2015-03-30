@@ -30,12 +30,18 @@ public class ClassifiedAssertionRepositoryImpl extends AbstractRepositoryImpl<Cl
 
 	@Override
 	protected ClassifiedAssertion convertToDomainObject(final DBObject dbObjectin) {
+		if(dbObjectin == null){return null;}
+		else{
 		return classifiedAssertionReadConverter.convert(dbObjectin);
+		}
 	}
 
 	@Override
 	protected DBObject convertToDBObject(final ClassifiedAssertion s) {
+		if(s == null){return null;}
+		else{
 		return classifiedAssertionWriteConverter.convert(s);
+		}
 	}
 
     @Override
