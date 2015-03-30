@@ -13,8 +13,8 @@ public interface AssertionClassifier {
 
     /**
      * Classify all of the PCEs within an assertion
-     * @param assertion
-     * @return
+     * @param assertion Assertion
+     * @return ClassifiedAssertion ClassifiedAssertion
      */
 	ClassifiedAssertion classify(Assertion assertion);
 
