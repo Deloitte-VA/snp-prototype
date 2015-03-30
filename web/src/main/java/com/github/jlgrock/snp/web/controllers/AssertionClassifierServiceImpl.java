@@ -7,8 +7,6 @@ import java.util.List;
 import org.apache.commons.io.input.ReaderInputStream;
 
 import com.github.jlgrock.snp.core.classifier.AssertionClassifier;
-import com.github.jlgrock.snp.core.classifier.AssertionClassifierImpl;
-import com.github.jlgrock.snp.core.data.ClassifiedAssertionMongoDbStore;
 import com.github.jlgrock.snp.core.data.ClassifiedAssertionStore;
 import com.github.jlgrock.snp.core.domain.ClassifiedAssertion;
 import com.github.jlgrock.snp.core.model.parser.Assertion;

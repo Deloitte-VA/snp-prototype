@@ -75,16 +75,15 @@ public class LegoController {
 
         LOGGER.debug("File uploaded to : " + uploadedFileLocation);
 
-        InputStream inputStream;
-        try {
-			inputStream = new BufferedInputStream(Files.newInputStream(
-					uploadedFileLocation, StandardOpenOption.READ));
+        try (InputStream inputStream = new BufferedInputStream(Files.newInputStream(
+				uploadedFileLocation, StandardOpenOption.READ));) {
+        	assertClssfrSvc.classifyAssertion(inputStream);
 		} catch (IOException e) {
 			LOGGER.error(e.toString());
 			return Response.serverError().build();
 		}
 
-        assertClssfrSvc.classifyAssertion(inputStream);
+        
         return Response.ok().build();
     }
     
