@@ -1,17 +1,12 @@
 package com.github.jlgrock.snp.core.classifier;
 
-import gov.vha.isaac.logic.LogicGraph;
+import org.jvnet.hk2.annotations.Service;
 
-import java.io.IOException;
-import java.util.UUID;
-
-import org.ihtsdo.otf.tcc.api.contradiction.ContradictionException;
-
-import com.github.jlgrock.snp.core.data.LegoLogicGraphBuilder;
 import com.github.jlgrock.snp.core.domain.ClassifiedAssertion;
 import com.github.jlgrock.snp.core.model.parser.Assertion;
 import com.github.jlgrock.snp.core.model.parser.Expression;
 
+@Service
 public class AssertionClassifierImpl implements AssertionClassifier {
 
 	@Override

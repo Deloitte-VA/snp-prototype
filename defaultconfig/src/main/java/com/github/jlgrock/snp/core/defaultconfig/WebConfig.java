@@ -17,7 +17,7 @@ public class WebConfig implements WebConfiguration {
 
     private String filepath;
 
-    WebConfig() {
+    public WebConfig() {
         filepath = PropertiesFileReader.getFilelocation();
         if (filepath == null) {
             filepath = WebConfig.TEMP_DIR_LOCATION;
