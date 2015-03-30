@@ -5,6 +5,8 @@ import com.github.jlgrock.snp.apis.connection.MongoDbFactory;
 import com.github.jlgrock.snp.apis.connection.configuration.MongoDbConfiguration;
 import com.github.jlgrock.snp.apis.connection.configuration.WebConfiguration;
 import com.github.jlgrock.snp.apis.connection.synchronization.TransactionSynchronizationManager;
+import com.github.jlgrock.snp.core.classifier.AssertionClassifier;
+import com.github.jlgrock.snp.core.classifier.AssertionClassifierImpl;
 import com.github.jlgrock.snp.core.connection.SimpleMongoDbFactory;
 import com.github.jlgrock.snp.core.connection.SynchronizedMongoDatabaseManager;
 import com.github.jlgrock.snp.core.connection.synchronization.CollectionSynchronizationManager;
@@ -16,16 +18,22 @@ import com.github.jlgrock.snp.core.converters.ObservationReadConverter;
 import com.github.jlgrock.snp.core.converters.ObservationWriteConverter;
 import com.github.jlgrock.snp.core.converters.PatientReadConverter;
 import com.github.jlgrock.snp.core.converters.PatientWriteConverter;
+import com.github.jlgrock.snp.core.data.ClassifiedAssertionMongoDbStore;
 import com.github.jlgrock.snp.core.data.ClassifiedAssertionRepository;
 import com.github.jlgrock.snp.core.data.ClassifiedAssertionRepositoryImpl;
+import com.github.jlgrock.snp.core.data.ClassifiedAssertionStore;
 import com.github.jlgrock.snp.core.data.EncounterRepository;
 import com.github.jlgrock.snp.core.data.EncounterRepositoryImpl;
 import com.github.jlgrock.snp.core.data.PatientRepository;
 import com.github.jlgrock.snp.core.data.PatientRepositoryImpl;
 import com.github.jlgrock.snp.core.defaultconfig.MongoConfig;
 import com.github.jlgrock.snp.core.defaultconfig.WebConfig;
+import com.github.jlgrock.snp.web.controllers.AssertionClassifierService;
+import com.github.jlgrock.snp.web.controllers.AssertionClassifierServiceImpl;
+
 import io.dropwizard.jersey.jackson.JacksonMessageBodyProvider;
 import io.dropwizard.jersey.jackson.JsonProcessingExceptionMapper;
+
 import org.glassfish.hk2.api.ServiceLocator;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import org.glassfish.jersey.jackson.JacksonFeature;
@@ -90,6 +98,10 @@ public class ApplicationConfig extends ResourceConfig {
                 bind(EncounterRepositoryImpl.class).to(EncounterRepository.class);
                 bind(PatientRepositoryImpl.class).to(PatientRepository.class);
                 bind(ClassifiedAssertionRepositoryImpl.class).to(ClassifiedAssertionRepository.class);
+                
+                bind(AssertionClassifierServiceImpl.class).to(AssertionClassifierService.class);
+                bind(AssertionClassifierImpl.class).to(AssertionClassifier.class);
+                bind(ClassifiedAssertionMongoDbStore.class).to(ClassifiedAssertionStore.class);
 
                 bind(ObservationReadConverter.class).to(ObservationReadConverter.class);
                 bind(ObservationWriteConverter.class).to(ObservationWriteConverter.class);
