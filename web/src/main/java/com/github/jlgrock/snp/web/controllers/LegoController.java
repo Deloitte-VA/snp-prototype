@@ -2,6 +2,7 @@ package com.github.jlgrock.snp.web.controllers;
 
 import com.github.jlgrock.snp.apis.connection.configuration.WebConfiguration;
 import com.github.jlgrock.snp.apis.data.MultiPartFileUtils;
+
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 import org.slf4j.Logger;
@@ -14,7 +15,12 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
+import java.io.BufferedInputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.StandardOpenOption;
 
 /**
  * The controller for handling all xml uploads of lego data
@@ -27,6 +33,8 @@ public class LegoController {
     private MultiPartFileUtils multipartFileUtils;
 
     private WebConfiguration webConfiguration;
+    
+    private AssertionClassifierService assertClssfrSvc;
 
     /**
      * Default constructor.
@@ -35,9 +43,11 @@ public class LegoController {
      */
     @Inject
     public LegoController(final WebConfiguration webConfigurationIn,
-                          final MultiPartFileUtils multipartFileUtilsIn) {
+                          final MultiPartFileUtils multipartFileUtilsIn,
+                          final AssertionClassifierService assertClssfrSvcIn) {
         webConfiguration = webConfigurationIn;
         multipartFileUtils = multipartFileUtilsIn;
+        assertClssfrSvc = assertClssfrSvcIn;
     }
 
     /**
@@ -65,8 +75,16 @@ public class LegoController {
 
         LOGGER.debug("File uploaded to : " + uploadedFileLocation);
 
-        //TODO this is where we add the connection to the XML parser
+        InputStream inputStream;
+        try {
+			inputStream = new BufferedInputStream(Files.newInputStream(
+					uploadedFileLocation, StandardOpenOption.READ));
+		} catch (IOException e) {
+			LOGGER.error(e.toString());
+			return Response.serverError().build();
+		}
 
+        assertClssfrSvc.classifyAssertion(inputStream);
         return Response.ok().build();
     }
     
@@ -81,22 +99,14 @@ public class LegoController {
     @POST
     @Path("/")
     @Consumes(MediaType.APPLICATION_XML)
-    @Produces(MediaType.APPLICATION_XML)
-    public String getLego(final String xml) {
+//    @Produces(MediaType.APPLICATION_XML)
+    public Response getLego(final String xml) {
     	
-    	Long patientId = 0L;
+    	LOGGER.debug("HTTP XML stream received: " + xml);
     	
-//    	ReaderInputStream ris = new ReaderInputStream(new StringReader(xml));
-//    	LegoXmlParser legoXmlParser = new LegoXmlParser();
-//    	LegoList legoList = legoXmlParser.parseDocument(ris);
-//    	List<Lego> legos = legoList.getLegos();
-//    	Assertion assertion = legos.get(0).getAssertion();
-//    	AssertionClassifier assertClassifier = new AssertionClassifierImpl();
-//    	ClassifiedAssertion cAssertion = assertClassifier.classify(assertion);
-//    	ClassifiedAssertionMongoDbStore store = new ClassifiedAssertionMongoDbStore(null, null);
-//    	store.save(patientId, cAssertion);
+    	assertClssfrSvc.classifyAssertion(xml);
     	
-    	return xml;
+    	return Response.ok().build();
     }
 
 }
