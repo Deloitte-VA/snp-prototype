@@ -63,7 +63,7 @@ public class PatientControllerTest extends GenericControllerTest {
 
     @Test
     public void testGetPatient() {
-    	Mockito.when(patientRepository.findOne(patient.getId())).thenReturn(patient);
+    	Mockito.when(patientRepository.findOneById(patient.getId())).thenReturn(patient);
         patientController = new PatientController(patientRepository);
     	Patient actual = patientController.getPatient(patient.getId());
 
@@ -79,7 +79,7 @@ public class PatientControllerTest extends GenericControllerTest {
         patientTemp.setLastName("c");
         patientTemp.setGender(Gender.FEMALE);
         patientTemp.setRace(Race.AMERICAN_INDIAN);
-        Mockito.when(patientRepository.findOne(Mockito.any())).thenReturn(patientTemp);
+        Mockito.when(patientRepository.findOneById(Mockito.any())).thenReturn(patientTemp);
         final WebTarget target = target("patient/1");
         String response = target.request().get(String.class);
         String serialized = JacksonConfig.newObjectMapper().writeValueAsString(patientTemp);

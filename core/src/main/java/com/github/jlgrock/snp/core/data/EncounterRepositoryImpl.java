@@ -1,6 +1,8 @@
 package com.github.jlgrock.snp.core.data;
 
 import com.github.jlgrock.snp.apis.connection.MongoDbFactory;
+import com.github.jlgrock.snp.core.converters.EncounterReadConverter;
+import com.github.jlgrock.snp.core.converters.EncounterWriteConverter;
 import com.github.jlgrock.snp.core.domain.Encounter;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
@@ -9,8 +11,8 @@ import com.mongodb.DBObject;
 import org.jvnet.hk2.annotations.Service;
 
 import javax.inject.Inject;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -20,37 +22,47 @@ import java.util.List;
 public class EncounterRepositoryImpl extends
 		AbstractRepositoryImpl<Encounter, Long> implements EncounterRepository {
 
-	@Override
-	protected Encounter convertCollection(final DBObject dbObjectin) {
-		return null;
-	}
+	private final EncounterReadConverter encounterReadConverter;
 
-	@Override
-	protected DBObject convertToDBObject(final Encounter encounter) {
-		return null;
-	}
+	private final EncounterWriteConverter encounterWriteConverter;
 
 	@Inject
-	public EncounterRepositoryImpl(final MongoDbFactory mongoDbFactoryIn) {
+	protected EncounterRepositoryImpl(final MongoDbFactory mongoDbFactoryIn,
+									  final EncounterReadConverter encounterReadConverterIn,
+									  final EncounterWriteConverter encounterWriteConverterIn) {
 		super(mongoDbFactoryIn);
+		encounterReadConverter = encounterReadConverterIn;
+		encounterWriteConverter = encounterWriteConverterIn;
 	}
 
 	@Override
-	protected String getCollection() {
-		return "encounter";
+	protected String getCollectionName() {
+		return "encounters";
 	}
 
-	@Override
-	public List<Encounter> findByDate(Date date) {
-		List<Encounter> eList = new ArrayList<Encounter>();
+
+	public List<Encounter> findByDate(final LocalDate date) {
+		List<Encounter> eList = new ArrayList<>();
 		DBCollection dbc1 = dBCollection();
-		BasicDBObject query = new BasicDBObject("Encounter.date", date);
+		BasicDBObject query = new BasicDBObject() {{
+			put("date", date.toEpochDay());
+		}};
+
 		DBCursor x = dbc1.find(query);
 		for (DBObject o : x) {
-			//eList.add(o);
-			//TODO convert
+			eList.add(convertToDomainObject(o));
 		}
 		return eList;
+	}
+
+	@Override
+	protected Encounter convertToDomainObject(final DBObject dbObjectin) {
+		return encounterReadConverter.convert(dbObjectin);
+	}
+
+	@Override
+	protected DBObject convertToDBObject(final Encounter s) {
+		return encounterWriteConverter.convert(s);
 	}
 
 }

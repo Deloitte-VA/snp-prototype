@@ -55,7 +55,7 @@ public class EncounterControllerTest extends GenericControllerTest {
     @Test
     public void testGetEncounterMethod() {
         Mockito.when(encounter.getId()).thenReturn(1l);
-    	Mockito.when(encounterRepository.findOne(encounter.getId())).thenReturn(encounter);
+    	Mockito.when(encounterRepository.findOneById(encounter.getId())).thenReturn(encounter);
         encounterController = new EncounterController(encounterRepository);
     	Encounter actual = encounterController.getEncounter(encounter.getId());
     	Assert.assertEquals(actual, encounter);
@@ -69,7 +69,7 @@ public class EncounterControllerTest extends GenericControllerTest {
         encounterTemp.setPatientId(2l);
         encounterTemp.setReasonForVisit("abc");
         encounterTemp.setType(3);
-        Mockito.when(encounterRepository.findOne(Mockito.any())).thenReturn(encounterTemp);
+        Mockito.when(encounterRepository.findOneById(Mockito.any())).thenReturn(encounterTemp);
         final WebTarget target = target("encounter/1");
         String response = target.request().get(String.class);
         String serialized = JacksonConfig.newObjectMapper().writeValueAsString(encounterTemp);

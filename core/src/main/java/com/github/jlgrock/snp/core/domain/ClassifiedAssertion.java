@@ -1,6 +1,5 @@
 package com.github.jlgrock.snp.core.domain;
 
-import com.github.jlgrock.snp.core.model.parser.Assertion;
 import com.google.common.base.MoreObjects;
 
 import javax.validation.constraints.NotNull;
@@ -8,7 +7,7 @@ import javax.validation.constraints.NotNull;
 /**
  * An object that has classified all of the PCEs
  */
-public class ClassifiedAssertion extends Assertion {
+public class ClassifiedAssertion extends AbstractMongoDomainObject {
 	private String uuid;
 
 	public String getUuid() {

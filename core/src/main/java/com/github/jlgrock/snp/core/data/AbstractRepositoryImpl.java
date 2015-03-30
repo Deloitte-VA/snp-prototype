@@ -7,6 +7,7 @@ import com.github.jlgrock.snp.apis.data.Pageable;
 import com.github.jlgrock.snp.apis.data.Sort;
 import com.github.jlgrock.snp.apis.domain.MongoDomainObject;
 import com.github.jlgrock.snp.apis.exceptions.DataAccessException;
+import com.google.common.collect.Lists;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
@@ -22,6 +23,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * This is an Abstract implementation of a repository class for Java
@@ -39,7 +41,7 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
 	 *            Data Base Object is an input parameter used in this method
 	 * @return the method returns a Serializable S object as output
 	 */
-	protected abstract S convertCollection(final DBObject dbObjectin);
+	protected abstract S convertToDomainObject(final DBObject dbObjectin);
 
 	/**
 	 * Changes an S object into a DBObject
@@ -78,7 +80,7 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
 	 * 
 	 * @return method will return a string
 	 */
-	protected abstract String getCollection();
+	protected abstract String getCollectionName();
 
 	/**
 	 * 
@@ -92,7 +94,12 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
 		} catch (DataAccessException e) {
 			LOGGER.error("Could not get access to the data.", e);
 		}
-		DBCollection dbCollection = db.getCollection(getCollection());
+		String collectionName = getCollectionName();
+		if (collectionName == null) {
+			LOGGER.error("Collection name has not been set on class " + this.getClass().getSimpleName() + ", code will fail until this is remedied");
+			return null;
+		}
+		DBCollection dbCollection = db.getCollection(collectionName);
 		dbCollection.setWriteConcern(WriteConcern.JOURNALED);
 		return dbCollection;
 	}
@@ -105,8 +112,8 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
 	 * @return an id that can be serialized. If it cannot be serialized, the
 	 *         optional is returned and an error is logged.
 	 */
-	private Optional<?> serializeId(Object obj) {
-		Optional<?> returnval = null;
+	private Optional<?> serializeId(final Object obj) {
+		Optional<?> returnval;
 		if (obj instanceof Number || obj instanceof Binary
 				|| obj instanceof ObjectId || obj instanceof DBObject) {
 			returnval = Optional.of(obj);
@@ -120,7 +127,7 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
 		return returnval;
 	}
 
-	private List<Object> serializeIds(List<Object> objs) {
+	private List<Object> serializeIds(final List<Object> objs) {
 		List<Object> list = new ArrayList<>();
 		for (Object obj : objs) {
 			Optional<?> o = serializeId(obj);
@@ -132,7 +139,7 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
 	}
 
 	@Override
-	public Iterable<S> findAll(Sort sort) {
+	public Iterable<S> findAll(final Sort sort) {
 		/*
 		 * List<S> sList = new ArrayList<S>(); DBCollection dbc1 =
 		 * dBCollection(); if(sort = Sort.ASC){
@@ -150,7 +157,7 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
 	}
 
 	@Override
-	public Page<S> findAll(Pageable pageable) {
+	public Page<S> findAll(final Pageable pageable) {
 		/*
 		 * List<S> sList = new ArrayList<S>(); DBCollection dbc1 =
 		 * dBCollection(); BasicDBObject query = new BasicDBObject
@@ -161,14 +168,14 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
 	}
 
 	@Override
-	public <S1 extends S> S save(S1 entity) {
+	public <S1 extends S> S save(final S1 entity) {
 		DBCollection dbc1 = dBCollection();
 		dbc1.save(convertToDBObject(entity));
 		return entity;
 	}
 
 	@Override
-	public <S1 extends S> Iterable<S1> save(Iterable<S1> entities) {
+	public <S1 extends S> Iterable<S1> save(final Iterable<S1> entities) {
 		DBCollection dbc1 = dBCollection();
 		for (S1 o : entities) {
 			dbc1.save(convertToDBObject(o));
@@ -177,44 +184,56 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
 	}
 
 	@Override
-	public S findOne(T t) {
+	public S findOneById(final T id) {
+		LOGGER.info("find(id=" + id + ")");
 		DBCollection dbc1 = dBCollection();
-		BasicDBObject query = new BasicDBObject("$eq", t);
+		BasicDBObject query = new BasicDBObject() {{
+			put("_id", id);
+		}};
 		DBObject x = dbc1.findOne(query);
-		return convertCollection(x);
+		return convertToDomainObject(x);
 	}
 
 	@Override
-	public boolean exists(T t) {
+	public boolean existsById(final T id) {
+		LOGGER.info("exists(id=" + id + ")");
 		DBCollection dbc1 = dBCollection();
-		BasicDBObject query = new BasicDBObject("$eq", t);
+		BasicDBObject query = new BasicDBObject() {{
+			put("_id", id);
+		}};
 		DBCursor x = dbc1.find(query);
 		if (x != null) {
 			return true;
-		} else {
-			return false;
 		}
+		return false;
 	}
 
 	@Override
 	public Iterable<S> findAll() {
-		List<S> sList = new ArrayList<S>();
+		LOGGER.info("findAll()");
+		List<S> sList = new ArrayList<>();
 		DBCollection dbc1 = dBCollection();
 		DBCursor x = dbc1.find();
 		for (DBObject o : x) {
-			sList.add(convertCollection(o));
+			sList.add(convertToDomainObject(o));
 		}
 		return sList;
 	}
 
 	@Override
-	public Iterable<S> findAll(Iterable<T> ids) {
-		List<S> sList = new ArrayList<S>();
+	public Iterable<S> findAllById(final Iterable<T> ids) {
+		LOGGER.info("findall(ids=" + Lists.newArrayList(ids).stream().map(id -> id.toString()).collect(Collectors.joining(", ")) + ")");
+		List<S> sList = new ArrayList<>();
 		DBCollection dbc1 = dBCollection();
-		BasicDBObject query = new BasicDBObject("$in", ids);
+		BasicDBObject query = new BasicDBObject() {{
+			put("_id", new BasicDBObject() {{
+				put("$in", ids);
+			}});
+		}};
+
 		DBCursor x = dbc1.find(query);
 		for (DBObject o : x) {
-			sList.add(convertCollection(o));
+			sList.add(convertToDomainObject(o));
 		}
 		return sList;
 	}
@@ -226,27 +245,37 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
 	}
 
 	@Override
-	public void deleteById(T t) {
+	public void deleteById(final T id) {
+		LOGGER.info("deleteById(id=" + id + ")");
 		DBCollection dbc1 = dBCollection();
-		BasicDBObject query = new BasicDBObject("$eq", t);
+		BasicDBObject query = new BasicDBObject() {{
+			put("_id", id);
+		}};
 		dbc1.findAndRemove(query);
 	}
 
 	@Override
-	public void delete(S entity) {
+	public void delete(final S entity) {
+		LOGGER.info("deleteById(entity=" + entity + ")");
 		DBCollection dbc1 = dBCollection();
 		dbc1.remove(convertToDBObject(entity));
 	}
 
 	@Override
-	public void delete(Iterable<? extends S> entities) {
+	public void delete(final Iterable<? extends S> entities) {
+		LOGGER.info("delete(ids=" + Lists.newArrayList(entities).stream().map(id -> id.toString()).collect(Collectors.joining(", ")) + ")");
 		DBCollection dbc1 = dBCollection();
-		BasicDBObject query = new BasicDBObject("$in", entities);
+		BasicDBObject query = new BasicDBObject() {{
+			put("_id", new BasicDBObject() {{
+				put("$in", entities);
+			}});
+		}};
 		dbc1.findAndRemove(query);
 	}
 
 	@Override
 	public void deleteAll() {
+		LOGGER.info("deleteAll()");
 		DBCollection dbc1 = dBCollection();
 		BasicDBObject query = new BasicDBObject();
 		dbc1.findAndRemove(query);

@@ -13,12 +13,12 @@ import javax.inject.Named;
  */
 @Service
 @Named
-public class ClassifiedAssertionReadConverter implements ReadConverter<DBObject, ClassifiedAssertion> {
+public class ClassifiedAssertionReadConverter extends AbstractReadConverter implements ReadConverter<DBObject, ClassifiedAssertion> {
     @Override
     public ClassifiedAssertion convert(final DBObject source) {
         ClassifiedAssertion assertion = new ClassifiedAssertion();
-        assertion.setId(((Number) source.get(AssertionTags.ID_TAG)).longValue());
-        assertion.setDesc((String) source.get(AssertionTags.DESCRIPTION_TAG));
+        assertion.setId(parseLong(source, AssertionTags.ID_TAG));
+        assertion.setDesc(parseString(source, AssertionTags.DESCRIPTION_TAG));
         return assertion;
     }
 }

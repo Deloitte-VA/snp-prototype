@@ -19,7 +19,7 @@ public class ClassifiedAssertionMongoDbStore implements ClassifiedAssertionStore
 	}
 	
 	public void save(final Long patientId, final ClassifiedAssertion classifiedAssertion) {
-		Patient patient = patientRepository.findOne(patientId);
+		Patient patient = patientRepository.findOneById(patientId);
 		if(patient != null) {
 			classifiedAssertionRepository.save(classifiedAssertion);
 		}		
