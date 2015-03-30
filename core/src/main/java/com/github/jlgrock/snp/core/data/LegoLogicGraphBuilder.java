@@ -56,7 +56,7 @@ public class LegoLogicGraphBuilder extends LogicGraphBuilder {
         int destinationNid = Integer.parseInt(destinationSctId);
 
         RootNode root = Root(SufficientSet(And(SomeRole(typeConceptNid, Concept(destinationNid)))));
-        new LogicGraph()
+        
     }
 
     public LogicGraph getLogicGraph() {
