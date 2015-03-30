@@ -1,36 +1,60 @@
 package com.github.jlgrock.snp.core.data;
 
-import java.io.IOException;
-
-import org.ihtsdo.otf.tcc.api.contradiction.ContradictionException;
-
+import com.github.jlgrock.snp.core.model.parser.Concept;
+import com.github.jlgrock.snp.core.model.parser.Destination;
 import com.github.jlgrock.snp.core.model.parser.Expression;
-
+import com.github.jlgrock.snp.core.model.parser.Relation;
+import com.github.jlgrock.snp.core.model.parser.Type;
 import gov.vha.isaac.logic.LogicGraph;
 import gov.vha.isaac.logic.LogicGraphBuilder;
-import gov.vha.isaac.logic.node.AndNode;
 import gov.vha.isaac.logic.node.RootNode;
 
+import java.util.List;
+import java.util.Optional;
+
 /**
- * A Logic Graph Builder specific to Lego documents
+ * A Logic Graph Builder specific to Lego documents.  This should only be used to
  */
 public class LegoLogicGraphBuilder extends LogicGraphBuilder {
 
-    private Expression expression;
+    private final Expression expression;
     private LogicGraph logicGraph;
-
-    /**
-     * Set the expression to build the logic graph
-     * @param expressionIn the expression to create a logic graph from
-     */
-    public void setExpression(final Expression expressionIn) {
-        expression = expressionIn;
-    }
 
     @Override
     public void create() {
-        //TODO LogicGraph creation code goes here
-    	//Look for LegoLogicGraphBuilder constructor method below
+//        String sourceConceptSctid = expression.getConcept().getSctid();
+//        int ?? = Integer.parseInt(sourceConceptSctid);
+
+        String isAboutSctId = Optional.ofNullable(expression)
+                .map(Expression::getRelations)
+                .filter((List<Relation> list) -> list.size() < 0)
+                .map((List<Relation> list) -> list.get(0))
+                .map(Relation::getType)
+                .map(Type::getConcept)
+                .map(Concept::getSctid)
+                .orElse(null);
+        if (isAboutSctId == null) {
+            return;
+        }
+
+        String destinationSctId = Optional.ofNullable(expression)
+                .map(Expression::getRelations)
+                .filter((List<Relation> list) -> list.size() < 0)
+                .map((List<Relation> list) -> list.get(0))
+                .map(Relation::getDestination)
+                .map(Destination::getExpression)
+                .map(Expression::getConcept)
+                .map(Concept::getSctid)
+                .orElse(null);
+        if (destinationSctId == null) {
+            return;
+        }
+
+        int typeConceptNid = Integer.parseInt(isAboutSctId);
+        int destinationNid = Integer.parseInt(destinationSctId);
+
+        RootNode root = Root(SufficientSet(And(SomeRole(typeConceptNid, Concept(destinationNid)))));
+
     }
 
     public LogicGraph getLogicGraph() {
@@ -39,34 +63,9 @@ public class LegoLogicGraphBuilder extends LogicGraphBuilder {
     
     /**
      * Constructor for LogicGraph using input parameters from LEGO XML expressions
-     * @param sourceConceptSctid
-     * @param isAboutSctid
-     * @param destinationSctid
-     * @throws IOException
-     * @throws ContradictionException
+     * @param expressionIn the complex expression to parse
      */
-    public LegoLogicGraphBuilder(int sourceConceptSctid,
-            String isAboutSctid, //isAboutUUID,
-            String destinationSctid //destinationUUID
-            ) throws IOException, ContradictionException {
-    	
-    	int sourceConceptNid = sourceConceptSctid;
-    	 //Convert from String to int
-    	int typeConceptNid = Integer.parseInt(isAboutSctid);  //Do we need any converter method call to transform sctid into Nid?
-    	int destinationNid = Integer.parseInt(destinationSctid); //Do we need any converter method call to transform sctid into Nid or seq id?
-    	
-    	 //Add the nodes to the logic graph based on LEGO XML parameters
-    	 //Create root node first
-    	 RootNode root = getRoot();
-    	 //Create AndNode
-         AndNode andNode = And();
-         
-        //For LEGO XML expressions, put SufficientSetNode at the top and AndNode next. For "IS ABOUT" type relationship,
-        //add RoleNodeSomeWithNids as child of AndNode. For the parameters of RoleNodeSomeWithNids, use typeConceptNid and 
-         //ConceptNodeWithNids as parameters.
-         
-         root.addChildren(SufficientSet(andNode));
-         andNode.addChildren(SomeRole(typeConceptNid, Concept(destinationNid)));
-        
+    public LegoLogicGraphBuilder(final Expression expressionIn) {
+    	expression = expressionIn;
     }
 }
