@@ -1,18 +1,18 @@
 package com.github.jlgrock.snp.core.classifier;
 
-import java.io.IOException;
 import java.util.UUID;
-
-import org.ihtsdo.otf.tcc.api.contradiction.ContradictionException;
 
 import com.github.jlgrock.snp.core.domain.ClassifiedAssertion;
 import com.github.jlgrock.snp.core.model.parser.Assertion;
 import com.github.jlgrock.snp.core.model.parser.Expression;
 
+/**
+ * Classify an assertion object with a complex expression
+ */
 public class AssertionClassifierImpl implements AssertionClassifier {
 
 	@Override
-	public ClassifiedAssertion classify(Assertion assertion) throws IOException, ContradictionException {
+	public ClassifiedAssertion classify(final Assertion assertion) {
 		LogicGraphClassifierImpl lgClassifier = new LogicGraphClassifierImpl();
 		Expression expression = assertion.getDiscernible().getExpression();
 		ClassifiedAssertion classifiedAssertion = new ClassifiedAssertion();
