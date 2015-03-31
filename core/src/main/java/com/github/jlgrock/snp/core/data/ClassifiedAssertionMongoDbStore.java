@@ -22,11 +22,10 @@ public class ClassifiedAssertionMongoDbStore implements ClassifiedAssertionStore
 	}
 	
 	public void save(final Long patientId, final ClassifiedAssertion classifiedAssertion) {
-		return;
-//		Patient patient = patientRepository.findOneById(patientId);
-//		if(patient != null) {
-//			classifiedAssertionRepository.save(classifiedAssertion);
-//		}		
+		Patient patient = patientRepository.findOneById(patientId);
+		if(patient != null) {
+			classifiedAssertionRepository.save(classifiedAssertion);
+		}		
 	}
 	
 }

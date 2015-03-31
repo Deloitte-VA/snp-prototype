@@ -5,6 +5,7 @@ import com.github.jlgrock.snp.apis.connection.MongoDbFactory;
 import com.github.jlgrock.snp.apis.connection.configuration.MongoDbConfiguration;
 import com.github.jlgrock.snp.apis.connection.configuration.WebConfiguration;
 import com.github.jlgrock.snp.apis.connection.synchronization.TransactionSynchronizationManager;
+import com.github.jlgrock.snp.apis.data.MultiPartFileUtils;
 import com.github.jlgrock.snp.core.classifier.AssertionClassifier;
 import com.github.jlgrock.snp.core.classifier.AssertionClassifierImpl;
 import com.github.jlgrock.snp.core.connection.SimpleMongoDbFactory;
@@ -30,6 +31,7 @@ import com.github.jlgrock.snp.core.defaultconfig.MongoConfig;
 import com.github.jlgrock.snp.core.defaultconfig.WebConfig;
 import com.github.jlgrock.snp.web.controllers.AssertionClassifierService;
 import com.github.jlgrock.snp.web.controllers.AssertionClassifierServiceImpl;
+import com.github.jlgrock.snp.web.controllers.MultipartFileUtilsImpl;
 
 import io.dropwizard.jersey.jackson.JacksonMessageBodyProvider;
 import io.dropwizard.jersey.jackson.JsonProcessingExceptionMapper;
@@ -102,6 +104,7 @@ public class ApplicationConfig extends ResourceConfig {
                 bind(AssertionClassifierServiceImpl.class).to(AssertionClassifierService.class);
                 bind(AssertionClassifierImpl.class).to(AssertionClassifier.class);
                 bind(ClassifiedAssertionMongoDbStore.class).to(ClassifiedAssertionStore.class);
+                bind(MultipartFileUtilsImpl.class).to(MultiPartFileUtils.class);
 
                 bind(ObservationReadConverter.class).to(ObservationReadConverter.class);
                 bind(ObservationWriteConverter.class).to(ObservationWriteConverter.class);
