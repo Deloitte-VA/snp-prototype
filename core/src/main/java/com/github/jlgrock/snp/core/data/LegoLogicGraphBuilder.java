@@ -1,16 +1,25 @@
 package com.github.jlgrock.snp.core.data;
 
+import gov.vha.isaac.logic.LogicGraphBuilder;
+import gov.vha.isaac.logic.node.RootNode;
+import gov.vha.isaac.metadata.coordinates.ViewCoordinates;
+import gov.vha.isaac.ochre.api.LookupService;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+
+import org.ihtsdo.otf.tcc.api.concept.ConceptVersionBI;
+import org.ihtsdo.otf.tcc.api.store.TerminologySnapshotDI;
+import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
+import org.ihtsdo.otf.tcc.api.uuid.UuidT3Generator;
+
 import com.github.jlgrock.snp.core.model.parser.Concept;
 import com.github.jlgrock.snp.core.model.parser.Destination;
 import com.github.jlgrock.snp.core.model.parser.Expression;
 import com.github.jlgrock.snp.core.model.parser.Relation;
 import com.github.jlgrock.snp.core.model.parser.Type;
-import gov.vha.isaac.logic.LogicGraph;
-import gov.vha.isaac.logic.LogicGraphBuilder;
-import gov.vha.isaac.logic.node.RootNode;
-
-import java.util.List;
-import java.util.Optional;
 
 /**
  * A Logic Graph Builder specific to Lego documents.  This should only be used to
@@ -18,7 +27,6 @@ import java.util.Optional;
 public class LegoLogicGraphBuilder extends LogicGraphBuilder {
 
     private final Expression expression;
-    private LogicGraph logicGraph;
 
     @Override
     public void create() {
@@ -27,7 +35,7 @@ public class LegoLogicGraphBuilder extends LogicGraphBuilder {
 
         String isAboutSctId = Optional.ofNullable(expression)
                 .map(Expression::getRelations)
-                .filter((List<Relation> list) -> list.size() < 0)
+                .filter((List<Relation> list) -> list.size() > 0)
                 .map((List<Relation> list) -> list.get(0))
                 .map(Relation::getType)
                 .map(Type::getConcept)
@@ -39,7 +47,7 @@ public class LegoLogicGraphBuilder extends LogicGraphBuilder {
 
         String destinationSctId = Optional.ofNullable(expression)
                 .map(Expression::getRelations)
-                .filter((List<Relation> list) -> list.size() < 0)
+                .filter((List<Relation> list) -> list.size() > 0)
                 .map((List<Relation> list) -> list.get(0))
                 .map(Relation::getDestination)
                 .map(Destination::getExpression)
@@ -49,16 +57,34 @@ public class LegoLogicGraphBuilder extends LogicGraphBuilder {
         if (destinationSctId == null) {
             return;
         }
+        
 
-        int typeConceptNid = Integer.parseInt(isAboutSctId);
-        int destinationNid = Integer.parseInt(destinationSctId);
+        //int typeConceptNid = Integer.parseInt(isAboutSctId);
+        //int destinationNid = Integer.parseInt(destinationSctId);
+        
+        int typeConceptNid = 0;
+        int destinationNid = 0;
+        TerminologyStoreDI termStore = LookupService.getService(TerminologyStoreDI.class);
+        try {
+            TerminologySnapshotDI termSnapshot = termStore.getSnapshot(ViewCoordinates.getDevelopmentInferredLatest());
+            
+            //UUID bleedingSnomedUuid = UuidT3Generator.fromSNOMED(131148009L);
+            //TODO: Verify if there is a way to use lookup
+            UUID typeConceptUuid = UuidT3Generator.fromSNOMED(Integer.parseInt(isAboutSctId));
+            UUID destinationUuid = UuidT3Generator.fromSNOMED(Integer.parseInt(destinationSctId));
+            
+            ConceptVersionBI typeConcept = termSnapshot.getConceptVersion(typeConceptUuid);
+            ConceptVersionBI destinationConcept = termSnapshot.getConceptVersion(destinationUuid);
+            
+            typeConceptNid = typeConcept.getNid();
+            destinationNid =  destinationConcept.getNid();
+        } catch (IOException ex) {
+            //Logger.getLogger(LegoLogicGraphBuilder.class.getName()).log(Level.SEVERE, null, ex);
+        	ex.printStackTrace();
+        }
 
         RootNode root = Root(SufficientSet(And(SomeRole(typeConceptNid, Concept(destinationNid)))));
 
-    }
-
-    public LogicGraph getLogicGraph() {
-        return logicGraph;
     }
     
     /**
