@@ -46,7 +46,6 @@ public class AssertionClassifierServiceImpl implements
 	private void classifyAssertion(final List<Lego> legos) {
     	for (Lego lego : legos) {
     		Assertion assertion = lego.getAssertion();
-//    		System.out.println(assertion);
         	ClassifiedAssertion cAssertion = assertClassifier.classify(assertion);
         	Long patientId = 0L;
 			classAssertStore.save(patientId , cAssertion);
