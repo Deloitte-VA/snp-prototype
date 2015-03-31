@@ -38,19 +38,15 @@ public class AssertionClassifierServiceImplTest {
     
 	@Test
 	public void testClassifyAssertion() {
-		System.out.println("#############");
-		System.out.println("TEST CLASSIFY");
-		System.out.println("#############");
 		
 		Mockito.when(assertionClassifier.classify(assertion)).thenReturn(cAssertion);
 //		Mockito.verify(cAssertStore.save(Mockito.anyLong(), cAssertion));
 		
-//		String expected = readFile("Audiology OBSERVABLES.xml");
 		String expected = readFile("Assertion_Example_01.xml");
-		System.out.println(expected);
 		AssertionClassifierServiceImpl classSvc = new AssertionClassifierServiceImpl(assertionClassifier, cAssertStore);
 		classSvc.classifyAssertion(expected);
-//		classSvc.classifyAssertion();
+		
+//		 TODO: need to add to test
 	}
 	
 	/**
