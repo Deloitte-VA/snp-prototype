@@ -66,16 +66,8 @@ public class LegoController {
                 fileInputStream != null, formDataContentDisposition != null);
 
         LOGGER.debug("fileInputStream={}, fileName={}", fileInputStream, formDataContentDisposition.getFileName());
-// TODO Fix this
-//        java.nio.file.Path uploadedFileLocation = webConfiguration.fileLocation().resolve(formDataContentDisposition.getFileName());
-        java.nio.file.Path uploadedFileLocation;
-		try {
-			java.nio.file.Path tempDir = Files.createTempDirectory("LegoTempDir");
-			uploadedFileLocation = tempDir.resolve(formDataContentDisposition.getFileName());
-		} catch (IOException e1) {
-			LOGGER.error(e1.toString(), e1);
-			return Response.serverError().build();
-		}
+
+        java.nio.file.Path uploadedFileLocation = webConfiguration.fileLocation().resolve(formDataContentDisposition.getFileName());
         
         // save it
         multipartFileUtils.writeToFile(fileInputStream, uploadedFileLocation);
