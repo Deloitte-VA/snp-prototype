@@ -18,8 +18,7 @@ public class LogicGraphClassifierImpl implements LogicGraphClassifier {
 
 		//Set the expression from the
 		LegoLogicGraphBuilder legoLogicGraphBuilder = new LegoLogicGraphBuilder(expression);
-		legoLogicGraphBuilder.create();
-		LogicGraph logicGraph = legoLogicGraphBuilder.getLogicGraph();
+		LogicGraph logicGraph = (LogicGraph)legoLogicGraphBuilder;
 
 		// TODO : call a service that takes a LogicGraph and returns a classifier ID
 		//UUID classifierID = vaLogicService.classify(logicGraph);
