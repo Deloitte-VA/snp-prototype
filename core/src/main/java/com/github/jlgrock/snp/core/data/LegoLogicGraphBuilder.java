@@ -1,6 +1,7 @@
 package com.github.jlgrock.snp.core.data;
 
 import gov.vha.isaac.logic.LogicGraphBuilder;
+import gov.vha.isaac.logic.node.AndNode;
 import gov.vha.isaac.logic.node.RootNode;
 import gov.vha.isaac.metadata.coordinates.ViewCoordinates;
 import gov.vha.isaac.ochre.api.LookupService;
@@ -33,6 +34,14 @@ public class LegoLogicGraphBuilder extends LogicGraphBuilder {
 //        String sourceConceptSctid = expression.getConcept().getSctid();
 //        int ?? = Integer.parseInt(sourceConceptSctid);
 
+    	String sourceSctId = Optional.ofNullable(expression)
+                .map(Expression::getConcept)
+                .map(Concept::getSctid)
+                .orElse(null);
+        if (sourceSctId == null) {
+            return;
+        }
+        
         String isAboutSctId = Optional.ofNullable(expression)
                 .map(Expression::getRelations)
                 .filter((List<Relation> list) -> list.size() > 0)
@@ -62,6 +71,7 @@ public class LegoLogicGraphBuilder extends LogicGraphBuilder {
         //int typeConceptNid = Integer.parseInt(isAboutSctId);
         //int destinationNid = Integer.parseInt(destinationSctId);
         
+        int sourceConceptNid = 0;
         int typeConceptNid = 0;
         int destinationNid = 0;
         TerminologyStoreDI termStore = LookupService.getService(TerminologyStoreDI.class);
@@ -70,20 +80,53 @@ public class LegoLogicGraphBuilder extends LogicGraphBuilder {
             
             //UUID bleedingSnomedUuid = UuidT3Generator.fromSNOMED(131148009L);
             //TODO: Verify if there is a way to use lookup
+            UUID sourceConceptUuid = UuidT3Generator.fromSNOMED(Integer.parseInt(sourceSctId));
             UUID typeConceptUuid = UuidT3Generator.fromSNOMED(Integer.parseInt(isAboutSctId));
             UUID destinationUuid = UuidT3Generator.fromSNOMED(Integer.parseInt(destinationSctId));
             
+            //Get NID from UUID
+            sourceConceptNid = termSnapshot.getNidForUuids(sourceConceptUuid);  
+            typeConceptNid = termSnapshot.getNidForUuids(typeConceptUuid);  
+            destinationNid = termSnapshot.getNidForUuids(destinationUuid); 
+            
+            //Another way to get Nid
+            /*
+            ConceptVersionBI sourceConcept = termSnapshot.getConceptVersion(sourceConceptUuid);
             ConceptVersionBI typeConcept = termSnapshot.getConceptVersion(typeConceptUuid);
             ConceptVersionBI destinationConcept = termSnapshot.getConceptVersion(destinationUuid);
             
+            sourceConceptNid = sourceConcept.getNid();
             typeConceptNid = typeConcept.getNid();
             destinationNid =  destinationConcept.getNid();
+            */
         } catch (IOException ex) {
             //Logger.getLogger(LegoLogicGraphBuilder.class.getName()).log(Level.SEVERE, null, ex);
         	ex.printStackTrace();
         }
+        
 
-        RootNode root = Root(SufficientSet(And(SomeRole(typeConceptNid, Concept(destinationNid)))));
+        //Add the nodes to the logic graph based on LEGO XML parameters
+        //Create root node first
+        RootNode root = getRoot();
+        //Create AndNode
+        AndNode andNode = And();
+
+        //For LEGO XML expressions, put SufficientSetNode at the top and AndNode next. For "IS ABOUT" type relationship,
+        //add RoleNodeSomeWithNids as child of AndNode. For the parameters of RoleNodeSomeWithNids, use typeConceptNid and 
+        //ConceptNodeWithNids as parameters.
+
+        root.addChildren(SufficientSet(andNode));
+        andNode.addChildren(Concept(sourceConceptNid), SomeRole(typeConceptNid, Concept(destinationNid)));
+
+        //The following alternate approach to create logic graph gives somehow class cast Exception for root node
+        /*
+        RootNode root = Root(
+        					SufficientSet(
+    							And(
+	    							Concept(sourceConceptNid), 
+	    							SomeRole(typeConceptNid, Concept(destinationNid))
+    								)));
+         */
 
     }
     
