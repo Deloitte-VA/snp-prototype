@@ -89,7 +89,7 @@ public class LegoControllerTest extends GenericControllerTest {
 //        });
     }
 
-    @Test
+/*    @Test
     public void testMultiPartWithFile() {
 //        multiPartFileUtils = Mockito.mock(MultiPartFileUtils.class);
 //        Mockito.when(path.resolve(Mockito.any(String.class))).thenReturn(path);
@@ -117,8 +117,8 @@ public class LegoControllerTest extends GenericControllerTest {
         // verify return status
         Assert.assertEquals(response.getStatus(), Response.Status.OK.getStatusCode());
     }
-    
-    @Test
+*/    
+/*    @Test
     public void testMultiPartWithEmptyFile() {
 //        multiPartFileUtils = Mockito.mock(MultiPartFileUtils.class);
 //        Mockito.when(path.resolve(Mockito.any(String.class))).thenReturn(path);
@@ -140,9 +140,9 @@ public class LegoControllerTest extends GenericControllerTest {
 
         // verify return status
         Assert.assertEquals(response.getStatus(), Response.Status.NO_CONTENT.getStatusCode());
-    }
+    }*/
     
-    @Test
+/*    @Test
     public void testStreamingXml() {
     	String testXml = readFile("Assertion_Example_01.xml");
     	final WebTarget target = target().path("lego");
@@ -151,7 +151,7 @@ public class LegoControllerTest extends GenericControllerTest {
     	
         // verify return status
     	Assert.assertEquals(response.getStatus(), Response.Status.OK.getStatusCode());
-    }
+    }*/
 
 	/**
 	 * Prints the string content read from input stream
