@@ -12,9 +12,9 @@ import org.jvnet.hk2.annotations.Service;
 import com.github.jlgrock.snp.core.classifier.AssertionClassifier;
 import com.github.jlgrock.snp.core.data.ClassifiedAssertionStore;
 import com.github.jlgrock.snp.core.domain.ClassifiedAssertion;
-import com.github.jlgrock.snp.core.model.parser.Assertion;
-import com.github.jlgrock.snp.core.model.parser.Lego;
-import com.github.jlgrock.snp.core.model.parser.LegoList;
+import com.github.jlgrock.snp.core.model.xml.lego.Assertion;
+import com.github.jlgrock.snp.core.model.xml.lego.Lego;
+import com.github.jlgrock.snp.core.model.xml.lego.LegoList;
 import com.github.jlgrock.snp.core.parser.LegoXmlParser;
 
 @Service
