@@ -1,4 +1,7 @@
 package com.github.jlgrock.snp.core.model.xml.fihr;
+
+import com.google.common.base.MoreObjects;
+
 /**
  * The Coding class represents the coding element in the FIHR XML document.
  *
@@ -31,5 +34,14 @@ public class Coding {
 	public void setDisplay(final Display pDisplay) {
 		display = pDisplay;
 	}	
+	
+	@Override
+	public String toString() {
+		return MoreObjects.toStringHelper(this)
+		.add("system", system)
+		.add("code", code)
+		.add("display", display)
+		.toString();
+	}
 	
 }

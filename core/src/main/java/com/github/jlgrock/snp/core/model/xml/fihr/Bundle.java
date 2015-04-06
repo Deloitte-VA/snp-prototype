@@ -7,6 +7,8 @@ import java.util.List;
 import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
+
+import com.google.common.base.MoreObjects;
 /**
  * Represents the content of FIHR XML document
  *
@@ -253,6 +255,15 @@ public class Bundle {
 		
 		//end location element
 		xmlStreamWriter.writeEndElement();
+	}
+	
+	@Override
+	public String toString() {
+		return MoreObjects.toStringHelper(this)
+		.add("id", id)
+		.add("type", type)
+		.add("entries", entries)
+		.toString();
 	}
 	
 }

@@ -1,4 +1,7 @@
 package com.github.jlgrock.snp.core.model.xml.fihr;
+
+import com.google.common.base.MoreObjects;
+
 /**
  * The Display class represents the display element in the FIHR XML document.
  *
@@ -12,6 +15,13 @@ public class Display {
 
 	public void setValue(final String pValue) {
 		value = pValue;
+	}
+	
+	@Override
+	public String toString() {
+		return MoreObjects.toStringHelper(this)
+		.add("value", value)
+		.toString();
 	}
 	
 }

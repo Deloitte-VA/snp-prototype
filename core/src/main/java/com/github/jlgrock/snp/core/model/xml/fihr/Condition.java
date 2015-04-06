@@ -1,4 +1,7 @@
 package com.github.jlgrock.snp.core.model.xml.fihr;
+
+import com.google.common.base.MoreObjects;
+
 /**
  * The Condition class represents the Condition element in the FIHR XML document.
  *
@@ -93,6 +96,22 @@ public class Condition {
 	
 	public void setNotes(final String pNotes) {
 		notes = pNotes;
+	}
+	
+	@Override
+	public String toString() {
+		return MoreObjects.toStringHelper(this)
+		.add("subject", subject)
+		.add("encounter", encounter)
+		.add("asserter", asserter)
+		.add("dateAsserted", dateAsserted)
+		.add("status", status)
+		.add("code", code)
+		.add("category", category)
+		.add("onset", onset)
+		.add("location", location)
+		.add("notes", notes)
+		.toString();
 	}
 	
 }

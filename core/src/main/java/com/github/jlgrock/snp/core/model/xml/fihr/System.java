@@ -1,4 +1,7 @@
 package com.github.jlgrock.snp.core.model.xml.fihr;
+
+import com.google.common.base.MoreObjects;
+
 /**
  * The System class represents the system element in the FIHR XML document.
  *
@@ -12,6 +15,13 @@ public class System {
 
 	public void setValue(final String pValue) {
 		value = pValue;
+	}
+	
+	@Override
+	public String toString() {
+		return MoreObjects.toStringHelper(this)
+		.add("value", value)
+		.toString();
 	}
 	
 }

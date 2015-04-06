@@ -1,4 +1,7 @@
 package com.github.jlgrock.snp.core.model.xml.fihr;
+
+import com.google.common.base.MoreObjects;
+
 /**
  * The Resource class represents the resource element in the FIHR XML document.
  *
@@ -12,6 +15,13 @@ public class Resource {
 
 	public void setCondition(final Condition pCondition) {
 		condition = pCondition;
+	}
+	
+	@Override
+	public String toString() {
+		return MoreObjects.toStringHelper(this)
+		.add("condition", condition)
+		.toString();
 	}
 	
 }
