@@ -13,12 +13,25 @@ import java.nio.file.Paths;
 @Service
 public class WebConfig implements WebConfiguration {
 
-    //TODO make sure this directory is updated and exists in docker container
-    private static final String TEMP_DIR_LOCATION = "/tmp";
+    static final String TEMP_DIR_LOCATION = "/data/uploads";
 
-    //TODO this should be parsing a config file for these properties
+    private String filepath;
+
+    public WebConfig() {
+        filepath = PropertiesFileReader.getFilelocation();
+        if (filepath == null) {
+            filepath = WebConfig.TEMP_DIR_LOCATION;
+        }
+    }
+    /**
+     * @return the location, in string format
+     */
+    public String getFilepath() {
+        return filepath;
+    }
+
     @Override
     public Path fileLocation() {
-        return Paths.get(WebConfig.TEMP_DIR_LOCATION);
+        return Paths.get(filepath);
     }
 }

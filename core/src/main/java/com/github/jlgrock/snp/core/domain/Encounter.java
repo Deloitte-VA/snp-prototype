@@ -11,9 +11,7 @@ import java.util.Objects;
  * The domain object that represents a single encounter in a patient visit.  Each encounter can consist
  * of multiple {@link com.github.jlgrock.snp.core.domain.Observation Observation} objects.
  */
-public class Encounter {
-    @NotNull
-    private Long id;
+public class Encounter extends AbstractMongoDomainObject {
 
     @NotNull
     private Long patientId;
@@ -21,7 +19,7 @@ public class Encounter {
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
-                .add("id", id)
+                .add("id", getId())
                 .add("patientId", patientId)
                 .add("date", date)
                 .add("type", type)
@@ -32,7 +30,7 @@ public class Encounter {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, patientId, date, type, reasonForVisit, observations);
+        return Objects.hash(getId(), patientId, date, type, reasonForVisit, observations);
     }
 
     @Override
@@ -44,7 +42,7 @@ public class Encounter {
             return false;
         }
         final Encounter other = (Encounter) obj;
-        return Objects.equals(this.id, other.id)
+        return Objects.equals(this.getId(), other.getId())
                 && Objects.equals(this.patientId, other.patientId)
                 && Objects.equals(this.date, other.date)
                 && Objects.equals(this.type, other.type)
@@ -92,14 +90,6 @@ public class Encounter {
     }
 
     private List<Observation> observations;
-
-    public void setId(final Long pId) {
-        id = pId;
-    }
-
-    public Long getId() {
-        return id;
-    }
 
     public Long getPatientId() {
         return patientId;

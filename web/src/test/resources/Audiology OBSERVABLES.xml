@@ -1,0 +1,2267 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<legoList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="LEGO.xsd">
+    <groupName>Audiology OBSERVABLES</groupName>
+    <legoListUUID>530391c6-fe77-4638-ba99-1c33cae59ab5</legoListUUID>
+    <groupDescription>Observables for new VA Audiology form</groupDescription>
+    <comment></comment>
+    <lego>
+        <legoUUID>2601a0fa-3f0f-453c-9186-9ddf5dec3fd9</legoUUID>
+        <stamp status="Active" time="2013-07-30T19:47:23.770-07:00" author="dsperzel" module="default module" path="default path" uuid="f681273f-d2f0-455a-bae2-0be1e83426d7"/>
+        <pncs id="26274" name="Claim for tinnitus" value="Yes"/>
+        <assertion>
+            <assertionUUID>96cd1743-65e0-418c-958f-1a9215007299</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="1217" uuid="6a61d423-d02a-3c56-a50d-c23ae7ff12f3" desc="VA benefit claim filed  (observable entity) "/>
+                    <relation>
+                        <type>
+                            <concept sctid="53" uuid="d82c8d16-19ad-3176-9665-453cfb2e55f0" desc="IS ABOUT (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="155248003" uuid="abba4bbd-0223-3987-8b19-7ddd52e779b5" desc="Tinnitus (disorder)"/>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <expression>
+                    <concept sctid="373066001" uuid="c928767e-f519-3b34-bff2-a2ed3cd5c6c3" desc="Yes (qualifier value)"/>
+                </expression>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>264ba329-f10f-4e98-bf2a-04a39ed629bf</legoUUID>
+        <stamp status="Active" time="2013-07-30T19:53:07.808-07:00" author="dsperzel" module="default module" path="default path" uuid="b8f84c65-06e1-4418-8633-03f8bd4ba2b9"/>
+        <pncs id="26274" name="Claim for tinnitus" value="No"/>
+        <assertion>
+            <assertionUUID>da89cc8e-265f-4029-bf6c-9aeedfca9782</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="1217" uuid="6a61d423-d02a-3c56-a50d-c23ae7ff12f3" desc="VA benefit claim filed  (observable entity) "/>
+                    <relation>
+                        <type>
+                            <concept sctid="53" uuid="d82c8d16-19ad-3176-9665-453cfb2e55f0" desc="IS ABOUT (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="155248003" uuid="abba4bbd-0223-3987-8b19-7ddd52e779b5" desc="Tinnitus (disorder)"/>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <expression>
+                    <concept sctid="373067005" uuid="d58a8003-b801-3da2-83c1-e09497c9bb53" desc="No (qualifier value)"/>
+                </expression>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>23178049-55b0-4649-a170-d9ffca9d5b43</legoUUID>
+        <stamp status="Active" time="2013-07-30T20:12:51.680-07:00" author="dsperzel" module="default module" path="default path" uuid="5f597f37-4dcd-4e9d-a862-8e668313889d"/>
+        <pncs id="26052" name="Current complaint of tinnitus" value="Yes"/>
+        <assertion>
+            <assertionUUID>89af08e5-7bd9-4d1d-9b1c-c261a62bd566</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="1218" uuid="3f67fd97-162d-30e6-be27-748b5b372509" desc="Current compliant (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="53" uuid="d82c8d16-19ad-3176-9665-453cfb2e55f0" desc="IS ABOUT (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="155248003" uuid="abba4bbd-0223-3987-8b19-7ddd52e779b5" desc="Tinnitus (disorder)"/>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <expression>
+                    <concept sctid="373066001" uuid="c928767e-f519-3b34-bff2-a2ed3cd5c6c3" desc="Yes (qualifier value)"/>
+                </expression>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>df699292-1515-4a1e-8afc-d96ec82bdc4f</legoUUID>
+        <stamp status="Active" time="2013-07-30T20:14:20.821-07:00" author="dsperzel" module="default module" path="default path" uuid="266e029a-7dc8-4546-8157-189bbbe13fc3"/>
+        <pncs id="26052" name="Current complaint of tinnitus" value="No"/>
+        <assertion>
+            <assertionUUID>34ef38f6-7a5f-4268-b20e-349299923984</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="1218" uuid="3f67fd97-162d-30e6-be27-748b5b372509" desc="Current compliant (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="53" uuid="d82c8d16-19ad-3176-9665-453cfb2e55f0" desc="IS ABOUT (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="155248003" uuid="abba4bbd-0223-3987-8b19-7ddd52e779b5" desc="Tinnitus (disorder)"/>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <expression>
+                    <concept sctid="373067005" uuid="d58a8003-b801-3da2-83c1-e09497c9bb53" desc="No (qualifier value)"/>
+                </expression>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>6859c90f-57d5-4f1b-b0a3-7798043308a3</legoUUID>
+        <stamp status="Active" time="2013-07-30T20:57:52.042-07:00" author="dsperzel" module="default module" path="default path" uuid="ba204178-e0a6-4fa3-a757-c178f0d94e8f"/>
+        <pncs id="26055" name="Is tinnitus constant?" value="Yes"/>
+        <assertion>
+            <assertionUUID>28e81901-34ba-432e-a76f-3a3d64f03294</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="162451001" uuid="6b45e67f-01d1-3aa3-8abb-89d9116ffaab" desc="Symptom frequency (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="53" uuid="d82c8d16-19ad-3176-9665-453cfb2e55f0" desc="IS ABOUT (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="155248003" uuid="abba4bbd-0223-3987-8b19-7ddd52e779b5" desc="Tinnitus (disorder)"/>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <expression>
+                    <concept sctid="255238004" uuid="e1d8431c-ceaf-3209-9383-71219f621b4e" desc="Continuous (qualifier value)"/>
+                </expression>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>cc52a17a-b5ad-4dc7-a52c-3928e74ff49a</legoUUID>
+        <stamp status="Active" time="2013-07-30T20:57:59.580-07:00" author="dsperzel" module="default module" path="default path" uuid="e263dba7-6aec-4e40-a32d-5fb76aa925aa"/>
+        <pncs id="26055" name="Is tinnitus constant?" value="No"/>
+        <assertion>
+            <assertionUUID>b16dd202-e82c-48fe-b771-cff56964c051</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="162451001" uuid="6b45e67f-01d1-3aa3-8abb-89d9116ffaab" desc="Symptom frequency (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="53" uuid="d82c8d16-19ad-3176-9665-453cfb2e55f0" desc="IS ABOUT (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="155248003" uuid="abba4bbd-0223-3987-8b19-7ddd52e779b5" desc="Tinnitus (disorder)"/>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <expression>
+                    <concept sctid="7087005" uuid="4060e391-a814-3622-a1ef-7444c8a0e992" desc="Intermittent (qualifier value)"/>
+                </expression>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>3e2befc5-c3ec-4ab3-b3bb-12b26006ff7d</legoUUID>
+        <stamp status="Active" time="2013-07-30T20:58:08.254-07:00" author="dsperzel" module="default module" path="default path" uuid="6da764df-4f03-419e-a5ea-bc6c7558c48c"/>
+        <pncs id="17545" name="Is tinnitus recurrent (intermittent)?" value="Yes"/>
+        <assertion>
+            <assertionUUID>44561364-bd37-4f38-a5ed-c872b29b7037</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="162451001" uuid="6b45e67f-01d1-3aa3-8abb-89d9116ffaab" desc="Symptom frequency (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="53" uuid="d82c8d16-19ad-3176-9665-453cfb2e55f0" desc="IS ABOUT (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="155248003" uuid="abba4bbd-0223-3987-8b19-7ddd52e779b5" desc="Tinnitus (disorder)"/>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <expression>
+                    <concept sctid="7087005" uuid="4060e391-a814-3622-a1ef-7444c8a0e992" desc="Intermittent (qualifier value)"/>
+                </expression>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>d254d0cf-9e24-48fc-a3db-0553ce379c3d</legoUUID>
+        <stamp status="Active" time="2013-07-30T20:58:20.190-07:00" author="dsperzel" module="default module" path="default path" uuid="055e5c0a-4bf2-426b-8f1f-c08e08367b74"/>
+        <pncs id="17545" name="Is tinnitus recurrent (intermittent)?" value="No"/>
+        <assertion>
+            <assertionUUID>e116f15a-d8e9-455d-99d7-5a6963ae5c94</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="162451001" uuid="6b45e67f-01d1-3aa3-8abb-89d9116ffaab" desc="Symptom frequency (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="53" uuid="d82c8d16-19ad-3176-9665-453cfb2e55f0" desc="IS ABOUT (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="155248003" uuid="abba4bbd-0223-3987-8b19-7ddd52e779b5" desc="Tinnitus (disorder)"/>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <expression>
+                    <concept sctid="255238004" uuid="e1d8431c-ceaf-3209-9383-71219f621b4e" desc="Continuous (qualifier value)"/>
+                </expression>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>2f9d1659-be42-4c5c-82ef-b774a8332a83</legoUUID>
+        <stamp status="Active" time="2013-07-30T23:24:01.240-07:00" author="dsperzel" module="default module" path="default path" uuid="6f8777d2-1730-48b5-b538-ac891122f543"/>
+        <pncs id="100" name="Hearing threshold in right ear at 500 Hz" value="PNCS_VALUE_FIELD"/>
+        <assertion>
+            <assertionUUID>f7c996cf-25c9-4710-a891-eab7aefd44d7</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="89269003" uuid="816a0a98-fc57-37a8-9581-83dc049d0189" desc="Threshold of hearing (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="118589004" uuid="15e7eff2-66be-3502-8e54-d174e3139608" desc="Threshold (property) (qualifier value)"/>
+                        </type>
+                        <destination>
+                            <measurement>
+<units>
+    <concept sctid="259024007" uuid="a6a9f9d0-8f06-32bf-8153-b40fed577ece" desc="Hz"/>
+</units>
+<point xsi:type="pointLong">
+    <value>500</value>
+</point>
+                            </measurement>
+                        </destination>
+                    </relation>
+                    <relation>
+                        <type>
+                            <concept sctid="36" uuid="19ca14e7-ea63-38a4-ae0e-b13d585e4c22" desc="INHERES IN (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="22945000" uuid="cfbb74be-3c4b-3b25-b571-e1f709859b6e" desc="Inner ear structure (body structure)"/>
+<relation>
+    <type>
+        <concept sctid="272741003" uuid="26ca4590-bbe5-327c-a40a-ba56dc86996b" desc="Laterality (attribute)"/>
+    </type>
+    <destination>
+        <expression>
+            <concept sctid="24028007" uuid="0b506040-5d71-3287-813a-d9e4d74d928b" desc="Right (qualifier value)"/>
+        </expression>
+    </destination>
+</relation>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="252577008" uuid="6a66c427-650c-3401-adca-025c17c3933b" desc="Pure tone audiometry (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <measurement>
+                    <units>
+                        <concept sctid="259042002" uuid="4db394d1-a0a5-348e-9262-0b7c277021aa" desc="decibel (qualifier value)"/>
+                    </units>
+                    <point xsi:type="pointLong">
+                        <value>-10000</value>
+                    </point>
+                </measurement>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>07e15a16-41d8-40c0-8156-bc56dcd2e827</legoUUID>
+        <stamp status="Active" time="2013-07-30T23:32:39.213-07:00" author="dsperzel" module="default module" path="default path" uuid="7444f7ec-1405-4438-b88b-68d7c1969157"/>
+        <pncs id="96" name="Hearing threshold in right ear at 1000 Hz" value="PNCS_VALUE_FIELD"/>
+        <assertion>
+            <assertionUUID>e0358c8e-44d6-41ac-9259-9e80232eee44</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="89269003" uuid="816a0a98-fc57-37a8-9581-83dc049d0189" desc="Threshold of hearing (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="118589004" uuid="15e7eff2-66be-3502-8e54-d174e3139608" desc="Threshold (property) (qualifier value)"/>
+                        </type>
+                        <destination>
+                            <measurement>
+<units>
+    <concept sctid="259024007" uuid="a6a9f9d0-8f06-32bf-8153-b40fed577ece" desc="Hz"/>
+</units>
+<point xsi:type="pointLong">
+    <value>1000</value>
+</point>
+                            </measurement>
+                        </destination>
+                    </relation>
+                    <relation>
+                        <type>
+                            <concept sctid="36" uuid="19ca14e7-ea63-38a4-ae0e-b13d585e4c22" desc="INHERES IN (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="22945000" uuid="cfbb74be-3c4b-3b25-b571-e1f709859b6e" desc="Inner ear structure (body structure)"/>
+<relation>
+    <type>
+        <concept sctid="272741003" uuid="26ca4590-bbe5-327c-a40a-ba56dc86996b" desc="Laterality (attribute)"/>
+    </type>
+    <destination>
+        <expression>
+            <concept sctid="24028007" uuid="0b506040-5d71-3287-813a-d9e4d74d928b" desc="Right (qualifier value)"/>
+        </expression>
+    </destination>
+</relation>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="252577008" uuid="6a66c427-650c-3401-adca-025c17c3933b" desc="Pure tone audiometry (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <measurement>
+                    <units>
+                        <concept sctid="259042002" uuid="4db394d1-a0a5-348e-9262-0b7c277021aa" desc="decibel (qualifier value)"/>
+                    </units>
+                    <point xsi:type="pointLong">
+                        <value>-10000</value>
+                    </point>
+                </measurement>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>26d47d8c-ab2e-447f-9519-0430b2e6e57f</legoUUID>
+        <stamp status="Active" time="2013-07-31T00:04:55.041-07:00" author="dsperzel" module="default module" path="default path" uuid="2a8471b8-2a79-4f86-a0e3-d05131bd039b"/>
+        <pncs id="97" name="Hearing threshold in right ear at 2000 Hz" value="PNCS_VALUE_FIELD"/>
+        <assertion>
+            <assertionUUID>4b606369-748d-4f5d-b3bc-3f0a527e7c29</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="89269003" uuid="816a0a98-fc57-37a8-9581-83dc049d0189" desc="Threshold of hearing (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="118589004" uuid="15e7eff2-66be-3502-8e54-d174e3139608" desc="Threshold (property) (qualifier value)"/>
+                        </type>
+                        <destination>
+                            <measurement>
+<units>
+    <concept sctid="259024007" uuid="a6a9f9d0-8f06-32bf-8153-b40fed577ece" desc="Hz"/>
+</units>
+<point xsi:type="pointLong">
+    <value>2000</value>
+</point>
+                            </measurement>
+                        </destination>
+                    </relation>
+                    <relation>
+                        <type>
+                            <concept sctid="36" uuid="19ca14e7-ea63-38a4-ae0e-b13d585e4c22" desc="INHERES IN (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="22945000" uuid="cfbb74be-3c4b-3b25-b571-e1f709859b6e" desc="Inner ear structure (body structure)"/>
+<relation>
+    <type>
+        <concept sctid="272741003" uuid="26ca4590-bbe5-327c-a40a-ba56dc86996b" desc="Laterality (attribute)"/>
+    </type>
+    <destination>
+        <expression>
+            <concept sctid="24028007" uuid="0b506040-5d71-3287-813a-d9e4d74d928b" desc="Right (qualifier value)"/>
+        </expression>
+    </destination>
+</relation>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="252577008" uuid="6a66c427-650c-3401-adca-025c17c3933b" desc="Pure tone audiometry (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <measurement>
+                    <units>
+                        <concept sctid="259042002" uuid="4db394d1-a0a5-348e-9262-0b7c277021aa" desc="decibel (qualifier value)"/>
+                    </units>
+                    <point xsi:type="pointLong">
+                        <value>-10000</value>
+                    </point>
+                </measurement>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>6e91d90c-0f27-492e-aafb-f301259c9c29</legoUUID>
+        <stamp status="Active" time="2013-07-31T00:06:14.206-07:00" author="dsperzel" module="default module" path="default path" uuid="fdab7f16-a272-4c00-a5e1-4ff1ccb6e05f"/>
+        <pncs id="98" name="Hearing threshold in right ear at  3000 Hz" value="PNCS_VALUE_FIELD"/>
+        <assertion>
+            <assertionUUID>8bcefac6-5c65-4caf-8267-349a126b699a</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="89269003" uuid="816a0a98-fc57-37a8-9581-83dc049d0189" desc="Threshold of hearing (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="118589004" uuid="15e7eff2-66be-3502-8e54-d174e3139608" desc="Threshold (property) (qualifier value)"/>
+                        </type>
+                        <destination>
+                            <measurement>
+<units>
+    <concept sctid="259024007" uuid="a6a9f9d0-8f06-32bf-8153-b40fed577ece" desc="Hz"/>
+</units>
+<point xsi:type="pointLong">
+    <value>3000</value>
+</point>
+                            </measurement>
+                        </destination>
+                    </relation>
+                    <relation>
+                        <type>
+                            <concept sctid="36" uuid="19ca14e7-ea63-38a4-ae0e-b13d585e4c22" desc="INHERES IN (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="22945000" uuid="cfbb74be-3c4b-3b25-b571-e1f709859b6e" desc="Inner ear structure (body structure)"/>
+<relation>
+    <type>
+        <concept sctid="272741003" uuid="26ca4590-bbe5-327c-a40a-ba56dc86996b" desc="Laterality (attribute)"/>
+    </type>
+    <destination>
+        <expression>
+            <concept sctid="24028007" uuid="0b506040-5d71-3287-813a-d9e4d74d928b" desc="Right (qualifier value)"/>
+        </expression>
+    </destination>
+</relation>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="252577008" uuid="6a66c427-650c-3401-adca-025c17c3933b" desc="Pure tone audiometry (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <measurement>
+                    <units>
+                        <concept sctid="259042002" uuid="4db394d1-a0a5-348e-9262-0b7c277021aa" desc="decibel (qualifier value)"/>
+                    </units>
+                    <point xsi:type="pointLong">
+                        <value>-10000</value>
+                    </point>
+                </measurement>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>680604a2-f779-4774-91cb-dcce297da0b5</legoUUID>
+        <stamp status="Active" time="2013-07-31T00:07:46.301-07:00" author="dsperzel" module="default module" path="default path" uuid="65cfd416-530f-4418-8b2a-ed8a41ef51a5"/>
+        <pncs id="99" name="Hearing threshold in right ear at 4000 Hz" value="PNCS_VALUE_FIELD"/>
+        <assertion>
+            <assertionUUID>fba3d11c-92b9-4d03-87e8-39eabbd7b4f5</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="89269003" uuid="816a0a98-fc57-37a8-9581-83dc049d0189" desc="Threshold of hearing (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="118589004" uuid="15e7eff2-66be-3502-8e54-d174e3139608" desc="Threshold (property) (qualifier value)"/>
+                        </type>
+                        <destination>
+                            <measurement>
+<units>
+    <concept sctid="259024007" uuid="a6a9f9d0-8f06-32bf-8153-b40fed577ece" desc="Hz"/>
+</units>
+<point xsi:type="pointLong">
+    <value>4000</value>
+</point>
+                            </measurement>
+                        </destination>
+                    </relation>
+                    <relation>
+                        <type>
+                            <concept sctid="36" uuid="19ca14e7-ea63-38a4-ae0e-b13d585e4c22" desc="INHERES IN (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="22945000" uuid="cfbb74be-3c4b-3b25-b571-e1f709859b6e" desc="Inner ear structure (body structure)"/>
+<relation>
+    <type>
+        <concept sctid="272741003" uuid="26ca4590-bbe5-327c-a40a-ba56dc86996b" desc="Laterality (attribute)"/>
+    </type>
+    <destination>
+        <expression>
+            <concept sctid="24028007" uuid="0b506040-5d71-3287-813a-d9e4d74d928b" desc="Right (qualifier value)"/>
+        </expression>
+    </destination>
+</relation>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="252577008" uuid="6a66c427-650c-3401-adca-025c17c3933b" desc="Pure tone audiometry (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <measurement>
+                    <units>
+                        <concept sctid="259042002" uuid="4db394d1-a0a5-348e-9262-0b7c277021aa" desc="decibel (qualifier value)"/>
+                    </units>
+                    <point xsi:type="pointLong">
+                        <value>-10000</value>
+                    </point>
+                </measurement>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>3d51bdd3-6c22-4763-b503-a50a18e89490</legoUUID>
+        <stamp status="Active" time="2013-07-31T00:10:28.333-07:00" author="dsperzel" module="default module" path="default path" uuid="8da17010-acfd-4048-88ea-494d55c90559"/>
+        <pncs id="101" name="Average hearing threshold in right ear" value="PNCS_VALUE_FIELD"/>
+        <assertion>
+            <assertionUUID>3ffb0d64-44d6-40ff-8fab-c549f1468c2b</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="89269003" uuid="816a0a98-fc57-37a8-9581-83dc049d0189" desc="Threshold of hearing (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="39" uuid="d67d8ab4-f4c1-3bf2-aaa3-53e27879133c" desc="PROPERTY TYPE (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="118589004" uuid="15e7eff2-66be-3502-8e54-d174e3139608" desc="Threshold (property) (qualifier value)"/>
+                            </expression>
+                        </destination>
+                    </relation>
+                    <relation>
+                        <type>
+                            <concept sctid="36" uuid="19ca14e7-ea63-38a4-ae0e-b13d585e4c22" desc="INHERES IN (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="22945000" uuid="cfbb74be-3c4b-3b25-b571-e1f709859b6e" desc="Inner ear structure (body structure)"/>
+<relation>
+    <type>
+        <concept sctid="272741003" uuid="26ca4590-bbe5-327c-a40a-ba56dc86996b" desc="Laterality (attribute)"/>
+    </type>
+    <destination>
+        <expression>
+            <concept sctid="24028007" uuid="0b506040-5d71-3287-813a-d9e4d74d928b" desc="Right (qualifier value)"/>
+        </expression>
+    </destination>
+</relation>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="252577008" uuid="6a66c427-650c-3401-adca-025c17c3933b" desc="Pure tone audiometry (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <measurement>
+                    <units>
+                        <concept sctid="259042002" uuid="4db394d1-a0a5-348e-9262-0b7c277021aa" desc="decibel (qualifier value)"/>
+                    </units>
+                    <point xsi:type="pointLong">
+                        <value>-10000</value>
+                    </point>
+                </measurement>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>27e543b7-4e9a-4484-ae57-c34622a2ba87</legoUUID>
+        <stamp status="Active" time="2013-07-31T00:12:16.836-07:00" author="dsperzel" module="default module" path="default path" uuid="c1cd6507-e915-49c8-ba75-8906d276b8dc"/>
+        <pncs id="94" name="Hearing threshold in  left ear at 500 Hz" value="PNCS_VALUE_FIELD"/>
+        <assertion>
+            <assertionUUID>7c6bc047-5ffe-475a-b863-38975ddf6d34</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="89269003" uuid="816a0a98-fc57-37a8-9581-83dc049d0189" desc="Threshold of hearing (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="118589004" uuid="15e7eff2-66be-3502-8e54-d174e3139608" desc="Threshold (property) (qualifier value)"/>
+                        </type>
+                        <destination>
+                            <measurement>
+<units>
+    <concept sctid="259024007" uuid="a6a9f9d0-8f06-32bf-8153-b40fed577ece" desc="Hz"/>
+</units>
+<point xsi:type="pointLong">
+    <value>500</value>
+</point>
+                            </measurement>
+                        </destination>
+                    </relation>
+                    <relation>
+                        <type>
+                            <concept sctid="36" uuid="19ca14e7-ea63-38a4-ae0e-b13d585e4c22" desc="INHERES IN (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="22945000" uuid="cfbb74be-3c4b-3b25-b571-e1f709859b6e" desc="Inner ear structure (body structure)"/>
+<relation>
+    <type>
+        <concept sctid="272741003" uuid="26ca4590-bbe5-327c-a40a-ba56dc86996b" desc="Laterality (attribute)"/>
+    </type>
+    <destination>
+        <expression>
+            <concept sctid="7771000" uuid="204c773e-2ba9-3374-80fb-104f78f4b98d" desc="Left (qualifier value)"/>
+        </expression>
+    </destination>
+</relation>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="252577008" uuid="6a66c427-650c-3401-adca-025c17c3933b" desc="Pure tone audiometry (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <measurement>
+                    <units>
+                        <concept sctid="259042002" uuid="4db394d1-a0a5-348e-9262-0b7c277021aa" desc="decibel (qualifier value)"/>
+                    </units>
+                    <point xsi:type="pointLong">
+                        <value>-10000</value>
+                    </point>
+                </measurement>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>b6d8540a-17c5-437e-8728-8edd1db9b315</legoUUID>
+        <stamp status="Active" time="2013-07-31T00:16:59.759-07:00" author="dsperzel" module="default module" path="default path" uuid="af4c2105-fd40-473e-befd-15b5398f8e46"/>
+        <pncs id="91" name="Hearing threshold in left ear at 2000 Hz" value="PNCS_VALUE_FIELD"/>
+        <assertion>
+            <assertionUUID>6f60df7e-adf9-4c4d-87a3-331a1fa9600a</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="89269003" uuid="816a0a98-fc57-37a8-9581-83dc049d0189" desc="Threshold of hearing (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="118589004" uuid="15e7eff2-66be-3502-8e54-d174e3139608" desc="Threshold (property) (qualifier value)"/>
+                        </type>
+                        <destination>
+                            <measurement>
+<units>
+    <concept sctid="259024007" uuid="a6a9f9d0-8f06-32bf-8153-b40fed577ece" desc="Hz"/>
+</units>
+<point xsi:type="pointLong">
+    <value>2000</value>
+</point>
+                            </measurement>
+                        </destination>
+                    </relation>
+                    <relation>
+                        <type>
+                            <concept sctid="36" uuid="19ca14e7-ea63-38a4-ae0e-b13d585e4c22" desc="INHERES IN (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="22945000" uuid="cfbb74be-3c4b-3b25-b571-e1f709859b6e" desc="Inner ear structure (body structure)"/>
+<relation>
+    <type>
+        <concept sctid="272741003" uuid="26ca4590-bbe5-327c-a40a-ba56dc86996b" desc="Laterality (attribute)"/>
+    </type>
+    <destination>
+        <expression>
+            <concept sctid="7771000" uuid="204c773e-2ba9-3374-80fb-104f78f4b98d" desc="Left (qualifier value)"/>
+        </expression>
+    </destination>
+</relation>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="252577008" uuid="6a66c427-650c-3401-adca-025c17c3933b" desc="Pure tone audiometry (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <measurement>
+                    <units>
+                        <concept sctid="259042002" uuid="4db394d1-a0a5-348e-9262-0b7c277021aa" desc="decibel (qualifier value)"/>
+                    </units>
+                    <point xsi:type="pointLong">
+                        <value>-10000</value>
+                    </point>
+                </measurement>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>e0adfe4d-ad11-4cd4-89e5-3313fd09f75e</legoUUID>
+        <stamp status="Active" time="2013-07-31T00:19:01.906-07:00" author="dsperzel" module="default module" path="default path" uuid="34a7c705-4384-41f8-a768-5f46468d6aaf"/>
+        <pncs id="92" name="Hearing threshold in  left ear at 3000 Hz" value="PNCS_VALUE_FIELD"/>
+        <assertion>
+            <assertionUUID>ef900b61-91f3-4e30-af0c-c425638e10e1</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="89269003" uuid="816a0a98-fc57-37a8-9581-83dc049d0189" desc="Threshold of hearing (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="118589004" uuid="15e7eff2-66be-3502-8e54-d174e3139608" desc="Threshold (property) (qualifier value)"/>
+                        </type>
+                        <destination>
+                            <measurement>
+<units>
+    <concept sctid="259024007" uuid="a6a9f9d0-8f06-32bf-8153-b40fed577ece" desc="Hz"/>
+</units>
+<point xsi:type="pointLong">
+    <value>3000</value>
+</point>
+                            </measurement>
+                        </destination>
+                    </relation>
+                    <relation>
+                        <type>
+                            <concept sctid="36" uuid="19ca14e7-ea63-38a4-ae0e-b13d585e4c22" desc="INHERES IN (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="22945000" uuid="cfbb74be-3c4b-3b25-b571-e1f709859b6e" desc="Inner ear structure (body structure)"/>
+<relation>
+    <type>
+        <concept sctid="272741003" uuid="26ca4590-bbe5-327c-a40a-ba56dc86996b" desc="Laterality (attribute)"/>
+    </type>
+    <destination>
+        <expression>
+            <concept sctid="7771000" uuid="204c773e-2ba9-3374-80fb-104f78f4b98d" desc="Left (qualifier value)"/>
+        </expression>
+    </destination>
+</relation>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="252577008" uuid="6a66c427-650c-3401-adca-025c17c3933b" desc="Pure tone audiometry (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <measurement>
+                    <units>
+                        <concept sctid="259042002" uuid="4db394d1-a0a5-348e-9262-0b7c277021aa" desc="decibel (qualifier value)"/>
+                    </units>
+                    <point xsi:type="pointLong">
+                        <value>-10000</value>
+                    </point>
+                </measurement>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>2a172230-53f0-48eb-9fc2-eca15a948174</legoUUID>
+        <stamp status="Active" time="2013-07-31T00:20:37.406-07:00" author="dsperzel" module="default module" path="default path" uuid="2c7220bd-48c4-40a8-81a3-e399c477013d"/>
+        <pncs id="93" name="Hearing threshold in  left ear at 4000 Hz" value="PNCS_VALUE_FIELD"/>
+        <assertion>
+            <assertionUUID>5371f40a-b2e4-4ab4-8def-bf288f21752c</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="89269003" uuid="816a0a98-fc57-37a8-9581-83dc049d0189" desc="Threshold of hearing (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="118589004" uuid="15e7eff2-66be-3502-8e54-d174e3139608" desc="Threshold (property) (qualifier value)"/>
+                        </type>
+                        <destination>
+                            <measurement>
+<units>
+    <concept sctid="259024007" uuid="a6a9f9d0-8f06-32bf-8153-b40fed577ece" desc="Hz"/>
+</units>
+<point xsi:type="pointLong">
+    <value>4000</value>
+</point>
+                            </measurement>
+                        </destination>
+                    </relation>
+                    <relation>
+                        <type>
+                            <concept sctid="36" uuid="19ca14e7-ea63-38a4-ae0e-b13d585e4c22" desc="INHERES IN (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="22945000" uuid="cfbb74be-3c4b-3b25-b571-e1f709859b6e" desc="Inner ear structure (body structure)"/>
+<relation>
+    <type>
+        <concept sctid="272741003" uuid="26ca4590-bbe5-327c-a40a-ba56dc86996b" desc="Laterality (attribute)"/>
+    </type>
+    <destination>
+        <expression>
+            <concept sctid="7771000" uuid="204c773e-2ba9-3374-80fb-104f78f4b98d" desc="Left (qualifier value)"/>
+        </expression>
+    </destination>
+</relation>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="252577008" uuid="6a66c427-650c-3401-adca-025c17c3933b" desc="Pure tone audiometry (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <measurement>
+                    <units>
+                        <concept sctid="259042002" uuid="4db394d1-a0a5-348e-9262-0b7c277021aa" desc="decibel (qualifier value)"/>
+                    </units>
+                    <point xsi:type="pointLong">
+                        <value>-10000</value>
+                    </point>
+                </measurement>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>9e8f4e50-ba55-4288-a40f-7fc54bb738cd</legoUUID>
+        <stamp status="Active" time="2013-07-31T00:25:18.867-07:00" author="dsperzel" module="default module" path="default path" uuid="e992594b-0ef8-4a8f-9fe9-a88b676cbad1"/>
+        <pncs id="90" name="Hearing threshold in left ear at 1000 Hz" value="PNCS_VALUE_FIELD"/>
+        <assertion>
+            <assertionUUID>700ca7c4-557b-4abe-893b-ff5d43e9de36</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="89269003" uuid="816a0a98-fc57-37a8-9581-83dc049d0189" desc="Threshold of hearing (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="118589004" uuid="15e7eff2-66be-3502-8e54-d174e3139608" desc="Threshold (property) (qualifier value)"/>
+                        </type>
+                        <destination>
+                            <measurement>
+<units>
+    <concept sctid="259024007" uuid="a6a9f9d0-8f06-32bf-8153-b40fed577ece" desc="Hz"/>
+</units>
+<point xsi:type="pointLong">
+    <value>1000</value>
+</point>
+                            </measurement>
+                        </destination>
+                    </relation>
+                    <relation>
+                        <type>
+                            <concept sctid="36" uuid="19ca14e7-ea63-38a4-ae0e-b13d585e4c22" desc="INHERES IN (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="22945000" uuid="cfbb74be-3c4b-3b25-b571-e1f709859b6e" desc="Inner ear structure (body structure)"/>
+<relation>
+    <type>
+        <concept sctid="272741003" uuid="26ca4590-bbe5-327c-a40a-ba56dc86996b" desc="Laterality (attribute)"/>
+    </type>
+    <destination>
+        <expression>
+            <concept sctid="7771000" uuid="204c773e-2ba9-3374-80fb-104f78f4b98d" desc="Left (qualifier value)"/>
+        </expression>
+    </destination>
+</relation>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="252577008" uuid="6a66c427-650c-3401-adca-025c17c3933b" desc="Pure tone audiometry (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <measurement>
+                    <units>
+                        <concept sctid="259042002" uuid="4db394d1-a0a5-348e-9262-0b7c277021aa" desc="decibel (qualifier value)"/>
+                    </units>
+                    <point xsi:type="pointLong">
+                        <value>-10000</value>
+                    </point>
+                </measurement>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>1989ab00-8f54-4281-a074-dd0802e5399a</legoUUID>
+        <stamp status="Active" time="2013-07-31T00:27:36.205-07:00" author="dsperzel" module="default module" path="default path" uuid="d34ff8aa-1577-4ec6-b842-0a4004669bf4"/>
+        <pncs id="95" name="Average hearing threshold in left ear" value="PNCS_VALUE_FIELD"/>
+        <assertion>
+            <assertionUUID>6bab238d-352b-4218-bc03-e2099dbb4dee</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="89269003" uuid="816a0a98-fc57-37a8-9581-83dc049d0189" desc="Threshold of hearing (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="39" uuid="d67d8ab4-f4c1-3bf2-aaa3-53e27879133c" desc="PROPERTY TYPE (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="118589004" uuid="15e7eff2-66be-3502-8e54-d174e3139608" desc="Threshold (property) (qualifier value)"/>
+                            </expression>
+                        </destination>
+                    </relation>
+                    <relation>
+                        <type>
+                            <concept sctid="36" uuid="19ca14e7-ea63-38a4-ae0e-b13d585e4c22" desc="INHERES IN (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="22945000" uuid="cfbb74be-3c4b-3b25-b571-e1f709859b6e" desc="Inner ear structure (body structure)"/>
+<relation>
+    <type>
+        <concept sctid="272741003" uuid="26ca4590-bbe5-327c-a40a-ba56dc86996b" desc="Laterality (attribute)"/>
+    </type>
+    <destination>
+        <expression>
+            <concept sctid="24028007" uuid="0b506040-5d71-3287-813a-d9e4d74d928b" desc="Right (qualifier value)"/>
+        </expression>
+    </destination>
+</relation>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="252577008" uuid="6a66c427-650c-3401-adca-025c17c3933b" desc="Pure tone audiometry (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <measurement>
+                    <units>
+                        <concept sctid="259042002" uuid="4db394d1-a0a5-348e-9262-0b7c277021aa" desc="decibel (qualifier value)"/>
+                    </units>
+                    <point xsi:type="pointLong">
+                        <value>-10000</value>
+                    </point>
+                </measurement>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>be12c153-f970-4f9e-a65c-04f85cd4474d</legoUUID>
+        <stamp status="Active" time="2013-07-31T17:33:22.735-07:00" author="dsperzel" module="default module" path="default path" uuid="3e79fa91-6ad4-47f8-80b6-1a36f910ac80"/>
+        <pncs id="21347" name="Speech Recognition Score on Maryland CNC Word List in right ear" value=" Could not test"/>
+        <assertion>
+            <assertionUUID>eb6870c9-c449-4639-942b-206703e09b46</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="1221" uuid="1d72310e-dc00-3dad-b219-0caad5802983" desc="Speech Recognition Score on Maryland CNC Word List (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="53" uuid="d82c8d16-19ad-3176-9665-453cfb2e55f0" desc="IS ABOUT (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="252590001" uuid="84463a9e-dae4-3159-b473-c0ae05e11e69" desc="Hearing assessment using speech material (procedure)"/>
+<relation>
+    <type>
+        <concept sctid="363704007" uuid="78dd0334-4b9e-3c26-9266-356f8c5c43ed" desc="Procedure site (attribute)"/>
+    </type>
+    <destination>
+        <expression>
+            <concept sctid="25577004" uuid="6db4e794-ced8-3908-9f87-0fff9faf1fa0" desc="Right ear structure (body structure)"/>
+        </expression>
+    </destination>
+</relation>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="398171003" uuid="66ee8421-7c7e-371c-a16b-6d09d2f3f5c0" desc="Hearing examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <expression>
+                    <concept sctid="373121007" uuid="39925f20-bd93-343f-a4c0-588762316250" desc="Test not done (qualifier value)"/>
+                </expression>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>bd059381-90dd-4239-92a2-ec2669ece9fa</legoUUID>
+        <stamp status="Active" time="2013-07-31T17:34:25.071-07:00" author="dsperzel" module="default module" path="default path" uuid="812173d3-b675-422e-82ef-6a81e68d5288"/>
+        <pncs id="21347" name="Speech Recognition Score on Maryland CNC Word List in right ear" value="Too unreliable to score"/>
+        <assertion>
+            <assertionUUID>8823efe1-1628-42ea-865c-e931894e4932</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="1221" uuid="1d72310e-dc00-3dad-b219-0caad5802983" desc="Speech Recognition Score on Maryland CNC Word List (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="53" uuid="d82c8d16-19ad-3176-9665-453cfb2e55f0" desc="IS ABOUT (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="252590001" uuid="84463a9e-dae4-3159-b473-c0ae05e11e69" desc="Hearing assessment using speech material (procedure)"/>
+<relation>
+    <type>
+        <concept sctid="363704007" uuid="78dd0334-4b9e-3c26-9266-356f8c5c43ed" desc="Procedure site (attribute)"/>
+    </type>
+    <destination>
+        <expression>
+            <concept sctid="25577004" uuid="6db4e794-ced8-3908-9f87-0fff9faf1fa0" desc="Right ear structure (body structure)"/>
+        </expression>
+    </destination>
+</relation>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="398171003" uuid="66ee8421-7c7e-371c-a16b-6d09d2f3f5c0" desc="Hearing examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <expression>
+                    <concept sctid="280416009" uuid="56c3e3fe-3e00-3a26-839b-1a93b5e4a53d" desc="Indeterminate result (qualifier value)"/>
+                </expression>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>e2a25ab4-df26-4f82-b1af-1c420bfa337a</legoUUID>
+        <stamp status="Active" time="2013-07-31T17:44:43.190-07:00" author="dsperzel" module="default module" path="default path" uuid="6e6fbb36-d5ce-4225-90c7-7836b14b81f4"/>
+        <pncs id="21347" name="Speech Recognition Score on Maryland CNC Word List in right ear" value="Score from 0 to 100"/>
+        <assertion>
+            <assertionUUID>c17e081a-a55f-4cc1-97a6-b3ea7fbfb2ea</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="1221" uuid="1d72310e-dc00-3dad-b219-0caad5802983" desc="Speech Recognition Score on Maryland CNC Word List (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="53" uuid="d82c8d16-19ad-3176-9665-453cfb2e55f0" desc="IS ABOUT (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="252590001" uuid="84463a9e-dae4-3159-b473-c0ae05e11e69" desc="Hearing assessment using speech material (procedure)"/>
+<relation>
+    <type>
+        <concept sctid="363704007" uuid="78dd0334-4b9e-3c26-9266-356f8c5c43ed" desc="Procedure site (attribute)"/>
+    </type>
+    <destination>
+        <expression>
+            <concept sctid="25577004" uuid="6db4e794-ced8-3908-9f87-0fff9faf1fa0" desc="Right ear structure (body structure)"/>
+        </expression>
+    </destination>
+</relation>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="398171003" uuid="66ee8421-7c7e-371c-a16b-6d09d2f3f5c0" desc="Hearing examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <measurement>
+                    <units>
+                        <concept sctid="118582008" uuid="31e4aab3-5b9b-39b7-89a5-52b4738e03a6" desc="Percent (property) (qualifier value)"/>
+                    </units>
+                    <bound>
+                        <lowerPoint xsi:type="pointLong">
+                            <value>0</value>
+                        </lowerPoint>
+                        <upperPoint xsi:type="pointLong">
+                            <value>100</value>
+                        </upperPoint>
+                    </bound>
+                </measurement>
+            </value>
+        </assertion>
+        <comment> From looking at the drop-down box, this score can apparently vary from 0 to 100%, in increments of 2%. Instead of taking the time to create 50 different LEGOs, we treated this as a numeric field to be entered at runtime.,</comment>
+    </lego>
+    <lego>
+        <legoUUID>12836448-35ed-40fd-a27d-747cc6d2aa37</legoUUID>
+        <stamp status="Active" time="2013-07-31T17:46:28.303-07:00" author="dsperzel" module="default module" path="default path" uuid="b9e2b45d-5b4d-4041-a58b-d412bc9c2b7d"/>
+        <pncs id="21345" name="Speech Recognition Score on Maryland CNC Word List in left ear" value="Score from 0 to 100"/>
+        <assertion>
+            <assertionUUID>c6527eba-640b-4803-bab7-ea04504c16fe</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="1221" uuid="1d72310e-dc00-3dad-b219-0caad5802983" desc="Speech Recognition Score on Maryland CNC Word List (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="53" uuid="d82c8d16-19ad-3176-9665-453cfb2e55f0" desc="IS ABOUT (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="252590001" uuid="84463a9e-dae4-3159-b473-c0ae05e11e69" desc="Hearing assessment using speech material (procedure)"/>
+<relation>
+    <type>
+        <concept sctid="363704007" uuid="78dd0334-4b9e-3c26-9266-356f8c5c43ed" desc="Procedure site (attribute)"/>
+    </type>
+    <destination>
+        <expression>
+            <concept sctid="89644007" uuid="0294994e-e20b-3be0-ae2a-f800ebef2db4" desc="Left ear structure (body structure)"/>
+        </expression>
+    </destination>
+</relation>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="398171003" uuid="66ee8421-7c7e-371c-a16b-6d09d2f3f5c0" desc="Hearing examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <measurement>
+                    <units>
+                        <concept sctid="118582008" uuid="31e4aab3-5b9b-39b7-89a5-52b4738e03a6" desc="Percent (property) (qualifier value)"/>
+                    </units>
+                    <bound>
+                        <lowerPoint xsi:type="pointLong">
+                            <value>0</value>
+                        </lowerPoint>
+                        <upperPoint xsi:type="pointLong">
+                            <value>100</value>
+                        </upperPoint>
+                    </bound>
+                </measurement>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>6471b741-ded3-4923-a20b-1e186cfe93f3</legoUUID>
+        <stamp status="Active" time="2013-07-31T17:50:39.850-07:00" author="dsperzel" module="default module" path="default path" uuid="63c0fa44-c393-43b5-a845-868ad7aad27a"/>
+        <pncs id="21345" name="Speech Recognition Score on Maryland CNC Word List in left ear" value="Too unreliable to score"/>
+        <assertion>
+            <assertionUUID>fe06e44c-d4bd-40c1-b6de-4fa8a658c251</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="1221" uuid="1d72310e-dc00-3dad-b219-0caad5802983" desc="Speech Recognition Score on Maryland CNC Word List (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="53" uuid="d82c8d16-19ad-3176-9665-453cfb2e55f0" desc="IS ABOUT (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="252590001" uuid="84463a9e-dae4-3159-b473-c0ae05e11e69" desc="Hearing assessment using speech material (procedure)"/>
+<relation>
+    <type>
+        <concept sctid="363704007" uuid="78dd0334-4b9e-3c26-9266-356f8c5c43ed" desc="Procedure site (attribute)"/>
+    </type>
+    <destination>
+        <expression>
+            <concept sctid="89644007" uuid="0294994e-e20b-3be0-ae2a-f800ebef2db4" desc="Left ear structure (body structure)"/>
+        </expression>
+    </destination>
+</relation>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="398171003" uuid="66ee8421-7c7e-371c-a16b-6d09d2f3f5c0" desc="Hearing examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <expression>
+                    <concept sctid="280416009" uuid="56c3e3fe-3e00-3a26-839b-1a93b5e4a53d" desc="Indeterminate result (qualifier value)"/>
+                </expression>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>e1160ca5-fb4c-4685-a9ae-6d8f751f5c8e</legoUUID>
+        <stamp status="Active" time="2013-07-31T17:51:34.079-07:00" author="dsperzel" module="default module" path="default path" uuid="5d169477-d359-4edc-82ae-3dd88914216c"/>
+        <pncs id="21345" name="Speech Recognition Score on Maryland CNC Word List in left ear" value="Could not test"/>
+        <assertion>
+            <assertionUUID>4ec096ce-eacf-4fff-8108-b1305568701e</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="1221" uuid="1d72310e-dc00-3dad-b219-0caad5802983" desc="Speech Recognition Score on Maryland CNC Word List (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="53" uuid="d82c8d16-19ad-3176-9665-453cfb2e55f0" desc="IS ABOUT (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="252590001" uuid="84463a9e-dae4-3159-b473-c0ae05e11e69" desc="Hearing assessment using speech material (procedure)"/>
+<relation>
+    <type>
+        <concept sctid="363704007" uuid="78dd0334-4b9e-3c26-9266-356f8c5c43ed" desc="Procedure site (attribute)"/>
+    </type>
+    <destination>
+        <expression>
+            <concept sctid="89644007" uuid="0294994e-e20b-3be0-ae2a-f800ebef2db4" desc="Left ear structure (body structure)"/>
+        </expression>
+    </destination>
+</relation>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="398171003" uuid="66ee8421-7c7e-371c-a16b-6d09d2f3f5c0" desc="Hearing examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <expression>
+                    <concept sctid="373121007" uuid="39925f20-bd93-343f-a4c0-588762316250" desc="Test not done (qualifier value)"/>
+                </expression>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>9d121766-a8b6-41b2-a49a-ede40620ecb7</legoUUID>
+        <stamp status="Active" time="2013-07-31T18:14:36.903-07:00" author="dsperzel" module="default module" path="default path" uuid="3a86b06e-9a19-4e90-90df-e76582696013"/>
+        <pncs id="26529" name="Speech recognition performance in right ear" value="Excellent"/>
+        <assertion>
+            <assertionUUID>aeb4c768-b972-4a5a-8d7e-5cdb5b57bc77</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="364025008" uuid="68ce57a8-cc79-376e-97c5-858fcdf6ca04" desc="Auditory discrimination feature (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="53" uuid="d82c8d16-19ad-3176-9665-453cfb2e55f0" desc="IS ABOUT (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="252590001" uuid="84463a9e-dae4-3159-b473-c0ae05e11e69" desc="Hearing assessment using speech material (procedure)"/>
+<relation>
+    <type>
+        <concept sctid="363704007" uuid="78dd0334-4b9e-3c26-9266-356f8c5c43ed" desc="Procedure site (attribute)"/>
+    </type>
+    <destination>
+        <expression>
+            <concept sctid="25577004" uuid="6db4e794-ced8-3908-9f87-0fff9faf1fa0" desc="Right ear structure (body structure)"/>
+        </expression>
+    </destination>
+</relation>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="398171003" uuid="66ee8421-7c7e-371c-a16b-6d09d2f3f5c0" desc="Hearing examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <measurement>
+                    <units>
+                        <concept sctid="118582008" uuid="31e4aab3-5b9b-39b7-89a5-52b4738e03a6" desc="Percent (property) (qualifier value)"/>
+                    </units>
+                    <bound>
+                        <lowerPoint xsi:type="pointLong">
+                            <value>94</value>
+                        </lowerPoint>
+                        <upperPoint xsi:type="pointLong">
+                            <value>100</value>
+                        </upperPoint>
+                    </bound>
+                </measurement>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>8feca501-10a6-4044-8a51-ac81cfd5ac9d</legoUUID>
+        <stamp status="Active" time="2013-07-31T20:49:27.007-07:00" author="dsperzel" module="default module" path="default path" uuid="4fc872e7-1fa3-490a-9431-8843b2aa31e4"/>
+        <pncs id="26529" name="Speech recognition performance in right ear" value="Good"/>
+        <assertion>
+            <assertionUUID>ac40d7a1-4263-4bbb-a081-edadf777619b</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="364025008" uuid="68ce57a8-cc79-376e-97c5-858fcdf6ca04" desc="Auditory discrimination feature (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="53" uuid="d82c8d16-19ad-3176-9665-453cfb2e55f0" desc="IS ABOUT (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="252590001" uuid="84463a9e-dae4-3159-b473-c0ae05e11e69" desc="Hearing assessment using speech material (procedure)"/>
+<relation>
+    <type>
+        <concept sctid="363704007" uuid="78dd0334-4b9e-3c26-9266-356f8c5c43ed" desc="Procedure site (attribute)"/>
+    </type>
+    <destination>
+        <expression>
+            <concept sctid="25577004" uuid="6db4e794-ced8-3908-9f87-0fff9faf1fa0" desc="Right ear structure (body structure)"/>
+        </expression>
+    </destination>
+</relation>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="398171003" uuid="66ee8421-7c7e-371c-a16b-6d09d2f3f5c0" desc="Hearing examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <measurement>
+                    <units>
+                        <concept sctid="118582008" uuid="31e4aab3-5b9b-39b7-89a5-52b4738e03a6" desc="Percent (property) (qualifier value)"/>
+                    </units>
+                    <bound>
+                        <lowerPoint xsi:type="pointLong">
+                            <value>80</value>
+                        </lowerPoint>
+                        <upperPoint xsi:type="pointLong">
+                            <value>92</value>
+                        </upperPoint>
+                    </bound>
+                </measurement>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>ce5082fd-25e8-4de9-8859-492b6330fb77</legoUUID>
+        <stamp status="Active" time="2013-07-31T20:51:43.180-07:00" author="dsperzel" module="default module" path="default path" uuid="badd6334-2b03-4b1d-9b17-8a0725e98503"/>
+        <pncs id="26529" name="Speech recognition performance in right ear" value=" Poor"/>
+        <assertion>
+            <assertionUUID>9a33d30a-d6a1-4d49-be21-d3b74b65f4d1</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="364025008" uuid="68ce57a8-cc79-376e-97c5-858fcdf6ca04" desc="Auditory discrimination feature (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="53" uuid="d82c8d16-19ad-3176-9665-453cfb2e55f0" desc="IS ABOUT (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="252590001" uuid="84463a9e-dae4-3159-b473-c0ae05e11e69" desc="Hearing assessment using speech material (procedure)"/>
+<relation>
+    <type>
+        <concept sctid="363704007" uuid="78dd0334-4b9e-3c26-9266-356f8c5c43ed" desc="Procedure site (attribute)"/>
+    </type>
+    <destination>
+        <expression>
+            <concept sctid="25577004" uuid="6db4e794-ced8-3908-9f87-0fff9faf1fa0" desc="Right ear structure (body structure)"/>
+        </expression>
+    </destination>
+</relation>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="398171003" uuid="66ee8421-7c7e-371c-a16b-6d09d2f3f5c0" desc="Hearing examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <measurement>
+                    <units>
+                        <concept sctid="118582008" uuid="31e4aab3-5b9b-39b7-89a5-52b4738e03a6" desc="Percent (property) (qualifier value)"/>
+                    </units>
+                    <bound>
+                        <upperPoint xsi:type="pointLong">
+                            <value>70</value>
+                        </upperPoint>
+                    </bound>
+                </measurement>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>dcba236d-874d-47c8-80c1-8dc9a14db98a</legoUUID>
+        <stamp status="Active" time="2013-07-31T20:52:40.601-07:00" author="dsperzel" module="default module" path="default path" uuid="0e095e12-163f-4a05-af5d-e627c228464a"/>
+        <pncs id="26529" name="Speech recognition performance in right ear" value="Fair"/>
+        <assertion>
+            <assertionUUID>6b272999-ad32-495d-9bfd-38a15f2c139e</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="364025008" uuid="68ce57a8-cc79-376e-97c5-858fcdf6ca04" desc="Auditory discrimination feature (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="53" uuid="d82c8d16-19ad-3176-9665-453cfb2e55f0" desc="IS ABOUT (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="252590001" uuid="84463a9e-dae4-3159-b473-c0ae05e11e69" desc="Hearing assessment using speech material (procedure)"/>
+<relation>
+    <type>
+        <concept sctid="363704007" uuid="78dd0334-4b9e-3c26-9266-356f8c5c43ed" desc="Procedure site (attribute)"/>
+    </type>
+    <destination>
+        <expression>
+            <concept sctid="25577004" uuid="6db4e794-ced8-3908-9f87-0fff9faf1fa0" desc="Right ear structure (body structure)"/>
+        </expression>
+    </destination>
+</relation>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="398171003" uuid="66ee8421-7c7e-371c-a16b-6d09d2f3f5c0" desc="Hearing examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <measurement>
+                    <units>
+                        <concept sctid="118582008" uuid="31e4aab3-5b9b-39b7-89a5-52b4738e03a6" desc="Percent (property) (qualifier value)"/>
+                    </units>
+                    <bound>
+                        <lowerPoint xsi:type="pointLong">
+                            <value>70</value>
+                        </lowerPoint>
+                        <upperPoint xsi:type="pointLong">
+                            <value>78</value>
+                        </upperPoint>
+                    </bound>
+                </measurement>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>47ed4ab8-4b3f-4faf-92bc-b9d95e3ed085</legoUUID>
+        <stamp status="Active" time="2013-07-31T20:57:33.159-07:00" author="dsperzel" module="default module" path="default path" uuid="233cddef-5389-4520-a5c7-3549d93ecf94"/>
+        <pncs id="26530" name="Speech recognition performance in left ear" value="Excellent"/>
+        <assertion>
+            <assertionUUID>15e5ac19-5c16-4345-a402-eb7bd8be2503</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="364025008" uuid="68ce57a8-cc79-376e-97c5-858fcdf6ca04" desc="Auditory discrimination feature (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="53" uuid="d82c8d16-19ad-3176-9665-453cfb2e55f0" desc="IS ABOUT (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="252590001" uuid="84463a9e-dae4-3159-b473-c0ae05e11e69" desc="Hearing assessment using speech material (procedure)"/>
+<relation>
+    <type>
+        <concept sctid="363704007" uuid="78dd0334-4b9e-3c26-9266-356f8c5c43ed" desc="Procedure site (attribute)"/>
+    </type>
+    <destination>
+        <expression>
+            <concept sctid="89644007" uuid="0294994e-e20b-3be0-ae2a-f800ebef2db4" desc="Left ear structure (body structure)"/>
+        </expression>
+    </destination>
+</relation>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="398171003" uuid="66ee8421-7c7e-371c-a16b-6d09d2f3f5c0" desc="Hearing examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <measurement>
+                    <units>
+                        <concept sctid="118582008" uuid="31e4aab3-5b9b-39b7-89a5-52b4738e03a6" desc="Percent (property) (qualifier value)"/>
+                    </units>
+                    <bound>
+                        <lowerPoint xsi:type="pointLong">
+                            <value>94</value>
+                        </lowerPoint>
+                        <upperPoint xsi:type="pointLong">
+                            <value>100</value>
+                        </upperPoint>
+                    </bound>
+                </measurement>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>586ca84c-ba84-4ab1-9190-9f735bae1797</legoUUID>
+        <stamp status="Active" time="2013-07-31T21:01:24.944-07:00" author="dsperzel" module="default module" path="default path" uuid="e79aa73c-381e-42a5-8af0-9462c826df23"/>
+        <pncs id="26530" name="Speech recognition performance in left ear" value="Good"/>
+        <assertion>
+            <assertionUUID>c4a239f4-7016-4791-8ffe-38cf04562ae1</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="364025008" uuid="68ce57a8-cc79-376e-97c5-858fcdf6ca04" desc="Auditory discrimination feature (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="53" uuid="d82c8d16-19ad-3176-9665-453cfb2e55f0" desc="IS ABOUT (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="252590001" uuid="84463a9e-dae4-3159-b473-c0ae05e11e69" desc="Hearing assessment using speech material (procedure)"/>
+<relation>
+    <type>
+        <concept sctid="363704007" uuid="78dd0334-4b9e-3c26-9266-356f8c5c43ed" desc="Procedure site (attribute)"/>
+    </type>
+    <destination>
+        <expression>
+            <concept sctid="89644007" uuid="0294994e-e20b-3be0-ae2a-f800ebef2db4" desc="Left ear structure (body structure)"/>
+        </expression>
+    </destination>
+</relation>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="398171003" uuid="66ee8421-7c7e-371c-a16b-6d09d2f3f5c0" desc="Hearing examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <measurement>
+                    <units>
+                        <concept sctid="118582008" uuid="31e4aab3-5b9b-39b7-89a5-52b4738e03a6" desc="Percent (property) (qualifier value)"/>
+                    </units>
+                    <bound>
+                        <lowerPoint xsi:type="pointLong">
+                            <value>80</value>
+                        </lowerPoint>
+                        <upperPoint xsi:type="pointLong">
+                            <value>92</value>
+                        </upperPoint>
+                    </bound>
+                </measurement>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>7988361c-a2d6-4553-be6a-461fbfeb6605</legoUUID>
+        <stamp status="Active" time="2013-07-31T21:02:25.419-07:00" author="dsperzel" module="default module" path="default path" uuid="f7dd985c-739f-4dfa-ba17-6e27c39e8a1e"/>
+        <pncs id="26530" name="Speech recognition performance in left ear" value="Fair"/>
+        <assertion>
+            <assertionUUID>4ba2268d-ea02-463c-abbe-523d58039af2</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="364025008" uuid="68ce57a8-cc79-376e-97c5-858fcdf6ca04" desc="Auditory discrimination feature (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="53" uuid="d82c8d16-19ad-3176-9665-453cfb2e55f0" desc="IS ABOUT (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="252590001" uuid="84463a9e-dae4-3159-b473-c0ae05e11e69" desc="Hearing assessment using speech material (procedure)"/>
+<relation>
+    <type>
+        <concept sctid="363704007" uuid="78dd0334-4b9e-3c26-9266-356f8c5c43ed" desc="Procedure site (attribute)"/>
+    </type>
+    <destination>
+        <expression>
+            <concept sctid="89644007" uuid="0294994e-e20b-3be0-ae2a-f800ebef2db4" desc="Left ear structure (body structure)"/>
+        </expression>
+    </destination>
+</relation>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="398171003" uuid="66ee8421-7c7e-371c-a16b-6d09d2f3f5c0" desc="Hearing examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <measurement>
+                    <units>
+                        <concept sctid="118582008" uuid="31e4aab3-5b9b-39b7-89a5-52b4738e03a6" desc="Percent (property) (qualifier value)"/>
+                    </units>
+                    <bound>
+                        <lowerPoint xsi:type="pointLong">
+                            <value>70</value>
+                        </lowerPoint>
+                        <upperPoint xsi:type="pointLong">
+                            <value>78</value>
+                        </upperPoint>
+                    </bound>
+                </measurement>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>9cc11679-1645-4851-a9cc-f11363fe60ca</legoUUID>
+        <stamp status="Active" time="2013-07-31T21:03:09.973-07:00" author="dsperzel" module="default module" path="default path" uuid="9da2da31-5b78-4e66-ab9d-66ed3fcd04d3"/>
+        <pncs id="26530" name="Speech recognition performance in left ear" value="Poor"/>
+        <assertion>
+            <assertionUUID>f700ce1e-ceda-4a6d-9d10-330f77c56a98</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="364025008" uuid="68ce57a8-cc79-376e-97c5-858fcdf6ca04" desc="Auditory discrimination feature (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="53" uuid="d82c8d16-19ad-3176-9665-453cfb2e55f0" desc="IS ABOUT (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="252590001" uuid="84463a9e-dae4-3159-b473-c0ae05e11e69" desc="Hearing assessment using speech material (procedure)"/>
+<relation>
+    <type>
+        <concept sctid="363704007" uuid="78dd0334-4b9e-3c26-9266-356f8c5c43ed" desc="Procedure site (attribute)"/>
+    </type>
+    <destination>
+        <expression>
+            <concept sctid="89644007" uuid="0294994e-e20b-3be0-ae2a-f800ebef2db4" desc="Left ear structure (body structure)"/>
+        </expression>
+    </destination>
+</relation>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="398171003" uuid="66ee8421-7c7e-371c-a16b-6d09d2f3f5c0" desc="Hearing examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <measurement>
+                    <units>
+                        <concept sctid="118582008" uuid="31e4aab3-5b9b-39b7-89a5-52b4738e03a6" desc="Percent (property) (qualifier value)"/>
+                    </units>
+                    <bound>
+                        <upperPoint xsi:type="pointLong">
+                            <value>70</value>
+                        </upperPoint>
+                    </bound>
+                </measurement>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>3e5698d8-82a3-452c-b27f-eb3121f6673e</legoUUID>
+        <stamp status="Active" time="2013-07-31T23:02:51.108-07:00" author="dsperzel" module="default module" path="default path" uuid="2dca9a4d-6bb7-41f4-9ba3-8dfb4ab3c49e"/>
+        <pncs id="26056" name="Is motor activity normal?" value="Yes"/>
+        <assertion>
+            <assertionUUID>b93ec264-afd5-488a-b414-8668a4613931</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="52479005" uuid="3cbca727-8747-3890-8659-491142f87d84" desc="Motor function (observable entity)"/>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <expression>
+                    <concept sctid="373066001" uuid="c928767e-f519-3b34-bff2-a2ed3cd5c6c3" desc="Yes (qualifier value)"/>
+                </expression>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>89f518b7-ec6b-4199-8604-80fe8d5b209e</legoUUID>
+        <stamp status="Active" time="2013-07-31T23:05:14.075-07:00" author="dsperzel" module="default module" path="default path" uuid="fef280b9-d390-4110-bede-019b85c574b6"/>
+        <pncs id="26056" name="Is motor activity normal?" value="No"/>
+        <assertion>
+            <assertionUUID>652b4f16-6811-43ae-8c18-c4e5cb52ecea</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="52479005" uuid="3cbca727-8747-3890-8659-491142f87d84" desc="Motor function (observable entity)"/>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <expression>
+                    <concept sctid="373067005" uuid="d58a8003-b801-3da2-83c1-e09497c9bb53" desc="No (qualifier value)"/>
+                </expression>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>44ff5c3c-7613-4693-9f2a-a53995773c26</legoUUID>
+        <stamp status="Active" time="2013-07-31T23:09:49.357-07:00" author="dsperzel" module="default module" path="default path" uuid="c8750f26-b7a6-418d-b77f-e1f20ed6d380"/>
+        <pncs id="26057" name="Is hearing loss present?" value="No"/>
+        <assertion>
+            <assertionUUID>3e16a0e5-e6c3-41d0-9c3a-030d36304aac</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="364018001" uuid="b0b2c12a-afcb-3e38-9cf4-237fa0c7e288" desc="Hearing observable (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="53" uuid="d82c8d16-19ad-3176-9665-453cfb2e55f0" desc="IS ABOUT (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="15188001" uuid="1b64a40d-9b52-3d96-b442-9b28456aa577" desc="Hearing loss (disorder)"/>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <expression>
+                    <concept sctid="52101004" uuid="850e9dff-7c45-3db4-8cf9-34c8fb7359fd" desc="Present (qualifier value)"/>
+                </expression>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>5ec39dd8-3dd3-4b3d-8ea6-b2829581204b</legoUUID>
+        <stamp status="Active" time="2013-07-31T23:12:48.099-07:00" author="dsperzel" module="default module" path="default path" uuid="3b35427d-c891-4bdc-ad9f-05cd10d3468a"/>
+        <pncs id="26057" name="Is hearing loss present?" value="Yes"/>
+        <assertion>
+            <assertionUUID>ce0137ed-a2b6-4ca4-afa4-f19b5c8ea78f</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="364018001" uuid="b0b2c12a-afcb-3e38-9cf4-237fa0c7e288" desc="Hearing observable (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="53" uuid="d82c8d16-19ad-3176-9665-453cfb2e55f0" desc="IS ABOUT (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="15188001" uuid="1b64a40d-9b52-3d96-b442-9b28456aa577" desc="Hearing loss (disorder)"/>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <expression>
+                    <concept sctid="2667000" uuid="23dfdcb1-bfa8-3bad-a32a-49ed6d0ca6d7" desc="Absent (qualifier value)"/>
+                </expression>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>533523fc-6fea-427a-8de8-90af1b29ebf2</legoUUID>
+        <stamp status="Active" time="2013-07-31T23:25:56.409-07:00" author="dsperzel" module="default module" path="default path" uuid="1b2cc80b-c525-48de-b266-bbd1402bbf7c"/>
+        <pncs id="26064" name="Are there effects on usual daily activities?" value="No"/>
+        <assertion>
+            <assertionUUID>8fd3cd91-1fc1-4218-851c-1755008e94ee</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="284545001" uuid="2833c797-435d-3027-8afb-37fdea4332e2" desc="Ability to perform activities of everyday life (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="53" uuid="d82c8d16-19ad-3176-9665-453cfb2e55f0" desc="IS ABOUT (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="15188001" uuid="1b64a40d-9b52-3d96-b442-9b28456aa577" desc="Hearing loss (disorder)"/>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <expression>
+                    <concept sctid="103309006" uuid="bc46ea73-5d12-39fb-b1ea-b7cc3b5e0a49" desc="Patient affected (contextual qualifier) (qualifier value)"/>
+                </expression>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>4cf1b688-9c71-4769-bbab-8a9ec4832086</legoUUID>
+        <stamp status="Active" time="2013-07-31T23:26:44.950-07:00" author="dsperzel" module="default module" path="default path" uuid="d90ad254-41e1-4e3f-b0ab-4f2f38593099"/>
+        <pncs id="26064" name="Are there effects on usual daily activities?" value="Yes"/>
+        <assertion>
+            <assertionUUID>0bc4d229-7245-426f-bbfd-e1bd68e67e0f</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="284545001" uuid="2833c797-435d-3027-8afb-37fdea4332e2" desc="Ability to perform activities of everyday life (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="53" uuid="d82c8d16-19ad-3176-9665-453cfb2e55f0" desc="IS ABOUT (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="15188001" uuid="1b64a40d-9b52-3d96-b442-9b28456aa577" desc="Hearing loss (disorder)"/>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <expression>
+                    <concept sctid="103309006" uuid="bc46ea73-5d12-39fb-b1ea-b7cc3b5e0a49" desc="Patient affected (contextual qualifier) (qualifier value)"/>
+                </expression>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>e12acb02-f63f-44e8-b1cf-14acaa93cb4a</legoUUID>
+        <stamp status="Active" time="2013-07-31T23:34:50.969-07:00" author="dsperzel" module="default module" path="default path" uuid="6e7245c2-6521-4d03-b63a-64e36d97481e"/>
+        <pncs id="20940" name="Is veteran currently employed?" value="No"/>
+        <assertion>
+            <assertionUUID>d2af30b5-a82b-49c1-8976-ebfc731a91f7</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="1222" uuid="3a029f04-d76d-32e7-9367-c4b3255dda4d" desc="Veteran currently employed (observable entity)"/>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <expression>
+                    <concept sctid="373067005" uuid="d58a8003-b801-3da2-83c1-e09497c9bb53" desc="No (qualifier value)"/>
+                </expression>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>a521a549-2cb9-4a1b-a00d-1241b3973621</legoUUID>
+        <stamp status="Active" time="2013-07-31T23:35:32.992-07:00" author="dsperzel" module="default module" path="default path" uuid="8bce9e32-3d5c-4cfd-a83e-ff9b1ed77325"/>
+        <pncs id="20940" name="Is veteran currently employed?" value="Yes"/>
+        <assertion>
+            <assertionUUID>c8a90615-d00d-4455-b3c1-0cc6f26d8464</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="1222" uuid="3a029f04-d76d-32e7-9367-c4b3255dda4d" desc="Veteran currently employed (observable entity)"/>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <expression>
+                    <concept sctid="373066001" uuid="c928767e-f519-3b34-bff2-a2ed3cd5c6c3" desc="Yes (qualifier value)"/>
+                </expression>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>32f84fa0-e8ea-42b9-a1c3-3f213f28cf74</legoUUID>
+        <stamp status="Active" time="2013-07-31T23:39:47.176-07:00" author="dsperzel" module="default module" path="default path" uuid="1157bf2b-2329-400e-8623-7ba334b85dea"/>
+        <pncs id="20946" name="Is veteran retired?" value="No"/>
+        <assertion>
+            <assertionUUID>e44a6129-7d22-4b38-baf5-ab9a1c16accf</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="1223" uuid="43cca4b3-de20-37b9-958e-fefd0ecc3588" desc="Veteran retired (observable entity)"/>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <expression>
+                    <concept sctid="373066001" uuid="c928767e-f519-3b34-bff2-a2ed3cd5c6c3" desc="Yes (qualifier value)"/>
+                </expression>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>712c9bde-d187-4f99-99d4-243857cd7139</legoUUID>
+        <stamp status="Active" time="2013-07-31T23:40:20.993-07:00" author="dsperzel" module="default module" path="default path" uuid="3ce4079a-eece-4c05-af96-55ef7dfdc27b"/>
+        <pncs id="20946" name="Is veteran retired?" value="Yes"/>
+        <assertion>
+            <assertionUUID>1927b772-8d76-4324-8fe8-a555385ffbc5</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="1223" uuid="43cca4b3-de20-37b9-958e-fefd0ecc3588" desc="Veteran retired (observable entity)"/>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <expression>
+                    <concept sctid="373066001" uuid="c928767e-f519-3b34-bff2-a2ed3cd5c6c3" desc="Yes (qualifier value)"/>
+                </expression>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>8befa3e2-6015-4f5b-b6f6-b8b27f7efa8a</legoUUID>
+        <stamp status="Active" time="2013-07-31T23:54:06.115-07:00" author="dsperzel" module="default module" path="default path" uuid="dcefa734-7f9d-48d3-8c2a-022782f7af5c"/>
+        <pncs id="20948" name="Cause of retirement" value="Eligible for retirement by age"/>
+        <assertion>
+            <assertionUUID>6e001078-3276-40ab-8879-a2d104d32217</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="1225" uuid="25df35de-87aa-341b-88f2-2a6c2a830a17" desc="Eligible for retirement by age (observable entity)"/>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <expression>
+                    <concept sctid="373066001" uuid="c928767e-f519-3b34-bff2-a2ed3cd5c6c3" desc="Yes (qualifier value)"/>
+                </expression>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>02dcb9cc-4fff-4467-9242-f96fedc547b1</legoUUID>
+        <stamp status="Active" time="2013-07-31T23:54:35.665-07:00" author="dsperzel" module="default module" path="default path" uuid="dfc47bb6-4b59-415f-b57b-736518376192"/>
+        <pncs id="20948" name="Cause of retirement" value="Eligible for retirement by duration of work"/>
+        <assertion>
+            <assertionUUID>fdf84b4a-e262-4016-bc8b-4dc73555a2e4</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="1226" uuid="3210ddbe-aa16-348a-b02b-6049b8d9a202" desc="Eligible for retirement by duration of work (observable entity)"/>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <expression>
+                    <concept sctid="373066001" uuid="c928767e-f519-3b34-bff2-a2ed3cd5c6c3" desc="Yes (qualifier value)"/>
+                </expression>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>478bc58d-5425-4312-b7ff-f99329d64bc8</legoUUID>
+        <stamp status="Active" time="2013-07-31T23:55:10.411-07:00" author="dsperzel" module="default module" path="default path" uuid="ee8de661-ba0c-4a41-9d06-fb9d5ada25f0"/>
+        <pncs id="20948" name="Cause of retirement" value="Retirement due to physical problem"/>
+        <assertion>
+            <assertionUUID>f4678efe-fc3c-460f-8c0c-05ed76b9c51f</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="1227" uuid="c4851e8e-2644-35c4-894e-4e85b0baa7cc" desc="Retirement due to physical problem (observable entity)"/>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <expression>
+                    <concept sctid="373066001" uuid="c928767e-f519-3b34-bff2-a2ed3cd5c6c3" desc="Yes (qualifier value)"/>
+                </expression>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>ef1fe696-7dd6-4e6d-afc7-e38df8e96c24</legoUUID>
+        <stamp status="Active" time="2013-07-31T23:55:42.116-07:00" author="dsperzel" module="default module" path="default path" uuid="43bbd856-4e80-47af-81e5-3f03920bb91b"/>
+        <pncs id="20948" name="Cause of retirement" value="Retirement due to psychiatric problem"/>
+        <assertion>
+            <assertionUUID>48a90127-dcf0-4ee1-ab3f-aeb3a75c5447</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="1228" uuid="eb86d510-361f-323b-99f1-8c1bc9802cc6" desc="Retirement due to psychiatric problem (observable entity)"/>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <expression>
+                    <concept sctid="373066001" uuid="c928767e-f519-3b34-bff2-a2ed3cd5c6c3" desc="Yes (qualifier value)"/>
+                </expression>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>8b705753-6466-480b-ad00-07f3908601b5</legoUUID>
+        <stamp status="Active" time="2013-08-01T00:01:27.122-07:00" author="dsperzel" module="default module" path="default path" uuid="d69376a2-49a6-4ca0-942b-67cbdf310c66"/>
+        <pncs id="20956" name="Is veteran unemployed but not retired?" value="No"/>
+        <assertion>
+            <assertionUUID>24ec10ba-fe98-4e52-b3a9-3b7d02dfd82a</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="1230" uuid="4122cb13-c7a4-34c1-976c-9706ae36521d" desc="Veteran unemployed but not retired (observable entity)"/>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <expression>
+                    <concept sctid="373067005" uuid="d58a8003-b801-3da2-83c1-e09497c9bb53" desc="No (qualifier value)"/>
+                </expression>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>a1e4bedb-143d-4a3d-82a8-7c13f07266d1</legoUUID>
+        <stamp status="Active" time="2013-08-01T00:02:22.914-07:00" author="dsperzel" module="default module" path="default path" uuid="afe4de25-8ce0-4ac5-8db2-a070ddfd5505"/>
+        <pncs id="20956" name="Is veteran unemployed but not retired?" value="Yes"/>
+        <assertion>
+            <assertionUUID>c8a7f695-ad5a-48ba-967b-2da231e1b6d1</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="1230" uuid="4122cb13-c7a4-34c1-976c-9706ae36521d" desc="Veteran unemployed but not retired (observable entity)"/>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <expression>
+                    <concept sctid="373066001" uuid="c928767e-f519-3b34-bff2-a2ed3cd5c6c3" desc="Yes (qualifier value)"/>
+                </expression>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>0be27fda-cbd3-4bf6-937f-b5a37d2f14a6</legoUUID>
+        <stamp status="Active" time="2013-08-01T00:30:49.322-07:00" author="dsperzel" module="default module" path="default path" uuid="ad723192-48b6-46be-bc48-0718c26d6806"/>
+        <pncs id="26296" name="Is there a history of trauma?" value="No"/>
+        <assertion>
+            <assertionUUID>a89c2e2b-b391-47d9-9ed2-cdbec74f50ce</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="405146003" uuid="8d2fc978-178e-3ab7-aca5-14f9a740c87f" desc="Physical injury status (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="53" uuid="d82c8d16-19ad-3176-9665-453cfb2e55f0" desc="IS ABOUT (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="417746004" uuid="180ffd1b-8807-30d0-a118-08c9268ec371" desc="Traumatic injury (disorder)"/>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <expression>
+                    <concept sctid="373067005" uuid="d58a8003-b801-3da2-83c1-e09497c9bb53" desc="No (qualifier value)"/>
+                </expression>
+            </value>
+            <timing>
+                <bound>
+                    <lowerPoint xsi:type="pointMeasurementConstant">
+                        <value>DOB</value>
+                    </lowerPoint>
+                    <upperPoint xsi:type="pointMeasurementConstant">
+                        <value>NOW</value>
+                    </upperPoint>
+                </bound>
+            </timing>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>4ca9a066-9fc2-4b97-8076-35919504ca33</legoUUID>
+        <stamp status="Active" time="2013-08-01T00:32:38.720-07:00" author="dsperzel" module="default module" path="default path" uuid="6dcd956d-d8ca-4034-bdac-03cc58c0fa5f"/>
+        <pncs id="26296" name="Is there a history of trauma?" value="Yes"/>
+        <assertion>
+            <assertionUUID>dae753c0-30f0-40aa-8d53-1f0238cef2be</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="405146003" uuid="8d2fc978-178e-3ab7-aca5-14f9a740c87f" desc="Physical injury status (observable entity)"/>
+                    <relation>
+                        <type>
+                            <concept sctid="53" uuid="d82c8d16-19ad-3176-9665-453cfb2e55f0" desc="IS ABOUT (attribute)"/>
+                        </type>
+                        <destination>
+                            <expression>
+<concept sctid="417746004" uuid="180ffd1b-8807-30d0-a118-08c9268ec371" desc="Traumatic injury (disorder)"/>
+                            </expression>
+                        </destination>
+                    </relation>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <expression>
+                    <concept sctid="373066001" uuid="c928767e-f519-3b34-bff2-a2ed3cd5c6c3" desc="Yes (qualifier value)"/>
+                </expression>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>634e36f8-cd08-4f70-83ae-5749881ce835</legoUUID>
+        <stamp status="Active" time="2013-08-01T00:58:29.846-07:00" author="dsperzel" module="default module" path="default path" uuid="882cf376-137b-4066-95b0-3a1ca9f3e633"/>
+        <pncs id="26298" name="Comments on records" value="Assigned to different duties"/>
+        <assertion>
+            <assertionUUID>9cf1c296-eb20-4ba7-95ae-ab685dd6fb06</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="1231" uuid="6c14da10-9e29-3d1e-8155-be8aa4b1ce8e" desc="Assignment to different duties (observable entity)"/>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="312853008" uuid="1bcf0b0e-65c3-3ee5-ad74-5ba80e38bf84" desc="Medical records review (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <expression>
+                    <concept sctid="52101004" uuid="850e9dff-7c45-3db4-8cf9-34c8fb7359fd" desc="Present (qualifier value)"/>
+                </expression>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>5c4f3074-8291-4f11-9bd8-e21965485414</legoUUID>
+        <stamp status="Active" time="2013-08-01T00:59:40.791-07:00" author="dsperzel" module="default module" path="default path" uuid="17b6b8f0-7ba0-481d-9e79-c4eff14605f1"/>
+        <pncs id="26298" name="Comments on records" value="Increased absenteeism"/>
+        <assertion>
+            <assertionUUID>56f36854-c105-4d84-ab5e-9c21747420af</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="1233" uuid="e034fb6b-66aa-3c1d-88f4-45ddfb08da98" desc="Increased absenteeism (observable entity)"/>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="312853008" uuid="1bcf0b0e-65c3-3ee5-ad74-5ba80e38bf84" desc="Medical records review (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <expression>
+                    <concept sctid="52101004" uuid="850e9dff-7c45-3db4-8cf9-34c8fb7359fd" desc="Present (qualifier value)"/>
+                </expression>
+            </value>
+        </assertion>
+    </lego>
+    <lego>
+        <legoUUID>39c45664-9342-4672-9e2d-b7893909b9a0</legoUUID>
+        <stamp status="Active" time="2013-08-01T01:00:47.395-07:00" author="dsperzel" module="default module" path="default path" uuid="080d2a78-ee57-4ca4-b339-a2fb6062cbc9"/>
+        <pncs id="26298" name="Comments on records" value="Increased tardiness"/>
+        <assertion>
+            <assertionUUID>d047c72d-228c-4bcf-ac4c-04e5aff85cb6</assertionUUID>
+            <discernible>
+                <expression>
+                    <concept sctid="1232" uuid="e53a0a29-78c2-3872-a450-5bdb51db06dc" desc="Increased tardiness (observable entity)"/>
+                </expression>
+            </discernible>
+            <qualifier>
+                <expression>
+                    <concept sctid="312853008" uuid="1bcf0b0e-65c3-3ee5-ad74-5ba80e38bf84" desc="Medical records review (procedure)"/>
+                </expression>
+            </qualifier>
+            <value>
+                <expression>
+                    <concept sctid="52101004" uuid="850e9dff-7c45-3db4-8cf9-34c8fb7359fd" desc="Present (qualifier value)"/>
+                </expression>
+            </value>
+        </assertion>
+    </lego>
+</legoList>

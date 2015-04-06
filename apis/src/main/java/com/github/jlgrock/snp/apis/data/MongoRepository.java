@@ -59,7 +59,7 @@ public interface MongoRepository<DT, ID extends Serializable> {
      *
      * throws IllegalArgumentException if {@code id} is {@literal null}
      */
-    DT findOne(ID id);
+    DT findOneById(ID id);
 
     /**
      * Returns whether an entity with the given id exists.
@@ -69,7 +69,7 @@ public interface MongoRepository<DT, ID extends Serializable> {
      *
      * throws IllegalArgumentException if {@code id} is {@literal null}
      */
-    boolean exists(ID id);
+    boolean existsById(ID id);
 
     /**
      * Returns all instances of the type.
@@ -85,7 +85,7 @@ public interface MongoRepository<DT, ID extends Serializable> {
      * @return all of the results, brought back into a single iterable collection.  Please note, that you should be
      *          using Pageable versions if the expected output is large.
      */
-    Iterable<DT> findAll(Iterable<ID> ids);
+    Iterable<DT> findAllById(Iterable<ID> ids);
 
     /**
      * Returns the number of entities available.
@@ -95,34 +95,41 @@ public interface MongoRepository<DT, ID extends Serializable> {
     long count();
 
     /**
-     * Deletes the entity with the given id.
-     *
-     * @param id must not be {@literal null}.
-     *
-     * throws IllegalArgumentException in case the given {@code id} is {@literal null}
-     */
-    void deleteById(ID id);
+	 * Deletes the entity with the given id.
+	 *
+	 * @param id
+	 *            must not be {@literal null}.
+	 *
+	 *            throws IllegalArgumentException in case the given {@code id}
+	 *            is {@literal null}
+	 */
+	void deleteById(ID id);
 
-    /**
-     * Deletes a given entity.
-     *
-     * @param entity the entity to delete
-     *
-     * throws IllegalArgumentException in case the given entity is (@literal null}.
-     */
-    void delete(DT entity);
+	/**
+	 * Deletes a given entity.
+	 *
+	 * @param entity
+	 *            the entity to delete
+	 *
+	 *            throws IllegalArgumentException in case the given entity is
+	 *            (@literal null}.
+	 */
+	void delete(DT entity);
 
-    /**
-     * Deletes the given entities.
-     *
-     * @param entities the entitites to delete
-     *
-     * throws IllegalArgumentException in case the given {@link Iterable} is (@literal null}.
-     */
-    void delete(Iterable<? extends DT> entities);
+	/**
+	 * Deletes the given entities.
+	 *
+	 * @param entities
+	 *            the entitites to delete
+	 *
+	 *            throws IllegalArgumentException in case the given
+	 *            {@link Iterable} is (@literal null}.
+	 */
+	void delete(Iterable<? extends DT> entities);
 
-    /**
-     * Deletes all entities managed by the repository.
-     */
-    void deleteAll();
+	/**
+	 * Deletes all entities managed by the repository.
+	 */
+	void deleteAll();
+
 }

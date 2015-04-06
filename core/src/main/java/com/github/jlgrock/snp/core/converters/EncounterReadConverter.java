@@ -9,7 +9,6 @@ import org.jvnet.hk2.annotations.Service;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,7 +18,7 @@ import java.util.stream.Collectors;
  */
 @Service
 @Named
-public class EncounterReadConverter implements Converter<DBObject, Encounter> {
+public class EncounterReadConverter extends AbstractReadConverter implements Converter<DBObject, Encounter> {
 
     private final ObservationReadConverter observationReadConverter;
 
@@ -35,11 +34,11 @@ public class EncounterReadConverter implements Converter<DBObject, Encounter> {
     @Override
     public Encounter convert(final DBObject source) {
         Encounter encounter = new Encounter();
-        encounter.setId(((Number) source.get(EncounterTags.ID_TAG)).longValue());
-        encounter.setPatientId(((Number) source.get(EncounterTags.PATIENT_TAG)).longValue());
-        encounter.setDate(LocalDate.ofEpochDay(((Number) source.get(EncounterTags.DATE_TAG)).longValue()));
-        encounter.setType(((Number) source.get(EncounterTags.TYPE_TAG)).intValue());
-        encounter.setReasonForVisit((String) source.get(EncounterTags.REASON_FOR_VISIT_TAG));
+        encounter.setId(parseLong(source, EncounterTags.ID_TAG));
+        encounter.setPatientId(parseLong(source, EncounterTags.PATIENT_TAG));
+        encounter.setDate(parseLocalDate(source, EncounterTags.DATE_TAG));
+        encounter.setType(parseInteger(source, EncounterTags.TYPE_TAG));
+        encounter.setReasonForVisit(parseString(source, EncounterTags.REASON_FOR_VISIT_TAG));
 
         List<DBObject> observationsObjs = (List<DBObject>) source.get(EncounterTags.OBSERVATIONS_TAG);
         List<Observation> observations = new ArrayList<>();

@@ -37,7 +37,7 @@ public class PatientController {
     @Produces(MediaType.APPLICATION_JSON)
     public Patient getPatient(@PathParam("id") final Long id) {
         LOGGER.debug("getting Patient");
-        return repository.findOne(id);
+        return repository.findOneById(id);
     }
 }
 

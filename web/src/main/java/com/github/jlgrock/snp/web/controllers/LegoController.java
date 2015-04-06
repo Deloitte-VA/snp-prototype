@@ -1,20 +1,25 @@
 package com.github.jlgrock.snp.web.controllers;
 
-import com.github.jlgrock.snp.apis.connection.configuration.WebConfiguration;
-import com.github.jlgrock.snp.apis.data.MultiPartFileUtils;
-import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
-import org.glassfish.jersey.media.multipart.FormDataParam;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.StandardOpenOption;
 
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.io.InputStream;
+
+import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
+import org.glassfish.jersey.media.multipart.FormDataParam;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.github.jlgrock.snp.apis.connection.configuration.WebConfiguration;
+import com.github.jlgrock.snp.apis.data.MultiPartFileUtils;
 
 /**
  * The controller for handling all xml uploads of lego data
@@ -27,6 +32,8 @@ public class LegoController {
     private MultiPartFileUtils multipartFileUtils;
 
     private WebConfiguration webConfiguration;
+    
+    private AssertionClassifierService assertClssfrSvc;
 
     /**
      * Default constructor.
@@ -35,9 +42,11 @@ public class LegoController {
      */
     @Inject
     public LegoController(final WebConfiguration webConfigurationIn,
-                          final MultiPartFileUtils multipartFileUtilsIn) {
+                          final MultiPartFileUtils multipartFileUtilsIn,
+                          final AssertionClassifierService assertClssfrSvcIn) {
         webConfiguration = webConfigurationIn;
         multipartFileUtils = multipartFileUtilsIn;
+        assertClssfrSvc = assertClssfrSvcIn;
     }
 
     /**
@@ -59,14 +68,38 @@ public class LegoController {
         LOGGER.debug("fileInputStream={}, fileName={}", fileInputStream, formDataContentDisposition.getFileName());
 
         java.nio.file.Path uploadedFileLocation = webConfiguration.fileLocation().resolve(formDataContentDisposition.getFileName());
-
+        
         // save it
         multipartFileUtils.writeToFile(fileInputStream, uploadedFileLocation);
 
         LOGGER.debug("File uploaded to : " + uploadedFileLocation);
+        
+        // verify that a file was uploaded/created
+        if (Files.notExists(uploadedFileLocation)) {
+        	LOGGER.error("Uploaded file does not exist: " + uploadedFileLocation);
+        	return Response.serverError().build();
+        }
+        
+        // verify that file is not empty
+        try {
+			if (Files.size(uploadedFileLocation) <= 0) {
+				LOGGER.warn("Uploaded file is empty: " + uploadedFileLocation);
+				return Response.status(Response.Status.NO_CONTENT).build();
+			}
+		} catch (IOException e) {
+			LOGGER.error(e.getMessage(), e);
+			return Response.serverError().build();
+		}
 
-        //TODO this is where we add the connection to the XML parser
-
+        // open file and process contents
+        try (InputStream inputStream = new BufferedInputStream(Files.newInputStream(
+				uploadedFileLocation, StandardOpenOption.READ));) {
+        	assertClssfrSvc.classifyAssertion(inputStream);
+		} catch (IOException e) {
+			LOGGER.error(e.getMessage(), e);
+			return Response.serverError().build();
+		}
+        
         return Response.ok().build();
     }
     
@@ -81,9 +114,13 @@ public class LegoController {
     @POST
     @Path("/")
     @Consumes(MediaType.APPLICATION_XML)
-    @Produces(MediaType.APPLICATION_XML)
-    public String getLego(final String xml) {
-    	return xml;
+    public Response getLego(final String xml) {
+    	
+    	LOGGER.debug("HTTP XML stream received: " + xml);
+    	
+    	assertClssfrSvc.classifyAssertion(xml);
+    	
+    	return Response.ok().build();
     }
 
 }
