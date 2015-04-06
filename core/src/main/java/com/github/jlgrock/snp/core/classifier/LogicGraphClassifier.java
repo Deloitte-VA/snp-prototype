@@ -2,7 +2,7 @@ package com.github.jlgrock.snp.core.classifier;
 
 import java.util.UUID;
 
-import com.github.jlgrock.snp.core.model.parser.Expression;
+import com.github.jlgrock.snp.core.model.xml.lego.Expression;
 
 /**
  * Classify Post Coordinated Expressions

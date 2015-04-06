@@ -1,22 +1,22 @@
-package com.github.jlgrock.snp.core.model.parser;
+package com.github.jlgrock.snp.core.model.xml.lego;
 
 import com.google.common.base.MoreObjects;
 
 /**
- * The Value class represents the value element in the LEGO XML document.
+ * The Destination class represents the destination element in the LEGO XML document.
  *
  */
-public class Value {
+public class Destination {
 	private Expression expression;
 	private Measurement measurement;
 	
 	public Expression getExpression() {
 		return expression;
 	}
-
+	
 	public void setExpression(final Expression pExpression) {
 		expression = pExpression;
-	}
+	}	
 	
 	public Measurement getMeasurement() {
 		return measurement;
@@ -29,9 +29,9 @@ public class Value {
 	@Override
 	public String toString() {
 		return MoreObjects.toStringHelper(this)
-				.add("expression", expression)
-				.add("measurement", measurement)
-				.toString();
+		.add("expression", expression)
+		.add("measurement", measurement)
+		.toString();
 	}
 	
 }

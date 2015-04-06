@@ -6,7 +6,7 @@ import java.io.InputStream;
 
 import org.testng.annotations.Test;
 
-import com.github.jlgrock.snp.core.model.parser.LegoList;
+import com.github.jlgrock.snp.core.model.xml.lego.LegoList;
 
 public class LegoXmlParserTest extends AbstractXmlParserTest {
 

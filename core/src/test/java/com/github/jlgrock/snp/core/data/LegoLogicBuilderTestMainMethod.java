@@ -10,11 +10,11 @@ import java.util.List;
 
 import org.ihtsdo.otf.tcc.api.contradiction.ContradictionException;
 
-import com.github.jlgrock.snp.core.model.parser.Concept;
-import com.github.jlgrock.snp.core.model.parser.Destination;
-import com.github.jlgrock.snp.core.model.parser.Expression;
-import com.github.jlgrock.snp.core.model.parser.Relation;
-import com.github.jlgrock.snp.core.model.parser.Type;
+import com.github.jlgrock.snp.core.model.xml.lego.Concept;
+import com.github.jlgrock.snp.core.model.xml.lego.Destination;
+import com.github.jlgrock.snp.core.model.xml.lego.Expression;
+import com.github.jlgrock.snp.core.model.xml.lego.Relation;
+import com.github.jlgrock.snp.core.model.xml.lego.Type;
 
 public class LegoLogicBuilderTestMainMethod {
 

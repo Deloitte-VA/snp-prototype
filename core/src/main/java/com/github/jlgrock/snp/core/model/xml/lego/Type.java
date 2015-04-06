@@ -1,12 +1,12 @@
-package com.github.jlgrock.snp.core.model.parser;
+package com.github.jlgrock.snp.core.model.xml.lego;
 
 import com.google.common.base.MoreObjects;
 
 /**
- * The Units class represents the units element in the LEGO XML document.
+ * The Type class represents the type element in the LEGO XML document.
  *
  */
-public class Units {
+public class Type {
 	private Concept concept;
 
 	public Concept getConcept() {

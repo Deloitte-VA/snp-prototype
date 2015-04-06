@@ -1,4 +1,4 @@
-package com.github.jlgrock.snp.core.model.parser;
+package com.github.jlgrock.snp.core.model.xml.lego;
 
 import java.io.StringReader;
 import java.io.StringWriter;

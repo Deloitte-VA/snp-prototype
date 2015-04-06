@@ -1,4 +1,4 @@
-package com.github.jlgrock.snp.core.model.parser;
+package com.github.jlgrock.snp.core.model.xml.lego;
 
 /**
  * This interface declares the constants used parsing

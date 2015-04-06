@@ -1,12 +1,12 @@
-package com.github.jlgrock.snp.core.model.parser;
+package com.github.jlgrock.snp.core.model.xml.lego;
 
 import com.google.common.base.MoreObjects;
 
 /**
- * The Qualifier class represents the qualifier element in the LEGO XML document.
+ * The Discernible class represents the discernible element in the LEGO XML document.
  *
  */
-public class Qualifier {
+public class Discernible {
 	private Expression expression;
 
 	public Expression getExpression() {
@@ -20,8 +20,8 @@ public class Qualifier {
 	@Override
 	public String toString() {
 		return MoreObjects.toStringHelper(this)
-				.add("expression", expression)
-				.toString();
+		.add("expression", expression)
+		.toString();
 	}
 	
 }
