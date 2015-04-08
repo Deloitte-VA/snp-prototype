@@ -9,11 +9,11 @@ import java.util.List;
 import org.testng.annotations.Test;
 
 import com.github.jlgrock.snp.core.domain.ClassifiedAssertion;
-import com.github.jlgrock.snp.core.model.parser.Assertion;
-import com.github.jlgrock.snp.core.model.parser.Destination;
-import com.github.jlgrock.snp.core.model.parser.Discernible;
-import com.github.jlgrock.snp.core.model.parser.Expression;
-import com.github.jlgrock.snp.core.model.parser.Relation;
+import com.github.jlgrock.snp.core.model.xml.lego.Assertion;
+import com.github.jlgrock.snp.core.model.xml.lego.Destination;
+import com.github.jlgrock.snp.core.model.xml.lego.Discernible;
+import com.github.jlgrock.snp.core.model.xml.lego.Expression;
+import com.github.jlgrock.snp.core.model.xml.lego.Relation;
 
 public class AssertionClassifierTest {
 	
