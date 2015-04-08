@@ -42,6 +42,7 @@ public class LegoXmlParser implements XmlParser<LegoList> {
      * @param xmlInput the input stream
      * @return the deserialized java objects
      */
+	@Override
 	public LegoList parseDocument(final InputStream xmlInput) {
 		legoList = new LegoList();
 		String tagContent = null;
