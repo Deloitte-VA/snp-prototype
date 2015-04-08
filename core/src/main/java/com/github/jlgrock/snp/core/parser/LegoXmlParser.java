@@ -1,38 +1,39 @@
 package com.github.jlgrock.snp.core.parser;
 
-import com.github.jlgrock.snp.core.model.parser.Assertion;
-import com.github.jlgrock.snp.core.model.parser.AssertionComponent;
-import com.github.jlgrock.snp.core.model.parser.Bound;
-import com.github.jlgrock.snp.core.model.parser.Concept;
-import com.github.jlgrock.snp.core.model.parser.Destination;
-import com.github.jlgrock.snp.core.model.parser.Discernible;
-import com.github.jlgrock.snp.core.model.parser.Expression;
-import com.github.jlgrock.snp.core.model.parser.Lego;
-import com.github.jlgrock.snp.core.model.parser.LegoList;
-import com.github.jlgrock.snp.core.model.parser.LegoXmlConstants;
-import com.github.jlgrock.snp.core.model.parser.Measurement;
-import com.github.jlgrock.snp.core.model.parser.Pncs;
-import com.github.jlgrock.snp.core.model.parser.Point;
-import com.github.jlgrock.snp.core.model.parser.Qualifier;
-import com.github.jlgrock.snp.core.model.parser.Relation;
-import com.github.jlgrock.snp.core.model.parser.Stamp;
-import com.github.jlgrock.snp.core.model.parser.Timing;
-import com.github.jlgrock.snp.core.model.parser.Type;
-import com.github.jlgrock.snp.core.model.parser.Units;
-import com.github.jlgrock.snp.core.model.parser.Value;
+import java.io.InputStream;
 
 import javax.xml.stream.FactoryConfigurationError;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
-import java.io.InputStream;
+
+import com.github.jlgrock.snp.core.model.xml.lego.Assertion;
+import com.github.jlgrock.snp.core.model.xml.lego.AssertionComponent;
+import com.github.jlgrock.snp.core.model.xml.lego.Bound;
+import com.github.jlgrock.snp.core.model.xml.lego.Concept;
+import com.github.jlgrock.snp.core.model.xml.lego.Destination;
+import com.github.jlgrock.snp.core.model.xml.lego.Discernible;
+import com.github.jlgrock.snp.core.model.xml.lego.Expression;
+import com.github.jlgrock.snp.core.model.xml.lego.Lego;
+import com.github.jlgrock.snp.core.model.xml.lego.LegoList;
+import com.github.jlgrock.snp.core.model.xml.lego.LegoXmlConstants;
+import com.github.jlgrock.snp.core.model.xml.lego.Measurement;
+import com.github.jlgrock.snp.core.model.xml.lego.Pncs;
+import com.github.jlgrock.snp.core.model.xml.lego.Point;
+import com.github.jlgrock.snp.core.model.xml.lego.Qualifier;
+import com.github.jlgrock.snp.core.model.xml.lego.Relation;
+import com.github.jlgrock.snp.core.model.xml.lego.Stamp;
+import com.github.jlgrock.snp.core.model.xml.lego.Timing;
+import com.github.jlgrock.snp.core.model.xml.lego.Type;
+import com.github.jlgrock.snp.core.model.xml.lego.Units;
+import com.github.jlgrock.snp.core.model.xml.lego.Value;
 
 /**
  * Parses LEGO XML document for retrieving Post Coordinated Expressions (PCEs)
  *
  */
-public class LegoXmlParser {
+public class LegoXmlParser implements XmlParser<LegoList> {
 	//this is the list which shall be populated while parsing the XML
 	private LegoList legoList;
 
@@ -41,6 +42,7 @@ public class LegoXmlParser {
      * @param xmlInput the input stream
      * @return the deserialized java objects
      */
+	@Override
 	public LegoList parseDocument(final InputStream xmlInput) {
 		legoList = new LegoList();
 		String tagContent = null;

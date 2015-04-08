@@ -1,11 +1,12 @@
 package com.github.jlgrock.snp.core.classifier;
 
 import java.util.UUID;
+
 import org.jvnet.hk2.annotations.Service;
 
 import com.github.jlgrock.snp.core.domain.ClassifiedAssertion;
-import com.github.jlgrock.snp.core.model.parser.Assertion;
-import com.github.jlgrock.snp.core.model.parser.Expression;
+import com.github.jlgrock.snp.core.model.xml.lego.Assertion;
+import com.github.jlgrock.snp.core.model.xml.lego.Expression;
 
 /**
  * Classify an assertion object with a complex expression
