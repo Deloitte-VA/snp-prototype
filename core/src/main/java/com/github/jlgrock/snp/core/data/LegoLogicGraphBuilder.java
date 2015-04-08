@@ -16,11 +16,11 @@ import org.ihtsdo.otf.tcc.api.store.TerminologySnapshotDI;
 import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
 import org.ihtsdo.otf.tcc.api.uuid.UuidT3Generator;
 
-import com.github.jlgrock.snp.core.model.parser.Concept;
-import com.github.jlgrock.snp.core.model.parser.Destination;
-import com.github.jlgrock.snp.core.model.parser.Expression;
-import com.github.jlgrock.snp.core.model.parser.Relation;
-import com.github.jlgrock.snp.core.model.parser.Type;
+import com.github.jlgrock.snp.core.model.xml.lego.Concept;
+import com.github.jlgrock.snp.core.model.xml.lego.Destination;
+import com.github.jlgrock.snp.core.model.xml.lego.Expression;
+import com.github.jlgrock.snp.core.model.xml.lego.Relation;
+import com.github.jlgrock.snp.core.model.xml.lego.Type;
 
 /**
  * A Logic Graph Builder specific to Lego documents.  This should only be used to

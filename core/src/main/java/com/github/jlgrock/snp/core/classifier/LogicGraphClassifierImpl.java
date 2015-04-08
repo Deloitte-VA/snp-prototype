@@ -1,7 +1,8 @@
 package com.github.jlgrock.snp.core.classifier;
 
 import com.github.jlgrock.snp.core.data.LegoLogicGraphBuilder;
-import com.github.jlgrock.snp.core.model.parser.Expression;
+import com.github.jlgrock.snp.core.model.xml.lego.Expression;
+
 import gov.vha.isaac.logic.LogicGraph;
 
 import java.util.UUID;
