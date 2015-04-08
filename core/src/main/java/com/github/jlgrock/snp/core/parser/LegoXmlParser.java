@@ -1,5 +1,13 @@
 package com.github.jlgrock.snp.core.parser;
 
+import java.io.InputStream;
+
+import javax.xml.stream.FactoryConfigurationError;
+import javax.xml.stream.XMLInputFactory;
+import javax.xml.stream.XMLStreamConstants;
+import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.XMLStreamReader;
+
 import com.github.jlgrock.snp.core.model.xml.lego.Assertion;
 import com.github.jlgrock.snp.core.model.xml.lego.AssertionComponent;
 import com.github.jlgrock.snp.core.model.xml.lego.Bound;
@@ -21,19 +29,11 @@ import com.github.jlgrock.snp.core.model.xml.lego.Type;
 import com.github.jlgrock.snp.core.model.xml.lego.Units;
 import com.github.jlgrock.snp.core.model.xml.lego.Value;
 
-import javax.xml.stream.FactoryConfigurationError;
-import javax.xml.stream.XMLInputFactory;
-import javax.xml.stream.XMLStreamConstants;
-import javax.xml.stream.XMLStreamException;
-import javax.xml.stream.XMLStreamReader;
-
-import java.io.InputStream;
-
 /**
  * Parses LEGO XML document for retrieving Post Coordinated Expressions (PCEs)
  *
  */
-public class LegoXmlParser {
+public class LegoXmlParser implements XmlParser<LegoList> {
 	//this is the list which shall be populated while parsing the XML
 	private LegoList legoList;
 
