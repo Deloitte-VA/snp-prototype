@@ -127,6 +127,11 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
 		return returnval;
 	}
 
+	private void executeQuery1(BasicDBObject query){
+		DBCollection dbc1 = dBCollection();
+		dbc1.findAndRemove(query);
+		}
+	
 	private List<Object> serializeIds(final List<Object> objs) {
 		List<Object> list = new ArrayList<>();
 		for (Object obj : objs) {
@@ -140,31 +145,12 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
 
 	@Override
 	public Iterable<S> findAll(final Sort sort) {
-		/*
-		 * List<S> sList = new ArrayList<S>(); DBCollection dbc1 =
-		 * dBCollection(); if(sort = Sort.ASC){
-		 * 
-		 * dbc1.find().sort() } else{
-		 * 
-		 * 
-		 * }
-		 * 
-		 * BasicDBObject query = new BasicDBObject (, sort); DBCursor x =
-		 * dbc1.find(query); for(DBObject o:x){ sList.add(convertCollection(o));
-		 * } return sList;
-		 */
-		return null;
+		throw new UnsupportedOperationException("Method is not currently being utilized.");
 	}
 
 	@Override
 	public Page<S> findAll(final Pageable pageable) {
-		/*
-		 * List<S> sList = new ArrayList<S>(); DBCollection dbc1 =
-		 * dBCollection(); BasicDBObject query = new BasicDBObject
-		 * (pageable).skip(start).limit(count); dbc1.find(query); for(DBObject
-		 * o:x){ sList.add(convertCollection(o)); } return sList;
-		 */
-		return null;
+		throw new UnsupportedOperationException("Method is not currently being utilized.");
 	}
 
 	@Override
@@ -245,16 +231,6 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
 	}
 
 	@Override
-	public void deleteById(final T id) {
-		LOGGER.info("deleteById(id=" + id + ")");
-		DBCollection dbc1 = dBCollection();
-		BasicDBObject query = new BasicDBObject() {{
-			put("_id", id);
-		}};
-		dbc1.findAndRemove(query);
-	}
-
-	@Override
 	public void delete(final S entity) {
 		LOGGER.info("deleteById(entity=" + entity + ")");
 		DBCollection dbc1 = dBCollection();
@@ -262,22 +238,29 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
 	}
 
 	@Override
+	public void deleteById(final T id) {
+		LOGGER.info("deleteById(id=" + id + ")");
+		BasicDBObject query = new BasicDBObject() {{
+			put("_id", id);
+		}};
+		executeQuery1(query);
+	}
+	
+	@Override
 	public void delete(final Iterable<? extends S> entities) {
 		LOGGER.info("delete(ids=" + Lists.newArrayList(entities).stream().map(id -> id.toString()).collect(Collectors.joining(", ")) + ")");
-		DBCollection dbc1 = dBCollection();
 		BasicDBObject query = new BasicDBObject() {{
 			put("_id", new BasicDBObject() {{
 				put("$in", entities);
 			}});
 		}};
-		dbc1.findAndRemove(query);
+		executeQuery1(query);
 	}
 
 	@Override
 	public void deleteAll() {
 		LOGGER.info("deleteAll()");
-		DBCollection dbc1 = dBCollection();
 		BasicDBObject query = new BasicDBObject();
-		dbc1.findAndRemove(query);
+		executeQuery1(query);
 	}
 }
