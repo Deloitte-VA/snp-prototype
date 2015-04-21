@@ -105,6 +105,12 @@
                 <artifactId>web</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>legoschema</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
             <dependency>
                 <groupId>ch.qos.logback</groupId>
@@ -320,12 +326,14 @@
     </dependencies>
 
     <modules>
+    	<module>legoschema</module>
         <module>apis</module>
         <module>defaultconfig</module>
         <module>core</module>
         <module>web</module>
         <!--<module>client</module>-->
         <!--<module>integration</module>-->
+       <!--<module>legoschema</module>-->
     </modules>
 
     <build>
@@ -379,6 +387,10 @@
                             <goals>
                                 <goal>jar</goal>
                             </goals>
+                            <!-- For Java 8, set Xdoclint:none to avert Javadoc related problems with JAXB generated classes  -->
+                            <configuration>
+                				<additionalparam>-Xdoclint:none</additionalparam>
+            				</configuration>
                         </execution>
                     </executions>
                 </plugin>
@@ -443,7 +455,7 @@
                         <effort>Max</effort>
                         <threshold>Medium</threshold>
                         <xmlOutput>true</xmlOutput>
-                        <failOnError>true</failOnError>\
+                        <failOnError>true</failOnError>
                     </configuration>
                     <executions>
                         <execution>
