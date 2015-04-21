@@ -38,11 +38,6 @@ public class LegoLogicGraphBuilderTest extends AbstractXmlParserTest {
 				
 		LogicGraph g = null;
     	
-        //Try to invoke new constructor for LEGO XML PCEs
-       
-		//Create the LogicGraph using the constructor meant for LEGO XMLs
-    	//g = new LegoLogicGraphBuilder(439272007, "704647008", "46973005");  //Actual "IS ABOUT" concept id = 704647008 rather than 53
-    	
     	LegoLogicGraphBuilder legoLogicGraphBuilder = new LegoLogicGraphBuilder(expression);
     	//LegoLogicGraphBuilder.create() gets called by LogicGraph.legoLogicGraphBuilderprocessDepthFirst()
     	//call this method if you don't call LogicGraph.legoLogicGraphBuilderprocessDepthFirst() in order
@@ -70,11 +65,6 @@ public class LegoLogicGraphBuilderTest extends AbstractXmlParserTest {
 		Expression expression = legoList.getLegos().get(0).getAssertion().getDiscernible().getExpression();
 		
 		LogicGraph g = null;
-    	
-        //Try to invoke new constructor for LEGO XML PCEs
-       
-		//Create the LogicGraph using the constructor meant for LEGO XMLs
-    	//g = new LegoLogicGraphBuilder(439272007, "704647008", "46973005");  //Actual "IS ABOUT" concept id = 704647008 rather than 53
     	
     	LegoLogicGraphBuilder legoLogicGraphBuilder = new LegoLogicGraphBuilder(expression);
     	//LegoLogicGraphBuilder.create() gets called by LogicGraph.legoLogicGraphBuilderprocessDepthFirst()

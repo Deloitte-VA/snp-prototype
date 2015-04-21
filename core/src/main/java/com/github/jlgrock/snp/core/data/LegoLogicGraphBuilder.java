@@ -53,27 +53,6 @@ public class LegoLogicGraphBuilder extends LogicGraphBuilder {
         	Node[] sufficientSetsArr = sufficientSetList.toArray(new Node[sufficientSetList.size()]);
         	root.addChildren(sufficientSetsArr);
     	}
-    	
-    	//Another way to get Nid
-    	/*
-         ConceptVersionBI sourceConcept = termSnapshot.getConceptVersion(sourceConceptUuid);
-         ConceptVersionBI typeConcept = termSnapshot.getConceptVersion(typeConceptUuid);
-         ConceptVersionBI destinationConcept = termSnapshot.getConceptVersion(destinationUuid);
-
-         sourceConceptNid = sourceConcept.getNid();
-         typeConceptNid = typeConcept.getNid();
-         destinationNid =  destinationConcept.getNid();
-    	 */
-    	
-    	//The following alternate approach to create logic graph gives somehow class cast Exception for root node
-    	/*
-          RootNode root = Root(
-          					SufficientSet(
-      							And(
-    	  							Concept(sourceConceptNid), 
-    	  							SomeRole(typeConceptNid, Concept(destinationNid))
-        						)));
-    	 */
     }
     
     public Node processRelation(Relation relation, int sourceConceptNid) {
