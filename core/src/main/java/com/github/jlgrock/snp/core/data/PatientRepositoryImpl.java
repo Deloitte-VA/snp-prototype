@@ -29,9 +29,9 @@ public class PatientRepositoryImpl extends
 	private final PatientWriteConverter patientWriteConverter;
 
 	@Inject
-	protected PatientRepositoryImpl(final MongoDbFactory mongoDbFactoryIn,
+	public PatientRepositoryImpl(final MongoDbFactory mongoDbFactoryIn,
 									final PatientReadConverter patientReadConverterIn,
-									PatientWriteConverter patientWriteConverterIn) {
+									final PatientWriteConverter patientWriteConverterIn) {
 		super(mongoDbFactoryIn);
 		patientReadConverter = patientReadConverterIn;
 		patientWriteConverter = patientWriteConverterIn;
@@ -58,78 +58,56 @@ public class PatientRepositoryImpl extends
 		}
 	}
 	
-	@Override
-	public List<Patient> findAllByLastName(String lastName) {
+	private List<Patient> performQuery(BasicDBObject query){
 		List<Patient> pList = new ArrayList<>();
 		DBCollection dbc1 = dBCollection();
-		BasicDBObject query = new BasicDBObject() {{
-			put("lastName", lastName);
-		}};
 		DBCursor x = dbc1.find(query);
 		for (DBObject o : x) {
 			pList.add(convertToDomainObject(o));
 		}
 		return pList;
+	}
+	
+	@Override
+	public List<Patient> findAllByLastName(String lastName) {
+		BasicDBObject query = new BasicDBObject() {{
+			put("lastName", lastName);
+		}};
+		return performQuery(query);
 	}
 
 	@Override
 	public List<Patient> findAllByFirstNameAndLastName(final String firstName,
 			final String lastName) {
-		List<Patient> pList = new ArrayList<>();
-		DBCollection dbc1 = dBCollection();
 		BasicDBObject query = new BasicDBObject() {{
 			put("firstName", firstName);
 			put("lastName", lastName);
 		}};
-
-		DBCursor x = dbc1.find(query);
-		for (DBObject o : x) {
-			pList.add(convertToDomainObject(o));
-		}
-		return pList;
+		return performQuery(query);
 	}
 
 	@Override
 	public List<Patient> findAllByDateOfBirth(final Date dateOfBirth) {
-		List<Patient> pList = new ArrayList<>();
-		DBCollection dbc1 = dBCollection();
 		BasicDBObject query = new BasicDBObject() {{
 			put("dateOfBirth", dateOfBirth);
 		}};
-		DBCursor x = dbc1.find(query);
-		for (DBObject o : x) {
-			pList.add(convertToDomainObject(o));
-		}
-		return pList;
+		return performQuery(query);
 	}
 
 	@Override
 	public List<Patient> findAllByGender(final Gender gender) {
-		List<Patient> pList = new ArrayList<>();
-		DBCollection dbc1 = dBCollection();
 		BasicDBObject query = new BasicDBObject() {{
 			put("gender", gender);
 		}};
-
-		DBCursor x = dbc1.find(query);
-		for (DBObject o : x) {
-			pList.add(convertToDomainObject(o));
-		}
-		return pList;
+		return performQuery(query);
 	}
 
 	@Override
 	public List<Patient> findAllByRace(final Race race) {
-		List<Patient> pList = new ArrayList<>();
-		DBCollection dbc1 = dBCollection();
 		BasicDBObject query = new BasicDBObject() {{
 			put("race", race);
 		}};
-		DBCursor x = dbc1.find(query);
-		for (DBObject o : x) {
-			pList.add(convertToDomainObject(o));
-		}
-		return pList;
+		return performQuery(query);
 	}
 
 }
