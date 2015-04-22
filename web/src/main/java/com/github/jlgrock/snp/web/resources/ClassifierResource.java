@@ -113,7 +113,7 @@ public class ClassifierResource {
 //				}
 //			}
 			
-			Class<? extends Object> entityClass = SnpMediaTypeMapping.getEntityClass(filePart.getMediaType());
+			Class entityClass = SnpMediaTypeMapping.getEntityClass(filePart.getMediaType());
 			
 			MessageBodyReader<?> mbr =  filePart.messageBodyWorkers.getMessageBodyReader(
 					entityClass, null, null, filePart.getMediaType());
