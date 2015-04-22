@@ -72,7 +72,7 @@ public class LegoController {
         // save it
         multipartFileUtils.writeToFile(fileInputStream, uploadedFileLocation);
 
-        LOGGER.debug("File uploaded to : " + uploadedFileLocation);
+        LOGGER.debug("File uploaded to : {}", uploadedFileLocation);
         
         // verify that a file was uploaded/created
         if (Files.notExists(uploadedFileLocation)) {
@@ -83,7 +83,7 @@ public class LegoController {
         // verify that file is not empty
         try {
 			if (Files.size(uploadedFileLocation) <= 0) {
-				LOGGER.warn("Uploaded file is empty: " + uploadedFileLocation);
+				LOGGER.warn("Uploaded file is empty: {}", uploadedFileLocation);
 				return Response.status(Response.Status.NO_CONTENT).build();
 			}
 		} catch (IOException e) {
