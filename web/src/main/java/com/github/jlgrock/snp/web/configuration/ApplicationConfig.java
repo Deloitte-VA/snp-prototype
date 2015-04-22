@@ -85,7 +85,7 @@ public class ApplicationConfig extends ResourceConfig {
         // Enable Tracing support.
         property(ServerProperties.TRACING, "ALL");
 
-        packages("com.github.jlgrock.snp.web");
+        packages("com.github.jlgrock.snp.web", "com.github.jlgrock.snp.web.providers");
         //doesn't work
         // ServiceLocator locator = ServiceLocatorUtilities.createAndPopulateServiceLocator();
 

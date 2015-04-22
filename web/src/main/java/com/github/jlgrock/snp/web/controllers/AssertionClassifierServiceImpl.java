@@ -37,18 +37,22 @@ public class AssertionClassifierServiceImpl implements
 	}
 	
 	public void classifyAssertion(final InputStream inStream) {
-		LegoXmlParser legoXmlParser = new LegoXmlParser();
-    	LegoList legoList = legoXmlParser.parseDocument(inStream);
+		LegoList legoList = parseStream(inStream);
     	List<Lego> legos = legoList.getLegos();
     	classifyAssertion(legos);
 	}
 	
-	private void classifyAssertion(final List<Lego> legos) {
+	public void classifyAssertion(final List<Lego> legos) {
     	for (Lego lego : legos) {
     		Assertion assertion = lego.getAssertion();
         	ClassifiedAssertion cAssertion = assertClassifier.classify(assertion);
         	Long patientId = 0L;
 			classAssertStore.save(patientId , cAssertion);
     	}
+	}
+	
+	public LegoList parseStream(final InputStream inStream) {
+		LegoXmlParser legoXmlParser = new LegoXmlParser();
+    	return legoXmlParser.parseDocument(inStream);
 	}
 }
