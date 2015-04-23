@@ -51,7 +51,7 @@
         <jackson.version>2.5.0</jackson.version>
         <slf4j.version>1.7.9</slf4j.version>
         <logback.version>1.1.2</logback.version>
-        <mongo.driver.version>2.13.0-rc1</mongo.driver.version>
+        <mongo.driver.version>3.0.0</mongo.driver.version>
         <junit.version>4.12</junit.version>
         <mockito.version>1.10.8</mockito.version>
         <hk2.version>2.4.0-b10</hk2.version>

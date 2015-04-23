@@ -5,6 +5,7 @@ import com.github.jlgrock.snp.core.data.EncounterTags;
 import com.github.jlgrock.snp.core.domain.Encounter;
 import com.github.jlgrock.snp.core.domain.Observation;
 import com.mongodb.DBObject;
+import org.bson.Document;
 import org.jvnet.hk2.annotations.Service;
 
 import javax.inject.Inject;
@@ -18,7 +19,7 @@ import java.util.stream.Collectors;
  */
 @Service
 @Named
-public class EncounterReadConverter extends AbstractReadConverter implements Converter<DBObject, Encounter> {
+public class EncounterReadConverter extends AbstractReadConverter implements Converter<Document, Encounter> {
 
     private final ObservationReadConverter observationReadConverter;
 
@@ -32,7 +33,7 @@ public class EncounterReadConverter extends AbstractReadConverter implements Con
     }
 
     @Override
-    public Encounter convert(final DBObject source) {
+    public Encounter convert(final Document source) {
         Encounter encounter = new Encounter();
         encounter.setId(parseLong(source, EncounterTags.ID_TAG));
         encounter.setPatientId(parseLong(source, EncounterTags.PATIENT_TAG));
