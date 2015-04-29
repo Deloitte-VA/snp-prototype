@@ -3,8 +3,7 @@ package com.github.jlgrock.snp.core.converters;
 import com.github.jlgrock.snp.apis.converters.WriteConverter;
 import com.github.jlgrock.snp.core.data.PatientTags;
 import com.github.jlgrock.snp.core.domain.Patient;
-import com.mongodb.BasicDBObject;
-import com.mongodb.DBObject;
+import org.bson.Document;
 import org.jvnet.hk2.annotations.Service;
 
 import javax.inject.Named;
@@ -14,11 +13,11 @@ import javax.inject.Named;
  */
 @Service
 @Named
-public class PatientWriteConverter implements WriteConverter<Patient, DBObject> {
+public class PatientWriteConverter implements WriteConverter<Patient, Document> {
 
     @Override
-    public DBObject convert(final Patient source) {
-        DBObject dbo = new BasicDBObject();
+    public Document convert(final Patient source) {
+        Document dbo = new Document();
         dbo.put(PatientTags.ID_TAG, source.getId());
         dbo.put(PatientTags.FIRST_NAME_TAG, source.getFirstName());
         dbo.put(PatientTags.MIDDLE_NAME_TAG, source.getMiddleName());
