@@ -105,7 +105,7 @@
             
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>legoschema</artifactId>
+                <artifactId>conceptparsers</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
@@ -323,14 +323,14 @@
     </dependencies>
 
     <modules>
-    	<module>legoschema</module>
+    	<module>conceptparsers</module>
         <module>apis</module>
         <module>defaultconfig</module>
         <module>core</module>
         <module>web</module>
         <!--<module>client</module>-->
         <!--<module>integration</module>-->
-       <!--<module>legoschema</module>-->
+       <!--<module>conceptparsers</module>-->
     </modules>
 
     <build>

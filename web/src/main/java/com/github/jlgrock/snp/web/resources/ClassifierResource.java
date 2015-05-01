@@ -26,7 +26,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.github.jlgrock.snp.core.model.xml.fihr.Bundle;
-import com.github.jlgrock.snp.core.model.xml.lego.LegoList;
+import com.github.jlgrock.snp.core.domain.lego.LegoList;
 import com.github.jlgrock.snp.web.SnpMediaType;
 import com.github.jlgrock.snp.web.SnpMediaTypeMapping;
 import com.github.jlgrock.snp.web.controllers.AssertionClassifierService;
@@ -49,6 +49,7 @@ public class ClassifierResource {
 	@POST
 	public Response postLego(LegoList legoList) {
 		LOGGER.debug("Posted LegoList: {}", legoList);
+//		assertClssfrSvc.classifyAssertion(legoList.getLego());
 		return Response.ok().entity(legoList.toString()).type(MediaType.TEXT_PLAIN).build();
 	}
 	
@@ -87,9 +88,9 @@ public class ClassifierResource {
 				}
 			}
 			
-			InputStream fbEntity = filePart.getEntityAs(InputStream.class);
-			LegoList ll = assertClssfrSvc.parseStream(fbEntity);
-			LOGGER.debug("File part LegoList: {}", ll.toString());
+//			InputStream fbEntity = filePart.getEntityAs(InputStream.class);
+//			LegoList ll = assertClssfrSvc.parseStream(fbEntity);
+//			LOGGER.debug("File part LegoList: {}", ll.toString());
 			
 			LOGGER.debug("File part media type: {}", filePart.getMediaType());
 			Map<MediaType, List<MessageBodyReader>> readers = filePart.messageBodyWorkers
@@ -113,19 +114,22 @@ public class ClassifierResource {
 //				}
 //			}
 			
-			Class entityClass = SnpMediaTypeMapping.getEntityClass(filePart.getMediaType());
+			Class<?> entityClass = SnpMediaTypeMapping.getEntityClass(filePart.getMediaType());
+			LegoList ll2 = null;
+//			entityClass.newInstance();
+			ll2 = (LegoList) filePart.getEntityAs(entityClass);
 			
 			MessageBodyReader<?> mbr =  filePart.messageBodyWorkers.getMessageBodyReader(
 					entityClass, null, null, filePart.getMediaType());
 			LOGGER.debug("MBR 2: {}", mbr);
 			
-			LegoList ll2 = null;
-			try {
-				ll2 = (LegoList) mbr.readFrom(entityClass, entityClass.getGenericSuperclass(), new Annotation[] {}, filePart.getMediaType(), hh.getRequestHeaders(), is);
-			} catch (WebApplicationException | IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+
+//			try {
+//				ll2 = (LegoList) mbr.readFrom(entityClass, entityClass.getGenericSuperclass(), new Annotation[] {}, filePart.getMediaType(), hh.getRequestHeaders(), is);
+//			} catch (WebApplicationException | IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
 			
 			LOGGER.debug("LegoList 2: {}", ll2);
 //			assertClssfrSvc.classifyAssertion(ll2.getLegos());

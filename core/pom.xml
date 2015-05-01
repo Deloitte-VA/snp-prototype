@@ -21,6 +21,11 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>apis</artifactId>
         </dependency>
+		
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>conceptparsers</artifactId>
+		</dependency>
 
         <dependency>
             <groupId>org.mongodb</groupId>

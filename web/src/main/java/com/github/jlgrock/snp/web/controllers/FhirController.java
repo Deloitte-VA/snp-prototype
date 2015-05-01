@@ -94,7 +94,7 @@ public class FhirController {
         // open file and process contents
         try (InputStream inputStream = new BufferedInputStream(Files.newInputStream(
 				uploadedFileLocation, StandardOpenOption.READ));) {
-        	assertClssfrSvc.classifyAssertion(inputStream);
+//        	assertClssfrSvc.classifyAssertion(inputStream);
 		} catch (IOException e) {
 			LOGGER.error(e.getMessage(), e);
 			return Response.serverError().build();

@@ -34,7 +34,7 @@
 		
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>legoschema</artifactId>
+			<artifactId>conceptparsers</artifactId>
 		</dependency>
 
         <dependency>

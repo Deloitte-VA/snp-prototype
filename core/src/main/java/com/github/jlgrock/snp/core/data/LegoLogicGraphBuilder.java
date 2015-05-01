@@ -11,16 +11,15 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import org.ihtsdo.otf.tcc.api.concept.ConceptVersionBI;
 import org.ihtsdo.otf.tcc.api.store.TerminologySnapshotDI;
 import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
 import org.ihtsdo.otf.tcc.api.uuid.UuidT3Generator;
 
-import com.github.jlgrock.snp.core.model.xml.lego.Concept;
-import com.github.jlgrock.snp.core.model.xml.lego.Destination;
-import com.github.jlgrock.snp.core.model.xml.lego.Expression;
-import com.github.jlgrock.snp.core.model.xml.lego.Relation;
-import com.github.jlgrock.snp.core.model.xml.lego.Type;
+import com.github.jlgrock.snp.core.domain.lego.Concept;
+import com.github.jlgrock.snp.core.domain.lego.Destination;
+import com.github.jlgrock.snp.core.domain.lego.Expression;
+import com.github.jlgrock.snp.core.domain.lego.Relation;
+import com.github.jlgrock.snp.core.domain.lego.Type;
 
 /**
  * A Logic Graph Builder specific to Lego documents.  This should only be used to
@@ -37,32 +36,35 @@ public class LegoLogicGraphBuilder extends LogicGraphBuilder {
     	String sourceSctId = Optional.ofNullable(expression)
                 .map(Expression::getConcept)
                 .map(Concept::getSctid)
-                .orElse(null);
+                .orElse(null)
+                .toString();
         if (sourceSctId == null) {
             return;
         }
         
         String isAboutSctId = Optional.ofNullable(expression)
-                .map(Expression::getRelations)
+                .map(Expression::getRelation)
                 .filter((List<Relation> list) -> list.size() > 0)
                 .map((List<Relation> list) -> list.get(0))
                 .map(Relation::getType)
                 .map(Type::getConcept)
                 .map(Concept::getSctid)
-                .orElse(null);
+                .orElse(null)
+                .toString();
         if (isAboutSctId == null) {
             return;
         }
 
         String destinationSctId = Optional.ofNullable(expression)
-                .map(Expression::getRelations)
+                .map(Expression::getRelation)
                 .filter((List<Relation> list) -> list.size() > 0)
                 .map((List<Relation> list) -> list.get(0))
                 .map(Relation::getDestination)
                 .map(Destination::getExpression)
                 .map(Expression::getConcept)
                 .map(Concept::getSctid)
-                .orElse(null);
+                .orElse(null)
+                .toString();
         if (destinationSctId == null) {
             return;
         }
@@ -132,9 +134,9 @@ public class LegoLogicGraphBuilder extends LogicGraphBuilder {
     
     /**
      * Constructor for LogicGraph using input parameters from LEGO XML expressions
-     * @param expressionIn the complex expression to parse
+     * @param expression2 the complex expression to parse
      */
-    public LegoLogicGraphBuilder(final Expression expressionIn) {
-    	expression = expressionIn;
+    public LegoLogicGraphBuilder(final com.github.jlgrock.snp.core.domain.lego.Expression expression) {
+    	this.expression = expression;
     }
 }
