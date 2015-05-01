@@ -39,7 +39,7 @@ public class EncounterRepositoryImpl extends
 
     public List<Encounter> findByDate(final LocalDate date) {
         Document query = new Document() {{
-            put("date", date.toEpochDay());
+            put("date", date);
         }};
         return executeQueryAndTransformResults(query);
     }

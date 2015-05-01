@@ -6,10 +6,13 @@ import com.github.jlgrock.snp.core.converters.PatientWriteConverter;
 import com.github.jlgrock.snp.core.domain.Gender;
 import com.github.jlgrock.snp.core.domain.Patient;
 import com.github.jlgrock.snp.core.domain.Race;
+
 import org.bson.Document;
 import org.jvnet.hk2.annotations.Service;
 
 import javax.inject.Inject;
+
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -74,7 +77,7 @@ public class PatientRepositoryImpl extends
     }
 
     @Override
-    public List<Patient> findAllByDateOfBirth(final Date dateOfBirth) {
+    public List<Patient> findAllByDateOfBirth(final LocalDate dateOfBirth) {
         Document query = new Document() {{
             put("dateOfBirth", dateOfBirth);
         }};

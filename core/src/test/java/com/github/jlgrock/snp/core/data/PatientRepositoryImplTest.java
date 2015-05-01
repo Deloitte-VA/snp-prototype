@@ -1,63 +1,51 @@
 package com.github.jlgrock.snp.core.data;
 
 import static org.mockito.Mockito.*;
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
 
+import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.bson.Document;
 import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.Spy;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.github.jlgrock.snp.apis.connection.MongoDatabaseManager;
 import com.github.jlgrock.snp.apis.connection.MongoDbFactory;
-import com.github.jlgrock.snp.apis.connection.configuration.MongoDbConfiguration;
-import com.github.jlgrock.snp.apis.connection.synchronization.TransactionSynchronizationManager;
-import com.github.jlgrock.snp.core.connection.SimpleMongoDbFactory;
 import com.github.jlgrock.snp.core.converters.PatientReadConverter;
 import com.github.jlgrock.snp.core.converters.PatientWriteConverter;
 import com.github.jlgrock.snp.core.domain.Gender;
 import com.github.jlgrock.snp.core.domain.Patient;
 import com.github.jlgrock.snp.core.domain.Race;
+import com.mongodb.client.MongoCollection;
 
 public class PatientRepositoryImplTest {
 	
-	//@Mock
-	//private SimpleMongoDbFactory mdbf;
-	//@Mock
-	//private MongoDbConfiguration mongoDbConfiguration;
-	//@Mock
-	//private MongoDatabaseManager mongoDatabaseManagerIn;
-	//@Mock
-	//private TransactionSynchronizationManager synchronizationManagerIn;
-	//private PatientReadConverter prc = new PatientReadConverter();
-	//private PatientWriteConverter pwc = new PatientWriteConverter();
-	//@Spy
-	//private PatientRepositoryImpl pri;
-	//private MongoCollection mc = Mockito.mock(MongoCollection.class);
-	//private MongoDatabase mdb = Mockito.mock(MongoDatabase.class);
+	@Mock 
+	MongoDbFactory mdbf;
 	
 	@Mock
-	private PatientRepositoryImpl pri;
+	PatientReadConverter prc;
 	
-	//private List<Patient> list = new ArrayList();
+	@Mock
+	PatientWriteConverter pwc;
+	
+	@Mock
+	MongoCollection<Document> dbCollection; 
+
+	PatientRepositoryImpl mockedPRI = new PatientRepositoryImpl(mdbf, prc, pwc);
+	
+	private List<Patient> list = new ArrayList();
+	
+	
 	
 	@BeforeMethod
 	public void setUp() throws Exception {
-		
-		
-		
-		
-		
-		//mdbf = new SimpleMongoDbFactory(mongoDbConfiguration, mongoDatabaseManagerIn, synchronizationManagerIn);
-		
-		//pri = new PatientRepositoryImpl(mdbf, prc, pwc);
-		/**
+
 		Patient patient1 = new Patient();
 		patient1.setFirstName("Justin");
 		patient1.setLastName("Grant");
@@ -105,56 +93,115 @@ public class PatientRepositoryImplTest {
 		patient6.setRace(Race.CAUCASIAN);
 		patient6.setDateOfBirth(LocalDate.of(2006, 6, 6));
 		list.add(patient6);
-	
-	**/
-	
-		
-	
+
 	}
 	
 	@Test
-	public void testFindAllByLastName(){
-		Document query = new Document() {{
-            put("lastName", "Grant");
+	public void testFindAllByDateOfBirth(){
+		
+		LocalDate dateOfBirth = LocalDate.of(2001, 01, 1);
+		
+		Document query1 = new Document() {{
+            put("dateOfBirth", dateOfBirth);
         }};
-		 when(pri.executeQueryAndTransformResults(query)).thenReturn(list);
-        //doReturn(list).when(pri.executeQueryAndTransformResults(query));
-		 assertEquals("Justin", pri.findAllByLastName("Grant").get(0).getFirstName());
+        
+		when(mockedPRI.dBCollection().find(query1)).thenReturn(list);
+		when(mockedPRI.executeQueryAndTransformResults(query1)).thenReturn(list);
+		when(mockedPRI.findAllByDateOfBirth(dateOfBirth)).thenReturn(list);
+		
+		mockedPRI.findAllByDateOfBirth(dateOfBirth);
+		verify(mockedPRI).findAllByDateOfBirth(dateOfBirth);
+		
+	    assertEquals(mockedPRI.findAllByDateOfBirth(dateOfBirth), mockedPRI.executeQueryAndTransformResults(query1));
+	    assertEquals(mockedPRI.findAllByDateOfBirth(dateOfBirth), mockedPRI.dBCollection().find(query1));
+	    assertEquals("Justin", mockedPRI.findAllByDateOfBirth(dateOfBirth).get(0).getFirstName());
+	    
 	}
 	
-	
-   /* public List<Patient> findAllByLastName(String lastName) {
-        Document query = new Document() {{
+	public void testFindAllByFirstAndLastName(){
+
+		String firstName = "Shane";
+		String lastName = "Lewis";
+		
+		 Document query2 = new Document() {{
+	            put("firstName", firstName);
+	            put("lastName", lastName);
+	        }};
+        
+		when(mockedPRI.dBCollection().find(query2)).thenReturn(list);
+		when(mockedPRI.executeQueryAndTransformResults(query2)).thenReturn(list);
+		when(mockedPRI.findAllByFirstNameAndLastName(firstName, lastName)).thenReturn(list);
+		
+		mockedPRI.findAllByFirstNameAndLastName(firstName, lastName);
+		verify(mockedPRI).findAllByFirstNameAndLastName(firstName, lastName);
+		
+	    assertEquals(mockedPRI.findAllByFirstNameAndLastName(firstName, lastName), mockedPRI.executeQueryAndTransformResults(query2));
+	    assertEquals(mockedPRI.findAllByFirstNameAndLastName(firstName, lastName), mockedPRI.dBCollection().find(query2));
+	    assertEquals(Race.CAUCASIAN, mockedPRI.findAllByFirstNameAndLastName(firstName, lastName).get(5).getRace());
+		
+	}
+		
+	public void testFindAllByLastName(){
+
+		String lastName = "Bhole";
+		
+		Document query3 = new Document() {{
             put("lastName", lastName);
         }};
-        return executeQueryAndTransformResults(query);
-    }
-	
-	
-	
-	@Test
-	public void addCustomerWithDummyTest() {
-	 Customer dummy = mock(Customer.class);
-	 AddressBook addressBook = new AddressBook();
-	 addressBook.addCustomer(dummy);
-	 AssertJUnit.assertEquals(1, addressBook.getNumberOfCustomers());
+        
+		when(mockedPRI.dBCollection().find(query3)).thenReturn(list);
+		when(mockedPRI.executeQueryAndTransformResults(query3)).thenReturn(list);
+		when(mockedPRI.findAllByLastName(lastName)).thenReturn(list);
+		
+		mockedPRI.findAllByLastName(lastName);
+		verify(mockedPRI).findAllByLastName(lastName);
+		
+	    assertEquals(mockedPRI.findAllByLastName(lastName), mockedPRI.executeQueryAndTransformResults(query3));
+	    assertEquals(mockedPRI.findAllByLastName(lastName), mockedPRI.dBCollection().find(query3));
+	    assertEquals(Gender.MALE, mockedPRI.findAllByLastName(lastName).get(3).getGender());
+		
 	}
-	
-	@Test
-	public void testGetHighestPricedTrade() throws Exception {
-	  Price price1 = new Price(10); 
-	  Price price2 = new Price(15);
-	  Price price3 = new Price(25);
-	 
-	  PricingRepository pricingRepository = mock(PricingRepository.class);
-	  when(pricingRepository.getPriceForTrade(any(Trade.class)))
-	    .thenReturn(price1, price2, price3);
-	   
-	  PricingService service = new SimplePricingService(pricingRepository);
-	  Price highestPrice = service.getHighestPricedTrade(getTrades());
-	  
-	  AssertJUnit.assertEquals(price3.getAmount(), highestPrice.getAmount());
-	}*/
-	
-	
+		
+	public void testFindAllByRace(){
+
+		Race race = Race.BLACK_AFRICAN_AMERICAN;
+		
+		Document query4 = new Document() {{
+            put("race", race);
+        }};
+        
+		when(mockedPRI.dBCollection().find(query4)).thenReturn(list);
+		when(mockedPRI.executeQueryAndTransformResults(query4)).thenReturn(list);
+		when(mockedPRI.findAllByRace(race)).thenReturn(list);
+		
+		mockedPRI.findAllByRace(race);
+		verify(mockedPRI).findAllByRace(race);
+		
+	    assertEquals(mockedPRI.findAllByRace(race), mockedPRI.executeQueryAndTransformResults(query4));
+	    assertEquals(mockedPRI.findAllByRace(race), mockedPRI.dBCollection().find(query4));
+	    assertEquals("Johnson", mockedPRI.findAllByRace(race).get(2).getLastName());
+		
+	}
+		
+	public void testFindAllByGender(){
+
+		Gender gender = Gender.MALE;
+		
+	     Document query5 = new Document() {{
+	            put("gender", gender);
+	        }};
+        
+		when(mockedPRI.dBCollection().find(query5)).thenReturn(list);
+		when(mockedPRI.executeQueryAndTransformResults(query5)).thenReturn(list);
+		when(mockedPRI.findAllByGender(gender)).thenReturn(list);
+		
+		mockedPRI.findAllByGender(gender);
+		verify(mockedPRI).findAllByGender(gender);
+		
+	    assertEquals(mockedPRI.findAllByGender(gender), mockedPRI.executeQueryAndTransformResults(query5));
+	    assertEquals(mockedPRI.findAllByGender(gender), mockedPRI.dBCollection().find(query5));
+	    assertEquals("Sunny", mockedPRI.findAllByGender(gender).get(4).getFirstName());
+		
+	}
+
 }

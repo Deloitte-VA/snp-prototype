@@ -4,9 +4,12 @@ import com.github.jlgrock.snp.apis.data.MongoRepository;
 import com.github.jlgrock.snp.core.domain.Gender;
 import com.github.jlgrock.snp.core.domain.Patient;
 import com.github.jlgrock.snp.core.domain.Race;
+
 import org.jvnet.hk2.annotations.Contract;
 
 import javax.inject.Named;
+
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -37,7 +40,7 @@ public interface PatientRepository extends MongoRepository<Patient, Long> {
      * @param dateOfBirth is the birthday date
      * @return list of patients
      */
-    List<Patient> findAllByDateOfBirth(Date dateOfBirth);
+    List<Patient> findAllByDateOfBirth(LocalDate dateOfBirth);
     /**
      * 
      * @param gender is the gender
