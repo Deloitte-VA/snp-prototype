@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.github.jlgrock.snp</groupId>
+    <artifactId>snp</artifactId>
+    <version>0.3-SNAPSHOT</version>
+  </parent>
+  <groupId>com.github.jlgrock.snp</groupId>
+  <artifactId>conceptparsers</artifactId>
+  <version>0.3-SNAPSHOT</version>
+  <name>conceptparsers</name>
+  
+   <properties>
+        <project.rootdir>${project.parent.basedir}</project.rootdir>
+    </properties>
+
+    <dependencies>
+        <!-- internal dependencies -->
+    </dependencies>
+    
+    <build>
+    
+    <plugins>
+        <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>jaxb2-maven-plugin</artifactId>
+            <version>1.6</version>
+            <executions>
+                <execution>
+                    <id>xjc</id>
+                    <goals>
+                        <goal>xjc</goal>
+                    </goals>
+                </execution>
+            </executions>
+            <configuration>
+                <!-- Specify output directory. Required parameter? -->              
+                <!-- <outputDirectory>target</outputDirectory>  -->
+                <schemaDirectory>src/main/resources</schemaDirectory>
+                <!-- The package of your generated sources -->
+                <packageName>com.github.jlgrock.snp.core.domain.lego</packageName>
+            </configuration>
+        </plugin>
+    </plugins>
+</build>
+    
+    
+</project>
