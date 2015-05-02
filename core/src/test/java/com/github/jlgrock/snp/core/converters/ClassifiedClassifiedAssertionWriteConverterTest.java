@@ -2,7 +2,7 @@ package com.github.jlgrock.snp.core.converters;
 
 import com.github.jlgrock.snp.core.data.AssertionTags;
 import com.github.jlgrock.snp.core.domain.ClassifiedAssertion;
-import com.mongodb.DBObject;
+import org.bson.Document;
 import org.testng.annotations.Test;
 
 import java.time.LocalDate;
@@ -27,7 +27,7 @@ public class ClassifiedClassifiedAssertionWriteConverterTest {
         when(assertion.getDesc()).thenReturn("bla");
 
         ClassifiedAssertionWriteConverter classifiedAssertionWriteConverter = new ClassifiedAssertionWriteConverter();
-        DBObject dbObj = classifiedAssertionWriteConverter.convert(assertion);
+        Document dbObj = classifiedAssertionWriteConverter.convert(assertion);
 
         assertEquals((Long) 123l, dbObj.get(AssertionTags.ID_TAG));
         assertEquals("bla", dbObj.get(AssertionTags.DESCRIPTION_TAG));

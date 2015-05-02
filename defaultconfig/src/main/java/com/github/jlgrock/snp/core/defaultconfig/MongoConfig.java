@@ -7,7 +7,6 @@ import org.jvnet.hk2.annotations.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.net.UnknownHostException;
 import java.util.List;
 import java.util.Optional;
 
@@ -54,7 +53,7 @@ public class MongoConfig implements MongoDbConfiguration {
         }
         try {
             hostSet = new ServerAddress( server, port );
-        } catch (UnknownHostException e) {
+        } catch (Exception e) {
             LOGGER.error("Unable to identify host=" + server, e);
             hostSet = null;
         }

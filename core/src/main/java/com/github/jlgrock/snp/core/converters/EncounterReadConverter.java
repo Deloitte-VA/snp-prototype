@@ -4,7 +4,6 @@ import com.github.jlgrock.snp.apis.converters.Converter;
 import com.github.jlgrock.snp.core.data.EncounterTags;
 import com.github.jlgrock.snp.core.domain.Encounter;
 import com.github.jlgrock.snp.core.domain.Observation;
-import com.mongodb.DBObject;
 import org.bson.Document;
 import org.jvnet.hk2.annotations.Service;
 
@@ -41,7 +40,7 @@ public class EncounterReadConverter extends AbstractReadConverter implements Con
         encounter.setType(parseInteger(source, EncounterTags.TYPE_TAG));
         encounter.setReasonForVisit(parseString(source, EncounterTags.REASON_FOR_VISIT_TAG));
 
-        List<DBObject> observationsObjs = (List<DBObject>) source.get(EncounterTags.OBSERVATIONS_TAG);
+        List<Document> observationsObjs = (List<Document>) source.get(EncounterTags.OBSERVATIONS_TAG);
         List<Observation> observations = new ArrayList<>();
         if (observationsObjs != null) {
             observations = observationsObjs.stream().map(

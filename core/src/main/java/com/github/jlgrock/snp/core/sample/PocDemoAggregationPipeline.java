@@ -3,17 +3,16 @@ package com.github.jlgrock.snp.core.sample;
 import com.github.jlgrock.snp.apis.connection.MongoDbFactory;
 import com.github.jlgrock.snp.apis.exceptions.DataAccessException;
 import com.github.jlgrock.snp.apis.sample.SampleQuery;
-import com.mongodb.AggregationOptions;
-import com.mongodb.BasicDBObject;
-import com.mongodb.Cursor;
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
-import com.mongodb.DBObject;
+import com.mongodb.client.AggregateIterable;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import org.bson.Document;
 import org.jvnet.hk2.annotations.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -40,7 +39,7 @@ public class PocDemoAggregationPipeline implements SampleQuery {
     @Override
     public void query() throws DataAccessException {
         // get handle to database
-        DB db = mongoDbFactory.db();
+        MongoDatabase db = mongoDbFactory.db();
 
         //The following query (Query 1) from Javascript would be tried in java
         /*
@@ -68,48 +67,42 @@ public class PocDemoAggregationPipeline implements SampleQuery {
          */
         
         //First, get the "encounters" collection from then database
-        DBCollection testCollection = db.getCollection("encounters");
+        MongoCollection<Document> testCollection = db.getCollection("encounters");
         
         //Now try to construct the query in Java similar to the Javascript query
         //Note: For the observation.name value the sequence of digits is cast to Long as default Integer
         //can't hold the value as Integer.MAX_VALUE is 2147483647
         
         // create our pipeline operations, first with the $match
-        DBObject match = new BasicDBObject("$match", new BasicDBObject("observations.name", (Long) 5695930304L)
+        Document match = new Document("$match", new Document("observations.name", (Long) 5695930304L)
         .append("observations.name_type", 1)
-        .append("observations.value", new BasicDBObject("$gt", 140)) );
+        .append("observations.value", new Document("$gt", 140)) );
         
         // Now the $group operation based on patient_id
-        DBObject groupFields = new BasicDBObject( "_id", "$patient_id");
-        groupFields.put("patientsum", new BasicDBObject( "$sum", 1));
-        DBObject group = new BasicDBObject("$group", groupFields);
+        Document groupFields = new Document( "_id", "$patient_id");
+        groupFields.put("patientsum", new Document( "$sum", 1));
+        Document group = new Document("$group", groupFields);
         
         // Now the second (or final) $group operation based on the 1st column to get count
-        DBObject finalGroupFields = new BasicDBObject( "_id", 1);  //or could you also try null instead of 1?
-        finalGroupFields.put("sum", new BasicDBObject( "$sum", 1));
-        DBObject finalGroup = new BasicDBObject("$group", finalGroupFields);
+        Document finalGroupFields = new Document( "_id", 1);  //or could you also try null instead of 1?
+        finalGroupFields.put("sum", new Document( "$sum", 1));
+        Document finalGroup = new Document("$group", finalGroupFields);
         
         // run aggregation
-        List<DBObject> pipeline = Arrays.asList(match, group, finalGroup);
-        
-        //Cursor option approach
-        AggregationOptions aggregationOptions = AggregationOptions.builder()
-                .batchSize(100)
-                .outputMode(AggregationOptions.OutputMode.CURSOR)
-                .allowDiskUse(true)
-                .build();
+        List<Document> pipeline = Arrays.asList(match, group, finalGroup);
 
-        Cursor cursor = testCollection.aggregate(pipeline, aggregationOptions);
-        
+        AggregateIterable<Document> cursor = testCollection.aggregate(pipeline);
+        cursor.batchSize(100);
+        cursor.allowDiskUse(true);
+
+        List<Document> documents = new ArrayList<>();
+        cursor.into(documents);
+
         //There would be only one row in the result, based on the final grouping
-        if (cursor.hasNext()) {
-            DBObject dbObject = cursor.next();
-            LOGGER.debug("Number of patients= " + dbObject.get("sum") );
+        for (Document document : documents) {
+            LOGGER.debug("Number of patients= " + document.get("sum"));
         }
         
-        //Close cursor
-        cursor.close();
-
         mongoDbFactory.destroy();
     }
 

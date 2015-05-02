@@ -4,13 +4,16 @@ import com.github.jlgrock.snp.apis.connection.MongoDbFactory;
 import com.github.jlgrock.snp.apis.exceptions.DataAccessException;
 import com.github.jlgrock.snp.apis.sample.SampleQuery;
 import com.mongodb.BasicDBObject;
-import com.mongodb.DBCollection;
-import com.mongodb.DBCursor;
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoCollection;
+import org.bson.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 
  * Simple example of how to do nested AND and OR statements using the MongoDB driver library.
@@ -33,7 +36,7 @@ public class AndOr implements SampleQuery {
     @Override
     public void query() throws DataAccessException {
         // First, get the "inventory" collection from then database
-        DBCollection testCollection = mongoDbFactory.db().getCollection("inventory");
+        MongoCollection<Document> testCollection = mongoDbFactory.db().getCollection("inventory");
 
         //
         //Example for the following code:
@@ -60,16 +63,14 @@ public class AndOr implements SampleQuery {
                     }}));
                 }});
 
-        DBCursor cursor = testCollection.find(query);
+        FindIterable<Document> cursor = testCollection.find(query);
+        List<Document> documents = new ArrayList<>();
+        cursor.into(documents);
 
-        LOGGER.debug("Filtered data count (length): " + cursor.length());
+        LOGGER.debug("Filtered data count (length): " + documents.size());
         cursor = testCollection.find(query); //Get the cursor value afresh before iterating over the collection
-        try {
-            while (cursor.hasNext()) {
-                LOGGER.info(cursor.next().toString()); //Note that the output may not be formatted cleanly
-            }
-        } finally {
-            cursor.close();
+        for (Document document : documents) {
+                LOGGER.info(document.toJson());
         }
 
         // release resources

@@ -4,8 +4,7 @@ import com.github.jlgrock.snp.core.data.EncounterTags;
 import com.github.jlgrock.snp.core.domain.Encounter;
 import com.github.jlgrock.snp.core.domain.Observation;
 import com.mongodb.BasicDBList;
-import com.mongodb.BasicDBObject;
-import com.mongodb.DBObject;
+import org.bson.Document;
 import org.testng.annotations.Test;
 
 import java.time.LocalDate;
@@ -14,7 +13,6 @@ import java.util.List;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import static org.testng.Assert.assertEquals;
 
 public class EncounterReadConverterTest {
     /**
@@ -32,8 +30,8 @@ public class EncounterReadConverterTest {
             add(observation1);
             add(observation2);
         }};
-        DBObject observation1Obj = mock(BasicDBObject.class);
-        DBObject observation2Obj = mock(BasicDBObject.class);
+        Document observation1Obj = mock(Document.class);
+        Document observation2Obj = mock(Document.class);
         BasicDBList observationObjs = new BasicDBList() {{
             add(observation1Obj);
             add(observation1Obj);
@@ -41,7 +39,7 @@ public class EncounterReadConverterTest {
         }};
         ObservationReadConverter observationReadConverter = mock(ObservationReadConverter.class);
 
-        DBObject dbObject = new BasicDBObject() {{
+        Document dbObject = new Document() {{
             put(EncounterTags.ID_TAG, 123l);
             put(EncounterTags.PATIENT_TAG, 456l);
             put(EncounterTags.DATE_TAG, date.toEpochDay());

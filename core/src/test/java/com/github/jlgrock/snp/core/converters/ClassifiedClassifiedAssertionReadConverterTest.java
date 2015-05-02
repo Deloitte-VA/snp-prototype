@@ -2,7 +2,7 @@ package com.github.jlgrock.snp.core.converters;
 
 import com.github.jlgrock.snp.core.data.AssertionTags;
 import com.github.jlgrock.snp.core.domain.ClassifiedAssertion;
-import com.mongodb.DBObject;
+import org.bson.Document;
 import org.testng.annotations.Test;
 
 import static org.mockito.Mockito.mock;
@@ -19,7 +19,7 @@ public class ClassifiedClassifiedAssertionReadConverterTest {
      */
     @Test
     public void testConvert() {
-        DBObject dbObj = mock(DBObject.class);
+        Document dbObj = mock(Document.class);
         when(dbObj.get(AssertionTags.ID_TAG)).thenReturn((Long) 123l);
         when(dbObj.get(AssertionTags.DESCRIPTION_TAG)).thenReturn("bla");
 
