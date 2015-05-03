@@ -10,7 +10,9 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -46,6 +48,12 @@ public class PatientRepositoryImplTest {
     List<Document> documents = new ArrayList<>(6);
 
     IterableMock iterableMock;
+
+    @BeforeClass
+    public void setUpTests() throws Exception {
+        // Required to make this work on TestNG
+        MockitoAnnotations.initMocks(this);
+    }
 
     @BeforeMethod
     public void setUp() throws Exception {
@@ -101,16 +109,17 @@ public class PatientRepositoryImplTest {
         patient.setDateOfBirth(LocalDate.of(2006, 6, 6));
         patients.add(patient);
 
-        // create list of patient Documents
-        for (Patient p : patients) {
-            documents.add(patientRepositoryImpl.convertToDBObject(p));
-        }
         iterableMock = new IterableMock(documents);
 
         // make mocks return the things that we access
         when(mongoDbFactory.db()).thenReturn(mongoDatabase);
         patientRepositoryImpl = new PatientRepositoryImpl(mongoDbFactory, patientReadConverter, patientWriteConverter);
         when(mongoDatabase.getCollection(patientRepositoryImpl.getCollectionName())).thenReturn(dbCollection);
+
+        // create list of patient Documents
+        for (Patient p : patients) {
+            documents.add(patientRepositoryImpl.convertToDBObject(p));
+        }
 
     }
 
