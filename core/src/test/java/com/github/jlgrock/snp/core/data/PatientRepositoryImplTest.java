@@ -8,7 +8,6 @@ import com.github.jlgrock.snp.core.domain.Patient;
 import com.github.jlgrock.snp.core.domain.Race;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-
 import org.bson.Document;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -22,7 +21,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 
@@ -184,7 +182,7 @@ public class PatientRepositoryImplTest {
         }};
 
        
-        when(dbCollection.find(Mockito.any())).thenReturn(iterableMock);
+        when(dbCollection.find(Mockito.<Document>any())).thenReturn(iterableMock);
 
 //        List<Patient> queryResults = patientRepositoryImpl.findAllByDateOfBirth(dateOfBirth);
 //        
