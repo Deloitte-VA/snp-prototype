@@ -11,6 +11,7 @@ import org.bson.conversions.Bson;
 
 import java.util.Collection;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Consumer;
 
 /**
  *
@@ -101,6 +102,11 @@ public class IterableMock implements FindIterable<Document> {
         @Override
         public void forEach(Block<? super Document> block) {
             c.forEach(block::apply);
+        }
+
+        @Override
+        public void forEach(Consumer<? super Document> consumer) {
+            c.forEach(consumer::accept);
         }
 
         @Override
