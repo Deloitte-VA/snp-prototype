@@ -9,12 +9,12 @@ import org.testng.annotations.Test;
 import com.github.jlgrock.snp.core.model.xml.fihr.Bundle;
 
 
-public class FihrXmlParserTest extends AbstractXmlParserTest {
+public class FhirXmlParserTest extends AbstractXmlParserTest {
 		
 	@Test
 	public void testParserConditionBundle() throws Exception {
 		InputStream xmlInput = getClass().getClassLoader().getResourceAsStream("ConditionBundle.xml");
-		Bundle bundle = new FihrXmlParser().parseDocument(xmlInput);
+		Bundle bundle = new FhirXmlParser().parseDocument(xmlInput);
 		
 		String expected = readFile("ConditionBundle.xml");
 		String formatted = bundle.toXml();

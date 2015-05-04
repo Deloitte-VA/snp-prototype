@@ -28,7 +28,7 @@ import com.github.jlgrock.snp.core.model.xml.fihr.Type;
  * Parses FIHR XML document for retrieving Post Coordinated Expressions (PCEs)
  *
  */
-public class FihrXmlParser implements XmlParser<Bundle> {
+public class FhirXmlParser implements XmlParser<Bundle> {
 	private Bundle bundle;
 	
 	@Override
