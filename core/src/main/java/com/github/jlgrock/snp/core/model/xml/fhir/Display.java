@@ -3,7 +3,7 @@ package com.github.jlgrock.snp.core.model.xml.fhir;
 import com.google.common.base.MoreObjects;
 
 /**
- * The Display class represents the display element in the FIHR XML document.
+ * The Display class represents the display element in the FHIR XML document.
  *
  */
 public class Display {

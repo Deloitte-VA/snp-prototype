@@ -3,7 +3,7 @@ package com.github.jlgrock.snp.core.model.xml.fhir;
 import com.google.common.base.MoreObjects;
 
 /**
- * The Code class represents the code element in the FIHR XML document.
+ * The Code class represents the code element in the FHIR XML document.
  *
  */
 public class Code {

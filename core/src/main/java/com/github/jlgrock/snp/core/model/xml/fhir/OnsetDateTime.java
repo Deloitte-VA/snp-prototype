@@ -3,7 +3,7 @@ package com.github.jlgrock.snp.core.model.xml.fhir;
 import com.google.common.base.MoreObjects;
 
 /**
- * The OnsetDateTime class represents the onsetDateTime element in the FIHR XML document.
+ * The OnsetDateTime class represents the onsetDateTime element in the FHIR XML document.
  *
  */
 public class OnsetDateTime {

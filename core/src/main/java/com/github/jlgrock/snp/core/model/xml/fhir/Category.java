@@ -3,7 +3,7 @@ package com.github.jlgrock.snp.core.model.xml.fhir;
 import com.google.common.base.MoreObjects;
 
 /**
- * The Category class represents the category element in the FIHR XML document.
+ * The Category class represents the category element in the FHIR XML document.
  *
  */
 public class Category {

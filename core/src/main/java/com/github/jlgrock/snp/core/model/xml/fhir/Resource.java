@@ -3,7 +3,7 @@ package com.github.jlgrock.snp.core.model.xml.fhir;
 import com.google.common.base.MoreObjects;
 
 /**
- * The Resource class represents the resource element in the FIHR XML document.
+ * The Resource class represents the resource element in the FHIR XML document.
  *
  */
 public class Resource {

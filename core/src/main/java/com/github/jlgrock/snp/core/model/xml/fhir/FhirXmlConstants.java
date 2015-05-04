@@ -2,14 +2,14 @@ package com.github.jlgrock.snp.core.model.xml.fhir;
 
 /**
  * This interface declares the constants used parsing
- * FIHR xml documents
+ * FHIR xml documents
  */
-public final class FihrXmlConstants {
+public final class FhirXmlConstants {
 
 	/**
      * private constructor for utility class
      */
-	private FihrXmlConstants() {}
+	private FhirXmlConstants() {}
 	
 	public static final String BUNDLE = "Bundle";
 	public static final String ID = "id";

@@ -3,7 +3,7 @@ package com.github.jlgrock.snp.core.model.xml.fhir;
 import com.google.common.base.MoreObjects;
 
 /**
- * The Condition class represents the Condition element in the FIHR XML document.
+ * The Condition class represents the Condition element in the FHIR XML document.
  *
  */
 public class Condition {

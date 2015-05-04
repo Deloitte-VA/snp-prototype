@@ -3,7 +3,7 @@ package com.github.jlgrock.snp.core.model.xml.fhir;
 import com.google.common.base.MoreObjects;
 
 /**
- * The Status class represents the status element in the FIHR XML document.
+ * The Status class represents the status element in the FHIR XML document.
  *
  */
 public class Status {
