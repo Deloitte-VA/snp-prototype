@@ -6,7 +6,7 @@ import java.io.InputStream;
 
 import org.testng.annotations.Test;
 
-import com.github.jlgrock.snp.core.model.xml.fihr.Bundle;
+import com.github.jlgrock.snp.core.model.xml.fhir.Bundle;
 
 
 public class FhirXmlParserTest extends AbstractXmlParserTest {

@@ -12,8 +12,8 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
-import com.github.jlgrock.snp.core.model.xml.fihr.Bundle;
-import com.github.jlgrock.snp.core.model.xml.fihr.Condition;
+import com.github.jlgrock.snp.core.model.xml.fhir.Bundle;
+import com.github.jlgrock.snp.core.model.xml.fhir.Condition;
 import com.github.jlgrock.snp.core.parser.AbstractXmlParserTest;
 import com.github.jlgrock.snp.core.parser.FhirXmlParser;
 

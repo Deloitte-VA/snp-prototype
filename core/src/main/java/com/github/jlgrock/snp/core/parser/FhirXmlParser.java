@@ -8,22 +8,22 @@ import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 
-import com.github.jlgrock.snp.core.model.xml.fihr.Bundle;
-import com.github.jlgrock.snp.core.model.xml.fihr.Category;
-import com.github.jlgrock.snp.core.model.xml.fihr.Code;
-import com.github.jlgrock.snp.core.model.xml.fihr.Coding;
-import com.github.jlgrock.snp.core.model.xml.fihr.Condition;
-import com.github.jlgrock.snp.core.model.xml.fihr.Display;
-import com.github.jlgrock.snp.core.model.xml.fihr.Entry;
-import com.github.jlgrock.snp.core.model.xml.fihr.FihrXmlConstants;
-import com.github.jlgrock.snp.core.model.xml.fihr.Id;
-import com.github.jlgrock.snp.core.model.xml.fihr.Location;
-import com.github.jlgrock.snp.core.model.xml.fihr.Onset;
-import com.github.jlgrock.snp.core.model.xml.fihr.OnsetDateTime;
-import com.github.jlgrock.snp.core.model.xml.fihr.Resource;
-import com.github.jlgrock.snp.core.model.xml.fihr.Status;
-import com.github.jlgrock.snp.core.model.xml.fihr.System;
-import com.github.jlgrock.snp.core.model.xml.fihr.Type;
+import com.github.jlgrock.snp.core.model.xml.fhir.Bundle;
+import com.github.jlgrock.snp.core.model.xml.fhir.Category;
+import com.github.jlgrock.snp.core.model.xml.fhir.Code;
+import com.github.jlgrock.snp.core.model.xml.fhir.Coding;
+import com.github.jlgrock.snp.core.model.xml.fhir.Condition;
+import com.github.jlgrock.snp.core.model.xml.fhir.Display;
+import com.github.jlgrock.snp.core.model.xml.fhir.Entry;
+import com.github.jlgrock.snp.core.model.xml.fhir.FihrXmlConstants;
+import com.github.jlgrock.snp.core.model.xml.fhir.Id;
+import com.github.jlgrock.snp.core.model.xml.fhir.Location;
+import com.github.jlgrock.snp.core.model.xml.fhir.Onset;
+import com.github.jlgrock.snp.core.model.xml.fhir.OnsetDateTime;
+import com.github.jlgrock.snp.core.model.xml.fhir.Resource;
+import com.github.jlgrock.snp.core.model.xml.fhir.Status;
+import com.github.jlgrock.snp.core.model.xml.fhir.System;
+import com.github.jlgrock.snp.core.model.xml.fhir.Type;
 /**
  * Parses FIHR XML document for retrieving Post Coordinated Expressions (PCEs)
  *

@@ -6,7 +6,7 @@ import gov.vha.isaac.logic.node.RootNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.github.jlgrock.snp.core.model.xml.fihr.Condition;
+import com.github.jlgrock.snp.core.model.xml.fhir.Condition;
 
 /**
  * A Logic Graph Builder specific to FHIR documents.

@@ -1,4 +1,4 @@
 /**
  *
  */
-package com.github.jlgrock.snp.core.model.xml.fihr;
+package com.github.jlgrock.snp.core.model.xml.fhir;
