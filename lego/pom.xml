@@ -7,10 +7,8 @@
     <artifactId>snp</artifactId>
     <version>0.3-SNAPSHOT</version>
   </parent>
-  <groupId>com.github.jlgrock.snp</groupId>
-  <artifactId>legoschema</artifactId>
-  <version>0.3-SNAPSHOT</version>
-  <name>legoschema</name>
+  <artifactId>lego</artifactId>
+  <name>lego model</name>
   
    <properties>
         <project.rootdir>${project.parent.basedir}</project.rootdir>
@@ -26,7 +24,7 @@
         <plugin>
             <groupId>org.codehaus.mojo</groupId>
             <artifactId>jaxb2-maven-plugin</artifactId>
-            <version>1.6</version>
+            <version>${jaxb.version}</version>
             <executions>
                 <execution>
                     <id>xjc</id>
@@ -36,9 +34,13 @@
                 </execution>
             </executions>
             <configuration>
-                <!-- Specify output directory. Required parameter? -->              
-                <outputDirectory>target</outputDirectory> 
-                <schemaDirectory>src/main/resources</schemaDirectory>
+                <schemaFiles>
+                    <schemaFile>src/main/resources/fhir-all.xsd</schemaFile>
+                </schemaFiles>
+
+                <!-- Specify output directory. Required parameter? -->
+                <outputDirectory>target</outputDirectory>
+
                 <!-- The package of your generated sources -->
                 <packageName>com.github.jlgrock.snp.core.domain.lego</packageName>
             </configuration>
