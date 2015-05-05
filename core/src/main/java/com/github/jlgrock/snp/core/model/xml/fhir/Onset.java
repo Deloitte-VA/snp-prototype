@@ -1,9 +1,9 @@
-package com.github.jlgrock.snp.core.model.xml.fihr;
+package com.github.jlgrock.snp.core.model.xml.fhir;
 
 import com.google.common.base.MoreObjects;
 
 /**
- * The Onset class represents the onset element in the FIHR XML document.
+ * The Onset class represents the onset element in the FHIR XML document.
  *
  */
 public class Onset {
