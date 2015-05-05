@@ -13,8 +13,9 @@ import com.github.jlgrock.snp.core.model.xml.fhir.Condition;
  */
 public class FhirLogicGraphBuilder extends AbstractLogicGraphBuilder {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(FhirLogicGraphBuilderTest.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(FhirLogicGraphBuilder.class);
 	private final Condition condition;
+	private static final String IS_ABOUT_SCTID = "53";
 	
 	@Override
 	public void create() {
@@ -25,10 +26,9 @@ public class FhirLogicGraphBuilder extends AbstractLogicGraphBuilder {
 		String sourceSctId = condition.getLocation().getCode().getCoding().getCode().getValue();
 		//Get NID from UUID
     	int sourceConceptNid = getNidFromSNOMED(sourceSctId);
-    	String isAboutSctId = "53";// always "IS ABOUT"
 		String destinationSctId = condition.getCode().getCoding().getCode().getValue();
 		//Get NID from UUID
-		int typeConceptNid = getNidFromSNOMED(isAboutSctId);
+		int typeConceptNid = getNidFromSNOMED(IS_ABOUT_SCTID);
 		int destinationNid = getNidFromSNOMED(destinationSctId);
 		
 		//Create AndNode
@@ -39,7 +39,7 @@ public class FhirLogicGraphBuilder extends AbstractLogicGraphBuilder {
 
 	/**
      * Constructor for LogicGraph using input parameters from FHIR XML condition
-     * @param expressionIn the complex expression to parse
+     * @param conditionIn the complex expression to parse
      */
     public FhirLogicGraphBuilder(final Condition conditionIn) {
     	condition = conditionIn;
