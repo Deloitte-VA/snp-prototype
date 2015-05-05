@@ -1,12 +1,12 @@
-package com.github.jlgrock.snp.core.model.xml.fihr;
+package com.github.jlgrock.snp.core.model.xml.fhir;
 
 import com.google.common.base.MoreObjects;
 
 /**
- * The Location class represents the location element in the FIHR XML document.
+ * The Category class represents the category element in the FHIR XML document.
  *
  */
-public class Location {
+public class Category {
 	private Code code;
 
 	public Code getCode() {

@@ -25,7 +25,7 @@ import com.github.jlgrock.snp.core.model.xml.lego.Relation;
 /**
  * A Logic Graph Builder specific to Lego documents.  This should only be used to
  */
-public class LegoLogicGraphBuilder extends LogicGraphBuilder {
+public class LegoLogicGraphBuilder extends AbstractLogicGraphBuilder {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(LegoLogicGraphBuilder.class);
     private final Expression expression;
@@ -74,38 +74,6 @@ public class LegoLogicGraphBuilder extends LogicGraphBuilder {
         AndNode andNode = And();
         andNode.addChildren(Concept(sourceConceptNid), SomeRole(typeConceptNid, Concept(destinationNid)));
         return SufficientSet(andNode);
-    }
-        
-    public int getNidFromSNOMED(String sctid) {
-    	int nid = 0;
-    	try {
-    		TerminologyStoreDI termStore = LookupService.getService(TerminologyStoreDI.class);
-    		TerminologySnapshotDI termSnapshot = termStore.getSnapshot(ViewCoordinates.getDevelopmentInferredLatest());  	    
-    		UUID uuid = UuidT3Generator.fromSNOMED(Long.parseLong(sctid));
-
-    		//Get NID from UUID
-    		nid = termSnapshot.getNidForUuids(uuid);  
-    	} catch (IOException ex) {
-    		LOGGER.error("Fatal error occured", ex);
-    	}
-    	return nid;
-    }
-    
-    public static void startExpressionService() {
-    	if(LookupService.getRunLevelController().getCurrentRunLevel() != 2) {
-			System.setProperty(Constants.CHRONICLE_COLLECTIONS_ROOT_LOCATION_PROPERTY, "target/data/object-chronicles");
-    		System.setProperty(Constants.SEARCH_ROOT_LOCATION_PROPERTY, "target/data/search");
-
-    		LookupService.getRunLevelController().proceedTo(2);
-    		LOGGER.info("System up...");	
-		} else {
-			LOGGER.info("System already up and running!");
-		}
-    }
-    
-    public static void stopExpressionService() {
-    	LookupService.getRunLevelController().proceedTo(-1);
-	    LOGGER.info("System down...");
     }
     
     /**

@@ -1,4 +1,4 @@
-package com.github.jlgrock.snp.core.model.xml.fihr;
+package com.github.jlgrock.snp.core.model.xml.fhir;
 
 import java.io.StringWriter;
 import java.util.ArrayList;
@@ -10,7 +10,7 @@ import javax.xml.stream.XMLStreamWriter;
 
 import com.google.common.base.MoreObjects;
 /**
- * Represents the content of FIHR XML document
+ * Represents the content of FHIR XML document
  *
  */
 public class Bundle {
@@ -63,14 +63,14 @@ public class Bundle {
 			XMLOutputFactory outputFactory = XMLOutputFactory.newFactory();
 			xmlStreamWriter = outputFactory.createXMLStreamWriter(stringWriter);			
 			//start Bundle element
-			xmlStreamWriter.writeStartElement(FihrXmlConstants.BUNDLE);
+			xmlStreamWriter.writeStartElement(FhirXmlConstants.BUNDLE);
 			xmlStreamWriter.writeNamespace("", "http://hl7.org/fhir");
 			//start/end id element
-			xmlStreamWriter.writeEmptyElement(FihrXmlConstants.ID);
-            xmlStreamWriter.writeAttribute(FihrXmlConstants.VALUE, id.getValue());
+			xmlStreamWriter.writeEmptyElement(FhirXmlConstants.ID);
+            xmlStreamWriter.writeAttribute(FhirXmlConstants.VALUE, id.getValue());
             //start/end type element
-			xmlStreamWriter.writeEmptyElement(FihrXmlConstants.TYPE);
-            xmlStreamWriter.writeAttribute(FihrXmlConstants.VALUE, type.getValue());	
+			xmlStreamWriter.writeEmptyElement(FhirXmlConstants.TYPE);
+            xmlStreamWriter.writeAttribute(FhirXmlConstants.VALUE, type.getValue());	
 			
 			writeEntryElem(xmlStreamWriter);
 			
@@ -101,7 +101,7 @@ public class Bundle {
 	public void writeEntryElem(final XMLStreamWriter xmlStreamWriter) throws XMLStreamException {
 		for(Entry entry : entries) {
 			//start entry element
-			xmlStreamWriter.writeStartElement(FihrXmlConstants.ENTRY);
+			xmlStreamWriter.writeStartElement(FhirXmlConstants.ENTRY);
 			
 			writeResourceElem(entry.getResource(), xmlStreamWriter);
 			
@@ -118,7 +118,7 @@ public class Bundle {
 	 */
 	public void writeResourceElem(final Resource resource, final XMLStreamWriter xmlStreamWriter) throws XMLStreamException {
 		//start resource element
-		xmlStreamWriter.writeStartElement(FihrXmlConstants.RESOURCE);
+		xmlStreamWriter.writeStartElement(FhirXmlConstants.RESOURCE);
 		
 		writeConditionElem(resource.getCondition(), xmlStreamWriter);
 		
@@ -134,30 +134,30 @@ public class Bundle {
 	 */
 	public void writeConditionElem(final Condition condition, final XMLStreamWriter xmlStreamWriter) throws XMLStreamException {
 		//start Condition element
-		xmlStreamWriter.writeStartElement(FihrXmlConstants.CONDITION);
+		xmlStreamWriter.writeStartElement(FhirXmlConstants.CONDITION);
 		//start subject element
-		xmlStreamWriter.writeStartElement(FihrXmlConstants.SUBJECT);
+		xmlStreamWriter.writeStartElement(FhirXmlConstants.SUBJECT);
 		xmlStreamWriter.writeCharacters(condition.getSubject());
 		//end subject element
 		xmlStreamWriter.writeEndElement();
 		//start encounter element
 		if(condition.getEncounter().trim().isEmpty()) {
 			//start/end encounter element
-			xmlStreamWriter.writeEmptyElement(FihrXmlConstants.ENCOUNTER);
+			xmlStreamWriter.writeEmptyElement(FhirXmlConstants.ENCOUNTER);
 		} else {
-			xmlStreamWriter.writeStartElement(FihrXmlConstants.ENCOUNTER);
+			xmlStreamWriter.writeStartElement(FhirXmlConstants.ENCOUNTER);
 			xmlStreamWriter.writeCharacters(condition.getEncounter());
 			//end encounter element
 			xmlStreamWriter.writeEndElement();
 		}
 		
 		//start asserter element
-		xmlStreamWriter.writeStartElement(FihrXmlConstants.ASSERTER);
+		xmlStreamWriter.writeStartElement(FhirXmlConstants.ASSERTER);
 		xmlStreamWriter.writeCharacters(condition.getAsserter());
 		//end asserter element
 		xmlStreamWriter.writeEndElement();
 		//start dateAsserted element
-		xmlStreamWriter.writeStartElement(FihrXmlConstants.DATE_ASSERTED);
+		xmlStreamWriter.writeStartElement(FhirXmlConstants.DATE_ASSERTED);
 		xmlStreamWriter.writeCharacters(condition.getDateAsserted());
 		//end dateAsserted element
 		xmlStreamWriter.writeEndElement();
@@ -167,15 +167,15 @@ public class Bundle {
 		writeCategoryElem(condition.getCategory(), xmlStreamWriter);
 		
 		//start/end status element
-		xmlStreamWriter.writeEmptyElement(FihrXmlConstants.STATUS);
-		xmlStreamWriter.writeAttribute(FihrXmlConstants.VALUE, condition.getStatus().getValue());
+		xmlStreamWriter.writeEmptyElement(FhirXmlConstants.STATUS);
+		xmlStreamWriter.writeAttribute(FhirXmlConstants.VALUE, condition.getStatus().getValue());
 		
 		writeOnsetElem(condition.getOnset(), xmlStreamWriter);
 		
 		writeLocationElem(condition.getLocation(), xmlStreamWriter);
 		
 		//start notes element
-		xmlStreamWriter.writeStartElement(FihrXmlConstants.NOTES);
+		xmlStreamWriter.writeStartElement(FhirXmlConstants.NOTES);
 		xmlStreamWriter.writeCharacters(condition.getNotes());
 		//end notes element
 		xmlStreamWriter.writeEndElement();		
@@ -191,18 +191,18 @@ public class Bundle {
 	 */
 	public void writeCodeElem(final Code code, final XMLStreamWriter xmlStreamWriter) throws XMLStreamException {
 		//start code element
-		xmlStreamWriter.writeStartElement(FihrXmlConstants.CODE);
+		xmlStreamWriter.writeStartElement(FhirXmlConstants.CODE);
 		//start coding element
-		xmlStreamWriter.writeStartElement(FihrXmlConstants.CODING);
+		xmlStreamWriter.writeStartElement(FhirXmlConstants.CODING);
 		//start/end system element
-		xmlStreamWriter.writeEmptyElement(FihrXmlConstants.SYSTEM);
-        xmlStreamWriter.writeAttribute(FihrXmlConstants.VALUE, code.getCoding().getSystem().getValue());
+		xmlStreamWriter.writeEmptyElement(FhirXmlConstants.SYSTEM);
+        xmlStreamWriter.writeAttribute(FhirXmlConstants.VALUE, code.getCoding().getSystem().getValue());
         //start/end code element
-      	xmlStreamWriter.writeEmptyElement(FihrXmlConstants.CODE);
-        xmlStreamWriter.writeAttribute(FihrXmlConstants.VALUE, code.getCoding().getCode().getValue());
+      	xmlStreamWriter.writeEmptyElement(FhirXmlConstants.CODE);
+        xmlStreamWriter.writeAttribute(FhirXmlConstants.VALUE, code.getCoding().getCode().getValue());
         //start/end display element
-      	xmlStreamWriter.writeEmptyElement(FihrXmlConstants.DISPLAY);
-        xmlStreamWriter.writeAttribute(FihrXmlConstants.VALUE, code.getCoding().getDisplay().getValue());
+      	xmlStreamWriter.writeEmptyElement(FhirXmlConstants.DISPLAY);
+        xmlStreamWriter.writeAttribute(FhirXmlConstants.VALUE, code.getCoding().getDisplay().getValue());
 		//end coding element
 		xmlStreamWriter.writeEndElement();
 		//end code element
@@ -217,7 +217,7 @@ public class Bundle {
 	 */
 	public void writeCategoryElem(final Category category, final XMLStreamWriter xmlStreamWriter) throws XMLStreamException {
 		//start category element
-		xmlStreamWriter.writeStartElement(FihrXmlConstants.CATEGORY);
+		xmlStreamWriter.writeStartElement(FhirXmlConstants.CATEGORY);
 		
 		writeCodeElem(category.getCode(), xmlStreamWriter);
 		
@@ -233,10 +233,10 @@ public class Bundle {
 	 */
 	public void writeOnsetElem(final Onset onset, final XMLStreamWriter xmlStreamWriter) throws XMLStreamException {
 		//start onset element
-		xmlStreamWriter.writeStartElement(FihrXmlConstants.ONSET);
+		xmlStreamWriter.writeStartElement(FhirXmlConstants.ONSET);
 		//start/end onsetDateTime element
-      	xmlStreamWriter.writeEmptyElement(FihrXmlConstants.ONSET_DATE_TIME);
-        xmlStreamWriter.writeAttribute(FihrXmlConstants.VALUE, onset.getOnsetDateTime().getValue());
+      	xmlStreamWriter.writeEmptyElement(FhirXmlConstants.ONSET_DATE_TIME);
+        xmlStreamWriter.writeAttribute(FhirXmlConstants.VALUE, onset.getOnsetDateTime().getValue());
 		//end onset element
 		xmlStreamWriter.writeEndElement();
 	}
@@ -249,7 +249,7 @@ public class Bundle {
 	 */
 	public void writeLocationElem(final Location location, final XMLStreamWriter xmlStreamWriter) throws XMLStreamException {
 		//start location element
-		xmlStreamWriter.writeStartElement(FihrXmlConstants.LOCATION);
+		xmlStreamWriter.writeStartElement(FhirXmlConstants.LOCATION);
 		
 		writeCodeElem(location.getCode(), xmlStreamWriter);
 		

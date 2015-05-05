@@ -1,12 +1,12 @@
-package com.github.jlgrock.snp.core.model.xml.fihr;
+package com.github.jlgrock.snp.core.model.xml.fhir;
 
 import com.google.common.base.MoreObjects;
 
 /**
- * The Id class represents the id element in the FIHR XML document.
+ * The OnsetDateTime class represents the onsetDateTime element in the FHIR XML document.
  *
  */
-public class Id {
+public class OnsetDateTime {
 	private String value;
 
 	public String getValue() {

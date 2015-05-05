@@ -1,12 +1,12 @@
-package com.github.jlgrock.snp.core.model.xml.fihr;
+package com.github.jlgrock.snp.core.model.xml.fhir;
 
 import com.google.common.base.MoreObjects;
 
 /**
- * The Status class represents the status element in the FIHR XML document.
+ * The Id class represents the id element in the FHIR XML document.
  *
  */
-public class Status {
+public class Id {
 	private String value;
 
 	public String getValue() {
