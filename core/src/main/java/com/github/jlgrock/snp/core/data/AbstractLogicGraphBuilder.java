@@ -14,10 +14,20 @@ import gov.vha.isaac.lookup.constants.Constants;
 import gov.vha.isaac.metadata.coordinates.ViewCoordinates;
 import gov.vha.isaac.ochre.api.LookupService;
 
+/**
+ * 
+ * Abstract implementation of Logic Graph Builder
+ *
+ */
 public abstract class AbstractLogicGraphBuilder extends LogicGraphBuilder {
-	private final static Logger LOGGER = LoggerFactory.getLogger(AbstractLogicGraphBuilder.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(AbstractLogicGraphBuilder.class);
 	
-	public int getNidFromSNOMED(String sctid) {
+	/**
+	 * Get the native identifier
+	 * @param sctid SNOMED clinical terms identifier
+	 * @return native identifier
+	 */
+	public int getNidFromSNOMED(final String sctid) {
     	int nid = 0;
     	try {
     		TerminologyStoreDI termStore = LookupService.getService(TerminologyStoreDI.class);
@@ -32,6 +42,9 @@ public abstract class AbstractLogicGraphBuilder extends LogicGraphBuilder {
     	return nid;
     }
     
+	/**
+	 * Start the expression service
+	 */
     public static void startExpressionService() {
     	if(LookupService.getRunLevelController().getCurrentRunLevel() != 2) {
 			System.setProperty(Constants.CHRONICLE_COLLECTIONS_ROOT_LOCATION_PROPERTY, "target/data/object-chronicles");
@@ -44,6 +57,9 @@ public abstract class AbstractLogicGraphBuilder extends LogicGraphBuilder {
 		}
     }
     
+    /**
+     * Stop the expression service
+     */
     public static void stopExpressionService() {
     	LookupService.getRunLevelController().proceedTo(-1);
 	    LOGGER.info("System down...");

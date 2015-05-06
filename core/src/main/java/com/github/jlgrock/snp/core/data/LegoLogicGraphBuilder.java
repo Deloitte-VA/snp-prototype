@@ -1,21 +1,12 @@
 package com.github.jlgrock.snp.core.data;
 
-import gov.vha.isaac.logic.LogicGraphBuilder;
 import gov.vha.isaac.logic.Node;
 import gov.vha.isaac.logic.node.AndNode;
 import gov.vha.isaac.logic.node.RootNode;
-import gov.vha.isaac.lookup.constants.Constants;
-import gov.vha.isaac.metadata.coordinates.ViewCoordinates;
-import gov.vha.isaac.ochre.api.LookupService;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
-import org.ihtsdo.otf.tcc.api.store.TerminologySnapshotDI;
-import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
-import org.ihtsdo.otf.tcc.api.uuid.UuidT3Generator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -55,7 +46,13 @@ public class LegoLogicGraphBuilder extends AbstractLogicGraphBuilder {
     	}
     }
     
-    public Node processRelation(Relation relation, int sourceConceptNid) {
+    /**
+     * Parse the relationship
+     * @param relation Relation
+     * @param sourceConceptNid int
+     * @return Node
+     */
+    public Node processRelation(final Relation relation, final int sourceConceptNid) {
     	if(relation.getDestination() != null && relation.getDestination().getExpression() != null
     			&& relation.getDestination().getExpression().getRelations() != null
     			&& !relation.getDestination().getExpression().getRelations().isEmpty()) {
