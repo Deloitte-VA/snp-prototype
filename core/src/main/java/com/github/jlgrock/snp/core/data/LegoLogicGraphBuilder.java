@@ -11,6 +11,7 @@ import gov.vha.isaac.ochre.api.LookupService;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.ihtsdo.otf.tcc.api.store.TerminologySnapshotDI;
@@ -120,13 +121,10 @@ public class LegoLogicGraphBuilder extends LogicGraphBuilder {
         //add RoleNodeSomeWithNids as child of AndNode. For the parameters of RoleNodeSomeWithNids, use typeConceptNid and 
         //ConceptNodeWithNids as parameters.
 
-        String sourceSctId = expression.getConcept().getSctid();
-        //Get NID from UUID
-    	int sourceConceptNid = getNidFromSNOMED(sourceSctId);    	    	
     	List<Node> sufficientSetList = new ArrayList<>();
     	
-    	if(expression.getRelations() != null && !expression.getRelations().isEmpty()) {
-    		for(Relation relation: expression.getRelations()) {
+    	if(expression.getRelation() != null && !expression.getRelation().isEmpty()) {
+    		for(Relation relation: expression.getRelation()) {
     			sufficientSetList.add(processRelation(relation, sourceConceptNid));
         	}
         	
@@ -137,15 +135,15 @@ public class LegoLogicGraphBuilder extends LogicGraphBuilder {
     
     public Node processRelation(Relation relation, int sourceConceptNid) {
     	if(relation.getDestination() != null && relation.getDestination().getExpression() != null
-    			&& relation.getDestination().getExpression().getRelations() != null
-    			&& !relation.getDestination().getExpression().getRelations().isEmpty()) {
-    		for(Relation r : relation.getDestination().getExpression().getRelations()) {
+    			&& relation.getDestination().getExpression().getRelation() != null
+    			&& !relation.getDestination().getExpression().getRelation().isEmpty()) {
+    		for(Relation r : relation.getDestination().getExpression().getRelation()) {
     			return processRelation(r, sourceConceptNid);
     		}    		
     	}
     	
-    	String isAboutSctId = relation.getType().getConcept().getSctid();
-		String destinationSctId = relation.getDestination().getExpression().getConcept().getSctid();
+    	String isAboutSctId = relation.getType().getConcept().getSctid().toString();
+		String destinationSctId = relation.getDestination().getExpression().getConcept().getSctid().toString();
 		//Get NID from UUID
 		int typeConceptNid = getNidFromSNOMED(isAboutSctId);
 		int destinationNid = getNidFromSNOMED(destinationSctId);            

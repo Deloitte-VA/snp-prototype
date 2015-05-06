@@ -49,7 +49,7 @@
         <target.jdk>1.8</target.jdk>
         
         <!-- VHA versions -->
-		<solor.version>1.6</solor.version>
+		<solor.version>1.8-SNAPSHOT</solor.version>
 
         <jackson.version>2.5.0</jackson.version>
         <slf4j.version>1.7.9</slf4j.version>

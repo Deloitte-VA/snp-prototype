@@ -43,7 +43,16 @@
             <version>1.2.16</version>
         </dependency>
         
-        <dependency>
+			
+<!-- 		<dependency>
+			<groupId>gov.vha.solor.modules</groupId>
+			<artifactId>snomed</artifactId>
+			<version>1.8-SNAPSHOT</version>
+			<classifier>all.cradle</classifier>
+			<type>zip</type>
+		</dependency> -->
+
+<!--         <dependency>
             <groupId>gov.vha.solor.modules</groupId>
             <artifactId>snomed</artifactId>
             <version>${solor.version}</version>
@@ -59,7 +68,7 @@
             <type>cradle.zip</type>
             <classifier>all</classifier>
             <scope>compile</scope>
-        </dependency>
+        </dependency> -->
     
     </dependencies>
     
