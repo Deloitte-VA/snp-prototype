@@ -1,3 +1,5 @@
+[![Build Status](http://52.5.163.147:8080/buildStatus/icon?job=snp-prototype)](http://52.5.163.147:8080/view/SNP/job/snp-prototype/)
+
 SN Prototype - Semantic Normalization Prototype
 =============
 
@@ -5,6 +7,3 @@ A simple proof of concept of ingesting and processing Health Ontologies into a m
 
 For more details and the documentation for this program, please visit the wiki at https://github.com/jlgrock/snp-prototype/wiki
 
-Travis-CI Build Status
----------------------
-![Build Status](https://travis-ci.org/Deloitte-VA/snp-prototype.svg?branch=master)

@@ -3,7 +3,7 @@ package com.github.jlgrock.snp.web;
 import javax.ws.rs.core.MediaType;
 
 import com.github.jlgrock.snp.core.model.xml.fihr.Bundle;
-import com.github.jlgrock.snp.core.model.xml.lego.LegoList;
+import com.github.jlgrock.snp.core.domain.lego.LegoList;
 
 public enum SnpMediaTypeMapping {
 	LEGO (SnpMediaType.APPLICATION_LEGO_XML_TYPE, LegoList.class),

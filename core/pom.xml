@@ -24,7 +24,7 @@
 		
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>conceptparsers</artifactId>
+			<artifactId>legoschema</artifactId>
 		</dependency>
 
         <dependency>
@@ -37,6 +37,52 @@
             <artifactId>logic</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.16</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>gov.vha.solor.modules</groupId>
+            <artifactId>snomed</artifactId>
+            <version>${solor.version}</version>
+            <type>lucene.zip</type>
+            <classifier>all</classifier>
+            <scope>compile</scope>
+        </dependency>
+        
+        <dependency>
+            <groupId>gov.vha.solor.modules</groupId>
+            <artifactId>snomed</artifactId>
+            <version>${solor.version}</version>
+            <type>cradle.zip</type>
+            <classifier>all</classifier>
+            <scope>compile</scope>
+        </dependency>
+    
     </dependencies>
+    
+    <build>
+    	<plugins>
+    		<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>extract-data</id>
+                        <phase>generate-test-resources</phase>
+                        <goals>
+                            <goal>unpack-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <includeArtifactIds>snomed</includeArtifactIds>
+                            <outputDirectory>${project.build.directory}/data</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

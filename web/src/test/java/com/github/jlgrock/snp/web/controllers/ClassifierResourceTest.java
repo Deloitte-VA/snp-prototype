@@ -47,29 +47,29 @@ public class ClassifierResourceTest extends GenericControllerTest {
 		LOGGER.debug("Received response: " + response.readEntity(String.class));
 	}
 	
-//	@Test
-//	public void testLegoXmlFileUpload() {
-//		final WebTarget target = target().path("classifier");
-//
-//        String testXml = readFile("Assertion_Example_01.xml");
-//        
-//        final FormDataMultiPart mp = new FormDataMultiPart();
-//        final FormDataContentDisposition formDataContentDisposition = FormDataContentDisposition
-//                .name("file")
-//                .fileName("lego.xml")
-//                .size(testXml.length())
-//                .build();
-//        final FormDataBodyPart formDataBodyPart = new FormDataBodyPart(
-//        		formDataContentDisposition, testXml, 
-//        		SnpMediaType.APPLICATION_LEGO_XML_TYPE);
-//        mp.bodyPart(formDataBodyPart);
-//        
-//        final Entity<FormDataMultiPart> form = Entity.entity(mp, MediaType.MULTIPART_FORM_DATA_TYPE);
-//        final Response response = target.request().post(form);
-//        
-//        // verify return status
-//        Assert.assertEquals(response.getStatus(), Response.Status.OK.getStatusCode());
-//	}
+	@Test
+	public void testLegoXmlFileUpload() {
+		final WebTarget target = target().path("classifier");
+
+        String testXml = readFile("Assertion_Example_01.xml");
+        
+        final FormDataMultiPart mp = new FormDataMultiPart();
+        final FormDataContentDisposition formDataContentDisposition = FormDataContentDisposition
+                .name("file")
+                .fileName("lego.xml")
+                .size(testXml.length())
+                .build();
+        final FormDataBodyPart formDataBodyPart = new FormDataBodyPart(
+        		formDataContentDisposition, testXml, 
+        		SnpMediaType.APPLICATION_LEGO_XML_TYPE);
+        mp.bodyPart(formDataBodyPart);
+        
+        final Entity<FormDataMultiPart> form = Entity.entity(mp, MediaType.MULTIPART_FORM_DATA_TYPE);
+        final Response response = target.request().post(form);
+        
+        // verify return status
+        Assert.assertEquals(response.getStatus(), Response.Status.OK.getStatusCode());
+	}
 
 	/**
 	 * Prints the string content read from input stream

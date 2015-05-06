@@ -8,9 +8,9 @@
     <version>0.3-SNAPSHOT</version>
   </parent>
   <groupId>com.github.jlgrock.snp</groupId>
-  <artifactId>conceptparsers</artifactId>
+  <artifactId>legoschema</artifactId>
   <version>0.3-SNAPSHOT</version>
-  <name>conceptparsers</name>
+  <name>legoschema</name>
   
    <properties>
         <project.rootdir>${project.parent.basedir}</project.rootdir>
