@@ -9,25 +9,25 @@ import javax.inject.Inject;
 import org.apache.commons.io.input.ReaderInputStream;
 import org.jvnet.hk2.annotations.Service;
 
-import com.github.jlgrock.snp.core.classifier.AssertionClassifier;
+import com.github.jlgrock.snp.core.classifier.PceClassifier;
 import com.github.jlgrock.snp.core.data.ClassifiedAssertionStore;
-import com.github.jlgrock.snp.core.domain.ClassifiedAssertion;
+import com.github.jlgrock.snp.core.domain.ClassifiedPce;
 import com.github.jlgrock.snp.core.model.xml.lego.Assertion;
 import com.github.jlgrock.snp.core.model.xml.lego.Lego;
 import com.github.jlgrock.snp.core.model.xml.lego.LegoList;
 import com.github.jlgrock.snp.core.parser.LegoXmlParser;
 
 @Service
-public class AssertionClassifierServiceImpl implements
-		AssertionClassifierService {
+public class PceClassifierServiceImpl implements
+		PceClassifierService {
 	
-	AssertionClassifier assertClassifier;
+	PceClassifier<Assertion> pceClassifier;
 	ClassifiedAssertionStore classAssertStore; 
 	
 	@Inject
-	protected AssertionClassifierServiceImpl(AssertionClassifier assertClassifier, 
+	protected PceClassifierServiceImpl(PceClassifier<Assertion> assertClassifier, 
 			ClassifiedAssertionStore classAssertStore) {
-		this.assertClassifier = assertClassifier;
+		this.pceClassifier = assertClassifier;
 		this.classAssertStore = classAssertStore;
 	}
 	
@@ -46,7 +46,7 @@ public class AssertionClassifierServiceImpl implements
 	private void classifyAssertion(final List<Lego> legos) {
     	for (Lego lego : legos) {
     		Assertion assertion = lego.getAssertion();
-        	ClassifiedAssertion cAssertion = assertClassifier.classify(assertion);
+        	ClassifiedPce cAssertion = pceClassifier.classify(assertion);
         	Long patientId = 0L;
 			classAssertStore.save(patientId , cAssertion);
     	}

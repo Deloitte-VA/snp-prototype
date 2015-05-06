@@ -9,7 +9,7 @@ import com.google.common.base.MoreObjects;
 /**
  * An object that has classified all of the PCEs
  */
-public class ClassifiedAssertion extends AbstractMongoDomainObject {
+public class ClassifiedPce extends AbstractMongoDomainObject {
 	private UUID uuid;
 
 	public UUID getUuid() {
@@ -31,7 +31,7 @@ public class ClassifiedAssertion extends AbstractMongoDomainObject {
 		if (o == null || getClass() != o.getClass()) return false;
 		if (!super.equals(o)) return false;
 
-		ClassifiedAssertion that = (ClassifiedAssertion) o;
+		ClassifiedPce that = (ClassifiedPce) o;
 
 		if (uuid != null ? !uuid.equals(that.uuid) : that.uuid != null) return false;
 		if (id != null ? !id.equals(that.id) : that.id != null) return false;

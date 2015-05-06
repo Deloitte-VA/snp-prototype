@@ -1,8 +1,8 @@
 package com.github.jlgrock.snp.core.converters;
 
 import com.github.jlgrock.snp.apis.converters.ReadConverter;
-import com.github.jlgrock.snp.core.data.AssertionTags;
-import com.github.jlgrock.snp.core.domain.ClassifiedAssertion;
+import com.github.jlgrock.snp.core.data.ClassifiedPceTags;
+import com.github.jlgrock.snp.core.domain.ClassifiedPce;
 import com.mongodb.DBObject;
 import org.jvnet.hk2.annotations.Service;
 
@@ -13,12 +13,12 @@ import javax.inject.Named;
  */
 @Service
 @Named
-public class ClassifiedAssertionReadConverter extends AbstractReadConverter implements ReadConverter<DBObject, ClassifiedAssertion> {
+public class ClassifiedPceReadConverter extends AbstractReadConverter implements ReadConverter<DBObject, ClassifiedPce> {
     @Override
-    public ClassifiedAssertion convert(final DBObject source) {
-        ClassifiedAssertion assertion = new ClassifiedAssertion();
-        assertion.setId(parseLong(source, AssertionTags.ID_TAG));
-        assertion.setDesc(parseString(source, AssertionTags.DESCRIPTION_TAG));
-        return assertion;
+    public ClassifiedPce convert(final DBObject source) {
+        ClassifiedPce classifiedPce = new ClassifiedPce();
+        classifiedPce.setId(parseLong(source, ClassifiedPceTags.ID_TAG));
+        classifiedPce.setDesc(parseString(source, ClassifiedPceTags.DESCRIPTION_TAG));
+        return classifiedPce;
     }
 }

@@ -1,28 +1,27 @@
 package com.github.jlgrock.snp.core.classifier;
 
-import com.github.jlgrock.snp.core.data.LegoLogicGraphBuilder;
-import com.github.jlgrock.snp.core.model.xml.lego.Expression;
-
 import gov.vha.isaac.logic.LogicGraph;
 
 import java.util.UUID;
 
 import org.jvnet.hk2.annotations.Service;
 
+import com.github.jlgrock.snp.core.data.FhirLogicGraphBuilder;
+import com.github.jlgrock.snp.core.model.xml.fhir.Condition;
+
 /**
  * Replace Post Coordinated Expressions in Logic Graph with Classifier ID
  *
  */
 @Service
-public class LegoLogicGraphClassifierImpl implements LogicGraphClassifier<Expression> {
-
+public class FhirLogicGraphClassifierImpl implements LogicGraphClassifier<Condition> {
 
 	@Override
-	public UUID classify(final Expression expression) {
+	public UUID classify(final Condition pce) {
 
 		//Set the expression from the
-		LegoLogicGraphBuilder legoLogicGraphBuilder = new LegoLogicGraphBuilder(expression);
-		LogicGraph logicGraph = (LogicGraph)legoLogicGraphBuilder;
+		FhirLogicGraphBuilder fhirLogicGraphBuilder = new FhirLogicGraphBuilder(pce);
+		LogicGraph logicGraph = (LogicGraph)fhirLogicGraphBuilder;
 
 		// TODO : call a service that takes a LogicGraph and returns a classifier ID
 		//UUID classifierID = vaLogicService.classify(logicGraph);

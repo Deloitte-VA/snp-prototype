@@ -1,9 +1,9 @@
 package com.github.jlgrock.snp.core.data;
 
 import com.github.jlgrock.snp.apis.connection.MongoDbFactory;
-import com.github.jlgrock.snp.core.converters.ClassifiedAssertionReadConverter;
+import com.github.jlgrock.snp.core.converters.ClassifiedPceReadConverter;
 import com.github.jlgrock.snp.core.converters.ClassifiedAssertionWriteConverter;
-import com.github.jlgrock.snp.core.domain.ClassifiedAssertion;
+import com.github.jlgrock.snp.core.domain.ClassifiedPce;
 import com.mongodb.DBObject;
 import org.jvnet.hk2.annotations.Service;
 
@@ -13,15 +13,15 @@ import javax.inject.Inject;
  *
  */
 @Service
-public class ClassifiedAssertionRepositoryImpl extends AbstractRepositoryImpl<ClassifiedAssertion, Long> implements ClassifiedAssertionRepository {
+public class ClassifiedAssertionRepositoryImpl extends AbstractRepositoryImpl<ClassifiedPce, Long> implements ClassifiedAssertionRepository {
 
-	private final ClassifiedAssertionReadConverter classifiedAssertionReadConverter;
+	private final ClassifiedPceReadConverter classifiedAssertionReadConverter;
 
 	private final ClassifiedAssertionWriteConverter classifiedAssertionWriteConverter;
 
 	@Inject
     public ClassifiedAssertionRepositoryImpl(final MongoDbFactory mongoDbFactoryIn,
-											 final ClassifiedAssertionReadConverter classifiedAssertionReadConverterIn,
+											 final ClassifiedPceReadConverter classifiedAssertionReadConverterIn,
 											 final ClassifiedAssertionWriteConverter classifiedAssertionWriteConverterIn) {
         super(mongoDbFactoryIn);
 		classifiedAssertionReadConverter = classifiedAssertionReadConverterIn;
@@ -29,12 +29,12 @@ public class ClassifiedAssertionRepositoryImpl extends AbstractRepositoryImpl<Cl
     }
 
 	@Override
-	protected ClassifiedAssertion convertToDomainObject(final DBObject dbObjectin) {
+	protected ClassifiedPce convertToDomainObject(final DBObject dbObjectin) {
 		return classifiedAssertionReadConverter.convert(dbObjectin);
 	}
 
 	@Override
-	protected DBObject convertToDBObject(final ClassifiedAssertion s) {
+	protected DBObject convertToDBObject(final ClassifiedPce s) {
 		return classifiedAssertionWriteConverter.convert(s);
 	}
 

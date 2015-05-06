@@ -1,7 +1,7 @@
 package com.github.jlgrock.snp.web.controllers;
 
 import com.github.jlgrock.snp.core.data.ClassifiedAssertionRepository;
-import com.github.jlgrock.snp.core.domain.ClassifiedAssertion;
+import com.github.jlgrock.snp.core.domain.ClassifiedPce;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -38,7 +38,7 @@ public class ClassifiedAssertionController {
      */
     @GET @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public ClassifiedAssertion getAssertion(@PathParam("id") final Long id) {
+    public ClassifiedPce getAssertion(@PathParam("id") final Long id) {
         LOGGER.debug("getting Assertion");
         return repository.findOneById(id);
     }

@@ -1,7 +1,7 @@
 package com.github.jlgrock.snp.core.converters;
 
-import com.github.jlgrock.snp.core.data.AssertionTags;
-import com.github.jlgrock.snp.core.domain.ClassifiedAssertion;
+import com.github.jlgrock.snp.core.data.ClassifiedPceTags;
+import com.github.jlgrock.snp.core.domain.ClassifiedPce;
 import com.mongodb.DBObject;
 import org.testng.annotations.Test;
 
@@ -20,11 +20,11 @@ public class ClassifiedClassifiedAssertionReadConverterTest {
     @Test
     public void testConvert() {
         DBObject dbObj = mock(DBObject.class);
-        when(dbObj.get(AssertionTags.ID_TAG)).thenReturn((Long) 123l);
-        when(dbObj.get(AssertionTags.DESCRIPTION_TAG)).thenReturn("bla");
+        when(dbObj.get(ClassifiedPceTags.ID_TAG)).thenReturn((Long) 123l);
+        when(dbObj.get(ClassifiedPceTags.DESCRIPTION_TAG)).thenReturn("bla");
 
-        ClassifiedAssertionReadConverter patientReadConverter = new ClassifiedAssertionReadConverter();
-        ClassifiedAssertion assertion = patientReadConverter.convert(dbObj);
+        ClassifiedPceReadConverter patientReadConverter = new ClassifiedPceReadConverter();
+        ClassifiedPce assertion = patientReadConverter.convert(dbObj);
 
         assertEquals((Long) 123l, assertion.getId());
 //        TODO: FIXME

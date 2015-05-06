@@ -2,7 +2,7 @@ package com.github.jlgrock.snp.core.data;
 
 import javax.inject.Inject;
 
-import com.github.jlgrock.snp.core.domain.ClassifiedAssertion;
+import com.github.jlgrock.snp.core.domain.ClassifiedPce;
 import com.github.jlgrock.snp.core.domain.Patient;
 
 /**
@@ -21,7 +21,7 @@ public class ClassifiedAssertionMongoDbStore implements ClassifiedAssertionStore
 		patientRepository = patientRepositoryIn;
 	}
 	
-	public void save(final Long patientId, final ClassifiedAssertion classifiedAssertion) {
+	public void save(final Long patientId, final ClassifiedPce classifiedAssertion) {
 		Patient patient = patientRepository.findOneById(patientId);
 		if(patient != null) {
 			classifiedAssertionRepository.save(classifiedAssertion);

@@ -2,20 +2,19 @@ package com.github.jlgrock.snp.core.classifier;
 
 import org.jvnet.hk2.annotations.Contract;
 
-import com.github.jlgrock.snp.core.domain.ClassifiedAssertion;
-import com.github.jlgrock.snp.core.model.xml.lego.Assertion;
+import com.github.jlgrock.snp.core.domain.ClassifiedPce;
 
 /**
  * Classify an entire assertion object
  */
 @Contract
-public interface AssertionClassifier {
+public interface PceClassifier<T> {
 
     /**
-     * Classify all of the PCEs within an assertion
-     * @param assertion Assertion
-     * @return ClassifiedAssertion ClassifiedAssertion
+     * Classify all of the PCEs
+     * @param pce Post Coordinated Expression
+     * @return ClassifiedAssertion classified PCE
      */
-	ClassifiedAssertion classify(Assertion assertion);
+	ClassifiedPce classify(T pce);
 
 }
