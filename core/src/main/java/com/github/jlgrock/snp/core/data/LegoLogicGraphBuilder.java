@@ -1,17 +1,15 @@
 package com.github.jlgrock.snp.core.data;
 
+import com.github.jlgrock.snp.core.model.xml.lego.Expression;
+import com.github.jlgrock.snp.core.model.xml.lego.Relation;
 import gov.vha.isaac.logic.Node;
 import gov.vha.isaac.logic.node.AndNode;
 import gov.vha.isaac.logic.node.RootNode;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.github.jlgrock.snp.core.model.xml.lego.Expression;
-import com.github.jlgrock.snp.core.model.xml.lego.Relation;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A Logic Graph Builder specific to Lego documents.  This should only be used to
@@ -80,4 +78,21 @@ public class LegoLogicGraphBuilder extends AbstractLogicGraphBuilder {
     public LegoLogicGraphBuilder(final Expression expressionIn) {
     	expression = expressionIn;
     }
+
+	@Override
+	public boolean equals(final Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		if (!super.equals(o)) return false;
+
+		LegoLogicGraphBuilder that = (LegoLogicGraphBuilder) o;
+
+		return !(expression != null ? !expression.equals(that.expression) : that.expression != null);
+
+	}
+
+	@Override
+	public int hashCode() {
+		return expression != null ? expression.hashCode() : 0;
+	}
 }

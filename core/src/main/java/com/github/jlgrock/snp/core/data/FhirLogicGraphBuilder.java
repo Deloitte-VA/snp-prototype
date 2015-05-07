@@ -44,4 +44,21 @@ public class FhirLogicGraphBuilder extends AbstractLogicGraphBuilder {
     public FhirLogicGraphBuilder(final Condition conditionIn) {
     	condition = conditionIn;
     }
+
+	@Override
+	public boolean equals(final Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		if (!super.equals(o)) return false;
+
+		FhirLogicGraphBuilder that = (FhirLogicGraphBuilder) o;
+
+		return !(condition != null ? !condition.equals(that.condition) : that.condition != null);
+
+	}
+
+	@Override
+	public int hashCode() {
+		return condition != null ? condition.hashCode() : 0;
+	}
 }
