@@ -1,7 +1,7 @@
 package com.github.jlgrock.snp.core.classifier;
 
 import com.github.jlgrock.snp.core.data.LegoLogicGraphBuilder;
-import com.github.jlgrock.snp.core.model.xml.lego.Expression;
+import com.github.jlgrock.snp.core.domain.lego.Expression;
 
 import gov.vha.isaac.logic.LogicGraph;
 

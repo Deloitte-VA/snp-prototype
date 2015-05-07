@@ -20,9 +20,14 @@ import org.slf4j.LoggerFactory;
 
 import com.github.jlgrock.snp.apis.connection.configuration.WebConfiguration;
 import com.github.jlgrock.snp.apis.data.MultiPartFileUtils;
+//import com.github.jlgrock.snp.core.model.xml.lego.Lego;
+import com.github.jlgrock.snp.core.domain.lego.Lego;
 
 /**
  * The controller for handling all xml uploads of lego data
+ * @param <T>
+ * @param <assertClssfrSvc>
+ * @param <assertClssfrSvc>
  */
 @Path("/lego")
 public class LegoController {
@@ -33,17 +38,18 @@ public class LegoController {
 
     private WebConfiguration webConfiguration;
     
-    private AssertionClassifierService assertClssfrSvc;
+    private AssertionClassifierService<Lego> assertClssfrSvc;
 
     /**
      * Default constructor.
+     * @param <assertClssfrSvc>
      * @param webConfigurationIn the configuration object for the web project
      * @param multipartFileUtilsIn instance of the file helper utilities
      */
     @Inject
     public LegoController(final WebConfiguration webConfigurationIn,
                           final MultiPartFileUtils multipartFileUtilsIn,
-                          final AssertionClassifierService assertClssfrSvcIn) {
+                          final AssertionClassifierService<Lego> assertClssfrSvcIn) {
         webConfiguration = webConfigurationIn;
         multipartFileUtils = multipartFileUtilsIn;
         assertClssfrSvc = assertClssfrSvcIn;
@@ -72,7 +78,7 @@ public class LegoController {
         // save it
         multipartFileUtils.writeToFile(fileInputStream, uploadedFileLocation);
 
-        LOGGER.debug("File uploaded to : " + uploadedFileLocation);
+        LOGGER.debug("File uploaded to : {}", uploadedFileLocation);
         
         // verify that a file was uploaded/created
         if (Files.notExists(uploadedFileLocation)) {
@@ -83,7 +89,7 @@ public class LegoController {
         // verify that file is not empty
         try {
 			if (Files.size(uploadedFileLocation) <= 0) {
-				LOGGER.warn("Uploaded file is empty: " + uploadedFileLocation);
+				LOGGER.warn("Uploaded file is empty: {}", uploadedFileLocation);
 				return Response.status(Response.Status.NO_CONTENT).build();
 			}
 		} catch (IOException e) {
@@ -94,7 +100,7 @@ public class LegoController {
         // open file and process contents
         try (InputStream inputStream = new BufferedInputStream(Files.newInputStream(
 				uploadedFileLocation, StandardOpenOption.READ));) {
-        	assertClssfrSvc.classifyAssertion(inputStream);
+//        	assertClssfrSvc.classifyAssertion(inputStream);
 		} catch (IOException e) {
 			LOGGER.error(e.getMessage(), e);
 			return Response.serverError().build();
@@ -118,7 +124,7 @@ public class LegoController {
     	
     	LOGGER.debug("HTTP XML stream received: " + xml);
     	
-    	assertClssfrSvc.classifyAssertion(xml);
+//    	assertClssfrSvc.classifyAssertion(xml);
     	
     	return Response.ok().build();
     }

@@ -12,14 +12,14 @@ import org.jvnet.hk2.annotations.Service;
 import com.github.jlgrock.snp.core.classifier.AssertionClassifier;
 import com.github.jlgrock.snp.core.data.ClassifiedAssertionStore;
 import com.github.jlgrock.snp.core.domain.ClassifiedAssertion;
-import com.github.jlgrock.snp.core.model.xml.lego.Assertion;
-import com.github.jlgrock.snp.core.model.xml.lego.Lego;
-import com.github.jlgrock.snp.core.model.xml.lego.LegoList;
+import com.github.jlgrock.snp.core.domain.lego.Assertion;
+import com.github.jlgrock.snp.core.domain.lego.Lego;
+import com.github.jlgrock.snp.core.domain.lego.LegoList;
 import com.github.jlgrock.snp.core.parser.LegoXmlParser;
 
 @Service
 public class AssertionClassifierServiceImpl implements
-		AssertionClassifierService {
+		AssertionClassifierService<Lego> {
 	
 	AssertionClassifier assertClassifier;
 	ClassifiedAssertionStore classAssertStore; 
@@ -33,22 +33,29 @@ public class AssertionClassifierServiceImpl implements
 	
 	public void classifyAssertion(final String xml) {
 		ReaderInputStream ris = new ReaderInputStream(new StringReader(xml));
-    	classifyAssertion(ris);
+//    	classifyAssertion(ris);
 	}
 	
-	public void classifyAssertion(final InputStream inStream) {
-		LegoXmlParser legoXmlParser = new LegoXmlParser();
-    	LegoList legoList = legoXmlParser.parseDocument(inStream);
-    	List<Lego> legos = legoList.getLegos();
-    	classifyAssertion(legos);
-	}
+//	public void classifyAssertion(final InputStream inStream) {
+//		LegoList legoList = parseStream(inStream);
+//    	List<Lego> legos = legoList.getLego();
+//    	classifyAssertion(legos);
+//	}
 	
-	private void classifyAssertion(final List<Lego> legos) {
+	public void classifyAssertion(final List<Lego> legos) {
     	for (Lego lego : legos) {
-    		Assertion assertion = lego.getAssertion();
+    		// FIXME: add loop
+    		Assertion assertion = lego.getAssertion().get(0);
         	ClassifiedAssertion cAssertion = assertClassifier.classify(assertion);
+        	
+        	// FIXME: need to capture patient id
         	Long patientId = 0L;
 			classAssertStore.save(patientId , cAssertion);
     	}
 	}
+	
+//	public LegoList parseStream(final InputStream inStream) {
+//		LegoXmlParser legoXmlParser = new LegoXmlParser();
+//    	return legoXmlParser.parseDocument(inStream);
+//	}
 }
