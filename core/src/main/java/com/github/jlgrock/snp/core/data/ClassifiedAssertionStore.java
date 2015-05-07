@@ -9,5 +9,10 @@ import com.github.jlgrock.snp.core.domain.ClassifiedAssertion;
  */
 public interface ClassifiedAssertionStore {
 
+	/**
+	 * saves the classified assertion to the database
+	 * @param patientId the patient id to save
+	 * @param classifiedAssertion the assertion to store
+	 */
 	void save(final Long patientId, final ClassifiedAssertion classifiedAssertion);
 }

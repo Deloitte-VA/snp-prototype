@@ -9,14 +9,12 @@ import java.time.LocalDate;
 /**
  *
  */
-public class AbstractReadConverter {
+public abstract class AbstractReadConverter {
     private Number parseNumber(final DBObject source, final String tag) {
-        return ((Number) source.get(EncounterTags.ID_TAG));
+        return (Number) source.get(EncounterTags.ID_TAG);
     }
 
     protected Long parseLong(final DBObject source, final String tag) {
-        Long returnVal = null;
-
         Number num = parseNumber(source, tag);
         if (num == null) {
             return null;
@@ -25,8 +23,6 @@ public class AbstractReadConverter {
     }
 
     protected Integer parseInteger(final DBObject source, final String tag) {
-        Long returnVal = null;
-
         Number num = parseNumber(source, tag);
         if (num == null) {
             return null;
