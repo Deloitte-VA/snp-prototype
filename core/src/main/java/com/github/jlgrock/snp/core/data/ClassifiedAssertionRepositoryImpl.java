@@ -10,7 +10,8 @@ import org.jvnet.hk2.annotations.Service;
 import javax.inject.Inject;
 
 /**
- *
+ * This class executes queries against the ClassifiedAssertion 
+ * Collection within MongoDB.
  */
 @Service
 public class ClassifiedAssertionRepositoryImpl extends AbstractRepositoryImpl<ClassifiedAssertion, Long> implements ClassifiedAssertionRepository {
@@ -19,6 +20,12 @@ public class ClassifiedAssertionRepositoryImpl extends AbstractRepositoryImpl<Cl
 
 	private final ClassifiedAssertionWriteConverter classifiedAssertionWriteConverter;
 
+	/**
+	 * Constructs a ClassifiedAssertionRepositoryImpl
+	 * @param mongoDbFactoryIn MongoDbFactory
+	 * @param classifiedAssertionReadConverterIn ClassifiedAssertionReadConverter
+	 * @param classifiedAssertionWriteConverterIn ClassifiedAssertionWriteConverter
+	 */
 	@Inject
     public ClassifiedAssertionRepositoryImpl(final MongoDbFactory mongoDbFactoryIn,
 											 final ClassifiedAssertionReadConverter classifiedAssertionReadConverterIn,
