@@ -4,7 +4,8 @@ import gov.vha.isaac.logic.LogicGraph;
 import gov.vha.isaac.logic.Node;
 import gov.vha.isaac.ochre.api.tree.TreeNodeVisitData;
 
-import java.io.InputStream;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Unmarshaller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,7 +16,6 @@ import org.testng.annotations.Test;
 import com.github.jlgrock.snp.core.domain.lego.Expression;
 import com.github.jlgrock.snp.core.domain.lego.LegoList;
 import com.github.jlgrock.snp.core.parser.AbstractXmlParserTest;
-import com.github.jlgrock.snp.core.parser.LegoXmlParser;
 
 public class LegoLogicGraphBuilderTest extends AbstractXmlParserTest {
 	private static final Logger LOGGER = LoggerFactory.getLogger(LegoLogicGraphBuilderTest.class);
@@ -30,63 +30,64 @@ public class LegoLogicGraphBuilderTest extends AbstractXmlParserTest {
     	LegoLogicGraphBuilder.stopExpressionService();
     }
     
-//	@Test
-//	public void testExpressionOneRelation() {
-//		InputStream xmlInput = getClass().getClassLoader().getResourceAsStream("testExpressionOneRelation.xml");
-//		// FIXME: should use JAXB parser
-//		LegoList legoList = null;//new LegoXmlParser().parseDocument(xmlInput);
-//		Expression expression = null;//legoList.getLego().get(0).getAssertion().getDiscernible().getExpression();
-//				
-//		LogicGraph g = null;
-//    	
-//    	LegoLogicGraphBuilder legoLogicGraphBuilder = new LegoLogicGraphBuilder(expression);
-//    	//LegoLogicGraphBuilder.create() gets called by LogicGraph.legoLogicGraphBuilderprocessDepthFirst()
-//    	//call this method if you don't call LogicGraph.legoLogicGraphBuilderprocessDepthFirst() in order
-//    	//to create logicGraph
-//    	//legoLogicGraphBuilder.create();
-//    	
-//    	g = (LogicGraph) legoLogicGraphBuilder;
-//        
-//        //LogicGraph.legoLogicGraphBuilderprocessDepthFirst calls init() which calls create()
-//        //that is implemented by the LegoLogicGraphBuilder
-//        g.processDepthFirst((Node node, TreeNodeVisitData graphVisitData) -> {
-//            for (int i = 0; i < graphVisitData.getDistance(node.getNodeIndex()); i++) {
-//                System.out.print("  ");
-//            }
-//            System.out.println(node);
-//        });
-//        
-//        LOGGER.info("Graph size=" + g.getNodeCount() );
-//	}
-	
-//	@Test
-//	public void testExpressionThreeRelations() {
-//		InputStream xmlInput = getClass().getClassLoader().getResourceAsStream("testExpressionThreeRelations.xml");
-//		// FIXME: need to use JAXB parser
-//		LegoList legoList = null; //new LegoXmlParser().parseDocument(xmlInput);
-//		Expression expression = null;//legoList.getLego().get(0).getAssertion().getDiscernible().getExpression();
-//		
-//		LogicGraph g = null;
-//    	
-//    	LegoLogicGraphBuilder legoLogicGraphBuilder = new LegoLogicGraphBuilder(expression);
-//    	//LegoLogicGraphBuilder.create() gets called by LogicGraph.legoLogicGraphBuilderprocessDepthFirst()
-//    	//call this method if you don't call LogicGraph.legoLogicGraphBuilderprocessDepthFirst() in order
-//    	//to create logicGraph
-//    	//legoLogicGraphBuilder.create();
-//    	
-//    	g = (LogicGraph) legoLogicGraphBuilder;
-//        
+	@Test
+	public void testExpressionOneRelation() throws Exception {
+		JAXBContext jaxbContext = JAXBContext.newInstance(LegoList.class);
+	    Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+	    
+	    LegoList legoList = (LegoList)jaxbUnmarshaller.unmarshal(getClass().getClassLoader().getResourceAsStream("testExpressionOneRelation.xml"));
+	    Expression expression = legoList.getLego().get(0).getAssertion().get(0).getDiscernible().getExpression();
+	    		
+		LogicGraph g = null;
+    	
+    	LegoLogicGraphBuilder legoLogicGraphBuilder = new LegoLogicGraphBuilder(expression);
+    	//LegoLogicGraphBuilder.create() gets called by LogicGraph.legoLogicGraphBuilderprocessDepthFirst()
+    	//call this method if you don't call LogicGraph.legoLogicGraphBuilderprocessDepthFirst() in order
+    	//to create logicGraph
+    	//legoLogicGraphBuilder.create();
+    	
+    	g = (LogicGraph) legoLogicGraphBuilder;
+        
         //LogicGraph.legoLogicGraphBuilderprocessDepthFirst calls init() which calls create()
         //that is implemented by the LegoLogicGraphBuilder
-    	// FIXME
-//        g.processDepthFirst((Node node, TreeNodeVisitData graphVisitData) -> {
-//            for (int i = 0; i < graphVisitData.getDistance(node.getNodeIndex()); i++) {
-//                System.out.print("  ");
-//            }
-//            System.out.println(node);
-//        });
+        g.processDepthFirst((Node node, TreeNodeVisitData graphVisitData) -> {
+            for (int i = 0; i < graphVisitData.getDistance(node.getNodeIndex()); i++) {
+                System.out.print("  ");
+            }
+            System.out.println(node);
+        });
         
-//        LOGGER.info("Graph size=" + g.getNodeCount() );
-//	}
+        LOGGER.info("Graph size=" + g.getNodeCount() );
+	}
+	
+	@Test
+	public void testExpressionThreeRelations() throws Exception {
+		JAXBContext jaxbContext = JAXBContext.newInstance(LegoList.class);
+	    Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+	    
+	    LegoList legoList = (LegoList) jaxbUnmarshaller.unmarshal(getClass().getClassLoader().getResourceAsStream("testExpressionThreeRelations.xml"));
+	    Expression expression = legoList.getLego().get(0).getAssertion().get(0).getDiscernible().getExpression();
+	    
+		LogicGraph g = null;
+    	
+    	LegoLogicGraphBuilder legoLogicGraphBuilder = new LegoLogicGraphBuilder(expression);
+    	//LegoLogicGraphBuilder.create() gets called by LogicGraph.legoLogicGraphBuilderprocessDepthFirst()
+    	//call this method if you don't call LogicGraph.legoLogicGraphBuilderprocessDepthFirst() in order
+    	//to create logicGraph
+    	//legoLogicGraphBuilder.create();
+    	
+    	g = (LogicGraph) legoLogicGraphBuilder;
+        
+        //LogicGraph.legoLogicGraphBuilderprocessDepthFirst calls init() which calls create()
+        //that is implemented by the LegoLogicGraphBuilder
+        g.processDepthFirst((Node node, TreeNodeVisitData graphVisitData) -> {
+            for (int i = 0; i < graphVisitData.getDistance(node.getNodeIndex()); i++) {
+                System.out.print("  ");
+            }
+            System.out.println(node);
+        });
+        
+        LOGGER.info("Graph size=" + g.getNodeCount() );
+	}
 	
 }
