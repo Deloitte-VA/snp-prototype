@@ -1,7 +1,7 @@
 package com.github.jlgrock.snp.core.converters;
 
-import com.github.jlgrock.snp.core.data.AssertionTags;
-import com.github.jlgrock.snp.core.domain.ClassifiedAssertion;
+import com.github.jlgrock.snp.core.data.ClassifiedPceTags;
+import com.github.jlgrock.snp.core.domain.ClassifiedPce;
 import com.mongodb.DBObject;
 import org.testng.annotations.Test;
 
@@ -22,15 +22,15 @@ public class ClassifiedClassifiedAssertionWriteConverterTest {
     public void testConvert() {
         LocalDate dob = LocalDate.now(); //final
 
-        ClassifiedAssertion assertion = mock(ClassifiedAssertion.class);
+        ClassifiedPce assertion = mock(ClassifiedPce.class);
         when(assertion.getId()).thenReturn((Long) 123l);
         when(assertion.getDesc()).thenReturn("bla");
 
         ClassifiedAssertionWriteConverter classifiedAssertionWriteConverter = new ClassifiedAssertionWriteConverter();
         DBObject dbObj = classifiedAssertionWriteConverter.convert(assertion);
 
-        assertEquals((Long) 123l, dbObj.get(AssertionTags.ID_TAG));
-        assertEquals("bla", dbObj.get(AssertionTags.DESCRIPTION_TAG));
+        assertEquals((Long) 123l, dbObj.get(ClassifiedPceTags.ID_TAG));
+        assertEquals("bla", dbObj.get(ClassifiedPceTags.DESCRIPTION_TAG));
 
     }
 }

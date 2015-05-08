@@ -2,19 +2,20 @@ package com.github.jlgrock.snp.core.classifier;
 
 import java.util.UUID;
 
-import com.github.jlgrock.snp.core.model.xml.lego.Expression;
+import org.jvnet.hk2.annotations.Contract;
 
 /**
  * Classify Post Coordinated Expressions
  *
  */
-public interface LogicGraphClassifier {
+@Contract
+public interface LogicGraphClassifier<T> {
 
 	/**
 	 * replace Post Coordinated Expressions with a classifier ID
 	 * 
-	 * @param expression Expression
+	 * @param pce Post Coordinated Expression
 	 * @return UUID UUID
 	 */
-	UUID classify(Expression expression);
+	UUID classify(T pce);
 }
