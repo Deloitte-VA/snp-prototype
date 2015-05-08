@@ -14,22 +14,21 @@ import javax.inject.Inject;
  * Collection within MongoDB.
  */
 @Service
-public class ClassifiedAssertionRepositoryImpl extends AbstractRepositoryImpl<ClassifiedPce, Long> implements ClassifiedAssertionRepository {
+public class ClassifiedPceRepositoryImpl extends AbstractRepositoryImpl<ClassifiedPce, Long> implements ClassifiedPceRepository {
 
 	private final ClassifiedPceReadConverter classifiedAssertionReadConverter;
 
 	private final ClassifiedAssertionWriteConverter classifiedAssertionWriteConverter;
 
 	/**
-	 * Constructs a ClassifiedAssertionRepositoryImpl
 	 * @param mongoDbFactoryIn MongoDbFactory
 	 * @param classifiedAssertionReadConverterIn ClassifiedAssertionReadConverter
 	 * @param classifiedAssertionWriteConverterIn ClassifiedAssertionWriteConverter
 	 */
 	@Inject
-    public ClassifiedAssertionRepositoryImpl(final MongoDbFactory mongoDbFactoryIn,
-											 final ClassifiedPceReadConverter classifiedAssertionReadConverterIn,
-											 final ClassifiedAssertionWriteConverter classifiedAssertionWriteConverterIn) {
+    public ClassifiedPceRepositoryImpl(final MongoDbFactory mongoDbFactoryIn,
+									   final ClassifiedPceReadConverter classifiedAssertionReadConverterIn,
+									   final ClassifiedAssertionWriteConverter classifiedAssertionWriteConverterIn) {
         super(mongoDbFactoryIn);
 		classifiedAssertionReadConverter = classifiedAssertionReadConverterIn;
 		classifiedAssertionWriteConverter = classifiedAssertionWriteConverterIn;

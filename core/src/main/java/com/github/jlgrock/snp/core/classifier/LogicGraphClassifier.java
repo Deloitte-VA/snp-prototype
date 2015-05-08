@@ -1,12 +1,13 @@
 package com.github.jlgrock.snp.core.classifier;
 
-import java.util.UUID;
-
 import org.jvnet.hk2.annotations.Contract;
+
+import java.util.UUID;
 
 /**
  * Classify Post Coordinated Expressions
  *
+ * @param <T> the type of PCE to classify.  This will be specific to each type of input
  */
 @Contract
 public interface LogicGraphClassifier<T> {

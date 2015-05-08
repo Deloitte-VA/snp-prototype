@@ -12,7 +12,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import com.github.jlgrock.snp.core.classifier.PceClassifier;
-import com.github.jlgrock.snp.core.data.ClassifiedAssertionStore;
+import com.github.jlgrock.snp.core.data.ClassifiedPceStore;
 import com.github.jlgrock.snp.core.domain.ClassifiedPce;
 import com.github.jlgrock.snp.core.model.xml.lego.Assertion;
 
@@ -22,7 +22,7 @@ public class AssertionClassifierServiceImplTest {
 	PceClassifier assertionClassifier;
 	
 	@Mock
-	ClassifiedAssertionStore cAssertStore;
+	ClassifiedPceStore cAssertStore;
 	
 	@Mock
 	Assertion assertion;

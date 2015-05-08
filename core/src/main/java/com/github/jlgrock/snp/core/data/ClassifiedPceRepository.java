@@ -10,6 +10,6 @@ import com.github.jlgrock.snp.core.domain.ClassifiedPce;
  * Collection within MongoDB.
  */
 @Contract
-public interface ClassifiedAssertionRepository extends MongoRepository<ClassifiedPce, Long> {
+public interface ClassifiedPceRepository extends MongoRepository<ClassifiedPce, Long> {
 }
 

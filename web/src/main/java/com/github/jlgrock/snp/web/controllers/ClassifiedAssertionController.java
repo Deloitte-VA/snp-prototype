@@ -1,6 +1,6 @@
 package com.github.jlgrock.snp.web.controllers;
 
-import com.github.jlgrock.snp.core.data.ClassifiedAssertionRepository;
+import com.github.jlgrock.snp.core.data.ClassifiedPceRepository;
 import com.github.jlgrock.snp.core.domain.ClassifiedPce;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,13 +20,13 @@ public class ClassifiedAssertionController {
     private static final Logger LOGGER = LoggerFactory.getLogger(ClassifiedAssertionController.class);
 
 
-    private ClassifiedAssertionRepository repository;
+    private ClassifiedPceRepository repository;
 
     /**
      * @param repositoryIn the repository to get Assertion objects from
      */
     @Inject
-    public ClassifiedAssertionController(final ClassifiedAssertionRepository repositoryIn) {
+    public ClassifiedAssertionController(final ClassifiedPceRepository repositoryIn) {
         repository = repositoryIn;
     }
 

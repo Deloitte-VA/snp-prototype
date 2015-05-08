@@ -19,10 +19,10 @@ import com.github.jlgrock.snp.core.converters.ObservationReadConverter;
 import com.github.jlgrock.snp.core.converters.ObservationWriteConverter;
 import com.github.jlgrock.snp.core.converters.PatientReadConverter;
 import com.github.jlgrock.snp.core.converters.PatientWriteConverter;
-import com.github.jlgrock.snp.core.data.ClassifiedAssertionMongoDbStore;
-import com.github.jlgrock.snp.core.data.ClassifiedAssertionRepository;
-import com.github.jlgrock.snp.core.data.ClassifiedAssertionRepositoryImpl;
-import com.github.jlgrock.snp.core.data.ClassifiedAssertionStore;
+import com.github.jlgrock.snp.core.data.ClassifiedPceMongoDbStore;
+import com.github.jlgrock.snp.core.data.ClassifiedPceRepository;
+import com.github.jlgrock.snp.core.data.ClassifiedPceRepositoryImpl;
+import com.github.jlgrock.snp.core.data.ClassifiedPceStore;
 import com.github.jlgrock.snp.core.data.EncounterRepository;
 import com.github.jlgrock.snp.core.data.EncounterRepositoryImpl;
 import com.github.jlgrock.snp.core.data.PatientRepository;
@@ -99,11 +99,11 @@ public class ApplicationConfig extends ResourceConfig {
             protected void configure() {
                 bind(EncounterRepositoryImpl.class).to(EncounterRepository.class);
                 bind(PatientRepositoryImpl.class).to(PatientRepository.class);
-                bind(ClassifiedAssertionRepositoryImpl.class).to(ClassifiedAssertionRepository.class);
+                bind(ClassifiedPceRepositoryImpl.class).to(ClassifiedPceRepository.class);
                 
                 bind(PceClassifierServiceImpl.class).to(PceClassifierService.class);
                 bind(LegoClassifierImpl.class).to(PceClassifier.class);
-                bind(ClassifiedAssertionMongoDbStore.class).to(ClassifiedAssertionStore.class);
+                bind(ClassifiedPceMongoDbStore.class).to(ClassifiedPceStore.class);
                 bind(MultipartFileUtilsImpl.class).to(MultiPartFileUtils.class);
 
                 bind(ObservationReadConverter.class).to(ObservationReadConverter.class);
