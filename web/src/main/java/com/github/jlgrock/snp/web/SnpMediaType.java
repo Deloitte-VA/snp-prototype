@@ -6,6 +6,9 @@ package com.github.jlgrock.snp.web;
 import javax.ws.rs.core.MediaType;
 
 /**
+ * An abstraction for a media type. Instances are immutable. 
+ * Types are specific to the data types that are specific to the SNP application.
+ * 
  * @author shalewis
  *
  */

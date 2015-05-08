@@ -44,7 +44,7 @@ public class AssertionClassifierServiceImplTest {
 		
 		String expected = readFile("Assertion_Example_01.xml");
 		AssertionClassifierServiceImpl classSvc = new AssertionClassifierServiceImpl(assertionClassifier, cAssertStore);
-		classSvc.classifyAssertion(expected);
+//		classSvc.classifyAssertion(expected);
 		
 //		 TODO: need to add to test
 	}

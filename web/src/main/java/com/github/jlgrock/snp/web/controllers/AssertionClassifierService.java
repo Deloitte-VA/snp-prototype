@@ -11,7 +11,7 @@ import com.github.jlgrock.snp.core.domain.lego.LegoList;
 @Contract
 public interface AssertionClassifierService<T> {
 	
-	void classifyAssertion(final String xml);
+//	void classifyAssertion(final String xml);
 	
 //	void classifyAssertion(final InputStream inStream);
 	

@@ -31,10 +31,10 @@ public class AssertionClassifierServiceImpl implements
 		this.classAssertStore = classAssertStore;
 	}
 	
-	public void classifyAssertion(final String xml) {
-		ReaderInputStream ris = new ReaderInputStream(new StringReader(xml));
+//	public void classifyAssertion(final String xml) {
+//		ReaderInputStream ris = new ReaderInputStream(new StringReader(xml));
 //    	classifyAssertion(ris);
-	}
+//	}
 	
 //	public void classifyAssertion(final InputStream inStream) {
 //		LegoList legoList = parseStream(inStream);

@@ -29,6 +29,7 @@ import com.github.jlgrock.snp.core.data.PatientRepository;
 import com.github.jlgrock.snp.core.data.PatientRepositoryImpl;
 import com.github.jlgrock.snp.core.defaultconfig.MongoConfig;
 import com.github.jlgrock.snp.core.defaultconfig.WebConfig;
+import com.github.jlgrock.snp.core.domain.lego.Lego;
 import com.github.jlgrock.snp.web.controllers.AssertionClassifierService;
 import com.github.jlgrock.snp.web.controllers.AssertionClassifierServiceImpl;
 import com.github.jlgrock.snp.web.controllers.MultipartFileUtilsImpl;
@@ -37,6 +38,7 @@ import io.dropwizard.jersey.jackson.JacksonMessageBodyProvider;
 import io.dropwizard.jersey.jackson.JsonProcessingExceptionMapper;
 
 import org.glassfish.hk2.api.ServiceLocator;
+import org.glassfish.hk2.api.TypeLiteral;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.media.multipart.MultiPartFeature;
@@ -85,7 +87,7 @@ public class ApplicationConfig extends ResourceConfig {
         // Enable Tracing support.
         property(ServerProperties.TRACING, "ALL");
 
-        packages("com.github.jlgrock.snp.web", "com.github.jlgrock.snp.web.providers");
+        packages("com.github.jlgrock.snp.web");
         //doesn't work
         // ServiceLocator locator = ServiceLocatorUtilities.createAndPopulateServiceLocator();
 
@@ -101,7 +103,7 @@ public class ApplicationConfig extends ResourceConfig {
                 bind(PatientRepositoryImpl.class).to(PatientRepository.class);
                 bind(ClassifiedAssertionRepositoryImpl.class).to(ClassifiedAssertionRepository.class);
                 
-                bind(AssertionClassifierServiceImpl.class).to(AssertionClassifierService.class);
+                bind(AssertionClassifierServiceImpl.class).to(new TypeLiteral<AssertionClassifierService<Lego>>() {});
                 bind(AssertionClassifierImpl.class).to(AssertionClassifier.class);
                 bind(ClassifiedAssertionMongoDbStore.class).to(ClassifiedAssertionStore.class);
                 bind(MultipartFileUtilsImpl.class).to(MultiPartFileUtils.class);

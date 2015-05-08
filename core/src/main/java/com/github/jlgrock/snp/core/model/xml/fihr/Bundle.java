@@ -11,7 +11,7 @@ import javax.xml.stream.XMLStreamWriter;
 import com.google.common.base.MoreObjects;
 /**
  * Represents the content of FIHR XML document
- *
+ * @deprecated
  */
 public class Bundle {
 	private Id id;

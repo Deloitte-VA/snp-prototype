@@ -26,6 +26,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.github.jlgrock.snp.core.model.xml.fihr.Bundle;
+import com.github.jlgrock.snp.core.domain.lego.Lego;
 import com.github.jlgrock.snp.core.domain.lego.LegoList;
 import com.github.jlgrock.snp.web.SnpMediaType;
 import com.github.jlgrock.snp.web.SnpMediaTypeMapping;
@@ -33,16 +34,18 @@ import com.github.jlgrock.snp.web.controllers.AssertionClassifierService;
 
 /**
  * The controller for handling all classifier requests
+ * 
+ * @author shalewis
  */
 @Path("/classifier")
 public class ClassifierResource {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ClassifierResource.class);
 	
-	private AssertionClassifierService assertClssfrSvc;
+	private AssertionClassifierService<Lego> assertClssfrSvc;
 	
 	@Inject
-	public ClassifierResource(final AssertionClassifierService assertClssfrSvcIn) {
+	public ClassifierResource(final AssertionClassifierService<Lego> assertClssfrSvcIn) {
 		assertClssfrSvc = assertClssfrSvcIn;
 	}
 	

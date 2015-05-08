@@ -3,7 +3,6 @@ package com.github.jlgrock.snp.core.classifier;
 import org.jvnet.hk2.annotations.Contract;
 
 import com.github.jlgrock.snp.core.domain.ClassifiedAssertion;
-//import com.github.jlgrock.snp.core.model.xml.lego.Assertion;
 import com.github.jlgrock.snp.core.domain.lego.Assertion;
 
 /**
