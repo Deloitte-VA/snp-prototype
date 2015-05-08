@@ -10,7 +10,7 @@ import java.io.StringWriter;
 import java.util.Properties;
 
 /**
- *
+ * Utility class for reading properties values from a configuration file.
  */
 public final class PropertiesFileReader {
     private static final Logger LOGGER = LoggerFactory.getLogger(MongoConfig.class);
@@ -18,46 +18,81 @@ public final class PropertiesFileReader {
     private static final String PROPERTIES_FILE_NAME = "config.properties";
 
     private static String user;
+
     private static String password;
+
     private static String host;
+
     private static Integer port;
+
     private static String database;
+
     private static String filelocation;
 
+    /**
+     * Read the file at instantiation.
+     */
     static {
         readFile();
     }
 
+    /**
+     * @return the user from the configuration file
+     */
     public static String getUser() {
         return user;
     }
 
+    /**
+     * @return the password from the configuration file
+     */
     public static String getPassword() {
         return password;
     }
 
+    /**
+     * @return the hostname or ip address from the configuration file
+     */
     public static String getHost() {
         return host;
     }
 
+    /**
+     * @return the port from the configuration file
+     */
     public static Integer getPort() {
         return port;
     }
 
+    /**
+     * @return the name of the database from the configuration file
+     */
     public static String getDatabase() {
         return database;
     }
 
+    /**
+     * @return the file location of the webserver, as identified in the
+     * configuration file
+     */
     public static String getFilelocation() {
         return filelocation;
     }
 
+    /**
+     * Private constructor for a utility class
+     */
     private PropertiesFileReader() {
     }
 
-    static void readFile() {
+    private static void readFile() {
         readFile(null);
     }
+
+    /**
+     * Read the properties from the file identified
+     * @param filename the file to read in
+     */
     static void readFile(final String filename) {
         Properties prop = new Properties();
 
@@ -67,7 +102,7 @@ public final class PropertiesFileReader {
             fname = PROPERTIES_FILE_NAME;
         }
         LOGGER.info("Loading properties file [" + fname + "]");
-        InputStream inputStream = new PropertiesFileReader().getClass().getClassLoader().getResourceAsStream(fname);
+        InputStream inputStream = PropertiesFileReader.class.getClassLoader().getResourceAsStream(fname);
 
         if (inputStream != null) {
             try {
@@ -90,15 +125,15 @@ public final class PropertiesFileReader {
         password = prop.getProperty("mongodb.password");
         host = prop.getProperty("mongodb.host");
         try {
-            String parsedport = prop.getProperty("mongodb.port");
-            port = Integer.parseInt(parsedport);
-        } catch(NumberFormatException nfe) {
+            String parsedPort = prop.getProperty("mongodb.port");
+            port = Integer.parseInt(parsedPort);
+        } catch (NumberFormatException nfe) {
             LOGGER.error("mongodb.port is not a valid number.  Ignoring");
         }
         database = prop.getProperty("mongodb.database");
         try {
             filelocation = prop.getProperty("webserver.filelocation");
-        } catch(Exception e) {
+        } catch (Exception e) {
             LOGGER.error("webserver.filelocation is not a valid path.  Ignoring");
         }
     }

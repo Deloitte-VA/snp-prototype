@@ -7,16 +7,20 @@ import java.time.Instant;
 import java.time.LocalDate;
 
 /**
- *
+ * An abstract implementation to convert between a MongoDB DBObject to a java object.
  */
-public class AbstractReadConverter {
+public abstract class AbstractReadConverter {
     private Number parseNumber(final DBObject source, final String tag) {
-        return ((Number) source.get(EncounterTags.ID_TAG));
+        return (Number) source.get(EncounterTags.ID_TAG);
     }
 
+    /**
+     * Parses the document and the tag and returns the value to which the tag is mapped
+     * @param source document
+     * @param tag JSON key tags
+     * @return the value to which the tag is mapped
+     */
     protected Long parseLong(final DBObject source, final String tag) {
-        Long returnVal = null;
-
         Number num = parseNumber(source, tag);
         if (num == null) {
             return null;
@@ -24,9 +28,13 @@ public class AbstractReadConverter {
         return num.longValue();
     }
 
+    /**
+     * Parses the document and the tag and returns the value to which the tag is mapped
+     * @param source document
+     * @param tag JSON key tags
+     * @return the value to which the tag is mapped
+     */
     protected Integer parseInteger(final DBObject source, final String tag) {
-        Long returnVal = null;
-
         Number num = parseNumber(source, tag);
         if (num == null) {
             return null;
@@ -34,6 +42,12 @@ public class AbstractReadConverter {
         return num.intValue();
     }
 
+    /**
+     * Parses the document and the tag and returns the value to which the tag is mapped
+     * @param source document
+     * @param tag JSON key tags
+     * @return the value to which the tag is mapped
+     */
     protected LocalDate parseLocalDate(final DBObject source, final String tag) {
         Long num = parseLong(source, tag);
         if (num == null) {
@@ -42,6 +56,12 @@ public class AbstractReadConverter {
         return LocalDate.ofEpochDay(num);
     }
 
+    /**
+     * Parses the document and the tag and returns the value to which the tag is mapped
+     * @param source document
+     * @param tag JSON key tags
+     * @return the value to which the tag is mapped
+     */
     protected Instant parseInstant(final DBObject source, final String tag) {
         Long num = parseLong(source, tag);
         if (num == null) {
@@ -50,6 +70,12 @@ public class AbstractReadConverter {
         return Instant.ofEpochMilli(num);
     }
 
+    /**
+     * Parses the document and the tag and returns the value to which the tag is mapped
+     * @param source document
+     * @param tag JSON key tags
+     * @return the value to which the tag is mapped
+     */
     protected String parseString(final DBObject source, final String tag) {
         return (String) source.get(EncounterTags.REASON_FOR_VISIT_TAG);
     }

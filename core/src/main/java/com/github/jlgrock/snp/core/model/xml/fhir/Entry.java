@@ -1,9 +1,9 @@
-package com.github.jlgrock.snp.core.model.xml.fihr;
+package com.github.jlgrock.snp.core.model.xml.fhir;
 
 import com.google.common.base.MoreObjects;
 
 /**
- * The Entry class represents the entry element in the FIHR XML document.
+ * The Entry class represents the entry element in the FHIR XML document.
  *
  */
 public class Entry {

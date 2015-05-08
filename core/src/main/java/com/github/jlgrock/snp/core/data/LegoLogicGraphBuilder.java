@@ -1,31 +1,20 @@
 package com.github.jlgrock.snp.core.data;
 
-import gov.vha.isaac.logic.LogicGraphBuilder;
+import com.github.jlgrock.snp.core.model.xml.lego.Expression;
+import com.github.jlgrock.snp.core.model.xml.lego.Relation;
 import gov.vha.isaac.logic.Node;
 import gov.vha.isaac.logic.node.AndNode;
 import gov.vha.isaac.logic.node.RootNode;
-import gov.vha.isaac.lookup.constants.Constants;
-import gov.vha.isaac.metadata.coordinates.ViewCoordinates;
-import gov.vha.isaac.ochre.api.LookupService;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-
-import org.ihtsdo.otf.tcc.api.store.TerminologySnapshotDI;
-import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
-import org.ihtsdo.otf.tcc.api.uuid.UuidT3Generator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.github.jlgrock.snp.core.model.xml.lego.Expression;
-import com.github.jlgrock.snp.core.model.xml.lego.Relation;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A Logic Graph Builder specific to Lego documents.  This should only be used to
  */
-public class LegoLogicGraphBuilder extends LogicGraphBuilder {
+public class LegoLogicGraphBuilder extends AbstractLogicGraphBuilder {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(LegoLogicGraphBuilder.class);
     private final Expression expression;
@@ -55,7 +44,13 @@ public class LegoLogicGraphBuilder extends LogicGraphBuilder {
     	}
     }
     
-    public Node processRelation(Relation relation, int sourceConceptNid) {
+    /**
+     * Parse the relationship
+     * @param relation Relation
+     * @param sourceConceptNid int
+     * @return Node
+     */
+    public Node processRelation(final Relation relation, final int sourceConceptNid) {
     	if(relation.getDestination() != null && relation.getDestination().getExpression() != null
     			&& relation.getDestination().getExpression().getRelations() != null
     			&& !relation.getDestination().getExpression().getRelations().isEmpty()) {
@@ -75,38 +70,6 @@ public class LegoLogicGraphBuilder extends LogicGraphBuilder {
         andNode.addChildren(Concept(sourceConceptNid), SomeRole(typeConceptNid, Concept(destinationNid)));
         return SufficientSet(andNode);
     }
-        
-    public int getNidFromSNOMED(String sctid) {
-    	int nid = 0;
-    	try {
-    		TerminologyStoreDI termStore = LookupService.getService(TerminologyStoreDI.class);
-    		TerminologySnapshotDI termSnapshot = termStore.getSnapshot(ViewCoordinates.getDevelopmentInferredLatest());  	    
-    		UUID uuid = UuidT3Generator.fromSNOMED(Long.parseLong(sctid));
-
-    		//Get NID from UUID
-    		nid = termSnapshot.getNidForUuids(uuid);  
-    	} catch (IOException ex) {
-    		LOGGER.error("Fatal error occured", ex);
-    	}
-    	return nid;
-    }
-    
-    public static void startExpressionService() {
-    	if(LookupService.getRunLevelController().getCurrentRunLevel() != 2) {
-			System.setProperty(Constants.CHRONICLE_COLLECTIONS_ROOT_LOCATION_PROPERTY, "target/data/object-chronicles");
-    		System.setProperty(Constants.SEARCH_ROOT_LOCATION_PROPERTY, "target/data/search");
-
-    		LookupService.getRunLevelController().proceedTo(2);
-    		LOGGER.info("System up...");	
-		} else {
-			LOGGER.info("System already up and running!");
-		}
-    }
-    
-    public static void stopExpressionService() {
-    	LookupService.getRunLevelController().proceedTo(-1);
-	    LOGGER.info("System down...");
-    }
     
     /**
      * Constructor for LogicGraph using input parameters from LEGO XML expressions
@@ -115,4 +78,21 @@ public class LegoLogicGraphBuilder extends LogicGraphBuilder {
     public LegoLogicGraphBuilder(final Expression expressionIn) {
     	expression = expressionIn;
     }
+
+	@Override
+	public boolean equals(final Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		if (!super.equals(o)) return false;
+
+		LegoLogicGraphBuilder that = (LegoLogicGraphBuilder) o;
+
+		return !(expression != null ? !expression.equals(that.expression) : that.expression != null);
+
+	}
+
+	@Override
+	public int hashCode() {
+		return expression != null ? expression.hashCode() : 0;
+	}
 }

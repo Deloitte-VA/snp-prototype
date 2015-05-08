@@ -8,27 +8,27 @@ import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 
-import com.github.jlgrock.snp.core.model.xml.fihr.Bundle;
-import com.github.jlgrock.snp.core.model.xml.fihr.Category;
-import com.github.jlgrock.snp.core.model.xml.fihr.Code;
-import com.github.jlgrock.snp.core.model.xml.fihr.Coding;
-import com.github.jlgrock.snp.core.model.xml.fihr.Condition;
-import com.github.jlgrock.snp.core.model.xml.fihr.Display;
-import com.github.jlgrock.snp.core.model.xml.fihr.Entry;
-import com.github.jlgrock.snp.core.model.xml.fihr.FihrXmlConstants;
-import com.github.jlgrock.snp.core.model.xml.fihr.Id;
-import com.github.jlgrock.snp.core.model.xml.fihr.Location;
-import com.github.jlgrock.snp.core.model.xml.fihr.Onset;
-import com.github.jlgrock.snp.core.model.xml.fihr.OnsetDateTime;
-import com.github.jlgrock.snp.core.model.xml.fihr.Resource;
-import com.github.jlgrock.snp.core.model.xml.fihr.Status;
-import com.github.jlgrock.snp.core.model.xml.fihr.System;
-import com.github.jlgrock.snp.core.model.xml.fihr.Type;
+import com.github.jlgrock.snp.core.model.xml.fhir.Bundle;
+import com.github.jlgrock.snp.core.model.xml.fhir.Category;
+import com.github.jlgrock.snp.core.model.xml.fhir.Code;
+import com.github.jlgrock.snp.core.model.xml.fhir.Coding;
+import com.github.jlgrock.snp.core.model.xml.fhir.Condition;
+import com.github.jlgrock.snp.core.model.xml.fhir.Display;
+import com.github.jlgrock.snp.core.model.xml.fhir.Entry;
+import com.github.jlgrock.snp.core.model.xml.fhir.FhirXmlConstants;
+import com.github.jlgrock.snp.core.model.xml.fhir.Id;
+import com.github.jlgrock.snp.core.model.xml.fhir.Location;
+import com.github.jlgrock.snp.core.model.xml.fhir.Onset;
+import com.github.jlgrock.snp.core.model.xml.fhir.OnsetDateTime;
+import com.github.jlgrock.snp.core.model.xml.fhir.Resource;
+import com.github.jlgrock.snp.core.model.xml.fhir.Status;
+import com.github.jlgrock.snp.core.model.xml.fhir.System;
+import com.github.jlgrock.snp.core.model.xml.fhir.Type;
 /**
- * Parses FIHR XML document for retrieving Post Coordinated Expressions (PCEs)
+ * Parses FHIR XML document for retrieving Post Coordinated Expressions (PCEs)
  *
  */
-public class FihrXmlParser implements XmlParser<Bundle> {
+public class FhirXmlParser implements XmlParser<Bundle> {
 	private Bundle bundle;
 	
 	@Override
@@ -46,22 +46,22 @@ public class FihrXmlParser implements XmlParser<Bundle> {
 				switch (event) {
 					case XMLStreamConstants.START_ELEMENT :
 						switch(reader.getLocalName()) {
-							case FihrXmlConstants.ENTRY :
+							case FhirXmlConstants.ENTRY :
 								parseEntryAndAllChildren(reader);
 								break;
-							case FihrXmlConstants.ID :
+							case FhirXmlConstants.ID :
 								Id id = new Id();
 								for(int index = 0;index < reader.getAttributeCount();index++) {
-									if (FihrXmlConstants.VALUE.equals(reader.getAttributeLocalName(index))) {
+									if (FhirXmlConstants.VALUE.equals(reader.getAttributeLocalName(index))) {
 										id.setValue(reader.getAttributeValue(index));
 									}
 								}
 								bundle.setId(id);
 								break;
-							case FihrXmlConstants.TYPE :
+							case FhirXmlConstants.TYPE :
 								Type type = new Type();
 								for(int index = 0;index < reader.getAttributeCount();index++) {
-									if (FihrXmlConstants.VALUE.equals(reader.getAttributeLocalName(index))) {
+									if (FhirXmlConstants.VALUE.equals(reader.getAttributeLocalName(index))) {
 										type.setValue(reader.getAttributeValue(index));
 									}
 								}
@@ -99,10 +99,10 @@ public class FihrXmlParser implements XmlParser<Bundle> {
 			switch (event) {
 				case XMLStreamConstants.START_ELEMENT :
 					switch(reader.getLocalName()) {
-						case FihrXmlConstants.ENTRY :
+						case FhirXmlConstants.ENTRY :
 							currentEntry = new Entry();
 							break;
-						case FihrXmlConstants.RESOURCE :
+						case FhirXmlConstants.RESOURCE :
 							currentEntry.setResource(parseResourceAndAllChildren(reader));
 							break;
 						default :
@@ -115,7 +115,7 @@ public class FihrXmlParser implements XmlParser<Bundle> {
 					break;
 				case XMLStreamConstants.END_ELEMENT :
 					switch(reader.getLocalName()) {
-						case FihrXmlConstants.ENTRY :
+						case FhirXmlConstants.ENTRY :
 							bundle.addEntry(currentEntry);
 							break;
 						default :
@@ -140,7 +140,7 @@ public class FihrXmlParser implements XmlParser<Bundle> {
 			switch (event) {
 				case XMLStreamConstants.START_ELEMENT :
 					switch(reader.getLocalName()) {
-						case FihrXmlConstants.CONDITION :
+						case FhirXmlConstants.CONDITION :
 							resource.setCondition(parseConditionAndAllChildren(reader));
 							break;
 						default :
@@ -153,7 +153,7 @@ public class FihrXmlParser implements XmlParser<Bundle> {
 					break;
 				case XMLStreamConstants.END_ELEMENT :
 					switch(reader.getLocalName()) {
-						case FihrXmlConstants.RESOURCE :
+						case FhirXmlConstants.RESOURCE :
 							exit = true;
 							break;
 						default :
@@ -183,25 +183,25 @@ public class FihrXmlParser implements XmlParser<Bundle> {
 			switch (event) {
 				case XMLStreamConstants.START_ELEMENT :
 					switch(reader.getLocalName()) {
-						case FihrXmlConstants.CODE :
+						case FhirXmlConstants.CODE :
 							condition.setCode(parseCodeAndAllChildren(reader));
 							break;
-						case FihrXmlConstants.CATEGORY :
+						case FhirXmlConstants.CATEGORY :
 							condition.setCategory(parseCategoryAndAllChildren(reader));
 							break;
-						case FihrXmlConstants.STATUS :
+						case FhirXmlConstants.STATUS :
 							Status status = new Status();
 							for(int index = 0;index < reader.getAttributeCount();index++) {
-								if (FihrXmlConstants.VALUE.equals(reader.getAttributeLocalName(index))) {
+								if (FhirXmlConstants.VALUE.equals(reader.getAttributeLocalName(index))) {
 									status.setValue(reader.getAttributeValue(index));
 								}
 							}
 							condition.setStatus(status);
 							break;
-						case FihrXmlConstants.ONSET :
+						case FhirXmlConstants.ONSET :
 							condition.setOnset(parseOnsetAndAllChildren(reader));
 							break;
-						case FihrXmlConstants.LOCATION :
+						case FhirXmlConstants.LOCATION :
 							condition.setLocation(parseLocationAndAllChildren(reader));
 							break;
 						default :
@@ -214,22 +214,22 @@ public class FihrXmlParser implements XmlParser<Bundle> {
 					break;
 				case XMLStreamConstants.END_ELEMENT :
 					switch(reader.getLocalName()) {
-						case FihrXmlConstants.SUBJECT :
+						case FhirXmlConstants.SUBJECT :
 							condition.setSubject(tagContent);
 							break;
-						case FihrXmlConstants.ENCOUNTER :
+						case FhirXmlConstants.ENCOUNTER :
 							condition.setEncounter(tagContent);
 							break;
-						case FihrXmlConstants.ASSERTER :
+						case FhirXmlConstants.ASSERTER :
 							condition.setAsserter(tagContent);
 							break;
-						case FihrXmlConstants.DATE_ASSERTED :
+						case FhirXmlConstants.DATE_ASSERTED :
 							condition.setDateAsserted(tagContent);
 							break;
-						case FihrXmlConstants.NOTES :
+						case FhirXmlConstants.NOTES :
 							condition.setNotes(tagContent);
 							break;
-						case FihrXmlConstants.CONDITION :
+						case FhirXmlConstants.CONDITION :
 							exit = true;
 							break;
 						default :
@@ -259,7 +259,7 @@ public class FihrXmlParser implements XmlParser<Bundle> {
 			switch (event) {
 				case XMLStreamConstants.START_ELEMENT :
 					switch(reader.getLocalName()) {
-						case FihrXmlConstants.CODING :
+						case FhirXmlConstants.CODING :
 							code.setCoding(parseCodingAndAllChildren(reader));
 							break;
 						default :
@@ -272,7 +272,7 @@ public class FihrXmlParser implements XmlParser<Bundle> {
 					break;
 				case XMLStreamConstants.END_ELEMENT :
 					switch(reader.getLocalName()) {
-						case FihrXmlConstants.CODE :
+						case FhirXmlConstants.CODE :
 							exit = true;
 							break;
 						default :
@@ -302,7 +302,7 @@ public class FihrXmlParser implements XmlParser<Bundle> {
 			switch (event) {
 				case XMLStreamConstants.START_ELEMENT :
 					switch(reader.getLocalName()) {
-						case FihrXmlConstants.CODE :
+						case FhirXmlConstants.CODE :
 							category.setCode(parseCodeAndAllChildren(reader));
 							break;
 						default :
@@ -315,7 +315,7 @@ public class FihrXmlParser implements XmlParser<Bundle> {
 					break;
 				case XMLStreamConstants.END_ELEMENT :
 					switch(reader.getLocalName()) {
-						case FihrXmlConstants.CATEGORY :
+						case FhirXmlConstants.CATEGORY :
 							exit = true;
 							break;
 						default :
@@ -345,28 +345,28 @@ public class FihrXmlParser implements XmlParser<Bundle> {
 			switch (event) {
 				case XMLStreamConstants.START_ELEMENT :
 					switch(reader.getLocalName()) {
-						case FihrXmlConstants.SYSTEM :
+						case FhirXmlConstants.SYSTEM :
 							System system = new System();
 							for(int index = 0;index < reader.getAttributeCount();index++) {
-								if (FihrXmlConstants.VALUE.equals(reader.getAttributeLocalName(index))) {
+								if (FhirXmlConstants.VALUE.equals(reader.getAttributeLocalName(index))) {
 									system.setValue(reader.getAttributeValue(index));
 								}
 							}
 							coding.setSystem(system);
 							break;
-						case FihrXmlConstants.CODE :
+						case FhirXmlConstants.CODE :
 							Code code = new Code();
 							for(int index = 0;index < reader.getAttributeCount();index++) {
-								if (FihrXmlConstants.VALUE.equals(reader.getAttributeLocalName(index))) {
+								if (FhirXmlConstants.VALUE.equals(reader.getAttributeLocalName(index))) {
 									code.setValue(reader.getAttributeValue(index));
 								}
 							}
 							coding.setCode(code);
 							break;
-						case FihrXmlConstants.DISPLAY :
+						case FhirXmlConstants.DISPLAY :
 							Display display = new Display();
 							for(int index = 0;index < reader.getAttributeCount();index++) {
-								if (FihrXmlConstants.VALUE.equals(reader.getAttributeLocalName(index))) {
+								if (FhirXmlConstants.VALUE.equals(reader.getAttributeLocalName(index))) {
 									display.setValue(reader.getAttributeValue(index));
 								}
 							}
@@ -382,7 +382,7 @@ public class FihrXmlParser implements XmlParser<Bundle> {
 					break;
 				case XMLStreamConstants.END_ELEMENT :
 					switch(reader.getLocalName()) {
-						case FihrXmlConstants.CODING :
+						case FhirXmlConstants.CODING :
 							exit = true;
 							break;
 						default :
@@ -412,10 +412,10 @@ public class FihrXmlParser implements XmlParser<Bundle> {
 			switch (event) {
 				case XMLStreamConstants.START_ELEMENT :
 					switch(reader.getLocalName()) {
-						case FihrXmlConstants.ONSET_DATE_TIME :
+						case FhirXmlConstants.ONSET_DATE_TIME :
 							OnsetDateTime onsetDateTime = new OnsetDateTime();
 							for(int index = 0;index < reader.getAttributeCount();index++) {
-								if (FihrXmlConstants.VALUE.equals(reader.getAttributeLocalName(index))) {
+								if (FhirXmlConstants.VALUE.equals(reader.getAttributeLocalName(index))) {
 									onsetDateTime.setValue(reader.getAttributeValue(index));
 								}
 							}
@@ -431,7 +431,7 @@ public class FihrXmlParser implements XmlParser<Bundle> {
 					break;
 				case XMLStreamConstants.END_ELEMENT :
 					switch(reader.getLocalName()) {
-						case FihrXmlConstants.ONSET :
+						case FhirXmlConstants.ONSET :
 							exit = true;
 							break;
 						default :
@@ -461,7 +461,7 @@ public class FihrXmlParser implements XmlParser<Bundle> {
 			switch (event) {
 				case XMLStreamConstants.START_ELEMENT :
 					switch(reader.getLocalName()) {
-						case FihrXmlConstants.CODE :
+						case FhirXmlConstants.CODE :
 							location.setCode(parseCodeAndAllChildren(reader));
 							break;
 						default :
@@ -474,7 +474,7 @@ public class FihrXmlParser implements XmlParser<Bundle> {
 					break;
 				case XMLStreamConstants.END_ELEMENT :
 					switch(reader.getLocalName()) {
-						case FihrXmlConstants.LOCATION :
+						case FhirXmlConstants.LOCATION :
 							exit = true;
 							break;
 						default :
