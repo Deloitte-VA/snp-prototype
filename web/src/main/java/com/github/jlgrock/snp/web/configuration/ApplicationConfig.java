@@ -6,12 +6,12 @@ import com.github.jlgrock.snp.apis.connection.configuration.MongoDbConfiguration
 import com.github.jlgrock.snp.apis.connection.configuration.WebConfiguration;
 import com.github.jlgrock.snp.apis.connection.synchronization.TransactionSynchronizationManager;
 import com.github.jlgrock.snp.apis.data.MultiPartFileUtils;
-import com.github.jlgrock.snp.core.classifier.AssertionClassifier;
-import com.github.jlgrock.snp.core.classifier.AssertionClassifierImpl;
+import com.github.jlgrock.snp.core.classifier.PceClassifier;
+import com.github.jlgrock.snp.core.classifier.LegoClassifierImpl;
 import com.github.jlgrock.snp.core.connection.SimpleMongoDbFactory;
 import com.github.jlgrock.snp.core.connection.SynchronizedMongoDatabaseManager;
 import com.github.jlgrock.snp.core.connection.synchronization.CollectionSynchronizationManager;
-import com.github.jlgrock.snp.core.converters.ClassifiedAssertionReadConverter;
+import com.github.jlgrock.snp.core.converters.ClassifiedPceReadConverter;
 import com.github.jlgrock.snp.core.converters.ClassifiedAssertionWriteConverter;
 import com.github.jlgrock.snp.core.converters.EncounterReadConverter;
 import com.github.jlgrock.snp.core.converters.EncounterWriteConverter;
@@ -19,18 +19,18 @@ import com.github.jlgrock.snp.core.converters.ObservationReadConverter;
 import com.github.jlgrock.snp.core.converters.ObservationWriteConverter;
 import com.github.jlgrock.snp.core.converters.PatientReadConverter;
 import com.github.jlgrock.snp.core.converters.PatientWriteConverter;
-import com.github.jlgrock.snp.core.data.ClassifiedAssertionMongoDbStore;
-import com.github.jlgrock.snp.core.data.ClassifiedAssertionRepository;
-import com.github.jlgrock.snp.core.data.ClassifiedAssertionRepositoryImpl;
-import com.github.jlgrock.snp.core.data.ClassifiedAssertionStore;
+import com.github.jlgrock.snp.core.data.ClassifiedPceMongoDbStore;
+import com.github.jlgrock.snp.core.data.ClassifiedPceRepository;
+import com.github.jlgrock.snp.core.data.ClassifiedPceRepositoryImpl;
+import com.github.jlgrock.snp.core.data.ClassifiedPceStore;
 import com.github.jlgrock.snp.core.data.EncounterRepository;
 import com.github.jlgrock.snp.core.data.EncounterRepositoryImpl;
 import com.github.jlgrock.snp.core.data.PatientRepository;
 import com.github.jlgrock.snp.core.data.PatientRepositoryImpl;
 import com.github.jlgrock.snp.core.defaultconfig.MongoConfig;
 import com.github.jlgrock.snp.core.defaultconfig.WebConfig;
-import com.github.jlgrock.snp.web.controllers.AssertionClassifierService;
-import com.github.jlgrock.snp.web.controllers.AssertionClassifierServiceImpl;
+import com.github.jlgrock.snp.web.controllers.PceClassifierService;
+import com.github.jlgrock.snp.web.controllers.PceClassifierServiceImpl;
 import com.github.jlgrock.snp.web.controllers.MultipartFileUtilsImpl;
 
 import io.dropwizard.jersey.jackson.JacksonMessageBodyProvider;
@@ -99,11 +99,11 @@ public class ApplicationConfig extends ResourceConfig {
             protected void configure() {
                 bind(EncounterRepositoryImpl.class).to(EncounterRepository.class);
                 bind(PatientRepositoryImpl.class).to(PatientRepository.class);
-                bind(ClassifiedAssertionRepositoryImpl.class).to(ClassifiedAssertionRepository.class);
+                bind(ClassifiedPceRepositoryImpl.class).to(ClassifiedPceRepository.class);
                 
-                bind(AssertionClassifierServiceImpl.class).to(AssertionClassifierService.class);
-                bind(AssertionClassifierImpl.class).to(AssertionClassifier.class);
-                bind(ClassifiedAssertionMongoDbStore.class).to(ClassifiedAssertionStore.class);
+                bind(PceClassifierServiceImpl.class).to(PceClassifierService.class);
+                bind(LegoClassifierImpl.class).to(PceClassifier.class);
+                bind(ClassifiedPceMongoDbStore.class).to(ClassifiedPceStore.class);
                 bind(MultipartFileUtilsImpl.class).to(MultiPartFileUtils.class);
 
                 bind(ObservationReadConverter.class).to(ObservationReadConverter.class);
@@ -115,7 +115,7 @@ public class ApplicationConfig extends ResourceConfig {
                 bind(PatientReadConverter.class).to(PatientReadConverter.class);
                 bind(PatientWriteConverter.class).to(PatientWriteConverter.class);
 
-                bind(ClassifiedAssertionReadConverter.class).to(ClassifiedAssertionReadConverter.class);
+                bind(ClassifiedPceReadConverter.class).to(ClassifiedPceReadConverter.class);
                 bind(ClassifiedAssertionWriteConverter.class).to(ClassifiedAssertionWriteConverter.class);
 
 
