@@ -2,6 +2,12 @@ package com.github.jlgrock.snp.core.parser;
 
 import java.io.InputStream;
 
+/**
+ * 
+ * Parses XML document
+ *
+ * @param <T> the deserialized java object
+ */
 public interface XmlParser<T> {
 
 	/**

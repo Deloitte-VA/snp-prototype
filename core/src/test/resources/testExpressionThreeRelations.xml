@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<legoList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="LEGO.xsd">
+	<groupName>Audiology OBSERVABLES</groupName>
+	<legoListUUID>530391c6-fe77-4638-ba99-1c33cae59ab5</legoListUUID>
+	<groupDescription>Observables for new VA Audiology form</groupDescription>
+	<comment></comment>
+	<lego>
+		<legoUUID>3d51bdd3-6c22-4763-b503-a50a18e89490</legoUUID>
+		<stamp status="Active" time="2013-07-31T00:10:28.333-07:00" author="dsperzel" module="default module" path="default path" uuid="8da17010-acfd-4048-88ea-494d55c90559"/>
+		<pncs id="101" name="Average hearing threshold in right ear" value="PNCS_VALUE_FIELD"/>
+		<assertion>
+			<assertionUUID>3ffb0d64-44d6-40ff-8fab-c549f1468c2b</assertionUUID>
+			<discernible>
+				<expression>
+					<concept sctid="89269003" uuid="816a0a98-fc57-37a8-9581-83dc049d0189" desc="Threshold of hearing (observable entity)" />
+					<relation>
+						<type>
+							<concept sctid="39" uuid="d67d8ab4-f4c1-3bf2-aaa3-53e27879133c" desc="PROPERTY TYPE (attribute)" />
+						</type>
+						<destination>
+							<expression>
+								<concept sctid="118589004" uuid="15e7eff2-66be-3502-8e54-d174e3139608" desc="Threshold (property) (qualifier value)" />
+							</expression>
+						</destination>
+					</relation>
+					<relation>
+						<type>
+							<concept sctid="36" uuid="19ca14e7-ea63-38a4-ae0e-b13d585e4c22" desc="INHERES IN (attribute)" />
+						</type>
+						<destination>
+							<expression>
+								<concept sctid="22945000" uuid="cfbb74be-3c4b-3b25-b571-e1f709859b6e" desc="Inner ear structure (body structure)" />
+								<relation>
+									<type>
+										<concept sctid="272741003" uuid="26ca4590-bbe5-327c-a40a-ba56dc86996b" desc="Laterality (attribute)" />
+									</type>
+									<destination>
+										<expression>
+											<concept sctid="24028007" uuid="0b506040-5d71-3287-813a-d9e4d74d928b" desc="Right (qualifier value)" />
+										</expression>
+									</destination>
+								</relation>
+							</expression>
+						</destination>
+					</relation>
+				</expression>
+			</discernible>
+			<qualifier>
+				<expression>
+					<concept sctid="252577008" uuid="6a66c427-650c-3401-adca-025c17c3933b" desc="Pure tone audiometry (procedure)" />
+				</expression>
+			</qualifier>
+			<value>
+				<measurement>
+					<units>
+						<concept sctid="259042002" uuid="4db394d1-a0a5-348e-9262-0b7c277021aa" desc="decibel (qualifier value)" />
+					</units>
+					<point xsi:type="pointLong">
+						<value>-10000</value>
+					</point>
+				</measurement>
+			</value>
+		</assertion>
+	</lego>
+</legoList>

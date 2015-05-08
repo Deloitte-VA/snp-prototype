@@ -33,7 +33,7 @@ public class FhirController {
 
     private WebConfiguration webConfiguration;
     
-    private AssertionClassifierService assertClssfrSvc;
+    private PceClassifierService assertClssfrSvc;
 
     /**
      * Default constructor.
@@ -43,7 +43,7 @@ public class FhirController {
     @Inject
     public FhirController(final WebConfiguration webConfigurationIn,
                           final MultiPartFileUtils multipartFileUtilsIn,
-                          final AssertionClassifierService assertClssfrSvcIn) {
+                          final PceClassifierService assertClssfrSvcIn) {
         webConfiguration = webConfigurationIn;
         multipartFileUtils = multipartFileUtilsIn;
         assertClssfrSvc = assertClssfrSvcIn;

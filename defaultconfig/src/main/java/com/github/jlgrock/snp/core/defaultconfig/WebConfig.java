@@ -17,6 +17,10 @@ public class WebConfig implements WebConfiguration {
 
     private String filepath;
 
+    /**
+     * Create the configuration object.  This will read the default properties
+     * file and use it for the web application.
+     */
     public WebConfig() {
         filepath = PropertiesFileReader.getFilelocation();
         if (filepath == null) {

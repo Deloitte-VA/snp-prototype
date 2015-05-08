@@ -47,6 +47,9 @@
         <project.rootdir>${project.basedir}</project.rootdir>
         <source.jdk>1.8</source.jdk>
         <target.jdk>1.8</target.jdk>
+        
+        <!-- VHA versions -->
+		<solor.version>1.6</solor.version>
 
         <jackson.version>2.5.0</jackson.version>
         <slf4j.version>1.7.9</slf4j.version>
@@ -61,7 +64,7 @@
         <testng.version>6.8.21</testng.version>
         <hk2testing.version>2.4.0-b11</hk2testing.version>
         <jackson-jaxrs-json-provider.version>2.5.1</jackson-jaxrs-json-provider.version>
-        <vha-isaac-logic.version>1.4</vha-isaac-logic.version>
+        <vha-isaac-logic.version>1.8</vha-isaac-logic.version>
         <commons-io.version>2.4</commons-io.version>
         <jaxb.version>1.6</jaxb.version>
         
