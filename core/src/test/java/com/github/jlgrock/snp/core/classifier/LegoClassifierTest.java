@@ -6,16 +6,24 @@ import static org.testng.Assert.assertNull;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import com.github.jlgrock.snp.core.domain.ClassifiedAssertion;
+import com.github.jlgrock.snp.core.domain.ClassifiedPce;
 import com.github.jlgrock.snp.core.model.xml.lego.Assertion;
 import com.github.jlgrock.snp.core.model.xml.lego.Destination;
 import com.github.jlgrock.snp.core.model.xml.lego.Discernible;
 import com.github.jlgrock.snp.core.model.xml.lego.Expression;
 import com.github.jlgrock.snp.core.model.xml.lego.Relation;
 
-public class AssertionClassifierTest {
+public class LegoClassifierTest {
+	private LegoClassifierImpl legoClassifier;
+	
+	@BeforeClass
+	public void setUp() {
+		legoClassifier = new LegoClassifierImpl();
+		legoClassifier.setLogicGraphClassifier(new LegoLogicGraphClassifierImpl());
+	}
 	
 	@Test
 	public void testClassifyComplexExpression() {
@@ -34,8 +42,7 @@ public class AssertionClassifierTest {
 		discernible.setExpression(expression);
 		assertion.setDiscernible(discernible);			
 		
-		AssertionClassifier assertionClassifier = new AssertionClassifierImpl();
-		ClassifiedAssertion classifiedAssertion = assertionClassifier.classify(assertion);
+		ClassifiedPce classifiedAssertion = legoClassifier.classify(assertion);
 		assertNotNull(classifiedAssertion.getUuid(), "complex expression is missing uuid");		
 	}
 	
@@ -48,8 +55,7 @@ public class AssertionClassifierTest {
 		discernible.setExpression(expression);
 		assertion.setDiscernible(discernible);
 		
-		AssertionClassifier assertionClassifier = new AssertionClassifierImpl();
-		ClassifiedAssertion classifiedAssertion = assertionClassifier.classify(assertion);
+		ClassifiedPce classifiedAssertion = legoClassifier.classify(assertion);
 		assertNull(classifiedAssertion.getUuid(), "simple expression does not need uuid");		
 	}
 }

@@ -4,11 +4,14 @@ import com.github.jlgrock.snp.core.model.xml.lego.Expression;
 
 import java.util.UUID;
 
+import org.jvnet.hk2.annotations.Service;
+
 /**
  * Replace Post Coordinated Expressions in Logic Graph with Classifier ID
  *
  */
-public class LogicGraphClassifierImpl implements LogicGraphClassifier {
+@Service
+public class LegoLogicGraphClassifierImpl implements LogicGraphClassifier<Expression> {
 
 
 	@Override

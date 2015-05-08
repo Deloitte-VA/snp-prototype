@@ -11,24 +11,24 @@ import org.mockito.MockitoAnnotations;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import com.github.jlgrock.snp.core.classifier.AssertionClassifier;
-import com.github.jlgrock.snp.core.data.ClassifiedAssertionStore;
-import com.github.jlgrock.snp.core.domain.ClassifiedAssertion;
+import com.github.jlgrock.snp.core.classifier.PceClassifier;
+import com.github.jlgrock.snp.core.data.ClassifiedPceStore;
+import com.github.jlgrock.snp.core.domain.ClassifiedPce;
 import com.github.jlgrock.snp.core.model.xml.lego.Assertion;
 
 public class AssertionClassifierServiceImplTest {
 	
 	@Mock
-	AssertionClassifier assertionClassifier;
+	PceClassifier assertionClassifier;
 	
 	@Mock
-	ClassifiedAssertionStore cAssertStore;
+	ClassifiedPceStore cAssertStore;
 	
 	@Mock
 	Assertion assertion;
 	
 	@Mock
-	ClassifiedAssertion cAssertion;
+	ClassifiedPce cAssertion;
 
     @BeforeClass
     public void setUpTests() throws Exception {
@@ -43,7 +43,7 @@ public class AssertionClassifierServiceImplTest {
 //		Mockito.verify(cAssertStore.save(Mockito.anyLong(), cAssertion));
 		
 		String expected = readFile("Assertion_Example_01.xml");
-		AssertionClassifierServiceImpl classSvc = new AssertionClassifierServiceImpl(assertionClassifier, cAssertStore);
+		PceClassifierServiceImpl classSvc = new PceClassifierServiceImpl(assertionClassifier, cAssertStore);
 		classSvc.classifyAssertion(expected);
 		
 //		 TODO: need to add to test
