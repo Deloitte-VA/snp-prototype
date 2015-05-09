@@ -4,7 +4,7 @@ import java.util.UUID;
 
 import org.jvnet.hk2.annotations.Service;
 
-import com.github.jlgrock.snp.core.domain.ClassifiedPce;
+import com.github.jlgrock.snp.core.domain.ClassifiedAssertion;
 import com.github.jlgrock.snp.core.domain.lego.Assertion;
 import com.github.jlgrock.snp.core.domain.lego.Expression;
 
@@ -15,10 +15,10 @@ import com.github.jlgrock.snp.core.domain.lego.Expression;
 public class AssertionClassifierImpl implements AssertionClassifier {
 
 	@Override
-	public ClassifiedPce classify(final Assertion assertion) {
-		LogicGraphClassifier lgClassifier = new LegoLogicGraphClassifierImpl();
+	public ClassifiedAssertion classify(final Assertion assertion) {
+		LogicGraphClassifierImpl lgClassifier = new LogicGraphClassifierImpl();
 		Expression expression = assertion.getDiscernible().getExpression();
-		ClassifiedPce classifiedAssertion = new ClassifiedPce();
+		ClassifiedAssertion classifiedAssertion = new ClassifiedAssertion();
 		//check for complex expression since simple expression is not being classified
 		if(expression.getRelation().size() > 0) {
 			UUID uuid = lgClassifier.classify(expression);

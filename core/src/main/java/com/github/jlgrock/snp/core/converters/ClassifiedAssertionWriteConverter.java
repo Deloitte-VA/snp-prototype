@@ -1,8 +1,8 @@
 package com.github.jlgrock.snp.core.converters;
 
 import com.github.jlgrock.snp.apis.converters.WriteConverter;
-import com.github.jlgrock.snp.core.data.AssertionTags;
-import com.github.jlgrock.snp.core.domain.ClassifiedAssertion;
+import com.github.jlgrock.snp.core.data.ClassifiedPceTags;
+import com.github.jlgrock.snp.core.domain.ClassifiedPce;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 import org.jvnet.hk2.annotations.Service;
@@ -14,12 +14,12 @@ import javax.inject.Named;
  */
 @Service
 @Named
-public class ClassifiedAssertionWriteConverter implements WriteConverter<ClassifiedAssertion, DBObject> {
+public class ClassifiedAssertionWriteConverter implements WriteConverter<ClassifiedPce, DBObject> {
     @Override
-    public DBObject convert(final ClassifiedAssertion source) {
+    public DBObject convert(final ClassifiedPce source) {
         DBObject dbo = new BasicDBObject();
-        dbo.put(AssertionTags.ID_TAG, source.getId());
-        dbo.put(AssertionTags.DESCRIPTION_TAG, source.getDesc());
+        dbo.put(ClassifiedPceTags.ID_TAG, source.getId());
+        dbo.put(ClassifiedPceTags.DESCRIPTION_TAG, source.getDesc());
         return dbo;
 
     }

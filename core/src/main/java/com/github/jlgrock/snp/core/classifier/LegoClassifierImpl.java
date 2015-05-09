@@ -12,20 +12,24 @@ import com.github.jlgrock.snp.core.domain.lego.Expression;
  * Classify an assertion object with a complex expression
  */
 @Service
-public class AssertionClassifierImpl implements AssertionClassifier {
-
+public class LegoClassifierImpl implements PceClassifier<Assertion> {
+	private LogicGraphClassifier<Expression> logicGraphClassifier;
+	
 	@Override
-	public ClassifiedPce classify(final Assertion assertion) {
-		LogicGraphClassifier lgClassifier = new LegoLogicGraphClassifierImpl();
-		Expression expression = assertion.getDiscernible().getExpression();
+	public ClassifiedPce classify(final Assertion pce) {
+		Expression expression = pce.getDiscernible().getExpression();
 		ClassifiedPce classifiedAssertion = new ClassifiedPce();
 		//check for complex expression since simple expression is not being classified
 		if(expression.getRelation().size() > 0) {
-			UUID uuid = lgClassifier.classify(expression);
+			UUID uuid = logicGraphClassifier.classify(expression);
 			classifiedAssertion.setUuid(uuid);
 		}
 		
 		return classifiedAssertion;
 	}
 
+	public void setLogicGraphClassifier(final LogicGraphClassifier<Expression> logicGraphClassifierIn) {
+		logicGraphClassifier = logicGraphClassifierIn;
+	}
+	
 }

@@ -1,8 +1,8 @@
 package com.github.jlgrock.snp.web.controllers;
 
-import com.github.jlgrock.snp.core.classifier.AssertionClassifier;
-import com.github.jlgrock.snp.core.data.ClassifiedAssertionStore;
-import com.github.jlgrock.snp.core.domain.ClassifiedAssertion;
+import com.github.jlgrock.snp.core.classifier.PceClassifier;
+import com.github.jlgrock.snp.core.data.ClassifiedPceStore;
+import com.github.jlgrock.snp.core.domain.ClassifiedPce;
 import com.github.jlgrock.snp.core.domain.lego.Assertion;
 import com.github.jlgrock.snp.core.domain.lego.Lego;
 import com.github.jlgrock.snp.core.domain.lego.LegoList;
@@ -16,15 +16,15 @@ import java.io.StringReader;
 import java.util.List;
 
 @Service
-public class AssertionClassifierServiceImpl implements
-		AssertionClassifierService<Lego> {
+public class PceClassifierServiceImpl implements
+		PceClassifierService<Lego> {
 	
-	AssertionClassifier assertClassifier;
-	ClassifiedAssertionStore classAssertStore; 
+	PceClassifier assertClassifier;
+	ClassifiedPceStore classAssertStore;
 	
 	@Inject
-	protected AssertionClassifierServiceImpl(final AssertionClassifier assertClassifierIn,
-			final ClassifiedAssertionStore classAssertStoreIn) {
+	protected PceClassifierServiceImpl(final PceClassifier assertClassifierIn,
+			final ClassifiedPceStore classAssertStoreIn) {
 		this.assertClassifier = assertClassifierIn;
 		this.classAssertStore = classAssertStoreIn;
 	}
@@ -44,7 +44,7 @@ public class AssertionClassifierServiceImpl implements
     	for (Lego lego : legos) {
     		// FIXME: add loop
     		Assertion assertion = lego.getAssertion().get(0);
-        	ClassifiedAssertion cAssertion = assertClassifier.classify(assertion);
+        	ClassifiedPce cAssertion = assertClassifier.classify(assertion);
         	
         	// FIXME: need to capture patient id
         	Long patientId = 0L;

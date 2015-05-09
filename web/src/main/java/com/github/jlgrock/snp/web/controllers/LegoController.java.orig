@@ -38,7 +38,11 @@ public class LegoController {
 
     private WebConfiguration webConfiguration;
     
-    private PceClassifierService<Lego> assertClssfrSvc;
+<<<<<<< HEAD
+    private AssertionClassifierService<Lego> assertClssfrSvc;
+=======
+    private PceClassifierService assertClssfrSvc;
+>>>>>>> e4c3bbc7791a5901c706fbeb454626b28cefb83e
 
     /**
      * Default constructor.
@@ -49,7 +53,11 @@ public class LegoController {
     @Inject
     public LegoController(final WebConfiguration webConfigurationIn,
                           final MultiPartFileUtils multipartFileUtilsIn,
-                          final PceClassifierService<Lego> assertClssfrSvcIn) {
+<<<<<<< HEAD
+                          final AssertionClassifierService<Lego> assertClssfrSvcIn) {
+=======
+                          final PceClassifierService assertClssfrSvcIn) {
+>>>>>>> e4c3bbc7791a5901c706fbeb454626b28cefb83e
         webConfiguration = webConfigurationIn;
         multipartFileUtils = multipartFileUtilsIn;
         assertClssfrSvc = assertClssfrSvcIn;

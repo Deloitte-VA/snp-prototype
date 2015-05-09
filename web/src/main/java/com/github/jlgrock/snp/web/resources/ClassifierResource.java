@@ -30,7 +30,7 @@ import com.github.jlgrock.snp.core.domain.lego.Lego;
 import com.github.jlgrock.snp.core.domain.lego.LegoList;
 import com.github.jlgrock.snp.web.SnpMediaType;
 import com.github.jlgrock.snp.web.SnpMediaTypeMapping;
-import com.github.jlgrock.snp.web.controllers.AssertionClassifierService;
+import com.github.jlgrock.snp.web.controllers.PceClassifierService;
 
 /**
  * The controller for handling all classifier requests
@@ -42,10 +42,10 @@ public class ClassifierResource {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ClassifierResource.class);
 	
-	private AssertionClassifierService<Lego> assertClssfrSvc;
+	private PceClassifierService<Lego> assertClssfrSvc;
 	
 	@Inject
-	public ClassifierResource(final AssertionClassifierService<Lego> assertClssfrSvcIn) {
+	public ClassifierResource(final PceClassifierService<Lego> assertClssfrSvcIn) {
 		assertClssfrSvc = assertClssfrSvcIn;
 	}
 	

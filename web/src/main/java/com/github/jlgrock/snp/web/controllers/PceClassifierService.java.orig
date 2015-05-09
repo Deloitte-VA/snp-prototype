@@ -9,11 +9,15 @@ import com.github.jlgrock.snp.core.domain.lego.Lego;
 import com.github.jlgrock.snp.core.domain.lego.LegoList;
 
 @Contract
+<<<<<<< HEAD:web/src/main/java/com/github/jlgrock/snp/web/controllers/AssertionClassifierService.java
 public interface AssertionClassifierService<T> {
 	
 //	void classifyAssertion(final String xml);
 	
 //	void classifyAssertion(final InputStream inStream);
+=======
+public interface PceClassifierService {
+>>>>>>> e4c3bbc7791a5901c706fbeb454626b28cefb83e:web/src/main/java/com/github/jlgrock/snp/web/controllers/PceClassifierService.java
 	
 	public void classifyAssertion(final List<T> legos);
 	
