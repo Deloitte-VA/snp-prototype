@@ -2,7 +2,7 @@ package com.github.jlgrock.snp.web;
 
 import javax.ws.rs.core.MediaType;
 
-import com.github.jlgrock.snp.core.model.xml.fihr.Bundle;
+import com.github.jlgrock.snp.core.model.xml.fhir.Bundle;
 import com.github.jlgrock.snp.core.domain.lego.LegoList;
 
 /**

@@ -1,12 +1,12 @@
-package com.github.jlgrock.snp.core.model.xml.fihr;
+package com.github.jlgrock.snp.core.model.xml.fhir;
 
 import com.google.common.base.MoreObjects;
 
 /**
- * The Display class represents the display element in the FIHR XML document.
+ * The Status class represents the status element in the FHIR XML document.
  *
  */
-public class Display {
+public class Status {
 	private String value;
 
 	public String getValue() {

@@ -16,7 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * This class executes queries against the Encounter
+ * Collection within MongoDB.
  */
 @Service
 public class EncounterRepositoryImpl extends
@@ -26,6 +27,12 @@ public class EncounterRepositoryImpl extends
 
 	private final EncounterWriteConverter encounterWriteConverter;
 
+	/**
+	 * create the EncounterRepositoryImpl
+	 * @param mongoDbFactoryIn MongoDbFactory mongoDB instance
+	 * @param encounterReadConverterIn EncounterReadConverter conversion class
+	 * @param encounterWriteConverterIn EncounterWriteConverter conversion class
+	 */
 	@Inject
 	protected EncounterRepositoryImpl(final MongoDbFactory mongoDbFactoryIn,
 									  final EncounterReadConverter encounterReadConverterIn,
@@ -41,6 +48,11 @@ public class EncounterRepositoryImpl extends
 	}
 
 
+	/**
+	 * find encounter by date
+	 * @param date LocalDate
+	 * @return List<Encounter> list of encounter objects
+	 */
 	public List<Encounter> findByDate(final LocalDate date) {
 		List<Encounter> eList = new ArrayList<>();
 		DBCollection dbc1 = dBCollection();

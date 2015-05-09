@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Condition xmlns='http://hl7.org/fhir'>
+	<text>
+		<status value='generated' />
+		<div xmlns='http://www.w3.org/1999/xhtml'>HTML CONTENT TO BE EMBEDDED HERE. CURRENTLY NOT
+			AVAILABLE</div>
+	</text>
+	<subject>
+		<reference value='Patient/100' />
+		<display value='John Doe' />
+	</subject>
+	<encounter>
+		<reference value='Encounter/Encounter_John Doe_2015-05-01' />
+	</encounter>
+	<asserter>
+		<reference value='Patient/100' />
+		<display value='John Doe' />
+	</asserter>
+	<dateAsserted value='2015-05-01' />
+	<code>
+		<coding>
+			<system value='http://snomed.info/sct' />
+			<code value='246636008' />
+			<display value='Hazy vision (disorder)' />
+		</coding>
+	</code>
+	<category>
+		<coding>
+			<system value='http://snomed.info/sct' />
+			<code value='439401001' />
+			<display value='Diagnosis' />
+		</coding>
+	</category>
+	<status value='confirmed' />
+	<onsetDate value='2015-05-01' />
+	<location>
+		<code>
+			<coding>
+				<system value='http://snomed.info/sct' />
+				<code value='18944008' />
+				<display value='Right eye structure (body structure)' />
+			</coding>
+		</code>
+	</location>
+</Condition>

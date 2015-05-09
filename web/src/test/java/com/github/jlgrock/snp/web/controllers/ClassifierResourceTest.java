@@ -38,7 +38,7 @@ public class ClassifierResourceTest extends GenericControllerTest {
 				bindFactory(new Factory<WebConfiguration>() {
 					@Override
 					public WebConfiguration provide() {
-						return webconfiguration;
+						return null; //webconfiguration;
 					}
 
 					@Override

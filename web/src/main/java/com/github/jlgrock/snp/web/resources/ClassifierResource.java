@@ -25,7 +25,7 @@ import org.glassfish.jersey.media.multipart.FormDataParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.github.jlgrock.snp.core.model.xml.fihr.Bundle;
+import com.github.jlgrock.snp.core.model.xml.fhir.Bundle;
 import com.github.jlgrock.snp.core.domain.lego.Lego;
 import com.github.jlgrock.snp.core.domain.lego.LegoList;
 import com.github.jlgrock.snp.web.SnpMediaType;

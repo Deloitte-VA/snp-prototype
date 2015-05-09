@@ -18,7 +18,8 @@ import java.util.Date;
 import java.util.List;
 
 /**
- *
+ * This class executes queries against the Patient 
+ * Collection within MongoDB. 
  */
 @Service
 public class PatientRepositoryImpl extends
@@ -28,10 +29,16 @@ public class PatientRepositoryImpl extends
 
 	private final PatientWriteConverter patientWriteConverter;
 
+	/**
+	 * constructs PatientRepositoryImpl
+	 * @param mongoDbFactoryIn MongoDbFactory
+	 * @param patientReadConverterIn PatientReadConverter
+	 * @param patientWriteConverterIn PatientWriteConverter
+	 */
 	@Inject
 	protected PatientRepositoryImpl(final MongoDbFactory mongoDbFactoryIn,
 									final PatientReadConverter patientReadConverterIn,
-									PatientWriteConverter patientWriteConverterIn) {
+									final PatientWriteConverter patientWriteConverterIn) {
 		super(mongoDbFactoryIn);
 		patientReadConverter = patientReadConverterIn;
 		patientWriteConverter = patientWriteConverterIn;
@@ -53,7 +60,7 @@ public class PatientRepositoryImpl extends
 	}
 	
 	@Override
-	public List<Patient> findAllByLastName(String lastName) {
+	public List<Patient> findAllByLastName(final String lastName) {
 		List<Patient> pList = new ArrayList<>();
 		DBCollection dbc1 = dBCollection();
 		BasicDBObject query = new BasicDBObject() {{

@@ -43,6 +43,7 @@
             <version>1.2.16</version>
         </dependency>
 
+        <!--
         <dependency>
             <groupId>gov.vha.solor.modules</groupId>
             <artifactId>snomed</artifactId>
@@ -60,6 +61,7 @@
             <classifier>all</classifier>
             <scope>compile</scope>
         </dependency>
+        -->
     
     </dependencies>
     
