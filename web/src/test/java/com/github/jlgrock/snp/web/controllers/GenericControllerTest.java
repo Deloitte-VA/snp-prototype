@@ -21,6 +21,9 @@ import javax.ws.rs.core.Application;
 @HK2(populate = false)
 public abstract class GenericControllerTest extends JerseyTestNg.ContainerPerClassTest {
     private static final Logger LOGGER = LoggerFactory.getLogger(GenericControllerTest.class);
+    
+    // Value used to override the default application bindings with test versions
+    public static final int DEFAULT_HK2_TEST_BIND_RANK = 10;
 
     @BeforeClass
     public void setUpTests() throws Exception {

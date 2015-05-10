@@ -11,40 +11,46 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.glassfish.hk2.api.Factory;
+import org.glassfish.hk2.api.TypeLiteral;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import org.glassfish.jersey.media.multipart.FormDataBodyPart;
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataMultiPart;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.jvnet.testing.hk2testng.HK2;
+import org.mockito.Mock;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import com.github.jlgrock.snp.apis.connection.configuration.WebConfiguration;
+import com.github.jlgrock.snp.core.domain.lego.Lego;
 import com.github.jlgrock.snp.web.SnpMediaType;
+import com.github.jlgrock.snp.web.services.PceClassifierService;
 
 @HK2(populate = false)
 public class ClassifierResourceTest extends GenericControllerTest {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ClassifierResourceTest.class);
 	
+	@Mock
+	PceClassifierService<Lego> assertClssfrSvc;
+	
 	@Override
 	protected void registerInjectionPoints(ResourceConfig application) {
 		application.registerInstances(new AbstractBinder() {
 			@Override
 			protected void configure() {
-				bindFactory(new Factory<WebConfiguration>() {
+				bindFactory(new Factory<PceClassifierService<Lego>>() {
 					@Override
-					public WebConfiguration provide() {
-						return null; //webconfiguration;
+					public PceClassifierService<Lego> provide() {
+						return assertClssfrSvc;
 					}
 
 					@Override
-					public void dispose(WebConfiguration instance) {
+					public void dispose(PceClassifierService<Lego> instance) {
 					}
-				}).to(WebConfiguration.class);
+				}).to(new TypeLiteral<PceClassifierService<Lego>>() {}).ranked(DEFAULT_HK2_TEST_BIND_RANK);
 			}
 		});
 	}

@@ -19,7 +19,7 @@ import org.slf4j.Logger;
 
 import com.github.jlgrock.snp.core.model.xml.lego.LegoList;
 import com.github.jlgrock.snp.web.SnpMediaType;
-import com.github.jlgrock.snp.web.controllers.PceClassifierService;;
+import com.github.jlgrock.snp.web.services.PceClassifierService;
 
 //@Provider
 //@Consumes(SnpMediaType.APPLICATION_LEGO_XML)

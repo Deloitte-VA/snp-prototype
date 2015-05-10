@@ -29,10 +29,11 @@ import com.github.jlgrock.snp.core.data.PatientRepository;
 import com.github.jlgrock.snp.core.data.PatientRepositoryImpl;
 import com.github.jlgrock.snp.core.defaultconfig.MongoConfig;
 import com.github.jlgrock.snp.core.defaultconfig.WebConfig;
+import com.github.jlgrock.snp.core.domain.lego.Assertion;
 import com.github.jlgrock.snp.core.domain.lego.Lego;
-import com.github.jlgrock.snp.web.controllers.PceClassifierService;
-import com.github.jlgrock.snp.web.controllers.PceClassifierServiceImpl;
 import com.github.jlgrock.snp.web.controllers.MultipartFileUtilsImpl;
+import com.github.jlgrock.snp.web.services.PceClassifierService;
+import com.github.jlgrock.snp.web.services.PceClassifierServiceImpl;
 
 import io.dropwizard.jersey.jackson.JacksonMessageBodyProvider;
 import io.dropwizard.jersey.jackson.JsonProcessingExceptionMapper;
@@ -104,7 +105,7 @@ public class ApplicationConfig extends ResourceConfig {
                 bind(ClassifiedPceRepositoryImpl.class).to(ClassifiedPceRepository.class);
                 
                 bind(PceClassifierServiceImpl.class).to(new TypeLiteral<PceClassifierService<Lego>>() {});
-                bind(LegoClassifierImpl.class).to(PceClassifier.class);
+                bind(LegoClassifierImpl.class).to(new TypeLiteral<PceClassifier<Assertion>>() {});
                 bind(ClassifiedPceMongoDbStore.class).to(ClassifiedPceStore.class);
                 bind(MultipartFileUtilsImpl.class).to(MultiPartFileUtils.class);
 

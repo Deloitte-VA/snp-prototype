@@ -1,4 +1,4 @@
-package com.github.jlgrock.snp.web.controllers;
+package com.github.jlgrock.snp.web.services;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,18 +11,13 @@ import org.mockito.MockitoAnnotations;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-<<<<<<< HEAD
-import com.github.jlgrock.snp.core.classifier.AssertionClassifier;
-import com.github.jlgrock.snp.core.data.ClassifiedAssertionStore;
-import com.github.jlgrock.snp.core.domain.ClassifiedAssertion;
-import com.github.jlgrock.snp.core.domain.lego.Assertion;
-=======
 import com.github.jlgrock.snp.core.classifier.PceClassifier;
 import com.github.jlgrock.snp.core.data.ClassifiedPceStore;
 import com.github.jlgrock.snp.core.domain.ClassifiedPce;
->>>>>>> e4c3bbc7791a5901c706fbeb454626b28cefb83e
+import com.github.jlgrock.snp.core.domain.lego.Assertion;
+import com.github.jlgrock.snp.web.services.PceClassifierServiceImpl;
 
-public class AssertionClassifierServiceImplTest {
+public class PceClassifierServiceImplTest {
 	
 	@Mock
 	PceClassifier assertionClassifier;
@@ -49,13 +44,8 @@ public class AssertionClassifierServiceImplTest {
 //		Mockito.verify(cAssertStore.save(Mockito.anyLong(), cAssertion));
 		
 		String expected = readFile("Assertion_Example_01.xml");
-<<<<<<< HEAD
-		AssertionClassifierServiceImpl classSvc = new AssertionClassifierServiceImpl(assertionClassifier, cAssertStore);
-//		classSvc.classifyAssertion(expected);
-=======
 		PceClassifierServiceImpl classSvc = new PceClassifierServiceImpl(assertionClassifier, cAssertStore);
-		classSvc.classifyAssertion(expected);
->>>>>>> e4c3bbc7791a5901c706fbeb454626b28cefb83e
+//		classSvc.classifyAssertion(expected);
 		
 //		 TODO: need to add to test
 	}

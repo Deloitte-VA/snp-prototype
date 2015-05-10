@@ -22,6 +22,7 @@ import com.github.jlgrock.snp.apis.connection.configuration.WebConfiguration;
 import com.github.jlgrock.snp.apis.data.MultiPartFileUtils;
 //import com.github.jlgrock.snp.core.model.xml.lego.Lego;
 import com.github.jlgrock.snp.core.domain.lego.Lego;
+import com.github.jlgrock.snp.web.services.PceClassifierService;
 
 /**
  * The controller for handling all xml uploads of lego data
