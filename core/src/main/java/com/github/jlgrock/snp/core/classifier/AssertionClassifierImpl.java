@@ -16,7 +16,7 @@ public class AssertionClassifierImpl implements AssertionClassifier {
 
 	@Override
 	public ClassifiedPce classify(final Assertion assertion) {
-		LogicGraphClassifier lgClassifier = new LegoLogicGraphClassifierImpl();
+		LogicGraphClassifier<Expression> lgClassifier = new LegoLogicGraphClassifierImpl();
 		Expression expression = assertion.getDiscernible().getExpression();
 		ClassifiedPce classifiedAssertion = new ClassifiedPce();
 		//check for complex expression since simple expression is not being classified

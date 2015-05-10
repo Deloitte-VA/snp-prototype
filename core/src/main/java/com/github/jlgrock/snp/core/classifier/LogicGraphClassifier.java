@@ -1,9 +1,8 @@
 package com.github.jlgrock.snp.core.classifier;
 
-import org.jvnet.hk2.annotations.Contract;
-
-import com.github.jlgrock.snp.core.domain.lego.Expression;
 import java.util.UUID;
+
+import org.jvnet.hk2.annotations.Contract;
 
 /**
  * Classify Post Coordinated Expressions

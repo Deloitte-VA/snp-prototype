@@ -22,12 +22,10 @@ import com.github.jlgrock.snp.apis.connection.configuration.WebConfiguration;
 import com.github.jlgrock.snp.apis.data.MultiPartFileUtils;
 //import com.github.jlgrock.snp.core.model.xml.lego.Lego;
 import com.github.jlgrock.snp.core.domain.lego.Lego;
+import com.github.jlgrock.snp.web.services.PceClassifierService;
 
 /**
  * The controller for handling all xml uploads of lego data
- * @param <T>
- * @param <assertClssfrSvc>
- * @param <assertClssfrSvc>
  */
 @Path("/lego")
 public class LegoController {
@@ -38,21 +36,21 @@ public class LegoController {
 
     private WebConfiguration webConfiguration;
     
-    private PceClassifierService<Lego> assertClssfrSvc;
+    private PceClassifierService<Lego> pceClssfrSvc;
 
     /**
      * Default constructor.
-     * @param <assertClssfrSvc>
      * @param webConfigurationIn the configuration object for the web project
      * @param multipartFileUtilsIn instance of the file helper utilities
+     * @param pceClssfrSvcIn  PCE classifier service
      */
     @Inject
     public LegoController(final WebConfiguration webConfigurationIn,
                           final MultiPartFileUtils multipartFileUtilsIn,
-                          final PceClassifierService<Lego> assertClssfrSvcIn) {
+                          final PceClassifierService<Lego> pceClssfrSvcIn) {
         webConfiguration = webConfigurationIn;
         multipartFileUtils = multipartFileUtilsIn;
-        assertClssfrSvc = assertClssfrSvcIn;
+        pceClssfrSvc = pceClssfrSvcIn;
     }
 
     /**

@@ -1,25 +1,28 @@
 package com.github.jlgrock.snp.web.controllers;
 
-import java.io.BufferedInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.StandardOpenOption;
+//import java.io.BufferedInputStream;
+//import java.io.IOException;
+//import java.io.InputStream;
+//import java.nio.file.Files;
+//import java.nio.file.StandardOpenOption;
 
 import javax.inject.Inject;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
+//import javax.ws.rs.Consumes;
+//import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+//import javax.ws.rs.core.MediaType;
+//import javax.ws.rs.core.Response;
 
-import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
-import org.glassfish.jersey.media.multipart.FormDataParam;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+//import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
+//import org.glassfish.jersey.media.multipart.FormDataParam;
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
 
 import com.github.jlgrock.snp.apis.connection.configuration.WebConfiguration;
 import com.github.jlgrock.snp.apis.data.MultiPartFileUtils;
+import com.github.jlgrock.snp.core.model.xml.fhir.Condition;
+import com.github.jlgrock.snp.web.services.PceClassifierService;
 
 /**
  * The controller for handling all xml uploads of fhir data
@@ -28,26 +31,27 @@ import com.github.jlgrock.snp.apis.data.MultiPartFileUtils;
 @Path("/fhir")
 public class FhirController {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(FhirController.class);
-
-    private MultiPartFileUtils multipartFileUtils;
-
-    private WebConfiguration webConfiguration;
-    
-    private PceClassifierService assertClssfrSvc;
+//    private static final Logger LOGGER = LoggerFactory.getLogger(FhirController.class);
+//
+//    private MultiPartFileUtils multipartFileUtils;
+//
+//    private WebConfiguration webConfiguration;
+//    
+//    private PceClassifierService assertClssfrSvc;
 
     /**
      * Default constructor.
      * @param webConfigurationIn the configuration object for the web project
      * @param multipartFileUtilsIn instance of the file helper utilities
+     * @param assertClssfrSvcIn PCE classification service
      */
     @Inject
     public FhirController(final WebConfiguration webConfigurationIn,
                           final MultiPartFileUtils multipartFileUtilsIn,
-                          final PceClassifierService assertClssfrSvcIn) {
-        webConfiguration = webConfigurationIn;
-        multipartFileUtils = multipartFileUtilsIn;
-        assertClssfrSvc = assertClssfrSvcIn;
+                          final PceClassifierService<Condition> assertClssfrSvcIn) {
+//        webConfiguration = webConfigurationIn;
+//        multipartFileUtils = multipartFileUtilsIn;
+//        assertClssfrSvc = assertClssfrSvcIn;
     }
 
     /**

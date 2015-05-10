@@ -25,9 +25,9 @@ public enum SnpMediaTypeMapping {
 	 * @param mediaType {@link SnpMediaType} of data type
 	 * @param entityClass JAXB XmlRootElement class representing the data type
 	 */
-	private SnpMediaTypeMapping(MediaType mediaType, Class<? extends Object> entityClass) {
-		this.mediaType = mediaType;
-		this.entityClass = entityClass;
+	private SnpMediaTypeMapping(final MediaType mediaTypeIn, final Class<? extends Object> entityClassIn) {
+		mediaType = mediaTypeIn;
+		entityClass = entityClassIn;
 	}
 	
 	/**
@@ -36,7 +36,7 @@ public enum SnpMediaTypeMapping {
 	 * @param mediaType {@link SnpMediaType} of the respective entity type
 	 * @return JAXB XmlRootElement class representing the data type
 	 */
-	public static  Class<? extends Object> getEntityClass(MediaType mediaType) {
+	public static  Class<? extends Object> getEntityClass(final MediaType mediaType) {
 		
 		if (mediaType == null) {
 			throw new NullPointerException("mediaType argument is null");

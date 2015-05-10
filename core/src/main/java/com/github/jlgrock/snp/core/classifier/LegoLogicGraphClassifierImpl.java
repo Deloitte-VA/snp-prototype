@@ -1,13 +1,10 @@
 package com.github.jlgrock.snp.core.classifier;
 
-import com.github.jlgrock.snp.core.data.LegoLogicGraphBuilder;
-import com.github.jlgrock.snp.core.domain.lego.Expression;
-
-import gov.vha.isaac.logic.LogicGraph;
-
 import java.util.UUID;
 
 import org.jvnet.hk2.annotations.Service;
+
+import com.github.jlgrock.snp.core.domain.lego.Expression;
 
 /**
  * Replace Post Coordinated Expressions in Logic Graph with Classifier ID
