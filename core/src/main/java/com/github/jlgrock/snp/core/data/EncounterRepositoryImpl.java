@@ -36,7 +36,6 @@ public class EncounterRepositoryImpl extends
         return "encounters";
     }
 
-
     public List<Encounter> findByDate(final LocalDate date) {
         Document query = new Document() {{
             put("date", date);

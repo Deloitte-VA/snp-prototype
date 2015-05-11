@@ -6,10 +6,12 @@ import com.mongodb.Function;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoIterable;
+
 import org.bson.Document;
 import org.bson.conversions.Bson;
 
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
@@ -91,7 +93,10 @@ public class IterableMock implements FindIterable<Document> {
 
         @Override
         public Document first() {
-            return null;
+        	
+        Iterator<Document> id1 = c.iterator();
+        return id1.next();
+        
         }
 
         @Override
