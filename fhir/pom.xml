@@ -34,7 +34,25 @@
                 </execution>
             </executions>
             <configuration>
+                <specVersion>2.1</specVersion>
                 <verbose>true</verbose>
+
+                <episode>true</episode>
+                <useDependenciesAsEpisodes>true</useDependenciesAsEpisodes>
+                <extension>true</extension>
+                <!--<catalog>src/main/catalog/catalog.cat</catalog>-->
+
+                <!--<strict>false</strict>-->
+                <!--<args>-->
+                    <!--<arg>-XtoString</arg>-->
+                    <!--<arg>-Xequals</arg>-->
+                    <!--<arg>-XhashCode</arg>-->
+                    <!--<arg>-Xdefault-value</arg>-->
+                    <!--<arg>-Xinheritance</arg>-->
+                    <!--<arg>-no-header</arg>-->
+                    <!--<arg>-readOnly</arg>-->
+                    <!--<arg>-mark-generated</arg>-->
+                <!--</args>-->
 
                 <!-- The location of your schema -->
                 <schemaDirectory>src/main/xsd</schemaDirectory>
@@ -46,7 +64,7 @@
                 </schemaIncludes>
 
                 <!-- The package of your generated sources -->
-                <generatePackage>com.github.jlgrock.snp.core.domain.fhir</generatePackage>
+                <!--<generatePackage>com.github.jlgrock.snp.core.domain.fhir</generatePackage>-->
             </configuration>
         </plugin>
 
