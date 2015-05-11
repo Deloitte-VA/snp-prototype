@@ -1,75 +1,86 @@
 <?xml version="1.0"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>com.github.jlgrock.snp</groupId>
-    <artifactId>snp</artifactId>
-    <version>0.3-SNAPSHOT</version>
-  </parent>
-  <artifactId>fhir</artifactId>
-  <name>fhir model</name>
-  
-   <properties>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.github.jlgrock.snp</groupId>
+        <artifactId>snp</artifactId>
+        <version>0.3-SNAPSHOT</version>
+    </parent>
+    <artifactId>fhir</artifactId>
+    <name>fhir model</name>
+
+    <properties>
         <project.rootdir>${project.parent.basedir}</project.rootdir>
     </properties>
 
     <dependencies>
-        <!-- internal dependencies -->
+        <dependency>
+            <groupId>org.jvnet.jaxb2_commons</groupId>
+            <artifactId>jaxb2-basics-runtime</artifactId>
+            <version>${jaxb.basics.version}</version>
+        </dependency>
     </dependencies>
-    
+
     <build>
-    
-    <plugins>
-        <plugin>
-            <groupId>org.jvnet.jaxb2.maven2</groupId>
-            <artifactId>maven-jaxb2-plugin</artifactId>
-            <version>0.12.3</version>
-            <executions>
-                <execution>
-                    <id>generate</id>
-                    <goals>
-                        <goal>generate</goal>
-                    </goals>
-                </execution>
-            </executions>
-            <configuration>
-                <specVersion>2.1</specVersion>
-                <verbose>true</verbose>
 
-                <episode>true</episode>
-                <useDependenciesAsEpisodes>true</useDependenciesAsEpisodes>
-                <extension>true</extension>
-                <!--<catalog>src/main/catalog/catalog.cat</catalog>-->
+        <plugins>
+            <plugin>
+                <groupId>org.jvnet.jaxb2.maven2</groupId>
+                <artifactId>maven-jaxb2-plugin</artifactId>
+                <version>${jaxb.version}</version>
+                <executions>
+                    <execution>
+                        <id>generate</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <specVersion>2.1</specVersion>
+                    <verbose>true</verbose>
 
-                <!--<strict>false</strict>-->
-                <!--<args>-->
-                    <!--<arg>-XtoString</arg>-->
-                    <!--<arg>-Xequals</arg>-->
-                    <!--<arg>-XhashCode</arg>-->
-                    <!--<arg>-Xdefault-value</arg>-->
-                    <!--<arg>-Xinheritance</arg>-->
-                    <!--<arg>-no-header</arg>-->
-                    <!--<arg>-readOnly</arg>-->
-                    <!--<arg>-mark-generated</arg>-->
-                <!--</args>-->
+                    <episode>true</episode>
+                    <useDependenciesAsEpisodes>true</useDependenciesAsEpisodes>
+                    <extension>true</extension>
 
-                <!-- The location of your schema -->
-                <schemaDirectory>src/main/xsd</schemaDirectory>
+                    <args>
+                        <arg>-XtoString</arg>
+                        <arg>-Xequals</arg>
+                        <arg>-XhashCode</arg>
+                        <arg>-Xinheritance</arg>
+                        <arg>-no-header</arg>
+                        <arg>-readOnly</arg>
+                        <arg>-mark-generated</arg>
+                    </args>
 
-                <bindingDirectory>src/main/xjb</bindingDirectory>
+                    <!-- The location of your schema -->
+                    <schemaDirectory>src/main/xsd</schemaDirectory>
 
-                <schemaIncludes>
-                    <schemaInclude>fhir-all.xsd</schemaInclude>
-                </schemaIncludes>
+                    <bindingDirectory>src/main/xjb</bindingDirectory>
 
-                <!-- The package of your generated sources -->
-                <!--<generatePackage>com.github.jlgrock.snp.core.domain.fhir</generatePackage>-->
-            </configuration>
-        </plugin>
+                    <schemaIncludes>
+                        <schemaInclude>fhir-all.xsd</schemaInclude>
+                    </schemaIncludes>
 
-    </plugins>
-</build>
-    
-    
+                    <plugins>
+                        <plugin>
+                            <groupId>org.jvnet.jaxb2_commons</groupId>
+                            <artifactId>jaxb2-basics</artifactId>
+                            <version>${jaxb.basics.version}</version>
+                        </plugin>
+                    </plugins>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>codeQuality</id>
+        </profile>
+    </profiles>
 </project>

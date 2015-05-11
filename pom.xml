@@ -66,8 +66,9 @@
         <jackson-jaxrs-json-provider.version>2.5.1</jackson-jaxrs-json-provider.version>
         <vha-isaac-logic.version>1.8</vha-isaac-logic.version>
         <commons-io.version>2.4</commons-io.version>
-        <jaxb.version>2.1</jaxb.version>
-        
+        <jaxb.version>0.12.3</jaxb.version>
+        <jaxb.basics.version>0.9.3</jaxb.basics.version>
+
         <jetty-plugin.version>9.3.0.M1</jetty-plugin.version>
         <findbugs-maven-plugin.version>3.0.0</findbugs-maven-plugin.version>
         <pmd-maven-plugin.version>3.4</pmd-maven-plugin.version>
@@ -78,6 +79,7 @@
         <maven-javadoc-plugin.version>2.10.1</maven-javadoc-plugin.version>
         <maven-release-plugin.version>2.5.1</maven-release-plugin.version>
         <maven-checkstyle-plugin.version>2.14</maven-checkstyle-plugin.version>
+
     </properties>
 
     <dependencyManagement>
@@ -234,12 +236,6 @@
 
             <dependency>
                 <groupId>org.glassfish.jersey.media</groupId>
-                <artifactId>jersey-media-json-jackson</artifactId>
-                <version>${jersey.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.glassfish.jersey.media</groupId>
                 <artifactId>jersey-media-multipart</artifactId>
                 <version>${jersey.version}</version>
             </dependency>
@@ -329,13 +325,11 @@
     <modules>
         <module>lego</module>
         <module>fhir</module>
-        <!--<module>apis</module>-->
-        <!--<module>defaultconfig</module>-->
-        <!--<module>core</module>-->
-        <!--<module>web</module>-->
+        <module>apis</module>
+        <module>defaultconfig</module>
+        <module>core</module>
+        <module>web</module>
         <!--<module>client</module>-->
-        <!--<module>integration</module>-->
-       <!--<module>legoschema</module>-->
     </modules>
 
     <build>
@@ -534,31 +528,6 @@
     </build>
 
     <profiles>
-        <profile>
-            <id>codeQuality</id>
-            <build>
-                <plugins>
-
-                    <!-- Check the project for issues in style guidelines -->
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-checkstyle-plugin</artifactId>
-                    </plugin>
-
-                    <!-- check for significant bugs that might have been missed in development -->
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>findbugs-maven-plugin</artifactId>
-                    </plugin>
-
-                    <!-- check for significant bugs that might have been missed in development -->
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-pmd-plugin</artifactId>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
         <profile>
             <id>integrationTests</id>
             <modules>

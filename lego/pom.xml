@@ -1,50 +1,79 @@
 <?xml version="1.0"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>com.github.jlgrock.snp</groupId>
-    <artifactId>snp</artifactId>
-    <version>0.3-SNAPSHOT</version>
-  </parent>
-  <artifactId>lego</artifactId>
-  <name>lego model</name>
-  
-   <properties>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.github.jlgrock.snp</groupId>
+        <artifactId>snp</artifactId>
+        <version>0.3-SNAPSHOT</version>
+    </parent>
+    <artifactId>lego</artifactId>
+    <name>lego model</name>
+
+    <properties>
         <project.rootdir>${project.parent.basedir}</project.rootdir>
     </properties>
 
     <dependencies>
-        <!-- internal dependencies -->
+        <dependency>
+            <groupId>org.jvnet.jaxb2_commons</groupId>
+            <artifactId>jaxb2-basics-runtime</artifactId>
+            <version>${jaxb.basics.version}</version>
+        </dependency>
     </dependencies>
-    
+
     <build>
-    
-    <plugins>
-        <plugin>
-            <groupId>org.jvnet.jaxb2.maven2</groupId>
-            <artifactId>maven-jaxb2-plugin</artifactId>
-            <version>0.12.3</version>
-            <executions>
-                <execution>
-                    <id>generate</id>
-                    <goals>
-                        <goal>generate</goal>
-                    </goals>
-                </execution>
-            </executions>
-            <configuration>
-                <verbose>true</verbose>
+        <plugins>
+            <plugin>
+                <groupId>org.jvnet.jaxb2.maven2</groupId>
+                <artifactId>maven-jaxb2-plugin</artifactId>
+                <version>${jaxb.version}</version>
+                <executions>
+                    <execution>
+                        <id>generate</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <verbose>true</verbose>
 
-                <!-- The location of your schema -->
-                <schemaDirectory>src/main/xsd</schemaDirectory>
+                    <args>
+                        <arg>-XtoString</arg>
+                        <arg>-Xequals</arg>
+                        <arg>-XhashCode</arg>
+                        <arg>-Xinheritance</arg>
+                        <arg>-no-header</arg>
+                        <arg>-readOnly</arg>
+                        <arg>-mark-generated</arg>
+                    </args>
 
-                <!-- The package of your generated sources -->
-                <generatePackage>com.github.jlgrock.snp.core.domain.lego</generatePackage>
-            </configuration>
-        </plugin>
-    </plugins>
-</build>
-    
-    
+                    <!-- The location of your schema -->
+                    <schemaDirectory>src/main/xsd</schemaDirectory>
+
+                    <!-- The package of your generated sources -->
+                    <generatePackage>com.github.jlgrock.snp.core.domain.lego</generatePackage>
+
+                    <plugins>
+                        <plugin>
+                            <groupId>org.jvnet.jaxb2_commons</groupId>
+                            <artifactId>jaxb2-basics</artifactId>
+                            <version>${jaxb.basics.version}</version>
+                        </plugin>
+                    </plugins>
+
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>codeQuality</id>
+        </profile>
+    </profiles>
+
 </project>
