@@ -66,7 +66,7 @@
         <jackson-jaxrs-json-provider.version>2.5.1</jackson-jaxrs-json-provider.version>
         <vha-isaac-logic.version>1.8</vha-isaac-logic.version>
         <commons-io.version>2.4</commons-io.version>
-        <jaxb.version>1.6</jaxb.version>
+        <jaxb.version>2.1</jaxb.version>
         
         <jetty-plugin.version>9.3.0.M1</jetty-plugin.version>
         <findbugs-maven-plugin.version>3.0.0</findbugs-maven-plugin.version>
@@ -329,10 +329,10 @@
     <modules>
         <module>lego</module>
         <module>fhir</module>
-        <module>apis</module>
-        <module>defaultconfig</module>
-        <module>core</module>
-        <module>web</module>
+        <!--<module>apis</module>-->
+        <!--<module>defaultconfig</module>-->
+        <!--<module>core</module>-->
+        <!--<module>web</module>-->
         <!--<module>client</module>-->
         <!--<module>integration</module>-->
        <!--<module>legoschema</module>-->

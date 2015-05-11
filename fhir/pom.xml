@@ -22,25 +22,34 @@
     
     <plugins>
         <plugin>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>jaxb2-maven-plugin</artifactId>
-            <version>${jaxb.version}</version>
+            <groupId>org.jvnet.jaxb2.maven2</groupId>
+            <artifactId>maven-jaxb2-plugin</artifactId>
+            <version>0.12.3</version>
             <executions>
                 <execution>
-                    <id>xjc</id>
+                    <id>generate</id>
                     <goals>
-                        <goal>xjc</goal>
+                        <goal>generate</goal>
                     </goals>
                 </execution>
             </executions>
             <configuration>
-                <!-- Specify output directory. Required parameter? -->              
-                <outputDirectory>target</outputDirectory> 
-                <schemaDirectory>src/main/resources</schemaDirectory>
+                <verbose>true</verbose>
+
+                <!-- The location of your schema -->
+                <schemaDirectory>src/main/xsd</schemaDirectory>
+
+                <bindingDirectory>src/main/xjb</bindingDirectory>
+
+                <schemaIncludes>
+                    <schemaInclude>fhir-all.xsd</schemaInclude>
+                </schemaIncludes>
+
                 <!-- The package of your generated sources -->
-                <packageName>com.github.jlgrock.snp.core.domain.fhir</packageName>
+                <generatePackage>com.github.jlgrock.snp.core.domain.fhir</generatePackage>
             </configuration>
         </plugin>
+
     </plugins>
 </build>
     

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<bindings version="2.1" xmlns="http://java.sun.com/xml/ns/jaxb">
+    <bindings scd="x-schema::tns" xmlns:tns="http://www.w3.org/1999/xlink">
+        <schemaBindings map="false">
+            <package name="org.hisrc.w3c.xlink.v_1_0"/>
+        </schemaBindings>
+        <bindings scd="~tns:arcType">
+            <class ref="org.hisrc.w3c.xlink.v_1_0.ArcType"/>
+        </bindings>
+        <bindings scd="~tns:resourceType">
+            <class ref="org.hisrc.w3c.xlink.v_1_0.ResourceType"/>
+        </bindings>
+        <!-- ... -->
+        <bindings scd="~tns:showType">
+            <typesafeEnumClass ref="org.hisrc.w3c.xlink.v_1_0.ShowType"/>
+        </bindings>
+    </bindings>
+</bindings>
