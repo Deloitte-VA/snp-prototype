@@ -1,21 +1,17 @@
 package com.github.jlgrock.snp.web.services;
 
-import java.util.List;
-
-import javax.inject.Inject;
-
-import org.jvnet.hk2.annotations.Service;
-
 import com.github.jlgrock.snp.core.classifier.PceClassifier;
 import com.github.jlgrock.snp.core.data.ClassifiedPceStore;
 import com.github.jlgrock.snp.core.domain.ClassifiedPce;
 import com.github.jlgrock.snp.core.domain.lego.Assertion;
 import com.github.jlgrock.snp.core.domain.lego.Lego;
+import org.jvnet.hk2.annotations.Service;
+
+import javax.inject.Inject;
+import java.util.List;
 
 /**
  * Classifying service for PCEs.
- * @author shalewis
- *
  */
 @Service
 public class PceClassifierServiceImpl implements

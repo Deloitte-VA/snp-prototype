@@ -1,12 +1,11 @@
 package com.github.jlgrock.snp.web.services;
 
-import java.util.List;
-
 import org.jvnet.hk2.annotations.Contract;
+
+import java.util.List;
 
 /**
  * Interface that should be implemented by assertion classifying services
- * @author shalewis
  *
  * @param <T> Class that is handled by this service
  */

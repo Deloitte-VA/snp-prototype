@@ -1,8 +1,14 @@
 package com.github.jlgrock.snp.web.resources;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
+import com.github.jlgrock.snp.core.domain.lego.Lego;
+import com.github.jlgrock.snp.core.domain.lego.LegoList;
+import com.github.jlgrock.snp.core.model.xml.fhir.Bundle;
+import com.github.jlgrock.snp.web.SnpMediaTypeMapping;
+import com.github.jlgrock.snp.web.services.PceClassifierService;
+import org.glassfish.jersey.media.multipart.FormDataBodyPart;
+import org.glassfish.jersey.media.multipart.FormDataMultiPart;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -11,22 +17,12 @@ import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.MessageBodyReader;
-
-import org.glassfish.jersey.media.multipart.FormDataBodyPart;
-import org.glassfish.jersey.media.multipart.FormDataMultiPart;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.github.jlgrock.snp.core.domain.lego.Lego;
-import com.github.jlgrock.snp.core.domain.lego.LegoList;
-import com.github.jlgrock.snp.core.model.xml.fhir.Bundle;
-import com.github.jlgrock.snp.web.SnpMediaTypeMapping;
-import com.github.jlgrock.snp.web.services.PceClassifierService;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  * The controller for handling all classifier requests
- * 
- * @author shalewis
  */
 @Path("/classifier")
 public class ClassifierResource {
@@ -51,7 +47,7 @@ public class ClassifierResource {
 	 */
 	@POST
 	public Response postLego(final LegoList legoList) {
-		LOGGER.debug("Posted LegoList: {}", legoList);
+		LOGGER.trace("Posted LegoList: {}", legoList);
 		
 		if (legoList == null) {
 			LOGGER.error("legoList is null");
@@ -69,7 +65,7 @@ public class ClassifierResource {
 	 */
 	@POST
 	public Response postFhir(final Bundle fhir) {
-		LOGGER.debug("Posted LegoList: {}", fhir);
+		LOGGER.trace("Posted LegoList: {}", fhir);
 		
 		if (fhir == null) {
 			LOGGER.error("fhir is null");
@@ -87,12 +83,13 @@ public class ClassifierResource {
 	@POST
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	public Response postFile(final FormDataMultiPart form) {
-		
+		LOGGER.trace("Form data multipart: {}", form);
+
 		if (form == null) {
 			LOGGER.error("form is null");
 			return Response.status(Response.Status.BAD_REQUEST).build();
 		}
-		LOGGER.debug("Form data multipart: {}", form);
+
 		// supports multi-file uploads
 		List<FormDataBodyPart> fileParts = form.getFields("file");
 		for (FormDataBodyPart filePart : fileParts) {

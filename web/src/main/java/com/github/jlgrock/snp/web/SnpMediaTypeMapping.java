@@ -8,9 +8,6 @@ import com.github.jlgrock.snp.core.domain.lego.LegoList;
 /**
  * Mappings of {@link MediaType} to the JAXB XmlRootElement class that represents 
  * that data type
- * 
- * @author shalewis
- *
  */
 public enum SnpMediaTypeMapping {
 	LEGO (SnpMediaType.APPLICATION_LEGO_XML_TYPE, LegoList.class),
