@@ -57,7 +57,7 @@ public class ClassifierResource {
 		pceClssfrSvc.classifyAssertion(legoList.getLego());
 		return Response.ok().build();
 	}
-
+	
 	/**
 	 * Handles posted streaming Fhir requests
 	 * @param fhir Fhir entity
@@ -66,12 +66,12 @@ public class ClassifierResource {
 	@POST
 	public Response postFhir(final Bundle fhir) {
 		LOGGER.trace("Posted LegoList: {}", fhir);
-
+		
 		if (fhir == null) {
 			LOGGER.error("fhir is null");
 			return Response.status(Response.Status.BAD_REQUEST).build();
 		}
-
+		
 		return Response.ok().build();
 	}
 	

@@ -1,4 +1,4 @@
-package com.github.jlgrock.snp.web.services;
+package com.github.jlgrock.snp.web.controllers;
 
 import com.github.jlgrock.snp.apis.data.MultiPartFileUtils;
 
