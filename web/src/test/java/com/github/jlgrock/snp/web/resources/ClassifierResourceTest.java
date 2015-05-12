@@ -20,9 +20,12 @@ import org.glassfish.jersey.media.multipart.FormDataMultiPart;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.jvnet.testing.hk2testng.HK2;
 import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.internal.verification.Times;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.github.jlgrock.snp.core.domain.lego.Lego;
@@ -33,7 +36,7 @@ import com.github.jlgrock.snp.web.services.PceClassifierService;
 @HK2(populate = false)
 public class ClassifierResourceTest extends GenericControllerTest {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(ClassifierResourceTest.class);
+	public static final String RESOURCE_URI = "classifier";
 	
 	@Mock
 	PceClassifierService<Lego> assertClssfrSvc;
@@ -57,23 +60,38 @@ public class ClassifierResourceTest extends GenericControllerTest {
 		});
 	}
 	
+	@SuppressWarnings("unchecked")
+	@BeforeMethod
+	public void setup() {
+		Mockito.reset(assertClssfrSvc);
+	}
+	
 	@Test
-	public void testStreamingXml() {
+	public void testStreamingLegoXml() {
 		String testXml = readFile("Assertion_Example_01.xml");
-		final WebTarget target = target().path("classifier");
+		final WebTarget target = target().path(RESOURCE_URI);
 		final Response response = target.request(SnpMediaType.APPLICATION_LEGO_XML_TYPE)
 				.post(Entity.entity(testXml, SnpMediaType.APPLICATION_LEGO_XML_TYPE));
 
 		// verify return status
 		Assert.assertEquals(response.getStatus(), Response.Status.OK.getStatusCode());
-		
-		LOGGER.debug("Has Entity: " + response.hasEntity());
-		LOGGER.debug("Received response: " + response.readEntity(String.class));
+		Mockito.verify(assertClssfrSvc).classifyAssertion(Mockito.any());
+	}
+	
+	@Test
+	public void testStreamingLegoXmlEmpty() {
+		final WebTarget target = target().path(RESOURCE_URI);
+		final Response response = target.request(SnpMediaType.APPLICATION_LEGO_XML_TYPE)
+				.post(Entity.entity(null, SnpMediaType.APPLICATION_LEGO_XML_TYPE));
+
+		// verify return status
+		Assert.assertEquals(response.getStatus(), Response.Status.BAD_REQUEST.getStatusCode());
+		Mockito.verifyZeroInteractions(assertClssfrSvc);
 	}
 	
 	@Test
 	public void testLegoXmlFileUpload() {
-		final WebTarget target = target().path("classifier");
+		final WebTarget target = target().path(RESOURCE_URI);
 
         String testXml = readFile("Assertion_Example_01.xml");
         
@@ -93,11 +111,89 @@ public class ClassifierResourceTest extends GenericControllerTest {
         
         // verify return status
         Assert.assertEquals(response.getStatus(), Response.Status.OK.getStatusCode());
+        Mockito.verify(assertClssfrSvc).classifyAssertion(Mockito.any());
+	}
+	
+	@Test
+	public void testLegoXmlMultiFileUpload() {
+		final WebTarget target = target().path(RESOURCE_URI);
+
+        String testXml = readFile("Assertion_Example_01.xml");
+        
+        final FormDataMultiPart mp = new FormDataMultiPart();
+        
+        // file 1
+        final FormDataContentDisposition formDataContentDisposition = FormDataContentDisposition
+                .name("file")
+                .fileName("lego.xml")
+                .size(testXml.length())
+                .build();
+        final FormDataBodyPart formDataBodyPart = new FormDataBodyPart(
+        		formDataContentDisposition, testXml, 
+        		SnpMediaType.APPLICATION_LEGO_XML_TYPE);
+        mp.bodyPart(formDataBodyPart);
+        
+        // file 2
+        final FormDataContentDisposition formDataContentDisposition2 = FormDataContentDisposition
+                .name("file")
+                .fileName("lego2.xml")
+                .size(testXml.length())
+                .build();
+        final FormDataBodyPart formDataBodyPart2 = new FormDataBodyPart(
+        		formDataContentDisposition2, testXml, 
+        		SnpMediaType.APPLICATION_LEGO_XML_TYPE);
+        mp.bodyPart(formDataBodyPart2);
+        
+        final Entity<FormDataMultiPart> form = Entity.entity(mp, MediaType.MULTIPART_FORM_DATA_TYPE);
+        final Response response = target.request().post(form);
+        
+        // verify return status
+        Assert.assertEquals(response.getStatus(), Response.Status.OK.getStatusCode());
+        Mockito.verify(assertClssfrSvc, Mockito.times(2)).classifyAssertion(Mockito.any());
+	}
+	
+	@Test
+	public void testLegoXmlMultiFileUploadWithAnEmptyFile() {
+		final WebTarget target = target().path(RESOURCE_URI);
+
+        String testXml = readFile("Assertion_Example_01.xml");
+        
+        final FormDataMultiPart mp = new FormDataMultiPart();
+        
+        // file 1
+        final FormDataContentDisposition formDataContentDisposition = FormDataContentDisposition
+                .name("file")
+                .fileName("lego.xml")
+                .size(testXml.length())
+                .build();
+        final FormDataBodyPart formDataBodyPart = new FormDataBodyPart(
+        		formDataContentDisposition, testXml, 
+        		SnpMediaType.APPLICATION_LEGO_XML_TYPE);
+        mp.bodyPart(formDataBodyPart);
+        
+        // file 2
+        final FormDataContentDisposition formDataContentDisposition2 = FormDataContentDisposition
+                .name("file")
+                .fileName("lego2.xml")
+                .size(0)
+                .build();
+        final FormDataBodyPart formDataBodyPart2 = new FormDataBodyPart(
+        		formDataContentDisposition2, new ByteArrayInputStream(new byte[] {}), 
+        		SnpMediaType.APPLICATION_LEGO_XML_TYPE);
+        mp.bodyPart(formDataBodyPart2);
+        
+        final Entity<FormDataMultiPart> form = Entity.entity(mp, MediaType.MULTIPART_FORM_DATA_TYPE);
+        final Response response = target.request().post(form);
+        
+        // verify return status
+        Assert.assertEquals(response.getStatus(), Response.Status.BAD_REQUEST.getStatusCode());
+        // TODO: should be... Mockito.verifyZeroInteractions(assertClssfrSvc);
+        Mockito.verify(assertClssfrSvc).classifyAssertion(Mockito.any());
 	}
 	
     @Test
     public void testMultiPartWithEmptyFile() {
-        final WebTarget target = target().path("classifier");
+        final WebTarget target = target().path(RESOURCE_URI);
 
         final FormDataMultiPart mp = new FormDataMultiPart();
         final FormDataContentDisposition formDataContentDisposition = FormDataContentDisposition
@@ -114,7 +210,20 @@ public class ClassifierResourceTest extends GenericControllerTest {
         final Response response = target.request().post(form);
 
         // verify return status
-        Assert.assertEquals(response.getStatus(), Response.Status.NO_CONTENT.getStatusCode());
+        Assert.assertEquals(response.getStatus(), Response.Status.BAD_REQUEST.getStatusCode());
+        Mockito.verifyZeroInteractions(assertClssfrSvc);
+    }
+    
+    @Test
+    public void testMultiPartWithEmptyForm() {
+        final WebTarget target = target().path(RESOURCE_URI);
+
+        final Entity<FormDataMultiPart> form = Entity.entity(null, MediaType.MULTIPART_FORM_DATA_TYPE);
+        final Response response = target.request().post(form);
+
+        // verify return status
+        Assert.assertEquals(response.getStatus(), Response.Status.BAD_REQUEST.getStatusCode());
+        Mockito.verifyZeroInteractions(assertClssfrSvc);
     }
 
 	/**

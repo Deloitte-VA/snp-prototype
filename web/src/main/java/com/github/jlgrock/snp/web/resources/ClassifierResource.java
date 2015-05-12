@@ -52,6 +52,12 @@ public class ClassifierResource {
 	@POST
 	public Response postLego(final LegoList legoList) {
 		LOGGER.debug("Posted LegoList: {}", legoList);
+		
+		if (legoList == null) {
+			LOGGER.error("legoList is null");
+			return Response.status(Response.Status.BAD_REQUEST).build();
+		}
+		
 		pceClssfrSvc.classifyAssertion(legoList.getLego());
 		return Response.ok().build();
 	}
@@ -63,6 +69,13 @@ public class ClassifierResource {
 	 */
 	@POST
 	public Response postFhir(final Bundle fhir) {
+		LOGGER.debug("Posted LegoList: {}", fhir);
+		
+		if (fhir == null) {
+			LOGGER.error("fhir is null");
+			return Response.status(Response.Status.BAD_REQUEST).build();
+		}
+		
 		return Response.ok().build();
 	}
 	
@@ -74,8 +87,11 @@ public class ClassifierResource {
 	@POST
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	public Response postFile(final FormDataMultiPart form) {
-		// Make sure that at least one file with size > 0 has been received
-		boolean isFileReceived = false;
+		
+		if (form == null) {
+			LOGGER.error("form is null");
+			return Response.status(Response.Status.BAD_REQUEST).build();
+		}
 		
 		LOGGER.debug("Form data multipart: {}", form);
 		
@@ -92,11 +108,11 @@ public class ClassifierResource {
 				}
 			}
 			
-			if (!isFileReceived && filePart.getContentDisposition().getSize() <= 0) {
-				return Response.noContent().build();
+			if (filePart.getContentDisposition() == null 
+					|| filePart.getContentDisposition().getSize() <= 0
+					|| filePart.getEntity() == null) {
+				return Response.status(Response.Status.BAD_REQUEST).build();
 			}
-			// At least one file with size > 0 has been received
-			isFileReceived = true;
 			
 			LOGGER.debug("File part media type: {}", filePart.getMediaType());
 			@SuppressWarnings("rawtypes")
@@ -111,6 +127,8 @@ public class ClassifierResource {
 				}
 			}
 			
+			// TODO: Queue processing of data to occur after loop so that all 
+			// files can be verified for correctness before we process any
 			// TODO: Add support for FHIR
 			Class<?> entityClass = SnpMediaTypeMapping.getEntityClass(filePart.getMediaType());
 			LegoList ll = null;
