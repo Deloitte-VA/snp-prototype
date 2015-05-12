@@ -31,6 +31,11 @@
 			<groupId>com.github.jlgrock.snp</groupId>
 			<artifactId>defaultconfig</artifactId>
 		</dependency>
+		
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>legoschema</artifactId>
+		</dependency>
 
         <dependency>
             <groupId>ch.qos.logback</groupId>
