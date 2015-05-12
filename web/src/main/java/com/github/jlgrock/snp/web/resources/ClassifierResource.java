@@ -92,9 +92,7 @@ public class ClassifierResource {
 			LOGGER.error("form is null");
 			return Response.status(Response.Status.BAD_REQUEST).build();
 		}
-		
 		LOGGER.debug("Form data multipart: {}", form);
-		
 		// supports multi-file uploads
 		List<FormDataBodyPart> fileParts = form.getFields("file");
 		for (FormDataBodyPart filePart : fileParts) {
@@ -113,7 +111,6 @@ public class ClassifierResource {
 					|| filePart.getEntity() == null) {
 				return Response.status(Response.Status.BAD_REQUEST).build();
 			}
-			
 			LOGGER.debug("File part media type: {}", filePart.getMediaType());
 			@SuppressWarnings("rawtypes")
 			Map<MediaType, List<MessageBodyReader>> readers = filePart.messageBodyWorkers
