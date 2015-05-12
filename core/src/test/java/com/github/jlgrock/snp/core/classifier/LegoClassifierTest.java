@@ -10,11 +10,11 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import com.github.jlgrock.snp.core.domain.ClassifiedPce;
-import com.github.jlgrock.snp.core.model.xml.lego.Assertion;
-import com.github.jlgrock.snp.core.model.xml.lego.Destination;
-import com.github.jlgrock.snp.core.model.xml.lego.Discernible;
-import com.github.jlgrock.snp.core.model.xml.lego.Expression;
-import com.github.jlgrock.snp.core.model.xml.lego.Relation;
+import com.github.jlgrock.snp.core.domain.lego.Assertion;
+import com.github.jlgrock.snp.core.domain.lego.Destination;
+import com.github.jlgrock.snp.core.domain.lego.Discernible;
+import com.github.jlgrock.snp.core.domain.lego.Expression;
+import com.github.jlgrock.snp.core.domain.lego.Relation;
 
 public class LegoClassifierTest {
 	private LegoClassifierImpl legoClassifier;
@@ -38,7 +38,7 @@ public class LegoClassifierTest {
 		List<Relation> relations = new ArrayList<Relation>();
 		relations.add(relation);
 		
-		expression.setRelations(relations);			
+		expression.getRelation().addAll(relations);			
 		discernible.setExpression(expression);
 		assertion.setDiscernible(discernible);			
 		

@@ -4,7 +4,8 @@ import gov.vha.isaac.logic.LogicGraph;
 import gov.vha.isaac.logic.Node;
 import gov.vha.isaac.ochre.api.tree.TreeNodeVisitData;
 
-import java.io.InputStream;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Unmarshaller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,10 +13,9 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
-import com.github.jlgrock.snp.core.model.xml.lego.Expression;
-import com.github.jlgrock.snp.core.model.xml.lego.LegoList;
+import com.github.jlgrock.snp.core.domain.lego.Expression;
+import com.github.jlgrock.snp.core.domain.lego.LegoList;
 import com.github.jlgrock.snp.core.parser.AbstractXmlParserTest;
-import com.github.jlgrock.snp.core.parser.LegoXmlParser;
 
 public class LegoLogicGraphBuilderTest extends AbstractXmlParserTest {
 	private static final Logger LOGGER = LoggerFactory.getLogger(LegoLogicGraphBuilderTest.class);
@@ -31,11 +31,13 @@ public class LegoLogicGraphBuilderTest extends AbstractXmlParserTest {
     }
     
 	@Test
-	public void testExpressionOneRelation() {
-		InputStream xmlInput = getClass().getClassLoader().getResourceAsStream("testExpressionOneRelation.xml");
-		LegoList legoList = new LegoXmlParser().parseDocument(xmlInput);
-		Expression expression = legoList.getLegos().get(0).getAssertion().getDiscernible().getExpression();
-				
+	public void testExpressionOneRelation() throws Exception {
+		JAXBContext jaxbContext = JAXBContext.newInstance(LegoList.class);
+	    Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+	    
+	    LegoList legoList = (LegoList)jaxbUnmarshaller.unmarshal(getClass().getClassLoader().getResourceAsStream("testExpressionOneRelation.xml"));
+	    Expression expression = legoList.getLego().get(0).getAssertion().get(0).getDiscernible().getExpression();
+	    		
 		LogicGraph g = null;
     	
     	LegoLogicGraphBuilder legoLogicGraphBuilder = new LegoLogicGraphBuilder(expression);
@@ -59,11 +61,13 @@ public class LegoLogicGraphBuilderTest extends AbstractXmlParserTest {
 	}
 	
 	@Test
-	public void testExpressionThreeRelations() {
-		InputStream xmlInput = getClass().getClassLoader().getResourceAsStream("testExpressionThreeRelations.xml");
-		LegoList legoList = new LegoXmlParser().parseDocument(xmlInput);
-		Expression expression = legoList.getLegos().get(0).getAssertion().getDiscernible().getExpression();
-		
+	public void testExpressionThreeRelations() throws Exception {
+		JAXBContext jaxbContext = JAXBContext.newInstance(LegoList.class);
+	    Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+	    
+	    LegoList legoList = (LegoList) jaxbUnmarshaller.unmarshal(getClass().getClassLoader().getResourceAsStream("testExpressionThreeRelations.xml"));
+	    Expression expression = legoList.getLego().get(0).getAssertion().get(0).getDiscernible().getExpression();
+	    
 		LogicGraph g = null;
     	
     	LegoLogicGraphBuilder legoLogicGraphBuilder = new LegoLogicGraphBuilder(expression);

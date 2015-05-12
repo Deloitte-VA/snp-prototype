@@ -17,7 +17,7 @@ import javax.xml.transform.stream.StreamSource;
 import com.google.common.base.MoreObjects;
 /**
  * Represents the content of LEGO XML document
- *
+ * @deprecated
  */
 public class LegoList {
 	private String groupName;
