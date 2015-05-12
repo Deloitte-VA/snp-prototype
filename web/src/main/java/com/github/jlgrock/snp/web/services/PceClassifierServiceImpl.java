@@ -35,6 +35,7 @@ public class PceClassifierServiceImpl implements
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public void classifyAssertion(final List<Lego> legos) {
     	for (Lego lego : legos) {
     		for (Assertion assertion : lego.getAssertion()) {
