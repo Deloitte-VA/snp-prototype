@@ -31,7 +31,7 @@ import com.github.jlgrock.snp.core.defaultconfig.MongoConfig;
 import com.github.jlgrock.snp.core.defaultconfig.WebConfig;
 import com.github.jlgrock.snp.core.domain.lego.Assertion;
 import com.github.jlgrock.snp.core.domain.lego.Lego;
-import com.github.jlgrock.snp.web.controllers.MultipartFileUtilsImpl;
+import com.github.jlgrock.snp.web.services.MultipartFileUtilsImpl;
 import com.github.jlgrock.snp.web.services.PceClassifierService;
 import com.github.jlgrock.snp.web.services.PceClassifierServiceImpl;
 
