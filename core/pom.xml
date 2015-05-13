@@ -22,6 +22,16 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>apis</artifactId>
         </dependency>
+		
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>lego</artifactId>
+		</dependency>
+
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>fhir</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>org.mongodb</groupId>

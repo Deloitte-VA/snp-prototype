@@ -33,6 +33,16 @@
 		</dependency>
 
         <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>lego</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>fhir</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
         </dependency>

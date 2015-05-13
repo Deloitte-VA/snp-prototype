@@ -1,12 +1,13 @@
 package com.github.jlgrock.snp.core.data;
 
-import com.github.jlgrock.snp.core.model.xml.lego.Expression;
-import com.github.jlgrock.snp.core.model.xml.lego.Relation;
 import gov.vha.isaac.logic.Node;
 import gov.vha.isaac.logic.node.AndNode;
 import gov.vha.isaac.logic.node.RootNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.github.jlgrock.snp.core.domain.lego.Expression;
+import com.github.jlgrock.snp.core.domain.lego.Relation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,13 +30,13 @@ public class LegoLogicGraphBuilder extends AbstractLogicGraphBuilder {
         //add RoleNodeSomeWithNids as child of AndNode. For the parameters of RoleNodeSomeWithNids, use typeConceptNid and 
         //ConceptNodeWithNids as parameters.
 
-        String sourceSctId = expression.getConcept().getSctid();
+        long sourceSctId = expression.getConcept().getSctid();
         //Get NID from UUID
-    	int sourceConceptNid = getNidFromSNOMED(sourceSctId);    	    	
+    	int sourceConceptNid = getNidFromSNOMED(String.valueOf(sourceSctId));    	    	
     	List<Node> sufficientSetList = new ArrayList<>();
     	
-    	if(expression.getRelations() != null && !expression.getRelations().isEmpty()) {
-    		for(Relation relation: expression.getRelations()) {
+    	if(expression.getRelation() != null && !expression.getRelation().isEmpty()) {
+    		for(Relation relation: expression.getRelation()) {
     			sufficientSetList.add(processRelation(relation, sourceConceptNid));
         	}
         	
@@ -52,18 +53,18 @@ public class LegoLogicGraphBuilder extends AbstractLogicGraphBuilder {
      */
     public Node processRelation(final Relation relation, final int sourceConceptNid) {
     	if(relation.getDestination() != null && relation.getDestination().getExpression() != null
-    			&& relation.getDestination().getExpression().getRelations() != null
-    			&& !relation.getDestination().getExpression().getRelations().isEmpty()) {
-    		for(Relation r : relation.getDestination().getExpression().getRelations()) {
+    			&& relation.getDestination().getExpression().getRelation() != null
+    			&& !relation.getDestination().getExpression().getRelation().isEmpty()) {
+    		for(Relation r : relation.getDestination().getExpression().getRelation()) {
     			return processRelation(r, sourceConceptNid);
     		}    		
     	}
     	
-    	String isAboutSctId = relation.getType().getConcept().getSctid();
-		String destinationSctId = relation.getDestination().getExpression().getConcept().getSctid();
+    	long isAboutSctId = relation.getType().getConcept().getSctid();
+		long destinationSctId = relation.getDestination().getExpression().getConcept().getSctid();
 		//Get NID from UUID
-		int typeConceptNid = getNidFromSNOMED(isAboutSctId);
-		int destinationNid = getNidFromSNOMED(destinationSctId);            
+		int typeConceptNid = getNidFromSNOMED(String.valueOf(isAboutSctId));
+		int destinationNid = getNidFromSNOMED(String.valueOf(destinationSctId));            
         
 		//Create AndNode
         AndNode andNode = And();
@@ -75,7 +76,7 @@ public class LegoLogicGraphBuilder extends AbstractLogicGraphBuilder {
      * Constructor for LogicGraph using input parameters from LEGO XML expressions
      * @param expressionIn the complex expression to parse
      */
-    public LegoLogicGraphBuilder(final Expression expressionIn) {
+    public LegoLogicGraphBuilder(final com.github.jlgrock.snp.core.domain.lego.Expression expressionIn) {
     	expression = expressionIn;
     }
 
