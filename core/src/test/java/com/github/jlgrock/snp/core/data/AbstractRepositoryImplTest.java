@@ -46,11 +46,6 @@ public class AbstractRepositoryImplTest extends TestSetup {
 		Assert.assertNotEquals(b1, 0);
 		
 	}
-
-//	  @Override
-//	    public Iterable<S> findAll(final Sort sort) {
-//	        throw new UnsupportedOperationException("Method is not currently being utilized.");
-//	    }
 	
 	@Test
 	public void findAllPageableTest() {
@@ -67,12 +62,7 @@ public class AbstractRepositoryImplTest extends TestSetup {
 		Assert.assertNotEquals(b1, 0);
 		
 	}
-	
-//	  @Override
-//	    public Page<S> findAll(final Pageable pageable) {
-//	        throw new UnsupportedOperationException("Method is not currently being utilized.");
-//	    }
-	
+		
 	@Test
 	public void saveTest() {
 
@@ -84,12 +74,6 @@ public class AbstractRepositoryImplTest extends TestSetup {
 		
 	}
 
-//	@Override
-//	public <S1 extends S> S save(final S1 entity) {
-//		dBCollection().insertOne(convertToDBObject(entity));
-//		return entity;
-//	}
-
 	@Test
 	public void iterableSaveTest() {
 		
@@ -100,21 +84,6 @@ public class AbstractRepositoryImplTest extends TestSetup {
 		Assert.assertEquals(patient1, patients);
 		
 	}
-
-//	@Override
-//	public <S1 extends S> Iterable<S1> save(final Iterable<S1> entities) {
-//		MongoCollection<Document> dbCollection = dBCollection();
-//		for (S entity : entities) {
-//			Document query = new Document() {
-//				{
-//					id: entity.getId();
-//				}
-//			};
-//			Document update = convertToDBObject(entity);
-//			dbCollection.updateOne(query, update);
-//		}
-//		return entities;
-//	}
 	
 	@Test
 	public void findOneByIdTest() {
@@ -132,17 +101,6 @@ public class AbstractRepositoryImplTest extends TestSetup {
 		Assert.assertEquals(iterableMock.first(), documents.get(0));
 
 	}
-
-//    @Override
-//    public S findOneById(final T id) {
-//        LOGGER.info("find(id=" + id + ")");
-//        Document query = new Document() {{
-//            put("_id", id);
-//
-//        }};
-//        FindIterable<Document> iterable = dBCollection().find(query).limit(1);
-//        return convertToDomainObject(iterable.first());
-//    }
 	
 	@Test
 	public void existsByIdTestNotNull() {
@@ -166,16 +124,6 @@ public class AbstractRepositoryImplTest extends TestSetup {
 		
 	}
 
-//    @Override
-//    public boolean existsById(final T id) {
-//        LOGGER.info("exists(id=" + id + ")");
-//        S obj = findOneById(id);
-//        if (obj != null) {
-//            return true;
-//        }
-//        return false;
-//    }
-
 	@Test
 	public void findAllTest() {
 		
@@ -185,13 +133,7 @@ public class AbstractRepositoryImplTest extends TestSetup {
 		Assert.assertEquals(patient1, iterableMock);
 
 	}
-		
-//    @Override
-//    public Iterable<S> findAll() {
-//        LOGGER.info("findAll()");
-//        return executeQueryAndTransformResults(new Document());
-//    }
-	
+			
 	@Test
 	public void findAllByIdTest() {
 		
@@ -206,20 +148,7 @@ public class AbstractRepositoryImplTest extends TestSetup {
 		Assert.assertEquals(patients, patient1);
 
 	}
-	
-//    @Override
-//    public Iterable<S> findAllById(final Iterable<T> ids) {
-//        LOGGER.info("findall(ids=" + Lists.newArrayList(ids).stream().map(id -> id.toString()).collect(Collectors.joining(", ")) + ")");
-//        List<S> sList = new ArrayList<>();
-//        Document query = new Document() {{
-//            put("_id", new BasicDBObject() {{
-//                put("$in", ids);
-//            }});
-//        }};
-//
-//        return dBCollection().find(query).into(sList);
-//    }
-	
+		
 	@Test
 	public void countTest() {
 
@@ -230,12 +159,7 @@ public class AbstractRepositoryImplTest extends TestSetup {
 		Assert.assertEquals(count1, count2);
 		
 	}
-	
-//    @Override
-//    public long count() {
-//        return dBCollection().count();
-//    }
-	
+		
 	@Test
 	public void deleteTest() {
 
@@ -243,13 +167,7 @@ public class AbstractRepositoryImplTest extends TestSetup {
 		Mockito.verify(dbCollection).findOneAndDelete(er1.convertToDBObject(patients.get(0)));
 		
 	}
-	
-//    @Override
-//    public void delete(final S entity) {
-//        LOGGER.info("deleteById(entity=" + entity + ")");
-//        dBCollection().findOneAndDelete(convertToDBObject(entity));
-//    }
-	
+		
 	@Test
 	public void deleteByIdTest() {
 
@@ -262,15 +180,6 @@ public class AbstractRepositoryImplTest extends TestSetup {
 
 	}
 	
-//	   @Override
-//	    public void deleteById(final T id) {
-//	        LOGGER.info("deleteById(id=" + id + ")");
-//	        Document query = new Document() {{
-//	            put("_id", id);
-//	        }};
-//	        deleteByQuery(query);
-//	    }
-
 	@Test
 	public void deleteIterableTest() {
 
@@ -283,18 +192,7 @@ public class AbstractRepositoryImplTest extends TestSetup {
         Mockito.verify(dbCollection).deleteMany(query);
 		
 	}
-	
-//    @Override
-//    public void delete(final Iterable<? extends S> entities) {
-//        LOGGER.info("delete(ids=" + Lists.newArrayList(entities).stream().map(id -> id.toString()).collect(Collectors.joining(", ")) + ")");
-//        Document query = new Document() {{
-//            put("_id", new Document() {{
-//                put("$in", entities);
-//            }});
-//        }};
-//        deleteByQuery(query);
-//    }
-	
+		
 	@Test
 	public void deleteAllTest() {
 
@@ -302,11 +200,5 @@ public class AbstractRepositoryImplTest extends TestSetup {
 		Mockito.verify(dbCollection).deleteMany(new Document());
 		
 	}
-	
-//	   @Override
-//	    public void deleteAll() {
-//	        LOGGER.info("deleteAll()");
-//	        deleteByQuery(new Document());
-//	    }
-	
+		
 }

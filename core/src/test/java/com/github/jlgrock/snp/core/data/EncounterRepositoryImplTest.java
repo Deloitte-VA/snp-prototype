@@ -36,14 +36,7 @@ public class EncounterRepositoryImplTest extends TestSetup {
 		for (Encounter encounter : queryResults1) {
 			Assert.assertTrue(encounters.contains(encounter));
 		}
-		
-//			 public List<Encounter> findByDate(final LocalDate date) {
-//			        Document query = new Document() {{
-//			            put("date", date);
-//			        }};
-//			        return executeQueryAndTransformResults(query);
-//			    }
-				
+						
 		}
 
 	}

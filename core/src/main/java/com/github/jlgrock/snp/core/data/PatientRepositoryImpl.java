@@ -9,10 +9,13 @@ import com.github.jlgrock.snp.core.domain.Race;
 
 import org.bson.Document;
 import org.jvnet.hk2.annotations.Service;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -26,6 +29,11 @@ public class PatientRepositoryImpl extends
     private final PatientReadConverter patientReadConverter;
 
     private final PatientWriteConverter patientWriteConverter;
+    
+    private static final Logger LOGGER = LoggerFactory
+            .getLogger(PatientRepositoryImpl.class);
+    
+    List<Patient> patientShell = new ArrayList<>(6);
 
     @Inject
     public PatientRepositoryImpl(final MongoDbFactory mongoDbFactoryIn,
@@ -38,6 +46,7 @@ public class PatientRepositoryImpl extends
 
     @Override
     protected Patient convertToDomainObject(final Document dbObjectin) {
+    	LOGGER.trace("convertToDomainObject(Document dbObjectin=" + dbObjectin + ")");
         if (dbObjectin == null) {
             return null;
         }
@@ -46,11 +55,13 @@ public class PatientRepositoryImpl extends
 
     @Override
     protected String getCollectionName() {
+    	LOGGER.trace("getCollectionName()");
         return "patients";
     }
 
     @Override
     protected Document convertToDBObject(final Patient s) {
+    	LOGGER.trace("convertToDBObject(Patient s=" + s + ")");
         if (s == null) {
             return null;
         }
@@ -60,6 +71,10 @@ public class PatientRepositoryImpl extends
 
     @Override
     public List<Patient> findAllByLastName(String lastName) {
+    	if (lastName == null){
+    		return patientShell;
+    	}
+    	LOGGER.trace("findAllByLastName(lastName=" + lastName + ")");
         Document query = new Document() {{
             put("lastName", lastName);
         }};
@@ -67,8 +82,11 @@ public class PatientRepositoryImpl extends
     }
 
     @Override
-    public List<Patient> findAllByFirstNameAndLastName(final String firstName,
-                                                       final String lastName) {
+    public List<Patient> findAllByFirstNameAndLastName(final String firstName, final String lastName) {
+    	if (firstName == null || lastName == null){
+    		return patientShell;
+    	}
+    	LOGGER.trace("findAllByFirstNameAndLastName(firstName=" + firstName + ", lastName=" + lastName + ")");
         Document query = new Document() {{
             put("firstName", firstName);
             put("lastName", lastName);
@@ -78,6 +96,10 @@ public class PatientRepositoryImpl extends
 
     @Override
     public List<Patient> findAllByDateOfBirth(final LocalDate dateOfBirth) {
+    	if (dateOfBirth == null){
+    		return patientShell;
+    	}
+    	LOGGER.trace("findAllByDateOfBirth(dateOfBirth=" + dateOfBirth + ")");
         Document query = new Document() {{
             put("dateOfBirth", dateOfBirth);
         }};
@@ -86,6 +108,10 @@ public class PatientRepositoryImpl extends
 
     @Override
     public List<Patient> findAllByGender(final Gender gender) {
+    	if (gender == null){
+    		return patientShell;
+    	}
+    	LOGGER.trace("findAllByGender(gender=" + gender + ")");
         Document query = new Document() {{
             put("gender", gender);
         }};
@@ -94,6 +120,10 @@ public class PatientRepositoryImpl extends
 
     @Override
     public List<Patient> findAllByRace(final Race race) {
+    	if (race == null){
+    		return patientShell;
+    	}
+    	LOGGER.trace("findAllByRace(race=" + race + ")");
         Document query = new Document() {{
             put("race", race);
         }};
