@@ -124,18 +124,27 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
         dBCollection().deleteMany(query);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Iterable<S> findAll(final Sort sort) {
     	LOGGER.trace("findAll(sort=" + sort + ")");
         throw new UnsupportedOperationException("Method is not currently being utilized.");
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Page<S> findAll(final Pageable pageable) {
     	LOGGER.trace("findAll(pageable=" + pageable + ")");
         throw new UnsupportedOperationException("Method is not currently being utilized.");
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public <S1 extends S> S save(final S1 entity) {
     	if (entity == null){
@@ -147,6 +156,9 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
         return entity;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public <S1 extends S> Iterable<S1> save(final Iterable<S1> entities) {
     	if (entities == null){
@@ -165,7 +177,10 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
         }
         return entities;
     }
-
+    
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public S findOneById(final T id) {
     	if (id == null){
@@ -181,6 +196,9 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
         return convertToDomainObject(iterable.first());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean existsById(final T id) {
     	if (id == null){
@@ -194,13 +212,19 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
         }
         return false;
     }
-
+    
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Iterable<S> findAll() {
         LOGGER.trace("findAll()");
         return executeQueryAndTransformResults(new Document());
     }
-
+    
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Iterable<S> findAllById(final Iterable<T> ids) {
         LOGGER.trace("findAllById(ids=" + Lists.newArrayList(ids).stream().map(id -> id.toString()).collect(Collectors.joining(", ")) + ")");
@@ -217,12 +241,18 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
         return dBCollection().find(query).into(sList);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public long count() {
     	LOGGER.trace("count()");
         return dBCollection().count();
     }
-
+    
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void delete(final S entity) {
     	if (entity == null){
@@ -231,7 +261,10 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
         LOGGER.trace("deleteById(entity=" + entity + ")");
         dBCollection().findOneAndDelete(convertToDBObject(entity));
     }
-
+    
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void deleteById(final T id) {
     	if (id == null){
@@ -243,7 +276,10 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
         }};
         deleteByQuery(query);
     }
-
+    
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void delete(final Iterable<? extends S> entities) {
     	if (entities == null){
@@ -257,7 +293,10 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
         }};
         deleteByQuery(query);
     }
-
+    
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void deleteAll() {
         LOGGER.trace("deleteAll()");

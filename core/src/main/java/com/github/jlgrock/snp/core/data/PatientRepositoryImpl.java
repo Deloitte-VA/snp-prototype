@@ -44,6 +44,9 @@ public class PatientRepositoryImpl extends
         patientWriteConverter = patientWriteConverterIn;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected Patient convertToDomainObject(final Document dbObjectin) {
     	LOGGER.trace("convertToDomainObject(Document dbObjectin=" + dbObjectin + ")");
@@ -52,13 +55,19 @@ public class PatientRepositoryImpl extends
         }
         return patientReadConverter.convert(dbObjectin);
     }
-
+    
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected String getCollectionName() {
     	LOGGER.trace("getCollectionName()");
         return "patients";
     }
-
+    
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected Document convertToDBObject(final Patient s) {
     	LOGGER.trace("convertToDBObject(Patient s=" + s + ")");
@@ -68,7 +77,9 @@ public class PatientRepositoryImpl extends
         return patientWriteConverter.convert(s);
     }
 
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Patient> findAllByLastName(String lastName) {
     	if (lastName == null){
@@ -80,7 +91,10 @@ public class PatientRepositoryImpl extends
         }};
         return executeQueryAndTransformResults(query);
     }
-
+    
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Patient> findAllByFirstNameAndLastName(final String firstName, final String lastName) {
     	if (firstName == null || lastName == null){
@@ -93,7 +107,10 @@ public class PatientRepositoryImpl extends
         }};
         return executeQueryAndTransformResults(query);
     }
-
+    
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Patient> findAllByDateOfBirth(final LocalDate dateOfBirth) {
     	if (dateOfBirth == null){
@@ -105,7 +122,10 @@ public class PatientRepositoryImpl extends
         }};
         return executeQueryAndTransformResults(query);
     }
-
+    
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Patient> findAllByGender(final Gender gender) {
     	if (gender == null){
@@ -117,7 +137,10 @@ public class PatientRepositoryImpl extends
         }};
         return executeQueryAndTransformResults(query);
     }
-
+    
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Patient> findAllByRace(final Race race) {
     	if (race == null){

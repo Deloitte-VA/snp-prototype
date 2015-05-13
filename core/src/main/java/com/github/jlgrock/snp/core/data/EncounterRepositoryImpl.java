@@ -42,6 +42,9 @@ public class EncounterRepositoryImpl extends
         encounterWriteConverter = encounterWriteConverterIn;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected String getCollectionName() {
     	LOGGER.trace("getCollectionName()");
@@ -58,7 +61,10 @@ public class EncounterRepositoryImpl extends
         }};
         return executeQueryAndTransformResults(query);
     }
-
+    
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected Encounter convertToDomainObject(final Document dbObjectin) {
     	LOGGER.trace("convertToDomainObject(Document dbObjectin=" + dbObjectin + ")");
@@ -67,7 +73,10 @@ public class EncounterRepositoryImpl extends
         }
         return encounterReadConverter.convert(dbObjectin);
     }
-
+    
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected Document convertToDBObject(final Encounter s) {
     	LOGGER.trace("convertToDBObject(Encounter s=" + s + ")");

@@ -33,7 +33,10 @@ public class ClassifiedAssertionRepositoryImpl extends AbstractRepositoryImpl<Cl
         classifiedAssertionReadConverter = classifiedAssertionReadConverterIn;
         classifiedAssertionWriteConverter = classifiedAssertionWriteConverterIn;
     }
-
+    
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected ClassifiedAssertion convertToDomainObject(final Document dbObjectin) {
     	LOGGER.trace("convertToDomainObject(Document dbObjectin=" + dbObjectin + ")");
@@ -44,6 +47,9 @@ public class ClassifiedAssertionRepositoryImpl extends AbstractRepositoryImpl<Cl
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected Document convertToDBObject(final ClassifiedAssertion s) {
     	LOGGER.trace("convertToDBObject(ClassifiedAssertion s=" + s + ")");
@@ -53,7 +59,10 @@ public class ClassifiedAssertionRepositoryImpl extends AbstractRepositoryImpl<Cl
             return classifiedAssertionWriteConverter.convert(s);
         }
     }
-
+    
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected String getCollectionName() {
     	LOGGER.trace("getCollectionName()");
