@@ -134,15 +134,22 @@ public class ClassifierResource {
 			
 			// TODO: Queue processing of data to occur after loop so that all 
 			// files can be verified for correctness before we process any
-			// TODO: Add support for FHIR
 			Class<?> entityClass = SnpMediaTypeMapping.getEntityClass(filePart.getMediaType());
-			LegoList ll = null;
-			ll = (LegoList) filePart.getEntityAs(entityClass);
-			
-			LOGGER.debug("LegoList: {}", ll);
-	    	for (Lego lego : ll.getLego()) {
-	    		pceClssfrSvcLego.classifyAssertion(lego);
-	    	}
+			LOGGER.debug("entityClass for media type is: {}", entityClass);
+			if (entityClass.equals(LegoList.class)) {
+				LOGGER.trace("inside LegoList");
+				LegoList ll = (LegoList) filePart.getEntityAs(entityClass);
+				LOGGER.debug("LegoList: {}", ll);
+		    	for (Lego lego : ll.getLego()) {
+		    		pceClssfrSvcLego.classifyAssertion(lego);
+		    	}
+			}
+			else if (entityClass.equals(Condition.class)) {
+				LOGGER.trace("inside Condition");
+				Condition condition = (Condition) filePart.getEntityAs(entityClass);
+				LOGGER.debug("Condition: {}", condition);
+				pceClssfrSvcFhir.classifyAssertion(condition);
+			}
 		}
 		
 		return Response.ok().build();

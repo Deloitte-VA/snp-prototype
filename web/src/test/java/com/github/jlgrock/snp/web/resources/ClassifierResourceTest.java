@@ -81,6 +81,7 @@ public class ClassifierResourceTest extends GenericControllerTest {
 	@BeforeMethod
 	public void setup() {
 		Mockito.reset(pceClssfrSvcLego);
+		Mockito.reset(pceClssfrSvcFhir);
 	}
 	
 	@Test
@@ -129,6 +130,31 @@ public class ClassifierResourceTest extends GenericControllerTest {
         // verify return status
         Assert.assertEquals(response.getStatus(), Response.Status.OK.getStatusCode());
         Mockito.verify(pceClssfrSvcLego).classifyAssertion(Mockito.any());
+	}
+
+	@Test
+	public void testFhirXmlFileUpload() {
+		final WebTarget target = target().path(RESOURCE_URI);
+
+        String testXml = readFile("FHIRCondition-1.xml");
+        
+        final FormDataMultiPart mp = new FormDataMultiPart();
+        final FormDataContentDisposition formDataContentDisposition = FormDataContentDisposition
+                .name("file")
+                .fileName("fhir.xml")
+                .size(testXml.length())
+                .build();
+        final FormDataBodyPart formDataBodyPart = new FormDataBodyPart(
+        		formDataContentDisposition, testXml, 
+        		SnpMediaType.APPLICATION_FHIR_XML_TYPE);
+        mp.bodyPart(formDataBodyPart);
+        
+        final Entity<FormDataMultiPart> form = Entity.entity(mp, MediaType.MULTIPART_FORM_DATA_TYPE);
+        final Response response = target.request().post(form);
+        
+        // verify return status
+        Assert.assertEquals(response.getStatus(), Response.Status.OK.getStatusCode());
+        Mockito.verify(pceClssfrSvcFhir).classifyAssertion(Mockito.any());
 	}
 	
 	@Test
