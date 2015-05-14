@@ -21,13 +21,11 @@ import org.glassfish.jersey.server.ResourceConfig;
 import org.jvnet.testing.hk2testng.HK2;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.internal.verification.Times;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import com.github.jlgrock.snp.core.domain.fhir.Condition;
 import com.github.jlgrock.snp.core.domain.lego.Lego;
 import com.github.jlgrock.snp.web.SnpMediaType;
 import com.github.jlgrock.snp.web.controllers.GenericControllerTest;
@@ -39,7 +37,10 @@ public class ClassifierResourceTest extends GenericControllerTest {
 	public static final String RESOURCE_URI = "classifier";
 	
 	@Mock
-	PceClassifierService<Lego> assertClssfrSvc;
+	PceClassifierService<Lego> pceClssfrSvcLego;
+	
+	@Mock
+	PceClassifierService<Condition> pceClssfrSvcFhir;
 	
 	@Override
 	protected void registerInjectionPoints(ResourceConfig application) {
@@ -49,7 +50,7 @@ public class ClassifierResourceTest extends GenericControllerTest {
 				bindFactory(new Factory<PceClassifierService<Lego>>() {
 					@Override
 					public PceClassifierService<Lego> provide() {
-						return assertClssfrSvc;
+						return pceClssfrSvcLego;
 					}
 
 					@Override
@@ -58,12 +59,28 @@ public class ClassifierResourceTest extends GenericControllerTest {
 				}).to(new TypeLiteral<PceClassifierService<Lego>>() {}).ranked(DEFAULT_HK2_TEST_BIND_RANK);
 			}
 		});
+		
+		application.registerInstances(new AbstractBinder() {
+			@Override
+			protected void configure() {
+				bindFactory(new Factory<PceClassifierService<Condition>>() {
+					@Override
+					public PceClassifierService<Condition> provide() {
+						return pceClssfrSvcFhir;
+					}
+
+					@Override
+					public void dispose(PceClassifierService<Condition> instance) {
+					}
+				}).to(new TypeLiteral<PceClassifierService<Condition>>() {}).ranked(DEFAULT_HK2_TEST_BIND_RANK);
+			}
+		});
 	}
 	
 	@SuppressWarnings("unchecked")
 	@BeforeMethod
 	public void setup() {
-		Mockito.reset(assertClssfrSvc);
+		Mockito.reset(pceClssfrSvcLego);
 	}
 	
 	@Test
@@ -75,7 +92,7 @@ public class ClassifierResourceTest extends GenericControllerTest {
 
 		// verify return status
 		Assert.assertEquals(response.getStatus(), Response.Status.OK.getStatusCode());
-		Mockito.verify(assertClssfrSvc).classifyAssertion(Mockito.any());
+		Mockito.verify(pceClssfrSvcLego).classifyAssertion(Mockito.any());
 	}
 	
 	@Test
@@ -86,7 +103,7 @@ public class ClassifierResourceTest extends GenericControllerTest {
 
 		// verify return status
 		Assert.assertEquals(response.getStatus(), Response.Status.BAD_REQUEST.getStatusCode());
-		Mockito.verifyZeroInteractions(assertClssfrSvc);
+		Mockito.verifyZeroInteractions(pceClssfrSvcLego);
 	}
 	
 	@Test
@@ -111,7 +128,7 @@ public class ClassifierResourceTest extends GenericControllerTest {
         
         // verify return status
         Assert.assertEquals(response.getStatus(), Response.Status.OK.getStatusCode());
-        Mockito.verify(assertClssfrSvc).classifyAssertion(Mockito.any());
+        Mockito.verify(pceClssfrSvcLego).classifyAssertion(Mockito.any());
 	}
 	
 	@Test
@@ -149,7 +166,7 @@ public class ClassifierResourceTest extends GenericControllerTest {
         
         // verify return status
         Assert.assertEquals(response.getStatus(), Response.Status.OK.getStatusCode());
-        Mockito.verify(assertClssfrSvc, Mockito.times(2)).classifyAssertion(Mockito.any());
+        Mockito.verify(pceClssfrSvcLego, Mockito.times(2)).classifyAssertion(Mockito.any());
 	}
 	
 	@Test
@@ -188,7 +205,19 @@ public class ClassifierResourceTest extends GenericControllerTest {
         // verify return status
         Assert.assertEquals(response.getStatus(), Response.Status.BAD_REQUEST.getStatusCode());
         // TODO: should be... Mockito.verifyZeroInteractions(assertClssfrSvc);
-        Mockito.verify(assertClssfrSvc).classifyAssertion(Mockito.any());
+        Mockito.verify(pceClssfrSvcLego).classifyAssertion(Mockito.any());
+	}
+	
+	@Test
+	public void testStreamingFhirXml() {
+		String testXml = readFile("FHIRCondition-1.xml");
+		final WebTarget target = target().path(RESOURCE_URI);
+		final Response response = target.request(SnpMediaType.APPLICATION_FHIR_XML_TYPE)
+				.post(Entity.entity(testXml, SnpMediaType.APPLICATION_FHIR_XML_TYPE));
+
+		// verify return status
+		Assert.assertEquals(response.getStatus(), Response.Status.OK.getStatusCode());
+		Mockito.verify(pceClssfrSvcFhir).classifyAssertion(Mockito.any());
 	}
 	
     @Test
@@ -211,7 +240,7 @@ public class ClassifierResourceTest extends GenericControllerTest {
 
         // verify return status
         Assert.assertEquals(response.getStatus(), Response.Status.BAD_REQUEST.getStatusCode());
-        Mockito.verifyZeroInteractions(assertClssfrSvc);
+        Mockito.verifyZeroInteractions(pceClssfrSvcLego);
     }
     
     @Test
@@ -223,7 +252,7 @@ public class ClassifierResourceTest extends GenericControllerTest {
 
         // verify return status
         Assert.assertEquals(response.getStatus(), Response.Status.BAD_REQUEST.getStatusCode());
-        Mockito.verifyZeroInteractions(assertClssfrSvc);
+        Mockito.verifyZeroInteractions(pceClssfrSvcLego);
     }
 
 	/**

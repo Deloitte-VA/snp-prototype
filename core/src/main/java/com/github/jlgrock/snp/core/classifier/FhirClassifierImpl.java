@@ -5,7 +5,7 @@ import java.util.UUID;
 import org.jvnet.hk2.annotations.Service;
 
 import com.github.jlgrock.snp.core.domain.ClassifiedPce;
-import com.github.jlgrock.snp.core.model.xml.fhir.Condition;
+import com.github.jlgrock.snp.core.domain.fhir.Condition;
 
 /**
  * Classify a condition object with a complex expression

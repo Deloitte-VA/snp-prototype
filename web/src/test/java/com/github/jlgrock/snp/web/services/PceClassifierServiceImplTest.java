@@ -15,7 +15,7 @@ import com.github.jlgrock.snp.core.classifier.PceClassifier;
 import com.github.jlgrock.snp.core.data.ClassifiedPceStore;
 import com.github.jlgrock.snp.core.domain.ClassifiedPce;
 import com.github.jlgrock.snp.core.domain.lego.Assertion;
-import com.github.jlgrock.snp.web.services.PceClassifierServiceImpl;
+import com.github.jlgrock.snp.web.services.PceClassifierServiceLegoImpl;
 
 public class PceClassifierServiceImplTest {
 	
@@ -44,7 +44,7 @@ public class PceClassifierServiceImplTest {
 //		Mockito.verify(cAssertStore.save(Mockito.anyLong(), cAssertion));
 		
 		String expected = readFile("Assertion_Example_01.xml");
-		PceClassifierServiceImpl classSvc = new PceClassifierServiceImpl(assertionClassifier, cAssertStore);
+		PceClassifierServiceLegoImpl classSvc = new PceClassifierServiceLegoImpl(assertionClassifier, cAssertStore);
 //		classSvc.classifyAssertion(expected);
 		
 //		 TODO: need to add to test
