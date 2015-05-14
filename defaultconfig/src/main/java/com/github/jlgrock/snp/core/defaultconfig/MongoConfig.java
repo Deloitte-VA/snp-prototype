@@ -38,18 +38,27 @@ public class MongoConfig implements MongoDbConfiguration {
     private final List<MongoCredential> userCredentials;
 
     /**
-     * Constructor that uses all defaults.  This is great for testing a mongo repository
-     * that is local and requires no authentication.
+     * Constructor that reads the default property file.
      */
     public MongoConfig() {
+        this(true);
+    }
+
+    /**
+     * Constructor that uses all defaults.  This is great for testing a mongo repository
+     * that is local and requires no authentication.
+     *
+     * @param readProperties false if you want to skip reading the properties.
+     */
+    public MongoConfig(boolean readProperties) {
         userCredentials = null;
         ServerAddress hostSet;
         String server = PropertiesFileReader.getHost();
-        if (server == null) {
+        if (readProperties == false || server == null) {
             server = DEFAULT_HOST;
         }
         Integer port = PropertiesFileReader.getPort();
-        if (port == null) {
+        if (readProperties == false || port == null) {
             port = DEFAULT_PORT;
         }
         try {
@@ -64,7 +73,7 @@ public class MongoConfig implements MongoDbConfiguration {
         hosts = null;
 
         String db = PropertiesFileReader.getDatabase();
-        if (db == null) {
+        if (readProperties == false || db == null) {
             db = DEFAULT_DATABASE;
         }
         defaultDatabase = db;
