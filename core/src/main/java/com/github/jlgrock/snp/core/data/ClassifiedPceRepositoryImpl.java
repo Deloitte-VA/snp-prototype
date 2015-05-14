@@ -2,9 +2,9 @@ package com.github.jlgrock.snp.core.data;
 
 import com.github.jlgrock.snp.apis.connection.MongoDbFactory;
 import com.github.jlgrock.snp.core.converters.ClassifiedPceReadConverter;
-import com.github.jlgrock.snp.core.converters.ClassifiedAssertionWriteConverter;
+import com.github.jlgrock.snp.core.converters.ClassifiedPceWriteConverter;
 import com.github.jlgrock.snp.core.domain.ClassifiedPce;
-import com.mongodb.DBObject;
+import org.bson.Document;
 import org.jvnet.hk2.annotations.Service;
 
 import javax.inject.Inject;
@@ -14,34 +14,35 @@ import javax.inject.Inject;
  * Collection within MongoDB.
  */
 @Service
-public class ClassifiedPceRepositoryImpl extends AbstractRepositoryImpl<ClassifiedPce, Long> implements ClassifiedPceRepository {
+public class ClassifiedPceRepositoryImpl extends AbstractRepositoryImpl<ClassifiedPce, Long>
+		implements ClassifiedPceRepository {
 
 	private final ClassifiedPceReadConverter classifiedAssertionReadConverter;
 
-	private final ClassifiedAssertionWriteConverter classifiedAssertionWriteConverter;
+	private final ClassifiedPceWriteConverter classifiedPceWriteConverter;
 
 	/**
 	 * @param mongoDbFactoryIn MongoDbFactory
 	 * @param classifiedAssertionReadConverterIn ClassifiedAssertionReadConverter
-	 * @param classifiedAssertionWriteConverterIn ClassifiedAssertionWriteConverter
+	 * @param classifiedPceWriteConverterIn ClassifiedAssertionWriteConverter
 	 */
 	@Inject
     public ClassifiedPceRepositoryImpl(final MongoDbFactory mongoDbFactoryIn,
 									   final ClassifiedPceReadConverter classifiedAssertionReadConverterIn,
-									   final ClassifiedAssertionWriteConverter classifiedAssertionWriteConverterIn) {
+									   final ClassifiedPceWriteConverter classifiedPceWriteConverterIn) {
         super(mongoDbFactoryIn);
 		classifiedAssertionReadConverter = classifiedAssertionReadConverterIn;
-		classifiedAssertionWriteConverter = classifiedAssertionWriteConverterIn;
+		classifiedPceWriteConverter = classifiedPceWriteConverterIn;
     }
 
 	@Override
-	protected ClassifiedPce convertToDomainObject(final DBObject dbObjectin) {
+	protected ClassifiedPce convertToDomainObject(final Document dbObjectin) {
 		return classifiedAssertionReadConverter.convert(dbObjectin);
 	}
 
 	@Override
-	protected DBObject convertToDBObject(final ClassifiedPce s) {
-		return classifiedAssertionWriteConverter.convert(s);
+	protected Document convertToDBObject(final ClassifiedPce s) {
+		return classifiedPceWriteConverter.convert(s);
 	}
 
     @Override

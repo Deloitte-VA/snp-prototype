@@ -12,7 +12,7 @@ import com.github.jlgrock.snp.core.connection.SimpleMongoDbFactory;
 import com.github.jlgrock.snp.core.connection.SynchronizedMongoDatabaseManager;
 import com.github.jlgrock.snp.core.connection.synchronization.CollectionSynchronizationManager;
 import com.github.jlgrock.snp.core.converters.ClassifiedPceReadConverter;
-import com.github.jlgrock.snp.core.converters.ClassifiedAssertionWriteConverter;
+import com.github.jlgrock.snp.core.converters.ClassifiedPceWriteConverter;
 import com.github.jlgrock.snp.core.converters.EncounterReadConverter;
 import com.github.jlgrock.snp.core.converters.EncounterWriteConverter;
 import com.github.jlgrock.snp.core.converters.ObservationReadConverter;
@@ -116,7 +116,7 @@ public class ApplicationConfig extends ResourceConfig {
                 bind(PatientWriteConverter.class).to(PatientWriteConverter.class);
 
                 bind(ClassifiedPceReadConverter.class).to(ClassifiedPceReadConverter.class);
-                bind(ClassifiedAssertionWriteConverter.class).to(ClassifiedAssertionWriteConverter.class);
+                bind(ClassifiedPceWriteConverter.class).to(ClassifiedPceWriteConverter.class);
 
 
                 bind(SimpleMongoDbFactory.class).to(MongoDbFactory.class);

@@ -5,7 +5,7 @@ import com.github.jlgrock.snp.core.data.PatientTags;
 import com.github.jlgrock.snp.core.domain.Gender;
 import com.github.jlgrock.snp.core.domain.Patient;
 import com.github.jlgrock.snp.core.domain.Race;
-import com.mongodb.DBObject;
+import org.bson.Document;
 import org.jvnet.hk2.annotations.Service;
 
 import javax.inject.Named;
@@ -16,10 +16,10 @@ import java.time.LocalDate;
  */
 @Service
 @Named
-public class PatientReadConverter implements ReadConverter<DBObject, Patient> {
+public class PatientReadConverter implements ReadConverter<Document, Patient> {
 
     @Override
-    public Patient convert(final DBObject source) {
+    public Patient convert(final Document source) {
         Patient p = new Patient();
         p.setId(((Number) source.get(PatientTags.ID_TAG)).longValue());
         p.setFirstName((String) source.get(PatientTags.FIRST_NAME_TAG));

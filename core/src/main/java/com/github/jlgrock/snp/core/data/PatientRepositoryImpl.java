@@ -6,13 +6,15 @@ import com.github.jlgrock.snp.core.converters.PatientWriteConverter;
 import com.github.jlgrock.snp.core.domain.Gender;
 import com.github.jlgrock.snp.core.domain.Patient;
 import com.github.jlgrock.snp.core.domain.Race;
-import com.mongodb.BasicDBObject;
-import com.mongodb.DBCollection;
-import com.mongodb.DBCursor;
-import com.mongodb.DBObject;
+
+import org.bson.Document;
 import org.jvnet.hk2.annotations.Service;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -23,11 +25,16 @@ import java.util.List;
  */
 @Service
 public class PatientRepositoryImpl extends
-		AbstractRepositoryImpl<Patient, Long> implements PatientRepository {
+        AbstractRepositoryImpl<Patient, Long> implements PatientRepository {
 
-	private final PatientReadConverter patientReadConverter;
+    private final PatientReadConverter patientReadConverter;
 
-	private final PatientWriteConverter patientWriteConverter;
+    private final PatientWriteConverter patientWriteConverter;
+    
+    private static final Logger LOGGER = LoggerFactory
+            .getLogger(PatientRepositoryImpl.class);
+    
+    List<Patient> patientShell = new ArrayList<>(6);
 
 	/**
 	 * constructs PatientRepositoryImpl
@@ -35,102 +42,122 @@ public class PatientRepositoryImpl extends
 	 * @param patientReadConverterIn PatientReadConverter
 	 * @param patientWriteConverterIn PatientWriteConverter
 	 */
-	@Inject
-	protected PatientRepositoryImpl(final MongoDbFactory mongoDbFactoryIn,
-									final PatientReadConverter patientReadConverterIn,
-									final PatientWriteConverter patientWriteConverterIn) {
-		super(mongoDbFactoryIn);
-		patientReadConverter = patientReadConverterIn;
-		patientWriteConverter = patientWriteConverterIn;
-	}
+    @Inject
+    public PatientRepositoryImpl(final MongoDbFactory mongoDbFactoryIn,
+                                 final PatientReadConverter patientReadConverterIn,
+                                 final PatientWriteConverter patientWriteConverterIn) {
+        super(mongoDbFactoryIn);
+        patientReadConverter = patientReadConverterIn;
+        patientWriteConverter = patientWriteConverterIn;
+    }
 
-	@Override
-	protected Patient convertToDomainObject(final DBObject dbObjectin) {
-		return patientReadConverter.convert(dbObjectin);
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected Patient convertToDomainObject(final Document dbObjectin) {
+    	LOGGER.trace("convertToDomainObject(Document dbObjectin=" + dbObjectin + ")");
+        if (dbObjectin == null) {
+            return null;
+        }
+        return patientReadConverter.convert(dbObjectin);
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected String getCollectionName() {
+    	LOGGER.trace("getCollectionName()");
+        return "patients";
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected Document convertToDBObject(final Patient s) {
+    	LOGGER.trace("convertToDBObject(Patient s=" + s + ")");
+        if (s == null) {
+            return null;
+        }
+        return patientWriteConverter.convert(s);
+    }
 
-	@Override
-	protected String getCollectionName() {
-		return "patients";
-	}
-
-	@Override
-	protected DBObject convertToDBObject(final Patient s) {
-		return patientWriteConverter.convert(s);
-	}
-	
-	@Override
-	public List<Patient> findAllByLastName(final String lastName) {
-		List<Patient> pList = new ArrayList<>();
-		DBCollection dbc1 = dBCollection();
-		BasicDBObject query = new BasicDBObject() {{
-			put("lastName", lastName);
-		}};
-		DBCursor x = dbc1.find(query);
-		for (DBObject o : x) {
-			pList.add(convertToDomainObject(o));
-		}
-		return pList;
-	}
-
-	@Override
-	public List<Patient> findAllByFirstNameAndLastName(final String firstName,
-			final String lastName) {
-		List<Patient> pList = new ArrayList<>();
-		DBCollection dbc1 = dBCollection();
-		BasicDBObject query = new BasicDBObject() {{
-			put("firstName", firstName);
-			put("lastName", lastName);
-		}};
-
-		DBCursor x = dbc1.find(query);
-		for (DBObject o : x) {
-			pList.add(convertToDomainObject(o));
-		}
-		return pList;
-	}
-
-	@Override
-	public List<Patient> findAllByDateOfBirth(final Date dateOfBirth) {
-		List<Patient> pList = new ArrayList<>();
-		DBCollection dbc1 = dBCollection();
-		BasicDBObject query = new BasicDBObject() {{
-			put("dateOfBirth", dateOfBirth);
-		}};
-		DBCursor x = dbc1.find(query);
-		for (DBObject o : x) {
-			pList.add(convertToDomainObject(o));
-		}
-		return pList;
-	}
-
-	@Override
-	public List<Patient> findAllByGender(final Gender gender) {
-		List<Patient> pList = new ArrayList<>();
-		DBCollection dbc1 = dBCollection();
-		BasicDBObject query = new BasicDBObject() {{
-			put("gender", gender);
-		}};
-
-		DBCursor x = dbc1.find(query);
-		for (DBObject o : x) {
-			pList.add(convertToDomainObject(o));
-		}
-		return pList;
-	}
-
-	@Override
-	public List<Patient> findAllByRace(final Race race) {
-		List<Patient> pList = new ArrayList<>();
-		DBCollection dbc1 = dBCollection();
-		BasicDBObject query = new BasicDBObject() {{
-			put("race", race);
-		}};
-		DBCursor x = dbc1.find(query);
-		for (DBObject o : x) {
-			pList.add(convertToDomainObject(o));
-		}
-		return pList;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<Patient> findAllByLastName(String lastName) {
+    	if (lastName == null){
+    		return patientShell;
+    	}
+    	LOGGER.trace("findAllByLastName(lastName=" + lastName + ")");
+        Document query = new Document() {{
+            put("lastName", lastName);
+        }};
+        return executeQueryAndTransformResults(query);
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<Patient> findAllByFirstNameAndLastName(final String firstName, final String lastName) {
+    	if (firstName == null || lastName == null){
+    		return patientShell;
+    	}
+    	LOGGER.trace("findAllByFirstNameAndLastName(firstName=" + firstName + ", lastName=" + lastName + ")");
+        Document query = new Document() {{
+            put("firstName", firstName);
+            put("lastName", lastName);
+        }};
+        return executeQueryAndTransformResults(query);
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<Patient> findAllByDateOfBirth(final LocalDate dateOfBirth) {
+    	if (dateOfBirth == null){
+    		return patientShell;
+    	}
+    	LOGGER.trace("findAllByDateOfBirth(dateOfBirth=" + dateOfBirth + ")");
+        Document query = new Document() {{
+            put("dateOfBirth", dateOfBirth);
+        }};
+        return executeQueryAndTransformResults(query);
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<Patient> findAllByGender(final Gender gender) {
+    	if (gender == null){
+    		return patientShell;
+    	}
+    	LOGGER.trace("findAllByGender(gender=" + gender + ")");
+        Document query = new Document() {{
+            put("gender", gender);
+        }};
+        return executeQueryAndTransformResults(query);
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<Patient> findAllByRace(final Race race) {
+    	if (race == null){
+    		return patientShell;
+    	}
+    	LOGGER.trace("findAllByRace(race=" + race + ")");
+        Document query = new Document() {{
+            put("race", race);
+        }};
+        return executeQueryAndTransformResults(query);
+    }
 
 }
