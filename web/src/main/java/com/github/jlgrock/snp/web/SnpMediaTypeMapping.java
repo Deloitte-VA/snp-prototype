@@ -2,7 +2,7 @@ package com.github.jlgrock.snp.web;
 
 import javax.ws.rs.core.MediaType;
 
-import com.github.jlgrock.snp.core.model.xml.fhir.Bundle;
+import com.github.jlgrock.snp.core.domain.fhir.Condition;
 import com.github.jlgrock.snp.core.domain.lego.LegoList;
 
 /**
@@ -11,7 +11,7 @@ import com.github.jlgrock.snp.core.domain.lego.LegoList;
  */
 public enum SnpMediaTypeMapping {
 	LEGO (SnpMediaType.APPLICATION_LEGO_XML_TYPE, LegoList.class),
-	FHIR (SnpMediaType.APPLICATION_FHIR_XML_TYPE, Bundle.class);
+	FHIR (SnpMediaType.APPLICATION_FHIR_XML_TYPE, Condition.class);
 	
 	private MediaType mediaType;
 	private Class<? extends Object> entityClass;
