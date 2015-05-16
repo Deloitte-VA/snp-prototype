@@ -50,7 +50,7 @@ public class MongoConfig implements MongoDbConfiguration {
      *
      * @param readProperties false if you want to skip reading the properties.
      */
-    public MongoConfig(boolean readProperties) {
+    public MongoConfig(final boolean readProperties) {
         userCredentials = null;
         ServerAddress hostSet;
         String server = PropertiesFileReader.getHost();
