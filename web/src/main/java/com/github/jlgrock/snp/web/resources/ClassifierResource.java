@@ -1,14 +1,8 @@
 package com.github.jlgrock.snp.web.resources;
 
-import com.github.jlgrock.snp.core.domain.lego.Lego;
-import com.github.jlgrock.snp.core.domain.lego.LegoList;
-import com.github.jlgrock.snp.core.model.xml.fhir.Bundle;
-import com.github.jlgrock.snp.web.SnpMediaTypeMapping;
-import com.github.jlgrock.snp.web.services.PceClassifierService;
-import org.glassfish.jersey.media.multipart.FormDataBodyPart;
-import org.glassfish.jersey.media.multipart.FormDataMultiPart;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -17,9 +11,18 @@ import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.MessageBodyReader;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
+
+import org.glassfish.jersey.media.multipart.FormDataBodyPart;
+import org.glassfish.jersey.media.multipart.FormDataMultiPart;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.github.jlgrock.snp.core.domain.fhir.Condition;
+import com.github.jlgrock.snp.core.domain.lego.Lego;
+import com.github.jlgrock.snp.core.domain.lego.LegoList;
+import com.github.jlgrock.snp.web.SnpMediaType;
+import com.github.jlgrock.snp.web.SnpMediaTypeMapping;
+import com.github.jlgrock.snp.web.services.PceClassifierService;
 
 /**
  * The controller for handling all classifier requests
@@ -29,15 +32,19 @@ public class ClassifierResource {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ClassifierResource.class);
 	
-	private PceClassifierService<Lego> pceClssfrSvc;
+	private PceClassifierService<Lego> pceClssfrSvcLego;
+	private PceClassifierService<Condition> pceClssfrSvcFhir;
 	
 	/**
 	 * Constructor
-	 * @param pceClssfrSvcIn PCE Classifier Service
+	 * @param pceClssfrSvcLegoIn PCE classifier service for LEGO
+	 * @param pceClssfrSvcFhirIn PCE classifier service for FHIR
 	 */
 	@Inject
-	public ClassifierResource(final PceClassifierService<Lego> pceClssfrSvcIn) {
-		pceClssfrSvc = pceClssfrSvcIn;
+	public ClassifierResource(final PceClassifierService<Lego> pceClssfrSvcLegoIn, 
+			final PceClassifierService<Condition> pceClssfrSvcFhirIn) {
+		pceClssfrSvcLego = pceClssfrSvcLegoIn;
+		pceClssfrSvcFhir = pceClssfrSvcFhirIn;
 	}
 	
 	/**
@@ -46,6 +53,7 @@ public class ClassifierResource {
 	 * @return HTTP 200 if successful
 	 */
 	@POST
+	@Consumes(SnpMediaType.APPLICATION_LEGO_XML)
 	public Response postLego(final LegoList legoList) {
 		LOGGER.trace("Posted LegoList: {}", legoList);
 		
@@ -54,7 +62,9 @@ public class ClassifierResource {
 			return Response.status(Response.Status.BAD_REQUEST).build();
 		}
 		
-		pceClssfrSvc.classifyAssertion(legoList.getLego());
+    	for (Lego lego : legoList.getLego()) {
+    		pceClssfrSvcLego.classifyAssertion(lego);
+    	}
 		return Response.ok().build();
 	}
 	
@@ -64,14 +74,15 @@ public class ClassifierResource {
 	 * @return HTTP 200 if successful
 	 */
 	@POST
-	public Response postFhir(final Bundle fhir) {
-		LOGGER.trace("Posted LegoList: {}", fhir);
+	@Consumes(SnpMediaType.APPLICATION_FHIR_XML)
+	public Response postFhir(final Condition fhir) {
+		LOGGER.trace("Posted Fhir Condition: {}", fhir);
 		
 		if (fhir == null) {
 			LOGGER.error("fhir is null");
 			return Response.status(Response.Status.BAD_REQUEST).build();
 		}
-		
+		pceClssfrSvcFhir.classifyAssertion(fhir);
 		return Response.ok().build();
 	}
 	
@@ -123,13 +134,22 @@ public class ClassifierResource {
 			
 			// TODO: Queue processing of data to occur after loop so that all 
 			// files can be verified for correctness before we process any
-			// TODO: Add support for FHIR
 			Class<?> entityClass = SnpMediaTypeMapping.getEntityClass(filePart.getMediaType());
-			LegoList ll = null;
-			ll = (LegoList) filePart.getEntityAs(entityClass);
-			
-			LOGGER.debug("LegoList: {}", ll);
-			pceClssfrSvc.classifyAssertion(ll.getLego());
+			LOGGER.debug("entityClass for media type is: {}", entityClass);
+			if (entityClass.equals(LegoList.class)) {
+				LOGGER.trace("inside LegoList");
+				LegoList ll = (LegoList) filePart.getEntityAs(entityClass);
+				LOGGER.debug("LegoList: {}", ll);
+		    	for (Lego lego : ll.getLego()) {
+		    		pceClssfrSvcLego.classifyAssertion(lego);
+		    	}
+			}
+			else if (entityClass.equals(Condition.class)) {
+				LOGGER.trace("inside Condition");
+				Condition condition = (Condition) filePart.getEntityAs(entityClass);
+				LOGGER.debug("Condition: {}", condition);
+				pceClssfrSvcFhir.classifyAssertion(condition);
+			}
 		}
 		
 		return Response.ok().build();
