@@ -1,18 +1,17 @@
 package com.github.jlgrock.snp.web.services;
 
-import javax.inject.Inject;
-
 import com.github.jlgrock.snp.core.classifier.PceClassifier;
 import com.github.jlgrock.snp.core.data.ClassifiedPceStore;
-import com.github.jlgrock.snp.core.domain.ClassifiedPce;
-import com.github.jlgrock.snp.core.domain.fhir.Condition;
+import com.github.jlgrock.snp.core.domain.fhir.FhirEnvelope;
+
+import javax.inject.Inject;
 
 /**
  * Classifying service for FHIR PCEs.
  */
-public class PceClassifierServiceFhirImpl implements PceClassifierService<Condition> {
+public class PceClassifierServiceFhirImpl implements PceClassifierService<FhirEnvelope> {
 
-	private PceClassifier<Condition> pceClassifier;
+	private PceClassifier<FhirEnvelope> pceClassifier;
 	private ClassifiedPceStore classPceStore;
 	
 	/**
@@ -21,7 +20,7 @@ public class PceClassifierServiceFhirImpl implements PceClassifierService<Condit
 	 * @param classPceStoreIn Classified PCE store
 	 */
 	@Inject
-	PceClassifierServiceFhirImpl(final PceClassifier<Condition> pceClassifierIn,
+	PceClassifierServiceFhirImpl(final PceClassifier<FhirEnvelope> pceClassifierIn,
 			final ClassifiedPceStore classPceStoreIn) {
 		this.pceClassifier = pceClassifierIn;
 		this.classPceStore = classPceStoreIn;
@@ -31,12 +30,12 @@ public class PceClassifierServiceFhirImpl implements PceClassifierService<Condit
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void classifyAssertion(final Condition assertion) {
-		ClassifiedPce cAssertion = pceClassifier.classify(assertion);
-
-		// FIXME: need to capture patient id
-		Long patientId = 0L;
-		classPceStore.save(patientId , cAssertion);
+	public void classifyAssertion(final FhirEnvelope fhirEnvelope) {
+//		ClassifiedPce cAssertion = pceClassifier.classify(assertion);
+//
+//		// FIXME: need to capture patient id
+//		Long patientId = 0L;
+//		classPceStore.save(patientId , cAssertion);
 	}
 
 }

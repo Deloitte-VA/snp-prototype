@@ -1,23 +1,20 @@
 package com.github.jlgrock.snp.web.services;
 
-import javax.inject.Inject;
-
-import org.jvnet.hk2.annotations.Service;
-
 import com.github.jlgrock.snp.core.classifier.PceClassifier;
 import com.github.jlgrock.snp.core.data.ClassifiedPceStore;
-import com.github.jlgrock.snp.core.domain.ClassifiedPce;
-import com.github.jlgrock.snp.core.domain.lego.Assertion;
-import com.github.jlgrock.snp.core.domain.lego.Lego;
+import com.github.jlgrock.snp.core.domain.lego.LegoEnvelope;
+import org.jvnet.hk2.annotations.Service;
+
+import javax.inject.Inject;
 
 /**
  * Classifying service for LEGO PCEs.
  */
 @Service
 public class PceClassifierServiceLegoImpl implements
-		PceClassifierService<Lego> {
+		PceClassifierService<LegoEnvelope> {
 	
-	private PceClassifier<Assertion> pceClassifier;
+	private PceClassifier<LegoEnvelope> pceClassifier;
 	private ClassifiedPceStore classPceStore;
 	
 	/**
@@ -26,7 +23,7 @@ public class PceClassifierServiceLegoImpl implements
 	 * @param classPceStoreIn Classified PCE store
 	 */
 	@Inject
-	protected PceClassifierServiceLegoImpl(final PceClassifier<Assertion> pceClassifierIn,
+	protected PceClassifierServiceLegoImpl(final PceClassifier<LegoEnvelope> pceClassifierIn,
 			final ClassifiedPceStore classPceStoreIn) {
 		this.pceClassifier = pceClassifierIn;
 		this.classPceStore = classPceStoreIn;
@@ -36,13 +33,13 @@ public class PceClassifierServiceLegoImpl implements
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void classifyAssertion(final Lego lego) {
-		for (Assertion assertion : lego.getAssertion()) {
-			ClassifiedPce cAssertion = pceClassifier.classify(assertion);
-
-			// FIXME: need to capture patient id
-			Long patientId = 0L;
-			classPceStore.save(patientId , cAssertion);
-		}
+	public void classifyAssertion(final LegoEnvelope legoEnvelope) {
+//		for (Assertion assertion : lego.getAssertion()) {
+//			ClassifiedPce cAssertion = pceClassifier.classify(assertion);
+//
+//			// FIXME: need to capture patient id
+//			Long patientId = 0L;
+//			classPceStore.save(patientId , cAssertion);
+//		}
 	}
 }

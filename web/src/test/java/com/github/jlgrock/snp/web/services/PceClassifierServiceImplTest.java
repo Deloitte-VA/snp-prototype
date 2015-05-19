@@ -1,32 +1,30 @@
 package com.github.jlgrock.snp.web.services;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-
+import com.github.jlgrock.snp.core.classifier.PceClassifier;
+import com.github.jlgrock.snp.core.data.ClassifiedPceStore;
+import com.github.jlgrock.snp.core.domain.ClassifiedPce;
+import com.github.jlgrock.snp.core.domain.lego.LegoEnvelope;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import com.github.jlgrock.snp.core.classifier.PceClassifier;
-import com.github.jlgrock.snp.core.data.ClassifiedPceStore;
-import com.github.jlgrock.snp.core.domain.ClassifiedPce;
-import com.github.jlgrock.snp.core.domain.lego.Assertion;
-import com.github.jlgrock.snp.web.services.PceClassifierServiceLegoImpl;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 public class PceClassifierServiceImplTest {
 	
 	@Mock
-	PceClassifier<Assertion> assertionClassifier;
+	PceClassifier<LegoEnvelope> assertionClassifier;
 	
 	@Mock
 	ClassifiedPceStore cAssertStore;
 	
 	@Mock
-	Assertion assertion;
+	LegoEnvelope assertion;
 	
 	@Mock
 	ClassifiedPce cAssertion;
