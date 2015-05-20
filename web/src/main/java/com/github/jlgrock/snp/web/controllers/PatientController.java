@@ -1,16 +1,19 @@
 package com.github.jlgrock.snp.web.controllers;
 
-import com.github.jlgrock.snp.core.data.PatientRepository;
-import com.github.jlgrock.snp.core.domain.Patient;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.github.jlgrock.snp.core.data.PatientRepository;
+import com.github.jlgrock.snp.core.domain.Patient;
+import com.github.jlgrock.snp.web.responses.SuccessResponse;
 
 /**
  * The Controller serving up domain objects for Patient objectsØ.
@@ -38,6 +41,18 @@ public class PatientController {
     public Patient getPatient(@PathParam("id") final Long id) {
         LOGGER.debug("getting Patient");
         return repository.findOneById(id);
+    }
+    
+    /**
+     * 
+     * @return
+     */
+    @GET @Path("/search")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getSearch() {
+    	LOGGER.debug("searching Patient");
+    	SuccessResponse response = new SuccessResponse("OK", new Object());
+    	return Response.ok().entity(response).build();
     }
 }
 

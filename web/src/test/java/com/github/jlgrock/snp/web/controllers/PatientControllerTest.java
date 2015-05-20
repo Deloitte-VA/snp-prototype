@@ -1,29 +1,35 @@
 package com.github.jlgrock.snp.web.controllers;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.github.jlgrock.snp.core.data.PatientRepository;
-import com.github.jlgrock.snp.core.domain.Gender;
-import com.github.jlgrock.snp.core.domain.Patient;
-import com.github.jlgrock.snp.core.domain.Race;
-import com.github.jlgrock.snp.web.configuration.JacksonConfig;
+import static org.testng.Assert.assertEquals;
+
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+
 import org.glassfish.hk2.api.Factory;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import javax.ws.rs.client.WebTarget;
-
-import static org.testng.Assert.assertEquals;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.github.jlgrock.snp.core.data.PatientRepository;
+import com.github.jlgrock.snp.core.domain.Gender;
+import com.github.jlgrock.snp.core.domain.Patient;
+import com.github.jlgrock.snp.core.domain.Race;
 
 /**
  *
  */
 public class PatientControllerTest extends GenericControllerTest {
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(PatientControllerTest.class);
+	
+	public static final String RESOURCE_URI = "patient";
 	
 	@Mock
 	Patient patient;
@@ -50,16 +56,16 @@ public class PatientControllerTest extends GenericControllerTest {
                     @Override
                     public void dispose(PatientRepository instance) {
                     }
-                }).to(PatientRepository.class);
+                }).to(PatientRepository.class).ranked(DEFAULT_HK2_TEST_BIND_RANK);;
             }
         });
     }
 
-    @BeforeMethod
-    public void setUpTests() throws Exception {
-        // Required to make this work on TestNG
-        MockitoAnnotations.initMocks(this);
-    }
+//    @BeforeMethod
+//    public void setUpTests() throws Exception {
+//        // Required to make this work on TestNG
+//        MockitoAnnotations.initMocks(this);
+//    }
 
     @Test
     public void testGetPatient() {
@@ -80,9 +86,17 @@ public class PatientControllerTest extends GenericControllerTest {
         patientTemp.setGender(Gender.FEMALE);
         patientTemp.setRace(Race.AMERICAN_INDIAN);
         Mockito.when(patientRepository.findOneById(Mockito.any())).thenReturn(patientTemp);
-        final WebTarget target = target("patient/1");
+        final WebTarget target = target(RESOURCE_URI + "/1");
 //        String response = target.request().get(String.class);
 //        String serialized = JacksonConfig.newObjectMapper().writeValueAsString(patientTemp);
 //        Assert.assertEquals(response, serialized);
+    }
+    
+    public void testGetPatientSearch() {
+    	final WebTarget target = target().path(RESOURCE_URI + "/search");
+    	final Response response = target.request(MediaType.APPLICATION_JSON_TYPE).get();
+    	
+    	LOGGER.debug("Patient search response: " + response.getEntity());
+    	Assert.assertEquals(response.getStatus(), Response.Status.OK.getStatusCode());
     }
 }
