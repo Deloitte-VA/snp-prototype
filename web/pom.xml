@@ -183,15 +183,6 @@
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
-                <configuration>
-          			<webAppSourceDirectory>${project.basedir}/src/main/webapp</webAppSourceDirectory>
-          			<webApp>
-            			<contextPath>/</contextPath>
-            			<descriptor>${project.basedir}/src/main/webapp/WEB-INF/web.xml</descriptor>
-            			<tempDirectory>${project.build.outputDirectory}/temp</tempDirectory>
-          			</webApp>
-          			<classesDirectory>${project.basedir}/target</classesDirectory>
-        		</configuration>
             </plugin>
 
             <plugin>
