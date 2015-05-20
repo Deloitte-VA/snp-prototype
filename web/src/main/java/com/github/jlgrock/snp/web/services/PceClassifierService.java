@@ -2,8 +2,6 @@ package com.github.jlgrock.snp.web.services;
 
 import org.jvnet.hk2.annotations.Contract;
 
-import java.util.List;
-
 /**
  * Interface that should be implemented by assertion classifying services
  *
@@ -13,9 +11,9 @@ import java.util.List;
 public interface PceClassifierService<T> {
 	
 	/**
-	 * Classifies a list of assertions
-	 * @param assertions assertions to be classified
+	 * Classifies an assertion
+	 * @param assertion assertion to be classified
 	 */
-	void classifyAssertion(final List<T> assertions);
+	void classifyAssertion(final T assertion);
 	
 }

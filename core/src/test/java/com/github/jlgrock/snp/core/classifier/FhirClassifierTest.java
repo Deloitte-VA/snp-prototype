@@ -6,10 +6,11 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import com.github.jlgrock.snp.core.domain.ClassifiedPce;
-import com.github.jlgrock.snp.core.model.xml.fhir.Code;
-import com.github.jlgrock.snp.core.model.xml.fhir.Coding;
-import com.github.jlgrock.snp.core.model.xml.fhir.Condition;
-import com.github.jlgrock.snp.core.model.xml.fhir.Location;
+import com.github.jlgrock.snp.core.domain.fhir.Code;
+import com.github.jlgrock.snp.core.domain.fhir.CodeableConcept;
+import com.github.jlgrock.snp.core.domain.fhir.Coding;
+import com.github.jlgrock.snp.core.domain.fhir.Condition;
+import com.github.jlgrock.snp.core.domain.fhir.ConditionLocation;
 
 public class FhirClassifierTest {
 	private FhirClassifierImpl fhirClassifier;
@@ -23,14 +24,14 @@ public class FhirClassifierTest {
 	@Test
 	public void testClassify() {
 		Condition condition = new Condition();
-		Location location = new Location();
-		Code code = new Code();
+		ConditionLocation condLoc = new ConditionLocation();
+		CodeableConcept cc = new CodeableConcept();
 		Coding coding = new Coding();
 		coding.setCode(new Code());
-		code.setCoding(coding);
-		location.setCode(code);
-		condition.setLocation(location);
-		condition.setCode(code);
+		cc.getCoding().add(coding);
+		condLoc.setCode(cc);
+		condition.getLocation().add(condLoc);
+		condition.setCode(cc);
 		
 		ClassifiedPce classifiedAssertion = fhirClassifier.classify(condition);
 		assertNotNull(classifiedAssertion.getUuid(), "pce is missing uuid");		
