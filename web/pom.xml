@@ -100,6 +100,22 @@
             <artifactId>jersey-media-json-jackson</artifactId>
         </dependency>
 
+		<!-- AngularJS dependencies -->
+		<dependency>
+  			<groupId>org.webjars</groupId>
+  			<artifactId>angularjs</artifactId>
+		</dependency>
+	
+		<dependency>
+   			<groupId>org.webjars.bower</groupId>
+    		<artifactId>bootstrap</artifactId>
+		</dependency>
+
+		<dependency>
+    		<groupId>org.webjars.bower</groupId>
+    		<artifactId>underscore</artifactId>
+		</dependency>
+		
         <!-- Test dependencies -->
         <dependency>
             <groupId>org.glassfish.jersey.test-framework</groupId>
@@ -122,7 +138,7 @@
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
 		</dependency>
-
+			
         <!-- To Use Guice with HK2 -->
         <!-- <dependency>
             <groupId>com.google.inject</groupId>
@@ -167,7 +183,36 @@
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
+                <configuration>
+          			<webAppSourceDirectory>${project.basedir}/src/main/webapp</webAppSourceDirectory>
+          			<webApp>
+            			<contextPath>/</contextPath>
+            			<descriptor>${project.basedir}/src/main/webapp/WEB-INF/web.xml</descriptor>
+            			<tempDirectory>${project.build.outputDirectory}/temp</tempDirectory>
+          			</webApp>
+          			<classesDirectory>${project.basedir}/target</classesDirectory>
+        		</configuration>
             </plugin>
+
+            <plugin>
+	            <groupId>com.samaxes.maven</groupId>
+	            <artifactId>minify-maven-plugin</artifactId>
+	            <version>${minify.version}</version>
+	            <executions>
+	                <execution>
+	                	<goals>
+	                        <goal>minify</goal>
+	                    </goals>
+	                    <configuration>
+	                    	<jsSourceDir>js</jsSourceDir>
+	                    	<jsSourceIncludes>
+	                    		<jsSourceInclude>*.js</jsSourceInclude>
+	                    	</jsSourceIncludes>
+	                    </configuration>
+	                </execution>
+	            </executions>
+	        </plugin>
+
 		</plugins>
 	</build>
 
