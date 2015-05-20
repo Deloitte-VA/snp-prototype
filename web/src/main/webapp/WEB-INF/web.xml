@@ -3,5 +3,15 @@
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
-  <display-name>Archetype Created Web Application</display-name>
+  
+  <servlet>
+    <servlet-name>default</servlet-name>
+    <servlet-class>org.eclipse.jetty.servlet.DefaultServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>default</servlet-name>
+    <url-pattern>/*</url-pattern>
+  </servlet-mapping>
+  
 </web-app>
