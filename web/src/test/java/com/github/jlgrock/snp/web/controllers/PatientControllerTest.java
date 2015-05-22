@@ -2,6 +2,10 @@ package com.github.jlgrock.snp.web.controllers;
 
 import static org.testng.Assert.assertEquals;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -21,6 +25,7 @@ import com.github.jlgrock.snp.core.data.PatientRepository;
 import com.github.jlgrock.snp.core.domain.Gender;
 import com.github.jlgrock.snp.core.domain.Patient;
 import com.github.jlgrock.snp.core.domain.Race;
+import com.google.common.io.CharStreams;
 
 /**
  *
@@ -42,8 +47,6 @@ public class PatientControllerTest extends GenericControllerTest {
 
     @Override
     public void registerInjectionPoints(final ResourceConfig application) {
-        //TODO swap this out for the anonymous class
-        //application.register(new SimpleBinder<>(patientRepository, PatientRepository.class));
         application.register(new AbstractBinder() {
             @Override
             protected void configure() {
@@ -92,11 +95,22 @@ public class PatientControllerTest extends GenericControllerTest {
 //        Assert.assertEquals(response, serialized);
     }
     
-    public void testGetPatientSearch() {
-    	final WebTarget target = target().path(RESOURCE_URI + "/search");
+    @Test
+    public void testGetPatientSearch() throws IOException {
+    	final WebTarget target = target().path(RESOURCE_URI + "/search")
+    			.queryParam("filter", "testf").queryParam("sort", "ASC").queryParam("fields", "1,2");
     	final Response response = target.request(MediaType.APPLICATION_JSON_TYPE).get();
     	
-    	LOGGER.debug("Patient search response: " + response.getEntity());
+    	LOGGER.debug("Patient search response: " + CharStreams.toString(new InputStreamReader((InputStream) response.getEntity())));
     	Assert.assertEquals(response.getStatus(), Response.Status.OK.getStatusCode());
     }
+    
+//    @Test
+//    public void testGetPatientSearchError() throws IOException {
+//    	final WebTarget target = target().path(RESOURCE_URI + "/search");
+//    	final Response response = target.request(MediaType.APPLICATION_JSON_TYPE).get();
+//    	
+//    	LOGGER.debug("Patient search response error: " + CharStreams.toString(new InputStreamReader((InputStream) response.getEntity())));
+//    	Assert.assertEquals(response.getStatus(), Response.Status.OK.getStatusCode());
+//    }
 }

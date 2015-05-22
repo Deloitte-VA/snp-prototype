@@ -1,6 +1,7 @@
 package com.github.jlgrock.snp.web.controllers;
 
 import javax.inject.Inject;
+import javax.ws.rs.BeanParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -13,7 +14,9 @@ import org.slf4j.LoggerFactory;
 
 import com.github.jlgrock.snp.core.data.PatientRepository;
 import com.github.jlgrock.snp.core.domain.Patient;
-import com.github.jlgrock.snp.web.responses.SuccessResponse;
+import com.github.jlgrock.snp.web.resources.query.QueryParamBean;
+import com.github.jlgrock.snp.web.resources.response.ResponseStatusCode;
+import com.github.jlgrock.snp.web.resources.response.SuccessResponse;
 
 /**
  * The Controller serving up domain objects for Patient objectsØ.
@@ -49,9 +52,10 @@ public class PatientController {
      */
     @GET @Path("/search")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getSearch() {
+    public Response getSearch(@BeanParam QueryParamBean beanParam) {
     	LOGGER.debug("searching Patient");
-    	SuccessResponse response = new SuccessResponse("OK", new Object());
+    	LOGGER.debug("Bean param: " + beanParam);
+    	SuccessResponse response = new SuccessResponse(ResponseStatusCode.OK, "Sample Result");
     	return Response.ok().entity(response).build();
     }
 }
