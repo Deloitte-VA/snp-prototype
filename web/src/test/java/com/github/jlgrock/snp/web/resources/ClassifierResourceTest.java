@@ -27,7 +27,6 @@ import org.testng.annotations.Test;
 
 import com.github.jlgrock.snp.core.domain.fhir.Condition;
 import com.github.jlgrock.snp.core.domain.lego.Lego;
-import com.github.jlgrock.snp.web.SnpMediaType;
 import com.github.jlgrock.snp.web.controllers.GenericControllerTest;
 import com.github.jlgrock.snp.web.services.PceClassifierService;
 

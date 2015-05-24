@@ -1,5 +1,11 @@
 package com.github.jlgrock.snp.core.domain.lego;
 
+import com.google.common.base.MoreObjects;
+
+import java.util.Objects;
+
+
+//TODO delete
 /**
  * A simple wrapper class to manage multiple top-level xml elements.
  */
@@ -16,13 +22,98 @@ public class LegoEnvelope {
     private final Qualifier qualifier;
     private final Value value;
     private final Relation relation;
-    private final Relation relationGroup;
+    private final RelationGroup relationGroup;
     private final Destination destination;
     private final Interval interval;
     private final Units units;
     private final Stamp stamp;
 
-    LegoEnvelope(final LegoList legoListIn,
+    public LegoEnvelope(final LegoList legoListIn) {
+        this(legoListIn, null, null, null, null, null, null, null,
+                null, null, null, null, null, null, null, null, null);
+    }
+
+    public LegoEnvelope(final Lego legoIn) {
+        this(null, legoIn, null, null, null, null, null, null,
+                null, null, null, null, null, null, null, null, null);
+    }
+
+    public LegoEnvelope(final Assertion assertionIn) {
+        this(null, null, assertionIn, null, null, null, null, null,
+                null, null, null, null, null, null, null, null, null);
+    }
+
+    public LegoEnvelope(final Pncs pncsIn) {
+        this(null, null, null, pncsIn, null, null, null, null,
+                null, null, null, null, null, null, null, null, null);
+    }
+
+    public LegoEnvelope(final AssertionComponent assertionComponentIn) {
+        this(null, null, null, null, assertionComponentIn, null, null, null,
+                null, null, null, null, null, null, null, null, null);
+    }
+
+    public LegoEnvelope(final Type typeIn) {
+        this(null, null, null, null, null, typeIn, null, null,
+                null, null, null, null, null, null, null, null, null);
+    }
+
+    public LegoEnvelope(final Expression expressionIn) {
+        this(null, null, null, null, null, null, expressionIn, null,
+                null, null, null, null, null, null, null, null, null);
+    }
+
+    public LegoEnvelope(final Concept conceptIn) {
+        this(null, null, null, null, null, null, null, conceptIn,
+                null, null, null, null, null, null, null, null, null);
+    }
+
+    public LegoEnvelope(final Discernible discernibleIn) {
+        this(null, null, null, null, null, null, null, null,
+                discernibleIn, null, null, null, null, null, null, null, null);
+    }
+
+    public LegoEnvelope(final Qualifier qualifierIn) {
+        this(null, null, null, null, null, null, null, null,
+                null, qualifierIn, null, null, null, null, null, null, null);
+    }
+
+    public LegoEnvelope(final Value valueIn) {
+        this(null, null, null, null, null, null, null, null,
+                null, null, valueIn, null, null, null, null, null, null);
+    }
+
+    public LegoEnvelope(final Relation relationIn) {
+        this(null, null, null, null, null, null, null, null,
+                null, null, null, relationIn, null, null, null, null, null);
+    }
+
+    public LegoEnvelope(final RelationGroup relationGroupIn) {
+        this(null, null, null, null, null, null, null, null,
+                null, null, null, null, relationGroupIn, null, null, null, null);
+    }
+
+    public LegoEnvelope(final Destination destinationIn) {
+        this(null, null, null, null, null, null, null, null,
+                null, null, null, null, null, destinationIn, null, null, null);
+    }
+
+    public LegoEnvelope(final Interval intervalIn) {
+        this(null, null, null, null, null, null, null, null,
+                null, null, null, null, null, null, intervalIn, null, null);
+    }
+
+    public LegoEnvelope(final Units unitsIn) {
+        this(null, null, null, null, null, null, null, null,
+                null, null, null, null, null, null, null, unitsIn, null);
+    }
+
+    public LegoEnvelope(final Stamp stampIn) {
+        this(null, null, null, null, null, null, null, null,
+                null, null, null, null, null, null, null, null, stampIn);
+    }
+
+    private LegoEnvelope(final LegoList legoListIn,
             final Lego legoIn,
             final Assertion assertionIn,
             final Pncs pncsIn,
@@ -34,7 +125,7 @@ public class LegoEnvelope {
             final Qualifier qualifierIn,
             final Value valueIn,
             final Relation relationIn,
-            final Relation relationGroupIn,
+            final RelationGroup relationGroupIn,
             final Destination destinationIn,
             final Interval intervalIn,
             final Units unitsIn,
@@ -106,7 +197,7 @@ public class LegoEnvelope {
         return relation;
     }
 
-    public Relation getRelationGroup() {
+    public RelationGroup getRelationGroup() {
         return relationGroup;
     }
 
@@ -124,5 +215,61 @@ public class LegoEnvelope {
 
     public Stamp getStamp() {
         return stamp;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(legoList, lego, assertion, pncs, assertionComponent, type, expression, concept, discernible, qualifier, value, relation, relationGroup, destination, interval, units, stamp);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        final LegoEnvelope other = (LegoEnvelope) obj;
+        return Objects.equals(this.legoList, other.legoList)
+                && Objects.equals(this.lego, other.lego)
+                && Objects.equals(this.assertion, other.assertion)
+                && Objects.equals(this.pncs, other.pncs)
+                && Objects.equals(this.assertionComponent, other.assertionComponent)
+                && Objects.equals(this.type, other.type)
+                && Objects.equals(this.expression, other.expression)
+                && Objects.equals(this.concept, other.concept)
+                && Objects.equals(this.discernible, other.discernible)
+                && Objects.equals(this.qualifier, other.qualifier)
+                && Objects.equals(this.value, other.value)
+                && Objects.equals(this.relation, other.relation)
+                && Objects.equals(this.relationGroup, other.relationGroup)
+                && Objects.equals(this.destination, other.destination)
+                && Objects.equals(this.interval, other.interval)
+                && Objects.equals(this.units, other.units)
+                && Objects.equals(this.stamp, other.stamp);
+    }
+
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this)
+                .add("legoList", legoList)
+                .add("lego", lego)
+                .add("assertion", assertion)
+                .add("pncs", pncs)
+                .add("assertionComponent", assertionComponent)
+                .add("type", type)
+                .add("expression", expression)
+                .add("concept", concept)
+                .add("discernible", discernible)
+                .add("qualifier", qualifier)
+                .add("value", value)
+                .add("relation", relation)
+                .add("relationGroup", relationGroup)
+                .add("destination", destination)
+                .add("interval", interval)
+                .add("units", units)
+                .add("stamp", stamp)
+                .toString();
     }
 }

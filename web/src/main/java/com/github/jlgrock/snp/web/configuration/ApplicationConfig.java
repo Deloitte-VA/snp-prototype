@@ -6,9 +6,6 @@ import com.github.jlgrock.snp.apis.connection.configuration.MongoDbConfiguration
 import com.github.jlgrock.snp.apis.connection.configuration.WebConfiguration;
 import com.github.jlgrock.snp.apis.connection.synchronization.TransactionSynchronizationManager;
 import com.github.jlgrock.snp.apis.data.MultiPartFileUtils;
-import com.github.jlgrock.snp.core.classifier.FhirClassifierImpl;
-import com.github.jlgrock.snp.core.classifier.LegoClassifierImpl;
-import com.github.jlgrock.snp.core.classifier.PceClassifier;
 import com.github.jlgrock.snp.core.connection.SimpleMongoDbFactory;
 import com.github.jlgrock.snp.core.connection.SynchronizedMongoDatabaseManager;
 import com.github.jlgrock.snp.core.connection.synchronization.CollectionSynchronizationManager;
@@ -30,16 +27,10 @@ import com.github.jlgrock.snp.core.data.PatientRepository;
 import com.github.jlgrock.snp.core.data.PatientRepositoryImpl;
 import com.github.jlgrock.snp.core.defaultconfig.MongoConfig;
 import com.github.jlgrock.snp.core.defaultconfig.WebConfig;
-import com.github.jlgrock.snp.core.domain.fhir.FhirEnvelope;
-import com.github.jlgrock.snp.core.domain.lego.LegoEnvelope;
 import com.github.jlgrock.snp.web.controllers.MultipartFileUtilsImpl;
-import com.github.jlgrock.snp.web.services.PceClassifierService;
-import com.github.jlgrock.snp.web.services.PceClassifierServiceFhirImpl;
-import com.github.jlgrock.snp.web.services.PceClassifierServiceLegoImpl;
 import io.dropwizard.jersey.jackson.JacksonMessageBodyProvider;
 import io.dropwizard.jersey.jackson.JsonProcessingExceptionMapper;
 import org.glassfish.hk2.api.ServiceLocator;
-import org.glassfish.hk2.api.TypeLiteral;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.media.multipart.MultiPartFeature;
@@ -104,10 +95,6 @@ public class ApplicationConfig extends ResourceConfig {
                 bind(PatientRepositoryImpl.class).to(PatientRepository.class);
                 bind(ClassifiedPceRepositoryImpl.class).to(ClassifiedPceRepository.class);
                 
-                bind(PceClassifierServiceLegoImpl.class).to(new TypeLiteral<PceClassifierService<LegoEnvelope>>() {});
-                bind(PceClassifierServiceFhirImpl.class).to(new TypeLiteral<PceClassifierService<FhirEnvelope>>() {});
-                bind(LegoClassifierImpl.class).to(new TypeLiteral<PceClassifier<LegoEnvelope>>() {});
-                bind(FhirClassifierImpl.class).to(new TypeLiteral<PceClassifier<FhirEnvelope>>() {});
                 bind(ClassifiedPceMongoDbStore.class).to(ClassifiedPceStore.class);
                 bind(MultipartFileUtilsImpl.class).to(MultiPartFileUtils.class);
 

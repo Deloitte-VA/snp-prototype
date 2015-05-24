@@ -5,7 +5,6 @@
         <groupId>org.sonatype.oss</groupId>
         <artifactId>oss-parent</artifactId>
         <version>7</version>
-        <relativePath />
     </parent>
 
     <groupId>com.github.jlgrock.snp</groupId>
@@ -540,7 +539,22 @@
                 <module>integration</module>
             </modules>
         </profile>
+
+        <!--
+        This profile will sign the JAR file, sources file, and javadocs file using the GPG key on the local machine.
+        See: https://docs.sonatype.org/display/Repository/How+To+Generate+PGP+Signatures+With+Maven
+        -->
+        <profile>
+            <id>release-sign-artifacts</id>
+            <activation>
+                <property>
+                    <name>release</name>
+                    <value>true</value>
+                </property>
+            </activation>
+        </profile>
     </profiles>
+
 </project>
 
 
