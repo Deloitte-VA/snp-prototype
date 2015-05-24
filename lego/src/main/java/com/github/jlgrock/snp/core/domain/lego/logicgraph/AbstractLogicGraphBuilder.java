@@ -79,7 +79,7 @@ public abstract class AbstractLogicGraphBuilder extends LogicGraphBuilder {
      * @param sctid SNOMED clinical terms identifier
      * @return native identifier
      */
-    private int getNidFromSNOMED(final String sctid) {
+    protected int getNidFromSNOMED(final String sctid) {
         int nid = 0;
         UUID uuid = null;
         TerminologySnapshotDI terminologySnapshotDI = null;
@@ -109,7 +109,7 @@ public abstract class AbstractLogicGraphBuilder extends LogicGraphBuilder {
 	 * @param sourceConceptNid int
 	 * @return Node
 	 */
-	public Node processRelation(final Relation relation, final int sourceConceptNid) {
+	protected Node processRelation(final Relation relation, final int sourceConceptNid) {
         // A relation can have a type and a destination
 
 		if(relation.getDestination() != null && relation.getDestination().getExpression() != null
@@ -133,7 +133,7 @@ public abstract class AbstractLogicGraphBuilder extends LogicGraphBuilder {
 		return SufficientSet(andNode);
 	}
 
-	private void processExpression(final Expression expression) {
+    protected void processExpression(final Expression expression) {
         //Can have either a Concept or an Expression subelement, plus 0 or more Relations and 0 or more RelationGroups
 
         // Determine if this Expression has been classified
@@ -144,11 +144,11 @@ public abstract class AbstractLogicGraphBuilder extends LogicGraphBuilder {
 
 	}
 
-    private void processRelationGroup(final RelationGroup relationGroup) {
+    protected void processRelationGroup(final RelationGroup relationGroup) {
         // can contain 1 or more Relations
     }
 
-    private void processDestination(final Destination destination) {
+    protected void processDestination(final Destination destination) {
         // can contain an expression, text, a boolean, or a measurement.
         // Only process if this is an expression
         Expression expression = destination.getExpression();
