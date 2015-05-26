@@ -18,6 +18,7 @@ import java.util.UUID;
  *
  */
 public abstract class AbstractLegoClassifier implements LegoElementClassifierService {
+
     protected void parseLegoList(final LegoList legoListIn) {
         List<Lego> legoList = legoListIn.getLego();
         for (Lego lego : legoList) {
@@ -48,11 +49,14 @@ public abstract class AbstractLegoClassifier implements LegoElementClassifierSer
     }
 
     protected void parseExpression(final Expression expression) {
-        ExpressionGraphBuilder legoLogicGraphBuilder = new ExpressionGraphBuilder().expression(expression);
+
+        ExpressionGraphBuilder legoLogicGraphBuilder = new ExpressionGraphBuilder().expression(expression).create();
+
         LogicGraph logicGraph = (LogicGraph)legoLogicGraphBuilder;
 
+
         //TODO run through classification service, should get a number back.
-        UUID uuid = UUID.randomUUID();
+
         int conceptId = -2;
 
         //TODO store concept ID, and logic graph expression

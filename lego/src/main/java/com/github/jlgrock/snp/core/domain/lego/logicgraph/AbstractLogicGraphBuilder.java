@@ -1,13 +1,18 @@
 package com.github.jlgrock.snp.core.domain.lego.logicgraph;
 
+import com.github.jlgrock.snp.core.domain.lego.Concept;
 import com.github.jlgrock.snp.core.domain.lego.Destination;
 import com.github.jlgrock.snp.core.domain.lego.Expression;
 import com.github.jlgrock.snp.core.domain.lego.Relation;
 import com.github.jlgrock.snp.core.domain.lego.RelationGroup;
+import com.github.jlgrock.snp.core.domain.lego.Type;
 import gov.vha.isaac.logic.LogicGraphBuilder;
 import gov.vha.isaac.logic.Node;
+import gov.vha.isaac.logic.node.AbstractNode;
 import gov.vha.isaac.logic.node.AndNode;
 import gov.vha.isaac.metadata.coordinates.ViewCoordinates;
+import gov.vha.isaac.ochre.api.LookupService;
+import org.ihtsdo.otf.tcc.api.concept.ConceptChronicleBI;
 import org.ihtsdo.otf.tcc.api.store.TerminologySnapshotDI;
 import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
 import org.ihtsdo.otf.tcc.api.uuid.UuidT3Generator;
@@ -15,7 +20,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * 
@@ -24,7 +32,25 @@ import java.util.UUID;
  */
 public abstract class AbstractLogicGraphBuilder extends LogicGraphBuilder {
 	private static final Logger LOGGER = LoggerFactory.getLogger(AbstractLogicGraphBuilder.class);
-	
+
+    private class LocalConcept {
+        private int nid;
+        private String description;
+
+        public LocalConcept(final int nidIn, final String descriptionIn) {
+            nid = nidIn;
+            description = descriptionIn;
+        }
+
+        public int getNid() {
+            return nid;
+        }
+
+        public String getDescription() {
+            return description;
+        }
+    }
+
 //	/**
 //	 * Get the native identifier
 //	 * @param sctid SNOMED clinical terms identifier
@@ -79,81 +105,144 @@ public abstract class AbstractLogicGraphBuilder extends LogicGraphBuilder {
      * @param sctid SNOMED clinical terms identifier
      * @return native identifier
      */
-    protected int getNidFromSNOMED(final String sctid) {
-        int nid = 0;
-        UUID uuid = null;
+    protected ConceptChronicleBI findChronicle(final String sctid) {
+        ConceptChronicleBI returnVal = null;
         TerminologySnapshotDI terminologySnapshotDI = null;
         try {
-            uuid = UuidT3Generator.fromSNOMED(Long.parseLong(sctid));
+            TerminologySnapshotDI statedTermSnapshot = terminologyStoreDI.getSnapshot(ViewCoordinates.getDevelopmentStatedLatest());
+            TerminologySnapshotDI inferredTermSnapshot = terminologyStoreDI.getSnapshot(ViewCoordinates.getDevelopmentInferredLatest());
+
+            UUID uuid = UuidT3Generator.fromSNOMED(Long.parseLong(sctid));
             terminologySnapshotDI = terminologyStoreDI.getSnapshot(ViewCoordinates.getDevelopmentInferredLatest());
+
+            returnVal = terminologyStoreDI.getConcept(uuid);
         } catch (IOException ex) {
             LOGGER.error("Unable to get ViewCoordinates Inferred Latest", ex);
             //TODO determine what to do.  May need to refactor Campbells code if we are going to keep using this pattern
         }
-        if (terminologySnapshotDI != null) {
-            try {
-                //Get NID from UUID
-                nid = terminologySnapshotDI.getNidForUuids(uuid);
-            } catch (IOException ex) {
-                LOGGER.error("Unable to get Nid from UUID", ex);
-            }
-        }
-        //TODO this shouldn't return a 0 in the case of an error
-        return nid;
+        return returnVal;
     }
-
 
     /**
-	 * Parse the relationship
-	 * @param relation Relation
-	 * @param sourceConceptNid int
-	 * @return Node
+	 * Get the native identifier
+	 * @param sctid SNOMED clinical terms identifier
+	 * @return native identifier
 	 */
-	protected Node processRelation(final Relation relation, final int sourceConceptNid) {
-        // A relation can have a type and a destination
+	public int getNidFromSNOMED(final String sctid) {
+    	int nid = 0;
+    	try {
+    		TerminologyStoreDI termStore = LookupService.getService(TerminologyStoreDI.class);
+    		TerminologySnapshotDI termSnapshot = termStore.getSnapshot(ViewCoordinates.getDevelopmentInferredLatest());
+    		UUID uuid = UuidT3Generator.fromSNOMED(Long.parseLong(sctid));
 
-		if(relation.getDestination() != null && relation.getDestination().getExpression() != null
-				&& relation.getDestination().getExpression().getRelation() != null
-				&& !relation.getDestination().getExpression().getRelation().isEmpty()) {
-			for(Relation r : relation.getDestination().getExpression().getRelation()) {
-				return processRelation(r, sourceConceptNid);
-			}
-		}
-
-		long isAboutSctId = relation.getType().getConcept().getSctid();
-		long destinationSctId = relation.getDestination().getExpression().getConcept().getSctid();
-
-		//Get NID from UUID
-		int typeConceptNid = getNidFromSNOMED(String.valueOf(isAboutSctId));
-		int destinationNid = getNidFromSNOMED(String.valueOf(destinationSctId));
-
-		//Create AndNode
-		AndNode andNode = And();
-		andNode.addChildren(Concept(sourceConceptNid), SomeRole(typeConceptNid, Concept(destinationNid)));
-		return SufficientSet(andNode);
-	}
-
-    protected void processExpression(final Expression expression) {
-        //Can have either a Concept or an Expression subelement, plus 0 or more Relations and 0 or more RelationGroups
-
-        // Determine if this Expression has been classified
-
-        // Determine if it is SufficientSet or NecessarySet.  In most cases in Lego, this will be a SufficientSet because
-        // all of the primitives have been defined in snomed.
-
-
-	}
-
-    protected void processRelationGroup(final RelationGroup relationGroup) {
-        // can contain 1 or more Relations
+    		//Get NID from UUID
+    		nid = termSnapshot.getNidForUuids(uuid);
+    	} catch (IOException ex) {
+    		LOGGER.error("Fatal error occured", ex);
+    	}
+    	return nid;
     }
 
-    protected void processDestination(final Destination destination) {
-        // can contain an expression, text, a boolean, or a measurement.
-        // Only process if this is an expression
+	protected AbstractNode processRelation(final Relation relation) {
+        // A relation can have a type and a destination
+        Type type = relation.getType();
+        LocalConcept typeConcept = processType(type);
+
+        Destination destination = relation.getDestination();
+        AbstractNode destinationConcept = processDestination(destination);
+
+		return SomeRole(typeConcept.getNid(), destinationConcept);
+	}
+
+    protected LocalConcept processType(final Type type) {
+        Concept typeConcept = type.getConcept();
+        LocalConcept processedConcept = processConcept(typeConcept);
+        return processedConcept;
+    }
+
+    protected AbstractNode processDestination(final Destination destination) {
+        // A destination can contain an expression, text, boolean, or measurement
+
         Expression expression = destination.getExpression();
         if (expression != null) {
-            processExpression(expression);
+            return processExpression(expression);
         }
+        //TODO needs work to handle text, boolean, or measurement
+        throw new UnsupportedOperationException();
     }
+
+    protected AbstractNode processExpression(final Expression expression) {
+        //Can have either a Concept or a list of sub-Expressions, plus 0 or more Relations and 0 or more RelationGroups
+
+        AbstractNode returnVal = null;
+
+        List<AbstractNode> values = new ArrayList<>();
+
+        Concept concept = expression.getConcept();
+
+        Long sourceSctId = null;
+        if (concept.getSctid() != null) {
+            sourceSctId = concept.getSctid();
+        }
+
+        AbstractNode subConceptOrExpression = null;
+        if (concept != null) {
+            LocalConcept localConcept = processConcept(concept);
+            subConceptOrExpression = Concept(localConcept.getNid());
+        } else {
+            List<Expression> subExpressions = expression.getExpression();
+            List<Node> expressionNodes = subExpressions.stream().map(this::processExpression).collect(Collectors.toList());
+
+            AndNode andNode = And();
+            andNode.addChildren(expressionNodes.toArray(new Node[expressionNodes.size()]));
+            subConceptOrExpression = andNode;
+        }
+        values.add(subConceptOrExpression);
+
+        List<Relation> relations = expression.getRelation();
+        if (relations != null) {
+            values.addAll(relations.stream().map(this::processRelation).collect(Collectors.toList()));
+        }
+
+        List<RelationGroup> relationGroups = expression.getRelationGroup();
+        if (relationGroups != null) {
+            values.addAll(relationGroups.stream().map(this::processRelationGroup).collect(Collectors.toList()));
+        }
+
+        if (values.size() == 1) {
+            returnVal = subConceptOrExpression;
+        } else {
+            returnVal = And(values.toArray(new AbstractNode[values.size()]));
+        }
+        return returnVal;
+	}
+
+    protected LocalConcept processConcept(final Concept concept) {
+        LocalConcept returnVal;
+        String description = concept.getDesc();
+
+        // can only have a sctid or a uuid
+        String sctId = Long.toString(concept.getSctid());
+        if (sctId != null) {
+            int nid = getNidFromSNOMED(sctId);
+            returnVal = new LocalConcept(nid, description);
+        } else {
+            //TODO all of the examples have a sctid, but not sure what to do if we get a uuid
+            throw new UnsupportedOperationException();
+        }
+
+        return returnVal;
+    }
+
+    protected AbstractNode processRelationGroup(final RelationGroup relationGroup) {
+        // can contain 1 or more Relations
+        AndNode andNode = null;
+        List<Relation> relations = relationGroup.getRelation();
+        if (relations.size() > 0) {
+            List<AbstractNode> nodes = relations.stream().map(this::processRelation).collect(Collectors.toList());
+            andNode = And(nodes.toArray(new AbstractNode[nodes.size()]));
+        }
+        return andNode;
+    }
+
 }
