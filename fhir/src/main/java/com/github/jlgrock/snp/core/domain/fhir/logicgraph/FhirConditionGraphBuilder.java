@@ -1,12 +1,9 @@
 package com.github.jlgrock.snp.core.domain.fhir.logicgraph;
 
-import com.github.jlgrock.snp.core.domain.fhir.Code;
 import com.github.jlgrock.snp.core.domain.fhir.CodeableConcept;
-import com.github.jlgrock.snp.core.domain.fhir.Coding;
 import com.github.jlgrock.snp.core.domain.fhir.Condition;
 import com.github.jlgrock.snp.core.domain.fhir.ConditionLocation;
 import gov.vha.isaac.logic.node.AbstractNode;
-import gov.vha.isaac.logic.node.AndNode;
 import gov.vha.isaac.logic.node.RootNode;
 import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
 
@@ -57,25 +54,7 @@ public class FhirConditionGraphBuilder extends AbstractFhirLogicGraphBuilder {
             childrenList.add(SomeRole(typeConceptNid, processCodeableConcept(codeableConcept)));
         }
 
-        AndNode andNode = And();
-        andNode.addChildren(childrenList.toArray(new AbstractNode[childrenList.size()]));
-        return andNode;
+        return And(childrenList.toArray(new AbstractNode[childrenList.size()]));
     }
 
-    protected AbstractNode processCodeableConcept(final CodeableConcept codeableConcept) {
-        List<Coding> codingList = codeableConcept.getCoding();
-        List<AbstractNode> childrenList = new ArrayList<>();
-        for (Coding coding : codingList) {
-            Code code = coding.getCode();
-            String destinationSctId = code.getValue();
-
-            //Get NID from UUID
-
-            int destinationNid = getNidFromSNOMED(destinationSctId);
-            childrenList.add(Concept(destinationNid));
-        }
-        AndNode andNode = And();
-        andNode.addChildren(childrenList.toArray(new AbstractNode[childrenList.size()]));
-        return andNode;
-    }
 }

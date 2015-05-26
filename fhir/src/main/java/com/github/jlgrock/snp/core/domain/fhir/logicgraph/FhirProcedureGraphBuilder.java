@@ -1,9 +1,13 @@
 package com.github.jlgrock.snp.core.domain.fhir.logicgraph;
 
+import com.github.jlgrock.snp.core.domain.fhir.CodeableConcept;
 import com.github.jlgrock.snp.core.domain.fhir.Procedure;
 import gov.vha.isaac.logic.node.AbstractNode;
 import gov.vha.isaac.logic.node.RootNode;
 import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -27,7 +31,17 @@ public class FhirProcedureGraphBuilder extends AbstractFhirLogicGraphBuilder {
     }
 
     protected AbstractNode processProcedure(final Procedure procedure) {
-        //TODO
-        return null;
+        List<AbstractNode> childrenNodes = new ArrayList<>();
+
+        CodeableConcept typeCodeableConcept = procedure.getType();
+        AbstractNode typeNode = processCodeableConcept(typeCodeableConcept);
+        childrenNodes.add(typeNode);
+
+        List<CodeableConcept> bodySiteList = procedure.getBodySite();
+        for (CodeableConcept codeableConcept : bodySiteList) {
+            childrenNodes.add(processCodeableConcept(codeableConcept));
+        }
+
+        return And(childrenNodes.toArray(new AbstractNode[childrenNodes.size()]));
     }
 }

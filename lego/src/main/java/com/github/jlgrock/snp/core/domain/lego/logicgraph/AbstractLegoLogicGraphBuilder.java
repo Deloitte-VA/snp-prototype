@@ -193,9 +193,7 @@ public abstract class AbstractLegoLogicGraphBuilder extends LogicGraphBuilder {
             List<Expression> subExpressions = expression.getExpression();
             List<Node> expressionNodes = subExpressions.stream().map(this::processExpression).collect(Collectors.toList());
 
-            AndNode andNode = And();
-            andNode.addChildren(expressionNodes.toArray(new Node[expressionNodes.size()]));
-            subConceptOrExpression = andNode;
+            subConceptOrExpression = And(expressionNodes.toArray(new AbstractNode[expressionNodes.size()]));
         }
         values.add(subConceptOrExpression);
 

@@ -1,9 +1,13 @@
 package com.github.jlgrock.snp.core.domain.fhir.logicgraph;
 
+import com.github.jlgrock.snp.core.domain.fhir.CodeableConcept;
 import com.github.jlgrock.snp.core.domain.fhir.Encounter;
 import gov.vha.isaac.logic.node.AbstractNode;
 import gov.vha.isaac.logic.node.RootNode;
 import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -27,8 +31,17 @@ public class FhirEncounterGraphBuilder extends AbstractFhirLogicGraphBuilder {
     }
 
     protected AbstractNode processEncounter(final Encounter encounter) {
-//        List<Encounter> encounters = condition.getEncounter();
-        //TODO
-        return null;
+        List<CodeableConcept> typeList = encounter.getType();
+        List<AbstractNode> childrenNodes = new ArrayList<>();
+
+        //TODO so many other possible fields to look into.  just using one currently
+
+        // add source
+        for (CodeableConcept codeableConcept : typeList) {
+            childrenNodes.add(processCodeableConcept(codeableConcept));
+        }
+
+        return And(new AbstractNode[childrenNodes.size()]);
     }
+
 }

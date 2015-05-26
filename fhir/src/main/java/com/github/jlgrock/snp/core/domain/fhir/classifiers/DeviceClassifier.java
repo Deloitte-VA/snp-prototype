@@ -1,6 +1,7 @@
 package com.github.jlgrock.snp.core.domain.fhir.classifiers;
 
 import com.github.jlgrock.snp.core.domain.fhir.Device;
+import gov.vha.isaac.logic.LogicGraph;
 import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
 
 /**
@@ -15,8 +16,12 @@ public class DeviceClassifier extends AbstractFhirClassifier {
         device = deviceIn;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void classify() {
+    protected LogicGraph getLogicGraph() {
         throw new UnsupportedOperationException();
     }
+
 }

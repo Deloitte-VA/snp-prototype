@@ -19,13 +19,17 @@ import java.util.List;
  */
 public abstract class AbstractLegoClassifier implements LegoElementClassifierService {
 
-    final TerminologyStoreDI terminologyStoreDI;
+    private final TerminologyStoreDI terminologyStoreDI;
 
     protected AbstractLegoClassifier(final TerminologyStoreDI terminologyStoreDIIn) {
         terminologyStoreDI = terminologyStoreDIIn;
     }
 
-      protected void parseLegoList(final LegoList legoListIn) {
+    protected TerminologyStoreDI getTerminologyStoreDI() {
+        return terminologyStoreDI;
+    }
+
+    protected void parseLegoList(final LegoList legoListIn) {
         List<Lego> legoList = legoListIn.getLego();
         for (Lego lego : legoList) {
             parseLego(lego);
@@ -64,7 +68,6 @@ public abstract class AbstractLegoClassifier implements LegoElementClassifierSer
 
         //TODO run through classification service, should get a number back.
 
-        int conceptId = -2;
 
         //TODO store concept ID, and logic graph expression
 

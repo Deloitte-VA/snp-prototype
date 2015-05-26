@@ -1,6 +1,7 @@
 package com.github.jlgrock.snp.core.domain.fhir.classifiers;
 
 import com.github.jlgrock.snp.core.domain.fhir.DocumentManifest;
+import gov.vha.isaac.logic.LogicGraph;
 import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
 
 /**
@@ -15,8 +16,12 @@ public class DocumentManifestClassifier extends AbstractFhirClassifier {
         documentManifest = documentManifestIn;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void classify() {
+    protected LogicGraph getLogicGraph() {
         throw new UnsupportedOperationException();
     }
+
 }

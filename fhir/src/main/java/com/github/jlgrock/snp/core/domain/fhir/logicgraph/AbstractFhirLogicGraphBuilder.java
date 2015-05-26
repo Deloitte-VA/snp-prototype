@@ -1,6 +1,11 @@
 package com.github.jlgrock.snp.core.domain.fhir.logicgraph;
 
+import com.github.jlgrock.snp.core.domain.fhir.Code;
+import com.github.jlgrock.snp.core.domain.fhir.CodeableConcept;
+import com.github.jlgrock.snp.core.domain.fhir.Coding;
 import gov.vha.isaac.logic.LogicGraphBuilder;
+import gov.vha.isaac.logic.node.AbstractNode;
+import gov.vha.isaac.logic.node.AndNode;
 import gov.vha.isaac.metadata.coordinates.ViewCoordinates;
 import gov.vha.isaac.ochre.api.LookupService;
 import org.ihtsdo.otf.tcc.api.concept.ConceptChronicleBI;
@@ -11,6 +16,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -24,7 +31,7 @@ public abstract class AbstractFhirLogicGraphBuilder extends LogicGraphBuilder {
 
     private static final String IS_ABOUT_SCTID = "53";
 
-    public AbstractFhirLogicGraphBuilder(final TerminologyStoreDI terminologyStoreDIIn) {
+    protected AbstractFhirLogicGraphBuilder(final TerminologyStoreDI terminologyStoreDIIn) {
         terminologyStoreDI = terminologyStoreDIIn;
     }
 
@@ -71,4 +78,20 @@ public abstract class AbstractFhirLogicGraphBuilder extends LogicGraphBuilder {
         return nid;
     }
 
+    protected AbstractNode processCodeableConcept(final CodeableConcept codeableConcept) {
+        List<Coding> codingList = codeableConcept.getCoding();
+        List<AbstractNode> childrenList = new ArrayList<>();
+        for (Coding coding : codingList) {
+            Code code = coding.getCode();
+            String destinationSctId = code.getValue();
+
+            //Get NID from UUID
+
+            int destinationNid = getNidFromSNOMED(destinationSctId);
+            childrenList.add(Concept(destinationNid));
+        }
+        AndNode andNode = And();
+        andNode.addChildren(childrenList.toArray(new AbstractNode[childrenList.size()]));
+        return andNode;
+    }
 }
