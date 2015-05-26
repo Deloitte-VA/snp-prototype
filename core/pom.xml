@@ -23,24 +23,9 @@
             <artifactId>apis</artifactId>
         </dependency>
 		
-		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>lego</artifactId>
-		</dependency>
-
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>fhir</artifactId>
-        </dependency>
-
         <dependency>
             <groupId>org.mongodb</groupId>
             <artifactId>mongo-java-driver</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>gov.vha.isaac</groupId>
-            <artifactId>logic</artifactId>
         </dependency>
 
         <dependency>
@@ -49,6 +34,10 @@
             <version>1.2.16</version>
         </dependency>
 
+        <dependency>
+            <groupId>gov.vha.isaac</groupId>
+            <artifactId>logic</artifactId>
+        </dependency>
         <!--
         <dependency>
             <groupId>gov.vha.solor.modules</groupId>
