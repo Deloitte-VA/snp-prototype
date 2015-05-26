@@ -48,111 +48,121 @@ import com.github.jlgrock.snp.core.domain.fhir.SecurityEvent;
 import com.github.jlgrock.snp.core.domain.fhir.Specimen;
 import com.github.jlgrock.snp.core.domain.fhir.Substance;
 import com.github.jlgrock.snp.core.domain.fhir.ValueSet;
+import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
 import org.jvnet.hk2.annotations.Service;
+
+import javax.inject.Inject;
 
 /**
  *
  */
 @Service
 public class FhirElementClassifierFactory {
+    final TerminologyStoreDI terminologyStoreDI;
+
+    @Inject
+    FhirElementClassifierFactory(final TerminologyStoreDI terminologyStoreDIIn) {
+        terminologyStoreDI = terminologyStoreDIIn;
+    }
+
     public FhirElementClassifierService findClassifier(final Object unmarshalledObject) throws ClassifierException {
 
         FhirElementClassifierService fhirElementClassifierService;
 
         if (unmarshalledObject instanceof AdverseReaction) {
-            fhirElementClassifierService = new AdverseReactionClassifier((AdverseReaction) unmarshalledObject);
+            fhirElementClassifierService = new AdverseReactionClassifier(terminologyStoreDI, (AdverseReaction) unmarshalledObject);
         } else if (unmarshalledObject instanceof Alert) {
-            fhirElementClassifierService = new AlertClassifier((Alert) unmarshalledObject);
+            fhirElementClassifierService = new AlertClassifier(terminologyStoreDI, (Alert) unmarshalledObject);
         } else if (unmarshalledObject instanceof AllergyIntolerance) {
-            fhirElementClassifierService = new AllergyIntoleranceClassifier((AllergyIntolerance) unmarshalledObject);
+            fhirElementClassifierService = new AllergyIntoleranceClassifier(terminologyStoreDI, (AllergyIntolerance) unmarshalledObject);
         } else if (unmarshalledObject instanceof CarePlan) {
-            fhirElementClassifierService = new CarePlanClassifier((CarePlan) unmarshalledObject);
+            fhirElementClassifierService = new CarePlanClassifier(terminologyStoreDI, (CarePlan) unmarshalledObject);
         } else if (unmarshalledObject instanceof Composition) {
-            fhirElementClassifierService = new CompositionClassifier((Composition) unmarshalledObject);
+            fhirElementClassifierService = new CompositionClassifier(terminologyStoreDI, (Composition) unmarshalledObject);
         } else if (unmarshalledObject instanceof ConceptMap) {
-            fhirElementClassifierService = new ConceptMapClassifier((ConceptMap) unmarshalledObject);
+            fhirElementClassifierService = new ConceptMapClassifier(terminologyStoreDI, (ConceptMap) unmarshalledObject);
         } else if (unmarshalledObject instanceof Condition) {
-            fhirElementClassifierService = new ConditionClassifier((Condition) unmarshalledObject);
+            fhirElementClassifierService = new ConditionClassifier(terminologyStoreDI, (Condition) unmarshalledObject);
         } else if (unmarshalledObject instanceof Conformance) {
-            fhirElementClassifierService = new ConformanceClassifier((Conformance) unmarshalledObject);
+            fhirElementClassifierService = new ConformanceClassifier(terminologyStoreDI, (Conformance) unmarshalledObject);
         } else if (unmarshalledObject instanceof Device) {
-            fhirElementClassifierService = new DeviceClassifier((Device) unmarshalledObject);
+            fhirElementClassifierService = new DeviceClassifier(terminologyStoreDI, (Device) unmarshalledObject);
         } else if (unmarshalledObject instanceof DeviceObservationReport) {
-            fhirElementClassifierService = new DeviceObservationReportClassifier((DeviceObservationReport) unmarshalledObject);
+            fhirElementClassifierService = new DeviceObservationReportClassifier(terminologyStoreDI, (DeviceObservationReport) unmarshalledObject);
         } else if (unmarshalledObject instanceof DiagnosticOrder) {
-            fhirElementClassifierService = new DiagnosticOrderClassifier((DiagnosticOrder) unmarshalledObject);
+            fhirElementClassifierService = new DiagnosticOrderClassifier(terminologyStoreDI, (DiagnosticOrder) unmarshalledObject);
         } else if (unmarshalledObject instanceof DiagnosticReport) {
-            fhirElementClassifierService = new DiagnosticReportClassifier((DiagnosticReport) unmarshalledObject);
+            fhirElementClassifierService = new DiagnosticReportClassifier(terminologyStoreDI, (DiagnosticReport) unmarshalledObject);
         } else if (unmarshalledObject instanceof DocumentManifest) {
-            fhirElementClassifierService = new DocumentManifestClassifier((DocumentManifest) unmarshalledObject);
+            fhirElementClassifierService = new DocumentManifestClassifier(terminologyStoreDI, (DocumentManifest) unmarshalledObject);
         } else if (unmarshalledObject instanceof Encounter) {
-            fhirElementClassifierService = new EncounterClassifier((Encounter) unmarshalledObject);
+            fhirElementClassifierService = new EncounterClassifier(terminologyStoreDI, (Encounter) unmarshalledObject);
         } else if (unmarshalledObject instanceof FamilyHistory) {
-            fhirElementClassifierService = new FamilyHistoryClassifier((FamilyHistory) unmarshalledObject);
+            fhirElementClassifierService = new FamilyHistoryClassifier(terminologyStoreDI, (FamilyHistory) unmarshalledObject);
         } else if (unmarshalledObject instanceof Group) {
-            fhirElementClassifierService = new GroupClassifier((Group) unmarshalledObject);
+            fhirElementClassifierService = new GroupClassifier(terminologyStoreDI, (Group) unmarshalledObject);
         } else if (unmarshalledObject instanceof ImagingStudy) {
-            fhirElementClassifierService = new ImagingStudyClassifier((ImagingStudy) unmarshalledObject);
+            fhirElementClassifierService = new ImagingStudyClassifier(terminologyStoreDI, (ImagingStudy) unmarshalledObject);
         } else if (unmarshalledObject instanceof Immunization) {
-            fhirElementClassifierService = new ImmunizationClassifier((Immunization) unmarshalledObject);
+            fhirElementClassifierService = new ImmunizationClassifier(terminologyStoreDI, (Immunization) unmarshalledObject);
         } else if (unmarshalledObject instanceof ImmunizationRecommendation) {
-            fhirElementClassifierService = new ImmunizationRecommendationClassifier((ImmunizationRecommendation) unmarshalledObject);
+            fhirElementClassifierService = new ImmunizationRecommendationClassifier(terminologyStoreDI, (ImmunizationRecommendation) unmarshalledObject);
         } else if (unmarshalledObject instanceof List) {
-            fhirElementClassifierService = new ListClassifier((List) unmarshalledObject);
+            fhirElementClassifierService = new ListClassifier(terminologyStoreDI, (List) unmarshalledObject);
         } else if (unmarshalledObject instanceof Location) {
-            fhirElementClassifierService = new LocationClassifier((Location) unmarshalledObject);
+            fhirElementClassifierService = new LocationClassifier(terminologyStoreDI, (Location) unmarshalledObject);
         } else if (unmarshalledObject instanceof Media) {
-            fhirElementClassifierService = new MediaClassifier((Media) unmarshalledObject);
+            fhirElementClassifierService = new MediaClassifier(terminologyStoreDI, (Media) unmarshalledObject);
         } else if (unmarshalledObject instanceof Medication) {
-            fhirElementClassifierService = new MedicationClassifier((Medication) unmarshalledObject);
+            fhirElementClassifierService = new MedicationClassifier(terminologyStoreDI, (Medication) unmarshalledObject);
         } else if (unmarshalledObject instanceof MedicationAdministration) {
-            fhirElementClassifierService = new MedicationAdministractionClassifier((MedicationAdministration) unmarshalledObject);
+            fhirElementClassifierService = new MedicationAdministractionClassifier(terminologyStoreDI, (MedicationAdministration) unmarshalledObject);
         } else if (unmarshalledObject instanceof MedicationDispense) {
-            fhirElementClassifierService = new MedicationDispenseClassifier((MedicationDispense) unmarshalledObject);
+            fhirElementClassifierService = new MedicationDispenseClassifier(terminologyStoreDI, (MedicationDispense) unmarshalledObject);
         } else if (unmarshalledObject instanceof MedicationPrescription) {
-            fhirElementClassifierService = new MedicationPrescriptionClassifier((MedicationPrescription) unmarshalledObject);
+            fhirElementClassifierService = new MedicationPrescriptionClassifier(terminologyStoreDI, (MedicationPrescription) unmarshalledObject);
         } else if (unmarshalledObject instanceof MedicationStatement) {
-            fhirElementClassifierService = new MedicationStatementClassifier((MedicationStatement) unmarshalledObject);
+            fhirElementClassifierService = new MedicationStatementClassifier(terminologyStoreDI, (MedicationStatement) unmarshalledObject);
         } else if (unmarshalledObject instanceof MessageHeader) {
-            fhirElementClassifierService = new MessageHeaderClassifier((MessageHeader) unmarshalledObject);
+            fhirElementClassifierService = new MessageHeaderClassifier(terminologyStoreDI, (MessageHeader) unmarshalledObject);
         } else if (unmarshalledObject instanceof Observation) {
-            fhirElementClassifierService = new ObservationClassifier((Observation) unmarshalledObject);
+            fhirElementClassifierService = new ObservationClassifier(terminologyStoreDI, (Observation) unmarshalledObject);
         } else if (unmarshalledObject instanceof OperationOutcome) {
-            fhirElementClassifierService = new OperationOutcomeClassifier((OperationOutcome) unmarshalledObject);
+            fhirElementClassifierService = new OperationOutcomeClassifier(terminologyStoreDI, (OperationOutcome) unmarshalledObject);
         } else if (unmarshalledObject instanceof Order) {
-            fhirElementClassifierService = new OrderClassifier((Order) unmarshalledObject);
+            fhirElementClassifierService = new OrderClassifier(terminologyStoreDI, (Order) unmarshalledObject);
         } else if (unmarshalledObject instanceof OrderResponse) {
-            fhirElementClassifierService = new OrderResponseClassifier((OrderResponse) unmarshalledObject);
+            fhirElementClassifierService = new OrderResponseClassifier(terminologyStoreDI, (OrderResponse) unmarshalledObject);
         } else if (unmarshalledObject instanceof Organization) {
-            fhirElementClassifierService = new OrgazationClassifier((Organization) unmarshalledObject);
+            fhirElementClassifierService = new OrgazationClassifier(terminologyStoreDI, (Organization) unmarshalledObject);
         } else if (unmarshalledObject instanceof Other) {
-            fhirElementClassifierService = new OtherClassifier((Other) unmarshalledObject);
+            fhirElementClassifierService = new OtherClassifier(terminologyStoreDI, (Other) unmarshalledObject);
         } else if (unmarshalledObject instanceof Patient) {
-            fhirElementClassifierService = new PatientClassifier((Patient) unmarshalledObject);
+            fhirElementClassifierService = new PatientClassifier(terminologyStoreDI, (Patient) unmarshalledObject);
         } else if (unmarshalledObject instanceof Practitioner) {
-            fhirElementClassifierService = new PractitionerClassifier((Practitioner) unmarshalledObject);
+            fhirElementClassifierService = new PractitionerClassifier(terminologyStoreDI, (Practitioner) unmarshalledObject);
         } else if (unmarshalledObject instanceof Procedure) {
-            fhirElementClassifierService = new ProcedureClassifier((Procedure) unmarshalledObject);
+            fhirElementClassifierService = new ProcedureClassifier(terminologyStoreDI, (Procedure) unmarshalledObject);
         } else if (unmarshalledObject instanceof Profile) {
-            fhirElementClassifierService = new ProfileClassifier((Profile) unmarshalledObject);
+            fhirElementClassifierService = new ProfileClassifier(terminologyStoreDI, (Profile) unmarshalledObject);
         } else if (unmarshalledObject instanceof Provenance) {
-            fhirElementClassifierService = new ProvenanceClassifier((Provenance) unmarshalledObject);
+            fhirElementClassifierService = new ProvenanceClassifier(terminologyStoreDI, (Provenance) unmarshalledObject);
         } else if (unmarshalledObject instanceof Query) {
-            fhirElementClassifierService = new QueryClassifier((Query) unmarshalledObject);
+            fhirElementClassifierService = new QueryClassifier(terminologyStoreDI, (Query) unmarshalledObject);
         } else if (unmarshalledObject instanceof Questionnaire) {
-            fhirElementClassifierService = new QuestionnaireClassifier((Questionnaire) unmarshalledObject);
+            fhirElementClassifierService = new QuestionnaireClassifier(terminologyStoreDI, (Questionnaire) unmarshalledObject);
         } else if (unmarshalledObject instanceof RelatedPerson) {
-            fhirElementClassifierService = new RelatedPersonClassifier((RelatedPerson) unmarshalledObject);
+            fhirElementClassifierService = new RelatedPersonClassifier(terminologyStoreDI, (RelatedPerson) unmarshalledObject);
         } else if (unmarshalledObject instanceof SecurityEvent) {
-            fhirElementClassifierService = new SecurityEventClassifier((SecurityEvent) unmarshalledObject);
+            fhirElementClassifierService = new SecurityEventClassifier(terminologyStoreDI, (SecurityEvent) unmarshalledObject);
         } else if (unmarshalledObject instanceof Specimen) {
-            fhirElementClassifierService = new SpecimenClassifier((Specimen) unmarshalledObject);
+            fhirElementClassifierService = new SpecimenClassifier(terminologyStoreDI, (Specimen) unmarshalledObject);
         } else if (unmarshalledObject instanceof Substance) {
-            fhirElementClassifierService = new SubstanceClassifier((Substance) unmarshalledObject);
+            fhirElementClassifierService = new SubstanceClassifier(terminologyStoreDI, (Substance) unmarshalledObject);
         } else if (unmarshalledObject instanceof ValueSet) {
-            fhirElementClassifierService = new ValueSetClassifier((ValueSet) unmarshalledObject);
+            fhirElementClassifierService = new ValueSetClassifier(terminologyStoreDI, (ValueSet) unmarshalledObject);
         } else if (unmarshalledObject instanceof Binary) {
-            fhirElementClassifierService = new BinaryClassifier((Binary) unmarshalledObject);
+            fhirElementClassifierService = new BinaryClassifier(terminologyStoreDI, (Binary) unmarshalledObject);
         } else {
             throw new ClassifierException("Could not parse unmarshalled object.  Are you sure this is a fhir document?");
         }

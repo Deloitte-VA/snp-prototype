@@ -1,6 +1,7 @@
 package com.github.jlgrock.snp.core.domain.fhir.classifiers;
 
 import com.github.jlgrock.snp.core.domain.fhir.Patient;
+import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
 
 /**
  *
@@ -9,7 +10,8 @@ public class PatientClassifier extends AbstractFhirClassifier {
 
     private final Patient patient;
 
-    public PatientClassifier(final Patient patientIn) {
+    public PatientClassifier(final TerminologyStoreDI terminologyStoreDIIn, final Patient patientIn) {
+        super(terminologyStoreDIIn);
         patient = patientIn;
     }
 

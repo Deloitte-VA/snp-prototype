@@ -7,24 +7,17 @@ import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.inject.Inject;
-
 /**
  * A Logic Graph Builder specific to Lego documents.  This should only be used to
  */
-public class ExpressionGraphBuilder extends AbstractLogicGraphBuilder {
+public class LegoExpressionGraphBuilder extends AbstractLegoLogicGraphBuilder {
 	
-	private static final Logger LOGGER = LoggerFactory.getLogger(ExpressionGraphBuilder.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(LegoExpressionGraphBuilder.class);
 
     private Expression expression;
 
-
-    @Inject
-    public ExpressionGraphBuilder(final TerminologyStoreDI terminologyStoreDIIn) {
+    public LegoExpressionGraphBuilder(final TerminologyStoreDI terminologyStoreDIIn, final Expression expressionIn) {
         super(terminologyStoreDIIn);
-    }
-
-    public void expression(final Expression expressionIn) {
         expression = expressionIn;
     }
 
@@ -39,9 +32,6 @@ public class ExpressionGraphBuilder extends AbstractLogicGraphBuilder {
         AbstractNode node = processExpression(expression);
         root.addChildren(SufficientSet(node));
     }
-
-
-    
 
 
 }

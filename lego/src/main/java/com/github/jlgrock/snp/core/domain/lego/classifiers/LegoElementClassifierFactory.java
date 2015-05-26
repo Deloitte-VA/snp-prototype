@@ -18,51 +18,61 @@ import com.github.jlgrock.snp.core.domain.lego.Stamp;
 import com.github.jlgrock.snp.core.domain.lego.Type;
 import com.github.jlgrock.snp.core.domain.lego.Units;
 import com.github.jlgrock.snp.core.domain.lego.Value;
+import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
 import org.jvnet.hk2.annotations.Service;
+
+import javax.inject.Inject;
 
 /**
  *
  */
 @Service
 public class LegoElementClassifierFactory {
+    final TerminologyStoreDI terminologyStoreDI;
+
+    @Inject
+    LegoElementClassifierFactory(final TerminologyStoreDI terminologyStoreDIIn) {
+        terminologyStoreDI = terminologyStoreDIIn;
+    }
+
     public LegoElementClassifierService findClassifier(final Object unmarshalledObject) throws ClassifierException {
 
         LegoElementClassifierService legoElementClassifierService;
 
         if (unmarshalledObject instanceof LegoList) {
-            legoElementClassifierService = new LegoListClassifier((LegoList) unmarshalledObject);
+            legoElementClassifierService = new LegoListClassifier(terminologyStoreDI, (LegoList) unmarshalledObject);
         } else if (unmarshalledObject instanceof Lego) {
-            legoElementClassifierService = new LegoClassifier((Lego) unmarshalledObject);
+            legoElementClassifierService = new LegoClassifier(terminologyStoreDI, (Lego) unmarshalledObject);
         } else if (unmarshalledObject instanceof Assertion) {
-            legoElementClassifierService = new AssertionClassifier((Assertion) unmarshalledObject);
+            legoElementClassifierService = new AssertionClassifier(terminologyStoreDI, (Assertion) unmarshalledObject);
         } else if (unmarshalledObject instanceof Pncs) {
-            legoElementClassifierService = new PncsClassifier((Pncs) unmarshalledObject);
+            legoElementClassifierService = new PncsClassifier(terminologyStoreDI, (Pncs) unmarshalledObject);
         } else if (unmarshalledObject instanceof AssertionComponent) {
-            legoElementClassifierService = new AssertionComponentClassifier((AssertionComponent) unmarshalledObject);
+            legoElementClassifierService = new AssertionComponentClassifier(terminologyStoreDI, (AssertionComponent) unmarshalledObject);
         } else if (unmarshalledObject instanceof Type) {
-            legoElementClassifierService = new TypeClassifier((Type) unmarshalledObject);
+            legoElementClassifierService = new TypeClassifier(terminologyStoreDI, (Type) unmarshalledObject);
         } else if (unmarshalledObject instanceof Expression) {
-            legoElementClassifierService = new ExpressionClassifier((Expression) unmarshalledObject);
+            legoElementClassifierService = new ExpressionClassifier(terminologyStoreDI, (Expression) unmarshalledObject);
         } else if (unmarshalledObject instanceof Concept) {
-            legoElementClassifierService = new ConceptClassifier((Concept) unmarshalledObject);
+            legoElementClassifierService = new ConceptClassifier(terminologyStoreDI, (Concept) unmarshalledObject);
         } else if (unmarshalledObject instanceof Discernible) {
-            legoElementClassifierService = new DiscernibleClassifier((Discernible) unmarshalledObject);
+            legoElementClassifierService = new DiscernibleClassifier(terminologyStoreDI, (Discernible) unmarshalledObject);
         } else if (unmarshalledObject instanceof Qualifier) {
-            legoElementClassifierService = new QualifierClassifier((Qualifier) unmarshalledObject);
+            legoElementClassifierService = new QualifierClassifier(terminologyStoreDI, (Qualifier) unmarshalledObject);
         } else if (unmarshalledObject instanceof Value) {
-            legoElementClassifierService = new ValueClassifier((Value) unmarshalledObject);
+            legoElementClassifierService = new ValueClassifier(terminologyStoreDI, (Value) unmarshalledObject);
         } else if (unmarshalledObject instanceof Relation) {
-            legoElementClassifierService = new RelationClassifier((Relation) unmarshalledObject);
+            legoElementClassifierService = new RelationClassifier(terminologyStoreDI, (Relation) unmarshalledObject);
         } else if (unmarshalledObject instanceof RelationGroup) {
-            legoElementClassifierService = new RelationGroupClassifier((RelationGroup) unmarshalledObject);
+            legoElementClassifierService = new RelationGroupClassifier(terminologyStoreDI, (RelationGroup) unmarshalledObject);
         } else if (unmarshalledObject instanceof Destination) {
-            legoElementClassifierService = new DestinationClassifier((Destination) unmarshalledObject);
+            legoElementClassifierService = new DestinationClassifier(terminologyStoreDI, (Destination) unmarshalledObject);
         } else if (unmarshalledObject instanceof Interval) {
-            legoElementClassifierService = new IntervalClassifier((Interval) unmarshalledObject);
+            legoElementClassifierService = new IntervalClassifier(terminologyStoreDI, (Interval) unmarshalledObject);
         } else if (unmarshalledObject instanceof Units) {
-            legoElementClassifierService = new UnitsClassifier((Units) unmarshalledObject);
+            legoElementClassifierService = new UnitsClassifier(terminologyStoreDI, (Units) unmarshalledObject);
         } else if (unmarshalledObject instanceof Stamp) {
-            legoElementClassifierService = new StampClassifier((Stamp) unmarshalledObject);
+            legoElementClassifierService = new StampClassifier(terminologyStoreDI, (Stamp) unmarshalledObject);
         } else {
             throw new ClassifierException("Could not parse unmarshalled object.  Are you sure this is a lego document?");
         }

@@ -8,18 +8,24 @@ import com.github.jlgrock.snp.core.domain.lego.Lego;
 import com.github.jlgrock.snp.core.domain.lego.LegoList;
 import com.github.jlgrock.snp.core.domain.lego.Pncs;
 import com.github.jlgrock.snp.core.domain.lego.Stamp;
-import com.github.jlgrock.snp.core.domain.lego.logicgraph.ExpressionGraphBuilder;
+import com.github.jlgrock.snp.core.domain.lego.logicgraph.LegoExpressionGraphBuilder;
 import gov.vha.isaac.logic.LogicGraph;
+import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
 
 import java.util.List;
-import java.util.UUID;
 
 /**
  *
  */
 public abstract class AbstractLegoClassifier implements LegoElementClassifierService {
 
-    protected void parseLegoList(final LegoList legoListIn) {
+    final TerminologyStoreDI terminologyStoreDI;
+
+    protected AbstractLegoClassifier(final TerminologyStoreDI terminologyStoreDIIn) {
+        terminologyStoreDI = terminologyStoreDIIn;
+    }
+
+      protected void parseLegoList(final LegoList legoListIn) {
         List<Lego> legoList = legoListIn.getLego();
         for (Lego lego : legoList) {
             parseLego(lego);
@@ -50,8 +56,9 @@ public abstract class AbstractLegoClassifier implements LegoElementClassifierSer
 
     protected void parseExpression(final Expression expression) {
 
-        ExpressionGraphBuilder legoLogicGraphBuilder = new ExpressionGraphBuilder().expression(expression).create();
-
+        // Create the logic graph
+        LegoExpressionGraphBuilder legoLogicGraphBuilder = new LegoExpressionGraphBuilder(terminologyStoreDI, expression);
+        legoLogicGraphBuilder.create();
         LogicGraph logicGraph = (LogicGraph)legoLogicGraphBuilder;
 
 

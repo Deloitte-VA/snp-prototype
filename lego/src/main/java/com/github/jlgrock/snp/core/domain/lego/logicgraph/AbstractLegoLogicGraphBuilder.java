@@ -30,8 +30,8 @@ import java.util.stream.Collectors;
  * Abstract implementation of Logic Graph Builder
  *
  */
-public abstract class AbstractLogicGraphBuilder extends LogicGraphBuilder {
-	private static final Logger LOGGER = LoggerFactory.getLogger(AbstractLogicGraphBuilder.class);
+public abstract class AbstractLegoLogicGraphBuilder extends LogicGraphBuilder {
+	private static final Logger LOGGER = LoggerFactory.getLogger(AbstractLegoLogicGraphBuilder.class);
 
     private class LocalConcept {
         private int nid;
@@ -96,7 +96,7 @@ public abstract class AbstractLogicGraphBuilder extends LogicGraphBuilder {
 
     private final TerminologyStoreDI terminologyStoreDI;
 
-    public AbstractLogicGraphBuilder(final TerminologyStoreDI terminologyStoreDIIn) {
+    public AbstractLegoLogicGraphBuilder(final TerminologyStoreDI terminologyStoreDIIn) {
         terminologyStoreDI = terminologyStoreDIIn;
     }
 
