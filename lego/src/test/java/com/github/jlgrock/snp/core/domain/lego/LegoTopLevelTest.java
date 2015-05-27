@@ -1,5 +1,7 @@
 package com.github.jlgrock.snp.core.domain.lego;
 
+import com.github.jlgrock.snp.core.domain.lego.model.Lego;
+import com.github.jlgrock.snp.core.domain.lego.model.LegoList;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -15,6 +17,7 @@ import java.io.Reader;
  */
 public class LegoTopLevelTest {
 
+    private static final String path = "com.github.jlgrock.snp.core.domain.lego.model";
     @Test
     public void testBla() {
         Assert.assertEquals(1, 1);
@@ -23,7 +26,7 @@ public class LegoTopLevelTest {
 
     @Test
     public void testLegoSerialization() throws Exception {
-        JAXBContext jc = JAXBContext.newInstance("com.github.jlgrock.snp.core.domain.lego");
+        JAXBContext jc = JAXBContext.newInstance(path);
         Unmarshaller unmarshaller = jc.createUnmarshaller();
         Reader reader = readFile("lego.xml");
         Object o = unmarshaller.unmarshal(reader);
@@ -32,7 +35,7 @@ public class LegoTopLevelTest {
 
     @Test
     public void testLegoListSerialization() throws Exception {
-        JAXBContext jc = JAXBContext.newInstance("com.github.jlgrock.snp.core.domain.lego");
+        JAXBContext jc = JAXBContext.newInstance(path);
         Unmarshaller unmarshaller = jc.createUnmarshaller();
         Reader reader = readFile("legolist.xml");
         Object o = unmarshaller.unmarshal(reader);

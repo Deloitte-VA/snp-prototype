@@ -1,6 +1,6 @@
 package com.github.jlgrock.snp.core.domain.lego.classifiers;
 
-import com.github.jlgrock.snp.core.domain.lego.Pncs;
+import com.github.jlgrock.snp.core.domain.lego.model.Pncs;
 import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
 
 /**

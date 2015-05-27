@@ -1,7 +1,7 @@
 package com.github.jlgrock.snp.core.domain.fhir.logicgraph;
 
-import com.github.jlgrock.snp.core.domain.fhir.CodeableConcept;
-import com.github.jlgrock.snp.core.domain.fhir.Procedure;
+import com.github.jlgrock.snp.core.domain.fhir.model.CodeableConcept;
+import com.github.jlgrock.snp.core.domain.fhir.model.Procedure;
 import gov.vha.isaac.logic.node.AbstractNode;
 import gov.vha.isaac.logic.node.RootNode;
 import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;

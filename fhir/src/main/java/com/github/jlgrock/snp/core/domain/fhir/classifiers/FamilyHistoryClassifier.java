@@ -1,6 +1,6 @@
 package com.github.jlgrock.snp.core.domain.fhir.classifiers;
 
-import com.github.jlgrock.snp.core.domain.fhir.FamilyHistory;
+import com.github.jlgrock.snp.core.domain.fhir.model.FamilyHistory;
 import gov.vha.isaac.logic.LogicGraph;
 import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
 

@@ -64,7 +64,7 @@
                     <schemaDirectory>src/main/xsd</schemaDirectory>
 
                     <!-- The package of your generated sources -->
-                    <generatePackage>com.github.jlgrock.snp.core.domain.lego</generatePackage>
+                    <generatePackage>com.github.jlgrock.snp.core.domain.lego.model</generatePackage>
 
                     <plugins>
                         <plugin>

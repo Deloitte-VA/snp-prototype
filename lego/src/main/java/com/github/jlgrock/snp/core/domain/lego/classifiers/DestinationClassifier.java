@@ -1,6 +1,6 @@
 package com.github.jlgrock.snp.core.domain.lego.classifiers;
 
-import com.github.jlgrock.snp.core.domain.lego.Destination;
+import com.github.jlgrock.snp.core.domain.lego.model.Destination;
 import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
 
 /**
