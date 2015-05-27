@@ -20,6 +20,8 @@ import java.util.function.Consumer;
  */
 public class IterableMock implements FindIterable<Document> {
 
+	
+	
         private Collection<Document> c;
 
         public IterableMock(final Collection<Document> cIn) {
@@ -33,7 +35,7 @@ public class IterableMock implements FindIterable<Document> {
 
         @Override
         public FindIterable<Document> limit(int limit) {
-            return null;
+            return this;
         }
 
         @Override
@@ -88,7 +90,7 @@ public class IterableMock implements FindIterable<Document> {
 
         @Override
         public MongoCursor<Document> iterator() {
-            return null;
+        	return new MongoCursorIterable(c);
         }
 
         @Override

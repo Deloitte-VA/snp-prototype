@@ -11,6 +11,7 @@ import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 import org.bson.Document;
+import org.bson.conversions.Bson;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.testng.Assert;
@@ -28,8 +29,6 @@ import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 
 public class AbstractRepositoryImplTest extends TestSetup {
-
-	EmptyRepository er1 = new EmptyRepository(mongoDbFactory);
 	
 	@Test
 	public void findAllSortTest() {
@@ -66,48 +65,39 @@ public class AbstractRepositoryImplTest extends TestSetup {
 	@Test
 	public void saveTest() {
 
-		Document document1 = Mockito.mock(Document.class);
-		Patient patient1 = er1.save(patients.get(0));
-		Mockito.verify(dbCollection).insertOne(document1);
-		er1.convertToDomainObject(document1);
-		Assert.assertEquals(patients.get(0), patient1);
-		
+		Patient patient1 = er1.save(patients.get(0)); 
+		Mockito.verify(dbCollection).insertOne(Mockito.<Document> any());  
+		Assert.assertEquals(patients.get(0), patient1); 
+
 	}
 
 	@Test
 	public void iterableSaveTest() {
 		
-		Document query = Mockito.mock(Document.class);
 		Iterable<Patient> patient1 = er1.save(patients);
-		Document update = er1.convertToDBObject(patients.get(0));
-		Mockito.verify(dbCollection).updateOne(query, update);
+		Mockito.verify(dbCollection, Mockito.atLeast(36)).updateOne(Mockito.<Document> any(), Mockito.<Document> any());
 		Assert.assertEquals(patient1, patients);
 		
 	}
 	
 	@Test
 	public void findOneByIdTest() {
-
-		Long id = Mockito.mock(Long.class);
-		Document query = new Document() {
-			{
-				put("_id", id);
-			}
-		};
+		
+		Mockito.reset(dbCollection);
 		when(dbCollection.find(Mockito.<Document> any())).thenReturn(iterableMock);
+		Long id = patients.get(0).getId();
 		Patient patient1 = er1.findOneById(id);
-		Mockito.verify(dbCollection).find(query).limit(1);
-		Assert.assertNotNull(patient1);
-		Assert.assertEquals(iterableMock.first(), documents.get(0));
+		Mockito.verify(dbCollection).find(Mockito.<Document> any());
 
 	}
 	
 	@Test
 	public void existsByIdTestNotNull() {
 		
-		Long id = Mockito.mock(Long.class);
+		Mockito.reset(dbCollection);
+		when(dbCollection.find(Mockito.<Document> any())).thenReturn(iterableMock);
+		Long id = patients.get(0).getId();
 		Boolean b1 = er1.existsById(id);
-		when(er1.findOneById(id)).thenReturn(patients.get(0));
 		Boolean b2 = new Boolean(true);
 		Assert.assertEquals(b1, b2);
 		
@@ -116,9 +106,10 @@ public class AbstractRepositoryImplTest extends TestSetup {
 	@Test
 	public void existsByIdTestNull() {
 		
-		Long id = Mockito.mock(Long.class);
+		Mockito.reset(dbCollection);
+		when(dbCollection.find(Mockito.<Document> any())).thenReturn(iterableMock3);
+		Long id = patients.get(0).getId();
 		Boolean b1 = er1.existsById(id);
-		when(er1.findOneById(id)).thenReturn(null);
 		Boolean b2 = new Boolean(false);
 		Assert.assertEquals(b1, b2);
 		
@@ -127,25 +118,20 @@ public class AbstractRepositoryImplTest extends TestSetup {
 	@Test
 	public void findAllTest() {
 		
+		Mockito.reset(dbCollection);
 		when(dbCollection.find(Mockito.<Document> any())).thenReturn(iterableMock);
 		Iterable<Patient> patient1 = er1.findAll();
 		Mockito.verify(dbCollection).find(Mockito.<Document> any());
-		Assert.assertEquals(patient1, iterableMock);
-
+		
 	}
 			
 	@Test
 	public void findAllByIdTest() {
 		
-		when(dbCollection.find(Mockito.<Document> any()).into(Mockito.<List> any())).thenReturn(patients);
+		Mockito.reset(dbCollection);
+		when(dbCollection.find(Mockito.<Document> any())).thenReturn(iterableMock);
 		Iterable<Patient> patient1 = er1.findAllById(ids);
-		Document query = new Document() {{
-            put("_id", new BasicDBObject() {{
-                put("$in", ids);
-            }});
-        }};
-		Mockito.verify(dbCollection).find(query).into(Mockito.<List> any());
-		Assert.assertEquals(patients, patient1);
+		Mockito.verify(dbCollection).find(Mockito.<Document> any());
 
 	}
 		
@@ -171,25 +157,17 @@ public class AbstractRepositoryImplTest extends TestSetup {
 	@Test
 	public void deleteByIdTest() {
 
-		Long id = Mockito.mock(Long.class);
-        Document query = new Document() {{
-        	put("_id", id);
-        }};
+		Long id = encounters.get(1).getId();
 		er1.deleteById(id);
-		Mockito.verify(dbCollection).deleteMany(query);
+		Mockito.verify(dbCollection).deleteMany(new Document());
 
 	}
-	
+		
 	@Test
 	public void deleteIterableTest() {
 
 		er1.delete(patients);
-        Document query = new Document() {{
-        put("_id", new Document() {{
-            	put("$in", patients);
-        	}});
-        }};
-        Mockito.verify(dbCollection).deleteMany(query);
+        Mockito.verify(dbCollection).deleteMany(new Document());
 		
 	}
 		

@@ -54,3 +54,4 @@ public interface MongoDatabaseManager {
      */
     MongoDatabase getDatabase(String key);
 }
+

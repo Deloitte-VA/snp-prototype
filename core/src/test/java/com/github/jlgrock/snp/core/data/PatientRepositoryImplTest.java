@@ -31,115 +31,72 @@ public class PatientRepositoryImplTest extends TestSetup{
 
 		LocalDate dateOfBirth = LocalDate.of(2001, 01, 1);
 
-		Document document1 = new Document() {
-			{
-				put("dateOfBirth", dateOfBirth);
-			}
-		};
+		when(dbCollection.find(Mockito.<Document> any())).thenReturn(iterableMock);
 
-		when(dbCollection.find(Mockito.<Document> any())).thenReturn(
-				iterableMock);
-
-		List<Patient> queryResults1 = patientRepositoryImpl
-				.findAllByDateOfBirth(dateOfBirth);
+		List<Patient> queryResults1 = patientRepositoryImpl.findAllByDateOfBirth(dateOfBirth);
 
 		verify(dbCollection).find(Mockito.<Document> any());
 
-		for (Patient patient : queryResults1) {
-			Assert.assertTrue(patients.contains(patient));
-		}
 	}
-
+	
+	@Test
 	public void testFindAllByFirstAndLastName() {
 
+		Mockito.reset(dbCollection);
+		
 		String firstName = "Shane";
 		String lastName = "Lewis";
 
-		Document document2 = new Document() {
-			{
-				put("firstName", firstName);
-				put("lastName", lastName);
-			}
-		};
+		when(dbCollection.find(Mockito.<Document> any())).thenReturn(iterableMock);
 
-		when(dbCollection.find(Mockito.<Document> any())).thenReturn(
-				iterableMock);
-
-		List<Patient> queryResults2 = patientRepositoryImpl
-				.findAllByFirstNameAndLastName(firstName, lastName);
+		List<Patient> queryResults2 = patientRepositoryImpl.findAllByFirstNameAndLastName(firstName, lastName);
 
 		verify(dbCollection).find(Mockito.<Document> any());
 
-		for (Patient patient : queryResults2) {
-			Assert.assertTrue(patients.contains(patient));
-		}
 	}
 
+	@Test
 	public void testFindAllByLastName() {
-
+		
+		Mockito.reset(dbCollection);
+		
 		String lastName = "Bhole";
 
-		Document document3 = new Document() {
-			{
-				put("lastName", lastName);
-			}
-		};
+		when(dbCollection.find(Mockito.<Document> any())).thenReturn(iterableMock);
 
-		when(dbCollection.find(Mockito.<Document> any())).thenReturn(
-				iterableMock);
-
-		List<Patient> queryResults3 = patientRepositoryImpl
-				.findAllByLastName(lastName);
+		List<Patient> queryResults3 = patientRepositoryImpl.findAllByLastName(lastName);
 
 		verify(dbCollection).find(Mockito.<Document> any());
 
-		for (Patient patient : queryResults3) {
-			Assert.assertTrue(patients.contains(patient));
-		}
 	}
 
+	@Test
 	public void testFindAllByRace() {
 
+		Mockito.reset(dbCollection);
+		
 		Race race = Race.BLACK_AFRICAN_AMERICAN;
 
-		Document document4 = new Document() {
-			{
-				put("race", race);
-			}
-		};
-
-		when(dbCollection.find(Mockito.<Document> any())).thenReturn(
-				iterableMock);
+		when(dbCollection.find(Mockito.<Document> any())).thenReturn(iterableMock);
 
 		List<Patient> queryResults4 = patientRepositoryImpl.findAllByRace(race);
 
 		verify(dbCollection).find(Mockito.<Document> any());
 
-		for (Patient patient : queryResults4) {
-			Assert.assertTrue(patients.contains(patient));
-		}
 	}
 
+	@Test
 	public void testFindAllByGender() {
 
+		Mockito.reset(dbCollection);
+		
 		Gender gender = Gender.MALE;
 
-		Document document5 = new Document() {
-			{
-				put("gender", gender);
-			}
-		};
+		when(dbCollection.find(Mockito.<Document> any())).thenReturn(iterableMock);
 
-		when(dbCollection.find(Mockito.<Document> any())).thenReturn(
-				iterableMock);
-
-		List<Patient> queryResults5 = patientRepositoryImpl.findAllByRace(race);
+		List<Patient> queryResults5 = patientRepositoryImpl.findAllByGender(gender);
 
 		verify(dbCollection).find(Mockito.<Document> any());
-
-		for (Patient patient : queryResults5) {
-			Assert.assertTrue(patients.contains(patient));
-		}
 
 	}
 

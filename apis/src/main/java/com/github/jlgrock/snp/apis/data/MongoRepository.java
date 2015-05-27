@@ -133,3 +133,4 @@ public interface MongoRepository<DT, ID extends Serializable> {
 	void deleteAll();
 
 }
+

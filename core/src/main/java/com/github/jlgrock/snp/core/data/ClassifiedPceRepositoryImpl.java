@@ -10,34 +10,34 @@ import org.jvnet.hk2.annotations.Service;
 import javax.inject.Inject;
 
 /**
- * This class executes queries against the ClassifiedAssertion 
+ * This class executes queries against the ClassifiedPce 
  * Collection within MongoDB.
  */
 @Service
 public class ClassifiedPceRepositoryImpl extends AbstractRepositoryImpl<ClassifiedPce, Long>
 		implements ClassifiedPceRepository {
 
-	private final ClassifiedPceReadConverter classifiedAssertionReadConverter;
+	private final ClassifiedPceReadConverter classifiedPceReadConverter;
 
 	private final ClassifiedPceWriteConverter classifiedPceWriteConverter;
 
 	/**
 	 * @param mongoDbFactoryIn MongoDbFactory
-	 * @param classifiedAssertionReadConverterIn ClassifiedAssertionReadConverter
-	 * @param classifiedPceWriteConverterIn ClassifiedAssertionWriteConverter
+	 * @param classifiedPceReadConverterIn ClassifiedPceReadConverter
+	 * @param classifiedPceWriteConverterIn ClassifiedPceWriteConverter
 	 */
 	@Inject
     public ClassifiedPceRepositoryImpl(final MongoDbFactory mongoDbFactoryIn,
-									   final ClassifiedPceReadConverter classifiedAssertionReadConverterIn,
+									   final ClassifiedPceReadConverter classifiedPceReadConverterIn,
 									   final ClassifiedPceWriteConverter classifiedPceWriteConverterIn) {
         super(mongoDbFactoryIn);
-		classifiedAssertionReadConverter = classifiedAssertionReadConverterIn;
+		classifiedPceReadConverter = classifiedPceReadConverterIn;
 		classifiedPceWriteConverter = classifiedPceWriteConverterIn;
     }
 
 	@Override
 	protected ClassifiedPce convertToDomainObject(final Document dbObjectin) {
-		return classifiedAssertionReadConverter.convert(dbObjectin);
+		return classifiedPceReadConverter.convert(dbObjectin);
 	}
 
 	@Override

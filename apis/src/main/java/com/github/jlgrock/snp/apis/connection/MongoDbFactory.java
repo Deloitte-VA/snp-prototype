@@ -45,3 +45,4 @@ public interface MongoDbFactory {
     WriteConcern getWriteConcern();
 
 }
+

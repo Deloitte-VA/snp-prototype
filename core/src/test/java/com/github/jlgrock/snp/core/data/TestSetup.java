@@ -15,23 +15,26 @@ import org.testng.annotations.BeforeMethod;
 import com.github.jlgrock.snp.apis.connection.MongoDbFactory;
 import com.github.jlgrock.snp.core.converters.EncounterReadConverter;
 import com.github.jlgrock.snp.core.converters.EncounterWriteConverter;
+import com.github.jlgrock.snp.core.converters.ObservationReadConverter;
+import com.github.jlgrock.snp.core.converters.ObservationWriteConverter;
 import com.github.jlgrock.snp.core.converters.PatientReadConverter;
 import com.github.jlgrock.snp.core.converters.PatientWriteConverter;
 import com.github.jlgrock.snp.core.domain.Encounter;
 import com.github.jlgrock.snp.core.domain.Gender;
 import com.github.jlgrock.snp.core.domain.Patient;
 import com.github.jlgrock.snp.core.domain.Race;
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 
-public abstract class TestSetup {
+public abstract class TestSetup{
 
 		@Mock
 		MongoDbFactory mongoDbFactory;
 
 		@Mock
 		MongoDatabase mongoDatabase;
-
+		
 		@Mock
 		PatientReadConverter patientReadConverter;
 
@@ -39,31 +42,37 @@ public abstract class TestSetup {
 		PatientWriteConverter patientWriteConverter;
 		
 		@Mock
-		EncounterReadConverter encounterReadConverter;  
-
+		EncounterReadConverter encounterReadConverter; 
+		
 		@Mock
 		EncounterWriteConverter encounterWriteConverter;
 		
 		@Mock
 		MongoCollection<Document> dbCollection;
-
+	
 		PatientRepositoryImpl patientRepositoryImpl;
 		
 		EncounterRepositoryImpl encounterRepositoryImpl;
-
+		
+		EmptyRepository er1;	
+		
 		List<Patient> patients = new ArrayList<>(6);
 
 		List<Document> documents = new ArrayList<>(6);
 		
 		List<Document> documents2 = new ArrayList<>(2);
 		
+		List<Document> documents3 = new ArrayList<>(1);
+		
 		List<Long> ids = new ArrayList<>(6);
 		
 		List<Encounter> encounters = new ArrayList<>(2); 
-	
+		
 		IterableMock iterableMock;
 		
 		IterableMock iterableMock2;
+		
+		IterableMock iterableMock3;
 		
 		@BeforeClass
 		public void setUpTests() throws Exception {
@@ -84,12 +93,11 @@ public abstract class TestSetup {
 			encounters.add(encounter1);
 			Document encounterDocument1 = new Document() {
 				{
-					put("Date", LocalDate.of(2015, 4, 30));
-					put("ReasonForVisit", "Sprained Ankle");
-					put("Type", 201523);
-					put("Id", 201521l);
-					put("PatientId", 4334l);
-					
+					put("date", LocalDate.of(2015, 4, 30));
+					put("reason_for_visit", "Sprained Ankle");
+					put("type", 201523);
+					put("_id", 201521l);
+					put("patient", 4334l);
 				}
 			};
 			when(encounterWriteConverter.convert(encounter1)).thenReturn(
@@ -97,19 +105,18 @@ public abstract class TestSetup {
 			
 			Encounter encounter2 = new Encounter();
 			encounter2.setDate(LocalDate.of(2015, 5, 1));
-			encounter1.setReasonForVisit("Sprained Wrist");
-			encounter1.setType(201524);
-			encounter1.setId(201522l);
-			encounter1.setPatientId(4335l);
+			encounter2.setReasonForVisit("Sprained Wrist");
+			encounter2.setType(201524);
+			encounter2.setId(201522l);
+			encounter2.setPatientId(4335l);
 			encounters.add(encounter2);
 			Document encounterDocument2 = new Document() {
 				{
-					put("Date", LocalDate.of(2015, 4, 30));
-					put("ReasonForVisit", "Sprained Ankle");
-					put("Type", 201523);
-					put("Id", 201521l);
-					put("PatientId", 4334l);
-					
+					put("date", LocalDate.of(2015, 4, 30));
+					put("reason_for_visit", "Sprained Ankle");
+					put("type", 201523);
+					put("_id", 201521l);
+					put("patient", 4334l);
 				}
 			};
 			when(encounterWriteConverter.convert(encounter2)).thenReturn(
@@ -125,12 +132,14 @@ public abstract class TestSetup {
 			patient1.setDateOfBirth(LocalDate.of(2001, 1, 1));
 			patients.add(patient1);
 			Document patientDocument1 = new Document() {
-				{
-					put("firstName", "Justin");
-					put("lastName", "Grant");
-					put("gender", Gender.MALE);
-					put("race", Race.CAUCASIAN);
-					put("dateOfBirth", LocalDate.of(2001, 1, 1));
+				{	
+			        put("middle_name", "Deloitte");
+			        put("_id", 1l);
+					put("first_name", "Justin");
+					put("last_name", "Grant");
+					put("gender", 1);
+					put("race", 1);
+					put("dob", 10000);
 				}
 			};
 			when(patientWriteConverter.convert(patient1)).thenReturn(
@@ -146,11 +155,13 @@ public abstract class TestSetup {
 			patients.add(patient2);
 			Document patientDocument2 = new Document() {
 				{
-					put("firstName", "Soyun");
-					put("lastName", "Choi");
-					put("gender", Gender.FEMALE);
-					put("race", Race.ASIAN);
-					put("dateOfBirth", LocalDate.of(2002, 2, 2));
+			        put("middle_name", "Deloitte");
+			        put("_id", 2l);
+					put("first_name", "Soyun");
+					put("last_name", "Choi");
+					put("gender", 2);
+					put("race", 2);
+					put("dob", 10000);
 				}
 			};
 			when(patientWriteConverter.convert(patient2)).thenReturn(
@@ -166,11 +177,13 @@ public abstract class TestSetup {
 			patients.add(patient3);
 			Document patientDocument3 = new Document() {
 				{
-					put("firstName", "Rodney");
-					put("lastName", "Johnson");
-					put("gender", Gender.MALE);
-					put("race", Race.BLACK_AFRICAN_AMERICAN);
-					put("dateOfBirth", LocalDate.of(2003, 3, 3));
+			        put("middle_name", "Deloitte");
+			        put("_id", 3l);
+					put("first_name", "Rodney");
+					put("last_name", "Johnson");
+					put("gender", 1);
+					put("race", 4);
+					put("dob", 10000);
 				}
 			};
 			when(patientWriteConverter.convert(patient3)).thenReturn(
@@ -186,11 +199,13 @@ public abstract class TestSetup {
 			patients.add(patient4);
 			Document patientDocument4 = new Document() {
 				{
-					put("firstName", "Vikram");
-					put("lastName", "Bhole");
-					put("gender", Gender.MALE);
-					put("race", Race.ASIAN);
-					put("dateOfBirth", LocalDate.of(2004, 4, 4));
+			        put("middle_name", "Deloitte");
+			        put("_id", 4l);
+					put("first_name", "Vikram");
+					put("last_name", "Bhole");
+					put("gender", 1);
+					put("race", 2);
+					put("dob", 10000);
 				}
 			};
 			when(patientWriteConverter.convert(patient4)).thenReturn(
@@ -206,11 +221,13 @@ public abstract class TestSetup {
 			patients.add(patient5);
 			Document patientDocument5 = new Document() {
 				{
-					put("firstName", "Sunny");
-					put("lastName", "Vashisht");
-					put("gender", Gender.MALE);
-					put("race", Race.ASIAN);
-					put("dateOfBirth", LocalDate.of(2005, 5, 5));
+			        put("middle_name", "Deloitte");
+			        put("_id", 5l);
+					put("first_name", "Sunny");
+					put("last_name", "Vashisht");
+					put("gender", 1);
+					put("race", 2);
+					put("dob", 10000);
 				}
 			};
 			when(patientWriteConverter.convert(patient5)).thenReturn(
@@ -226,11 +243,13 @@ public abstract class TestSetup {
 			patients.add(patient6);
 			Document patientDocument6 = new Document() {
 				{
-					put("firstName", "Shane");
-					put("lastName", "Lewis");
-					put("gender", Gender.MALE);
-					put("race", Race.CAUCASIAN);
-					put("dateOfBirth", LocalDate.of(2006, 6, 6));
+			        put("middle_name", "Deloitte");
+			        put("_id", 6l);
+					put("first_name", "Shane");
+					put("last_name", "Lewis");
+					put("gender", 1);
+					put("race", 1);
+					put("dob", 10000);
 				}
 			};
 			when(patientWriteConverter.convert(patient6)).thenReturn(
@@ -238,12 +257,13 @@ public abstract class TestSetup {
 
 			// make mocks return the things that we access
 			when(mongoDbFactory.db()).thenReturn(mongoDatabase);
-			patientRepositoryImpl = new PatientRepositoryImpl(mongoDbFactory,
-					patientReadConverter, patientWriteConverter);
-			when(
-					mongoDatabase.getCollection(patientRepositoryImpl
-							.getCollectionName())).thenReturn(dbCollection);
-
+			patientRepositoryImpl = new PatientRepositoryImpl(mongoDbFactory, patientReadConverter, patientWriteConverter);
+			encounterRepositoryImpl = new EncounterRepositoryImpl(mongoDbFactory, encounterReadConverter, encounterWriteConverter);
+			er1 = new EmptyRepository(mongoDbFactory);
+			when(mongoDatabase.getCollection(patientRepositoryImpl.getCollectionName())).thenReturn(dbCollection);
+			when(mongoDatabase.getCollection(encounterRepositoryImpl.getCollectionName())).thenReturn(dbCollection);
+			when(mongoDatabase.getCollection(er1.getCollectionName())).thenReturn(dbCollection);
+			
 			// create list of patient Documents
 			for (Patient p : patients) {
 				documents.add(patientRepositoryImpl.convertToDBObject(p));
@@ -255,13 +275,18 @@ public abstract class TestSetup {
 			}
 			
 			// creat list of encounter Documents
-			for (Encounter e : encounters) {
-				documents2.add(encounterRepositoryImpl.convertToDBObject(e));
-			}
-			
+			documents2.add(encounterDocument1);
+			documents2.add(encounterDocument2);
+			    
 			iterableMock = new IterableMock(documents);
 									
 			iterableMock2 = new IterableMock(documents2);
+			
+			Document doc3 = null;
+			
+			documents3.add(doc3);
+			
+			iterableMock3 = new IterableMock(documents3);
 			
 		}
 	

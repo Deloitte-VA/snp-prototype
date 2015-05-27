@@ -7,11 +7,13 @@ import com.github.jlgrock.snp.apis.data.Pageable;
 import com.github.jlgrock.snp.apis.data.Sort;
 import com.github.jlgrock.snp.apis.domain.MongoDomainObject;
 import com.github.jlgrock.snp.apis.exceptions.DataAccessException;
+import com.github.jlgrock.snp.core.domain.Patient;
 import com.google.common.collect.Lists;
 import com.mongodb.BasicDBObject;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+
 import org.bson.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -89,9 +91,13 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
         if (query == null){
     		return eList;
     	}
-        dBCollection().find(query).forEach(
-                (Consumer<Document>) this::convertToDomainObject
-        );
+        
+        FindIterable<Document> newCollection = dBCollection().find(query);
+       
+        for (Document d : newCollection) {
+			eList.add(convertToDomainObject(d));
+        }
+       
         return eList;
     }
 
@@ -190,13 +196,14 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
         LOGGER.trace("find(id=" + id + ")");
         Document query = new Document() {{
             put("_id", id);
-
+            
         }};
         FindIterable<Document> iterable = dBCollection().find(query).limit(1);
         return convertToDomainObject(iterable.first());
+
     }
 
-    /**
+    /**1
      * {@inheritDoc}
      */
     @Override

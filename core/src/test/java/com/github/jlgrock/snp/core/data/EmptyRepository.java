@@ -36,6 +36,9 @@ import com.mongodb.client.MongoDatabase;
 
 public class EmptyRepository extends
 		AbstractRepositoryImpl<Patient, Long> {
+	
+    private static final Logger LOGGER = LoggerFactory
+            .getLogger(EmptyRepository.class);
 
 	PatientReadConverter prc1 = new PatientReadConverter();
 	
@@ -64,8 +67,8 @@ public class EmptyRepository extends
 
 	@Override
 	protected String getCollectionName() {
-		// TODO Auto-generated method stub
-		return null;
+		LOGGER.trace("getCollectionName()");
+        return "EmptyRepository";
 	}
-
+    
 }
