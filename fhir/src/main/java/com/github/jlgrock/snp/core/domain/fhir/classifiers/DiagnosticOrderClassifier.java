@@ -1,6 +1,6 @@
 package com.github.jlgrock.snp.core.domain.fhir.classifiers;
 
-import com.github.jlgrock.snp.core.domain.fhir.DiagnosticOrder;
+import com.github.jlgrock.snp.core.domain.fhir.model.DiagnosticOrder;
 import gov.vha.isaac.logic.LogicGraph;
 import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
 

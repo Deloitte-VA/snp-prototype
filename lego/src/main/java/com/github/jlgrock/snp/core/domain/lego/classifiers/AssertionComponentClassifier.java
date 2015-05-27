@@ -1,7 +1,7 @@
 package com.github.jlgrock.snp.core.domain.lego.classifiers;
 
 import com.github.jlgrock.snp.core.data.ClassifiedPceStore;
-import com.github.jlgrock.snp.core.domain.lego.AssertionComponent;
+import com.github.jlgrock.snp.core.domain.lego.model.AssertionComponent;
 
 import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
 

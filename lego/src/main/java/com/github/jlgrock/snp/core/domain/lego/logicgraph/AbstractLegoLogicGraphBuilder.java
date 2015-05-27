@@ -1,11 +1,11 @@
 package com.github.jlgrock.snp.core.domain.lego.logicgraph;
 
-import com.github.jlgrock.snp.core.domain.lego.Concept;
-import com.github.jlgrock.snp.core.domain.lego.Destination;
-import com.github.jlgrock.snp.core.domain.lego.Expression;
-import com.github.jlgrock.snp.core.domain.lego.Relation;
-import com.github.jlgrock.snp.core.domain.lego.RelationGroup;
-import com.github.jlgrock.snp.core.domain.lego.Type;
+import com.github.jlgrock.snp.core.domain.lego.model.Concept;
+import com.github.jlgrock.snp.core.domain.lego.model.Destination;
+import com.github.jlgrock.snp.core.domain.lego.model.Expression;
+import com.github.jlgrock.snp.core.domain.lego.model.Relation;
+import com.github.jlgrock.snp.core.domain.lego.model.RelationGroup;
+import com.github.jlgrock.snp.core.domain.lego.model.Type;
 import gov.vha.isaac.logic.LogicGraphBuilder;
 import gov.vha.isaac.logic.Node;
 import gov.vha.isaac.logic.node.AbstractNode;

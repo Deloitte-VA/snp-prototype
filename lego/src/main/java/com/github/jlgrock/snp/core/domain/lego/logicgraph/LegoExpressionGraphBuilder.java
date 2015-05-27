@@ -1,6 +1,6 @@
 package com.github.jlgrock.snp.core.domain.lego.logicgraph;
 
-import com.github.jlgrock.snp.core.domain.lego.Expression;
+import com.github.jlgrock.snp.core.domain.lego.model.Expression;
 import gov.vha.isaac.logic.node.AbstractNode;
 import gov.vha.isaac.logic.node.RootNode;
 import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;

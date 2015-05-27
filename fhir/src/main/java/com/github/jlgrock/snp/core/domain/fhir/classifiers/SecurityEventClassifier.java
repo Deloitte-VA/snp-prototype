@@ -1,6 +1,6 @@
 package com.github.jlgrock.snp.core.domain.fhir.classifiers;
 
-import com.github.jlgrock.snp.core.domain.fhir.SecurityEvent;
+import com.github.jlgrock.snp.core.domain.fhir.model.SecurityEvent;
 import gov.vha.isaac.logic.LogicGraph;
 import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
 

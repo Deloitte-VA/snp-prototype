@@ -74,6 +74,8 @@
                         <schemaInclude>fhir-all.xsd</schemaInclude>
                     </schemaIncludes>
 
+                    <!-- The package is located in the xjb -->
+
                     <plugins>
                         <plugin>
                             <groupId>org.jvnet.jaxb2_commons</groupId>

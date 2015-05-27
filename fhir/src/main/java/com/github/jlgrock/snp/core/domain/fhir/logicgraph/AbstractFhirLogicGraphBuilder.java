@@ -1,8 +1,8 @@
 package com.github.jlgrock.snp.core.domain.fhir.logicgraph;
 
-import com.github.jlgrock.snp.core.domain.fhir.Code;
-import com.github.jlgrock.snp.core.domain.fhir.CodeableConcept;
-import com.github.jlgrock.snp.core.domain.fhir.Coding;
+import com.github.jlgrock.snp.core.domain.fhir.model.Code;
+import com.github.jlgrock.snp.core.domain.fhir.model.CodeableConcept;
+import com.github.jlgrock.snp.core.domain.fhir.model.Coding;
 import gov.vha.isaac.logic.LogicGraphBuilder;
 import gov.vha.isaac.logic.node.AbstractNode;
 import gov.vha.isaac.logic.node.AndNode;

@@ -1,5 +1,22 @@
 package com.github.jlgrock.snp.core.domain.lego;
 
+import com.github.jlgrock.snp.core.domain.lego.model.Assertion;
+import com.github.jlgrock.snp.core.domain.lego.model.AssertionComponent;
+import com.github.jlgrock.snp.core.domain.lego.model.Concept;
+import com.github.jlgrock.snp.core.domain.lego.model.Destination;
+import com.github.jlgrock.snp.core.domain.lego.model.Discernible;
+import com.github.jlgrock.snp.core.domain.lego.model.Expression;
+import com.github.jlgrock.snp.core.domain.lego.model.Interval;
+import com.github.jlgrock.snp.core.domain.lego.model.Lego;
+import com.github.jlgrock.snp.core.domain.lego.model.LegoList;
+import com.github.jlgrock.snp.core.domain.lego.model.Pncs;
+import com.github.jlgrock.snp.core.domain.lego.model.Qualifier;
+import com.github.jlgrock.snp.core.domain.lego.model.Relation;
+import com.github.jlgrock.snp.core.domain.lego.model.RelationGroup;
+import com.github.jlgrock.snp.core.domain.lego.model.Stamp;
+import com.github.jlgrock.snp.core.domain.lego.model.Type;
+import com.github.jlgrock.snp.core.domain.lego.model.Units;
+import com.github.jlgrock.snp.core.domain.lego.model.Value;
 import com.google.common.base.MoreObjects;
 
 import java.util.Objects;

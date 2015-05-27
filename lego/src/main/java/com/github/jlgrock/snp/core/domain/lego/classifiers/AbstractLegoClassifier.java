@@ -2,18 +2,18 @@ package com.github.jlgrock.snp.core.domain.lego.classifiers;
 
 import com.github.jlgrock.snp.core.data.ClassifiedPceStore;
 import com.github.jlgrock.snp.core.domain.ClassifiedPce;
-import com.github.jlgrock.snp.core.domain.lego.Assertion;
-import com.github.jlgrock.snp.core.domain.lego.Destination;
-import com.github.jlgrock.snp.core.domain.lego.Discernible;
-import com.github.jlgrock.snp.core.domain.lego.Expression;
-import com.github.jlgrock.snp.core.domain.lego.Lego;
-import com.github.jlgrock.snp.core.domain.lego.LegoList;
-import com.github.jlgrock.snp.core.domain.lego.Pncs;
-import com.github.jlgrock.snp.core.domain.lego.Stamp;
 import com.github.jlgrock.snp.core.domain.lego.logicgraph.LegoExpressionGraphBuilder;
 
-import gov.vha.isaac.logic.LogicGraph;
+import com.github.jlgrock.snp.core.domain.lego.model.Assertion;
+import com.github.jlgrock.snp.core.domain.lego.model.Destination;
+import com.github.jlgrock.snp.core.domain.lego.model.Discernible;
+import com.github.jlgrock.snp.core.domain.lego.model.Expression;
+import com.github.jlgrock.snp.core.domain.lego.model.Lego;
+import com.github.jlgrock.snp.core.domain.lego.model.LegoList;
+import com.github.jlgrock.snp.core.domain.lego.model.Pncs;
+import com.github.jlgrock.snp.core.domain.lego.model.Stamp;
 
+import gov.vha.isaac.logic.LogicGraph;
 import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
 
 import java.util.List;

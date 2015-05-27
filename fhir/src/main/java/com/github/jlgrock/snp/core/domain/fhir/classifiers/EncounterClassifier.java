@@ -1,9 +1,8 @@
 package com.github.jlgrock.snp.core.domain.fhir.classifiers;
 
-import com.github.jlgrock.snp.core.domain.fhir.Encounter;
 import com.github.jlgrock.snp.core.domain.fhir.logicgraph.FhirEncounterGraphBuilder;
+import com.github.jlgrock.snp.core.domain.fhir.model.Encounter;
 import gov.vha.isaac.logic.LogicGraph;
-import gov.vha.isaac.logic.LogicGraphBuilder;
 import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
 
 /**
