@@ -1,21 +1,5 @@
 package com.github.jlgrock.snp.web.configuration;
 
-import io.dropwizard.jersey.jackson.JacksonMessageBodyProvider;
-import io.dropwizard.jersey.jackson.JsonProcessingExceptionMapper;
-
-import javax.validation.Validation;
-import javax.ws.rs.ApplicationPath;
-
-import org.glassfish.hk2.api.ServiceLocator;
-import org.glassfish.hk2.api.TypeLiteral;
-import org.glassfish.hk2.utilities.binding.AbstractBinder;
-import org.glassfish.jersey.jackson.JacksonFeature;
-import org.glassfish.jersey.media.multipart.MultiPartFeature;
-import org.glassfish.jersey.server.ResourceConfig;
-import org.glassfish.jersey.server.ServerProperties;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.github.jlgrock.snp.apis.connection.MongoDatabaseManager;
 import com.github.jlgrock.snp.apis.connection.MongoDbFactory;
 import com.github.jlgrock.snp.apis.connection.configuration.MongoDbConfiguration;
@@ -53,13 +37,27 @@ import com.github.jlgrock.snp.web.controllers.MultipartFileUtilsImpl;
 import com.github.jlgrock.snp.web.services.PceClassifierService;
 import com.github.jlgrock.snp.web.services.PceClassifierServiceFhirImpl;
 import com.github.jlgrock.snp.web.services.PceClassifierServiceLegoImpl;
+import io.dropwizard.jersey.jackson.JacksonMessageBodyProvider;
+import io.dropwizard.jersey.jackson.JsonProcessingExceptionMapper;
+import org.glassfish.hk2.api.ServiceLocator;
+import org.glassfish.hk2.api.TypeLiteral;
+import org.glassfish.hk2.utilities.binding.AbstractBinder;
+import org.glassfish.jersey.jackson.JacksonFeature;
+import org.glassfish.jersey.media.multipart.MultiPartFeature;
+import org.glassfish.jersey.server.ResourceConfig;
+import org.glassfish.jersey.server.ServerProperties;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.validation.Validation;
+import javax.ws.rs.ApplicationPath;
 
 /**
  * The entry point for Jersey to start a web application in a Servlet 3.0 container.
  * This is a simple Jersey + HK2 application that can be bound to Spring IOC, Spring MVC,
  * Guice, as well as a number of others.
  */
-@ApplicationPath("/")
+@ApplicationPath("/services/")
 public class ApplicationConfig extends ResourceConfig {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ApplicationConfig.class);
