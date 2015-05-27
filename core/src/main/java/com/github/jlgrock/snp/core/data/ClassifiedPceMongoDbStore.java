@@ -26,7 +26,8 @@ public class ClassifiedPceMongoDbStore implements ClassifiedPceStore {
 		patientRepository = patientRepositoryIn;
 	}
 
-    @Override
+	// TODO: possibly remove this method
+//    @Override
 	public void save(final Long patientId, final ClassifiedPce classifiedAssertion) {
 		Patient patient = patientRepository.findOneById(patientId);
 		if(patient != null) {
@@ -34,4 +35,8 @@ public class ClassifiedPceMongoDbStore implements ClassifiedPceStore {
 		}		
 	}
 	
+	@Override
+	public void save(final ClassifiedPce classifiedAssertion) {
+			classifiedPceRepository.save(classifiedAssertion);
+	}
 }

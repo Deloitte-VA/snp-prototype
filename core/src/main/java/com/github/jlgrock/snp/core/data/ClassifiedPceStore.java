@@ -14,5 +14,6 @@ public interface ClassifiedPceStore {
 	 * @param patientId the patient id to save
 	 * @param classifiedAssertion the assertion to store
 	 */
-	void save(final Long patientId, final ClassifiedPce classifiedAssertion);
+//	void save(final Long patientId, final ClassifiedPce classifiedAssertion);
+	void save(final ClassifiedPce classifiedAssertion);
 }

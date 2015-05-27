@@ -14,6 +14,6 @@ public interface PceClassifierService<T> {
 	 * Classifies an assertion
 	 * @param assertion assertion to be classified
 	 */
-	void classifyAssertion(final T assertion);
+//	void classifyAssertion(final T assertion);
 	
 }

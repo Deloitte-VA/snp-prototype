@@ -1,6 +1,6 @@
 package com.github.jlgrock.snp.web.services;
 
-import com.github.jlgrock.snp.core.classifier.PceClassifier;
+//import com.github.jlgrock.snp.core.classifier.PceClassifier;
 import com.github.jlgrock.snp.core.data.ClassifiedPceStore;
 import com.github.jlgrock.snp.core.domain.ClassifiedPce;
 import com.github.jlgrock.snp.core.domain.lego.LegoEnvelope;
@@ -17,36 +17,36 @@ import java.io.InputStreamReader;
 
 public class PceClassifierServiceImplTest {
 	
-	@Mock
-	PceClassifier<LegoEnvelope> assertionClassifier;
-	
-	@Mock
-	ClassifiedPceStore cAssertStore;
-	
-	@Mock
-	LegoEnvelope assertion;
-	
-	@Mock
-	ClassifiedPce cAssertion;
-
-    @BeforeClass
-    public void setUpTests() throws Exception {
-        // Required to make this work on TestNG
-        MockitoAnnotations.initMocks(this);
-    }
-    
-	@Test
-	public void testClassifyAssertion() {
-		
-		Mockito.when(assertionClassifier.classify(assertion)).thenReturn(cAssertion);
-//		Mockito.verify(cAssertStore.save(Mockito.anyLong(), cAssertion));
-		
-		String expected = readFile("Assertion_Example_01.xml");
-		PceClassifierServiceLegoImpl classSvc = new PceClassifierServiceLegoImpl(assertionClassifier, cAssertStore);
-//		classSvc.classifyAssertion(expected);
-		
-//		 TODO: need to add to test
-	}
+//	@Mock
+//	PceClassifier<LegoEnvelope> assertionClassifier;
+//	
+//	@Mock
+//	ClassifiedPceStore cAssertStore;
+//	
+//	@Mock
+//	LegoEnvelope assertion;
+//	
+//	@Mock
+//	ClassifiedPce cAssertion;
+//
+//    @BeforeClass
+//    public void setUpTests() throws Exception {
+//        // Required to make this work on TestNG
+//        MockitoAnnotations.initMocks(this);
+//    }
+//    
+//	@Test
+//	public void testClassifyAssertion() {
+//		
+//		Mockito.when(assertionClassifier.classify(assertion)).thenReturn(cAssertion);
+////		Mockito.verify(cAssertStore.save(Mockito.anyLong(), cAssertion));
+//		
+//		String expected = readFile("Assertion_Example_01.xml");
+//		PceClassifierServiceLegoImpl classSvc = new PceClassifierServiceLegoImpl(assertionClassifier, cAssertStore);
+////		classSvc.classifyAssertion(expected);
+//		
+////		 TODO: need to add to test
+//	}
 	
 	/**
 	 * Prints the string content read from input stream

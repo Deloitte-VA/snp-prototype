@@ -25,7 +25,8 @@ public class ProcessingServiceFactory {
     ProcessingServiceFactory(final IterableProvider<ProcessingService> processingServicesIn) {
         for (ProcessingService processingService : processingServicesIn) {
             if (processingServices.containsKey(processingService.getMediaTypeString())) {
-                LOGGER.error("Processing Service with the key '{}' has been found more than once.  This should be corrected, as this needs to be unique.");
+                LOGGER.error("Processing Service with the key '{}' has been found more than once. This should be corrected, as this needs to be unique.", 
+                		processingService.getMediaTypeString());
             }
             processingServices.put(processingService.getMediaTypeString(), processingService);
         }

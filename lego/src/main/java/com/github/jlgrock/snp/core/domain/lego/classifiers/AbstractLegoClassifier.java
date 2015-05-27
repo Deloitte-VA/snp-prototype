@@ -1,5 +1,7 @@
 package com.github.jlgrock.snp.core.domain.lego.classifiers;
 
+import com.github.jlgrock.snp.core.data.ClassifiedPceStore;
+import com.github.jlgrock.snp.core.domain.ClassifiedPce;
 import com.github.jlgrock.snp.core.domain.lego.Assertion;
 import com.github.jlgrock.snp.core.domain.lego.Destination;
 import com.github.jlgrock.snp.core.domain.lego.Discernible;
@@ -9,7 +11,9 @@ import com.github.jlgrock.snp.core.domain.lego.LegoList;
 import com.github.jlgrock.snp.core.domain.lego.Pncs;
 import com.github.jlgrock.snp.core.domain.lego.Stamp;
 import com.github.jlgrock.snp.core.domain.lego.logicgraph.LegoExpressionGraphBuilder;
+
 import gov.vha.isaac.logic.LogicGraph;
+
 import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
 
 import java.util.List;
@@ -20,9 +24,12 @@ import java.util.List;
 public abstract class AbstractLegoClassifier implements LegoElementClassifierService {
 
     private final TerminologyStoreDI terminologyStoreDI;
+    private final ClassifiedPceStore classPceStore;
 
-    protected AbstractLegoClassifier(final TerminologyStoreDI terminologyStoreDIIn) {
+    protected AbstractLegoClassifier(final TerminologyStoreDI terminologyStoreDIIn, 
+    		final ClassifiedPceStore classPceStoreIn) {
         terminologyStoreDI = terminologyStoreDIIn;
+        classPceStore = classPceStoreIn;
     }
 
     protected TerminologyStoreDI getTerminologyStoreDI() {
@@ -63,13 +70,14 @@ public abstract class AbstractLegoClassifier implements LegoElementClassifierSer
         // Create the logic graph
         LegoExpressionGraphBuilder legoLogicGraphBuilder = new LegoExpressionGraphBuilder(terminologyStoreDI, expression);
         legoLogicGraphBuilder.create();
-        LogicGraph logicGraph = (LogicGraph)legoLogicGraphBuilder;
+        LogicGraph logicGraph = legoLogicGraphBuilder;
 
 
         //TODO run through classification service, should get a number back.
-
+        ClassifiedPce cPce = new ClassifiedPce();
 
         //TODO store concept ID, and logic graph expression
+        classPceStore.save(cPce);
 
 
     }
