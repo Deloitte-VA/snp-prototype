@@ -28,9 +28,13 @@ import com.github.jlgrock.snp.core.data.PatientRepositoryImpl;
 import com.github.jlgrock.snp.core.defaultconfig.MongoConfig;
 import com.github.jlgrock.snp.core.defaultconfig.WebConfig;
 import com.github.jlgrock.snp.web.controllers.MultipartFileUtilsImpl;
+import com.github.jlgrock.snp.web.services.PceClassifierService;
+import com.github.jlgrock.snp.web.services.PceClassifierServiceFhirImpl;
+import com.github.jlgrock.snp.web.services.PceClassifierServiceLegoImpl;
 import io.dropwizard.jersey.jackson.JacksonMessageBodyProvider;
 import io.dropwizard.jersey.jackson.JsonProcessingExceptionMapper;
 import org.glassfish.hk2.api.ServiceLocator;
+import org.glassfish.hk2.api.TypeLiteral;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.media.multipart.MultiPartFeature;
@@ -47,7 +51,7 @@ import javax.ws.rs.ApplicationPath;
  * This is a simple Jersey + HK2 application that can be bound to Spring IOC, Spring MVC,
  * Guice, as well as a number of others.
  */
-@ApplicationPath("/")
+@ApplicationPath("/services/")
 public class ApplicationConfig extends ResourceConfig {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ApplicationConfig.class);
