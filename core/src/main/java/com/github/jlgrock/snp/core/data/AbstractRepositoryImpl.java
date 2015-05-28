@@ -149,16 +149,16 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
 	}
 
 	@Override
-	public <S1 extends S> S save(final S1 entity) {
+	public <R extends S> S save(final R entity) {
 		DBCollection dbc1 = dBCollection();
 		dbc1.save(convertToDBObject(entity));
 		return entity;
 	}
 
 	@Override
-	public <S1 extends S> Iterable<S1> save(final Iterable<S1> entities) {
+	public <R extends S> Iterable<R> save(final Iterable<R> entities) {
 		DBCollection dbc1 = dBCollection();
-		for (S1 o : entities) {
+		for (R o : entities) {
 			dbc1.save(convertToDBObject(o));
 		}
 		return entities;

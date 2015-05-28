@@ -1,11 +1,10 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
 		<groupId>com.github.jlgrock.snp</groupId>
 		<artifactId>snp</artifactId>
-		<version>0.2-SNAPSHOT</version>
+		<version>0.3-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>web</artifactId>
@@ -32,6 +31,16 @@
 			<groupId>com.github.jlgrock.snp</groupId>
 			<artifactId>defaultconfig</artifactId>
 		</dependency>
+
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>lego</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>fhir</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>ch.qos.logback</groupId>
@@ -91,6 +100,22 @@
             <artifactId>jersey-media-json-jackson</artifactId>
         </dependency>
 
+		<!-- AngularJS dependencies -->
+		<dependency>
+  			<groupId>org.webjars</groupId>
+  			<artifactId>angularjs</artifactId>
+		</dependency>
+	
+		<dependency>
+   			<groupId>org.webjars.bower</groupId>
+    		<artifactId>bootstrap</artifactId>
+		</dependency>
+
+		<dependency>
+    		<groupId>org.webjars.bower</groupId>
+    		<artifactId>underscore</artifactId>
+		</dependency>
+		
         <!-- Test dependencies -->
         <dependency>
             <groupId>org.glassfish.jersey.test-framework</groupId>
@@ -113,7 +138,7 @@
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
 		</dependency>
-
+			
         <!-- To Use Guice with HK2 -->
         <!-- <dependency>
             <groupId>com.google.inject</groupId>
@@ -159,6 +184,54 @@
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
             </plugin>
+
+            <plugin>
+	            <groupId>com.samaxes.maven</groupId>
+	            <artifactId>minify-maven-plugin</artifactId>
+	            <version>${minify.version}</version>
+	            <executions>
+	                <execution>
+	                	<goals>
+	                        <goal>minify</goal>
+	                    </goals>
+	                    <configuration>
+	                    	<jsSourceDir>js</jsSourceDir>
+	                    	<jsSourceIncludes>
+	                    		<jsSourceInclude>*.js</jsSourceInclude>
+	                    	</jsSourceIncludes>
+	                    </configuration>
+	                </execution>
+	            </executions>
+	        </plugin>
+
 		</plugins>
 	</build>
+
+    <profiles>
+        <profile>
+            <id>codeQuality</id>
+            <build>
+                <plugins>
+
+                    <!-- Check the project for issues in style guidelines -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-checkstyle-plugin</artifactId>
+                    </plugin>
+
+                    <!-- check for significant bugs that might have been missed in development -->
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>findbugs-maven-plugin</artifactId>
+                    </plugin>
+
+                    <!-- check for significant bugs that might have been missed in development -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-pmd-plugin</artifactId>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>

@@ -1,20 +1,22 @@
 package com.github.jlgrock.snp.core.classifier;
 
-import gov.vha.isaac.logic.LogicGraph;
-
 import java.util.UUID;
+
+import org.jvnet.hk2.annotations.Contract;
 
 /**
  * Classify Post Coordinated Expressions
  *
+ * @param <T> the type of PCE to classify.  This will be specific to each type of input
  */
-public interface LogicGraphClassifier {
+@Contract
+public interface LogicGraphClassifier<T> {
 
 	/**
 	 * replace Post Coordinated Expressions with a classifier ID
 	 * 
-	 * @param logicGraph LogicGraph
+	 * @param pce Post Coordinated Expression
 	 * @return UUID UUID
 	 */
-	UUID classify(LogicGraph logicGraph);
+	UUID classify(T pce);
 }

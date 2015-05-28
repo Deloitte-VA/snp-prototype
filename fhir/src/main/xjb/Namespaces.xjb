@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<jaxb:bindings
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:xs="http://www.w3.org/2001/XMLSchema"
+        xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+        xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/jaxb http://java.sun.com/xml/ns/jaxb/bindingschema_2_0.xsd"
+        jaxb:version="2.1"
+        >
+    <jaxb:bindings schemaLocation="../xsd/xml.xsd">
+        <jaxb:schemaBindings>
+            <jaxb:package name="com.github.jlgrock.snp.core.domain.xml" />
+            <!--<jaxb:nameXmlTransform>-->
+                <!--<jaxb:typeName prefix="Blackboard"/>-->
+                <!--<jaxb:elementName prefix="Blackboard"/>-->
+            <!--</jaxb:nameXmlTransform>-->
+        </jaxb:schemaBindings>
+    </jaxb:bindings>
+
+    <jaxb:bindings schemaLocation="../xsd/fhir-xhtml.xsd">
+        <jaxb:schemaBindings>
+            <jaxb:package name="com.github.jlgrock.snp.core.domain.xhtml"/>
+        </jaxb:schemaBindings>
+    </jaxb:bindings>
+
+    <jaxb:bindings schemaLocation="../xsd/fhir-xhtml.xsd" node="//xs:schema//xs:attributeGroup[@name='i18n']//xs:attribute[@name='lang']">
+        <jaxb:property name="i18nlang"/>
+    </jaxb:bindings>
+
+    <jaxb:bindings schemaLocation="../xsd/fhir-xhtml.xsd" node="//xs:schema//xs:element[@name='bdo']//xs:complexType//xs:complexContent//xs:extension//xs:attribute[@name='lang']">
+        <jaxb:property name="bdolang"/>
+    </jaxb:bindings>
+
+    <jaxb:bindings schemaLocation="../xsd/fhir-all.xsd">
+        <jaxb:schemaBindings>
+            <jaxb:package name="com.github.jlgrock.snp.core.domain.fhir"/>
+        </jaxb:schemaBindings>
+    </jaxb:bindings>
+
+</jaxb:bindings>

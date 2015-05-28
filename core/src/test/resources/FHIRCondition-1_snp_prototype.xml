@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Bundle xmlns="http://hl7.org/fhir">
+	<id value="pastConditions"/>
+	<type value="collection"/> 
+	<entry>
+		<resource>
+			<Condition>
+				<subject>John Doe</subject>
+				<encounter/>
+				<asserter>John Smith</asserter>
+				<dateAsserted>2015-03-34T09:03:02</dateAsserted>
+				<code>
+					<coding>
+						<system value="http://snomed.info/sct"/>
+						<code value="41446000"/>
+						<display value="Blepharitis (disorder)"/>
+					</coding>
+				</code>
+				<category>
+					<code>
+						<coding>
+							<system value="http://snomed.info/sct"/>
+							<code value="439401001"/>
+							<display value="Diagnosis"/>
+						</coding>
+					</code>
+				</category>
+				<status value="confirmed"/>
+				<onset>
+					<onsetDateTime value="1900-01-01T00:0:01"/>
+				</onset>
+				<location>
+					<code>
+						<coding>
+							<system value="http://snomed.info/sct"/>
+							<code value="244486005"/>
+							<display value="Entire eye (body structure)"/>
+						</coding>
+					</code>
+				</location>
+				<notes>414174009|Eye observable (observable entity) and 53|IS ABOUT (attribute) some 41446000|Blepharitis (disorder) and 418775008|finding method some 108217004|Interview, history AND/OR physical examination (procedure)</notes>
+			</Condition>
+		</resource>
+	</entry>
+</Bundle>

@@ -3,20 +3,38 @@ package com.github.jlgrock.snp.core.data;
 import com.github.jlgrock.snp.apis.data.Pageable;
 import com.github.jlgrock.snp.apis.data.Sort;
 
+/**
+ * This class represents pageable information
+ */
 public class PageableImpl implements Pageable {
 	
 	final int pageSize;
 	final int offSet;
 	final Sort sort;
 	
+	/**
+	 * constructs PageableImpl
+	 * @param pageSize1 int
+	 */
 	public PageableImpl(final int pageSize1){
 		this(pageSize1, 0);
 	}
 	
+	/**
+	 * constructs PageableImpl
+	 * @param pageSize1 int
+	 * @param offSet1 int
+	 */
 	public PageableImpl(final int pageSize1, final int offSet1){
 		this(pageSize1, offSet1, null);
 	}
 	
+	/**
+	 * constructs PageableImpl
+	 * @param pageSize1 int
+	 * @param offSet1 int
+	 * @param sort1 int
+	 */
 	public PageableImpl(final int pageSize1, final int offSet1, final Sort sort1){
 		this.pageSize = pageSize1;
 		this.offSet = offSet1;

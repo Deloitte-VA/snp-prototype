@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<legoList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="LEGO.xsd">
+	<groupName>Hypertension Disability Benefits Questionnaire</groupName>
+	<legoListUUID>7e277b2b-a6a7-47d5-aa34-73005aa88314</legoListUUID>
+	<groupDescription>Legos about Hypertension</groupDescription>
+	<comment></comment>
+	<lego>
+		<legoUUID>67390d97-055c-4d98-8113-67aef2c0be66</legoUUID>
+        <stamp status="Active" time="2014-01-09T11:01:05.346-05:00" author="hsaitwal" module="default module" path="default path" uuid="2107d14e-43fa-40a1-ae59-ca8a06a0b943"/>
+        <pncs id="29363" name="Medical history - Diagnosis of hypertension or isolated systolic hypertension confirmed by blood pressure (BP) readings taken 2 or more times on at least 3 different days - Yes - BP reading 1 and 2 - Date" value="Free text"/>
+		<assertion>
+			<assertionUUID>89cf1075-d7b1-48b0-95e1-9eb328c9dec7</assertionUUID>
+			<discernible>
+				<expression>
+					<concept sctid="439272007" uuid="c909e67a-9925-3ebc-9e77-65227a329bea" desc="Date of procedure (observable entity)" />
+					<relation>
+						<type>
+							<concept sctid="53" uuid="d82c8d16-19ad-3176-9665-453cfb2e55f0" desc="IS ABOUT (attribute)" />
+						</type>
+						<destination>
+							<expression>
+								<concept sctid="46973005" uuid="215fd598-e21d-3e27-a0a2-8e23b1b36dfc" desc="Blood pressure taking (procedure)" />
+							</expression>
+						</destination>
+					</relation>
+				</expression>
+			</discernible>
+			<qualifier>
+				<expression>
+					<concept sctid="108217004" uuid="ed2f734a-9196-3410-ae04-751808edf584" desc="Interview, history AND/OR physical examination (procedure)" />
+				</expression>
+			</qualifier>
+			<value>
+				<measurement>
+					<point xsi:type="pointMeasurementConstant">
+						<value>PNCS Value Field</value>
+					</point>
+				</measurement>
+			</value>
+		</assertion>
+	</lego>
+</legoList>

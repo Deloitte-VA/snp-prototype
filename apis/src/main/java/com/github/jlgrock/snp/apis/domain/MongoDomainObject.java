@@ -9,5 +9,5 @@ public interface MongoDomainObject<T> {
     /**
      * @return return the object identifier.
      */
-    public T getId();
+    T getId();
 }
