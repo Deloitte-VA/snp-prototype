@@ -1,7 +1,7 @@
 package com.github.jlgrock.snp.core.domain.lego.classifiers;
 
-import com.github.jlgrock.snp.core.data.ClassifiedPceStore;
-import com.github.jlgrock.snp.core.domain.ClassifiedPce;
+import com.github.jlgrock.snp.domain.data.ClassifiedPceStore;
+import com.github.jlgrock.snp.domain.types.ClassifiedPce;
 import com.github.jlgrock.snp.core.domain.lego.logicgraph.LegoExpressionGraphBuilder;
 
 import com.github.jlgrock.snp.core.domain.lego.model.Assertion;

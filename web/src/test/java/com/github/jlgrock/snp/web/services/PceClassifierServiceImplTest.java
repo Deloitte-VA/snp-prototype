@@ -1,8 +1,8 @@
 package com.github.jlgrock.snp.web.services;
 
 //import com.github.jlgrock.snp.core.classifier.PceClassifier;
-import com.github.jlgrock.snp.core.data.ClassifiedPceStore;
-import com.github.jlgrock.snp.core.domain.ClassifiedPce;
+import com.github.jlgrock.snp.domain.data.ClassifiedPceStore;
+import com.github.jlgrock.snp.domain.types.ClassifiedPce;
 import com.github.jlgrock.snp.core.domain.lego.LegoEnvelope;
 import org.mockito.Mock;
 import org.mockito.Mockito;

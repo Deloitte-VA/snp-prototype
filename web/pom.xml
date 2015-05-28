@@ -24,7 +24,7 @@
 
 		<dependency>
 			<groupId>com.github.jlgrock.snp</groupId>
-			<artifactId>core</artifactId>
+			<artifactId>domain</artifactId>
 		</dependency>
 
 		<dependency>

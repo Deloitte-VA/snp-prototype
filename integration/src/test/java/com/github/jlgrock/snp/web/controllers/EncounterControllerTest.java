@@ -5,7 +5,7 @@ import com.github.jlgrock.snp.apis.data.Pageable;
 import com.github.jlgrock.snp.apis.data.Sort;
 import com.github.jlgrock.snp.core.converters.EncounterWriteConverter;
 import com.github.jlgrock.snp.core.converters.ObservationWriteConverter;
-import com.github.jlgrock.snp.core.data.EncounterRepository;
+import com.github.jlgrock.snp.domain.data.EncounterRepository;
 import com.github.jlgrock.snp.core.domain.Encounter;
 import com.github.jlgrock.snp.web.ApplicationConfig;
 import com.github.jlgrock.snp.web.ApplicationObjectMapper;

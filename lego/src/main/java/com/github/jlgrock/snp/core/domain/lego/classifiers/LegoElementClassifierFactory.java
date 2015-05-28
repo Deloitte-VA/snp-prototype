@@ -1,7 +1,7 @@
 package com.github.jlgrock.snp.core.domain.lego.classifiers;
 
 import com.github.jlgrock.snp.apis.exceptions.ClassifierException;
-import com.github.jlgrock.snp.core.data.ClassifiedPceStore;
+import com.github.jlgrock.snp.domain.data.ClassifiedPceStore;
 import com.github.jlgrock.snp.core.domain.lego.model.Assertion;
 import com.github.jlgrock.snp.core.domain.lego.model.AssertionComponent;
 import com.github.jlgrock.snp.core.domain.lego.model.Concept;

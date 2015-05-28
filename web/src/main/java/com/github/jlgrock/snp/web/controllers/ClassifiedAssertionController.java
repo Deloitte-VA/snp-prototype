@@ -1,7 +1,7 @@
 package com.github.jlgrock.snp.web.controllers;
 
-import com.github.jlgrock.snp.core.data.ClassifiedPceRepository;
-import com.github.jlgrock.snp.core.domain.ClassifiedPce;
+import com.github.jlgrock.snp.domain.data.ClassifiedPceRepository;
+import com.github.jlgrock.snp.domain.types.ClassifiedPce;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

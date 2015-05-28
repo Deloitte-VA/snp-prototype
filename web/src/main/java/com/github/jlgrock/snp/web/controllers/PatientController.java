@@ -1,7 +1,7 @@
 package com.github.jlgrock.snp.web.controllers;
 
-import com.github.jlgrock.snp.core.data.PatientRepository;
-import com.github.jlgrock.snp.core.domain.Patient;
+import com.github.jlgrock.snp.domain.data.PatientRepository;
+import com.github.jlgrock.snp.domain.types.Patient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -25,63 +25,63 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.github.jlgrock.snp.core.domain.fhir.Condition;
-import com.github.jlgrock.snp.core.domain.lego.Lego;
+import com.github.jlgrock.snp.core.domain.fhir.model.Condition;
+import com.github.jlgrock.snp.core.domain.lego.model.Lego;
 import com.github.jlgrock.snp.web.controllers.GenericControllerTest;
-import com.github.jlgrock.snp.web.services.PceClassifierService;
+//import com.github.jlgrock.snp.web.services.PceClassifierService;
 
 @HK2(populate = false)
 public class ClassifierResourceTest extends GenericControllerTest {
 
 	public static final String RESOURCE_URI = "classifier";
 	
-	@Mock
-	PceClassifierService<Lego> pceClssfrSvcLego;
-	
-	@Mock
-	PceClassifierService<Condition> pceClssfrSvcFhir;
-	
+//	@Mock
+//	PceClassifierService<Lego> pceClssfrSvcLego;
+//	
+//	@Mock
+//	PceClassifierService<Condition> pceClssfrSvcFhir;
+//	
 	@Override
 	protected void registerInjectionPoints(ResourceConfig application) {
-		application.registerInstances(new AbstractBinder() {
-			@Override
-			protected void configure() {
-				bindFactory(new Factory<PceClassifierService<Lego>>() {
-					@Override
-					public PceClassifierService<Lego> provide() {
-						return pceClssfrSvcLego;
-					}
-
-					@Override
-					public void dispose(PceClassifierService<Lego> instance) {
-					}
-				}).to(new TypeLiteral<PceClassifierService<Lego>>() {}).ranked(DEFAULT_HK2_TEST_BIND_RANK);
-			}
-		});
-		
-		application.registerInstances(new AbstractBinder() {
-			@Override
-			protected void configure() {
-				bindFactory(new Factory<PceClassifierService<Condition>>() {
-					@Override
-					public PceClassifierService<Condition> provide() {
-						return pceClssfrSvcFhir;
-					}
-
-					@Override
-					public void dispose(PceClassifierService<Condition> instance) {
-					}
-				}).to(new TypeLiteral<PceClassifierService<Condition>>() {}).ranked(DEFAULT_HK2_TEST_BIND_RANK);
-			}
-		});
+//		application.registerInstances(new AbstractBinder() {
+//			@Override
+//			protected void configure() {
+//				bindFactory(new Factory<PceClassifierService<Lego>>() {
+//					@Override
+//					public PceClassifierService<Lego> provide() {
+//						return pceClssfrSvcLego;
+//					}
+//
+//					@Override
+//					public void dispose(PceClassifierService<Lego> instance) {
+//					}
+//				}).to(new TypeLiteral<PceClassifierService<Lego>>() {}).ranked(DEFAULT_HK2_TEST_BIND_RANK);
+//			}
+//		});
+//		
+//		application.registerInstances(new AbstractBinder() {
+//			@Override
+//			protected void configure() {
+//				bindFactory(new Factory<PceClassifierService<Condition>>() {
+//					@Override
+//					public PceClassifierService<Condition> provide() {
+//						return pceClssfrSvcFhir;
+//					}
+//
+//					@Override
+//					public void dispose(PceClassifierService<Condition> instance) {
+//					}
+//				}).to(new TypeLiteral<PceClassifierService<Condition>>() {}).ranked(DEFAULT_HK2_TEST_BIND_RANK);
+//			}
+//		});
 	}
-	
-	@SuppressWarnings("unchecked")
-	@BeforeMethod
-	public void setup() {
-		Mockito.reset(pceClssfrSvcLego);
-		Mockito.reset(pceClssfrSvcFhir);
-	}
+//	
+//	@SuppressWarnings("unchecked")
+//	@BeforeMethod
+//	public void setup() {
+//		Mockito.reset(pceClssfrSvcLego);
+//		Mockito.reset(pceClssfrSvcFhir);
+//	}
 	
 //	@Test
 //	public void testStreamingLegoXml() {

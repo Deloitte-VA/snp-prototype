@@ -96,7 +96,13 @@
 
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>core</artifactId>
+                <artifactId>classifier</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>domain</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
@@ -355,7 +361,8 @@
         <module>fhir</module>
         <module>apis</module>
         <module>defaultconfig</module>
-        <module>core</module>
+        <module>classifier</module>
+        <module>domain</module>
         <module>web</module>
         <!--<module>client</module>-->
     </modules>

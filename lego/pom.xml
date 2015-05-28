@@ -23,7 +23,7 @@
 
         <dependency>
 	       <groupId>${parent.groupId}</groupId>
-	       <artifactId>core</artifactId>
+	       <artifactId>domain</artifactId>
         </dependency>
         
         <dependency>
