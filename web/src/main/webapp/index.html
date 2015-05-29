@@ -19,9 +19,10 @@
 						<label for="value">Value:</label>
 						<input ng-model="queryValue" type="text" class="form-control" id="value">
 					</div>
-					<div class="form-group">
+					<div class="form-group ">
 						<label for="type">Type:</label>
-						<input type="text" class="form-control" id="type">
+						<!-- <input type="text" class="form-control" id="type"> -->
+						<select type="text" class="form-control" ng-model="bsonType" ng-options="type for type in types"></select>
 					</div>
 				</form>
 			</div>

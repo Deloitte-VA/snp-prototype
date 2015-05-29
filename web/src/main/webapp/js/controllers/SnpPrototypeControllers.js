@@ -9,6 +9,20 @@ snpPrototypeControllers.controller('SnpPrototypeController', ['$scope', 'SnpProt
 		$scope.patients = {};
 		$scope.queryKey = '';
 		$scope.queryValue = '';
+		$scope.bsonType = '';
+		
+		$scope.types = 
+		[
+			'string',
+			'number',
+			'boolean',
+			'null',
+			'array',
+			'object',
+			'date',
+			'binary',
+			'objectId'
+		];
 		
 		$scope.getAll = function() {
 			SnpPrototype.query(function(response) {
