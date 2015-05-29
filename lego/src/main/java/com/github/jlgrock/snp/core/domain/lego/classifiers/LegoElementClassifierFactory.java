@@ -21,6 +21,7 @@ import com.github.jlgrock.snp.core.domain.lego.model.Units;
 import com.github.jlgrock.snp.core.domain.lego.model.Value;
 
 import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
+import org.jvnet.hk2.annotations.Contract;
 import org.jvnet.hk2.annotations.Service;
 
 import javax.inject.Inject;
@@ -28,6 +29,7 @@ import javax.inject.Inject;
 /**
  *
  */
+@Contract
 @Service
 public class LegoElementClassifierFactory {
     private final TerminologyStoreDI terminologyStoreDI;

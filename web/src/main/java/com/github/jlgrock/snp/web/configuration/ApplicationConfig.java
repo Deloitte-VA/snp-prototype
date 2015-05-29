@@ -6,6 +6,19 @@ import com.github.jlgrock.snp.apis.connection.configuration.MongoDbConfiguration
 import com.github.jlgrock.snp.apis.connection.configuration.WebConfiguration;
 import com.github.jlgrock.snp.apis.connection.synchronization.TransactionSynchronizationManager;
 import com.github.jlgrock.snp.apis.data.MultiPartFileUtils;
+import com.github.jlgrock.snp.apis.web.MediaTypeService;
+import com.github.jlgrock.snp.apis.web.ProcessingService;
+import com.github.jlgrock.snp.core.defaultconfig.MongoConfig;
+import com.github.jlgrock.snp.core.defaultconfig.WebConfig;
+import com.github.jlgrock.snp.core.domain.fhir.FhirMediaTypeService;
+import com.github.jlgrock.snp.core.domain.fhir.FhirProcessingService;
+import com.github.jlgrock.snp.core.domain.fhir.marshallers.FhirMarshallerService;
+import com.github.jlgrock.snp.core.domain.fhir.marshallers.FhirMarshallerServiceImpl;
+import com.github.jlgrock.snp.core.domain.lego.LegoMediaTypeService;
+import com.github.jlgrock.snp.core.domain.lego.LegoProcessingService;
+import com.github.jlgrock.snp.core.domain.lego.classifiers.LegoElementClassifierFactory;
+import com.github.jlgrock.snp.core.domain.lego.marhsallers.LegoMarshallerService;
+import com.github.jlgrock.snp.core.domain.lego.marhsallers.LegoMarshallerServiceImpl;
 import com.github.jlgrock.snp.domain.connection.SimpleMongoDbFactory;
 import com.github.jlgrock.snp.domain.connection.SynchronizedMongoDatabaseManager;
 import com.github.jlgrock.snp.domain.connection.synchronization.CollectionSynchronizationManager;
@@ -25,8 +38,6 @@ import com.github.jlgrock.snp.domain.data.EncounterRepository;
 import com.github.jlgrock.snp.domain.data.EncounterRepositoryImpl;
 import com.github.jlgrock.snp.domain.data.PatientRepository;
 import com.github.jlgrock.snp.domain.data.PatientRepositoryImpl;
-import com.github.jlgrock.snp.core.defaultconfig.MongoConfig;
-import com.github.jlgrock.snp.core.defaultconfig.WebConfig;
 import com.github.jlgrock.snp.web.controllers.MultipartFileUtilsImpl;
 import io.dropwizard.jersey.jackson.JacksonMessageBodyProvider;
 import io.dropwizard.jersey.jackson.JsonProcessingExceptionMapper;
@@ -91,12 +102,19 @@ public class ApplicationConfig extends ResourceConfig {
         register(new AbstractBinder() {
             @Override
             protected void configure() {
+
+                // DefaultConfig package implementations
+                bind(MongoConfig.class).to(MongoDbConfiguration.class);
+                bind(WebConfig.class).to(WebConfiguration.class);
+
+                // Domain package implementations
+                bind(SimpleMongoDbFactory.class).to(MongoDbFactory.class);
+                bind(SynchronizedMongoDatabaseManager.class).to(MongoDatabaseManager.class);
+                bind(CollectionSynchronizationManager.class).to(TransactionSynchronizationManager.class);
+
                 bind(EncounterRepositoryImpl.class).to(EncounterRepository.class);
                 bind(PatientRepositoryImpl.class).to(PatientRepository.class);
                 bind(ClassifiedPceRepositoryImpl.class).to(ClassifiedPceRepository.class);
-                
-                bind(ClassifiedPceMongoDbStore.class).to(ClassifiedPceStore.class);
-                bind(MultipartFileUtilsImpl.class).to(MultiPartFileUtils.class);
 
                 bind(ObservationReadConverter.class).to(ObservationReadConverter.class);
                 bind(ObservationWriteConverter.class).to(ObservationWriteConverter.class);
@@ -110,12 +128,22 @@ public class ApplicationConfig extends ResourceConfig {
                 bind(ClassifiedPceReadConverter.class).to(ClassifiedPceReadConverter.class);
                 bind(ClassifiedAssertionWriteConverter.class).to(ClassifiedAssertionWriteConverter.class);
 
+                bind(ClassifiedPceMongoDbStore.class).to(ClassifiedPceStore.class);
 
-                bind(SimpleMongoDbFactory.class).to(MongoDbFactory.class);
-                bind(MongoConfig.class).to(MongoDbConfiguration.class);
-                bind(WebConfig.class).to(WebConfiguration.class);
-                bind(SynchronizedMongoDatabaseManager.class).to(MongoDatabaseManager.class);
-                bind(CollectionSynchronizationManager.class).to(TransactionSynchronizationManager.class);
+                // Fhir package implementations
+                bind(FhirMediaTypeService.class).to(MediaTypeService.class);
+                bind(FhirProcessingService.class).to(ProcessingService.class);
+                bind(FhirMarshallerServiceImpl.class).to(FhirMarshallerService.class);
+
+                // Lego package implementations
+                bind(LegoMediaTypeService.class).to(MediaTypeService.class);
+                bind(LegoProcessingService.class).to(ProcessingService.class);
+                bind(LegoElementClassifierFactory.class).to(LegoElementClassifierFactory.class);
+                bind(LegoMarshallerServiceImpl.class).to(LegoMarshallerService.class);
+
+                // Web package implementations
+                bind(MultipartFileUtilsImpl.class).to(MultiPartFileUtils.class);
+
             }
         });
     }

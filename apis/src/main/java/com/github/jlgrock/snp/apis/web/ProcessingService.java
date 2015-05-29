@@ -6,7 +6,7 @@ import org.jvnet.hk2.annotations.Contract;
  *
  */
 @Contract
-public interface ProcessingService<T> {
+public interface ProcessingService {
     void processInput(final String input);
 
     String getMediaTypeString();
