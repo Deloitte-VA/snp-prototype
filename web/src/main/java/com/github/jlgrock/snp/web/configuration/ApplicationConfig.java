@@ -90,15 +90,10 @@ public class ApplicationConfig extends ResourceConfig {
         // Enable Tracing support.
         property(ServerProperties.TRACING, "ALL");
 
+        // Scans packages for rest services
         packages("com.github.jlgrock.snp.web");
-        //doesn't work
-        // ServiceLocator locator = ServiceLocatorUtilities.createAndPopulateServiceLocator();
 
-        //doesn't work
-        //register(EncounterRepository.class);
-
-        // TODO this is supposed to work with just the packages(String...) function, but it doesn't seem to be working.
-        // The scan of packages doesn't seem to be working, so I have to create an abstract binder to bind classes
+        // Jersey won't use the service locator, so we have to bind individually
         register(new AbstractBinder() {
             @Override
             protected void configure() {
