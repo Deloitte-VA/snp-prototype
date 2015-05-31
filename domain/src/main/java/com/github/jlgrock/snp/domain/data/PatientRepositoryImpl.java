@@ -23,7 +23,7 @@ import java.util.List;
  * This class executes queries against the Patient 
  * Collection within MongoDB. 
  */
-@Service
+@Service(name="patientRepository")
 public class PatientRepositoryImpl extends
 		AbstractRepositoryImpl<Patient, Long> implements PatientRepository {
 

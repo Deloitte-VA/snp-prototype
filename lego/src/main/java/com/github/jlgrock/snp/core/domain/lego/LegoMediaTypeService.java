@@ -15,25 +15,16 @@ public class LegoMediaTypeService implements MediaTypeService {
 
     private static final String MIME_SPECIFIC_XML = "lego+xml";
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String getMediaTypeString() {
         return MIME_APPLICATION + "/" + MIME_SPECIFIC_XML;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String getTypeName() {
         return MIME_APPLICATION;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String getSubTypeName() {
         return MIME_SPECIFIC_XML;

@@ -22,18 +22,12 @@ public class LegoMarshallerServiceImpl implements LegoMarshallerService {
 
     public static final String LEGO_PACKAGE = "com.github.jlgrock.snp.core.domain.lego";
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Object unmarshall(final String input) throws UnmarshallingException {
         LOGGER.trace("unmarshalling lego string: {}", input);
         return unmarshall(new StringReader(input));
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Object unmarshall(final Reader input) throws UnmarshallingException {
         LOGGER.trace("unmarshalling lego reader...");

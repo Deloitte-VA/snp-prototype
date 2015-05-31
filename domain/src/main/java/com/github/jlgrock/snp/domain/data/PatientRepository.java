@@ -4,10 +4,7 @@ import com.github.jlgrock.snp.apis.data.MongoRepository;
 import com.github.jlgrock.snp.domain.types.Gender;
 import com.github.jlgrock.snp.domain.types.Patient;
 import com.github.jlgrock.snp.domain.types.Race;
-
 import org.jvnet.hk2.annotations.Contract;
-
-import javax.inject.Named;
 
 import java.util.Date;
 import java.util.List;
@@ -19,7 +16,6 @@ import java.util.List;
  *
  */
 @Contract
-@Named
 public interface PatientRepository extends MongoRepository<Patient, Long> {
 	/**
 	 * 

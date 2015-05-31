@@ -21,7 +21,7 @@ import java.util.List;
  * This class executes queries against the Encounter
  * Collection within MongoDB.
  */
-@Service
+@Service(name="encounterRepository")
 public class EncounterRepositoryImpl extends
 		AbstractRepositoryImpl<Encounter, Long> implements EncounterRepository {
 

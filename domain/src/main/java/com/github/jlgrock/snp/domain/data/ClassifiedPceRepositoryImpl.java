@@ -14,7 +14,7 @@ import javax.inject.Inject;
  * This class executes queries against the ClassifiedAssertion 
  * Collection within MongoDB.
  */
-@Service
+@Service(name="classifiedPceRepository")
 public class ClassifiedPceRepositoryImpl extends AbstractRepositoryImpl<ClassifiedPce, Long> implements ClassifiedPceRepository {
 
 	private final ClassifiedPceReadConverter classifiedAssertionReadConverter;

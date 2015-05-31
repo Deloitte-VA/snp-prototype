@@ -4,8 +4,8 @@ import com.github.jlgrock.snp.apis.exceptions.ClassifierException;
 import com.github.jlgrock.snp.apis.exceptions.UnmarshallingException;
 import com.github.jlgrock.snp.apis.web.MediaTypeService;
 import com.github.jlgrock.snp.apis.web.ProcessingService;
-import com.github.jlgrock.snp.core.domain.lego.classifiers.LegoElementClassifierFactory;
-import com.github.jlgrock.snp.core.domain.lego.classifiers.LegoElementClassifierService;
+import com.github.jlgrock.snp.core.domain.lego.processors.LegoElementProcessorFactory;
+import com.github.jlgrock.snp.core.domain.lego.processors.LegoElementProcessorService;
 import com.github.jlgrock.snp.core.domain.lego.marhsallers.LegoMarshallerService;
 import org.jvnet.hk2.annotations.Service;
 
@@ -20,20 +20,17 @@ public class LegoProcessingService implements ProcessingService {
 
     private MediaTypeService mediaType;
     private LegoMarshallerService legoMarshallerService;
-    private LegoElementClassifierFactory legoElementClassifierFactory;
+    private LegoElementProcessorFactory legoElementProcessorFactory;
 
     @Inject
     public LegoProcessingService(@Named("LegoMediaTypeService") final MediaTypeService mediaTypeIn,
                                  final LegoMarshallerService legoMarshallerServiceIn,
-                                 final LegoElementClassifierFactory legoElementClassifierFactoryIn) {
+                                 final LegoElementProcessorFactory legoElementProcessorFactoryIn) {
         mediaType = mediaTypeIn;
         legoMarshallerService = legoMarshallerServiceIn;
-        legoElementClassifierFactory = legoElementClassifierFactoryIn;
+        legoElementProcessorFactory = legoElementProcessorFactoryIn;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void processInput(final String input) {
         Object unmarshalledObject = null;
@@ -43,13 +40,13 @@ public class LegoProcessingService implements ProcessingService {
             //TODO
         }
         if (unmarshalledObject != null) {
-            LegoElementClassifierService legoElementClassifierService = null;
+            LegoElementProcessorService legoElementProcessorService = null;
             try {
-                legoElementClassifierService = legoElementClassifierFactory.findClassifier(unmarshalledObject);
+                legoElementProcessorService = legoElementProcessorFactory.findClassifier(unmarshalledObject);
             } catch (ClassifierException ce) {
                 //TODO
             }
-            legoElementClassifierService.classify();
+            legoElementProcessorService.classify();
         }
     }
 

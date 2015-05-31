@@ -2,10 +2,7 @@ package com.github.jlgrock.snp.domain.data;
 
 import com.github.jlgrock.snp.apis.data.MongoRepository;
 import com.github.jlgrock.snp.domain.types.Encounter;
-
 import org.jvnet.hk2.annotations.Contract;
-
-import javax.inject.Named;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -15,7 +12,6 @@ import java.util.List;
  * Collection within MongoDB.
  */
 @Contract
-@Named
 public interface EncounterRepository extends MongoRepository<Encounter, Long> {
     /**
      * This function finds a list of encounters on a particular date

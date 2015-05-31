@@ -16,25 +16,16 @@ public class FhirMediaTypeService implements MediaTypeService {
 
     private static final java.lang.String MIME_SPECIFIC_XML = "fhir+xml";
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public java.lang.String getMediaTypeString() {
         return MIME_APPLICATION + "/" + MIME_SPECIFIC_XML;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public java.lang.String getTypeName() {
         return MIME_APPLICATION;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String getSubTypeName() {
         return MIME_SPECIFIC_XML;

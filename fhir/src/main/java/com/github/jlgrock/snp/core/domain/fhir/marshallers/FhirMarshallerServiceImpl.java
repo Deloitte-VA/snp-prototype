@@ -20,18 +20,12 @@ public class FhirMarshallerServiceImpl implements FhirMarshallerService {
 
     public static final java.lang.String FHIR_PACKAGE = "com.github.jlgrock.snp.core.domain.fhir";
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Object unmarshall(final java.lang.String input) throws UnmarshallingException {
         LOGGER.trace("unmarshalling fhir string: {}", input);
         return unmarshall(new StringReader(input));
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Object unmarshall(final Reader input) throws UnmarshallingException {
         LOGGER.trace("unmarshalling fhir reader...");
