@@ -1,9 +1,9 @@
 package com.github.jlgrock.snp.web.controllers;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.github.jlgrock.snp.core.data.EncounterRepository;
-import com.github.jlgrock.snp.core.domain.Encounter;
-import com.github.jlgrock.snp.web.configuration.JacksonConfig;
+import java.time.LocalDate;
+
+import javax.ws.rs.client.WebTarget;
+
 import org.glassfish.hk2.api.Factory;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import org.glassfish.jersey.server.ResourceConfig;
@@ -13,9 +13,9 @@ import org.mockito.Mockito;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import javax.ws.rs.client.WebTarget;
-
-import java.time.LocalDate;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.github.jlgrock.snp.core.data.EncounterRepository;
+import com.github.jlgrock.snp.core.domain.Encounter;
 
 /**
  *

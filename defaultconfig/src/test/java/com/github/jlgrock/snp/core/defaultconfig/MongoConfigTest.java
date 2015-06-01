@@ -10,7 +10,7 @@ public class MongoConfigTest {
 
     @Test
     public void testDefaults() {
-        MongoConfig mongoConfig = new MongoConfig();
+        MongoConfig mongoConfig = new MongoConfig(false);
         Assert.assertEquals(mongoConfig.getHost().get().getHost(), MongoConfig.DEFAULT_HOST);
         Assert.assertEquals(mongoConfig.getHost().get().getPort(), MongoConfig.DEFAULT_PORT.intValue());
         Assert.assertEquals(mongoConfig.getDefaultDatabase(), MongoConfig.DEFAULT_DATABASE);

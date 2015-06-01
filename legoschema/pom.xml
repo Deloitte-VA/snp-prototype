@@ -37,7 +37,7 @@
             </executions>
             <configuration>
                 <!-- Specify output directory. Required parameter? -->              
-                <outputDirectory>target</outputDirectory> 
+                <!-- <outputDirectory>target</outputDirectory>  -->
                 <schemaDirectory>src/main/resources</schemaDirectory>
                 <!-- The package of your generated sources -->
                 <packageName>com.github.jlgrock.snp.core.domain.lego</packageName>

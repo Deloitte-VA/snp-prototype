@@ -73,10 +73,6 @@ public class PocDemo2 implements SampleQuery {
         //Display the count of items in the resultant collection
         LOGGER.debug("Filtered data count (length): " + documents.size());
 
-        //Get the cursor value afresh before iterating over the collection
-        cursor = testCollection.find(query);
-
-
         //Get an array of encounters
         List<Encounter> myRightArmEncounters = convertDBObjectToJavaEncounterObj(documents);
         LOGGER.debug("myRightArmEncounters=" + myRightArmEncounters + ", size=" + myRightArmEncounters.size());

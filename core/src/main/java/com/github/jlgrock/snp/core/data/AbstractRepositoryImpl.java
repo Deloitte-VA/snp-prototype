@@ -7,7 +7,7 @@ import com.github.jlgrock.snp.apis.data.Pageable;
 import com.github.jlgrock.snp.apis.data.Sort;
 import com.github.jlgrock.snp.apis.domain.MongoDomainObject;
 import com.github.jlgrock.snp.apis.exceptions.DataAccessException;
-import com.github.jlgrock.snp.core.domain.Patient;
+
 import com.google.common.collect.Lists;
 import com.mongodb.BasicDBObject;
 import com.mongodb.client.FindIterable;
@@ -21,7 +21,7 @@ import org.slf4j.LoggerFactory;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
+
 import java.util.stream.Collectors;
 
 /**
@@ -152,7 +152,7 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
      * {@inheritDoc}
      */
     @Override
-    public <S1 extends S> S save(final S1 entity) {
+    public <R extends S> S save(final R entity) {
     	if (entity == null){
      		 LOGGER.error("Entity parameter for save method is null, therefore nothing can be saved or updated in the database.");
      		 return null;
@@ -166,7 +166,7 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
      * {@inheritDoc}
      */
     @Override
-    public <S1 extends S> Iterable<S1> save(final Iterable<S1> entities) {
+    public <R extends S> Iterable<R> save(final Iterable<R> entities) {
     	if (entities == null){
       		 LOGGER.error("Entities parameter for save method is null, therefore nothing can be saved or updated in the database.");
       		 return null;
@@ -233,12 +233,12 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
      * {@inheritDoc}
      */
     @Override
-    public Iterable<S> findAllById(final Iterable<T> ids) {
-        LOGGER.trace("findAllById(ids=" + Lists.newArrayList(ids).stream().map(id -> id.toString()).collect(Collectors.joining(", ")) + ")");
+    public Iterable<S> findAllById(final Iterable<T> ids) {     
         List<S> sList = new ArrayList<>();
         if (ids == null){
     		return sList;
     	}
+        LOGGER.trace("findAllById(ids=" + Lists.newArrayList(ids).stream().map(id -> id.toString()).collect(Collectors.joining(", ")) + ")");
         Document query = new Document() {{
             put("_id", new BasicDBObject() {{
                 put("$in", ids);
@@ -291,13 +291,15 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
     public void delete(final Iterable<? extends S> entities) {
     	if (entities == null){
      		 LOGGER.error("Entities parameter for delete method is null, therefore no values were removed from the database.");
+     		 return;
      	}
-        LOGGER.trace("delete(entities=" + Lists.newArrayList(entities).stream().map(entity -> entity.toString()).collect(Collectors.joining(", ")) + ")");
+    	LOGGER.trace("delete(entities=" + Lists.newArrayList(entities).stream().map(entity -> entity.toString()).collect(Collectors.joining(", ")) + ")");
         Document query = new Document() {{
             put("_id", new Document() {{
                 put("$in", entities);
             }});
         }};
+        
         deleteByQuery(query);
     }
     

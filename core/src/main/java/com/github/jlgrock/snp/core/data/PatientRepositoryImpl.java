@@ -16,7 +16,7 @@ import javax.inject.Inject;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
+
 import java.util.List;
 
 /**
@@ -88,7 +88,7 @@ public class PatientRepositoryImpl extends
      * {@inheritDoc}
      */
     @Override
-    public List<Patient> findAllByLastName(String lastName) {
+    public List<Patient> findAllByLastName(final String lastName) {
     	if (lastName == null){
     		return patientShell;
     	}

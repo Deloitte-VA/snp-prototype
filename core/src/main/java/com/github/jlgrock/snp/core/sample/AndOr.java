@@ -68,7 +68,6 @@ public class AndOr implements SampleQuery {
         cursor.into(documents);
 
         LOGGER.debug("Filtered data count (length): " + documents.size());
-        cursor = testCollection.find(query); //Get the cursor value afresh before iterating over the collection
         for (Document document : documents) {
                 LOGGER.info(document.toJson());
         }

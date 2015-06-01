@@ -4,7 +4,7 @@ import com.google.common.base.MoreObjects;
 
 /**
  * The Lego class represents the lego element in the LEGO XML document.
- *
+ * @deprecated
  */
 public class Lego {
 	private String uuid;

@@ -4,7 +4,7 @@ import com.github.jlgrock.snp.apis.connection.MongoDbFactory;
 import com.github.jlgrock.snp.core.converters.EncounterReadConverter;
 import com.github.jlgrock.snp.core.converters.EncounterWriteConverter;
 import com.github.jlgrock.snp.core.domain.Encounter;
-import com.github.jlgrock.snp.core.domain.Patient;
+
 
 import org.bson.Document;
 import org.jvnet.hk2.annotations.Service;
@@ -34,6 +34,12 @@ public class EncounterRepositoryImpl extends
     private static final Logger LOGGER = LoggerFactory
             .getLogger(EncounterRepositoryImpl.class);
 
+    /**
+     * 
+     * @param mongoDbFactoryIn MongoDbFactory
+     * @param encounterReadConverterIn EncounterReadConverter
+     * @param encounterWriteConverterIn EncounterWriteConverter
+     */
     @Inject
     protected EncounterRepositoryImpl(final MongoDbFactory mongoDbFactoryIn,
                                       final EncounterReadConverter encounterReadConverterIn,
@@ -52,6 +58,9 @@ public class EncounterRepositoryImpl extends
         return "encounters";
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public List<Encounter> findByDate(final LocalDate date) {
     	if (date == null){
     		return encounterShell;

@@ -1,13 +1,30 @@
 package com.github.jlgrock.snp.web.configuration;
 
+import io.dropwizard.jersey.jackson.JacksonMessageBodyProvider;
+import io.dropwizard.jersey.jackson.JsonProcessingExceptionMapper;
+
+import javax.validation.Validation;
+import javax.ws.rs.ApplicationPath;
+
+import org.glassfish.hk2.api.ServiceLocator;
+import org.glassfish.hk2.api.TypeLiteral;
+import org.glassfish.hk2.utilities.binding.AbstractBinder;
+import org.glassfish.jersey.jackson.JacksonFeature;
+import org.glassfish.jersey.media.multipart.MultiPartFeature;
+import org.glassfish.jersey.server.ResourceConfig;
+import org.glassfish.jersey.server.ServerProperties;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.github.jlgrock.snp.apis.connection.MongoDatabaseManager;
 import com.github.jlgrock.snp.apis.connection.MongoDbFactory;
 import com.github.jlgrock.snp.apis.connection.configuration.MongoDbConfiguration;
 import com.github.jlgrock.snp.apis.connection.configuration.WebConfiguration;
 import com.github.jlgrock.snp.apis.connection.synchronization.TransactionSynchronizationManager;
 import com.github.jlgrock.snp.apis.data.MultiPartFileUtils;
-import com.github.jlgrock.snp.core.classifier.PceClassifier;
+import com.github.jlgrock.snp.core.classifier.FhirClassifierImpl;
 import com.github.jlgrock.snp.core.classifier.LegoClassifierImpl;
+import com.github.jlgrock.snp.core.classifier.PceClassifier;
 import com.github.jlgrock.snp.core.connection.SimpleMongoDbFactory;
 import com.github.jlgrock.snp.core.connection.SynchronizedMongoDatabaseManager;
 import com.github.jlgrock.snp.core.connection.synchronization.CollectionSynchronizationManager;
@@ -29,31 +46,20 @@ import com.github.jlgrock.snp.core.data.PatientRepository;
 import com.github.jlgrock.snp.core.data.PatientRepositoryImpl;
 import com.github.jlgrock.snp.core.defaultconfig.MongoConfig;
 import com.github.jlgrock.snp.core.defaultconfig.WebConfig;
-import com.github.jlgrock.snp.web.controllers.PceClassifierService;
-import com.github.jlgrock.snp.web.controllers.PceClassifierServiceImpl;
+import com.github.jlgrock.snp.core.domain.fhir.Condition;
+import com.github.jlgrock.snp.core.domain.lego.Assertion;
+import com.github.jlgrock.snp.core.domain.lego.Lego;
 import com.github.jlgrock.snp.web.controllers.MultipartFileUtilsImpl;
-
-import io.dropwizard.jersey.jackson.JacksonMessageBodyProvider;
-import io.dropwizard.jersey.jackson.JsonProcessingExceptionMapper;
-
-import org.glassfish.hk2.api.ServiceLocator;
-import org.glassfish.hk2.utilities.binding.AbstractBinder;
-import org.glassfish.jersey.jackson.JacksonFeature;
-import org.glassfish.jersey.media.multipart.MultiPartFeature;
-import org.glassfish.jersey.server.ResourceConfig;
-import org.glassfish.jersey.server.ServerProperties;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import javax.validation.Validation;
-import javax.ws.rs.ApplicationPath;
+import com.github.jlgrock.snp.web.services.PceClassifierService;
+import com.github.jlgrock.snp.web.services.PceClassifierServiceFhirImpl;
+import com.github.jlgrock.snp.web.services.PceClassifierServiceLegoImpl;
 
 /**
  * The entry point for Jersey to start a web application in a Servlet 3.0 container.
  * This is a simple Jersey + HK2 application that can be bound to Spring IOC, Spring MVC,
  * Guice, as well as a number of others.
  */
-@ApplicationPath("/")
+@ApplicationPath("/services/")
 public class ApplicationConfig extends ResourceConfig {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ApplicationConfig.class);
@@ -101,8 +107,10 @@ public class ApplicationConfig extends ResourceConfig {
                 bind(PatientRepositoryImpl.class).to(PatientRepository.class);
                 bind(ClassifiedPceRepositoryImpl.class).to(ClassifiedPceRepository.class);
                 
-                bind(PceClassifierServiceImpl.class).to(PceClassifierService.class);
-                bind(LegoClassifierImpl.class).to(PceClassifier.class);
+                bind(PceClassifierServiceLegoImpl.class).to(new TypeLiteral<PceClassifierService<Lego>>() {});
+                bind(PceClassifierServiceFhirImpl.class).to(new TypeLiteral<PceClassifierService<Condition>>() {});
+                bind(LegoClassifierImpl.class).to(new TypeLiteral<PceClassifier<Assertion>>() {});
+                bind(FhirClassifierImpl.class).to(new TypeLiteral<PceClassifier<Condition>>() {});
                 bind(ClassifiedPceMongoDbStore.class).to(ClassifiedPceStore.class);
                 bind(MultipartFileUtilsImpl.class).to(MultiPartFileUtils.class);
 
@@ -138,4 +146,5 @@ public class ApplicationConfig extends ResourceConfig {
     }
 
 }
+
 
