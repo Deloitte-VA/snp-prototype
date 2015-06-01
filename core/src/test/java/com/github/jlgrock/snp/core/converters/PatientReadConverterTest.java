@@ -4,7 +4,7 @@ import com.github.jlgrock.snp.core.data.PatientTags;
 import com.github.jlgrock.snp.core.domain.Gender;
 import com.github.jlgrock.snp.core.domain.Patient;
 import com.github.jlgrock.snp.core.domain.Race;
-import com.mongodb.DBObject;
+import org.bson.Document;
 import org.testng.annotations.Test;
 
 import java.time.LocalDate;
@@ -21,7 +21,7 @@ public class PatientReadConverterTest {
     public void testConvert() {
         LocalDate dob = LocalDate.ofEpochDay(12345l);
 
-        DBObject dbObj = mock(DBObject.class);
+        Document dbObj = mock(Document.class);
         when(dbObj.get(PatientTags.ID_TAG)).thenReturn((Long) 123l);
         when(dbObj.get(PatientTags.FIRST_NAME_TAG)).thenReturn("Jerry");
         when(dbObj.get(PatientTags.MIDDLE_NAME_TAG)).thenReturn("Lee");

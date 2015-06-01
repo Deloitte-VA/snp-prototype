@@ -4,7 +4,7 @@ import com.github.jlgrock.snp.apis.converters.ReadConverter;
 import com.github.jlgrock.snp.core.data.ObservationTags;
 import com.github.jlgrock.snp.core.domain.Observation;
 import com.github.jlgrock.snp.core.domain.primitives.SimplePrimitive;
-import com.mongodb.DBObject;
+import org.bson.Document;
 import org.jvnet.hk2.annotations.Service;
 
 import javax.inject.Named;
@@ -14,10 +14,10 @@ import javax.inject.Named;
  */
 @Service
 @Named
-public class ObservationReadConverter extends AbstractReadConverter implements ReadConverter<DBObject, Observation> {
+public class ObservationReadConverter extends AbstractReadConverter implements ReadConverter<Document, Observation> {
 
     @Override
-    public Observation convert(final DBObject source) {
+    public Observation convert(final Document source) {
         Observation observation = new Observation();
         observation.setIdentifier(parseString(source, ObservationTags.ID_TAG));
         observation.setName(SimplePrimitive.createPrimitive(

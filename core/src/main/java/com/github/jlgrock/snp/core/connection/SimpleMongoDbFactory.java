@@ -1,14 +1,14 @@
 package com.github.jlgrock.snp.core.connection;
 
 import com.github.jlgrock.snp.apis.connection.MongoDatabaseManager;
-import com.github.jlgrock.snp.apis.connection.configuration.MongoDbConfiguration;
 import com.github.jlgrock.snp.apis.connection.MongoDbFactory;
+import com.github.jlgrock.snp.apis.connection.configuration.MongoDbConfiguration;
 import com.github.jlgrock.snp.apis.connection.synchronization.TransactionSynchronizationManager;
 import com.github.jlgrock.snp.apis.exceptions.DataAccessException;
 import com.google.common.base.Preconditions;
-import com.mongodb.DB;
 import com.mongodb.MongoClient;
 import com.mongodb.WriteConcern;
+import com.mongodb.client.MongoDatabase;
 import org.jvnet.hk2.annotations.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -72,12 +72,12 @@ public class SimpleMongoDbFactory implements MongoDbFactory {
     }
 
     @Override
-    public DB db() throws DataAccessException {
+    public MongoDatabase db() throws DataAccessException {
         return db(null);
     }
 
     @Override
-    public DB db(final String databaseNameIn) throws DataAccessException {
+    public MongoDatabase db(final String databaseNameIn) throws DataAccessException {
         String databaseToUse;
         if (databaseNameIn == null) {
             LOGGER.info("Name of database is null, using default database=[" + mongoDBConfiguration.getDefaultDatabase() + "]");
@@ -91,21 +91,21 @@ public class SimpleMongoDbFactory implements MongoDbFactory {
             createConnection();
         }
 
+        if (writeConcern != null) {
+            mongoClient.setWriteConcern(WriteConcern.JOURNALED);
+        }
+
         LOGGER.trace("Getting Mongo Database name=[" + databaseToUse + "]");
 
-        DB db;
-        if (mongoDatabaseManager.containsDb(databaseToUse)) {
-            db = mongoDatabaseManager.getDb(databaseToUse);
+        MongoDatabase db;
+        if (mongoDatabaseManager.containsDatabase(databaseToUse)) {
+            db = mongoDatabaseManager.getDatabase(databaseToUse);
         } else {
-            db = mongoClient.getDB(databaseToUse);
-            mongoDatabaseManager.addDb(databaseToUse, db);
+            db = mongoClient.getDatabase(databaseToUse);
+            mongoDatabaseManager.addDatabase(databaseToUse, db);
         }
 
         //TODO need to work on synchronization code
-
-        if (writeConcern != null) {
-            db.setWriteConcern(writeConcern);
-        }
 
         return db;
     }

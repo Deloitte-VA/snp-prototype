@@ -19,3 +19,4 @@ public interface MultiPartFileUtils {
      */
     void writeToFile(InputStream uploadedInputStream, Path uploadedFileLocation);
 }
+

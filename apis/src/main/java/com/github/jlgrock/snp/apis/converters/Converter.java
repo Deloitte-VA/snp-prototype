@@ -14,3 +14,4 @@ public interface Converter<T1, ID> {
      */
     ID convert(T1 source);
 }
+

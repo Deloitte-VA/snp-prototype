@@ -2,7 +2,7 @@ package com.github.jlgrock.snp.core.converters;
 
 import com.github.jlgrock.snp.core.data.ClassifiedPceTags;
 import com.github.jlgrock.snp.core.domain.ClassifiedPce;
-import com.mongodb.DBObject;
+import org.bson.Document;
 import org.testng.annotations.Test;
 
 import static org.mockito.Mockito.mock;
@@ -12,14 +12,14 @@ import static org.testng.Assert.assertEquals;
 /**
  *
  */
-public class ClassifiedClassifiedAssertionReadConverterTest {
+public class ClassifiedClassifiedPceReadConverterTest {
 
     /**
      * public function returns void
      */
     @Test
     public void testConvert() {
-        DBObject dbObj = mock(DBObject.class);
+        Document dbObj = mock(Document.class);
         when(dbObj.get(ClassifiedPceTags.ID_TAG)).thenReturn((Long) 123l);
         when(dbObj.get(ClassifiedPceTags.DESCRIPTION_TAG)).thenReturn("bla");
 

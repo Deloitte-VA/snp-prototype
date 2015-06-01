@@ -4,8 +4,7 @@ import com.github.jlgrock.snp.core.data.EncounterTags;
 import com.github.jlgrock.snp.core.domain.Encounter;
 import com.github.jlgrock.snp.core.domain.Observation;
 import com.mongodb.BasicDBList;
-import com.mongodb.BasicDBObject;
-import com.mongodb.DBObject;
+import org.bson.Document;
 import org.testng.annotations.Test;
 
 import java.time.LocalDate;
@@ -32,8 +31,8 @@ public class EncounterWriteConverterTest {
             add(observation1);
             add(observation2);
         }};
-        DBObject observation1Obj = mock(BasicDBObject.class);
-        DBObject observation2Obj = mock(BasicDBObject.class);
+        Document observation1Obj = mock(Document.class);
+        Document observation2Obj = mock(Document.class);
         BasicDBList observationObjs = new BasicDBList() {{
             add(observation1Obj);
             add(observation1Obj);
@@ -52,7 +51,7 @@ public class EncounterWriteConverterTest {
         when(encounter.getObservations()).thenReturn(observations);
 
         EncounterWriteConverter encounterWriteConverter = new EncounterWriteConverter(observationWriteConverter);
-        DBObject dbObj = encounterWriteConverter.convert(encounter);
+        Document dbObj = encounterWriteConverter.convert(encounter);
 
         assertEquals((Long) 123l, dbObj.get(EncounterTags.ID_TAG));
         assertEquals(date.toEpochDay(), dbObj.get(EncounterTags.DATE_TAG));

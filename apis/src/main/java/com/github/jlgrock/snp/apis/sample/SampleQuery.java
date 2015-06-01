@@ -14,3 +14,4 @@ public interface SampleQuery {
      */
     void query() throws DataAccessException;
 }
+

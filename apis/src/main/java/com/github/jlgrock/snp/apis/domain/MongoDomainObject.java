@@ -11,3 +11,4 @@ public interface MongoDomainObject<T> {
      */
     T getId();
 }
+

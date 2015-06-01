@@ -1,8 +1,8 @@
 package com.github.jlgrock.snp.apis.connection;
 
 import com.github.jlgrock.snp.apis.exceptions.DataAccessException;
-import com.mongodb.DB;
 import com.mongodb.WriteConcern;
+import com.mongodb.client.MongoDatabase;
 import org.jvnet.hk2.annotations.Contract;
 
 /**
@@ -22,7 +22,7 @@ public interface MongoDbFactory {
      * @return get the default Database
      * @throws DataAccessException if the default database does not exist or a connection cannot be made
      */
-    DB db() throws DataAccessException;
+    MongoDatabase db() throws DataAccessException;
 
     /**
      * Returns the database with the name indicated
@@ -31,7 +31,7 @@ public interface MongoDbFactory {
      * @return get the Database with the name specified
      * @throws DataAccessException if the default database does not exist or a connection cannot be made
      */
-    DB db(String name) throws DataAccessException;
+    MongoDatabase db(String name) throws DataAccessException;
 
     /**
      * Set the Write concern of the connection
@@ -45,3 +45,4 @@ public interface MongoDbFactory {
     WriteConcern getWriteConcern();
 
 }
+
