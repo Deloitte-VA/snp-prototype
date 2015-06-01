@@ -1,5 +1,6 @@
 package com.github.jlgrock.snp.web.configuration;
 
+import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
 import io.dropwizard.jersey.jackson.JacksonMessageBodyProvider;
 import io.dropwizard.jersey.jackson.JsonProcessingExceptionMapper;
 import org.glassfish.hk2.api.ServiceLocator;
@@ -36,6 +37,9 @@ public class ApplicationConfig extends ResourceConfig {
 
         new JerseyAutoScan(serviceLocator).scan();
 
+        // preload the LogicGraphClassifier to bootstrap the database
+        serviceLocator.getService(LogicGraphClassifier.class);
+
         // Register Feature allowing for Multipart file uploads
         register(MultiPartFeature.class);
 
@@ -54,57 +58,16 @@ public class ApplicationConfig extends ResourceConfig {
         // Scans packages for rest services
         packages("com.github.jlgrock.snp.web");
 
-        // Jersey won't use the service locator, so we have to bind individually
+        // Place to manually bind objects, in the case that the Jersey Auto-scan isn't working
+        // e.g. bind(x.class).to(y.class);
+        //
         // note: if the object is generic, use TypeLiteral
         // e.g. bind(x.class).to(new TypeLiteral<InjectionResolver<SessionInject>>(){});
+        //
         register(new AbstractBinder() {
             @Override
             protected void configure() {
-//
-//                // DefaultConfig package implementations
-//                bind(MongoConfig.class).to(MongoDbConfiguration.class);
-//                bind(WebConfig.class).to(WebConfiguration.class);
-//
-//                // Domain package implementations
-//                bind(LogicGraphClassifierImpl.class)
-//                        .to(LogicGraphClassifier.class)
-//                        .in(Singleton.class).loadedBy();
-//
-//                bind(SimpleMongoDbFactory.class).to(MongoDbFactory.class);
-//                bind(SynchronizedMongoDatabaseManager.class).to(MongoDatabaseManager.class);
-//                bind(CollectionSynchronizationManager.class).to(TransactionSynchronizationManager.class);
-//
-//                bind(EncounterRepositoryImpl.class).to(EncounterRepository.class);
-//                bind(PatientRepositoryImpl.class).to(PatientRepository.class);
-//                bind(ClassifiedPceRepositoryImpl.class).to(ClassifiedPceRepository.class);
-//
-//                bind(ObservationReadConverter.class).to(ObservationReadConverter.class);
-//                bind(ObservationWriteConverter.class).to(ObservationWriteConverter.class);
-//
-//                bind(EncounterReadConverter.class).to(EncounterReadConverter.class);
-//                bind(EncounterWriteConverter.class).to(EncounterWriteConverter.class);
-//
-//                bind(PatientReadConverter.class).to(PatientReadConverter.class);
-//                bind(PatientWriteConverter.class).to(PatientWriteConverter.class);
-//
-//                bind(ClassifiedPceReadConverter.class).to(ClassifiedPceReadConverter.class);
-//                bind(ClassifiedAssertionWriteConverter.class).to(ClassifiedAssertionWriteConverter.class);
-//
-//                bind(ClassifiedPceMongoDbStore.class).to(ClassifiedPceStore.class);
-//
-//                // Fhir package implementations
-//                bind(FhirMediaTypeService.class).to(MediaTypeService.class);
-//                bind(FhirProcessingService.class).to(ProcessingService.class);
-//                bind(FhirMarshallerServiceImpl.class).to(FhirMarshallerService.class);
-//
-//                // Lego package implementations
-//                bind(LegoMediaTypeService.class).to(MediaTypeService.class);
-//                bind(LegoProcessingService.class).to(ProcessingService.class);
-//                bind(LegoElementProcessorFactory.class).to(LegoElementProcessorFactory.class);
-//                bind(LegoMarshallerServiceImpl.class).to(LegoMarshallerService.class);
-//
-//                // Web package implementations
-//                bind(MultipartFileUtilsImpl.class).to(MultiPartFileUtils.class);
+
 
             }
         });
