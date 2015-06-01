@@ -120,6 +120,6 @@ public class ClassifierResource {
         if (input == null || mediaType == null) {
             LOGGER.error("neither mediatype nor input are allowed to be null.  Skipping file.");
         }
-        processingServiceFactoryImpl.getService(mediaType).processInput(input);
+        processingServiceFactory.getService(mediaType).processInput(input);
     }
 }
