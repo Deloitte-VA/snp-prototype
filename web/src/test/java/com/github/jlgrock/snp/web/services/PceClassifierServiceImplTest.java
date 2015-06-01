@@ -1,54 +1,44 @@
 package com.github.jlgrock.snp.web.services;
 
+//import com.github.jlgrock.snp.core.classifier.PceClassifier;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
-
-import com.github.jlgrock.snp.core.classifier.PceClassifier;
-import com.github.jlgrock.snp.core.data.ClassifiedPceStore;
-import com.github.jlgrock.snp.core.domain.ClassifiedPce;
-import com.github.jlgrock.snp.core.domain.lego.Assertion;
-import com.github.jlgrock.snp.web.services.PceClassifierServiceLegoImpl;
-
 public class PceClassifierServiceImplTest {
 	
-	@Mock
-	PceClassifier<Assertion> assertionClassifier;
-	
-	@Mock
-	ClassifiedPceStore cAssertStore;
-	
-	@Mock
-	Assertion assertion;
-	
-	@Mock
-	ClassifiedPce cAssertion;
-
-    @BeforeClass
-    public void setUpTests() throws Exception {
-        // Required to make this work on TestNG
-        MockitoAnnotations.initMocks(this);
-    }
-    
-	@Test
-	public void testClassifyAssertion() {
-		
-		Mockito.when(assertionClassifier.classify(assertion)).thenReturn(cAssertion);
-//		Mockito.verify(cAssertStore.save(Mockito.anyLong(), cAssertion));
-		
-		String expected = readFile("Assertion_Example_01.xml");
-		PceClassifierServiceLegoImpl classSvc = new PceClassifierServiceLegoImpl(assertionClassifier, cAssertStore);
-//		classSvc.classifyAssertion(expected);
-		
-//		 TODO: need to add to test
-	}
+//	@Mock
+//	PceClassifier<LegoEnvelope> assertionClassifier;
+//	
+//	@Mock
+//	ClassifiedPceStore cAssertStore;
+//	
+//	@Mock
+//	LegoEnvelope assertion;
+//	
+//	@Mock
+//	ClassifiedPce cAssertion;
+//
+//    @BeforeClass
+//    public void setUpTests() throws Exception {
+//        // Required to make this work on TestNG
+//        MockitoAnnotations.initMocks(this);
+//    }
+//    
+//	@Test
+//	public void testClassifyAssertion() {
+//		
+//		Mockito.when(assertionClassifier.classify(assertion)).thenReturn(cAssertion);
+////		Mockito.verify(cAssertStore.save(Mockito.anyLong(), cAssertion));
+//		
+//		String expected = readFile("Assertion_Example_01.xml");
+//		PceClassifierServiceLegoImpl classSvc = new PceClassifierServiceLegoImpl(assertionClassifier, cAssertStore);
+////		classSvc.classifyAssertion(expected);
+//		
+////		 TODO: need to add to test
+//	}
 	
 	/**
 	 * Prints the string content read from input stream

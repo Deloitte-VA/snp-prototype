@@ -20,7 +20,7 @@ public class MongoConfig implements MongoDbConfiguration {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MongoConfig.class);
 
-    static final String DEFAULT_HOST = "localhost";
+    static final String DEFAULT_HOST = "192.168.59.103";
 
     static final Integer DEFAULT_PORT = 27017;
 

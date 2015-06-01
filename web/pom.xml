@@ -24,7 +24,7 @@
 
 		<dependency>
 			<groupId>com.github.jlgrock.snp</groupId>
-			<artifactId>core</artifactId>
+			<artifactId>domain</artifactId>
 		</dependency>
 
 		<dependency>
@@ -68,11 +68,13 @@
             <artifactId>dropwizard-jackson</artifactId>
             <version>0.8.0-rc5</version>
         </dependency>
+
         <dependency>
             <groupId>io.dropwizard</groupId>
             <artifactId>dropwizard-validation</artifactId>
             <version>0.8.0-rc5</version>
         </dependency>
+        
         <dependency>
             <groupId>io.dropwizard</groupId>
             <artifactId>dropwizard-jersey</artifactId>
@@ -188,6 +190,11 @@
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>org.glassfish.hk2</groupId>
+                <artifactId>hk2-inhabitant-generator</artifactId>
             </plugin>
 
             <plugin>
