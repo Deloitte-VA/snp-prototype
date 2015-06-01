@@ -5,6 +5,7 @@ import org.glassfish.hk2.api.MultiException;
 import org.glassfish.hk2.api.Populator;
 import org.glassfish.hk2.api.ServiceLocator;
 
+import javax.servlet.ServletContext;
 import java.io.IOException;
 
 /**
@@ -12,9 +13,11 @@ import java.io.IOException;
  */
 public class JerseyAutoScan {
     final ServiceLocator serviceLocator;
+    final ServletContext servletContext;
 
-    public JerseyAutoScan(final ServiceLocator serviceLocatorIn) {
+    public JerseyAutoScan(final ServiceLocator serviceLocatorIn, final ServletContext servletContextIn) {
         serviceLocator = serviceLocatorIn;
+        servletContext = servletContextIn;
     }
 
     public void scan() {
@@ -23,7 +26,7 @@ public class JerseyAutoScan {
                     serviceLocator.getService(DynamicConfigurationService.class);
             Populator populator = dcs.getPopulator();
 
-            populator.populate(new JerseyDescriptorFinder());
+            populator.populate(new JerseyDescriptorFinder(servletContext));
         } catch (IOException e) {
             throw new MultiException(e);
         }

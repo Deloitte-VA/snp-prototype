@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
+import javax.servlet.ServletContext;
 import javax.validation.Validation;
 import javax.ws.rs.ApplicationPath;
 
@@ -30,12 +31,12 @@ public class ApplicationConfig extends ResourceConfig {
      * Sets up all of the standard features.
      */
     @Inject
-    public ApplicationConfig(final ServiceLocator serviceLocator) {
+    public ApplicationConfig(final ServiceLocator serviceLocator, final ServletContext context) {
         LOGGER.info("Starting MongoRestApplication...");
 
         setApplicationName(ApplicationConfig.class.getSimpleName());
 
-        new JerseyAutoScan(serviceLocator).scan();
+        new JerseyAutoScan(serviceLocator, context).scan();
 
         // preload the LogicGraphClassifier to bootstrap the database
         serviceLocator.getService(LogicGraphClassifier.class);
@@ -78,8 +79,8 @@ public class ApplicationConfig extends ResourceConfig {
      * Create and return an application configuration, for use in starting a jersey server.
      * @return the configuration object, which can be modified further.
      */
-    public static ResourceConfig createApp(final ServiceLocator serviceLocator) {
-        return new ApplicationConfig(serviceLocator);
+    public static ResourceConfig createApp(final ServiceLocator serviceLocator, final ServletContext context) {
+        return new ApplicationConfig(serviceLocator, context);
     }
 
 }

@@ -50,7 +50,7 @@ public abstract class GenericControllerTest extends JerseyTestNg.ContainerPerCla
         enable(TestProperties.DUMP_ENTITY);
 
         ServiceLocator serviceLocator = ServiceLocatorUtilities.createAndPopulateServiceLocator();
-        ResourceConfig application = ApplicationConfig.createApp(serviceLocator);
+        ResourceConfig application = ApplicationConfig.createApp(serviceLocator, null);
         registerInjectionPoints(application);
         return application;
     }
