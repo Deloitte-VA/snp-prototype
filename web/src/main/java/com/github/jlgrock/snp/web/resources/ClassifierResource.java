@@ -1,6 +1,6 @@
 package com.github.jlgrock.snp.web.resources;
 
-import com.github.jlgrock.snp.web.services.ProcessingServiceFactory;
+import com.github.jlgrock.snp.web.services.ProcessingServiceFactoryImpl;
 import org.glassfish.jersey.media.multipart.BodyPart;
 import org.glassfish.jersey.media.multipart.FormDataBodyPart;
 import org.glassfish.jersey.media.multipart.FormDataMultiPart;
@@ -26,17 +26,17 @@ public class ClassifierResource {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ClassifierResource.class);
 
-    ProcessingServiceFactory processingServiceFactory;
+    ProcessingServiceFactoryImpl processingServiceFactoryImpl;
 
     //ClassifierFactory classifierFactory;
 
 	/**
 	 * Constructor
-     * @param processingServiceFactoryIn the marshaller that
+     * @param processingServiceFactoryImplIn the marshaller that
 	 */
 	@Inject
-	public ClassifierResource(final ProcessingServiceFactory processingServiceFactoryIn) {
-		processingServiceFactory = processingServiceFactoryIn;
+	public ClassifierResource(final ProcessingServiceFactoryImpl processingServiceFactoryImplIn) {
+		processingServiceFactoryImpl = processingServiceFactoryImplIn;
 	}
 	
     /**
@@ -120,6 +120,6 @@ public class ClassifierResource {
         if (input == null || mediaType == null) {
             LOGGER.error("neither mediatype nor input are allowed to be null.  Skipping file.");
         }
-        processingServiceFactory.getService(mediaType).processInput(input);
+        processingServiceFactoryImpl.getService(mediaType).processInput(input);
     }
 }
