@@ -1,11 +1,10 @@
 package com.github.jlgrock.snp.domain.converters;
 
 import com.github.jlgrock.snp.apis.converters.Converter;
-import com.github.jlgrock.snp.domain.data.EncounterTags;
-import com.github.jlgrock.snp.domain.types.Encounter;
-import com.github.jlgrock.snp.domain.types.Observation;
-import com.mongodb.DBObject;
-
+import com.github.jlgrock.snp.core.data.EncounterTags;
+import com.github.jlgrock.snp.core.domain.Encounter;
+import com.github.jlgrock.snp.core.domain.Observation;
+import org.bson.Document;
 import org.jvnet.hk2.annotations.Service;
 
 import javax.inject.Inject;
@@ -20,7 +19,7 @@ import java.util.stream.Collectors;
  */
 @Service
 @Named
-public class EncounterReadConverter extends AbstractReadConverter implements Converter<DBObject, Encounter> {
+public class EncounterReadConverter extends AbstractReadConverter implements Converter<Document, Encounter> {
 
     private final ObservationReadConverter observationReadConverter;
 
@@ -34,7 +33,7 @@ public class EncounterReadConverter extends AbstractReadConverter implements Con
     }
 
     @Override
-    public Encounter convert(final DBObject source) {
+    public Encounter convert(final Document source) {
         Encounter encounter = new Encounter();
         encounter.setId(parseLong(source, EncounterTags.ID_TAG));
         encounter.setPatientId(parseLong(source, EncounterTags.PATIENT_TAG));
@@ -42,7 +41,7 @@ public class EncounterReadConverter extends AbstractReadConverter implements Con
         encounter.setType(parseInteger(source, EncounterTags.TYPE_TAG));
         encounter.setReasonForVisit(parseString(source, EncounterTags.REASON_FOR_VISIT_TAG));
 
-        List<DBObject> observationsObjs = (List<DBObject>) source.get(EncounterTags.OBSERVATIONS_TAG);
+        List<Document> observationsObjs = (List<Document>) source.get(EncounterTags.OBSERVATIONS_TAG);
         List<Observation> observations = new ArrayList<>();
         if (observationsObjs != null) {
             observations = observationsObjs.stream().map(

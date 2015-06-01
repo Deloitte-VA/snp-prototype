@@ -5,9 +5,7 @@ import com.github.jlgrock.snp.domain.data.EncounterTags;
 import com.github.jlgrock.snp.domain.types.Encounter;
 import com.github.jlgrock.snp.domain.types.Observation;
 import com.mongodb.BasicDBList;
-import com.mongodb.BasicDBObject;
-import com.mongodb.DBObject;
-
+import org.bson.Document;
 import org.jvnet.hk2.annotations.Service;
 
 import javax.inject.Inject;
@@ -22,7 +20,7 @@ import java.util.stream.Stream;
  */
 @Service
 @Named
-public class EncounterWriteConverter implements WriteConverter<Encounter, DBObject> {
+public class EncounterWriteConverter implements WriteConverter<Encounter, Document> {
 
     private final ObservationWriteConverter observationWriteConverter;
     /**
@@ -36,8 +34,8 @@ public class EncounterWriteConverter implements WriteConverter<Encounter, DBObje
     }
 
     @Override
-    public DBObject convert(final Encounter source) {
-        DBObject dbo = new BasicDBObject();
+    public Document convert(final Encounter source) {
+        Document dbo = new Document();
         dbo.put(EncounterTags.ID_TAG, source.getId());
         dbo.put(EncounterTags.PATIENT_TAG, source.getPatientId());
         if (source.getDate() == null) {
@@ -52,7 +50,7 @@ public class EncounterWriteConverter implements WriteConverter<Encounter, DBObje
         BasicDBList observationObjs = new BasicDBList();
         if (observations != null) {
             Stream<Observation> s1 = observations.stream();
-            Stream<DBObject> s2 = s1.map(observation -> observationWriteConverter.convert(observation));
+            Stream<Document> s2 = s1.map(observation -> observationWriteConverter.convert(observation));
             observationObjs = s2.collect(Collectors.toCollection(BasicDBList::new));
         }
 

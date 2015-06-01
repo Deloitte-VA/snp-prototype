@@ -1,6 +1,6 @@
 package com.github.jlgrock.snp.apis.connection;
 
-import com.mongodb.DB;
+import com.mongodb.client.MongoDatabase;
 import org.jvnet.hk2.annotations.Contract;
 
 /**
@@ -14,7 +14,7 @@ public interface MongoDatabaseManager {
      * @param key the name of the database
      * @param session the database session
      */
-    void addDb(String key, DB session);
+    void addDatabase(String key, MongoDatabase session);
 
     /**
      * Unindex a database that is no longer used.
@@ -22,21 +22,21 @@ public interface MongoDatabaseManager {
      * @param dbName the name of the database to un-index.
      * @return the database that matches the name, or {@literal null} if it doesn't exist
      */
-    DB removeDb(String dbName);
+    MongoDatabase removeDatabase(String dbName);
 
     /**
      * Determine whether or not the DB has been indexed.
      * @param session the db to check for
      * @return {@literal true} if it contains the session, {@literal false} otherwise
      */
-    boolean containsDb(DB session);
+    boolean containsDatabase(MongoDatabase session);
 
     /**
      * Determine whether or not the DB has been indexed.
      * @param key the db to check for
      * @return {@literal true} if it contains the key, {@literal false} otherwise
      */
-    boolean containsDb(String key);
+    boolean containsDatabase(String key);
 
     /**
      * Whether or not this index has been initialized or not
@@ -52,5 +52,6 @@ public interface MongoDatabaseManager {
      *
      * @return the database identified by this key
      */
-    DB getDb(String key);
+    MongoDatabase getDatabase(String key);
 }
+

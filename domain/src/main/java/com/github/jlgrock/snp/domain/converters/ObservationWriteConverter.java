@@ -1,11 +1,9 @@
 package com.github.jlgrock.snp.domain.converters;
 
 import com.github.jlgrock.snp.apis.converters.WriteConverter;
-import com.github.jlgrock.snp.domain.data.ObservationTags;
-import com.github.jlgrock.snp.domain.types.Observation;
-import com.mongodb.BasicDBObject;
-import com.mongodb.DBObject;
-
+import com.github.jlgrock.snp.core.data.ObservationTags;
+import com.github.jlgrock.snp.core.domain.Observation;
+import org.bson.Document;
 import org.jvnet.hk2.annotations.Service;
 
 import javax.inject.Named;
@@ -15,11 +13,11 @@ import javax.inject.Named;
  */
 @Service
 @Named
-public class ObservationWriteConverter  implements WriteConverter<Observation, DBObject> {
+public class ObservationWriteConverter  implements WriteConverter<Observation, Document> {
 
     @Override
-    public DBObject convert(final Observation source) {
-        DBObject dbo = new BasicDBObject();
+    public Document convert(final Observation source) {
+        Document dbo = new Document();
         dbo.put(ObservationTags.ID_TAG, source.getIdentifier());
         dbo.put(ObservationTags.NAME_TYPE_TAG, null);
         dbo.put(ObservationTags.NAME_TAG, source.getName().getValue());

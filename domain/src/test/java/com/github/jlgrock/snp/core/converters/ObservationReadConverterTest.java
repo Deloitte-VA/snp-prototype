@@ -1,18 +1,15 @@
 package com.github.jlgrock.snp.core.converters;
 
-import com.github.jlgrock.snp.domain.converters.ObservationReadConverter;
-import com.github.jlgrock.snp.domain.data.ObservationTags;
-import com.github.jlgrock.snp.domain.types.Observation;
-import com.github.jlgrock.snp.domain.types.primitives.PrimitiveType;
-import com.mongodb.DBObject;
-
+import com.github.jlgrock.snp.core.data.ObservationTags;
+import com.github.jlgrock.snp.core.domain.Observation;
+import com.github.jlgrock.snp.core.domain.primitives.PrimitiveType;
+import org.bson.Document;
 import org.testng.annotations.Test;
 
 import java.time.Instant;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import static org.testng.Assert.assertEquals;
 
 public class ObservationReadConverterTest {
     /**
@@ -22,7 +19,7 @@ public class ObservationReadConverterTest {
     public void testConvert() {
         Instant date = Instant.now();
 
-        DBObject dbObj = mock(DBObject.class);
+        Document dbObj = mock(Document.class);
         when(dbObj.get(ObservationTags.ID_TAG)).thenReturn("stringId");
         when(dbObj.get(ObservationTags.NAME_TAG)).thenReturn("asdf");
         when(dbObj.get(ObservationTags.NAME_TYPE_TAG)).thenReturn(PrimitiveType.STRING.getId());

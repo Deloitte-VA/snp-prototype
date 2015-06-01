@@ -1,10 +1,9 @@
 package com.github.jlgrock.snp.domain.converters;
 
 import com.github.jlgrock.snp.apis.converters.ReadConverter;
-import com.github.jlgrock.snp.domain.data.ClassifiedPceTags;
-import com.github.jlgrock.snp.domain.types.ClassifiedPce;
-import com.mongodb.DBObject;
-
+import com.github.jlgrock.snp.core.data.ClassifiedPceTags;
+import com.github.jlgrock.snp.core.domain.ClassifiedPce;
+import org.bson.Document;
 import org.jvnet.hk2.annotations.Service;
 
 import javax.inject.Named;
@@ -14,9 +13,9 @@ import javax.inject.Named;
  */
 @Service
 @Named
-public class ClassifiedPceReadConverter extends AbstractReadConverter implements ReadConverter<DBObject, ClassifiedPce> {
+public class ClassifiedPceReadConverter extends AbstractReadConverter implements ReadConverter<Document, ClassifiedPce> {
     @Override
-    public ClassifiedPce convert(final DBObject source) {
+    public ClassifiedPce convert(final Document source) {
         ClassifiedPce classifiedPce = new ClassifiedPce();
         classifiedPce.setId(parseLong(source, ClassifiedPceTags.ID_TAG));
         classifiedPce.setDesc(parseString(source, ClassifiedPceTags.DESCRIPTION_TAG));

@@ -1,13 +1,11 @@
 package com.github.jlgrock.snp.core.converters;
 
-import com.github.jlgrock.snp.domain.converters.ObservationWriteConverter;
-import com.github.jlgrock.snp.domain.data.ObservationTags;
-import com.github.jlgrock.snp.domain.types.Observation;
-import com.github.jlgrock.snp.domain.types.primitives.BooleanPrimitive;
-import com.github.jlgrock.snp.domain.types.primitives.PrimitiveType;
-import com.github.jlgrock.snp.domain.types.primitives.StringPrimitive;
-import com.mongodb.DBObject;
-
+import com.github.jlgrock.snp.core.data.ObservationTags;
+import com.github.jlgrock.snp.core.domain.Observation;
+import com.github.jlgrock.snp.core.domain.primitives.BooleanPrimitive;
+import com.github.jlgrock.snp.core.domain.primitives.PrimitiveType;
+import com.github.jlgrock.snp.core.domain.primitives.StringPrimitive;
+import org.bson.Document;
 import org.testng.annotations.Test;
 
 import java.time.Instant;
@@ -40,7 +38,7 @@ public class ObservationWriteConverterTest {
         when(observation.getSubject()).thenReturn("subject");
 
         ObservationWriteConverter observationWriteConverter = new ObservationWriteConverter();
-        DBObject dbObj = observationWriteConverter.convert(observation);
+        Document dbObj = observationWriteConverter.convert(observation);
 
         assertEquals("stringId", dbObj.get(ObservationTags.ID_TAG));
         assertEquals("asdf", dbObj.get(ObservationTags.NAME_TAG));

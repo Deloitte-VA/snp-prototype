@@ -1,12 +1,10 @@
 package com.github.jlgrock.snp.core.converters;
 
-import com.github.jlgrock.snp.domain.converters.PatientWriteConverter;
-import com.github.jlgrock.snp.domain.data.PatientTags;
-import com.github.jlgrock.snp.domain.types.Gender;
-import com.github.jlgrock.snp.domain.types.Patient;
-import com.github.jlgrock.snp.domain.types.Race;
-import com.mongodb.DBObject;
-
+import com.github.jlgrock.snp.core.data.PatientTags;
+import com.github.jlgrock.snp.core.domain.Gender;
+import com.github.jlgrock.snp.core.domain.Patient;
+import com.github.jlgrock.snp.core.domain.Race;
+import org.bson.Document;
 import org.testng.annotations.Test;
 
 import java.time.LocalDate;
@@ -33,7 +31,7 @@ public class PatientWriteConverterTest {
         when(patient.getRace()).thenReturn(Race.AMERICAN_INDIAN);
 
         PatientWriteConverter patientWriteConverter = new PatientWriteConverter();
-        DBObject dbObj = patientWriteConverter.convert(patient);
+        Document dbObj = patientWriteConverter.convert(patient);
 
         assertEquals((Long) 123l, dbObj.get(PatientTags.ID_TAG));
         assertEquals("Jerry", dbObj.get(PatientTags.FIRST_NAME_TAG));
