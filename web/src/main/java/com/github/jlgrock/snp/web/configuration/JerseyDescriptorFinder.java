@@ -4,6 +4,7 @@ import org.glassfish.hk2.utilities.ClasspathDescriptorFileFinder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.servlet.ServletContext;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -21,6 +22,8 @@ import java.util.stream.Collectors;
 public class JerseyDescriptorFinder extends ClasspathDescriptorFileFinder {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(JerseyDescriptorFinder.class);
+
+    final ServletContext servletContext;
 
     private class UrlMapResult {
         final InputStream inputStream;
@@ -40,18 +43,26 @@ public class JerseyDescriptorFinder extends ClasspathDescriptorFileFinder {
         }
     }
 
+    JerseyDescriptorFinder(final ServletContext servletContextIn) {
+        servletContext = servletContextIn;
+    }
+
     @Override
     public List<InputStream> findDescriptorFiles() throws IOException {
         final Enumeration<URL> metaInfUrls = this.getClass().getClassLoader()
                 .getResources("META-INF/hk2-locator/default");
-        final Enumeration<URL> webInfUrls = this.getClass().getClassLoader()
-                .getResources("WEB-INF/hk2-locator/default");
-
         Collection<URL> urls = new ArrayList<>();
         urls.addAll(Collections.list(metaInfUrls));
-        urls.addAll(Collections.list(webInfUrls));
 
-        LOGGER.debug("locators: {}", Arrays.toString(urls.toArray()));
+        URL webInfUrl = null;
+        if (servletContext != null) {
+            webInfUrl = servletContext.getResource("/WEB-INF/classes/hk2-locator/default");
+            urls.add(webInfUrl);
+        }
+
+
+        LOGGER.debug("meta-inf locators: {}", Arrays.toString(urls.toArray()));
+        LOGGER.debug("web-inf locator: {}", webInfUrl);
 
         // open the descriptor files
         List<UrlMapResult> mapResults = urls
