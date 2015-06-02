@@ -1,15 +1,14 @@
 package com.github.jlgrock.snp.domain.converters;
 
 import com.github.jlgrock.snp.apis.converters.Converter;
-import com.github.jlgrock.snp.core.data.EncounterTags;
-import com.github.jlgrock.snp.core.domain.Encounter;
-import com.github.jlgrock.snp.core.domain.Observation;
+import com.github.jlgrock.snp.domain.data.EncounterTags;
+import com.github.jlgrock.snp.domain.types.Encounter;
+import com.github.jlgrock.snp.domain.types.Observation;
 import org.bson.Document;
 import org.jvnet.hk2.annotations.Service;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;

@@ -1,16 +1,12 @@
 package com.github.jlgrock.snp.domain.data;
 
 import com.github.jlgrock.snp.apis.data.MongoRepository;
-import com.github.jlgrock.snp.core.domain.Gender;
-import com.github.jlgrock.snp.core.domain.Patient;
-import com.github.jlgrock.snp.core.domain.Race;
-
+import com.github.jlgrock.snp.domain.types.Gender;
+import com.github.jlgrock.snp.domain.types.Patient;
+import com.github.jlgrock.snp.domain.types.Race;
 import org.jvnet.hk2.annotations.Contract;
 
-import javax.inject.Named;
-
 import java.time.LocalDate;
-
 import java.util.List;
 
 /**

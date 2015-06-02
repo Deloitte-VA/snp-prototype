@@ -1,6 +1,6 @@
 package com.github.jlgrock.snp.domain.converters;
 
-import com.github.jlgrock.snp.core.data.EncounterTags;
+import com.github.jlgrock.snp.domain.data.EncounterTags;
 import org.bson.Document;
 
 import java.time.Instant;
@@ -16,8 +16,9 @@ public class AbstractReadConverter {
 
     /**
      * Parses the document and the tag and returns the value to which the tag is mapped
+     *
      * @param source document
-     * @param tag JSON key tags
+     * @param tag    JSON key tags
      * @return the value to which the tag is mapped
      */
     protected Long parseLong(final Document source, final String tag) {
@@ -30,8 +31,9 @@ public class AbstractReadConverter {
 
     /**
      * Parses the document and the tag and returns the value to which the tag is mapped
+     *
      * @param source document
-     * @param tag JSON key tags
+     * @param tag    JSON key tags
      * @return the value to which the tag is mapped
      */
     protected Integer parseInteger(final Document source, final String tag) {
@@ -44,8 +46,9 @@ public class AbstractReadConverter {
 
     /**
      * Parses the document and the tag and returns the value to which the tag is mapped
+     *
      * @param source document
-     * @param tag JSON key tags
+     * @param tag    JSON key tags
      * @return the value to which the tag is mapped
      */
     protected LocalDate parseLocalDate(final Document source, final String tag) {
@@ -58,8 +61,9 @@ public class AbstractReadConverter {
 
     /**
      * Parses the document and the tag and returns the value to which the tag is mapped
+     *
      * @param source document
-     * @param tag JSON key tags
+     * @param tag    JSON key tags
      * @return the value to which the tag is mapped
      */
     protected Instant parseInstant(final Document source, final String tag) {
@@ -72,8 +76,9 @@ public class AbstractReadConverter {
 
     /**
      * Parses the document and the tag and returns the value to which the tag is mapped
+     *
      * @param source document
-     * @param tag JSON key tags
+     * @param tag    JSON key tags
      * @return the value to which the tag is mapped
      */
     protected String parseString(final Document source, final String tag) {

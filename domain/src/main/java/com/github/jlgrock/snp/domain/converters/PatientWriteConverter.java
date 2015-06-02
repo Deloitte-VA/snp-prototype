@@ -1,8 +1,8 @@
 package com.github.jlgrock.snp.domain.converters;
 
 import com.github.jlgrock.snp.apis.converters.WriteConverter;
-import com.github.jlgrock.snp.core.data.PatientTags;
-import com.github.jlgrock.snp.core.domain.Patient;
+import com.github.jlgrock.snp.domain.data.PatientTags;
+import com.github.jlgrock.snp.domain.types.Patient;
 import org.bson.Document;
 import org.jvnet.hk2.annotations.Service;
 

@@ -1,9 +1,9 @@
 package com.github.jlgrock.snp.domain.converters;
 
 import com.github.jlgrock.snp.apis.converters.ReadConverter;
-import com.github.jlgrock.snp.core.data.ObservationTags;
-import com.github.jlgrock.snp.core.domain.Observation;
-import com.github.jlgrock.snp.core.domain.primitives.SimplePrimitive;
+import com.github.jlgrock.snp.domain.data.ObservationTags;
+import com.github.jlgrock.snp.domain.types.Observation;
+import com.github.jlgrock.snp.domain.types.primitives.SimplePrimitive;
 import org.bson.Document;
 import org.jvnet.hk2.annotations.Service;
 

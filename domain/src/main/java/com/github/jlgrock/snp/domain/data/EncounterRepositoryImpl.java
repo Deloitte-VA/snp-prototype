@@ -1,11 +1,10 @@
 package com.github.jlgrock.snp.domain.data;
 
 import com.github.jlgrock.snp.apis.connection.MongoDbFactory;
-import com.github.jlgrock.snp.core.converters.EncounterReadConverter;
-import com.github.jlgrock.snp.core.converters.EncounterWriteConverter;
-import com.github.jlgrock.snp.core.domain.Encounter;
 
-
+import com.github.jlgrock.snp.domain.converters.EncounterReadConverter;
+import com.github.jlgrock.snp.domain.converters.EncounterWriteConverter;
+import com.github.jlgrock.snp.domain.types.Encounter;
 import org.bson.Document;
 import org.jvnet.hk2.annotations.Service;
 import org.slf4j.Logger;

@@ -1,9 +1,9 @@
 package com.github.jlgrock.snp.domain.data;
 
 import com.github.jlgrock.snp.apis.connection.MongoDbFactory;
-import com.github.jlgrock.snp.core.converters.ClassifiedPceReadConverter;
-import com.github.jlgrock.snp.core.converters.ClassifiedPceWriteConverter;
-import com.github.jlgrock.snp.core.domain.ClassifiedPce;
+import com.github.jlgrock.snp.domain.converters.ClassifiedPceReadConverter;
+import com.github.jlgrock.snp.domain.converters.ClassifiedPceWriteConverter;
+import com.github.jlgrock.snp.domain.types.ClassifiedPce;
 import org.bson.Document;
 import org.jvnet.hk2.annotations.Service;
 

@@ -1,8 +1,8 @@
 package com.github.jlgrock.snp.domain.converters;
 
 import com.github.jlgrock.snp.apis.converters.ReadConverter;
-import com.github.jlgrock.snp.core.data.ClassifiedPceTags;
-import com.github.jlgrock.snp.core.domain.ClassifiedPce;
+import com.github.jlgrock.snp.domain.data.ClassifiedPceTags;
+import com.github.jlgrock.snp.domain.types.ClassifiedPce;
 import org.bson.Document;
 import org.jvnet.hk2.annotations.Service;
 

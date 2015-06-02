@@ -1,15 +1,14 @@
 package com.github.jlgrock.snp.domain.converters;
 
 import com.github.jlgrock.snp.apis.converters.ReadConverter;
-import com.github.jlgrock.snp.core.data.PatientTags;
-import com.github.jlgrock.snp.core.domain.Gender;
-import com.github.jlgrock.snp.core.domain.Patient;
-import com.github.jlgrock.snp.core.domain.Race;
+import com.github.jlgrock.snp.domain.data.PatientTags;
+import com.github.jlgrock.snp.domain.types.Gender;
+import com.github.jlgrock.snp.domain.types.Patient;
+import com.github.jlgrock.snp.domain.types.Race;
 import org.bson.Document;
 import org.jvnet.hk2.annotations.Service;
 
 import javax.inject.Named;
-
 import java.time.LocalDate;
 
 /**

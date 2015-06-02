@@ -1,22 +1,19 @@
 package com.github.jlgrock.snp.domain.data;
 
 import com.github.jlgrock.snp.apis.connection.MongoDbFactory;
-import com.github.jlgrock.snp.core.converters.PatientReadConverter;
-import com.github.jlgrock.snp.core.converters.PatientWriteConverter;
-import com.github.jlgrock.snp.core.domain.Gender;
-import com.github.jlgrock.snp.core.domain.Patient;
-import com.github.jlgrock.snp.core.domain.Race;
-
+import com.github.jlgrock.snp.domain.converters.PatientReadConverter;
+import com.github.jlgrock.snp.domain.converters.PatientWriteConverter;
+import com.github.jlgrock.snp.domain.types.Gender;
+import com.github.jlgrock.snp.domain.types.Patient;
+import com.github.jlgrock.snp.domain.types.Race;
 import org.bson.Document;
 import org.jvnet.hk2.annotations.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
-
 import java.util.List;
 
 /**
