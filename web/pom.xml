@@ -164,11 +164,11 @@
         </dependency>
         -->
 
-        <dependency>
-            <groupId>gov.vha.isaac.newtons-cradle.modules</groupId>
-            <artifactId>newtons-cradle-extension</artifactId>
-            <version>1.18-SNAPSHOT</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>gov.vha.isaac.newtons-cradle.modules</groupId>-->
+            <!--<artifactId>newtons-cradle-extension</artifactId>-->
+            <!--<version>1.18-SNAPSHOT</version>-->
+        <!--</dependency>-->
 	</dependencies>
 
 	<build>
