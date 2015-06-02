@@ -2,31 +2,28 @@ package com.github.jlgrock.snp.core.domain.fhir;
 
 import com.github.jlgrock.snp.apis.exceptions.ClassifierException;
 import com.github.jlgrock.snp.apis.exceptions.UnmarshallingException;
-import com.github.jlgrock.snp.apis.web.MediaTypeService;
 import com.github.jlgrock.snp.apis.web.ProcessingService;
 import com.github.jlgrock.snp.core.domain.fhir.marshallers.FhirMarshallerService;
 import com.github.jlgrock.snp.core.domain.fhir.processors.FhirElementProcessorFactory;
-import com.github.jlgrock.snp.core.domain.fhir.processors.FhirElementProcessorFactoryImpl;
 import com.github.jlgrock.snp.core.domain.fhir.processors.FhirElementProcessorService;
 import org.jvnet.hk2.annotations.Service;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 
 /**
  *
  */
 @Service
 public class FhirProcessingService implements ProcessingService {
-    private MediaTypeService mediaType;
+    private FhirMediaTypeService fhirMediaTypeService;
     private FhirElementProcessorFactory fhirElementProcessorFactory;
     private FhirMarshallerService fhirMarshallerService;
 
     @Inject
-    public FhirProcessingService(@Named("FhirMediaTypeService") final MediaTypeService mediaTypeIn,
+    public FhirProcessingService(final FhirMediaTypeService fhirMediaTypeServiceIn,
                           final FhirMarshallerService fhirMarshallerServiceIn,
-                          final FhirElementProcessorFactoryImpl fhirElementProcessorFactoryIn) {
-        mediaType = mediaTypeIn;
+                          final FhirElementProcessorFactory fhirElementProcessorFactoryIn) {
+        fhirMediaTypeService = fhirMediaTypeServiceIn;
         fhirMarshallerService = fhirMarshallerServiceIn;
         fhirElementProcessorFactory = fhirElementProcessorFactoryIn;
     }
@@ -52,7 +49,7 @@ public class FhirProcessingService implements ProcessingService {
 
     @Override
     public java.lang.String getMediaTypeString() {
-        return mediaType.getMediaTypeString();
+        return fhirMediaTypeService.getMediaTypeString();
     }
 
 }
