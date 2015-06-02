@@ -1,17 +1,12 @@
 package com.github.jlgrock.snp.core.domain.fhir;
 
-import com.github.jlgrock.snp.apis.web.MediaTypeService;
 import org.jvnet.hk2.annotations.Service;
-
-import javax.inject.Named;
-import java.lang.String;
 
 /**
  * The media types related to Fhir
  */
 @Service
-@Named
-public class FhirMediaTypeServiceImpl implements MediaTypeService {
+public class FhirMediaTypeServiceImpl implements FhirMediaTypeService {
     private static final java.lang.String MIME_APPLICATION = "application";
 
     private static final java.lang.String MIME_SPECIFIC_XML = "fhir+xml";
