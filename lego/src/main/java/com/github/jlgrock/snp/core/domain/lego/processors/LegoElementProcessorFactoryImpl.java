@@ -33,8 +33,9 @@ public class LegoElementProcessorFactoryImpl implements LegoElementProcessorFact
     private final ClassifiedPceStore classPceStore;
 
     @Inject
-    LegoElementProcessorFactoryImpl(final TerminologyStoreDI terminologyStoreDIIn, final ClassifiedPceStore classPceStoreIn) {
-        terminologyStoreDI = terminologyStoreDIIn;
+    //LegoElementProcessorFactoryImpl(final TerminologyStoreDI terminologyStoreDIIn, final ClassifiedPceStore classPceStoreIn) {
+    LegoElementProcessorFactoryImpl(final ClassifiedPceStore classPceStoreIn) {
+        terminologyStoreDI = null;
         classPceStore = classPceStoreIn;
     }
 

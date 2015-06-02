@@ -1,9 +1,6 @@
 package com.github.jlgrock.snp.core.domain.lego;
 
-import com.github.jlgrock.snp.apis.web.MediaTypeService;
 import org.jvnet.hk2.annotations.Service;
-
-import javax.inject.Named;
 
 /**
  * The media types related to LEGO
