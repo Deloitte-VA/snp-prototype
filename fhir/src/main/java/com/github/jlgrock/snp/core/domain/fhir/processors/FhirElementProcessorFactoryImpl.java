@@ -61,8 +61,9 @@ public class FhirElementProcessorFactoryImpl implements FhirElementProcessorFact
     final TerminologyStoreDI terminologyStoreDI;
 
     @Inject
-    FhirElementProcessorFactoryImpl(final TerminologyStoreDI terminologyStoreDIIn) {
-        terminologyStoreDI = terminologyStoreDIIn;
+//    FhirElementProcessorFactoryImpl(final TerminologyStoreDI terminologyStoreDIIn) {
+    FhirElementProcessorFactoryImpl() {
+        terminologyStoreDI = null;
     }
 
     @Override

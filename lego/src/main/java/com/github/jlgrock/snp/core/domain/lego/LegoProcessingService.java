@@ -4,9 +4,9 @@ import com.github.jlgrock.snp.apis.exceptions.ClassifierException;
 import com.github.jlgrock.snp.apis.exceptions.UnmarshallingException;
 import com.github.jlgrock.snp.apis.web.MediaTypeService;
 import com.github.jlgrock.snp.apis.web.ProcessingService;
+import com.github.jlgrock.snp.core.domain.lego.marhsallers.LegoMarshallerService;
 import com.github.jlgrock.snp.core.domain.lego.processors.LegoElementProcessorFactory;
 import com.github.jlgrock.snp.core.domain.lego.processors.LegoElementProcessorService;
-import com.github.jlgrock.snp.core.domain.lego.marhsallers.LegoMarshallerService;
 import org.jvnet.hk2.annotations.Service;
 
 import javax.inject.Inject;
