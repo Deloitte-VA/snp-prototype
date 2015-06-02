@@ -3,9 +3,7 @@ package com.github.jlgrock.snp.domain.converters;
 import com.github.jlgrock.snp.apis.converters.WriteConverter;
 import com.github.jlgrock.snp.domain.data.ClassifiedPceTags;
 import com.github.jlgrock.snp.domain.types.ClassifiedPce;
-import com.mongodb.BasicDBObject;
-import com.mongodb.DBObject;
-
+import org.bson.Document;
 import org.jvnet.hk2.annotations.Service;
 
 import javax.inject.Named;
@@ -15,10 +13,10 @@ import javax.inject.Named;
  */
 @Service
 @Named
-public class ClassifiedAssertionWriteConverter implements WriteConverter<ClassifiedPce, DBObject> {
+public class ClassifiedPceWriteConverter implements WriteConverter<ClassifiedPce, Document> {
     @Override
-    public DBObject convert(final ClassifiedPce source) {
-        DBObject dbo = new BasicDBObject();
+    public Document convert(final ClassifiedPce source) {
+        Document dbo = new Document();
         dbo.put(ClassifiedPceTags.ID_TAG, source.getId());
         dbo.put(ClassifiedPceTags.DESCRIPTION_TAG, source.getDesc());
         return dbo;

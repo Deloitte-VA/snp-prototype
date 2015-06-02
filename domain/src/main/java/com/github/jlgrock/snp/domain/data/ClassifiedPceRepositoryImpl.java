@@ -1,48 +1,48 @@
 package com.github.jlgrock.snp.domain.data;
 
 import com.github.jlgrock.snp.apis.connection.MongoDbFactory;
-import com.github.jlgrock.snp.domain.converters.ClassifiedAssertionWriteConverter;
 import com.github.jlgrock.snp.domain.converters.ClassifiedPceReadConverter;
+import com.github.jlgrock.snp.domain.converters.ClassifiedPceWriteConverter;
 import com.github.jlgrock.snp.domain.types.ClassifiedPce;
-import com.mongodb.DBObject;
-
+import org.bson.Document;
 import org.jvnet.hk2.annotations.Service;
 
 import javax.inject.Inject;
 
 /**
- * This class executes queries against the ClassifiedAssertion 
+ * This class executes queries against the ClassifiedPce 
  * Collection within MongoDB.
  */
-@Service(name="classifiedPceRepository")
-public class ClassifiedPceRepositoryImpl extends AbstractRepositoryImpl<ClassifiedPce, Long> implements ClassifiedPceRepository {
+@Service
+public class ClassifiedPceRepositoryImpl extends AbstractRepositoryImpl<ClassifiedPce, Long>
+		implements ClassifiedPceRepository {
 
-	private final ClassifiedPceReadConverter classifiedAssertionReadConverter;
+	private final ClassifiedPceReadConverter classifiedPceReadConverter;
 
-	private final ClassifiedAssertionWriteConverter classifiedAssertionWriteConverter;
+	private final ClassifiedPceWriteConverter classifiedPceWriteConverter;
 
 	/**
 	 * @param mongoDbFactoryIn MongoDbFactory
-	 * @param classifiedAssertionReadConverterIn ClassifiedAssertionReadConverter
-	 * @param classifiedAssertionWriteConverterIn ClassifiedAssertionWriteConverter
+	 * @param classifiedPceReadConverterIn ClassifiedPceReadConverter
+	 * @param classifiedPceWriteConverterIn ClassifiedPceWriteConverter
 	 */
 	@Inject
     public ClassifiedPceRepositoryImpl(final MongoDbFactory mongoDbFactoryIn,
-									   final ClassifiedPceReadConverter classifiedAssertionReadConverterIn,
-									   final ClassifiedAssertionWriteConverter classifiedAssertionWriteConverterIn) {
+									   final ClassifiedPceReadConverter classifiedPceReadConverterIn,
+									   final ClassifiedPceWriteConverter classifiedPceWriteConverterIn) {
         super(mongoDbFactoryIn);
-		classifiedAssertionReadConverter = classifiedAssertionReadConverterIn;
-		classifiedAssertionWriteConverter = classifiedAssertionWriteConverterIn;
+		classifiedPceReadConverter = classifiedPceReadConverterIn;
+		classifiedPceWriteConverter = classifiedPceWriteConverterIn;
     }
 
 	@Override
-	protected ClassifiedPce convertToDomainObject(final DBObject dbObjectin) {
-		return classifiedAssertionReadConverter.convert(dbObjectin);
+	protected ClassifiedPce convertToDomainObject(final Document dbObjectin) {
+		return classifiedPceReadConverter.convert(dbObjectin);
 	}
 
 	@Override
-	protected DBObject convertToDBObject(final ClassifiedPce s) {
-		return classifiedAssertionWriteConverter.convert(s);
+	protected Document convertToDBObject(final ClassifiedPce s) {
+		return classifiedPceWriteConverter.convert(s);
 	}
 
     @Override

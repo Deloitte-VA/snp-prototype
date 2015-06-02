@@ -15,3 +15,4 @@ public interface WebConfiguration {
      */
     Path fileLocation();
 }
+

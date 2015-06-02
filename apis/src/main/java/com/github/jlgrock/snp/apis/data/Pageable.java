@@ -48,3 +48,4 @@ public interface Pageable {
      */
     boolean hasPrevious();
 }
+

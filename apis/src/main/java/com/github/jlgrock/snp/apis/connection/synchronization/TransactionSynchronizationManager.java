@@ -14,3 +14,4 @@ public interface TransactionSynchronizationManager {
     boolean isActive();
 
 }
+
