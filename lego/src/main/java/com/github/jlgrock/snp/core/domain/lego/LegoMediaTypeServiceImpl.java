@@ -9,8 +9,7 @@ import javax.inject.Named;
  * The media types related to LEGO
  */
 @Service
-@Named
-public class LegoMediaTypeServiceImpl implements MediaTypeService {
+public class LegoMediaTypeServiceImpl implements LegoMediaTypeService {
     private static final String MIME_APPLICATION = "application";
 
     private static final String MIME_SPECIFIC_XML = "lego+xml";
