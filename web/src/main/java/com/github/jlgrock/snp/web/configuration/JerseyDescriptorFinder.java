@@ -54,15 +54,19 @@ public class JerseyDescriptorFinder extends ClasspathDescriptorFileFinder {
         Collection<URL> urls = new ArrayList<>();
         urls.addAll(Collections.list(metaInfUrls));
 
-        URL webInfUrl = null;
+        URL webInfUrl;
         if (servletContext != null) {
             webInfUrl = servletContext.getResource("/WEB-INF/classes/hk2-locator/default");
-            urls.add(webInfUrl);
+
+            LOGGER.debug("web-inf locator: {}", webInfUrl);
+
+            if (webInfUrl != null) {
+                urls.add(webInfUrl);
+            }
         }
 
 
         LOGGER.debug("meta-inf locators: {}", Arrays.toString(urls.toArray()));
-        LOGGER.debug("web-inf locator: {}", webInfUrl);
 
         // open the descriptor files
         List<UrlMapResult> mapResults = urls

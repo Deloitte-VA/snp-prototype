@@ -8,17 +8,19 @@ import gov.vha.isaac.ochre.api.LookupService;
 import org.ihtsdo.otf.tcc.api.store.TerminologySnapshotDI;
 import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
 import org.ihtsdo.otf.tcc.api.uuid.UuidT3Generator;
+import org.jvnet.hk2.annotations.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.inject.Singleton;
 import java.io.IOException;
 import java.util.UUID;
 
 /**
  *
  */
-//@Service
-//@Singleton
+@Service
+@Singleton
 public class LogicGraphClassifierImpl implements LogicGraphClassifier {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(LogicGraphClassifierImpl.class);
