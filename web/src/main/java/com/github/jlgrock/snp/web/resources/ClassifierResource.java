@@ -83,9 +83,7 @@ public class ClassifierResource {
 				}
 			}
 			
-			if (filePart.getContentDisposition() == null 
-					|| filePart.getContentDisposition().getSize() <= 0
-					|| filePart.getEntity() == null) {
+			if (filePart.getEntity() == null) {
 				return Response.status(Response.Status.BAD_REQUEST).build();
 			}
 			LOGGER.debug("File part media type: {}", filePart.getMediaType());
