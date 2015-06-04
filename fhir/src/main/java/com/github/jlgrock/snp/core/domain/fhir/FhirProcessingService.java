@@ -46,7 +46,7 @@ public class FhirProcessingService implements ProcessingService {
             } catch (ClassifierException ce) {
                 //TODO
             }
-            legoElementClassifierService.classify();
+            legoElementClassifierService.process();
         }
     }
 

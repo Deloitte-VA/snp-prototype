@@ -2,7 +2,9 @@ package com.github.jlgrock.snp.core.domain.fhir.processors;
 
 import com.github.jlgrock.snp.core.domain.fhir.logicgraph.FhirEncounterGraphBuilder;
 import com.github.jlgrock.snp.core.domain.fhir.model.Encounter;
+
 import gov.vha.isaac.logic.LogicGraph;
+
 import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
 
 /**
@@ -21,6 +23,12 @@ public class EncounterProcessor extends AbstractFhirProcessor {
     protected LogicGraph getLogicGraph() {
         FhirEncounterGraphBuilder fhirEncounterGraphBuilder = new FhirEncounterGraphBuilder(getTerminologyStoreDI(), encounter);
         fhirEncounterGraphBuilder.create();
-        return (LogicGraph) fhirEncounterGraphBuilder;
+        return fhirEncounterGraphBuilder;
     }
+
+	@Override
+	public void process() {
+		throw new UnsupportedOperationException();
+		
+	}
 }
