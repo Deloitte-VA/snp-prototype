@@ -5,7 +5,6 @@ import org.jvnet.hk2.annotations.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.inject.Named;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
@@ -16,7 +15,6 @@ import java.io.StringReader;
  * Unmarshalls the LEGO XML documents into an object
  */
 @Service
-@Named
 public class LegoMarshallerServiceImpl implements LegoMarshallerService {
     private static final Logger LOGGER = LoggerFactory.getLogger(LegoMarshallerServiceImpl.class);
 

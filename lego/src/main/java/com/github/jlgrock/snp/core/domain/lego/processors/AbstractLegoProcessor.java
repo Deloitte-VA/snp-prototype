@@ -24,12 +24,12 @@ import java.util.List;
 public abstract class AbstractLegoProcessor implements LegoElementProcessorService {
 
     private final TerminologyStoreDI terminologyStoreDI;
-    private final ClassifiedPceStore classPceStore;
+    private final ClassifiedPceStore classifiedPceStore;
 
     protected AbstractLegoProcessor(final TerminologyStoreDI terminologyStoreDIIn,
                                     final ClassifiedPceStore classPceStoreIn) {
         terminologyStoreDI = terminologyStoreDIIn;
-        classPceStore = classPceStoreIn;
+        classifiedPceStore = classPceStoreIn;
     }
 
     protected TerminologyStoreDI getTerminologyStoreDI() {
@@ -77,7 +77,7 @@ public abstract class AbstractLegoProcessor implements LegoElementProcessorServi
         ClassifiedPce cPce = new ClassifiedPce();
 
         //TODO store concept ID, and logic graph expression
-        classPceStore.save(cPce);
+        classifiedPceStore.save(cPce);
 
 
     }

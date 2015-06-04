@@ -66,9 +66,10 @@ public class FhirElementProcessorFactoryImpl implements FhirElementProcessorFact
     final PatientRepository patientRepository;
 
     @Inject
-    FhirElementProcessorFactoryImpl(final TerminologyStoreDI terminologyStoreDIIn,
+    FhirElementProcessorFactoryImpl(/*final TerminologyStoreDI terminologyStoreDIIn,*/
     		final PatientWriteConverter patientWriteConverterIn, final PatientRepository patientRepositoryIn) {
-        terminologyStoreDI = terminologyStoreDIIn;
+//        terminologyStoreDI = terminologyStoreDIIn;
+    	terminologyStoreDI = null;
         patientWriteConverter = patientWriteConverterIn;
         patientRepository = patientRepositoryIn;
     }

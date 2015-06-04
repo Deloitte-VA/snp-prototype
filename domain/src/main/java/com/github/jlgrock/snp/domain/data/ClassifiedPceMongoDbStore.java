@@ -2,6 +2,7 @@ package com.github.jlgrock.snp.domain.data;
 
 import com.github.jlgrock.snp.domain.types.ClassifiedPce;
 import com.github.jlgrock.snp.domain.types.Patient;
+import org.jvnet.hk2.annotations.Service;
 
 import javax.inject.Inject;
 
@@ -10,6 +11,7 @@ import javax.inject.Inject;
  * with a classifier ID to the MongoDB
  *
  */
+@Service
 public class ClassifiedPceMongoDbStore implements ClassifiedPceStore {
 	private final ClassifiedPceRepository classifiedPceRepository;
 	private final PatientRepository patientRepository;

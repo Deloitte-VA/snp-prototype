@@ -2,7 +2,6 @@ package com.github.jlgrock.snp.core.domain.lego;
 
 import com.github.jlgrock.snp.apis.exceptions.ClassifierException;
 import com.github.jlgrock.snp.apis.exceptions.UnmarshallingException;
-import com.github.jlgrock.snp.apis.web.MediaTypeService;
 import com.github.jlgrock.snp.apis.web.ProcessingService;
 import com.github.jlgrock.snp.core.domain.lego.marhsallers.LegoMarshallerService;
 import com.github.jlgrock.snp.core.domain.lego.processors.LegoElementProcessorFactory;
@@ -10,7 +9,6 @@ import com.github.jlgrock.snp.core.domain.lego.processors.LegoElementProcessorSe
 import org.jvnet.hk2.annotations.Service;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 
 /**
  *
@@ -18,15 +16,15 @@ import javax.inject.Named;
 @Service
 public class LegoProcessingService implements ProcessingService {
 
-    private MediaTypeService mediaType;
+    private LegoMediaTypeService legoMediaType;
     private LegoMarshallerService legoMarshallerService;
     private LegoElementProcessorFactory legoElementProcessorFactory;
 
     @Inject
-    public LegoProcessingService(@Named("LegoMediaTypeService") final MediaTypeService mediaTypeIn,
+    public LegoProcessingService(final LegoMediaTypeService legoMediaTypeIn,
                                  final LegoMarshallerService legoMarshallerServiceIn,
                                  final LegoElementProcessorFactory legoElementProcessorFactoryIn) {
-        mediaType = mediaTypeIn;
+        legoMediaType = legoMediaTypeIn;
         legoMarshallerService = legoMarshallerServiceIn;
         legoElementProcessorFactory = legoElementProcessorFactoryIn;
     }
@@ -52,6 +50,6 @@ public class LegoProcessingService implements ProcessingService {
 
     @Override
     public String getMediaTypeString() {
-        return mediaType.getMediaTypeString();
+        return legoMediaType.getMediaTypeString();
     }
 }
