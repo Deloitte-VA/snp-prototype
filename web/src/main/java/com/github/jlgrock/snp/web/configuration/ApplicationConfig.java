@@ -1,6 +1,6 @@
 package com.github.jlgrock.snp.web.configuration;
 
-import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
+import com.github.jlgrock.snp.apis.classifier.LogicClassifierStore;
 import io.dropwizard.jersey.jackson.JacksonMessageBodyProvider;
 import io.dropwizard.jersey.jackson.JsonProcessingExceptionMapper;
 import org.glassfish.hk2.api.ServiceLocator;
@@ -39,7 +39,7 @@ public class ApplicationConfig extends ResourceConfig {
         new JerseyAutoScan(serviceLocator, context).scan();
 
         // preload the LogicGraphClassifier to bootstrap the database
-        serviceLocator.getService(LogicGraphClassifier.class);
+        LogicClassifierStore logicClassifierStore = serviceLocator.getService(LogicClassifierStore.class);
 
         // Register Feature allowing for Multipart file uploads
         register(MultiPartFeature.class);

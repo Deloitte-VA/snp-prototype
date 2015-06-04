@@ -34,7 +34,7 @@ public class ClassifiedPceMongoDbStore implements ClassifiedPceStore {
 		Patient patient = patientRepository.findOneById(patientId);
 		if(patient != null) {
 			classifiedPceRepository.save(classifiedAssertion);
-		}		
+		}
 	}
 	
 	@Override
