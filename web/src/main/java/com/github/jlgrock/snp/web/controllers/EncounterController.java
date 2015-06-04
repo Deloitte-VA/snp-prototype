@@ -1,7 +1,7 @@
 package com.github.jlgrock.snp.web.controllers;
 
-import com.github.jlgrock.snp.core.data.EncounterRepository;
-import com.github.jlgrock.snp.core.domain.Encounter;
+import com.github.jlgrock.snp.domain.data.EncounterRepository;
+import com.github.jlgrock.snp.domain.types.Encounter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -14,8 +14,8 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.github.jlgrock.snp.core.data.EncounterRepository;
-import com.github.jlgrock.snp.core.domain.Encounter;
+import com.github.jlgrock.snp.domain.data.EncounterRepository;
+import com.github.jlgrock.snp.domain.types.Encounter;
 
 /**
  *

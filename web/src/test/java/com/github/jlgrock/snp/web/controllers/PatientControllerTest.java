@@ -1,10 +1,10 @@
 package com.github.jlgrock.snp.web.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.github.jlgrock.snp.core.data.PatientRepository;
-import com.github.jlgrock.snp.core.domain.Gender;
-import com.github.jlgrock.snp.core.domain.Patient;
-import com.github.jlgrock.snp.core.domain.Race;
+import com.github.jlgrock.snp.domain.data.PatientRepository;
+import com.github.jlgrock.snp.domain.types.Gender;
+import com.github.jlgrock.snp.domain.types.Patient;
+import com.github.jlgrock.snp.domain.types.Race;
 import com.github.jlgrock.snp.web.configuration.JacksonConfig;
 import org.glassfish.hk2.api.Factory;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
@@ -55,7 +55,8 @@ public class PatientControllerTest extends GenericControllerTest {
         });
     }
 
-    @BeforeMethod
+    @Override
+	@BeforeMethod
     public void setUpTests() throws Exception {
         // Required to make this work on TestNG
         MockitoAnnotations.initMocks(this);

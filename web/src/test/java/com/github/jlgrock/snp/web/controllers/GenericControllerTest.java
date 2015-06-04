@@ -4,6 +4,8 @@ import com.github.jlgrock.snp.web.configuration.ApplicationConfig;
 import com.github.jlgrock.snp.web.configuration.ApplicationObjectMapper;
 import com.github.jlgrock.snp.web.configuration.JacksonConfig;
 import io.dropwizard.jersey.jackson.JacksonMessageBodyProvider;
+import org.glassfish.hk2.api.ServiceLocator;
+import org.glassfish.hk2.utilities.ServiceLocatorUtilities;
 import org.glassfish.jersey.client.ClientConfig;
 import org.glassfish.jersey.media.multipart.MultiPartFeature;
 import org.glassfish.jersey.server.ResourceConfig;
@@ -47,7 +49,8 @@ public abstract class GenericControllerTest extends JerseyTestNg.ContainerPerCla
         enable(TestProperties.LOG_TRAFFIC);
         enable(TestProperties.DUMP_ENTITY);
 
-        ResourceConfig application = ApplicationConfig.createApp();
+        ServiceLocator serviceLocator = ServiceLocatorUtilities.createAndPopulateServiceLocator();
+        ResourceConfig application = ApplicationConfig.createApp(serviceLocator, null);
         registerInjectionPoints(application);
         return application;
     }

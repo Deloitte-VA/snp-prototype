@@ -17,6 +17,21 @@
 
     <dependencies>
         <dependency>
+            <groupId>${parent.groupId}</groupId>
+            <artifactId>apis</artifactId>
+        </dependency>
+
+        <dependency>
+	       <groupId>${parent.groupId}</groupId>
+	       <artifactId>domain</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>gov.vha.isaac</groupId>
+            <artifactId>logic</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>org.jvnet.jaxb2_commons</groupId>
             <artifactId>jaxb2-basics-runtime</artifactId>
             <version>${jaxb.basics.version}</version>
@@ -54,7 +69,7 @@
                     <schemaDirectory>src/main/xsd</schemaDirectory>
 
                     <!-- The package of your generated sources -->
-                    <generatePackage>com.github.jlgrock.snp.core.domain.lego</generatePackage>
+                    <generatePackage>com.github.jlgrock.snp.core.domain.lego.model</generatePackage>
 
                     <plugins>
                         <plugin>
