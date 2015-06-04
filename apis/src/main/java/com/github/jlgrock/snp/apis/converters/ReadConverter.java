@@ -10,3 +10,4 @@ import org.jvnet.hk2.annotations.Contract;
 @Contract
 public interface ReadConverter<T1, ID> extends Converter<T1, ID> {
 }
+

@@ -123,8 +123,12 @@ public class Sort implements Iterable<Sort.Order> {
 
     @Override
     public boolean equals(final Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+        	return true;
+        	}
+        if (o == null || getClass() != o.getClass()) {
+        	return false;
+        	};
 
         Sort that = (Sort) o;
 
@@ -331,8 +335,12 @@ public class Sort implements Iterable<Sort.Order> {
 
         @Override
         public boolean equals(final Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
+            if (this == o) {
+            	return true;
+            	}
+            if (o == null || getClass() != o.getClass()) {
+            	return false;
+            	}
 
             Order that = (Order) o;
 
@@ -353,3 +361,4 @@ public class Sort implements Iterable<Sort.Order> {
         }
     }
 }
+

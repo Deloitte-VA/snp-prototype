@@ -1,21 +1,5 @@
 package com.github.jlgrock.snp.web.configuration;
 
-import io.dropwizard.jersey.jackson.JacksonMessageBodyProvider;
-import io.dropwizard.jersey.jackson.JsonProcessingExceptionMapper;
-
-import javax.validation.Validation;
-import javax.ws.rs.ApplicationPath;
-
-import org.glassfish.hk2.api.ServiceLocator;
-import org.glassfish.hk2.api.TypeLiteral;
-import org.glassfish.hk2.utilities.binding.AbstractBinder;
-import org.glassfish.jersey.jackson.JacksonFeature;
-import org.glassfish.jersey.media.multipart.MultiPartFeature;
-import org.glassfish.jersey.server.ResourceConfig;
-import org.glassfish.jersey.server.ServerProperties;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.github.jlgrock.snp.apis.connection.MongoDatabaseManager;
 import com.github.jlgrock.snp.apis.connection.MongoDbFactory;
 import com.github.jlgrock.snp.apis.connection.configuration.MongoDbConfiguration;
@@ -28,8 +12,13 @@ import com.github.jlgrock.snp.core.classifier.PceClassifier;
 import com.github.jlgrock.snp.core.connection.SimpleMongoDbFactory;
 import com.github.jlgrock.snp.core.connection.SynchronizedMongoDatabaseManager;
 import com.github.jlgrock.snp.core.connection.synchronization.CollectionSynchronizationManager;
+<<<<<<< HEAD
 import com.github.jlgrock.snp.core.converters.ClassifiedPceReadConverter;
 import com.github.jlgrock.snp.core.converters.ClassifiedPceWriteConverter;
+=======
+import com.github.jlgrock.snp.core.converters.ClassifiedAssertionWriteConverter;
+import com.github.jlgrock.snp.core.converters.ClassifiedPceReadConverter;
+>>>>>>> master
 import com.github.jlgrock.snp.core.converters.EncounterReadConverter;
 import com.github.jlgrock.snp.core.converters.EncounterWriteConverter;
 import com.github.jlgrock.snp.core.converters.ObservationReadConverter;
@@ -53,6 +42,20 @@ import com.github.jlgrock.snp.web.controllers.MultipartFileUtilsImpl;
 import com.github.jlgrock.snp.web.services.PceClassifierService;
 import com.github.jlgrock.snp.web.services.PceClassifierServiceFhirImpl;
 import com.github.jlgrock.snp.web.services.PceClassifierServiceLegoImpl;
+import io.dropwizard.jersey.jackson.JacksonMessageBodyProvider;
+import io.dropwizard.jersey.jackson.JsonProcessingExceptionMapper;
+import org.glassfish.hk2.api.ServiceLocator;
+import org.glassfish.hk2.api.TypeLiteral;
+import org.glassfish.hk2.utilities.binding.AbstractBinder;
+import org.glassfish.jersey.jackson.JacksonFeature;
+import org.glassfish.jersey.media.multipart.MultiPartFeature;
+import org.glassfish.jersey.server.ResourceConfig;
+import org.glassfish.jersey.server.ServerProperties;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.validation.Validation;
+import javax.ws.rs.ApplicationPath;
 
 /**
  * The entry point for Jersey to start a web application in a Servlet 3.0 container.
@@ -146,5 +149,4 @@ public class ApplicationConfig extends ResourceConfig {
     }
 
 }
-
 

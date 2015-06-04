@@ -1,7 +1,7 @@
 package com.github.jlgrock.snp.core.connection;
 
 import com.github.jlgrock.snp.apis.connection.MongoDatabaseManager;
-import com.mongodb.DB;
+import com.mongodb.client.MongoDatabase;
 import org.jvnet.hk2.annotations.Service;
 
 import java.util.Map;
@@ -23,25 +23,25 @@ public class SynchronizedMongoDatabaseManager implements MongoDatabaseManager {
     /**
      * The concurrent hashmap that will allow you to keep track of the accessed databases, by name.
      */
-    private final Map<String, DB> collectionMap = new ConcurrentHashMap<>();
+    private final Map<String, MongoDatabase> collectionMap = new ConcurrentHashMap<>();
 
     @Override
-    public void addDb(final String key, final DB session) {
+    public void addDatabase(final String key, final MongoDatabase session) {
         collectionMap.put(key, session);
     }
 
     @Override
-    public DB removeDb(final String dbName) {
+    public MongoDatabase removeDatabase(final String dbName) {
         return collectionMap.remove(dbName);
     }
 
     @Override
-    public boolean containsDb(final DB session) {
+    public boolean containsDatabase(final MongoDatabase session) {
         return collectionMap.containsValue(session);
     }
 
     @Override
-    public boolean containsDb(final String key) {
+    public boolean containsDatabase(final String key) {
         return collectionMap.containsKey(key);
     }
 
@@ -51,7 +51,7 @@ public class SynchronizedMongoDatabaseManager implements MongoDatabaseManager {
     }
 
     @Override
-    public DB getDb(final String key) {
+    public MongoDatabase getDatabase(final String key) {
         return collectionMap.get(key);
     }
 
