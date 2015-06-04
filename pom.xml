@@ -5,7 +5,6 @@
         <groupId>org.sonatype.oss</groupId>
         <artifactId>oss-parent</artifactId>
         <version>7</version>
-        <relativePath />
     </parent>
 
     <groupId>com.github.jlgrock.snp</groupId>
@@ -59,6 +58,7 @@
         <mockito.version>1.10.8</mockito.version>
         <hk2.version>2.4.0-b10</hk2.version>
         <guava.version>18.0</guava.version>
+        <jax-ws.version>2.0</jax-ws.version>
         <jersey.version>2.17</jersey.version>
         <jersey-json.version>1.19</jersey-json.version>
         <testng.version>6.8.21</testng.version>
@@ -98,7 +98,13 @@
 
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>core</artifactId>
+                <artifactId>classifier</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>domain</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
@@ -143,6 +149,12 @@
                 <groupId>org.glassfish.hk2</groupId>
                 <artifactId>hk2</artifactId>
                 <version>${hk2.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>javax.ws.rs</groupId>
+                <artifactId>javax.ws.rs-api</artifactId>
+                <version>${jax-ws.version}</version>
             </dependency>
 
             <dependency>
@@ -363,7 +375,8 @@
         <module>fhir</module>
         <module>apis</module>
         <module>defaultconfig</module>
-        <module>core</module>
+        <module>classifier</module>
+        <module>domain</module>
         <module>web</module>
         <!--<module>client</module>-->
     </modules>
@@ -570,7 +583,22 @@
                 <module>integration</module>
             </modules>
         </profile>
+
+        <!--
+        This profile will sign the JAR file, sources file, and javadocs file using the GPG key on the local machine.
+        See: https://docs.sonatype.org/display/Repository/How+To+Generate+PGP+Signatures+With+Maven
+        -->
+        <profile>
+            <id>release-sign-artifacts</id>
+            <activation>
+                <property>
+                    <name>release</name>
+                    <value>true</value>
+                </property>
+            </activation>
+        </profile>
     </profiles>
+
 </project>
 
 
