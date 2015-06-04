@@ -19,14 +19,7 @@ public abstract class AbstractFhirProcessor implements FhirElementProcessorServi
     }
 
     @Override
-    public void classify() {
-        LogicGraph logicGraphBuilder = getLogicGraph();
-
-        //TODO run through classification service, should get a number back.
-
-        //TODO store concept ID, and logic graph expression
-
-    }
+    public abstract void process();
 
     protected abstract LogicGraph getLogicGraph();
 }

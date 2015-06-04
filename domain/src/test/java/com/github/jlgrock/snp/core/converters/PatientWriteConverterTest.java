@@ -21,24 +21,22 @@ public class PatientWriteConverterTest {
         LocalDate dob = LocalDate.now(); //final
 
         Patient patient = Mockito.mock(Patient.class);
-        Mockito.when(patient.getId()).thenReturn((Long) 123l);
+        Mockito.when(patient.getId()).thenReturn(123l);
         Mockito.when(patient.getFirstName()).thenReturn("Jerry");
         Mockito.when(patient.getMiddleName()).thenReturn("Lee");
         Mockito.when(patient.getLastName()).thenReturn("Lewis");
         Mockito.when(patient.getDateOfBirth()).thenReturn(dob);
         Mockito.when(patient.getGender()).thenReturn(Gender.MALE);
-        Mockito.when(patient.getRace()).thenReturn(Race.AMERICAN_INDIAN);
 
         PatientWriteConverter patientWriteConverter = new PatientWriteConverter();
         Document dbObj = patientWriteConverter.convert(patient);
 
-        Assert.assertEquals((Long) 123l, dbObj.get(PatientTags.ID_TAG));
+        Assert.assertEquals(123l, dbObj.get(PatientTags.ID_TAG));
         Assert.assertEquals("Jerry", dbObj.get(PatientTags.FIRST_NAME_TAG));
         Assert.assertEquals("Lee", dbObj.get(PatientTags.MIDDLE_NAME_TAG));
         Assert.assertEquals("Lewis", dbObj.get(PatientTags.LAST_NAME_TAG));
         Assert.assertEquals(dob.toEpochDay(), dbObj.get(PatientTags.DATE_OF_BIRTH_TAG));
         Assert.assertEquals(Gender.MALE.getId(), dbObj.get(PatientTags.GENDER_TAG));
-        Assert.assertEquals(Race.AMERICAN_INDIAN.getId(), dbObj.get(PatientTags.RACE_TAG));
 
     }
 }

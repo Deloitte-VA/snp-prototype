@@ -27,7 +27,6 @@ public class PatientTest {
 	    String st3 = "Lynch";
         LocalDate dt1 = LocalDate.of(2015, 2, 2);
 		Gender gn1 = Gender.MALE;
-		Race rc1 = Race.CAUCASIAN;
 	    
 	    Long ln2 = new Long(201523l);
 	    String st4 = "Gronkowski";
@@ -35,7 +34,6 @@ public class PatientTest {
 	    String st6 = "Sherman";
         LocalDate dt2 = LocalDate.of(2015, 2, 4);
 		Gender gn2 = Gender.FEMALE; 
-		Race rc2 = Race.ASIAN; 
 		
 		Patient pt1 = new Patient();
 		
@@ -45,7 +43,6 @@ public class PatientTest {
 		pt1.setLastName(st3);
 		pt1.setDateOfBirth(dt1);
 		pt1.setGender(gn1);
-		pt1.setRace(rc1);
 		
 		Patient pt2 = new Patient();
 		
@@ -55,7 +52,6 @@ public class PatientTest {
 		pt2.setLastName(st3);
 		pt2.setDateOfBirth(dt1);
 		pt2.setGender(gn1);
-		pt2.setRace(rc1);
 		
 		assertTrue(pt2.equals(pt1));
 		
@@ -65,7 +61,6 @@ public class PatientTest {
 		assertEquals(st3, pt1.getLastName());
 		assertEquals(dt1, pt1.getDateOfBirth());
 		assertEquals(gn1, pt1.getGender());
-		assertEquals(rc1, pt1.getRace());
 	
 		pt2.setId(ln2);
 		pt2.setFirstName(st4);
@@ -73,7 +68,6 @@ public class PatientTest {
 		pt2.setLastName(st6);
 		pt2.setDateOfBirth(dt2);
 		pt2.setGender(gn2);
-		pt2.setRace(rc2);
 		
 		assertFalse(pt2.equals(pt1));
 		
@@ -83,9 +77,8 @@ public class PatientTest {
 		assertNotEquals(pt1.getLastName(), pt2.getLastName());
 		assertNotEquals(pt1.getDateOfBirth(), pt2.getDateOfBirth());
 		assertNotEquals(pt1.getGender(), pt2.getGender());
-		assertNotEquals(pt1.getRace(), pt2.getRace());
 		
-		assertEquals("Patient{id=201521, firstName=Brady, middleName=Wilson, lastName=Lynch, dateOfBirth=2015-02-02, gender=MALE, race=CAUCASIAN}", pt1.toString());
+		assertEquals(pt1.toString(), "Patient{id=201521, firstName=Brady, middleName=Wilson, lastName=Lynch, dateOfBirth=2015-02-02, gender=MALE}");
 		assertNotEquals(pt1.hashCode(), pt2.hashCode());
 		
 	}

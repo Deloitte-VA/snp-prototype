@@ -23,7 +23,6 @@ public class PatientWriteConverter implements WriteConverter<Patient, Document> 
         dbo.put(PatientTags.MIDDLE_NAME_TAG, source.getMiddleName());
         dbo.put(PatientTags.LAST_NAME_TAG, source.getLastName());
         dbo.put(PatientTags.GENDER_TAG, source.getGender().getId());
-        dbo.put(PatientTags.RACE_TAG, source.getRace().getId());
         if (source.getDateOfBirth() == null) {
             dbo.put(PatientTags.DATE_OF_BIRTH_TAG, null);
         } else {

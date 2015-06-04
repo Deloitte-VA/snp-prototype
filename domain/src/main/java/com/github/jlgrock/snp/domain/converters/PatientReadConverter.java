@@ -26,7 +26,7 @@ public class PatientReadConverter implements ReadConverter<Document, Patient> {
         p.setMiddleName((String) source.get(PatientTags.MIDDLE_NAME_TAG));
         p.setLastName((String) source.get(PatientTags.LAST_NAME_TAG));
         p.setGender(Gender.getValueById((Integer) source.get(PatientTags.GENDER_TAG)));
-        p.setRace(Race.getValueById((Integer) source.get(PatientTags.RACE_TAG)));
+//        p.setRace(Race.getValueById((Integer) source.get(PatientTags.RACE_TAG)));
         p.setDateOfBirth(LocalDate.ofEpochDay(((Number) source.get(PatientTags.DATE_OF_BIRTH_TAG)).longValue()));
         return p;
     }
