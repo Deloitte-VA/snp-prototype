@@ -18,7 +18,7 @@ import java.io.StringReader;
 public class LegoMarshallerServiceImpl implements LegoMarshallerService {
     private static final Logger LOGGER = LoggerFactory.getLogger(LegoMarshallerServiceImpl.class);
 
-    public static final String LEGO_PACKAGE = "com.github.jlgrock.snp.core.domain.lego";
+    public static final String LEGO_PACKAGE = "com.github.jlgrock.snp.core.domain.lego.model";
 
     @Override
     public Object unmarshall(final String input) throws UnmarshallingException {
