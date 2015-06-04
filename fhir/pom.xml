@@ -27,7 +27,7 @@
         </dependency>
 
         <dependency>
-            <groupId>gov.vha.isaac</groupId>
+            <groupId>gov.vha.isaac.logic.modules</groupId>
             <artifactId>logic</artifactId>
         </dependency>
 
