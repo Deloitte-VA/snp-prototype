@@ -1,6 +1,7 @@
 package com.github.jlgrock.snp.core.domain.fhir.processors;
 
 import com.github.jlgrock.snp.apis.exceptions.ClassifierException;
+import com.github.jlgrock.snp.core.domain.fhir.converters.PatientWriteConverter;
 import com.github.jlgrock.snp.core.domain.fhir.model.AdverseReaction;
 import com.github.jlgrock.snp.core.domain.fhir.model.Alert;
 import com.github.jlgrock.snp.core.domain.fhir.model.AllergyIntolerance;
@@ -48,6 +49,8 @@ import com.github.jlgrock.snp.core.domain.fhir.model.SecurityEvent;
 import com.github.jlgrock.snp.core.domain.fhir.model.Specimen;
 import com.github.jlgrock.snp.core.domain.fhir.model.Substance;
 import com.github.jlgrock.snp.core.domain.fhir.model.ValueSet;
+import com.github.jlgrock.snp.domain.data.PatientRepository;
+
 import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
 import org.jvnet.hk2.annotations.Service;
 
@@ -59,11 +62,16 @@ import javax.inject.Inject;
 @Service
 public class FhirElementProcessorFactoryImpl implements FhirElementProcessorFactory {
     final TerminologyStoreDI terminologyStoreDI;
+    final PatientWriteConverter patientWriteConverter;
+    final PatientRepository patientRepository;
 
     @Inject
-//    FhirElementProcessorFactoryImpl(final TerminologyStoreDI terminologyStoreDIIn) {
-    FhirElementProcessorFactoryImpl() {
-        terminologyStoreDI = null;
+    FhirElementProcessorFactoryImpl(/*final TerminologyStoreDI terminologyStoreDIIn,*/
+    		final PatientWriteConverter patientWriteConverterIn, final PatientRepository patientRepositoryIn) {
+//        terminologyStoreDI = terminologyStoreDIIn;
+    	terminologyStoreDI = null;
+        patientWriteConverter = patientWriteConverterIn;
+        patientRepository = patientRepositoryIn;
     }
 
     @Override
@@ -140,7 +148,7 @@ public class FhirElementProcessorFactoryImpl implements FhirElementProcessorFact
         } else if (unmarshalledObject instanceof Other) {
             fhirElementProcessorService = new OtherProcessor(terminologyStoreDI, (Other) unmarshalledObject);
         } else if (unmarshalledObject instanceof Patient) {
-            fhirElementProcessorService = new PatientProcessor(terminologyStoreDI, (Patient) unmarshalledObject);
+            fhirElementProcessorService = new PatientProcessor(terminologyStoreDI, (Patient) unmarshalledObject, patientWriteConverter, patientRepository);
         } else if (unmarshalledObject instanceof Practitioner) {
             fhirElementProcessorService = new PractitionerProcessor(terminologyStoreDI, (Practitioner) unmarshalledObject);
         } else if (unmarshalledObject instanceof Procedure) {

@@ -52,12 +52,12 @@ public class PatientRepositoryImpl extends
      * {@inheritDoc}
      */
     @Override
-    protected Patient convertToDomainObject(final Document dbObjectin) {
-    	LOGGER.trace("convertToDomainObject(Document dbObjectin=" + dbObjectin + ")");
-        if (dbObjectin == null) {
+    protected Patient convertToDomainObject(final Document dbObjectIn) {
+    	LOGGER.trace("convertToDomainObject(Document dbObjectIn={})", dbObjectIn);
+        if (dbObjectIn == null) {
             return null;
         }
-        return patientReadConverter.convert(dbObjectin);
+        return patientReadConverter.convert(dbObjectIn);
     }
     
     /**
@@ -74,7 +74,7 @@ public class PatientRepositoryImpl extends
      */
     @Override
     protected Document convertToDBObject(final Patient s) {
-    	LOGGER.trace("convertToDBObject(Patient s=" + s + ")");
+    	LOGGER.trace("convertToDBObject(Patient s={})", s);
         if (s == null) {
             return null;
         }
@@ -86,10 +86,10 @@ public class PatientRepositoryImpl extends
      */
     @Override
     public List<Patient> findAllByLastName(final String lastName) {
+    	LOGGER.trace("findAllByLastName(lastName={})", lastName);
     	if (lastName == null){
     		return patientShell;
     	}
-    	LOGGER.trace("findAllByLastName(lastName=" + lastName + ")");
         Document query = new Document() {{
             put("lastName", lastName);
         }};
@@ -101,10 +101,10 @@ public class PatientRepositoryImpl extends
      */
     @Override
     public List<Patient> findAllByFirstNameAndLastName(final String firstName, final String lastName) {
+    	LOGGER.trace("findAllByFirstNameAndLastName(firstName={}, lastName={})", firstName, lastName);
     	if (firstName == null || lastName == null){
     		return patientShell;
     	}
-    	LOGGER.trace("findAllByFirstNameAndLastName(firstName=" + firstName + ", lastName=" + lastName + ")");
         Document query = new Document() {{
             put("firstName", firstName);
             put("lastName", lastName);
@@ -117,10 +117,10 @@ public class PatientRepositoryImpl extends
      */
     @Override
     public List<Patient> findAllByDateOfBirth(final LocalDate dateOfBirth) {
+    	LOGGER.trace("findAllByDateOfBirth(dateOfBirth={})", dateOfBirth);
     	if (dateOfBirth == null){
     		return patientShell;
     	}
-    	LOGGER.trace("findAllByDateOfBirth(dateOfBirth=" + dateOfBirth + ")");
         Document query = new Document() {{
             put("dateOfBirth", dateOfBirth);
         }};
@@ -132,10 +132,10 @@ public class PatientRepositoryImpl extends
      */
     @Override
     public List<Patient> findAllByGender(final Gender gender) {
+    	LOGGER.trace("findAllByGender(gender={})", gender);
     	if (gender == null){
     		return patientShell;
     	}
-    	LOGGER.trace("findAllByGender(gender=" + gender + ")");
         Document query = new Document() {{
             put("gender", gender);
         }};
@@ -147,10 +147,10 @@ public class PatientRepositoryImpl extends
      */
     @Override
     public List<Patient> findAllByRace(final Race race) {
+    	LOGGER.trace("findAllByRace(race={})", race);
     	if (race == null){
     		return patientShell;
     	}
-    	LOGGER.trace("findAllByRace(race=" + race + ")");
         Document query = new Document() {{
             put("race", race);
         }};

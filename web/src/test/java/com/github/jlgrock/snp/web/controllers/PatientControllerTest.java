@@ -79,7 +79,6 @@ public class PatientControllerTest extends GenericControllerTest {
         patientTemp.setMiddleName("b");
         patientTemp.setLastName("c");
         patientTemp.setGender(Gender.FEMALE);
-        patientTemp.setRace(Race.AMERICAN_INDIAN);
         Mockito.when(patientRepository.findOneById(Mockito.any())).thenReturn(patientTemp);
         final WebTarget target = target("patient/1");
 //        String response = target.request().get(String.class);

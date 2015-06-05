@@ -21,8 +21,12 @@ public class Patient extends AbstractMongoDomainObject {
     private LocalDate dateOfBirth;
 
     private Gender gender;
+    
+    private Boolean isDeceased;
+    
+    private LocalDate dateDeceased;
 
-    private Race race;
+//    private Race race;
 
     @Override
     public boolean equals(final Object o) {
@@ -36,8 +40,8 @@ public class Patient extends AbstractMongoDomainObject {
                 Objects.equal(middleName, that.middleName) &&
                 Objects.equal(lastName, that.lastName) &&
                 Objects.equal(dateOfBirth, that.dateOfBirth) &&
-                Objects.equal(gender, that.gender) &&
-                Objects.equal(race, that.race);
+                Objects.equal(gender, that.gender);// &&
+//                Objects.equal(race, that.race);
     }
 
     @Override
@@ -48,8 +52,8 @@ public class Patient extends AbstractMongoDomainObject {
                 middleName,
                 lastName,
                 dateOfBirth,
-                gender,
-                race);
+                gender);//,
+//                race);
     }
 
     @Override
@@ -61,7 +65,7 @@ public class Patient extends AbstractMongoDomainObject {
                 .add("lastName", lastName)
                 .add("dateOfBirth", dateOfBirth)
                 .add("gender", gender)
-                .add("race", race)
+//                .add("race", race)
                 .toString();
     }
 
@@ -105,12 +109,28 @@ public class Patient extends AbstractMongoDomainObject {
         gender = pGender;
     }
 
-    public Race getRace() {
-        return race;
-    }
+	public Boolean isDeceased() {
+		return isDeceased;
+	}
 
-    public void setRace(final Race pRace) {
-        race = pRace;
-    }
+	public void setDeceased(Boolean isDeceased) {
+		this.isDeceased = isDeceased;
+	}
+
+	public LocalDate getDateDeceased() {
+		return dateDeceased;
+	}
+
+	public void setDateDeceased(LocalDate dateDeceased) {
+		this.dateDeceased = dateDeceased;
+	}
+
+//    public Race getRace() {
+//        return race;
+//    }
+//
+//    public void setRace(final Race pRace) {
+//        race = pRace;
+//    }
 }
 

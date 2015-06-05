@@ -20,4 +20,10 @@ public class AdverseReactionProcessor extends AbstractFhirProcessor {
     protected LogicGraph getLogicGraph() {
         throw new UnsupportedOperationException();
     }
+
+	@Override
+	public void process() {
+		throw new UnsupportedOperationException();
+		
+	}
 }

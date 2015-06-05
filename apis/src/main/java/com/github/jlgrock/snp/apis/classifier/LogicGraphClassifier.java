@@ -15,5 +15,5 @@ public interface LogicGraphClassifier {
      * @param pce Post Coordinated Expression
      * @return the unique identifier
      */
-    Long classify(LogicGraph pce);
+    Integer classify(LogicGraph pce);
 }

@@ -22,7 +22,12 @@
         </dependency>
 
         <dependency>
-            <groupId>gov.vha.isaac</groupId>
+            <groupId>${parent.groupId}</groupId>
+            <artifactId>domain</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>gov.vha.isaac.logic.modules</groupId>
             <artifactId>logic</artifactId>
         </dependency>
 
