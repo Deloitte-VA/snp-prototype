@@ -13,24 +13,34 @@ import java.util.Objects;
  */
 public class Encounter extends AbstractMongoDomainObject {
 
-    @NotNull
-    private Long patientId;
+//    @NotNull
+//    private Long patientId;
+    
+    private String subject;
+    
+    private String clazz;
+
+//    private String reasonForVisit;
+    
+    private String status;
+    
+    private String participant;
 
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
                 .add("id", getId())
-                .add("patientId", patientId)
-                .add("date", date)
-                .add("type", type)
-                .add("reasonForVisit", reasonForVisit)
+//                .add("patientId", patientId)
+                .add("class", clazz)
+                .add("status", status)
+//                .add("reasonForVisit", reasonForVisit)
                 .add("observations", observations)
                 .toString();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), patientId, date, type, reasonForVisit, observations);
+        return Objects.hash(getId(), /*patientId,*/ clazz, status, /*reasonForVisit,*/ observations);
     }
 
     @Override
@@ -43,35 +53,20 @@ public class Encounter extends AbstractMongoDomainObject {
         }
         final Encounter other = (Encounter) obj;
         return Objects.equals(this.getId(), other.getId())
-                && Objects.equals(this.patientId, other.patientId)
-                && Objects.equals(this.date, other.date)
-                && Objects.equals(this.type, other.type)
-                && Objects.equals(this.reasonForVisit, other.reasonForVisit)
+//                && Objects.equals(this.patientId, other.patientId)
+                && Objects.equals(this.clazz, other.clazz)
+                && Objects.equals(this.status, other.status)
+//                && Objects.equals(this.reasonForVisit, other.reasonForVisit)
                 && Objects.equals(this.observations, other.observations);
     }
 
-    @NotNull
-    private LocalDate date;
-
-    private Integer type;
-
-    private String reasonForVisit;
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate(final LocalDate pDate) {
-        date = pDate;
-    }
-
-    public String getReasonForVisit() {
-        return reasonForVisit;
-    }
-
-    public void setReasonForVisit(final String pReasonForVisit) {
-        reasonForVisit = pReasonForVisit;
-    }
+//    public String getReasonForVisit() {
+//        return reasonForVisit;
+//    }
+//
+//    public void setReasonForVisit(final String pReasonForVisit) {
+//        reasonForVisit = pReasonForVisit;
+//    }
 
     public List<Observation> getObservations() {
         return observations;
@@ -81,22 +76,46 @@ public class Encounter extends AbstractMongoDomainObject {
         observations = pObservations;
     }
 
-    public Integer getType() {
-        return type;
-    }
-
-    public void setType(final Integer pType) {
-        type = pType;
-    }
-
     private List<Observation> observations;
 
-    public Long getPatientId() {
-        return patientId;
-    }
+//    public Long getPatientId() {
+//        return patientId;
+//    }
+//
+//	public void setPatientId(final Long pPatientId) {
+//        this.patientId = pPatientId;
+//    }
 
-	public void setPatientId(final Long pPatientId) {
-        this.patientId = pPatientId;
-    }
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getClazz() {
+		return clazz;
+	}
+
+	public void setClazz(String clazz) {
+		this.clazz = clazz;
+	}
+
+	public String getParticipant() {
+		return participant;
+	}
+
+	public void setParticipant(String participant) {
+		this.participant = participant;
+	}
+
+	public String getSubject() {
+		return subject;
+	}
+
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
 }
 
