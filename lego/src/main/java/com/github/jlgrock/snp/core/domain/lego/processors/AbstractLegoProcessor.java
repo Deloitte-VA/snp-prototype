@@ -1,9 +1,7 @@
 package com.github.jlgrock.snp.core.domain.lego.processors;
 
-import com.github.jlgrock.snp.domain.data.ClassifiedPceStore;
-import com.github.jlgrock.snp.domain.types.ClassifiedPce;
+import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
 import com.github.jlgrock.snp.core.domain.lego.logicgraph.LegoExpressionGraphBuilder;
-
 import com.github.jlgrock.snp.core.domain.lego.model.Assertion;
 import com.github.jlgrock.snp.core.domain.lego.model.Destination;
 import com.github.jlgrock.snp.core.domain.lego.model.Discernible;
@@ -12,9 +10,11 @@ import com.github.jlgrock.snp.core.domain.lego.model.Lego;
 import com.github.jlgrock.snp.core.domain.lego.model.LegoList;
 import com.github.jlgrock.snp.core.domain.lego.model.Pncs;
 import com.github.jlgrock.snp.core.domain.lego.model.Stamp;
-
+import com.github.jlgrock.snp.domain.data.ClassifiedPceStore;
+import com.github.jlgrock.snp.domain.types.ClassifiedPce;
 import gov.vha.isaac.logic.LogicGraph;
-import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
@@ -23,75 +23,75 @@ import java.util.List;
  */
 public abstract class AbstractLegoProcessor implements LegoElementProcessorService {
 
-    private final TerminologyStoreDI terminologyStoreDI;
+    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractLegoProcessor.class);
+
+    private final LogicGraphClassifier logicGraphClassifier;
     private final ClassifiedPceStore classifiedPceStore;
 
-    protected AbstractLegoProcessor(final TerminologyStoreDI terminologyStoreDIIn,
+    protected AbstractLegoProcessor(final LogicGraphClassifier logicGraphClassifierIn,
                                     final ClassifiedPceStore classPceStoreIn) {
-        terminologyStoreDI = terminologyStoreDIIn;
+        logicGraphClassifier = logicGraphClassifierIn;
         classifiedPceStore = classPceStoreIn;
     }
 
-    protected TerminologyStoreDI getTerminologyStoreDI() {
-        return terminologyStoreDI;
-    }
-
-    protected void parseLegoList(final LegoList legoListIn) {
+    protected void processLegoList(final LegoList legoListIn) {
         List<Lego> legoList = legoListIn.getLego();
         for (Lego lego : legoList) {
-            parseLego(lego);
+            processLego(lego);
         }
     }
 
-    protected void parseLego(final Lego lego) {
+    protected void processLego(final Lego lego) {
         List<Assertion> assertionList = lego.getAssertion();
         for (Assertion assertion : assertionList) {
-            parseAssertion(assertion);
+            processAssertion(assertion);
         }
 
         Pncs pncs = lego.getPncs();
-        parsePncs(pncs);
+        processPncs(pncs);
         Stamp stamp = lego.getStamp();
-        parseStamp(stamp);
+        processStamp(stamp);
     }
 
-    protected void parseAssertion(final Assertion assertion) {
+    protected void processAssertion(final Assertion assertion) {
         Discernible discernible = assertion.getDiscernible();
-        parseDiscernible(discernible);
+        processDiscernible(discernible);
     }
 
-    protected void parseDiscernible(final Discernible discernible) {
+    protected void processDiscernible(final Discernible discernible) {
         Expression expression = discernible.getExpression();
-        parseExpression(expression);
+        processExpression(expression);
     }
 
-    protected void parseExpression(final Expression expression) {
+    protected void processExpression(final Expression expression) {
 
+        LegoExpressionGraphBuilder legoLogicGraphBuilder = null;
         // Create the logic graph
-        LegoExpressionGraphBuilder legoLogicGraphBuilder = new LegoExpressionGraphBuilder(terminologyStoreDI, expression);
+        legoLogicGraphBuilder = new LegoExpressionGraphBuilder(logicGraphClassifier, expression);
         legoLogicGraphBuilder.create();
         LogicGraph logicGraph = legoLogicGraphBuilder;
+        Integer classifiedLogicGraphId = logicGraphClassifier.classify(logicGraph);
 
-
-        //TODO run through classification service, should get a number back.
+        //TODO run through classification service, should get a number back. Should we change these to an int?
         ClassifiedPce cPce = new ClassifiedPce();
+        cPce.setId((long) classifiedLogicGraphId.intValue());
 
         //TODO store concept ID, and logic graph expression
         classifiedPceStore.save(cPce);
-
-
     }
 
-    protected void parsePncs(final Pncs pncs) {
+    protected void processPncs(final Pncs pncs) {
         //Do nothing?
     }
 
-    protected void parseStamp(final Stamp stamp) {
+    protected void processStamp(final Stamp stamp) {
         //Do nothing?
     }
 
-    protected void parseDestination(final Destination destination) {
+    protected void processDestination(final Destination destination) {
         Expression expression = destination.getExpression();
-        parseExpression(expression);
+        processExpression(expression);
     }
+
+
 }

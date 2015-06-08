@@ -1,9 +1,8 @@
 package com.github.jlgrock.snp.core.domain.lego.processors;
 
-import com.github.jlgrock.snp.domain.data.ClassifiedPceStore;
+import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
 import com.github.jlgrock.snp.core.domain.lego.model.Lego;
-
-import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
+import com.github.jlgrock.snp.domain.data.ClassifiedPceStore;
 
 /**
  *
@@ -12,14 +11,14 @@ public class LegoProcessor extends AbstractLegoProcessor {
 
     private final Lego lego;
 
-    LegoProcessor(final TerminologyStoreDI terminologyStoreDI, final ClassifiedPceStore classPceStore,
+    LegoProcessor(final LogicGraphClassifier logicGraphClassifierIn, final ClassifiedPceStore classPceStore,
                   final Lego legoIn) {
-        super(terminologyStoreDI, classPceStore);
+        super(logicGraphClassifierIn, classPceStore);
         lego = legoIn;
     }
 
     @Override
-	public void classify() {
-        parseLego(lego);
+	public void process() {
+        processLego(lego);
     }
 }

@@ -12,7 +12,7 @@ public class PropertiesFileReaderTest {
         PropertiesFileReader.readFile("app.properties");
         Assert.assertEquals(PropertiesFileReader.getHost(), "123.456.65.121");
         Assert.assertEquals(PropertiesFileReader.getPort(), new Integer(2345));
-        Assert.assertEquals(PropertiesFileReader.getDatabase(), "mydb");
+        Assert.assertEquals(PropertiesFileReader.getDatabaseName(), "mydb");
         Assert.assertEquals(PropertiesFileReader.getFilelocation(), "/data/bka");
     }
 }

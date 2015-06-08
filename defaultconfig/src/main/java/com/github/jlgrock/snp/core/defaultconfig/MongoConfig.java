@@ -63,17 +63,18 @@ public class MongoConfig implements MongoDbConfiguration {
         try {
             hostSet = new ServerAddress( server, port );
         } catch (Exception e) {
-            LOGGER.error("Unable to identify host=" + server, e);
+            LOGGER.error("Unable to identify host.  Using default={}", server);
             hostSet = null;
         }
-        LOGGER.info("Connecting to " + server + ":" + port);
+        LOGGER.info("Connecting to {}:{}", server, port);
 
         host = hostSet;
         hosts = null;
 
-        String db = PropertiesFileReader.getDatabase();
+        String db = PropertiesFileReader.getDatabaseName();
         if (readProperties == false || db == null) {
             db = DEFAULT_DATABASE;
+            LOGGER.error("Unable to identify database name.  Using default={}", db);
         }
         defaultDatabase = db;
     }
@@ -89,7 +90,7 @@ public class MongoConfig implements MongoDbConfiguration {
     public MongoConfig(final List<MongoCredential> userCredentialsIn,
                        final ServerAddress hostIn,
                        final String defaultDatabaseIn) {
-        LOGGER.info("Connecting to " + hostIn.getHost() + ":" + hostIn.getPort());
+        LOGGER.info("Connecting to {}:{}", hostIn.getHost(), hostIn.getPort());
         userCredentials = userCredentialsIn;
         host = hostIn;
         hosts = null;
@@ -109,7 +110,7 @@ public class MongoConfig implements MongoDbConfiguration {
                        final String defaultDatabaseIn) {
         LOGGER.info("Connecting to ReplicaSet...");
         for (ServerAddress s : hostsIn) {
-            LOGGER.info("Host=" + s.getHost() + ":" + s.getPort());
+            LOGGER.info("Connecting to {}:{}", s.getHost(), s.getPort());
         }
         userCredentials = userCredentialsIn;
         host = null;
