@@ -25,9 +25,13 @@ public final class PropertiesFileReader {
 
     private static Integer port;
 
-    private static String database;
+    private static String databaseName;
 
-    private static String filelocation;
+    private static String fileLocation;
+
+    private static String chronicleLocation;
+
+    private static String indexLocation;
 
     /**
      * Read the file at instantiation.
@@ -67,8 +71,22 @@ public final class PropertiesFileReader {
     /**
      * @return the name of the database from the configuration file
      */
-    public static String getDatabase() {
-        return database;
+    public static String getDatabaseName() {
+        return databaseName;
+    }
+
+    /**
+     * @return the location of the chronicles from the configuration file
+     */
+    public static String getChronicleLocation() {
+        return chronicleLocation;
+    }
+
+    /**
+     * @return the location of the index files from the configuration file
+     */
+    public static String getIndexLocation() {
+        return indexLocation;
     }
 
     /**
@@ -76,7 +94,7 @@ public final class PropertiesFileReader {
      * configuration file
      */
     public static String getFilelocation() {
-        return filelocation;
+        return fileLocation;
     }
 
     /**
@@ -128,13 +146,23 @@ public final class PropertiesFileReader {
             String parsedPort = prop.getProperty("mongodb.port");
             port = Integer.parseInt(parsedPort);
         } catch (NumberFormatException nfe) {
-            LOGGER.error("mongodb.port is not a valid number.  Ignoring");
+            LOGGER.error("mongodb.port is not a valid number.  Ignoring property.");
         }
-        database = prop.getProperty("mongodb.database");
+        databaseName = prop.getProperty("mongodb.database");
         try {
-            filelocation = prop.getProperty("webserver.filelocation");
+            fileLocation = prop.getProperty("webserver.filelocation");
         } catch (Exception e) {
-            LOGGER.error("webserver.filelocation is not a valid path.  Ignoring");
+            LOGGER.error("webserver.filelocation is not a valid path.  Ignoring property.");
+        }
+        try {
+            chronicleLocation = prop.getProperty("webserver.chronicleLocation");
+        } catch (Exception e) {
+            LOGGER.error("webserver.chronicleLocation is not a valid path.  Ignoring property.");
+        }
+        try {
+            indexLocation = prop.getProperty("webserver.indexLocation");
+        } catch (Exception e) {
+            LOGGER.error("webserver.indexLocation is not a valid path.  Ignoring property.");
         }
     }
 }

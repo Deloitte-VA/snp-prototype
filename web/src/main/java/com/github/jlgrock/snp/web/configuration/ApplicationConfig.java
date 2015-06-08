@@ -32,14 +32,22 @@ public class ApplicationConfig extends ResourceConfig {
      */
     @Inject
     public ApplicationConfig(final ServiceLocator serviceLocator, final ServletContext context) {
-        LOGGER.info("Starting MongoRestApplication...");
+        this(serviceLocator, context, false);
+    }
+
+    public ApplicationConfig(final ServiceLocator serviceLocator, final ServletContext context, final boolean isForTesting) {
+        String s = isForTesting ? "in Testing mode" : "";
+        LOGGER.info("Starting MongoRestApplication {}...", s);
 
         setApplicationName(ApplicationConfig.class.getSimpleName());
 
-        new JerseyAutoScan(serviceLocator, context).scan();
+        if (!isForTesting) {
+            new JerseyAutoScan(serviceLocator, context).scan();
 
-        // preload the LogicGraphClassifier to bootstrap the database
-        LogicClassifierStore logicClassifierStore = serviceLocator.getService(LogicClassifierStore.class);
+            // preload the LogicGraphClassifier to bootstrap the database
+            LogicClassifierStore logicClassifierStore = serviceLocator.getService(LogicClassifierStore.class);
+
+        }
 
         // Register Feature allowing for Multipart file uploads
         register(MultiPartFeature.class);
@@ -73,14 +81,12 @@ public class ApplicationConfig extends ResourceConfig {
             }
         });
     }
-
-
     /**
      * Create and return an application configuration, for use in starting a jersey server.
      * @return the configuration object, which can be modified further.
      */
-    public static ResourceConfig createApp(final ServiceLocator serviceLocator, final ServletContext context) {
-        return new ApplicationConfig(serviceLocator, context);
+    public static ResourceConfig createApp(final ServiceLocator serviceLocator, final ServletContext context, boolean isForTesting) {
+        return new ApplicationConfig(serviceLocator, context, isForTesting);
     }
 
 }

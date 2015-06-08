@@ -56,15 +56,9 @@ public class LogicGraphClassifierImpl implements LogicGraphClassifier {
 	@Override
 	public ConceptChronicleBI findChronicle(final String sctid) {
 		ConceptChronicleBI returnVal = null;
-		TerminologySnapshotDI terminologySnapshotDI = null;
 		try {
 			TerminologyStoreDI terminologyStoreDI = logicClassifierStore.getTerminologyStore();
-//            TerminologySnapshotDI statedTermSnapshot = terminologyStoreDI.getSnapshot(ViewCoordinates.getDevelopmentStatedLatest());
-//            TerminologySnapshotDI inferredTermSnapshot = terminologyStoreDI.getSnapshot(ViewCoordinates.getDevelopmentInferredLatest());
-
 			UUID uuid = UuidT3Generator.fromSNOMED(Long.parseLong(sctid));
-			//terminologySnapshotDI = terminologyStoreDI.getSnapshot(ViewCoordinates.getDevelopmentInferredLatest());
-
 			returnVal = terminologyStoreDI.getConcept(uuid);
 		} catch (IOException ex) {
 			LOGGER.error("Unable to get ViewCoordinates Inferred Latest", ex);
@@ -77,16 +71,8 @@ public class LogicGraphClassifierImpl implements LogicGraphClassifier {
 	public Integer classify(final LogicGraph logicGraph) {
 		LOGGER.debug("Stated logic graph: {}", logicGraph);
         Integer classifiedResult = null;
-//        IdentifierService idService = LookupService.getService(IdentifierService.class);
-//        IndexerBI descriptionLookup = LookupService.get().getService(IndexerBI.class, "Description indexer");
-//        TaxonomyService taxonomy = LookupService.getService(TaxonomyService.class);
-//        TerminologyStoreDI termStore = LookupService.getService(TerminologyStoreDI.class);
         LogicService logicService = LookupService.getService(LogicService.class);
         try {
-//            TerminologySnapshotDI statedTermSnapshot = termStore.getSnapshot(ViewCoordinates.getDevelopmentStatedLatest());
-//            TerminologySnapshotDI inferredTermSnapshot = termStore.getSnapshot(ViewCoordinates.getDevelopmentInferredLatest());
-
-
             classifiedResult = logicService.getConceptSequenceForExpression(logicGraph,
                     StampCoordinates.getDevelopmentLatest(),
                     LogicCoordinates.getStandardElProfile(),

@@ -39,7 +39,7 @@ public class LegoElementProcessorFactoryImpl implements LegoElementProcessorFact
     }
 
     @Override
-    public LegoElementProcessorService findClassifier(final Object unmarshalledObject) throws ClassifierException {
+    public LegoElementProcessorService findElementProcessor(final Object unmarshalledObject) throws ClassifierException {
 
         LegoElementProcessorService legoElementProcessorService;
 

@@ -8,5 +8,5 @@ import org.jvnet.hk2.annotations.Contract;
  */
 @Contract
 public interface LegoElementProcessorFactory {
-    LegoElementProcessorService findClassifier(Object unmarshalledObject) throws ClassifierException;
+    LegoElementProcessorService findElementProcessor(Object unmarshalledObject) throws ClassifierException;
 }

@@ -24,55 +24,21 @@
         </dependency>
 
         <dependency>
-            <groupId>gov.vha.solor.modules</groupId>
-            <artifactId>snomed</artifactId>
-            <type>lucene.zip</type>
-            <classifier>all</classifier>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>gov.vha.solor.modules</groupId>
-            <artifactId>snomed</artifactId>
-            <type>cradle.zip</type>
-            <classifier>all</classifier>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
             <groupId>gov.vha.isaac.newtons-cradle.modules</groupId>
             <artifactId>newtons-cradle-extension</artifactId>
         </dependency>
+
         <dependency>
             <groupId>gov.vha.isaac.query-service.modules</groupId>
             <artifactId>query-implementation</artifactId>
         </dependency>
+
         <dependency>
             <groupId>gov.vha.isaac.logic.modules</groupId>
             <artifactId>logic</artifactId>
         </dependency>
 
     </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>extract-data</id>
-                        <phase>generate-test-resources</phase>
-                        <goals>
-                            <goal>unpack-dependencies</goal>
-                        </goals>
-                        <configuration>
-                            <includeArtifactIds>snomed</includeArtifactIds>
-                            <outputDirectory>${project.build.directory}/data</outputDirectory>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
 
     <profiles>
         <profile>

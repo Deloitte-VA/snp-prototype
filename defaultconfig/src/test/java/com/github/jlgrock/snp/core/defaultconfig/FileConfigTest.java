@@ -6,10 +6,10 @@ import org.testng.annotations.Test;
 /**
  *
  */
-public class WebConfigTest {
+public class FileConfigTest {
     @Test
     public void testDefaults() {
-        WebConfig webConfig = new WebConfig();
+        FileConfig webConfig = new FileConfig();
 //        TODO: Need to fix this test...
 //        Assert.assertEquals(webConfig.getFilepath(), WebConfig.TEMP_DIR_LOCATION);
     }
@@ -17,7 +17,8 @@ public class WebConfigTest {
     @Test
     public void testParsed() {
         PropertiesFileReader.readFile("app.properties");
-        WebConfig webConfig = new WebConfig();
-        Assert.assertEquals(webConfig.getFilepath(), "/data/bka");
+        FileConfig fileConfig = new FileConfig();
+        Assert.assertEquals(fileConfig.fileUploadLocation().toString(), "/data/bka");
+        //TODO add more
     }
 }

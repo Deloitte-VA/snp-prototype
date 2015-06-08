@@ -40,7 +40,7 @@ public class ProcessorTest extends AbstractClassificationTest {
         LegoElementProcessorFactory legoElementProcessorFactory = new LegoElementProcessorFactoryImpl(logicGraphClassifier, classifiedPceStore);
 
         // execute factory
-        LegoElementProcessorService legoElementProcessorService = legoElementProcessorFactory.findClassifier(lego);
+        LegoElementProcessorService legoElementProcessorService = legoElementProcessorFactory.findElementProcessor(lego);
 
         // verify that the Factory is working properly
         Assert.assertTrue(legoElementProcessorService instanceof LegoProcessor);

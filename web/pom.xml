@@ -151,30 +151,7 @@
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
 		</dependency>
-			
-        <!-- To Use Guice with HK2 -->
-        <!-- <dependency>
-            <groupId>com.google.inject</groupId>
-            <artifactId>guice</artifactId>
-            <version>3.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.google.inject.extensions</groupId>
-            <artifactId>guice-servlet</artifactId>
-            <version>3.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.glassfish.hk2</groupId>
-            <artifactId>guice-bridge</artifactId>
-            <version>2.2.0</version>
-        </dependency>
-        -->
 
-        <!--<dependency>-->
-            <!--<groupId>gov.vha.isaac.newtons-cradle.modules</groupId>-->
-            <!--<artifactId>newtons-cradle-extension</artifactId>-->
-            <!--<version>1.18-SNAPSHOT</version>-->
-        <!--</dependency>-->
 	</dependencies>
 
 	<build>
@@ -201,6 +178,18 @@
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
+                <configuration>
+                    <jvmArgs>-Xmx6144m -XX:+HeapDumpOnOutOfMemoryError</jvmArgs>
+                    <!--<scanIntervalSeconds>1</scanIntervalSeconds>-->
+                    <!--<stopKey>stop-jetty</stopKey>-->
+                    <!--<stopPort>9999</stopPort>-->
+                    <!--<systemProperties>-->
+                        <!--<systemProperty>-->
+                            <!--<name>jetty.port</name>-->
+                            <!--<value>9090</value>-->
+                        <!--</systemProperty>-->
+                    <!--</systemProperties>-->
+                </configuration>
             </plugin>
 
             <plugin>

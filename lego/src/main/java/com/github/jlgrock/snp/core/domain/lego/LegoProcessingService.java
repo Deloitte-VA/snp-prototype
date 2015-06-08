@@ -40,7 +40,7 @@ public class LegoProcessingService implements ProcessingService {
         if (unmarshalledObject != null) {
             LegoElementProcessorService legoElementProcessorService = null;
             try {
-                legoElementProcessorService = legoElementProcessorFactory.findClassifier(unmarshalledObject);
+                legoElementProcessorService = legoElementProcessorFactory.findElementProcessor(unmarshalledObject);
             } catch (ClassifierException ce) {
                 //TODO
             }
