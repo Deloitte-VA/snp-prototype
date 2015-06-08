@@ -3,6 +3,7 @@ package com.github.jlgrock.snp.classifier;
 import com.github.jlgrock.snp.apis.classifier.LogicClassifierStore;
 import gov.vha.isaac.ochre.api.LookupService;
 import gov.vha.isaac.ochre.api.constants.Constants;
+import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
 import org.ihtsdo.otf.tcc.model.index.service.IndexerBI;
 import org.jvnet.hk2.annotations.Service;
 import org.slf4j.Logger;
@@ -41,6 +42,11 @@ public class LogicClassifierStoreImpl implements LogicClassifierStore {
     @Override
     public IndexerBI getIndexer() {
         return LookupService.get().getService(IndexerBI.class, "snomed id refex indexer");
+    }
+
+    @Override
+    public TerminologyStoreDI getTerminologyStore() {
+        return LookupService.get().getService(TerminologyStoreDI.class);
     }
 
     @Override

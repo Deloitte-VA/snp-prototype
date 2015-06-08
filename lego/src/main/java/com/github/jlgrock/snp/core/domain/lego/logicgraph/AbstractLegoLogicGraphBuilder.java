@@ -1,5 +1,6 @@
 package com.github.jlgrock.snp.core.domain.lego.logicgraph;
 
+import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
 import com.github.jlgrock.snp.core.domain.lego.model.Concept;
 import com.github.jlgrock.snp.core.domain.lego.model.Destination;
 import com.github.jlgrock.snp.core.domain.lego.model.Expression;
@@ -10,19 +11,11 @@ import gov.vha.isaac.logic.LogicGraphBuilder;
 import gov.vha.isaac.logic.Node;
 import gov.vha.isaac.logic.node.AbstractNode;
 import gov.vha.isaac.logic.node.AndNode;
-import gov.vha.isaac.metadata.coordinates.ViewCoordinates;
-import gov.vha.isaac.ochre.api.LookupService;
-import org.ihtsdo.otf.tcc.api.concept.ConceptChronicleBI;
-import org.ihtsdo.otf.tcc.api.store.TerminologySnapshotDI;
-import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
-import org.ihtsdo.otf.tcc.api.uuid.UuidT3Generator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 /**
@@ -51,59 +44,17 @@ public abstract class AbstractLegoLogicGraphBuilder extends LogicGraphBuilder {
         }
     }
 
-    private final TerminologyStoreDI terminologyStoreDI;
+    private final LogicGraphClassifier logicGraphClassifier;
 
-    public AbstractLegoLogicGraphBuilder(final TerminologyStoreDI terminologyStoreDIIn) {
-        terminologyStoreDI = terminologyStoreDIIn;
+    public AbstractLegoLogicGraphBuilder(final LogicGraphClassifier logicGraphClassifierIn) {
+        logicGraphClassifier = logicGraphClassifierIn;
     }
 
-    /**
-     * Get the native identifier
-     * @param sctid SNOMED clinical terms identifier
-     * @return native identifier
-     */
-    protected ConceptChronicleBI findChronicle(final String sctid) {
-        ConceptChronicleBI returnVal = null;
-        TerminologySnapshotDI terminologySnapshotDI = null;
-        try {
-            TerminologySnapshotDI statedTermSnapshot = terminologyStoreDI.getSnapshot(ViewCoordinates.getDevelopmentStatedLatest());
-            TerminologySnapshotDI inferredTermSnapshot = terminologyStoreDI.getSnapshot(ViewCoordinates.getDevelopmentInferredLatest());
-
-            UUID uuid = UuidT3Generator.fromSNOMED(Long.parseLong(sctid));
-            terminologySnapshotDI = terminologyStoreDI.getSnapshot(ViewCoordinates.getDevelopmentInferredLatest());
-
-            returnVal = terminologyStoreDI.getConcept(uuid);
-        } catch (IOException ex) {
-            LOGGER.error("Unable to get ViewCoordinates Inferred Latest", ex);
-            //TODO determine what to do.  May need to refactor Campbells code if we are going to keep using this pattern
-        }
-        return returnVal;
-    }
-
-    /**
-	 * Get the native identifier
-	 * @param sctid SNOMED clinical terms identifier
-	 * @return native identifier
-	 */
-	public int getNidFromSNOMED(final String sctid) {
-    	int nid = 0;
-    	try {
-    		TerminologyStoreDI termStore = LookupService.getService(TerminologyStoreDI.class);
-    		TerminologySnapshotDI termSnapshot = termStore.getSnapshot(ViewCoordinates.getDevelopmentInferredLatest());
-    		UUID uuid = UuidT3Generator.fromSNOMED(Long.parseLong(sctid));
-
-    		//Get NID from UUID
-    		nid = termSnapshot.getNidForUuids(uuid);
-    	} catch (IOException ex) {
-    		LOGGER.error("Fatal error occured", ex);
-    	}
-    	return nid;
-    }
-
-	protected AbstractNode processRelation(final Relation relation) {
+	protected AbstractNode buildRelation(final Relation relation) {
+        LOGGER.trace("Building from relation node...");
         // A relation can have a type and a destination
         Type type = relation.getType();
-        LocalConcept typeConcept = processType(type);
+        LocalConcept typeConcept = buildType(type);
 
         Destination destination = relation.getDestination();
         AbstractNode destinationConcept = processDestination(destination);
@@ -111,24 +62,27 @@ public abstract class AbstractLegoLogicGraphBuilder extends LogicGraphBuilder {
 		return SomeRole(typeConcept.getNid(), destinationConcept);
 	}
 
-    protected LocalConcept processType(final Type type) {
+    protected LocalConcept buildType(final Type type) {
+        LOGGER.trace("Building from type node...");
         Concept typeConcept = type.getConcept();
-        LocalConcept processedConcept = processConcept(typeConcept);
+        LocalConcept processedConcept = buildConcept(typeConcept);
         return processedConcept;
     }
 
     protected AbstractNode processDestination(final Destination destination) {
+        LOGGER.trace("Building from destination node...");
         // A destination can contain an expression, text, boolean, or measurement
 
         Expression expression = destination.getExpression();
         if (expression != null) {
-            return processExpression(expression);
+            return buildExpression(expression);
         }
         //TODO needs work to handle text, boolean, or measurement
         throw new UnsupportedOperationException();
     }
 
-    protected AbstractNode processExpression(final Expression expression) {
+    protected AbstractNode buildExpression(final Expression expression) {
+        LOGGER.trace("Building from expression node...");
         //Can have either a Concept or a list of sub-Expressions, plus 0 or more Relations and 0 or more RelationGroups
 
         AbstractNode returnVal = null;
@@ -144,11 +98,11 @@ public abstract class AbstractLegoLogicGraphBuilder extends LogicGraphBuilder {
 
         AbstractNode subConceptOrExpression = null;
         if (concept != null) {
-            LocalConcept localConcept = processConcept(concept);
+            LocalConcept localConcept = buildConcept(concept);
             subConceptOrExpression = Concept(localConcept.getNid());
         } else {
             List<Expression> subExpressions = expression.getExpression();
-            List<Node> expressionNodes = subExpressions.stream().map(this::processExpression).collect(Collectors.toList());
+            List<Node> expressionNodes = subExpressions.stream().map(this::buildExpression).collect(Collectors.toList());
 
             subConceptOrExpression = And(expressionNodes.toArray(new AbstractNode[expressionNodes.size()]));
         }
@@ -156,12 +110,12 @@ public abstract class AbstractLegoLogicGraphBuilder extends LogicGraphBuilder {
 
         List<Relation> relations = expression.getRelation();
         if (relations != null) {
-            values.addAll(relations.stream().map(this::processRelation).collect(Collectors.toList()));
+            values.addAll(relations.stream().map(this::buildRelation).collect(Collectors.toList()));
         }
 
         List<RelationGroup> relationGroups = expression.getRelationGroup();
         if (relationGroups != null) {
-            values.addAll(relationGroups.stream().map(this::processRelationGroup).collect(Collectors.toList()));
+            values.addAll(relationGroups.stream().map(this::buildRelationGroup).collect(Collectors.toList()));
         }
 
         if (values.size() == 1) {
@@ -172,14 +126,14 @@ public abstract class AbstractLegoLogicGraphBuilder extends LogicGraphBuilder {
         return returnVal;
 	}
 
-    protected LocalConcept processConcept(final Concept concept) {
+    protected LocalConcept buildConcept(final Concept concept) {
         LocalConcept returnVal;
         String description = concept.getDesc();
 
         // can only have a sctid or a uuid
         String sctId = Long.toString(concept.getSctid());
         if (sctId != null) {
-            int nid = getNidFromSNOMED(sctId);
+            int nid = logicGraphClassifier.getNidFromSNOMED(sctId);
             returnVal = new LocalConcept(nid, description);
         } else {
             //TODO all of the examples have a sctid, but not sure what to do if we get a uuid
@@ -189,12 +143,12 @@ public abstract class AbstractLegoLogicGraphBuilder extends LogicGraphBuilder {
         return returnVal;
     }
 
-    protected AbstractNode processRelationGroup(final RelationGroup relationGroup) {
+    protected AbstractNode buildRelationGroup(final RelationGroup relationGroup) {
         // can contain 1 or more Relations
         AndNode andNode = null;
         List<Relation> relations = relationGroup.getRelation();
         if (relations.size() > 0) {
-            List<AbstractNode> nodes = relations.stream().map(this::processRelation).collect(Collectors.toList());
+            List<AbstractNode> nodes = relations.stream().map(this::buildRelation).collect(Collectors.toList());
             andNode = And(nodes.toArray(new AbstractNode[nodes.size()]));
         }
         return andNode;

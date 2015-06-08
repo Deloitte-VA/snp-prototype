@@ -9,6 +9,7 @@ import gov.vha.isaac.metadata.coordinates.LogicCoordinates;
 import gov.vha.isaac.metadata.coordinates.StampCoordinates;
 import gov.vha.isaac.metadata.coordinates.ViewCoordinates;
 import gov.vha.isaac.ochre.api.LookupService;
+import org.ihtsdo.otf.tcc.api.concept.ConceptChronicleBI;
 import org.ihtsdo.otf.tcc.api.store.TerminologySnapshotDI;
 import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
 import org.ihtsdo.otf.tcc.api.uuid.UuidT3Generator;
@@ -28,17 +29,15 @@ public class LogicGraphClassifierImpl implements LogicGraphClassifier {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(LogicGraphClassifierImpl.class);
 
-    @Inject
-	public LogicGraphClassifierImpl(final LogicClassifierStore logicClassifierStore) {
-		LOGGER.info("Instantiating Classifier Service...");
+	final LogicClassifierStore logicClassifierStore;
 
+    @Inject
+	public LogicGraphClassifierImpl(final LogicClassifierStore logicClassifierStoreIn) {
+		LOGGER.info("Instantiating Classifier Service...");
+		logicClassifierStore = logicClassifierStoreIn;
 	}
 
-    /**
-	 * Get the native identifier
-	 * @param sctid SNOMED clinical terms identifier
-	 * @return native identifier
-	 */
+    @Override
 	public int getNidFromSNOMED(final String sctid) {
     	int nid = 0;
     	try {
@@ -55,7 +54,28 @@ public class LogicGraphClassifierImpl implements LogicGraphClassifier {
     }
 
 	@Override
+	public ConceptChronicleBI findChronicle(final String sctid) {
+		ConceptChronicleBI returnVal = null;
+		TerminologySnapshotDI terminologySnapshotDI = null;
+		try {
+			TerminologyStoreDI terminologyStoreDI = logicClassifierStore.getTerminologyStore();
+//            TerminologySnapshotDI statedTermSnapshot = terminologyStoreDI.getSnapshot(ViewCoordinates.getDevelopmentStatedLatest());
+//            TerminologySnapshotDI inferredTermSnapshot = terminologyStoreDI.getSnapshot(ViewCoordinates.getDevelopmentInferredLatest());
+
+			UUID uuid = UuidT3Generator.fromSNOMED(Long.parseLong(sctid));
+			//terminologySnapshotDI = terminologyStoreDI.getSnapshot(ViewCoordinates.getDevelopmentInferredLatest());
+
+			returnVal = terminologyStoreDI.getConcept(uuid);
+		} catch (IOException ex) {
+			LOGGER.error("Unable to get ViewCoordinates Inferred Latest", ex);
+			//TODO determine what to do.  May need to refactor Campbells code if we are going to keep using this pattern
+		}
+		return returnVal;
+	}
+
+	@Override
 	public Integer classify(final LogicGraph logicGraph) {
+		LOGGER.debug("Stated logic graph: {}", logicGraph);
         Integer classifiedResult = null;
 //        IdentifierService idService = LookupService.getService(IdentifierService.class);
 //        IndexerBI descriptionLookup = LookupService.get().getService(IndexerBI.class, "Description indexer");
@@ -66,13 +86,11 @@ public class LogicGraphClassifierImpl implements LogicGraphClassifier {
 //            TerminologySnapshotDI statedTermSnapshot = termStore.getSnapshot(ViewCoordinates.getDevelopmentStatedLatest());
 //            TerminologySnapshotDI inferredTermSnapshot = termStore.getSnapshot(ViewCoordinates.getDevelopmentInferredLatest());
 
-            LOGGER.debug("Stated logic graph: {}", logicGraph);
 
             classifiedResult = logicService.getConceptSequenceForExpression(logicGraph,
                     StampCoordinates.getDevelopmentLatest(),
                     LogicCoordinates.getStandardElProfile(),
                     EditCoordinates.getDefaultUserSolorOverlay());
-            LOGGER.debug("Stated logic graph: {}", logicGraph);
         } catch (Exception e) {
 
         }

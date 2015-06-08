@@ -1,5 +1,6 @@
 package com.github.jlgrock.snp.core.domain.lego.processors;
 
+import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
 import com.github.jlgrock.snp.apis.exceptions.ClassifierException;
 import com.github.jlgrock.snp.core.domain.lego.model.Assertion;
 import com.github.jlgrock.snp.core.domain.lego.model.AssertionComponent;
@@ -19,7 +20,6 @@ import com.github.jlgrock.snp.core.domain.lego.model.Type;
 import com.github.jlgrock.snp.core.domain.lego.model.Units;
 import com.github.jlgrock.snp.core.domain.lego.model.Value;
 import com.github.jlgrock.snp.domain.data.ClassifiedPceStore;
-import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
 import org.jvnet.hk2.annotations.Service;
 
 import javax.inject.Inject;
@@ -29,13 +29,12 @@ import javax.inject.Inject;
  */
 @Service
 public class LegoElementProcessorFactoryImpl implements LegoElementProcessorFactory {
-    private final TerminologyStoreDI terminologyStoreDI;
+    private final LogicGraphClassifier logicGraphClassifier;
     private final ClassifiedPceStore classPceStore;
 
     @Inject
-    //LegoElementProcessorFactoryImpl(final TerminologyStoreDI terminologyStoreDIIn, final ClassifiedPceStore classPceStoreIn) {
-    LegoElementProcessorFactoryImpl(final ClassifiedPceStore classPceStoreIn) {
-        terminologyStoreDI = null;
+    LegoElementProcessorFactoryImpl(final LogicGraphClassifier logicGraphClassifierIn, final ClassifiedPceStore classPceStoreIn) {
+        logicGraphClassifier = logicGraphClassifierIn;
         classPceStore = classPceStoreIn;
     }
 
@@ -45,39 +44,39 @@ public class LegoElementProcessorFactoryImpl implements LegoElementProcessorFact
         LegoElementProcessorService legoElementProcessorService;
 
         if (unmarshalledObject instanceof LegoList) {
-            legoElementProcessorService = new LegoListProcessor(terminologyStoreDI, classPceStore, (LegoList) unmarshalledObject);
+            legoElementProcessorService = new LegoListProcessor(logicGraphClassifier, classPceStore, (LegoList) unmarshalledObject);
         } else if (unmarshalledObject instanceof Lego) {
-            legoElementProcessorService = new LegoProcessor(terminologyStoreDI, classPceStore, (Lego) unmarshalledObject);
+            legoElementProcessorService = new LegoProcessor(logicGraphClassifier, classPceStore, (Lego) unmarshalledObject);
         } else if (unmarshalledObject instanceof Assertion) {
-            legoElementProcessorService = new AssertionProcessor(terminologyStoreDI, classPceStore, (Assertion) unmarshalledObject);
+            legoElementProcessorService = new AssertionProcessor(logicGraphClassifier, classPceStore, (Assertion) unmarshalledObject);
         } else if (unmarshalledObject instanceof Pncs) {
-            legoElementProcessorService = new PncsProcessor(terminologyStoreDI, classPceStore, (Pncs) unmarshalledObject);
+            legoElementProcessorService = new PncsProcessor(logicGraphClassifier, classPceStore, (Pncs) unmarshalledObject);
         } else if (unmarshalledObject instanceof AssertionComponent) {
-            legoElementProcessorService = new AssertionComponentProcessor(terminologyStoreDI, classPceStore, (AssertionComponent) unmarshalledObject);
+            legoElementProcessorService = new AssertionComponentProcessor(logicGraphClassifier, classPceStore, (AssertionComponent) unmarshalledObject);
         } else if (unmarshalledObject instanceof Type) {
-            legoElementProcessorService = new TypeProcessor(terminologyStoreDI, classPceStore, (Type) unmarshalledObject);
+            legoElementProcessorService = new TypeProcessor(logicGraphClassifier, classPceStore, (Type) unmarshalledObject);
         } else if (unmarshalledObject instanceof Expression) {
-            legoElementProcessorService = new ExpressionProcessor(terminologyStoreDI, classPceStore, (Expression) unmarshalledObject);
+            legoElementProcessorService = new ExpressionProcessor(logicGraphClassifier, classPceStore, (Expression) unmarshalledObject);
         } else if (unmarshalledObject instanceof Concept) {
-            legoElementProcessorService = new ConceptProcessor(terminologyStoreDI, classPceStore, (Concept) unmarshalledObject);
+            legoElementProcessorService = new ConceptProcessor(logicGraphClassifier, classPceStore, (Concept) unmarshalledObject);
         } else if (unmarshalledObject instanceof Discernible) {
-            legoElementProcessorService = new DiscernibleProcessor(terminologyStoreDI, classPceStore, (Discernible) unmarshalledObject);
+            legoElementProcessorService = new DiscernibleProcessor(logicGraphClassifier, classPceStore, (Discernible) unmarshalledObject);
         } else if (unmarshalledObject instanceof Qualifier) {
-            legoElementProcessorService = new QualifierProcessor(terminologyStoreDI, classPceStore, (Qualifier) unmarshalledObject);
+            legoElementProcessorService = new QualifierProcessor(logicGraphClassifier, classPceStore, (Qualifier) unmarshalledObject);
         } else if (unmarshalledObject instanceof Value) {
-            legoElementProcessorService = new ValueProcessor(terminologyStoreDI, classPceStore, (Value) unmarshalledObject);
+            legoElementProcessorService = new ValueProcessor(logicGraphClassifier, classPceStore, (Value) unmarshalledObject);
         } else if (unmarshalledObject instanceof Relation) {
-            legoElementProcessorService = new RelationProcessor(terminologyStoreDI, classPceStore, (Relation) unmarshalledObject);
+            legoElementProcessorService = new RelationProcessor(logicGraphClassifier, classPceStore, (Relation) unmarshalledObject);
         } else if (unmarshalledObject instanceof RelationGroup) {
-            legoElementProcessorService = new RelationGroupProcessor(terminologyStoreDI, classPceStore, (RelationGroup) unmarshalledObject);
+            legoElementProcessorService = new RelationGroupProcessor(logicGraphClassifier, classPceStore, (RelationGroup) unmarshalledObject);
         } else if (unmarshalledObject instanceof Destination) {
-            legoElementProcessorService = new DestinationProcessor(terminologyStoreDI, classPceStore, (Destination) unmarshalledObject);
+            legoElementProcessorService = new DestinationProcessor(logicGraphClassifier, classPceStore, (Destination) unmarshalledObject);
         } else if (unmarshalledObject instanceof Interval) {
-            legoElementProcessorService = new IntervalProcessor(terminologyStoreDI, classPceStore, (Interval) unmarshalledObject);
+            legoElementProcessorService = new IntervalProcessor(logicGraphClassifier, classPceStore, (Interval) unmarshalledObject);
         } else if (unmarshalledObject instanceof Units) {
-            legoElementProcessorService = new UnitsProcessor(terminologyStoreDI, classPceStore, (Units) unmarshalledObject);
+            legoElementProcessorService = new UnitsProcessor(logicGraphClassifier, classPceStore, (Units) unmarshalledObject);
         } else if (unmarshalledObject instanceof Stamp) {
-            legoElementProcessorService = new StampProcessor(terminologyStoreDI, classPceStore, (Stamp) unmarshalledObject);
+            legoElementProcessorService = new StampProcessor(logicGraphClassifier, classPceStore, (Stamp) unmarshalledObject);
         } else {
             throw new ClassifierException("Could not parse unmarshalled object.  Are you sure this is a lego document?");
         }

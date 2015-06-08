@@ -44,7 +44,7 @@ public class LegoProcessingService implements ProcessingService {
             } catch (ClassifierException ce) {
                 //TODO
             }
-            legoElementProcessorService.classify();
+            legoElementProcessorService.process();
         }
     }
 

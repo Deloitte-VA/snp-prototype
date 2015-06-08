@@ -1,9 +1,8 @@
 package com.github.jlgrock.snp.core.domain.lego.processors;
 
-import com.github.jlgrock.snp.domain.data.ClassifiedPceStore;
+import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
 import com.github.jlgrock.snp.core.domain.lego.model.Pncs;
-
-import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
+import com.github.jlgrock.snp.domain.data.ClassifiedPceStore;
 
 /**
  *
@@ -12,14 +11,14 @@ public class PncsProcessor extends AbstractLegoProcessor {
 
     private final Pncs pncs;
 
-    PncsProcessor(final TerminologyStoreDI terminologyStoreDI, final ClassifiedPceStore classPceStore,
+    PncsProcessor(final LogicGraphClassifier logicGraphClassifierIn, final ClassifiedPceStore classPceStore,
                   final Pncs pncsIn) {
-        super(terminologyStoreDI, classPceStore);
+        super(logicGraphClassifierIn, classPceStore);
         pncs = pncsIn;
     }
 
     @Override
-    public void classify() {
-        parsePncs(pncs);
+    public void process() {
+        processPncs(pncs);
     }
 }
