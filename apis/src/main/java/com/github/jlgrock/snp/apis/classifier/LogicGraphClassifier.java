@@ -5,7 +5,7 @@ import org.ihtsdo.otf.tcc.api.concept.ConceptChronicleBI;
 import org.jvnet.hk2.annotations.Contract;
 
 /**
- * Classify Post Coordinated Expressions
+ * Classify Post Coordinated Expressions using the classification store.
  */
 @Contract
 public interface LogicGraphClassifier {
@@ -18,17 +18,18 @@ public interface LogicGraphClassifier {
     int getNidFromSNOMED(String sctid);
 
     /**
-     * TODO
+     * Find a chronicle based on the sctId
      * @param sctid SNOMED clinical terms identifier
      * @return native identifier
      */
     ConceptChronicleBI findChronicle(String sctid);
 
     /**
-     * replace Post Coordinated Expressions with a classifier ID
+     * Find the native id for the indexed LogicGraph.  If one does not exist,
+     * it will create one and return the native id.
      *
      * @param pce Post Coordinated Expression
-     * @return the unique identifier
+     * @return the native identifier
      */
     Integer classify(LogicGraph pce);
 }

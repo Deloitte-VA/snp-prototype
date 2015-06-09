@@ -1,21 +1,21 @@
 package com.github.jlgrock.snp.apis.web;
 
 /**
- *
+ * The media-type/mime-type, broken into the constituent parts.
  */
 public interface MediaTypeService {
     /**
-     * The media type to scan for when parsing uploads.
+     * @return The media type to scan for when parsing uploads.
      */
     String getMediaTypeString();
 
     /**
-     * The type part of the media type
+     * @return The type part of the media type
      */
     String getTypeName();
 
     /**
-     * The subtype part of the media type
+     * @return The subtype part of the media type
      */
     String getSubTypeName();
 }

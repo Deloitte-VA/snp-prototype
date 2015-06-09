@@ -15,14 +15,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * Class that provides query capabilities for the Logic Graph store.
  */
 @Service
 public class LogicGraphClassifierQueryImpl implements LogicGraphClassifierQuery {
     private static final Logger LOGGER = LoggerFactory.getLogger(LogicGraphClassifierQueryImpl.class);
 
-    final LogicClassifierStore logicClassifierStore;
+    private static final int MAX_DEPTH = 5;
 
+    private final LogicClassifierStore logicClassifierStore;
+
+    /**
+     * Creates the classifier query object
+     *
+     * @param logicClassifierStoreIn the specific store to use, in this case, ochre+lucene
+     */
     @Inject
     public LogicGraphClassifierQueryImpl(final LogicClassifierStore logicClassifierStoreIn) {
         logicClassifierStore = logicClassifierStoreIn;
@@ -33,9 +40,10 @@ public class LogicGraphClassifierQueryImpl implements LogicGraphClassifierQuery 
         List<Integer> queryResults = new ArrayList<>();
         try {
             IndexerBI snomedIdLookup = logicClassifierStore.getIndexer();
-            List<SearchResult> sctidResults = snomedIdLookup.query(id, ComponentProperty.STRING_EXTENSION_1, 5);
-            sctidResults.forEach( sctidResult -> queryResults.add(sctidResult.getNid()) );
-        } catch(IOException ioe) {
+            List<SearchResult> sctidResults = snomedIdLookup.query(id,
+                    ComponentProperty.STRING_EXTENSION_1, LogicGraphClassifierQueryImpl.MAX_DEPTH);
+            sctidResults.forEach(sctidResult -> queryResults.add(sctidResult.getNid()));
+        } catch (IOException ioe) {
             LOGGER.error("There was an error executing the Classifier query", ioe);
         }
         return queryResults;

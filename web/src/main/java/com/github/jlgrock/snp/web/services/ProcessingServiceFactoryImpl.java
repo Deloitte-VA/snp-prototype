@@ -23,18 +23,28 @@ public class ProcessingServiceFactoryImpl implements ProcessingServiceFactory {
 
     private Map<String, ProcessingService> processingServices;
 
+    /**
+     * @param processingServicesIn the list of all of the possible services that can be used
+     */
     @Inject
     ProcessingServiceFactoryImpl(final IterableProvider<ProcessingService> processingServicesIn) {
         processingServices = new HashMap<>();
         for (ProcessingService processingService : processingServicesIn) {
             if (processingServices.containsKey(processingService.getMediaTypeString())) {
-                LOGGER.error("Processing Service with the key '{}' has been found more than once. This should be corrected, as this needs to be unique.", 
-                		processingService.getMediaTypeString());
+                LOGGER.error(
+                        "Processing Service with the key '{}' has been found more than once. This should be corrected, as this needs to be unique.",
+                        processingService.getMediaTypeString());
             }
             processingServices.put(processingService.getMediaTypeString(), processingService);
         }
     }
 
+    /**
+     * Find the appropriate process based on the media-type
+     *
+     * @param snpMediaType the media-type/mime-type to look up
+     * @return the process that matches the media-type
+     */
     public ProcessingService getService(final MediaType snpMediaType) {
         return processingServices.get(snpMediaType.getType() + "/" + snpMediaType.getSubtype());
     }

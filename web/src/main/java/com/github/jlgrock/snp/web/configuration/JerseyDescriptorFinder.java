@@ -17,19 +17,22 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- *
+ * Finds the descriptor files on the classpath
  */
 public class JerseyDescriptorFinder extends ClasspathDescriptorFileFinder {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(JerseyDescriptorFinder.class);
 
-    final ServletContext servletContext;
+    private final ServletContext servletContext;
 
-    private class UrlMapResult {
-        final InputStream inputStream;
-        final IOException ioException;
+    /**
+     * Struct for storing inputstreams and exceptions
+     */
+    private static class UrlMapResult {
+        private final InputStream inputStream;
+        private final IOException ioException;
 
-        public UrlMapResult(InputStream inputStreamIn,  IOException ioExceptionIn) {
+        public UrlMapResult(final InputStream inputStreamIn, final IOException ioExceptionIn) {
             inputStream = inputStreamIn;
             ioException = ioExceptionIn;
         }
@@ -43,6 +46,10 @@ public class JerseyDescriptorFinder extends ClasspathDescriptorFileFinder {
         }
     }
 
+    /**
+     * @param servletContextIn the servlet context, for finding war descriptors.
+     *                         If this is null, it is ignored.
+     */
     JerseyDescriptorFinder(final ServletContext servletContextIn) {
         servletContext = servletContextIn;
     }

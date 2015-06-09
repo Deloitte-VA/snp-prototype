@@ -76,9 +76,10 @@ public abstract class AbstractLegoLogicGraphBuilder extends LogicGraphBuilder {
         Expression expression = destination.getExpression();
         if (expression != null) {
             return buildExpression(expression);
+        } else {
+            //TODO store this to MongoDB
+            throw new UnsupportedOperationException();
         }
-        //TODO needs work to handle text, boolean, or measurement
-        throw new UnsupportedOperationException();
     }
 
     protected AbstractNode buildExpression(final Expression expression) {
@@ -91,10 +92,12 @@ public abstract class AbstractLegoLogicGraphBuilder extends LogicGraphBuilder {
 
         Concept concept = expression.getConcept();
 
-        Long sourceSctId = null;
+        String sourceSctId = null;
         if (concept.getSctid() != null) {
-            sourceSctId = concept.getSctid();
+            sourceSctId = Long.toString(concept.getSctid());
         }
+
+        //TODO what if I get a sctId?  Are we done?
 
         AbstractNode subConceptOrExpression = null;
         if (concept != null) {

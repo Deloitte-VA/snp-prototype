@@ -22,15 +22,19 @@ import java.io.IOException;
 import java.util.UUID;
 
 /**
- *
+ * Class that provides classification services to ochre and lucene.
  */
 @Service
 public class LogicGraphClassifierImpl implements LogicGraphClassifier {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(LogicGraphClassifierImpl.class);
 
-	final LogicClassifierStore logicClassifierStore;
+	private final LogicClassifierStore logicClassifierStore;
 
+    /**
+     * Creates a new classifier, using ochre and lucene
+     * @param logicClassifierStoreIn the store that is specific to ochre and lucene
+     */
     @Inject
 	public LogicGraphClassifierImpl(final LogicClassifierStore logicClassifierStoreIn) {
 		LOGGER.info("Instantiating Classifier Service...");
@@ -72,14 +76,10 @@ public class LogicGraphClassifierImpl implements LogicGraphClassifier {
 		LOGGER.debug("Stated logic graph: {}", logicGraph);
         Integer classifiedResult = null;
         LogicService logicService = LookupService.getService(LogicService.class);
-        try {
-            classifiedResult = logicService.getConceptSequenceForExpression(logicGraph,
-                    StampCoordinates.getDevelopmentLatest(),
-                    LogicCoordinates.getStandardElProfile(),
-                    EditCoordinates.getDefaultUserSolorOverlay());
-        } catch (Exception e) {
-
-        }
+        classifiedResult = logicService.getConceptSequenceForExpression(logicGraph,
+                StampCoordinates.getDevelopmentLatest(),
+                LogicCoordinates.getStandardElProfile(),
+                EditCoordinates.getDefaultUserSolorOverlay());
         return classifiedResult;
 	}
 }

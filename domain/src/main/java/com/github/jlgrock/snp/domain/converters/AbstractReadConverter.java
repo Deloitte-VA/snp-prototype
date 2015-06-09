@@ -9,9 +9,9 @@ import java.time.LocalDate;
 /**
  * An abstract implementation to convert between a MongoDB DBObject to a java object.
  */
-public class AbstractReadConverter {
+public abstract class AbstractReadConverter {
     private Number parseNumber(final Document source, final String tag) {
-        return ((Number) source.get(EncounterTags.ID_TAG));
+        return (Number) source.get(EncounterTags.ID_TAG);
     }
 
     /**

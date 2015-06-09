@@ -114,16 +114,16 @@ public class Patient extends AbstractMongoDomainObject {
 		return isDeceased;
 	}
 
-	public void setDeceased(Boolean isDeceased) {
-		this.isDeceased = isDeceased;
+	public void setDeceased(final Boolean isDeceasedIn) {
+		this.isDeceased = isDeceasedIn;
 	}
 
 	public LocalDate getDateDeceased() {
 		return dateDeceased;
 	}
 
-	public void setDateDeceased(LocalDate dateDeceased) {
-		this.dateDeceased = dateDeceased;
+	public void setDateDeceased(final LocalDate dateDeceasedIn) {
+		this.dateDeceased = dateDeceasedIn;
 	}
 }
 

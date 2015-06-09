@@ -28,7 +28,7 @@ public class EncounterRepositoryImpl extends
 
     private final EncounterWriteConverter encounterWriteConverter;
     
-    List<Encounter> encounterShell = new ArrayList<>(6);
+    private List<Encounter> encounterShell = new ArrayList<>(6);
     
     private static final Logger LOGGER = LoggerFactory
             .getLogger(EncounterRepositoryImpl.class);
