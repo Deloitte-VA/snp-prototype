@@ -13,34 +13,35 @@ import java.util.Objects;
  */
 public class Encounter extends AbstractMongoDomainObject {
 
-//    @NotNull
-//    private Long patientId;
+    @NotNull
+    private Long patientId;
     
     private String subject;
     
     private String clazz;
 
-//    private String reasonForVisit;
-    
     private String status;
     
     private String participant;
+    
+    private List<Observation> observations;
 
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
                 .add("id", getId())
-//                .add("patientId", patientId)
+                .add("patientId", patientId)
+                .add("subject", subject)
                 .add("class", clazz)
                 .add("status", status)
-//                .add("reasonForVisit", reasonForVisit)
+                .add("participant", participant)
                 .add("observations", observations)
                 .toString();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), /*patientId,*/ clazz, status, /*reasonForVisit,*/ observations);
+        return Objects.hash(getId(), patientId, clazz, status, observations);
     }
 
     @Override
@@ -53,20 +54,13 @@ public class Encounter extends AbstractMongoDomainObject {
         }
         final Encounter other = (Encounter) obj;
         return Objects.equals(this.getId(), other.getId())
-//                && Objects.equals(this.patientId, other.patientId)
+                && Objects.equals(this.patientId, other.patientId)
+                && Objects.equals(this.subject, other.subject)
                 && Objects.equals(this.clazz, other.clazz)
                 && Objects.equals(this.status, other.status)
-//                && Objects.equals(this.reasonForVisit, other.reasonForVisit)
+                && Objects.equals(this.participant, other.participant)
                 && Objects.equals(this.observations, other.observations);
     }
-
-//    public String getReasonForVisit() {
-//        return reasonForVisit;
-//    }
-//
-//    public void setReasonForVisit(final String pReasonForVisit) {
-//        reasonForVisit = pReasonForVisit;
-//    }
 
     public List<Observation> getObservations() {
         return observations;
@@ -76,15 +70,13 @@ public class Encounter extends AbstractMongoDomainObject {
         observations = pObservations;
     }
 
-    private List<Observation> observations;
+    public Long getPatientId() {
+        return patientId;
+    }
 
-//    public Long getPatientId() {
-//        return patientId;
-//    }
-//
-//	public void setPatientId(final Long pPatientId) {
-//        this.patientId = pPatientId;
-//    }
+	public void setPatientId(final Long pPatientId) {
+        this.patientId = pPatientId;
+    }
 
 	public String getStatus() {
 		return status;
