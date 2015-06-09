@@ -3,6 +3,7 @@ package com.github.jlgrock.snp.domain.types;
 import com.google.common.base.MoreObjects;
 
 import javax.validation.constraints.NotNull;
+
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
@@ -14,7 +15,7 @@ import java.util.Objects;
 public class Encounter extends AbstractMongoDomainObject {
 
     @NotNull
-    private Long patientId;
+    private String patientId;
     
     private String subject;
     
@@ -70,12 +71,12 @@ public class Encounter extends AbstractMongoDomainObject {
         observations = pObservations;
     }
 
-    public Long getPatientId() {
+    public String getPatientId() {
         return patientId;
     }
 
-	public void setPatientId(final Long pPatientId) {
-        this.patientId = pPatientId;
+	public void setPatientId(final String id) {
+        this.patientId = id;
     }
 
 	public String getStatus() {

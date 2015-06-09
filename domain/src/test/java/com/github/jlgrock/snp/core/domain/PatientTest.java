@@ -31,9 +31,6 @@ public class PatientTest {
 	private Gender pt2Gender = Gender.FEMALE;
 	private Boolean pt2IsDeceased = false;
 	
-    /**
-     * public function returns void
-     */
 	@Test
 	public void testSettersandGetters() {
 

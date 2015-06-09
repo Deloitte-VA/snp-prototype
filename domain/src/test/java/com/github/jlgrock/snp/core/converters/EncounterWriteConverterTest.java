@@ -24,7 +24,7 @@ public class EncounterWriteConverterTest {
     @Test
     public void testConvert() {
         LocalDate date = LocalDate.ofEpochDay(888l);
-        Long patientId = 456l;
+        String patientId = "f456";
 
         Observation observation1 = mock(Observation.class);
         Observation observation2 = mock(Observation.class);
@@ -47,18 +47,16 @@ public class EncounterWriteConverterTest {
         Encounter encounter = mock(Encounter.class);
         when(encounter.getId()).thenReturn(123l);
 //        when(encounter.getDate()).thenReturn(date);
-//        when(encounter.getPatientId()).thenReturn(patientId);
-//        when(encounter.getReasonForVisit()).thenReturn("hernia");
+        when(encounter.getPatientId()).thenReturn(patientId);
 //        when(encounter.getType()).thenReturn(1);
 //        when(encounter.getObservations()).thenReturn(observations);
 
         EncounterWriteConverter encounterWriteConverter = new EncounterWriteConverter(observationWriteConverter);
         Document dbObj = encounterWriteConverter.convert(encounter);
 
-        assertEquals(123l, dbObj.get(EncounterTags.ID_TAG));
+        assertEquals(123L, dbObj.get(EncounterTags.ID_TAG));
 //        assertEquals(date.toEpochDay(), dbObj.get(EncounterTags.DATE_TAG));
 //        assertEquals(456l, dbObj.get(EncounterTags.PATIENT_TAG));
-//        assertEquals("hernia", dbObj.get(EncounterTags.REASON_FOR_VISIT_TAG));
 //        assertEquals(1, dbObj.get(EncounterTags.TYPE_TAG));
 //        assertEquals(observationObjs, dbObj.get(EncounterTags.OBSERVATIONS_TAG));
     }
