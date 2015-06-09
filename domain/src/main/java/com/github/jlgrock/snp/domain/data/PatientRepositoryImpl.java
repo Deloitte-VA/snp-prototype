@@ -30,8 +30,7 @@ public class PatientRepositoryImpl extends
     
     private static final Logger LOGGER = LoggerFactory
             .getLogger(PatientRepositoryImpl.class);
-    
-    List<Patient> patientShell = new ArrayList<>(6);
+
 
 	/**
 	 * constructs PatientRepositoryImpl
@@ -87,6 +86,7 @@ public class PatientRepositoryImpl extends
     @Override
     public List<Patient> findAllByLastName(final String lastName) {
     	LOGGER.trace("findAllByLastName(lastName={})", lastName);
+        List<Patient> patientShell = new ArrayList<>();
     	if (lastName == null){
     		return patientShell;
     	}
@@ -102,7 +102,8 @@ public class PatientRepositoryImpl extends
     @Override
     public List<Patient> findAllByFirstNameAndLastName(final String firstName, final String lastName) {
     	LOGGER.trace("findAllByFirstNameAndLastName(firstName={}, lastName={})", firstName, lastName);
-    	if (firstName == null || lastName == null){
+        List<Patient> patientShell = new ArrayList<>();
+        if (firstName == null || lastName == null){
     		return patientShell;
     	}
         Document query = new Document() {{
@@ -118,7 +119,8 @@ public class PatientRepositoryImpl extends
     @Override
     public List<Patient> findAllByDateOfBirth(final LocalDate dateOfBirth) {
     	LOGGER.trace("findAllByDateOfBirth(dateOfBirth={})", dateOfBirth);
-    	if (dateOfBirth == null){
+        List<Patient> patientShell = new ArrayList<>();
+        if (dateOfBirth == null){
     		return patientShell;
     	}
         Document query = new Document() {{
@@ -133,7 +135,8 @@ public class PatientRepositoryImpl extends
     @Override
     public List<Patient> findAllByGender(final Gender gender) {
     	LOGGER.trace("findAllByGender(gender={})", gender);
-    	if (gender == null){
+        List<Patient> patientShell = new ArrayList<>();
+        if (gender == null){
     		return patientShell;
     	}
         Document query = new Document() {{
@@ -148,7 +151,8 @@ public class PatientRepositoryImpl extends
     @Override
     public List<Patient> findAllByRace(final Race race) {
     	LOGGER.trace("findAllByRace(race={})", race);
-    	if (race == null){
+        List<Patient> patientShell = new ArrayList<>();
+        if (race == null){
     		return patientShell;
     	}
         Document query = new Document() {{

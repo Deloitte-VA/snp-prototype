@@ -7,13 +7,11 @@ import com.github.jlgrock.snp.apis.data.Pageable;
 import com.github.jlgrock.snp.apis.data.Sort;
 import com.github.jlgrock.snp.apis.domain.MongoDomainObject;
 import com.github.jlgrock.snp.apis.exceptions.DataAccessException;
-
 import com.google.common.collect.Lists;
 import com.mongodb.BasicDBObject;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-
 import org.bson.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +19,6 @@ import org.slf4j.LoggerFactory;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
 import java.util.stream.Collectors;
 
 /**
@@ -86,18 +83,18 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
      */
     @SuppressWarnings("unchecked")
     protected List<S> executeQueryAndTransformResults(final Document query) {
-    	LOGGER.trace("executeQueryAndTransformResults(query={})", query);
+        LOGGER.trace("executeQueryAndTransformResults(query={})", query);
         List<S> eList = new ArrayList<>();
-        if (query == null){
-    		return eList;
-    	}
-        
-        FindIterable<Document> newCollection = dBCollection().find(query);
-       
-        for (Document d : newCollection) {
-			eList.add(convertToDomainObject(d));
+        if (query == null) {
+            return eList;
         }
-       
+
+        FindIterable<Document> newCollection = dBCollection().find(query);
+
+        for (Document d : newCollection) {
+            eList.add(convertToDomainObject(d));
+        }
+
         return eList;
     }
 
@@ -106,7 +103,7 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
      * of data from a MongoDB instance.
      */
     protected MongoCollection dBCollection() {
-    	LOGGER.trace("dbCollection()");
+        LOGGER.trace("dbCollection()");
         MongoDatabase db = null;
         try {
             db = mongoDbFactory.db();
@@ -115,7 +112,9 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
         }
         String collectionName = getCollectionName();
         if (collectionName == null) {
-            LOGGER.error("Collection name has not been set on class " + this.getClass().getSimpleName() + ", code will fail until this is remedied");
+            LOGGER.error(
+                    "Collection name has not been set on class {}, code will fail until this is remedied",
+                    this.getClass().getSimpleName() + "");
             return null;
         }
         MongoCollection dbCollection = db.getCollection(collectionName);
@@ -124,10 +123,10 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
     }
 
     private void deleteByQuery(final Document query) {
-    	LOGGER.trace("deleteByQuery(query={})", query);
-    	if (query == null){
-    		LOGGER.error("Document parameter was null for the deleteByQuery method.");
-    	}
+        LOGGER.trace("deleteByQuery(query={})", query);
+        if (query == null) {
+            LOGGER.error("Document parameter was null for the deleteByQuery method.");
+        }
         dBCollection().deleteMany(query);
     }
 
@@ -136,7 +135,7 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
      */
     @Override
     public Iterable<S> findAll(final Sort sort) {
-    	LOGGER.trace("findAll(sort={})", sort);
+        LOGGER.trace("findAll(sort={})", sort);
         throw new UnsupportedOperationException("Method is not currently being utilized.");
     }
 
@@ -145,7 +144,7 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
      */
     @Override
     public Page<S> findAll(final Pageable pageable) {
-    	LOGGER.trace("findAll(pageable={})", pageable);
+        LOGGER.trace("findAll(pageable={})", pageable);
         throw new UnsupportedOperationException("Method is not currently being utilized.");
     }
 
@@ -154,11 +153,11 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
      */
     @Override
     public <R extends S> S save(final R entity) {
-    	LOGGER.trace("save(entity={})", entity);
-    	if (entity == null){
-     		 LOGGER.error("Entity parameter for save method is null, therefore nothing can be saved or updated in the database.");
-     		 return null;
-     	}
+        LOGGER.trace("save(entity={})", entity);
+        if (entity == null) {
+            LOGGER.error("Entity parameter for save method is null, therefore nothing can be saved or updated in the database.");
+            return null;
+        }
         dBCollection().insertOne(convertToDBObject(entity));
         return entity;
     }
@@ -168,13 +167,17 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
      */
     @Override
     public <R extends S> Iterable<R> save(final Iterable<R> entities) {
-    	if (LOGGER.isTraceEnabled()) {
-    		LOGGER.trace("save(entities={}", Lists.newArrayList(entities).stream().map(entity -> entity.toString()).collect(Collectors.joining(", ")));
-    	}
-    	if (entities == null){
-      		 LOGGER.error("Entities parameter for save method is null, therefore nothing can be saved or updated in the database.");
-      		 return null;
-      	}
+        if (LOGGER.isTraceEnabled()) {
+            LOGGER.trace("save(entities={}",
+                    Lists.newArrayList(entities)
+                            .stream()
+                            .map(entity -> entity.toString())
+                            .collect(Collectors.joining(", ")));
+        }
+        if (entities == null) {
+            LOGGER.error("Entities parameter for save method is null, therefore nothing can be saved or updated in the database.");
+            return null;
+        }
         MongoCollection<Document> dbCollection = dBCollection();
         for (S entity : entities) {
             Document query = new Document() {{
@@ -186,43 +189,44 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
         }
         return entities;
     }
-    
+
     /**
      * {@inheritDoc}
      */
     @Override
     public S findOneById(final T id) {
-    	LOGGER.trace("findOneByID(id={})", id);
-    	if (id == null){
-   		 LOGGER.error("Id parameter for findOneById method is null, therefore Domain Object cannot be found.");
-   		 return null;
-   	}
+        LOGGER.trace("findOneByID(id={})", id);
+        if (id == null) {
+            LOGGER.error("Id parameter for findOneById method is null, therefore Domain Object cannot be found.");
+            return null;
+        }
         Document query = new Document() {{
             put("_id", id);
-            
+
         }};
         FindIterable<Document> iterable = dBCollection().find(query).limit(1);
         return convertToDomainObject(iterable.first());
 
     }
 
-    /**1
+    /**
+     * 1
      * {@inheritDoc}
      */
     @Override
     public boolean existsById(final T id) {
-    	LOGGER.trace("exists(id={})", id);
-    	if (id == null){
-    		 LOGGER.error("Id parameter for existsById method is null, therefore Domain Object does not exist.");
-    		 return false;
-    	}
+        LOGGER.trace("exists(id={})", id);
+        if (id == null) {
+            LOGGER.error("Id parameter for existsById method is null, therefore Domain Object does not exist.");
+            return false;
+        }
         S obj = findOneById(id);
         if (obj != null) {
             return true;
         }
         return false;
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -231,19 +235,23 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
         LOGGER.trace("findAll()");
         return executeQueryAndTransformResults(new Document());
     }
-    
+
     /**
      * {@inheritDoc}
      */
     @Override
-    public Iterable<S> findAllById(final Iterable<T> ids) {  
-    	if (LOGGER.isTraceEnabled()) {
-    		LOGGER.trace("findAllById(ids={}", Lists.newArrayList(ids).stream().map(id -> id.toString()).collect(Collectors.joining(", ")));
-    	}
+    public Iterable<S> findAllById(final Iterable<T> ids) {
+        if (LOGGER.isTraceEnabled()) {
+            LOGGER.trace("findAllById(ids={}",
+                    Lists.newArrayList(ids)
+                            .stream()
+                            .map(id -> id.toString())
+                            .collect(Collectors.joining(", ")));
+        }
         List<S> sList = new ArrayList<>();
-        if (ids == null){
-    		return sList;
-    	}
+        if (ids == null) {
+            return sList;
+        }
         Document query = new Document() {{
             put("_id", new BasicDBObject() {{
                 put("$in", ids);
@@ -258,58 +266,62 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
      */
     @Override
     public long count() {
-    	LOGGER.trace("count()");
+        LOGGER.trace("count()");
         return dBCollection().count();
     }
-    
+
     /**
      * {@inheritDoc}
      */
     @Override
     public void delete(final S entity) {
-    	LOGGER.trace("deleteById(entity={})", entity);
-    	if (entity == null){
-   		 LOGGER.error("Entity parameter for delete method is null, therefore no values were removed from the database.");
-   	}
+        LOGGER.trace("deleteById(entity={})", entity);
+        if (entity == null) {
+            LOGGER.error("Entity parameter for delete method is null, therefore no values were removed from the database.");
+        }
         dBCollection().findOneAndDelete(convertToDBObject(entity));
     }
-    
+
     /**
      * {@inheritDoc}
      */
     @Override
     public void deleteById(final T id) {
-    	LOGGER.trace("deleteById(id={})", id);
-    	if (id == null){
-    		 LOGGER.error("Id parameter for deleteById method is null, therefore no values were removed from the database.");
-    	}
+        LOGGER.trace("deleteById(id={})", id);
+        if (id == null) {
+            LOGGER.error("Id parameter for deleteById method is null, therefore no values were removed from the database.");
+        }
         Document query = new Document() {{
             put("_id", id);
         }};
         deleteByQuery(query);
     }
-    
+
     /**
      * {@inheritDoc}
      */
     @Override
     public void delete(final Iterable<? extends S> entities) {
-    	if (LOGGER.isTraceEnabled()) {
-    		LOGGER.trace("delete(entities={}", Lists.newArrayList(entities).stream().map(entity -> entity.toString()).collect(Collectors.joining(", ")));
-    	}
-    	if (entities == null){
-     		 LOGGER.error("Entities parameter for delete method is null, therefore no values were removed from the database.");
-     		 return;
-     	}
+        if (LOGGER.isTraceEnabled()) {
+            LOGGER.trace("delete(entities={}",
+                    Lists.newArrayList(entities)
+                            .stream()
+                            .map(entity -> entity.toString())
+                            .collect(Collectors.joining(", ")));
+        }
+        if (entities == null) {
+            LOGGER.error("Entities parameter for delete method is null, therefore no values were removed from the database.");
+            return;
+        }
         Document query = new Document() {{
             put("_id", new Document() {{
                 put("$in", entities);
             }});
         }};
-        
+
         deleteByQuery(query);
     }
-    
+
     /**
      * {@inheritDoc}
      */

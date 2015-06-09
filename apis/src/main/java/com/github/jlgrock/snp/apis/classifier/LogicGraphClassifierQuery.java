@@ -5,7 +5,8 @@ import org.jvnet.hk2.annotations.Contract;
 import java.util.List;
 
 /**
- *
+ * Query utilities for searching the index for a particular classified
+ * Logic Graph.
  */
 @Contract
 public interface LogicGraphClassifierQuery {

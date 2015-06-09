@@ -1,13 +1,11 @@
 package com.github.jlgrock.snp.apis.classifier;
 
-import gov.vha.isaac.ochre.api.IdentifierService;
-import gov.vha.isaac.ochre.api.TaxonomyService;
 import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
 import org.ihtsdo.otf.tcc.model.index.service.IndexerBI;
 import org.jvnet.hk2.annotations.Contract;
 
 /**
- *
+ * The classifier store, which stores the data from the classifier.
  */
 @Contract
 public interface LogicClassifierStore {
@@ -15,12 +13,6 @@ public interface LogicClassifierStore {
      * Start the expression service
      */
     void startExpressionService();
-
-    IdentifierService getIdentifierService();
-
-    IndexerBI getDescriptionLookupService();
-
-    TaxonomyService getTaxonomyService();
 
     /**
      * Stop the expression service

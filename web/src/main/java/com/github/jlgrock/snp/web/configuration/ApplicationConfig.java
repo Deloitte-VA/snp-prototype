@@ -29,12 +29,23 @@ public class ApplicationConfig extends ResourceConfig {
 
     /**
      * Sets up all of the standard features.
+     *
+     * @param serviceLocator the service locator that Jersey uses
+     * @param context the servlet context that allows for getting resources from the servlet container
      */
     @Inject
     public ApplicationConfig(final ServiceLocator serviceLocator, final ServletContext context) {
         this(serviceLocator, context, false);
     }
 
+    /**
+     * Sets up all of the standard features.
+     *
+     * @param serviceLocator the service locator that Jersey uses
+     * @param context the servlet context that allows for getting resources from the servlet container
+     * @param isForTesting if true, skips loading hk2 resources automatically and allows you to do this
+     *                     via your own test framework
+     */
     public ApplicationConfig(final ServiceLocator serviceLocator, final ServletContext context, final boolean isForTesting) {
         String s = isForTesting ? "in Testing mode" : "";
         LOGGER.info("Starting MongoRestApplication {}...", s);
@@ -45,7 +56,7 @@ public class ApplicationConfig extends ResourceConfig {
             new JerseyAutoScan(serviceLocator, context).scan();
 
             // preload the LogicGraphClassifier to bootstrap the database
-            LogicClassifierStore logicClassifierStore = serviceLocator.getService(LogicClassifierStore.class);
+            serviceLocator.getService(LogicClassifierStore.class);
 
         }
 
@@ -83,9 +94,14 @@ public class ApplicationConfig extends ResourceConfig {
     }
     /**
      * Create and return an application configuration, for use in starting a jersey server.
+     *
+     * @param serviceLocator the service locator that Jersey uses
+     * @param context the servlet context that allows for getting resources from the servlet container
+     * @param isForTesting if true, skips loading hk2 resources automatically and allows you to do this
+     *                     via your own test framework
      * @return the configuration object, which can be modified further.
      */
-    public static ResourceConfig createApp(final ServiceLocator serviceLocator, final ServletContext context, boolean isForTesting) {
+    public static ResourceConfig createApp(final ServiceLocator serviceLocator, final ServletContext context, final boolean isForTesting) {
         return new ApplicationConfig(serviceLocator, context, isForTesting);
     }
 

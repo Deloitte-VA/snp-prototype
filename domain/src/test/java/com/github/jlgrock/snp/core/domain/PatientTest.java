@@ -1,17 +1,15 @@
 package com.github.jlgrock.snp.core.domain;
 
-import org.testng.annotations.Test;
-
 import com.github.jlgrock.snp.domain.types.Gender;
 import com.github.jlgrock.snp.domain.types.Patient;
-import com.github.jlgrock.snp.domain.types.Race;
+import org.testng.annotations.Test;
 
 import java.time.LocalDate;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotEquals;
 import static org.testng.Assert.assertTrue;
-import static org.testng.Assert.assertFalse;
 
 
 public class PatientTest {
@@ -43,6 +41,7 @@ public class PatientTest {
 		pt1.setLastName(st3);
 		pt1.setDateOfBirth(dt1);
 		pt1.setGender(gn1);
+		pt1.setDeceased(false);
 		
 		Patient pt2 = new Patient();
 		
@@ -52,6 +51,7 @@ public class PatientTest {
 		pt2.setLastName(st3);
 		pt2.setDateOfBirth(dt1);
 		pt2.setGender(gn1);
+		pt2.setDeceased(false);
 		
 		assertTrue(pt2.equals(pt1));
 		
@@ -78,7 +78,7 @@ public class PatientTest {
 		assertNotEquals(pt1.getDateOfBirth(), pt2.getDateOfBirth());
 		assertNotEquals(pt1.getGender(), pt2.getGender());
 		
-		assertEquals(pt1.toString(), "Patient{id=201521, firstName=Brady, middleName=Wilson, lastName=Lynch, dateOfBirth=2015-02-02, gender=MALE}");
+		assertEquals(pt1.toString(), "Patient{id=201521, firstName=Brady, middleName=Wilson, lastName=Lynch, dateOfBirth=2015-02-02, gender=MALE, isDeceased=false, dateDeceased=null}");
 		assertNotEquals(pt1.hashCode(), pt2.hashCode());
 		
 	}

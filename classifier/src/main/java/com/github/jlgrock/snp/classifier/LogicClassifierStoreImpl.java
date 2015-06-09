@@ -2,9 +2,7 @@ package com.github.jlgrock.snp.classifier;
 
 import com.github.jlgrock.snp.apis.classifier.LogicClassifierStore;
 import com.github.jlgrock.snp.apis.connection.configuration.FileConfiguration;
-import gov.vha.isaac.ochre.api.IdentifierService;
 import gov.vha.isaac.ochre.api.LookupService;
-import gov.vha.isaac.ochre.api.TaxonomyService;
 import gov.vha.isaac.ochre.api.constants.Constants;
 import org.glassfish.hk2.runlevel.RunLevelController;
 import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
@@ -17,19 +15,19 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 /**
- *
+ * The default implementation of the classifier store, this stores data in ochre and lucene.
  */
 @Service
 @Singleton
 public class LogicClassifierStoreImpl implements LogicClassifierStore {
     private static final Logger LOGGER = LoggerFactory.getLogger(LogicClassifierStoreImpl.class);
 
+    private final FileConfiguration fileConfiguration;
 
-//  TerminologySnapshotDI statedTermSnapshot = termStore.getSnapshot(ViewCoordinates.getDevelopmentStatedLatest());
-//  TerminologySnapshotDI inferredTermSnapshot = termStore.getSnapshot(ViewCoordinates.getDevelopmentInferredLatest());
-
-    final FileConfiguration fileConfiguration;
-
+    /**
+     * Constructor that will create and start the expression service.
+     * @param fileConfigurationIn the configuration that will be used for the expression service
+     */
     @Inject
     public LogicClassifierStoreImpl(final FileConfiguration fileConfigurationIn) {
         LOGGER.info("Starting Expression Service...");
@@ -61,21 +59,6 @@ public class LogicClassifierStoreImpl implements LogicClassifierStore {
     @Override
     public TerminologyStoreDI getTerminologyStore() {
         return LookupService.getService(TerminologyStoreDI.class);
-    }
-
-    @Override
-    public IdentifierService getIdentifierService() {
-        return LookupService.getService(IdentifierService.class);
-    }
-
-    @Override
-    public IndexerBI getDescriptionLookupService() {
-        return LookupService.getService(IndexerBI.class, "Description indexer");
-    }
-
-    @Override
-    public TaxonomyService getTaxonomyService() {
-        return LookupService.getService(TaxonomyService.class);
     }
 
     @Override

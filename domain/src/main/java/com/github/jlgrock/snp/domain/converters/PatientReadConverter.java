@@ -4,7 +4,6 @@ import com.github.jlgrock.snp.apis.converters.ReadConverter;
 import com.github.jlgrock.snp.domain.data.PatientTags;
 import com.github.jlgrock.snp.domain.types.Gender;
 import com.github.jlgrock.snp.domain.types.Patient;
-import com.github.jlgrock.snp.domain.types.Race;
 import org.bson.Document;
 import org.jvnet.hk2.annotations.Service;
 
@@ -26,7 +25,6 @@ public class PatientReadConverter implements ReadConverter<Document, Patient> {
         p.setMiddleName((String) source.get(PatientTags.MIDDLE_NAME_TAG));
         p.setLastName((String) source.get(PatientTags.LAST_NAME_TAG));
         p.setGender(Gender.getValueById((Integer) source.get(PatientTags.GENDER_TAG)));
-//        p.setRace(Race.getValueById((Integer) source.get(PatientTags.RACE_TAG)));
         p.setDateOfBirth(LocalDate.ofEpochDay(((Number) source.get(PatientTags.DATE_OF_BIRTH_TAG)).longValue()));
         return p;
     }

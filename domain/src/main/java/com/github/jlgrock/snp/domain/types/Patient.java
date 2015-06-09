@@ -26,8 +26,6 @@ public class Patient extends AbstractMongoDomainObject {
     
     private LocalDate dateDeceased;
 
-//    private Race race;
-
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;
@@ -40,8 +38,9 @@ public class Patient extends AbstractMongoDomainObject {
                 Objects.equal(middleName, that.middleName) &&
                 Objects.equal(lastName, that.lastName) &&
                 Objects.equal(dateOfBirth, that.dateOfBirth) &&
-                Objects.equal(gender, that.gender);// &&
-//                Objects.equal(race, that.race);
+                Objects.equal(gender, that.gender) &&
+                Objects.equal(isDeceased, that.isDeceased) &&
+                Objects.equal(dateDeceased, that.dateDeceased);
     }
 
     @Override
@@ -52,8 +51,9 @@ public class Patient extends AbstractMongoDomainObject {
                 middleName,
                 lastName,
                 dateOfBirth,
-                gender);//,
-//                race);
+                gender,
+                isDeceased,
+                dateDeceased);
     }
 
     @Override
@@ -65,7 +65,8 @@ public class Patient extends AbstractMongoDomainObject {
                 .add("lastName", lastName)
                 .add("dateOfBirth", dateOfBirth)
                 .add("gender", gender)
-//                .add("race", race)
+                .add("isDeceased", isDeceased)
+                .add("dateDeceased", dateDeceased)
                 .toString();
     }
 
@@ -113,24 +114,17 @@ public class Patient extends AbstractMongoDomainObject {
 		return isDeceased;
 	}
 
-	public void setDeceased(Boolean isDeceased) {
-		this.isDeceased = isDeceased;
+	public void setDeceased(final Boolean isDeceasedIn) {
+		this.isDeceased = isDeceasedIn;
 	}
 
 	public LocalDate getDateDeceased() {
 		return dateDeceased;
 	}
 
-	public void setDateDeceased(LocalDate dateDeceased) {
-		this.dateDeceased = dateDeceased;
+	public void setDateDeceased(final LocalDate dateDeceasedIn) {
+		this.dateDeceased = dateDeceasedIn;
 	}
 
-//    public Race getRace() {
-//        return race;
-//    }
-//
-//    public void setRace(final Race pRace) {
-//        race = pRace;
-//    }
 }
 
