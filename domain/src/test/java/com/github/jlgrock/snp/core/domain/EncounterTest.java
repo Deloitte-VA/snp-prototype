@@ -1,86 +1,116 @@
 package com.github.jlgrock.snp.core.domain;
 
-import org.mockito.Mockito;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertNotEquals;
+import static org.testng.Assert.assertTrue;
+
 import org.testng.annotations.Test;
 
 import com.github.jlgrock.snp.domain.types.Encounter;
 
-import java.time.LocalDate;
-import java.util.List;
-
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotEquals;
-import static org.testng.Assert.assertTrue;
-import static org.testng.Assert.assertFalse;
-
 public class EncounterTest {
-    /**
-     * public function returns void
-     */
+	
+    private Long enc1Id = new Long(201521);
+    private String patient1Id = "f203";
+    private String clazz1 = "OUTPATIENT";
+    private String participant1 = "Practitioner/f201";
+    private String status1 = "FINISHED";
+    private String subject1 = "Patient/f203";
+    
+    private Long enc2Id = new Long(201731);
+    private String patient2Id = "f201";
+    private String clazz2 = "INPATIENT";
+    private String participant2 = "Practitioner/f301";
+    private String status2 = "PLANNED";
+    private String subject2 = "Patient/f201";
+    
 	@Test
-	public void test() {
+	public void testSettersAndGetters() {
 				
-	    Long ln1 = new Long(201521);		
-		Long pt1 = new Long(4334l);
-        LocalDate dt1 = LocalDate.of(2015, 2, 2);
-		Integer it1 = 201523;
-	    String st1 = "Sprained Ankle";
-	    List lt1 = Mockito.mock (List.class);	
-	    
-	    Long ln2 = new Long(201524);		
-		Long pt2 = new Long(2425l);
-        LocalDate dt2 = LocalDate.of(2014, 2, 4);
-		Integer it2 = 201526;
-	    String st2 = "Sprained Wrist";
-	    List lt2 = Mockito.mock (List.class);	
-	    
 	    Encounter en1 = new Encounter();
 	    
-        en1.setDate(dt1);
-	    en1.setReasonForVisit(st1);
-	    en1.setObservations(lt1);
-	    en1.setType(it1);
-	    en1.setId(ln1);
-        en1.setPatientId(pt1);
+//	    en1.setObservations(lt1);
+	    en1.setId(enc1Id);
+        en1.setPatientId(patient1Id);
+        en1.setClazz(clazz1);
+        en1.setParticipant(participant1);
+        en1.setStatus(status1);
+        en1.setSubject(subject1);
+        
+        assertEquals(en1.getId(), enc1Id);
+        assertEquals(en1.getPatientId(), patient1Id);
+        assertEquals(en1.getClazz(), clazz1);
+        assertEquals(en1.getParticipant(), participant1);
+        assertEquals(en1.getStatus(), status1);
+        assertEquals(en1.getSubject(), subject1);
 
+	}
+	
+	@Test
+	public void testEqualsAndEquals() {
+	    Encounter en1 = new Encounter();
+	    
+//	    en1.setObservations(lt1);
+	    en1.setId(enc1Id);
+        en1.setPatientId(patient1Id);
+        en1.setClazz(clazz1);
+        en1.setParticipant(participant1);
+        en1.setStatus(status1);
+        en1.setSubject(subject1);
+        
 	    Encounter en2 = new Encounter();
 	    
-        en2.setDate(dt1);
-	    en2.setReasonForVisit(st1);
-	    en2.setObservations(lt1);
-	    en2.setType(it1);
-	    en2.setId(ln1);
-        en2.setPatientId(pt1);
+//	    en2.setObservations(lt1);
+	    en2.setId(enc1Id);
+        en2.setPatientId(patient1Id);
+        en2.setClazz(clazz1);
+        en2.setParticipant(participant1);
+        en2.setStatus(status1);
+        en2.setSubject(subject1);
         
-		assertTrue(en2.equals(en1));
+        assertTrue(en2.equals(en1));
+        assertEquals(en1.hashCode(), en2.hashCode());
+	}
+	
+	@Test
+	public void testEqualsAndHashCodeNegative() {
+	    Encounter en1 = new Encounter();
+	    
+//	    en1.setObservations(lt1);
+	    en1.setId(enc1Id);
+        en1.setPatientId(patient1Id);
+        en1.setClazz(clazz1);
+        en1.setParticipant(participant1);
+        en1.setStatus(status1);
+        en1.setSubject(subject1);
         
-		assertEquals(dt1, en1.getDate());
-		assertEquals(st1, en1.getReasonForVisit());
-		assertEquals(lt1, en1.getObservations());
-		assertEquals(it1, en1.getType());
-		assertEquals(ln1, en1.getId());
-		assertEquals(pt1, en1.getPatientId());
+	    Encounter en2 = new Encounter();
+	    
+//	    en2.setObservations(lt1);
+	    en2.setId(enc2Id);
+        en2.setPatientId(patient2Id);
+        en2.setClazz(clazz2);
+        en2.setParticipant(participant2);
+        en2.setStatus(status2);
+        en2.setSubject(subject2);
+        
+        assertFalse(en2.equals(en1));
+        assertNotEquals(en1.hashCode(), en2.hashCode());
+	}
+	
+	@Test
+	public void testToString() {
+		Encounter en1 = new Encounter();
 		
-        en2.setDate(dt2);
-	    en2.setReasonForVisit(st2);
-	    en2.setObservations(lt2);
-	    en2.setType(it2);
-	    en2.setId(ln2);
-        en2.setPatientId(pt2);
+		en1.setId(enc1Id);
+		en1.setPatientId(patient1Id);
+		en1.setClazz(clazz1);
+		en1.setParticipant(participant1);
+		en1.setStatus(status1);
+		en1.setSubject(subject1);
 		
-		assertFalse(en2.equals(pt1));
-		
-		assertNotEquals(en1.getDate(), en2.getDate());
-		assertNotEquals(en1.getReasonForVisit(), en2.getReasonForVisit());
-		assertNotEquals(en1.getObservations(), en2.getObservations());
-		assertNotEquals(en1.getType(), en2.getType());
-		assertNotEquals(en1.getId(), en2.getId());
-		assertNotEquals(en1.getPatientId(), en2.getPatientId());
-
-        // has an extra hashcode at the end because of the mocking of the list
-		assertEquals(true, en1.toString().contains("Encounter{id=201521, patientId=4334, date=2015-02-02, type=201523, reasonForVisit=Sprained Ankle, observations="));
-		assertNotEquals(en1.hashCode(), en2.hashCode());
-
+		assertEquals(en1.toString(), "Encounter{id=201521, patientId=f203, subject=Patient/f203, class=OUTPATIENT, status=FINISHED, participant=Practitioner/f201, observations=null}");
 	}
 
 }

@@ -65,10 +65,10 @@ public class EncounterControllerTest extends GenericControllerTest {
     public void testGetEncounterRestCall() throws JsonProcessingException {
         Encounter encounterTemp = new Encounter();
         encounterTemp.setId(1l);
-        encounterTemp.setDate(LocalDate.now());
-        encounterTemp.setPatientId(2l);
-        encounterTemp.setReasonForVisit("abc");
-        encounterTemp.setType(3);
+//        encounterTemp.setDate(LocalDate.now());
+//        encounterTemp.setPatientId(2l);
+//        encounterTemp.setReasonForVisit("abc");
+//        encounterTemp.setType(3);
         Mockito.when(encounterRepository.findOneById(Mockito.any())).thenReturn(encounterTemp);
         final WebTarget target = target("encounter/1");
 //        String response = target.request().get(String.class);

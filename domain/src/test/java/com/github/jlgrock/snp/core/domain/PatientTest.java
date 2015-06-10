@@ -13,63 +13,107 @@ import static org.testng.Assert.assertTrue;
 
 
 public class PatientTest {
-    /**
-     * public function returns void
-     */
+	
+	private Long pt1Id = new Long(201521L);
+    private String pt1FirstName = "Brady";
+    private String pt1MiddleName = "Wilson";
+    private String pt1LastName = "Lynch";
+    private LocalDate pt1Dob = LocalDate.of(1958, 2, 2);
+	private Gender pt1Gender = Gender.MALE;
+	private Boolean pt1IsDeceased = true;
+	private LocalDate pt1DateDeceased = LocalDate.of(2015, 3, 24);
+	
+	private Long pt2Id = new Long(201523L);
+    private String pt2FirstName = "Gronkowski";
+    private String pt2MiddleName = "Amendola";
+    private String pt2LastName = "Sherman";
+    private LocalDate pt2Dob = LocalDate.of(1975, 2, 4);
+	private Gender pt2Gender = Gender.FEMALE;
+	private Boolean pt2IsDeceased = false;
+	
 	@Test
-	public void test() {
+	public void testSettersandGetters() {
 
-	    Long ln1 = new Long(201521l);
-	    String st1 = "Brady";
-	    String st2 = "Wilson";
-	    String st3 = "Lynch";
-        LocalDate dt1 = LocalDate.of(2015, 2, 2);
-		Gender gn1 = Gender.MALE;
-	    
-	    Long ln2 = new Long(201523l);
-	    String st4 = "Gronkowski";
-	    String st5 = "Amendola";
-	    String st6 = "Sherman";
-        LocalDate dt2 = LocalDate.of(2015, 2, 4);
-		Gender gn2 = Gender.FEMALE; 
-		
 		Patient pt1 = new Patient();
 		
-		pt1.setId(ln1);
-		pt1.setFirstName(st1);
-		pt1.setMiddleName(st2);
-		pt1.setLastName(st3);
-		pt1.setDateOfBirth(dt1);
-		pt1.setGender(gn1);
-		pt1.setDeceased(false);
+		pt1.setId(pt1Id);
+		pt1.setFirstName(pt1FirstName);
+		pt1.setMiddleName(pt1MiddleName);
+		pt1.setLastName(pt1LastName);
+		pt1.setDateOfBirth(pt1Dob);
+		pt1.setGender(pt1Gender);
+		pt1.setDeceased(pt1IsDeceased);
+		pt1.setDateDeceased(pt1DateDeceased);
+		
+		assertEquals(pt1.getId(), pt1Id);
+		assertEquals(pt1.getFirstName(), pt1FirstName);
+		assertEquals(pt1.getMiddleName(), pt1MiddleName);
+		assertEquals(pt1.getLastName(), pt1LastName);
+		assertEquals(pt1.getDateOfBirth(), pt1Dob);
+		assertEquals(pt1.getGender(), pt1Gender);
+		assertEquals(pt1.isDeceased(), pt1IsDeceased);
+		assertEquals(pt1.getDateDeceased(), pt1DateDeceased);
+	}
+	
+	@Test
+	public void testHashCodeAndEquals() {
+		Patient pt1 = new Patient();
+		
+		pt1.setId(pt1Id);
+		pt1.setFirstName(pt1FirstName);
+		pt1.setMiddleName(pt1MiddleName);
+		pt1.setLastName(pt1LastName);
+		pt1.setDateOfBirth(pt1Dob);
+		pt1.setGender(pt1Gender);
+		pt1.setDeceased(pt1IsDeceased);
+		pt1.setDateDeceased(pt1DateDeceased);
 		
 		Patient pt2 = new Patient();
 		
-		pt2.setId(ln1);
-		pt2.setFirstName(st1);
-		pt2.setMiddleName(st2);
-		pt2.setLastName(st3);
-		pt2.setDateOfBirth(dt1);
-		pt2.setGender(gn1);
-		pt2.setDeceased(false);
+		pt2.setId(pt1Id);
+		pt2.setFirstName(pt1FirstName);
+		pt2.setMiddleName(pt1MiddleName);
+		pt2.setLastName(pt1LastName);
+		pt2.setDateOfBirth(pt1Dob);
+		pt2.setGender(pt1Gender);
+		pt2.setDeceased(pt1IsDeceased);
+		pt2.setDateDeceased(pt1DateDeceased);
+		
+		assertEquals(pt1.getId(), pt2.getId());
+		assertEquals(pt1.getFirstName(), pt2.getFirstName());
+		assertEquals(pt1.getMiddleName(), pt2.getMiddleName());
+		assertEquals(pt1.getLastName(), pt2.getLastName());
+		assertEquals(pt1.getDateOfBirth(), pt2.getDateOfBirth());
+		assertEquals(pt1.getGender(), pt2.getGender());
+		assertEquals(pt1.isDeceased(), pt2.isDeceased());
+		assertEquals(pt1.getDateDeceased(), pt2.getDateDeceased());
 		
 		assertTrue(pt2.equals(pt1));
-		
-		assertEquals(ln1, pt1.getId());
-		assertEquals(st1, pt1.getFirstName());
-		assertEquals(st2, pt1.getMiddleName());
-		assertEquals(st3, pt1.getLastName());
-		assertEquals(dt1, pt1.getDateOfBirth());
-		assertEquals(gn1, pt1.getGender());
+		assertEquals(pt1.hashCode(), pt2.hashCode());
+	}
 	
-		pt2.setId(ln2);
-		pt2.setFirstName(st4);
-		pt2.setMiddleName(st5);
-		pt2.setLastName(st6);
-		pt2.setDateOfBirth(dt2);
-		pt2.setGender(gn2);
+	@Test
+	public void testHashCodeAndEqualsNegative() {
+		Patient pt1 = new Patient();
 		
-		assertFalse(pt2.equals(pt1));
+		pt1.setId(pt1Id);
+		pt1.setFirstName(pt1FirstName);
+		pt1.setMiddleName(pt1MiddleName);
+		pt1.setLastName(pt1LastName);
+		pt1.setDateOfBirth(pt1Dob);
+		pt1.setGender(pt1Gender);
+		pt1.setDeceased(pt1IsDeceased);
+		pt1.setDateDeceased(pt1DateDeceased);
+		
+		Patient pt2 = new Patient();
+		
+		pt2.setId(pt2Id);
+		pt2.setFirstName(pt2FirstName);
+		pt2.setMiddleName(pt2MiddleName);
+		pt2.setLastName(pt2LastName);
+		pt2.setDateOfBirth(pt2Dob);
+		pt2.setGender(pt2Gender);
+		pt2.setDeceased(pt2IsDeceased);
 		
 		assertNotEquals(pt1.getId(), pt2.getId());
 		assertNotEquals(pt1.getFirstName(), pt2.getFirstName());
@@ -77,10 +121,27 @@ public class PatientTest {
 		assertNotEquals(pt1.getLastName(), pt2.getLastName());
 		assertNotEquals(pt1.getDateOfBirth(), pt2.getDateOfBirth());
 		assertNotEquals(pt1.getGender(), pt2.getGender());
+		assertNotEquals(pt1.isDeceased(), pt2.isDeceased());
+		assertNotEquals(pt1.getDateDeceased(), pt2.getDateDeceased());
 		
-		assertEquals(pt1.toString(), "Patient{id=201521, firstName=Brady, middleName=Wilson, lastName=Lynch, dateOfBirth=2015-02-02, gender=MALE, isDeceased=false, dateDeceased=null}");
+		assertFalse(pt2.equals(pt1));
 		assertNotEquals(pt1.hashCode(), pt2.hashCode());
+	}
+	
+	@Test
+	public void testToString() {
+		Patient pt1 = new Patient();
 		
+		pt1.setId(pt1Id);
+		pt1.setFirstName(pt1FirstName);
+		pt1.setMiddleName(pt1MiddleName);
+		pt1.setLastName(pt1LastName);
+		pt1.setDateOfBirth(pt1Dob);
+		pt1.setGender(pt1Gender);
+		pt1.setDeceased(pt1IsDeceased);
+		pt1.setDateDeceased(pt1DateDeceased);
+		
+		assertEquals(pt1.toString(), "Patient{id=201521, firstName=Brady, middleName=Wilson, lastName=Lynch, dateOfBirth=1958-02-02, gender=MALE, isDeceased=true, dateDeceased=2015-03-24}");
 	}
 }
 

@@ -125,6 +125,5 @@ public class Patient extends AbstractMongoDomainObject {
 	public void setDateDeceased(final LocalDate dateDeceasedIn) {
 		this.dateDeceased = dateDeceasedIn;
 	}
-
 }
 

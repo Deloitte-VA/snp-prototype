@@ -34,19 +34,19 @@ public class EncounterReadConverter extends AbstractReadConverter implements Con
     @Override
     public Encounter convert(final Document source) {
         Encounter encounter = new Encounter();
-        encounter.setId(parseLong(source, EncounterTags.ID_TAG));
-        encounter.setPatientId(parseLong(source, EncounterTags.PATIENT_TAG));
-        encounter.setDate(parseLocalDate(source, EncounterTags.DATE_TAG));
-        encounter.setType(parseInteger(source, EncounterTags.TYPE_TAG));
-        encounter.setReasonForVisit(parseString(source, EncounterTags.REASON_FOR_VISIT_TAG));
-
-        List<Document> observationsObjs = (List<Document>) source.get(EncounterTags.OBSERVATIONS_TAG);
-        List<Observation> observations = new ArrayList<>();
-        if (observationsObjs != null) {
-            observations = observationsObjs.stream().map(
-                    observationObj->observationReadConverter.convert(observationObj)).collect(Collectors.toList());
-        }
-        encounter.setObservations(observations);
+//        encounter.setId(parseLong(source, EncounterTags.ID_TAG));
+//        encounter.setPatientId(parseLong(source, EncounterTags.PATIENT_TAG));
+//        encounter.setDate(parseLocalDate(source, EncounterTags.DATE_TAG));
+//        encounter.setType(parseInteger(source, EncounterTags.TYPE_TAG));
+//        encounter.setReasonForVisit(parseString(source, EncounterTags.REASON_FOR_VISIT_TAG));
+//
+//        List<Document> observationsObjs = (List<Document>) source.get(EncounterTags.OBSERVATIONS_TAG);
+//        List<Observation> observations = new ArrayList<>();
+//        if (observationsObjs != null) {
+//            observations = observationsObjs.stream().map(
+//                    observationObj->observationReadConverter.convert(observationObj)).collect(Collectors.toList());
+//        }
+//        encounter.setObservations(observations);
         return encounter;
     }
 }
