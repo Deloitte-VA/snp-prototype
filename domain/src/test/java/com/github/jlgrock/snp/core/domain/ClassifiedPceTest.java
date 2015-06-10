@@ -42,7 +42,7 @@ public class ClassifiedPceTest {
         assertNotEquals(pc1.getId(), pc2.getId());
         assertNotEquals(pc1.getDesc(), pc2.getDesc());
 
-        assertEquals("ClassifiedPce{uuid=null, id=201521, desc=Touchdown}", pc1.toString());
+        assertEquals("ClassifiedPce{id=" + ln1 + ", uuid=null, desc=" + st1 + "}", pc1.toString());
         assertNotEquals(pc1.hashCode(), pc2.hashCode());
 
     }

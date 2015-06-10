@@ -4,30 +4,31 @@ package com.github.jlgrock.snp.domain.data;
  * JSON key tags related to Encounter serialization.
  */
 public final class EncounterTags {
-    /**
-     * The identifier.
-     */
-    public static final String ID_TAG = "_id";
 
     /**
      * The patient id.
      */
-    public static final String PATIENT_TAG = "patient";
+    public static final String FHIR_ID = "fhir_id";
 
     /**
      * The date of the encounter.
      */
-    public static final String DATE_TAG = "date";
+    public static final String PATIENT_CLASS = "patient_class";
 
     /**
-     * The type of encounter, stored as an integer.
+     * The subject, stored as a string.
      */
-    public static final String TYPE_TAG = "type";
+    public static final String SUBJECT = "subject";
 
     /**
-     * The reason for the visit, stored as a string description.
+     * The status, stored as a string.
      */
-    public static final String REASON_FOR_VISIT_TAG = "reason_for_visit";
+    public static final String STATUS = "status";
+
+    /**
+     * The participant, stored as a string description.
+     */
+    public static final String PARTICIPANT = "participant";
 
     /**
      * The list of observations.

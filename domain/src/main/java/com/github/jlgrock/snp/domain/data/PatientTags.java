@@ -4,10 +4,6 @@ package com.github.jlgrock.snp.domain.data;
  * JSON key tags related to Patient serialization.
  */
 public final class PatientTags {
-    /**
-     * The unique identifier.
-     */
-    public static final String ID_TAG = "_id";
 
     /**
      * The first name of the patient.
@@ -36,11 +32,14 @@ public final class PatientTags {
     public static final String GENDER_TAG = "gender";
 
     /**
-     * The integer value representation of the {@link com.github.jlgrock.snp.domain.types.Race Race}
-     * class for a patient's race.
+     * The boolean value representing if a patient is deceased.  This can be a null value if unknown.
      */
-    public static final String RACE_TAG = "race";
+    public static final String DECEASED = "deceased";
 
+    /**
+     * The date of death for a patient
+     */
+    public static final String DATE_DECEASED = "dod";
     /**
      * Private constructor for utility class.
      */

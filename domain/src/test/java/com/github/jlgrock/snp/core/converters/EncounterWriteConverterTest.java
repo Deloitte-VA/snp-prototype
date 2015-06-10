@@ -3,6 +3,7 @@ package com.github.jlgrock.snp.core.converters;
 import com.github.jlgrock.snp.domain.converters.EncounterWriteConverter;
 import com.github.jlgrock.snp.domain.converters.ObservationWriteConverter;
 import com.github.jlgrock.snp.domain.data.EncounterTags;
+import com.github.jlgrock.snp.domain.data.SharedTags;
 import com.github.jlgrock.snp.domain.types.Encounter;
 import com.github.jlgrock.snp.domain.types.Observation;
 import com.mongodb.BasicDBList;
@@ -44,21 +45,32 @@ public class EncounterWriteConverterTest {
         when(observationWriteConverter.convert(observation1)).thenReturn(observation1Obj);
         when(observationWriteConverter.convert(observation2)).thenReturn(observation2Obj);
 
+        Long id = 123l;
+        String fhirId = "abc";
+        String participant = "def";
+        String patientClass = "ghi";
+        String status = "jkl";
+        String subject = "mno";
+
         Encounter encounter = mock(Encounter.class);
-        when(encounter.getId()).thenReturn(123l);
-//        when(encounter.getDate()).thenReturn(date);
-        when(encounter.getPatientId()).thenReturn(patientId);
-//        when(encounter.getType()).thenReturn(1);
-//        when(encounter.getObservations()).thenReturn(observations);
+        when(encounter.getId()).thenReturn(id);
+        when(encounter.getFhirId()).thenReturn(fhirId);
+        when(encounter.getParticipant()).thenReturn(participant);
+        when(encounter.getPatientClass()).thenReturn(patientClass);
+        when(encounter.getStatus()).thenReturn(status);
+        when(encounter.getSubject()).thenReturn(subject);
+        when(encounter.getObservations()).thenReturn(observations);
 
         EncounterWriteConverter encounterWriteConverter = new EncounterWriteConverter(observationWriteConverter);
         Document dbObj = encounterWriteConverter.convert(encounter);
 
-        assertEquals(123L, dbObj.get(EncounterTags.ID_TAG));
-//        assertEquals(date.toEpochDay(), dbObj.get(EncounterTags.DATE_TAG));
-//        assertEquals(456l, dbObj.get(EncounterTags.PATIENT_TAG));
-//        assertEquals(1, dbObj.get(EncounterTags.TYPE_TAG));
-//        assertEquals(observationObjs, dbObj.get(EncounterTags.OBSERVATIONS_TAG));
+        assertEquals(id, dbObj.get(SharedTags.ID_TAG));
+        assertEquals(fhirId, dbObj.get(EncounterTags.FHIR_ID));
+        assertEquals(participant, dbObj.get(EncounterTags.PARTICIPANT));
+        assertEquals(patientClass, dbObj.get(EncounterTags.PATIENT_CLASS));
+        assertEquals(status, dbObj.get(EncounterTags.STATUS));
+        assertEquals(subject, dbObj.get(EncounterTags.SUBJECT));
+        assertEquals(observationObjs, dbObj.get(EncounterTags.OBSERVATIONS_TAG));
     }
 }
 

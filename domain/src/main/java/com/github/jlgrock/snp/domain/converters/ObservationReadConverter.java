@@ -2,6 +2,7 @@ package com.github.jlgrock.snp.domain.converters;
 
 import com.github.jlgrock.snp.apis.converters.ReadConverter;
 import com.github.jlgrock.snp.domain.data.ObservationTags;
+import com.github.jlgrock.snp.domain.data.SharedTags;
 import com.github.jlgrock.snp.domain.types.Observation;
 import com.github.jlgrock.snp.domain.types.primitives.SimplePrimitive;
 import org.bson.Document;
@@ -19,7 +20,7 @@ public class ObservationReadConverter extends AbstractReadConverter implements R
     @Override
     public Observation convert(final Document source) {
         Observation observation = new Observation();
-        observation.setIdentifier(parseString(source, ObservationTags.ID_TAG));
+        observation.setIdentifier(parseString(source, SharedTags.ID_TAG));
         observation.setName(SimplePrimitive.createPrimitive(
                 ((Number) source.get(ObservationTags.NAME_TYPE_TAG)).intValue(),
                 source.get(ObservationTags.NAME_TAG)));

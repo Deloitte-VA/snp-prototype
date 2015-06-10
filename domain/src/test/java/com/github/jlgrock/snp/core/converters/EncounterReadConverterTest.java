@@ -3,13 +3,14 @@ package com.github.jlgrock.snp.core.converters;
 import com.github.jlgrock.snp.domain.converters.EncounterReadConverter;
 import com.github.jlgrock.snp.domain.converters.ObservationReadConverter;
 import com.github.jlgrock.snp.domain.data.EncounterTags;
+import com.github.jlgrock.snp.domain.data.SharedTags;
 import com.github.jlgrock.snp.domain.types.Encounter;
 import com.github.jlgrock.snp.domain.types.Observation;
 import com.mongodb.BasicDBList;
 import org.bson.Document;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,9 +23,6 @@ public class EncounterReadConverterTest {
      */
     @Test
     public void testConvert() {
-        LocalDate date = LocalDate.ofEpochDay(99999l);
-        Long patientId = 456l;
-
         Observation observation1 = mock(Observation.class);
         Observation observation2 = mock(Observation.class);
         List<Observation> observations = new ArrayList<Observation>() {{
@@ -41,12 +39,20 @@ public class EncounterReadConverterTest {
         }};
         ObservationReadConverter observationReadConverter = mock(ObservationReadConverter.class);
 
+        Long id = 123l;
+        String fhirId = "abc";
+        String participant = "def";
+        String patientClass = "ghi";
+        String status = "jkl";
+        String subject = "mno";
+
         Document dbObject = new Document() {{
-            put(EncounterTags.ID_TAG, 123l);
-            put(EncounterTags.PATIENT_TAG, 456l);
-            put(EncounterTags.DATE_TAG, date.toEpochDay());
-            put(EncounterTags.TYPE_TAG, 1);
-            put(EncounterTags.REASON_FOR_VISIT_TAG, "hernia");
+            put(SharedTags.ID_TAG, id);
+            put(EncounterTags.FHIR_ID, fhirId);
+            put(EncounterTags.PARTICIPANT, participant);
+            put(EncounterTags.PATIENT_CLASS, patientClass);
+            put(EncounterTags.STATUS, status);
+            put(EncounterTags.SUBJECT, subject);
             put(EncounterTags.OBSERVATIONS_TAG, observationObjs);
         }};
 
@@ -56,13 +62,13 @@ public class EncounterReadConverterTest {
         EncounterReadConverter encounterReadConverter = new EncounterReadConverter(observationReadConverter);
 
         Encounter encounter = encounterReadConverter.convert(dbObject);
-//        TODO: FIXME
-//        assertEquals((Long) 123l, encounter.getId());
-//        assertEquals(patientId, encounter.getPatientId());
-//        assertEquals(date, encounter.getDate());
-//        assertEquals((Integer) 1, encounter.getType());
-//        assertEquals("hernia", encounter.getReasonForVisit());
-//        assertEquals(observations, encounter.getObservations());
+        Assert.assertEquals(id, encounter.getId());
+        Assert.assertEquals(fhirId, encounter.getFhirId());
+        Assert.assertEquals(participant, encounter.getParticipant());
+        Assert.assertEquals(patientClass, encounter.getPatientClass());
+        Assert.assertEquals(status, encounter.getStatus());
+        Assert.assertEquals(subject, encounter.getSubject());
+        Assert.assertEquals(observations, encounter.getObservations());
     }
 
 

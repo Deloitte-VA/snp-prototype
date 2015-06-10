@@ -4,10 +4,6 @@ package com.github.jlgrock.snp.domain.data;
  * JSON key tags related to Observation serialization.
  */
 public class ObservationTags {
-    /**
-     * The identifier for an observation.
-     */
-    public static final String ID_TAG = "identifier";
 
     /**
      * The name of the observation.  This can stored as any primitive indicated in

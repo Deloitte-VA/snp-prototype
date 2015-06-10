@@ -8,9 +8,9 @@ import com.github.jlgrock.snp.apis.data.Sort;
  */
 public class PageableImpl implements Pageable {
 
-    final int pageSize;
-    final int offSet;
-    final Sort sort;
+    private final int pageSize;
+    private final int offSet;
+    private final Sort sort;
 
     /**
      * constructs PageableImpl
