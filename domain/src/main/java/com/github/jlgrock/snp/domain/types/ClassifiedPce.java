@@ -3,6 +3,7 @@ package com.github.jlgrock.snp.domain.types;
 import com.google.common.base.MoreObjects;
 
 import javax.validation.constraints.NotNull;
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -25,39 +26,28 @@ public class ClassifiedPce extends AbstractMongoDomainObject {
     private String desc;
 
     @Override
-    public boolean equals(final Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        if (!super.equals(o)) {
-            return false;
-        }
-
-        ClassifiedPce that = (ClassifiedPce) o;
-
-        if (uuid != null ? !uuid.equals(that.uuid) : that.uuid != null) {
-            return false;
-        }
-        if (id != null ? !id.equals(that.id) : that.id != null) {
-            return false;
-        }
-        return !(desc != null ? !desc.equals(that.desc) : that.desc != null);
-
+    public int hashCode() {
+        return Objects.hash(uuid, id, desc);
     }
 
     @Override
-    public int hashCode() {
-        int result = super.hashCode();
-        result = 31 * result + (uuid != null ? uuid.hashCode() : 0);
-        result = 31 * result + (id != null ? id.hashCode() : 0);
-        result = 31 * result + (desc != null ? desc.hashCode() : 0);
-        return result;
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        final ClassifiedPce other = (ClassifiedPce) obj;
+        return Objects.equals(this.uuid, other.uuid)
+                && Objects.equals(this.id, other.id)
+                && Objects.equals(this.desc, other.desc);
     }
 
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
+                .add("uuid", uuid)
                 .add("id", id)
                 .add("desc", desc)
                 .toString();
