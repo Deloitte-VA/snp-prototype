@@ -8,24 +8,32 @@ import org.bson.Document;
 import org.jvnet.hk2.annotations.Service;
 
 import javax.inject.Named;
-import java.time.LocalDate;
+import java.util.Optional;
 
 /**
  * A Conversion class to convert between a MongoDB DBObject to an Patient object.
  */
 @Service
 @Named
-public class PatientReadConverter implements ReadConverter<Document, Patient> {
+public class PatientReadConverter extends AbstractReadConverter
+        implements ReadConverter<Document, Patient> {
 
     @Override
     public Patient convert(final Document source) {
         Patient p = new Patient();
-        p.setId(((Number) source.get(PatientTags.ID_TAG)).longValue());
-        p.setFirstName((String) source.get(PatientTags.FIRST_NAME_TAG));
-        p.setMiddleName((String) source.get(PatientTags.MIDDLE_NAME_TAG));
-        p.setLastName((String) source.get(PatientTags.LAST_NAME_TAG));
-        p.setGender(Gender.getValueById((Integer) source.get(PatientTags.GENDER_TAG)));
-        p.setDateOfBirth(LocalDate.ofEpochDay(((Number) source.get(PatientTags.DATE_OF_BIRTH_TAG)).longValue()));
+        p.setId(parseId(source));
+        p.setFirstName(parseString(source, PatientTags.FIRST_NAME_TAG));
+        p.setMiddleName(parseString(source, PatientTags.MIDDLE_NAME_TAG));
+        p.setLastName(parseString(source, PatientTags.LAST_NAME_TAG));
+        p.setGender(Gender.getValueById(parseInteger(source, PatientTags.GENDER_TAG)));
+        p.setDateOfBirth(parseLocalDate(source, PatientTags.DATE_OF_BIRTH_TAG));
+
+        Optional<Boolean> isDeceased = parseBoolean(source, PatientTags.DECEASED);
+        if (isDeceased.isPresent()) {
+            p.setDeceased(isDeceased.get());
+        }
+
+        p.setDateDeceased(parseLocalDate(source, PatientTags.DATE_DECEASED));
         return p;
     }
 }

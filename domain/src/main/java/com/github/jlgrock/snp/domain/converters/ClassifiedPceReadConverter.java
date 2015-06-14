@@ -17,7 +17,7 @@ public class ClassifiedPceReadConverter extends AbstractReadConverter implements
     @Override
     public ClassifiedPce convert(final Document source) {
         ClassifiedPce classifiedPce = new ClassifiedPce();
-        classifiedPce.setId(parseLong(source, ClassifiedPceTags.ID_TAG));
+        classifiedPce.setId(parseId(source));
         classifiedPce.setDesc(parseString(source, ClassifiedPceTags.DESCRIPTION_TAG));
         return classifiedPce;
     }

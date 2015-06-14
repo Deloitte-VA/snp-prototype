@@ -28,7 +28,7 @@ public class PocDemo implements SampleQuery {
     private static final Logger LOGGER = LoggerFactory.getLogger(PocDemo.class);
 
     @Inject
-    MongoDbFactory mongoDbFactory;
+    private MongoDbFactory mongoDbFactory;
 
     @Override
     public void query() throws DataAccessException {

@@ -3,6 +3,7 @@ package com.github.jlgrock.snp.core.converters;
 
 import com.github.jlgrock.snp.domain.converters.ObservationWriteConverter;
 import com.github.jlgrock.snp.domain.data.ObservationTags;
+import com.github.jlgrock.snp.domain.data.SharedTags;
 import com.github.jlgrock.snp.domain.types.Observation;
 import com.github.jlgrock.snp.domain.types.primitives.BooleanPrimitive;
 import com.github.jlgrock.snp.domain.types.primitives.PrimitiveType;
@@ -40,7 +41,7 @@ public class ObservationWriteConverterTest {
         ObservationWriteConverter observationWriteConverter = new ObservationWriteConverter();
         Document dbObj = observationWriteConverter.convert(observation);
 
-        Assert.assertEquals("stringId", dbObj.get(ObservationTags.ID_TAG));
+        Assert.assertEquals("stringId", dbObj.get(SharedTags.ID_TAG));
         Assert.assertEquals("asdf", dbObj.get(ObservationTags.NAME_TAG));
         Assert.assertEquals(PrimitiveType.STRING.getId(), dbObj.get(ObservationTags.NAME_TYPE_TAG));
         Assert.assertEquals(true, dbObj.get(ObservationTags.VALUE_TAG));

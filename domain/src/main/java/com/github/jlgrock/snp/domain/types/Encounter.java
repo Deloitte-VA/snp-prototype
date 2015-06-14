@@ -2,9 +2,6 @@ package com.github.jlgrock.snp.domain.types;
 
 import com.google.common.base.MoreObjects;
 
-import javax.validation.constraints.NotNull;
-
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
@@ -14,12 +11,11 @@ import java.util.Objects;
  */
 public class Encounter extends AbstractMongoDomainObject {
 
-    @NotNull
-    private String patientId;
+    private String fhirId;
     
     private String subject;
     
-    private String clazz;
+    private String patientClass;
 
     private String status;
     
@@ -31,9 +27,9 @@ public class Encounter extends AbstractMongoDomainObject {
     public String toString() {
         return MoreObjects.toStringHelper(this)
                 .add("id", getId())
-                .add("patientId", patientId)
+                .add("fhirId", fhirId)
                 .add("subject", subject)
-                .add("class", clazz)
+                .add("patientClass", patientClass)
                 .add("status", status)
                 .add("participant", participant)
                 .add("observations", observations)
@@ -42,7 +38,7 @@ public class Encounter extends AbstractMongoDomainObject {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), patientId, clazz, status, observations);
+        return Objects.hash(getId(), fhirId, patientClass, status, observations);
     }
 
     @Override
@@ -55,9 +51,9 @@ public class Encounter extends AbstractMongoDomainObject {
         }
         final Encounter other = (Encounter) obj;
         return Objects.equals(this.getId(), other.getId())
-                && Objects.equals(this.patientId, other.patientId)
+                && Objects.equals(this.fhirId, other.fhirId)
                 && Objects.equals(this.subject, other.subject)
-                && Objects.equals(this.clazz, other.clazz)
+                && Objects.equals(this.patientClass, other.patientClass)
                 && Objects.equals(this.status, other.status)
                 && Objects.equals(this.participant, other.participant)
                 && Objects.equals(this.observations, other.observations);
@@ -71,44 +67,44 @@ public class Encounter extends AbstractMongoDomainObject {
         observations = pObservations;
     }
 
-    public String getPatientId() {
-        return patientId;
+    public String getFhirId() {
+        return fhirId;
     }
 
-	public void setPatientId(final String id) {
-        this.patientId = id;
+	public void setFhirId(final String fhirIdIn) {
+        fhirId = fhirIdIn;
     }
 
 	public String getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
-		this.status = status;
+	public void setStatus(final String statusIn) {
+		status = statusIn;
 	}
 
-	public String getClazz() {
-		return clazz;
+	public String getPatientClass() {
+		return patientClass;
 	}
 
-	public void setClazz(String clazz) {
-		this.clazz = clazz;
+	public void setPatientClass(final String patientClassIn) {
+		patientClass = patientClassIn;
 	}
 
 	public String getParticipant() {
 		return participant;
 	}
 
-	public void setParticipant(String participant) {
-		this.participant = participant;
+	public void setParticipant(final String participantIn) {
+		participant = participantIn;
 	}
 
 	public String getSubject() {
 		return subject;
 	}
 
-	public void setSubject(String subject) {
-		this.subject = subject;
+	public void setSubject(final String subjectIn) {
+		subject = subjectIn;
 	}
 }
 

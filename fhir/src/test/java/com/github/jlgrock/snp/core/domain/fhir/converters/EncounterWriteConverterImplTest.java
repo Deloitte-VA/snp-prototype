@@ -1,14 +1,14 @@
 package com.github.jlgrock.snp.core.domain.fhir.converters;
 
+import com.github.jlgrock.snp.core.domain.fhir.model.Encounter;
+import org.testng.annotations.Test;
+
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
-import org.testng.annotations.Test;
 import static org.testng.Assert.assertEquals;
-
-import com.github.jlgrock.snp.core.domain.fhir.model.Encounter;
 
 public class EncounterWriteConverterImplTest extends AbstractConverterTest {
 	
@@ -28,8 +28,8 @@ public class EncounterWriteConverterImplTest extends AbstractConverterTest {
 		
 		com.github.jlgrock.snp.domain.types.Encounter encounter = encounterConverter.convert(encounterIn);
 		
-		assertEquals(encounter.getPatientId(), "f201");
-		assertEquals(encounter.getClazz(), "OUTPATIENT");
+		assertEquals(encounter.getFhirId(), "f201");
+		assertEquals(encounter.getPatientClass(), "OUTPATIENT");
 		assertEquals(encounter.getStatus(), "FINISHED");
 		assertEquals(encounter.getParticipant(), "Practitioner/f201");
 		assertEquals(encounter.getSubject(), "Patient/f201");

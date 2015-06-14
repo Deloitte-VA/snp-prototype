@@ -2,6 +2,7 @@ package com.github.jlgrock.snp.domain.converters;
 
 import com.github.jlgrock.snp.apis.converters.WriteConverter;
 import com.github.jlgrock.snp.domain.data.EncounterTags;
+import com.github.jlgrock.snp.domain.data.SharedTags;
 import com.github.jlgrock.snp.domain.types.Encounter;
 import com.github.jlgrock.snp.domain.types.Observation;
 import com.mongodb.BasicDBList;
@@ -10,10 +11,8 @@ import org.jvnet.hk2.annotations.Service;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * A Conversion class to convert between an Encounter objects and a MongoDB DBObject.
@@ -36,22 +35,20 @@ public class EncounterWriteConverter implements WriteConverter<Encounter, Docume
     @Override
     public Document convert(final Encounter source) {
         Document dbo = new Document();
-        dbo.put(EncounterTags.ID_TAG, source.getId());
-//        dbo.put(EncounterTags.PATIENT_TAG, source.getPatientId());
-//        if (source.getDate() == null) {
-//            dbo.put(EncounterTags.DATE_TAG, null);
-//        } else {
-//            dbo.put(EncounterTags.DATE_TAG, source.getDate().toEpochDay());
-//        }
-//        dbo.put(EncounterTags.TYPE_TAG, source.getType());
-//        dbo.put(EncounterTags.REASON_FOR_VISIT_TAG, source.getReasonForVisit());
+        dbo.put(SharedTags.ID_TAG, source.getId());
+        dbo.put(EncounterTags.FHIR_ID, source.getFhirId());
+        dbo.put(EncounterTags.PARTICIPANT, source.getParticipant());
+        dbo.put(EncounterTags.PATIENT_CLASS, source.getPatientClass());
+        dbo.put(EncounterTags.STATUS, source.getStatus());
+        dbo.put(EncounterTags.SUBJECT, source.getSubject());
 
         List<Observation> observations = source.getObservations();
         BasicDBList observationObjs = new BasicDBList();
         if (observations != null) {
-            Stream<Observation> s1 = observations.stream();
-            Stream<Document> s2 = s1.map(observation -> observationWriteConverter.convert(observation));
-            observationObjs = s2.collect(Collectors.toCollection(BasicDBList::new));
+            observationObjs = observations
+                    .stream()
+                    .map(observation -> observationWriteConverter.convert(observation))
+                    .collect(Collectors.toCollection(BasicDBList::new));
         }
 
         dbo.put(EncounterTags.OBSERVATIONS_TAG, observationObjs);
