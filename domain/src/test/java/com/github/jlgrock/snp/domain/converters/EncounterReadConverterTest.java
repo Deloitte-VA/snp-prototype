@@ -1,6 +1,7 @@
 package com.github.jlgrock.snp.domain.converters;
 
 import com.github.jlgrock.snp.domain.data.EncounterTags;
+import com.github.jlgrock.snp.domain.data.PatientRepository;
 import com.github.jlgrock.snp.domain.data.SharedTags;
 import com.github.jlgrock.snp.domain.types.Encounter;
 import com.github.jlgrock.snp.domain.types.Observation;
@@ -36,6 +37,7 @@ public class EncounterReadConverterTest {
             add(observation2Obj);
         }};
         ObservationReadConverter observationReadConverter = mock(ObservationReadConverter.class);
+        PatientRepository patientRepository = mock(PatientRepository.class);
 
         Long id = 123l;
         String fhirId = "abc";
@@ -57,7 +59,8 @@ public class EncounterReadConverterTest {
         when(observationReadConverter.convert(observation1Obj)).thenReturn(observation1);
         when(observationReadConverter.convert(observation2Obj)).thenReturn(observation2);
 
-        EncounterReadConverter encounterReadConverter = new EncounterReadConverter(observationReadConverter);
+        EncounterReadConverter encounterReadConverter =
+                new EncounterReadConverter(observationReadConverter, patientRepository);
 
         Encounter encounter = encounterReadConverter.convert(dbObject);
         Assert.assertEquals(id, encounter.getId());

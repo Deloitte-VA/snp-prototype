@@ -1,7 +1,6 @@
 package com.github.jlgrock.snp.domain.data;
 
 import com.github.jlgrock.snp.apis.connection.MongoDbFactory;
-
 import com.github.jlgrock.snp.domain.converters.EncounterReadConverter;
 import com.github.jlgrock.snp.domain.converters.EncounterWriteConverter;
 import com.github.jlgrock.snp.domain.types.Encounter;
@@ -11,7 +10,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -66,7 +64,16 @@ public class EncounterRepositoryImpl extends
         }};
         return executeQueryAndTransformResults(query);
     }
-    
+
+    @Override
+    public List<Encounter> findByPceIdList(final List<Long> pceIds) {
+        Document query = new Document();
+        Document idsIn = new Document();
+        idsIn.put("$in", pceIds);
+        query.put("observations.name", idsIn);
+        return executeQueryAndTransformResults(query);
+    }
+
     @Override
     protected Encounter convertToDomainObject(final Document dbObjectin) {
     	LOGGER.trace("convertToDomainObject(Document dbObjectin={})", dbObjectin);

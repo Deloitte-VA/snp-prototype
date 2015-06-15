@@ -27,6 +27,7 @@ public class EncounterReadConverter extends AbstractReadConverter implements Con
     /**
      * @param observationReadConverterIn object of type ObservationReadConverter that has values from a MongoDB
      *                                   object stored in an Observation object.
+     * @param patientRepositoryIn repository to look up the patient.
      */
     @Inject
     public EncounterReadConverter(final ObservationReadConverter observationReadConverterIn,

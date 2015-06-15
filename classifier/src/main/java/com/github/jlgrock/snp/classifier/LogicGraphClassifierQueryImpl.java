@@ -4,8 +4,6 @@ import com.github.jlgrock.snp.apis.classifier.LogicClassifierStore;
 import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifierQuery;
 import gov.vha.isaac.logic.LogicGraph;
 import gov.vha.isaac.metadata.coordinates.ViewCoordinates;
-import gov.vha.isaac.ochre.api.LookupService;
-import gov.vha.isaac.ochre.api.TaxonomyService;
 import gov.vha.isaac.ochre.collections.SequenceSet;
 import org.ihtsdo.otf.tcc.api.concept.ConceptChronicleBI;
 import org.ihtsdo.otf.tcc.api.uuid.UuidT3Generator;
@@ -26,8 +24,6 @@ import java.util.stream.Collectors;
 @Service
 public class LogicGraphClassifierQueryImpl implements LogicGraphClassifierQuery {
     private static final Logger LOGGER = LoggerFactory.getLogger(LogicGraphClassifierQueryImpl.class);
-
-    private static final int MAX_DEPTH = 5;
 
     private final LogicClassifierStore logicClassifierStore;
 

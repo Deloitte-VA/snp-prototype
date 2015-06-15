@@ -25,6 +25,11 @@ public interface EncounterRepository extends MongoRepository<Encounter, Long> {
     //@Query("'$or':[{'firstName':{'$regex':?0,'$options':'i'}},{'lastName':{'$regex':?0,'$options':'i'}}]")
     //List<User> findByEmailOrFirstnameOrLastnameLike(String searchText);
 
+    /**
+     * Find all of the Encounters based off of whether they have had an observed PCE observation
+     * @param pceIds the pce ids to find in the observation sub-object
+     * @return a list of the encounters that match the criteria
+     */
     List<Encounter> findByPceIdList(List<Long> pceIds);
 }
 

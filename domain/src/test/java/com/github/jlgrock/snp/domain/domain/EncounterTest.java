@@ -1,10 +1,9 @@
 package com.github.jlgrock.snp.domain.domain;
 
 import com.github.jlgrock.snp.domain.types.Encounter;
-import org.testng.annotations.Test;
-
-import com.github.jlgrock.snp.domain.types.Encounter;
 import com.github.jlgrock.snp.domain.types.Observation;
+import com.github.jlgrock.snp.domain.types.Patient;
+import org.mockito.Mockito;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
@@ -117,15 +116,19 @@ public class EncounterTest {
 	@Test
 	public void testToString() {
 		Encounter en1 = new Encounter();
-		
+		Patient patient = Mockito.mock(Patient.class);
+        String patientString = "{asdf}";
+        Mockito.when(patient.toString()).thenReturn(patientString);
+
 		en1.setId(enc1Id);
 		en1.setFhirId(patient1Id);
 		en1.setEncounterClass(clazz1);
+        en1.setPatient(patient);
 		en1.setParticipant(participant1);
 		en1.setStatus(status1);
 		en1.setSubject(subject1);
 		
-		assertEquals(en1.toString(), "Encounter{id=201521, fhirId=f203, subject=Patient/f203, encounterClass=OUTPATIENT, status=FINISHED, participant=Practitioner/f201, observations=null}");
+		assertEquals(en1.toString(), "Encounter{id=201521, fhirId=f203, subject=Patient/f203, encounterClass=OUTPATIENT, status=FINISHED, participant=Practitioner/f201, patient=" + patientString + ", observations=null}");
 	}
 
 }
