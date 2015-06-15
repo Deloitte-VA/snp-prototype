@@ -19,9 +19,9 @@ public class FileConfig implements FileConfiguration {
 //    private static final String DEFAULT_DIR_LOCATION = "/data/uploads";
 //    private static final String DEFAULT_CHRONICLE_LOCATION = "/data/object-chronicles";
 //    private static final String DEFAULT_INDEX_LOCATION = "/data/search";
-    private static final String DEFAULT_DIR_LOCATION = "/Users/jlgrock/workspace/snp/data/uploads";
-    private static final String DEFAULT_CHRONICLE_LOCATION = "/Users/jlgrock/workspace/snp/data/object-chronicles";
-    private static final String DEFAULT_INDEX_LOCATION = "/Users/jlgrock/workspace/snp/data/search";
+    private static final String DEFAULT_DIR_LOCATION = "/Users/jcis2/SNP-Prototype/data/uploads";
+    private static final String DEFAULT_CHRONICLE_LOCATION = "/Users/jcis2/SNP-Prototype/data/object-chronicles";
+    private static final String DEFAULT_INDEX_LOCATION = "/Users/jcis2/SNP-Prototype/data/search";
 
     private final Path fileUploadPath;
     private final Path chroniclePath;

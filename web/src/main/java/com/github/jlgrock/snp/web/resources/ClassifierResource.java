@@ -1,11 +1,9 @@
 package com.github.jlgrock.snp.web.resources;
 
-import com.github.jlgrock.snp.apis.web.ProcessingServiceFactory;
-import org.glassfish.jersey.media.multipart.BodyPart;
-import org.glassfish.jersey.media.multipart.FormDataBodyPart;
-import org.glassfish.jersey.media.multipart.FormDataMultiPart;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -14,9 +12,16 @@ import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.MessageBodyReader;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
+
+import org.glassfish.jersey.media.multipart.BodyPart;
+import org.glassfish.jersey.media.multipart.FormDataBodyPart;
+import org.glassfish.jersey.media.multipart.FormDataMultiPart;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.github.jlgrock.snp.apis.web.ProcessingServiceFactory;
+import com.github.jlgrock.snp.domain.types.Gender;
+import com.github.jlgrock.snp.domain.types.Patient;
 
 /**
  * The controller for handling all classifier requests
@@ -114,6 +119,34 @@ public class ClassifierResource {
         return Response.ok().build();
     }
 
+    @POST
+    @Path("/query")
+    public Response processForm(String jsonStr) {
+    	LOGGER.debug("Parameters from query form: {}", jsonStr);
+		return Response.status(200)
+				.entity(getPatients())
+				.type(MediaType.APPLICATION_JSON)
+				.build();
+	}
+	
+	public List<Patient> getPatients() {
+		List<Patient> patients = new ArrayList<>();
+		
+		Patient patient1 =  new Patient();
+		patient1.setFirstName("John");
+		patient1.setLastName("Doe");
+		patient1.setGender(Gender.MALE);
+		patients.add(patient1);
+		
+		Patient patient2 =  new Patient();
+		patient2.setFirstName("Jane");
+		patient2.setLastName("Doe");
+		patient2.setGender(Gender.FEMALE);
+		patients.add(patient2);
+		
+		return patients;
+	}
+	
     /**
      * Process the file, using the processingService.  If either parameter is null, the file load is aborted and
      * message is logged.

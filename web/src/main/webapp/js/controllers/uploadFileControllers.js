@@ -6,6 +6,7 @@ var uploadFileControllers = angular.module('UploadFileControllers', []);
 
 uploadFileControllers.controller('uploader', ['$scope', '$http',
                                     function($scope, $http) {
+									$scope.contentType = 'LEGO';
                       				$scope.contentTypes = 
                       					[
                       						'LEGO',
@@ -34,9 +35,15 @@ uploadFileControllers.controller('uploader', ['$scope', '$http',
                       							transformRequest:angular.identity,
                       							headers:{'Content-Type':undefined}
                       						})
-                      						.success(function(d) {
-                      							console.log(d)	
+                      						.success(function(data, status, headers, config) {
+                      							console.log(status);
+                      							$scope.status = status;
+                      							$scope.data = data;
                       						})
+                      						.error(function(data, status, headers, config) {
+                      				          $scope.data = data || "Request failed";
+                      				          $scope.status = status;
+                      				      });
                       					}
                       				}
                       			]);
