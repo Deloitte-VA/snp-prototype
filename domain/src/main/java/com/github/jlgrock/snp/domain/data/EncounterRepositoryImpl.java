@@ -28,10 +28,7 @@ public class EncounterRepositoryImpl extends
 
     private final EncounterWriteConverter encounterWriteConverter;
     
-    private List<Encounter> encounterShell = new ArrayList<>(6);
-    
-    private static final Logger LOGGER = LoggerFactory
-            .getLogger(EncounterRepositoryImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(EncounterRepositoryImpl.class);
 
     /**
      * 
@@ -48,9 +45,6 @@ public class EncounterRepositoryImpl extends
         encounterWriteConverter = encounterWriteConverterIn;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     protected String getCollectionName() {
     	LOGGER.trace("getCollectionName()");
@@ -58,37 +52,33 @@ public class EncounterRepositoryImpl extends
     }
 
     /**
-     * {@inheritDoc}
+     * Find an encounter by the date of the encounter
+     * @param date the date to search by
+     * @return the results, in the form of a list
      */
     public List<Encounter> findByDate(final LocalDate date) {
     	if (date == null){
-    		return encounterShell;
+    		return new ArrayList<>();
     	}
-    	LOGGER.trace("findByDate(LocalDate date=" + date + ")");
+    	LOGGER.trace("findByDate(LocalDate date={})", date);
         Document query = new Document() {{
             put("date", date);
         }};
         return executeQueryAndTransformResults(query);
     }
     
-    /**
-     * {@inheritDoc}
-     */
     @Override
     protected Encounter convertToDomainObject(final Document dbObjectin) {
-    	LOGGER.trace("convertToDomainObject(Document dbObjectin=" + dbObjectin + ")");
+    	LOGGER.trace("convertToDomainObject(Document dbObjectin={})", dbObjectin);
         if (dbObjectin == null) {
             return null;
         }
         return encounterReadConverter.convert(dbObjectin);
     }
     
-    /**
-     * {@inheritDoc}
-     */
     @Override
     protected Document convertToDBObject(final Encounter s) {
-    	LOGGER.trace("convertToDBObject(Encounter s=" + s + ")");
+    	LOGGER.trace("convertToDBObject(Encounter s={})", s);
         if (s == null) {
             return null;
         }

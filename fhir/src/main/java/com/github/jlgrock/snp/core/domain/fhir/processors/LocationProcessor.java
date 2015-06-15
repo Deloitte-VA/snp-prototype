@@ -1,10 +1,8 @@
 package com.github.jlgrock.snp.core.domain.fhir.processors;
 
+import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
 import com.github.jlgrock.snp.core.domain.fhir.model.Location;
-
 import gov.vha.isaac.logic.LogicGraph;
-
-import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
 
 /**
  *
@@ -13,8 +11,8 @@ public class LocationProcessor extends AbstractFhirProcessor {
 
     private final Location location;
 
-    public LocationProcessor(final TerminologyStoreDI terminologyStoreDIIn, final Location locationIn) {
-        super(terminologyStoreDIIn);
+    public LocationProcessor(final LogicGraphClassifier logicGraphClassifierIn, final Location locationIn) {
+        super(logicGraphClassifierIn);
         location = locationIn;
     }
 

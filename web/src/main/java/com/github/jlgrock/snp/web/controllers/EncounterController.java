@@ -34,7 +34,7 @@ public class EncounterController {
 
     /**
      * Returns the encounter for the respective <code>id</code>.
-     * @param id encounter id used for search
+     * @param id encounter id used for run
      * @return returns an encounter
      */
     @GET @Path("/{id}")

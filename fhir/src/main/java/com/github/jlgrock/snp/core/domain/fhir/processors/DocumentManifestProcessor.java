@@ -1,10 +1,8 @@
 package com.github.jlgrock.snp.core.domain.fhir.processors;
 
+import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
 import com.github.jlgrock.snp.core.domain.fhir.model.DocumentManifest;
-
 import gov.vha.isaac.logic.LogicGraph;
-
-import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
 
 /**
  *
@@ -13,8 +11,8 @@ public class DocumentManifestProcessor extends AbstractFhirProcessor {
 
     private final DocumentManifest documentManifest;
 
-    public DocumentManifestProcessor(final TerminologyStoreDI terminologyStoreDIIn, final DocumentManifest documentManifestIn) {
-        super(terminologyStoreDIIn);
+    public DocumentManifestProcessor(final LogicGraphClassifier logicGraphClassifierIn, final DocumentManifest documentManifestIn) {
+        super(logicGraphClassifierIn);
         documentManifest = documentManifestIn;
     }
 

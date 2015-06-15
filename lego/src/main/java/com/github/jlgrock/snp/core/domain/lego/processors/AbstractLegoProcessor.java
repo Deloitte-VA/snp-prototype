@@ -64,12 +64,9 @@ public abstract class AbstractLegoProcessor implements LegoElementProcessorServi
     }
 
     protected void processExpression(final Expression expression) {
-
-        LegoExpressionGraphBuilder legoLogicGraphBuilder = null;
         // Create the logic graph
-        legoLogicGraphBuilder = new LegoExpressionGraphBuilder(logicGraphClassifier, expression);
-        legoLogicGraphBuilder.create();
-        LogicGraph logicGraph = legoLogicGraphBuilder;
+        LegoExpressionGraphBuilder legoLogicGraphBuilder = new LegoExpressionGraphBuilder(logicGraphClassifier, expression);
+        LogicGraph logicGraph = legoLogicGraphBuilder.build();
         Integer classifiedLogicGraphId = logicGraphClassifier.classify(logicGraph);
 
         //TODO run through classification service, should get a number back. Should we change these to an int?

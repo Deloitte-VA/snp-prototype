@@ -1,10 +1,8 @@
 package com.github.jlgrock.snp.core.domain.fhir.processors;
 
+import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
 import com.github.jlgrock.snp.core.domain.fhir.model.DiagnosticReport;
-
 import gov.vha.isaac.logic.LogicGraph;
-
-import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
 
 /**
  *
@@ -13,8 +11,8 @@ public class DiagnosticReportProcessor extends AbstractFhirProcessor {
 
     private final DiagnosticReport diagnosticReport;
 
-    public DiagnosticReportProcessor(final TerminologyStoreDI terminologyStoreDIIn, final DiagnosticReport diagnosticReportIn) {
-        super(terminologyStoreDIIn);
+    public DiagnosticReportProcessor(final LogicGraphClassifier logicGraphClassifierIn, final DiagnosticReport diagnosticReportIn) {
+        super(logicGraphClassifierIn);
         diagnosticReport = diagnosticReportIn;
     }
 

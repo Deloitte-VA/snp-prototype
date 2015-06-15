@@ -1,10 +1,8 @@
 package com.github.jlgrock.snp.core.domain.fhir.processors;
 
+import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
 import com.github.jlgrock.snp.core.domain.fhir.model.Substance;
-
 import gov.vha.isaac.logic.LogicGraph;
-
-import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
 
 /**
  *
@@ -13,8 +11,8 @@ public class SubstanceProcessor extends AbstractFhirProcessor {
 
     private final Substance substance;
 
-    public SubstanceProcessor(final TerminologyStoreDI terminologyStoreDIIn, final Substance substanceIn) {
-        super(terminologyStoreDIIn);
+    public SubstanceProcessor(final LogicGraphClassifier logicGraphClassifierIn, final Substance substanceIn) {
+        super(logicGraphClassifierIn);
         substance = substanceIn;
     }
 

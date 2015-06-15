@@ -3,7 +3,6 @@ package com.github.jlgrock.snp.domain.data;
 import com.github.jlgrock.snp.apis.data.MongoRepository;
 import com.github.jlgrock.snp.domain.types.Gender;
 import com.github.jlgrock.snp.domain.types.Patient;
-import com.github.jlgrock.snp.domain.types.Race;
 import org.jvnet.hk2.annotations.Contract;
 
 import java.time.LocalDate;
@@ -42,12 +41,6 @@ public interface PatientRepository extends MongoRepository<Patient, Long> {
      * @return list of patients
      */
     List<Patient> findAllByGender(Gender gender);
-    /**
-     * 
-     * @param race is the patient's race
-     * @return list of patients
-     */
-    List<Patient> findAllByRace(Race race);
 }
 
 

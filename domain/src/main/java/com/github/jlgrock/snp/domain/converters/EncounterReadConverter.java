@@ -36,7 +36,7 @@ public class EncounterReadConverter extends AbstractReadConverter implements Con
         Encounter encounter = new Encounter();
         encounter.setId(parseId(source));
         encounter.setFhirId(parseString(source, EncounterTags.FHIR_ID));
-        encounter.setPatientClass(parseString(source, EncounterTags.PATIENT_CLASS));
+        encounter.setEncounterClass(parseString(source, EncounterTags.ENCOUNTER_CLASS));
         encounter.setStatus(parseString(source, EncounterTags.STATUS));
         encounter.setSubject(parseString(source, EncounterTags.SUBJECT));
         encounter.setParticipant(parseString(source, EncounterTags.PARTICIPANT));

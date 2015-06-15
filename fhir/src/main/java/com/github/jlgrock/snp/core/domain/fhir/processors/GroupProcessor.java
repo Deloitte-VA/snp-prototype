@@ -1,10 +1,8 @@
 package com.github.jlgrock.snp.core.domain.fhir.processors;
 
+import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
 import com.github.jlgrock.snp.core.domain.fhir.model.Group;
-
 import gov.vha.isaac.logic.LogicGraph;
-
-import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
 
 /**
  *
@@ -13,8 +11,8 @@ public class GroupProcessor extends AbstractFhirProcessor {
 
     private final Group group;
 
-    public GroupProcessor(final TerminologyStoreDI terminologyStoreDIIn, final Group groupIn) {
-        super(terminologyStoreDIIn);
+    public GroupProcessor(final LogicGraphClassifier logicGraphClassifierIn, final Group groupIn) {
+        super(logicGraphClassifierIn);
         group = groupIn;
     }
 

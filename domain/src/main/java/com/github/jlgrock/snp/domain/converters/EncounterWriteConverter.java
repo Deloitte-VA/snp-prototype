@@ -38,7 +38,7 @@ public class EncounterWriteConverter implements WriteConverter<Encounter, Docume
         dbo.put(SharedTags.ID_TAG, source.getId());
         dbo.put(EncounterTags.FHIR_ID, source.getFhirId());
         dbo.put(EncounterTags.PARTICIPANT, source.getParticipant());
-        dbo.put(EncounterTags.PATIENT_CLASS, source.getPatientClass());
+        dbo.put(EncounterTags.ENCOUNTER_CLASS, source.getEncounterClass());
         dbo.put(EncounterTags.STATUS, source.getStatus());
         dbo.put(EncounterTags.SUBJECT, source.getSubject());
 

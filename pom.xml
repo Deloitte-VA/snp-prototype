@@ -551,6 +551,7 @@
                         <threshold>Medium</threshold>
                         <xmlOutput>true</xmlOutput>
                         <failOnError>true</failOnError>
+                        <excludeFilterFile>findbugs-exclude.xml</excludeFilterFile>
                     </configuration>
                     <executions>
                         <execution>

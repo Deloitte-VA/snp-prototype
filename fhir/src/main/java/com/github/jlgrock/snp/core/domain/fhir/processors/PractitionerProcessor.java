@@ -1,10 +1,8 @@
 package com.github.jlgrock.snp.core.domain.fhir.processors;
 
+import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
 import com.github.jlgrock.snp.core.domain.fhir.model.Practitioner;
-
 import gov.vha.isaac.logic.LogicGraph;
-
-import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
 
 /**
  *
@@ -13,8 +11,8 @@ public class PractitionerProcessor extends AbstractFhirProcessor {
 
     private final Practitioner practitioner;
 
-    public PractitionerProcessor(final TerminologyStoreDI terminologyStoreDIIn, final Practitioner practitionerIn) {
-        super(terminologyStoreDIIn);
+    public PractitionerProcessor(final LogicGraphClassifier logicGraphClassifierIn, final Practitioner practitionerIn) {
+        super(logicGraphClassifierIn);
         practitioner = practitionerIn;
     }
 

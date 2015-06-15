@@ -1,5 +1,6 @@
 package com.github.jlgrock.snp.apis.classifier;
 
+import gov.vha.isaac.logic.LogicService;
 import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
 import org.ihtsdo.otf.tcc.model.index.service.IndexerBI;
 import org.jvnet.hk2.annotations.Contract;
@@ -28,5 +29,10 @@ public interface LogicClassifierStore {
      * @return the terminology store handle
      */
     TerminologyStoreDI getTerminologyStore();
+
+    /**
+     * @return the logic service
+     */
+    LogicService getLogicService();
 
 }

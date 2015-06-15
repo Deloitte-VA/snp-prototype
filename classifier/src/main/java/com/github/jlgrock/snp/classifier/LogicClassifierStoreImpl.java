@@ -2,6 +2,10 @@ package com.github.jlgrock.snp.classifier;
 
 import com.github.jlgrock.snp.apis.classifier.LogicClassifierStore;
 import com.github.jlgrock.snp.apis.connection.configuration.FileConfiguration;
+import gov.vha.isaac.logic.LogicService;
+import gov.vha.isaac.metadata.coordinates.EditCoordinates;
+import gov.vha.isaac.metadata.coordinates.LogicCoordinates;
+import gov.vha.isaac.metadata.coordinates.StampCoordinates;
 import gov.vha.isaac.ochre.api.LookupService;
 import gov.vha.isaac.ochre.api.constants.Constants;
 import org.glassfish.hk2.runlevel.RunLevelController;
@@ -16,10 +20,12 @@ import javax.inject.Singleton;
 
 /**
  * The default implementation of the classifier store, this stores data in ochre and lucene.
+ * Because the objects retrieved here are powerful, control to this object is restricted to the
+ * package.
  */
 @Service
 @Singleton
-public class LogicClassifierStoreImpl implements LogicClassifierStore {
+class LogicClassifierStoreImpl implements LogicClassifierStore {
     private static final Logger LOGGER = LoggerFactory.getLogger(LogicClassifierStoreImpl.class);
 
     private final FileConfiguration fileConfiguration;
@@ -33,6 +39,19 @@ public class LogicClassifierStoreImpl implements LogicClassifierStore {
         LOGGER.info("Starting Expression Service...");
         fileConfiguration = fileConfigurationIn;
         startExpressionService();
+        runFullClassification();
+    }
+
+    /**
+     * Classification consists of: converting the logic graph to axioms in memory, running the classification
+     * algorithms over the axioms, retrieving the results, determining what changed, and then write back to the
+     * logic graph assemblage. Running a full classification will likely take several minutes.
+     */
+    private void runFullClassification() {
+        getLogicService().fullClassification(
+                StampCoordinates.getDevelopmentLatest(),
+                LogicCoordinates.getStandardElProfile(),
+                EditCoordinates.getDefaultUserSolorOverlay());
     }
 
     @Override
@@ -59,6 +78,11 @@ public class LogicClassifierStoreImpl implements LogicClassifierStore {
     @Override
     public TerminologyStoreDI getTerminologyStore() {
         return LookupService.getService(TerminologyStoreDI.class);
+    }
+
+    @Override
+    public LogicService getLogicService() {
+        return LookupService.getService(LogicService.class);
     }
 
     @Override

@@ -1,10 +1,8 @@
 package com.github.jlgrock.snp.core.domain.fhir.processors;
 
+import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
 import com.github.jlgrock.snp.core.domain.fhir.model.AllergyIntolerance;
-
 import gov.vha.isaac.logic.LogicGraph;
-
-import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
 
 /**
  *
@@ -13,8 +11,8 @@ public class AllergyIntoleranceProcessor extends AbstractFhirProcessor {
 
     private final AllergyIntolerance allergyIntolerance;
 
-    public AllergyIntoleranceProcessor(final TerminologyStoreDI terminologyStoreDIIn, final AllergyIntolerance allergyIntoleranceIn) {
-        super(terminologyStoreDIIn);
+    public AllergyIntoleranceProcessor(final LogicGraphClassifier logicGraphClassifierIn, final AllergyIntolerance allergyIntoleranceIn) {
+        super(logicGraphClassifierIn);
         allergyIntolerance = allergyIntoleranceIn;
     }
 

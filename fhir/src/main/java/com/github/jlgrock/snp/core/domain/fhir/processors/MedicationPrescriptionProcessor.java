@@ -1,10 +1,8 @@
 package com.github.jlgrock.snp.core.domain.fhir.processors;
 
+import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
 import com.github.jlgrock.snp.core.domain.fhir.model.MedicationPrescription;
-
 import gov.vha.isaac.logic.LogicGraph;
-
-import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
 
 /**
  *
@@ -13,8 +11,8 @@ public class MedicationPrescriptionProcessor extends AbstractFhirProcessor {
 
     private final MedicationPrescription medicationPrescription;
 
-    public MedicationPrescriptionProcessor(final TerminologyStoreDI terminologyStoreDIIn, final MedicationPrescription medicationPrescriptionIn) {
-        super(terminologyStoreDIIn);
+    public MedicationPrescriptionProcessor(final LogicGraphClassifier logicGraphClassifierIn, final MedicationPrescription medicationPrescriptionIn) {
+        super(logicGraphClassifierIn);
         medicationPrescription = medicationPrescriptionIn;
     }
 

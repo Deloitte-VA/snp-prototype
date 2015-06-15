@@ -1,10 +1,8 @@
 package com.github.jlgrock.snp.core.domain.fhir.processors;
 
+import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
 import com.github.jlgrock.snp.core.domain.fhir.model.Order;
-
 import gov.vha.isaac.logic.LogicGraph;
-
-import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
 
 /**
  *
@@ -13,8 +11,8 @@ public class OrderProcessor extends AbstractFhirProcessor {
 
     private final Order order;
 
-    public OrderProcessor(final TerminologyStoreDI terminologyStoreDIIn, final Order orderIn) {
-        super(terminologyStoreDIIn);
+    public OrderProcessor(final LogicGraphClassifier logicGraphClassifierIn, final Order orderIn) {
+        super(logicGraphClassifierIn);
         order = orderIn;
     }
 

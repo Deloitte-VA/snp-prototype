@@ -8,12 +8,21 @@ import org.ihtsdo.otf.tcc.api.store.TerminologySnapshotDI;
 import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
 import org.ihtsdo.otf.tcc.model.index.service.IndexerBI;
 import org.ihtsdo.otf.tcc.model.index.service.SearchResult;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Search the database for a description matching a term
+ */
 public class SearchByDescription extends AbstractQuery {
-    protected void search() throws IOException {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(SearchByDescription.class);
+
+    @Override
+    protected void run() throws IOException {
         setup();
 
         TerminologyStoreDI termStore = LookupService.getService(TerminologyStoreDI.class);
@@ -30,13 +39,18 @@ public class SearchByDescription extends AbstractQuery {
                 int bleedingDexcriptionNid = result.nid;
                 int bleedingConceptNid = statedTermSnapshot.getConceptNidForNid(bleedingDexcriptionNid);
                 ConceptChronicleBI bleedingConcept2 = termStore.getConcept(bleedingConceptNid);
-                System.out.println("\nFound [3] nid: " + bleedingDexcriptionNid + " cNid: " + bleedingConceptNid +
-                        "; " + bleedingConcept2);
+                LOGGER.info("\nFound [3] nid: {} cNid: {}; ", bleedingDexcriptionNid, bleedingConceptNid, bleedingConcept2);
             }
         }
 
     }
-    public static void main(String[] args) {
+
+    /**
+     * Execute the Example
+     *
+     * @param args ignored
+     */
+    public static void main(final String[] args) {
         SearchByDescription searchByDescription = new SearchByDescription();
         searchByDescription.execute();
     }

@@ -1,10 +1,8 @@
 package com.github.jlgrock.snp.core.domain.fhir.processors;
 
+import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
 import com.github.jlgrock.snp.core.domain.fhir.model.ValueSet;
-
 import gov.vha.isaac.logic.LogicGraph;
-
-import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
 
 /**
  *
@@ -13,8 +11,8 @@ public class ValueSetProcessor extends AbstractFhirProcessor {
 
     private final ValueSet valueSet;
 
-    public ValueSetProcessor(final TerminologyStoreDI terminologyStoreDIIn, final ValueSet valueSetIn) {
-        super(terminologyStoreDIIn);
+    public ValueSetProcessor(final LogicGraphClassifier logicGraphClassifierIn, final ValueSet valueSetIn) {
+        super(logicGraphClassifierIn);
         valueSet = valueSetIn;
     }
 

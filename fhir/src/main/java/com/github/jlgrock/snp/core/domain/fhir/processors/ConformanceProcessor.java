@@ -1,10 +1,8 @@
 package com.github.jlgrock.snp.core.domain.fhir.processors;
 
+import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
 import com.github.jlgrock.snp.core.domain.fhir.model.Conformance;
-
 import gov.vha.isaac.logic.LogicGraph;
-
-import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
 
 /**
  *
@@ -13,8 +11,8 @@ public class ConformanceProcessor extends AbstractFhirProcessor {
 
     private final Conformance conformance;
 
-    public ConformanceProcessor(final TerminologyStoreDI terminologyStoreDIIn, final Conformance conformanceIn) {
-        super(terminologyStoreDIIn);
+    public ConformanceProcessor(final LogicGraphClassifier logicGraphClassifierIn, final Conformance conformanceIn) {
+        super(logicGraphClassifierIn);
         conformance = conformanceIn;
     }
 

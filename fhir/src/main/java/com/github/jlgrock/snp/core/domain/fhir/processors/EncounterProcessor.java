@@ -1,11 +1,9 @@
 package com.github.jlgrock.snp.core.domain.fhir.processors;
 
+import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
 import com.github.jlgrock.snp.core.domain.fhir.logicgraph.FhirEncounterGraphBuilder;
 import com.github.jlgrock.snp.core.domain.fhir.model.Encounter;
-
 import gov.vha.isaac.logic.LogicGraph;
-
-import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
 
 /**
  *
@@ -14,16 +12,16 @@ public class EncounterProcessor extends AbstractFhirProcessor {
 
     private final Encounter encounter;
 
-    public EncounterProcessor(final TerminologyStoreDI terminologyStoreDIIn, final Encounter encounterIn) {
-        super(terminologyStoreDIIn);
+    public EncounterProcessor(final LogicGraphClassifier logicGraphClassifierIn, final Encounter encounterIn) {
+        super(logicGraphClassifierIn);
         encounter = encounterIn;
     }
 
     @Override
     protected LogicGraph getLogicGraph() {
-        FhirEncounterGraphBuilder fhirEncounterGraphBuilder = new FhirEncounterGraphBuilder(getTerminologyStoreDI(), encounter);
-        fhirEncounterGraphBuilder.create();
-        return fhirEncounterGraphBuilder;
+        FhirEncounterGraphBuilder fhirEncounterGraphBuilder = new FhirEncounterGraphBuilder(getLogicGraphClassifier(), encounter);
+        LogicGraph logicGraph = fhirEncounterGraphBuilder.build();
+        return logicGraph;
     }
 
 	@Override

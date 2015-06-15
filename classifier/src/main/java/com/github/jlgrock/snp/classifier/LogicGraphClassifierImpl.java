@@ -57,7 +57,12 @@ public class LogicGraphClassifierImpl implements LogicGraphClassifier {
     	return nid;
     }
 
-	@Override
+    @Override
+    public UUID getUUIDFromSNOMED(final String sctid) {
+        return UuidT3Generator.fromSNOMED(131148009L);
+    }
+
+    @Override
 	public ConceptChronicleBI findChronicle(final String sctid) {
 		ConceptChronicleBI returnVal = null;
 		try {
@@ -66,7 +71,6 @@ public class LogicGraphClassifierImpl implements LogicGraphClassifier {
 			returnVal = terminologyStoreDI.getConcept(uuid);
 		} catch (IOException ex) {
 			LOGGER.error("Unable to get ViewCoordinates Inferred Latest", ex);
-			//TODO determine what to do.  May need to refactor Campbells code if we are going to keep using this pattern
 		}
 		return returnVal;
 	}
@@ -74,12 +78,14 @@ public class LogicGraphClassifierImpl implements LogicGraphClassifier {
 	@Override
 	public Integer classify(final LogicGraph logicGraph) {
 		LOGGER.debug("Stated logic graph: {}", logicGraph);
-        Integer classifiedResult = null;
+
         LogicService logicService = LookupService.getService(LogicService.class);
-        classifiedResult = logicService.getConceptSequenceForExpression(logicGraph,
+		Integer classifiedResult = logicService.getConceptSequenceForExpression(logicGraph,
                 StampCoordinates.getDevelopmentLatest(),
                 LogicCoordinates.getStandardElProfile(),
                 EditCoordinates.getDefaultUserSolorOverlay());
+
         return classifiedResult;
 	}
+
 }

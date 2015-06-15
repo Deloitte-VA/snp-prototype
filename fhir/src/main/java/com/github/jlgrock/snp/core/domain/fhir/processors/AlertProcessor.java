@@ -1,10 +1,8 @@
 package com.github.jlgrock.snp.core.domain.fhir.processors;
 
+import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
 import com.github.jlgrock.snp.core.domain.fhir.model.Alert;
-
 import gov.vha.isaac.logic.LogicGraph;
-
-import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
 
 /**
  *
@@ -13,8 +11,8 @@ public class AlertProcessor extends AbstractFhirProcessor {
 
     private final Alert alert;
 
-    public AlertProcessor(final TerminologyStoreDI terminologyStoreDIIn, final Alert alertIn) {
-        super(terminologyStoreDIIn);
+    public AlertProcessor(final LogicGraphClassifier logicGraphClassifierIn, final Alert alertIn) {
+        super(logicGraphClassifierIn);
         alert = alertIn;
     }
 

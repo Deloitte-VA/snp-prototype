@@ -1,10 +1,14 @@
 package com.github.jlgrock.snp.core.domain.fhir.logicgraph;
 
+import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
 import com.github.jlgrock.snp.core.domain.fhir.model.CodeableConcept;
 import com.github.jlgrock.snp.core.domain.fhir.model.Encounter;
-import gov.vha.isaac.logic.node.AbstractNode;
-import gov.vha.isaac.logic.node.RootNode;
-import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
+import gov.vha.isaac.logic.LogicGraph;
+import gov.vha.isaac.ochre.api.logic.LogicalExpressionBuilder;
+import gov.vha.isaac.ochre.api.logic.assertions.connectors.And;
+import gov.vha.isaac.ochre.api.logic.assertions.connectors.Connector;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,35 +17,36 @@ import java.util.List;
  *
  */
 public class FhirEncounterGraphBuilder extends AbstractFhirLogicGraphBuilder {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(FhirProcedureGraphBuilder.class);
+
     final Encounter encounter;
 
     @Override
-    public void create() {
-        //Add the nodes to the logic graph based on FHIR XML parameters
-        //Create root node first
-        RootNode root = getRoot();
-
-        AbstractNode node = processEncounter(encounter);
-        root.addChildren(SufficientSet(node));
+    public LogicGraph build() {
+        Connector connector = processEncounter(encounter);
+        LogicalExpressionBuilder.SufficientSet(connector);
+        return (LogicGraph) getLogicalExpressionBuilder().build();
     }
 
-    public FhirEncounterGraphBuilder(final TerminologyStoreDI terminologyStoreDIIn, final Encounter encounterIn) {
-        super(terminologyStoreDIIn);
+    public FhirEncounterGraphBuilder(final LogicGraphClassifier logicGraphClassifierIn, final Encounter encounterIn) {
+        super(logicGraphClassifierIn);
         encounter = encounterIn;
     }
 
-    protected AbstractNode processEncounter(final Encounter encounter) {
+    protected And processEncounter(final Encounter encounter) {
+        LOGGER.trace("Creating Fhir Encounter Logic Graph");
         List<CodeableConcept> typeList = encounter.getType();
-        List<AbstractNode> childrenNodes = new ArrayList<>();
+        List<And> childrenNodes = new ArrayList<>();
 
         //TODO so many other possible fields to look into.  just using one currently
 
         // add source
         for (CodeableConcept codeableConcept : typeList) {
-            childrenNodes.add(processCodeableConcept(codeableConcept));
+            childrenNodes.add(buildCodeableConcept(codeableConcept));
         }
 
-        return And(new AbstractNode[childrenNodes.size()]);
+        return LogicalExpressionBuilder.And(new And[childrenNodes.size()]);
     }
 
 }

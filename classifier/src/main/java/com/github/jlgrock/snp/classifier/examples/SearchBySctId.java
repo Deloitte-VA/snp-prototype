@@ -1,31 +1,34 @@
 package com.github.jlgrock.snp.classifier.examples;
 
 
-import gov.vha.isaac.logic.LogicService;
-import gov.vha.isaac.metadata.coordinates.ViewCoordinates;
-import gov.vha.isaac.ochre.api.IdentifierService;
 import gov.vha.isaac.ochre.api.LookupService;
 import org.ihtsdo.otf.tcc.api.blueprint.ComponentProperty;
 import org.ihtsdo.otf.tcc.api.concept.ConceptChronicleBI;
-import org.ihtsdo.otf.tcc.api.store.TerminologySnapshotDI;
 import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
 import org.ihtsdo.otf.tcc.model.index.service.IndexerBI;
 import org.ihtsdo.otf.tcc.model.index.service.SearchResult;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Search the database for a concept, using the Snomed Concept id (sctid) as an identifier
+ */
 public class SearchBySctId extends AbstractQuery {
 
-    @Override
-    protected void search() throws IOException {
-        TerminologyStoreDI termStore = LookupService.getService(TerminologyStoreDI.class);
-        IdentifierService idService = LookupService.getService(IdentifierService.class);
-        IndexerBI snomedIdLookup = LookupService.get().getService(IndexerBI.class, "snomed id refex indexer");
-        LogicService logicService = LookupService.getService(LogicService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(SearchBySctId.class);
 
-        TerminologySnapshotDI statedTermSnapshot = termStore.getSnapshot(ViewCoordinates.getDevelopmentStatedLatest());
-        TerminologySnapshotDI inferredTermSnapshot = termStore.getSnapshot(ViewCoordinates.getDevelopmentInferredLatest());
+    @Override
+    protected void run() throws IOException {
+        TerminologyStoreDI termStore = LookupService.getService(TerminologyStoreDI.class);
+        //IdentifierService idService = LookupService.getService(IdentifierService.class);
+        IndexerBI snomedIdLookup = LookupService.get().getService(IndexerBI.class, "snomed id refex indexer");
+        //LogicService logicService = LookupService.getService(LogicService.class);
+
+        //TerminologySnapshotDI statedTermSnapshot = termStore.getSnapshot(ViewCoordinates.getDevelopmentStatedLatest());
+        //TerminologySnapshotDI inferredTermSnapshot = termStore.getSnapshot(ViewCoordinates.getDevelopmentInferredLatest());
 
         Long sctId = 131148009L;
 
@@ -36,14 +39,19 @@ public class SearchBySctId extends AbstractQuery {
         if (!bleedingSctidResult.isEmpty()) {
             for (SearchResult result : bleedingSctidResult) {
                 int bleedingConceptNid = result.nid;
-                System.out.println("\nFound [2] nid: " + bleedingConceptNid);
+                LOGGER.info("\nFound [2] nid: {}", bleedingConceptNid);
                 ConceptChronicleBI bleedingConcept2 = termStore.getConcept(bleedingConceptNid);
-                System.out.println("Found [2]: " + bleedingConcept2);
+                LOGGER.info("Found [2]: {}", bleedingConcept2);
             }
         }
     }
 
-    public static void main(String[] args) {
+    /**
+     * Execute the Example
+     *
+     * @param args ignored
+     */
+    public static void main(final String[] args) {
         SearchBySctId searchBySctId = new SearchBySctId();
         searchBySctId.execute();
     }
