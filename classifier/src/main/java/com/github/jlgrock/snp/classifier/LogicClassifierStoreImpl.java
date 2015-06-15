@@ -8,6 +8,7 @@ import gov.vha.isaac.metadata.coordinates.LogicCoordinates;
 import gov.vha.isaac.metadata.coordinates.StampCoordinates;
 import gov.vha.isaac.ochre.api.IdentifierService;
 import gov.vha.isaac.ochre.api.LookupService;
+import gov.vha.isaac.ochre.api.TaxonomyService;
 import gov.vha.isaac.ochre.api.constants.Constants;
 import org.glassfish.hk2.runlevel.RunLevelController;
 import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
@@ -89,6 +90,11 @@ class LogicClassifierStoreImpl implements LogicClassifierStore {
     @Override
     public IdentifierService getIdentifierService() {
         return LookupService.getService(IdentifierService.class);
+    }
+
+    @Override
+    public TaxonomyService getTaxonomyService() {
+        return LookupService.getService(TaxonomyService.class);
     }
 
     @Override

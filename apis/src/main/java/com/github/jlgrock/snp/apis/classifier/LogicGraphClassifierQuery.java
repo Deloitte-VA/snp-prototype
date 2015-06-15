@@ -17,6 +17,15 @@ public interface LogicGraphClassifierQuery {
      * Query that will return all concept sequences that match the kind of
      * the concept with the uuid passed in
      *
+     * @param nid the native identifier for the database
+     * @return the list of matching Concept Sequences
+     */
+    List<Integer> query(int nid);
+
+    /**
+     * Query that will return all concept sequences that match the kind of
+     * the concept with the uuid passed in
+     *
      * @param uuid the unique identifier for the database
      * @return the list of matching Concept Sequences
      */

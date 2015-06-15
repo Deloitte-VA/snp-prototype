@@ -31,6 +31,11 @@ public final class EncounterTags {
     public static final String PARTICIPANT = "participant";
 
     /**
+     * The patient, stored as a linked unique identifier.
+     */
+    public static final String PATIENT = "patient";
+
+    /**
      * The list of observations.
      */
     public static final String OBSERVATIONS_TAG = "observations";

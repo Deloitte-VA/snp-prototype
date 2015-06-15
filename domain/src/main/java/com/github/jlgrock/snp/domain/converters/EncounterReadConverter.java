@@ -2,6 +2,7 @@ package com.github.jlgrock.snp.domain.converters;
 
 import com.github.jlgrock.snp.apis.converters.Converter;
 import com.github.jlgrock.snp.domain.data.EncounterTags;
+import com.github.jlgrock.snp.domain.data.PatientRepository;
 import com.github.jlgrock.snp.domain.types.Encounter;
 import com.github.jlgrock.snp.domain.types.Observation;
 import org.bson.Document;
@@ -21,14 +22,17 @@ import java.util.stream.Collectors;
 public class EncounterReadConverter extends AbstractReadConverter implements Converter<Document, Encounter> {
 
     private final ObservationReadConverter observationReadConverter;
+    private final PatientRepository patientRepository;
 
     /**
      * @param observationReadConverterIn object of type ObservationReadConverter that has values from a MongoDB
      *                                   object stored in an Observation object.
      */
     @Inject
-    public EncounterReadConverter(final ObservationReadConverter observationReadConverterIn) {
+    public EncounterReadConverter(final ObservationReadConverter observationReadConverterIn,
+                                  final PatientRepository patientRepositoryIn) {
         observationReadConverter = observationReadConverterIn;
+        patientRepository = patientRepositoryIn;
     }
 
     @Override
@@ -40,6 +44,7 @@ public class EncounterReadConverter extends AbstractReadConverter implements Con
         encounter.setStatus(parseString(source, EncounterTags.STATUS));
         encounter.setSubject(parseString(source, EncounterTags.SUBJECT));
         encounter.setParticipant(parseString(source, EncounterTags.PARTICIPANT));
+        encounter.setPatient(patientRepository.findOneById(parseLong(source, EncounterTags.PATIENT)));
 
         List<Document> observationsObjs = (List<Document>) source.get(EncounterTags.OBSERVATIONS_TAG);
         List<Observation> observations = new ArrayList<>();

@@ -2,6 +2,7 @@ package com.github.jlgrock.snp.domain.types;
 
 import com.google.common.base.MoreObjects;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Objects;
 
@@ -19,6 +20,9 @@ public class Encounter extends AbstractMongoDomainObject {
 
     private String status;
 
+    @NotNull
+    private Patient patient;
+
     private String participant;
 
     private List<Observation> observations;
@@ -32,6 +36,7 @@ public class Encounter extends AbstractMongoDomainObject {
                 .add("encounterClass", encounterClass)
                 .add("status", status)
                 .add("participant", participant)
+                .add("patient", patient)
                 .add("observations", observations)
                 .toString();
     }
@@ -56,6 +61,7 @@ public class Encounter extends AbstractMongoDomainObject {
                 && Objects.equals(this.encounterClass, other.encounterClass)
                 && Objects.equals(this.status, other.status)
                 && Objects.equals(this.participant, other.participant)
+                && Objects.equals(this.patient, other.patient)
                 && Objects.equals(this.observations, other.observations);
     }
 
@@ -90,6 +96,14 @@ public class Encounter extends AbstractMongoDomainObject {
 	public void setEncounterClass(final String encounterClassIn) {
         encounterClass = encounterClassIn;
 	}
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(final Patient patientIn) {
+        patient = patientIn;
+    }
 
 	public String getParticipant() {
 		return participant;
