@@ -34,7 +34,8 @@ public class SearchBySctId extends AbstractQuery {
 
         // Search the index for the sctId.  This will only go 5 levels deep
         int levelsToSearch = 5;
-        List<SearchResult> bleedingSctidResult = snomedIdLookup.query(Long.toString(sctId), ComponentProperty.STRING_EXTENSION_1, levelsToSearch);
+        List<SearchResult> bleedingSctidResult =
+                snomedIdLookup.query(Long.toString(sctId), ComponentProperty.STRING_EXTENSION_1, levelsToSearch);
 
         if (!bleedingSctidResult.isEmpty()) {
             for (SearchResult result : bleedingSctidResult) {
