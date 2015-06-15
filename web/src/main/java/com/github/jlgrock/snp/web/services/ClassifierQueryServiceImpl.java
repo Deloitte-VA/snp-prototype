@@ -2,24 +2,29 @@ package com.github.jlgrock.snp.web.services;
 
 
 import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifierQuery;
-import com.github.jlgrock.snp.domain.data.EncounterRepositoryImpl;
+import com.github.jlgrock.snp.domain.data.EncounterRepository;
 import com.github.jlgrock.snp.domain.types.Encounter;
 import com.github.jlgrock.snp.domain.types.Patient;
 import gov.vha.isaac.logic.LogicGraph;
+import org.jvnet.hk2.annotations.Service;
 
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  *
  */
-public class ClassifierQueryService {
+@Service
+public class ClassifierQueryServiceImpl implements ClassifierQueryServiceImpl {
 
-    final LogicGraphClassifierQuery logicGraphClassifierQuery;
+    private final LogicGraphClassifierQuery logicGraphClassifierQuery;
+    private final EncounterRepository encounterRepository;
 
-    public ClassifierQueryService(final LogicGraphClassifierQuery logicGraphClassifierQueryIn) {
+    public ClassifierQueryServiceImpl(final LogicGraphClassifierQuery logicGraphClassifierQueryIn, final EncounterRepository encounterRepositoryIn) {
         logicGraphClassifierQuery = logicGraphClassifierQueryIn;
+        encounterRepository = encounterRepositoryIn;
     }
 
     public Set<Patient> executeKindOfQuery(final UUID uuid) {
@@ -38,10 +43,18 @@ public class ClassifierQueryService {
     }
 
     private Set<Patient> findPatientsByNids(final List<Integer> nids) {
-        //TODO do query based on these nids
-//        EncounterRepositoryImpl r = new EncounterRepositoryImpl();
-//        Encounter e;
-//        e.getPatient()
+        // Convert the int list to a long list
+        List<Long> longNids = nids
+                .stream()
+                .map(a -> 1l)
+                .collect(Collectors.toList());
 
+        // execute the custom query
+        return encounterRepository.
+                findByPceIdList(longNids)
+                .stream()
+                .map(Encounter::getPatient)
+                .distinct()
+                .collect(Collectors.toSet());
     }
 }
