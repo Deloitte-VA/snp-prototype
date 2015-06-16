@@ -74,7 +74,7 @@ public abstract class AbstractLegoProcessor implements LegoElementProcessorServi
         ClassifiedPce cPce = new ClassifiedPce();
         cPce.setId((long) classifiedLogicGraphId.intValue());
         cPce.setDesc(logicGraph.toString());
-        
+
         //TODO store concept ID, and logic graph expression
         classifiedPceStore.save(cPce);
     }

@@ -139,8 +139,8 @@ public class Patient extends AbstractMongoDomainObject {
         return fhirId;
     }
 
-    public void setFhirId(String fhirId) {
-        this.fhirId = fhirId;
+    public void setFhirId(final String fhirIdIn) {
+        fhirId = fhirIdIn;
     }
 }
 
