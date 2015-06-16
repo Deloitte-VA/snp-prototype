@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -22,6 +23,7 @@ import org.slf4j.LoggerFactory;
 import com.github.jlgrock.snp.apis.web.ProcessingServiceFactory;
 import com.github.jlgrock.snp.domain.types.Gender;
 import com.github.jlgrock.snp.domain.types.Patient;
+import com.github.jlgrock.snp.web.services.ClassifierQueryServiceImpl;
 
 /**
  * The controller for handling all classifier requests
@@ -33,16 +35,18 @@ public class ClassifierResource {
 
     private final ProcessingServiceFactory processingServiceFactory;
 
-    //ClassifierFactory classifierFactory;
+    private final ClassifierQueryServiceImpl classifierQueryServiceImpl;
 
     /**
      * Constructor
      *
      * @param processingServiceFactoryIn the marshaller that
+     * @param classifierQueryServiceImplIn query the database
      */
     @Inject
-    public ClassifierResource(final ProcessingServiceFactory processingServiceFactoryIn) {
+    public ClassifierResource(final ProcessingServiceFactory processingServiceFactoryIn, ClassifierQueryServiceImpl classifierQueryServiceImplIn) {
         processingServiceFactory = processingServiceFactoryIn;
+        classifierQueryServiceImpl = classifierQueryServiceImplIn;
     }
 
     /**
@@ -123,6 +127,9 @@ public class ClassifierResource {
     @Path("/query")
     public Response processForm(String jsonStr) {
     	LOGGER.debug("Parameters from query form: {}", jsonStr);
+    	Set<Patient> patients = classifierQueryServiceImpl.executeKindOfQuery("131148009");
+    	LOGGER.debug("patients: {}", patients);
+    	
 		return Response.status(200)
 				.entity(getPatients())
 				.type(MediaType.APPLICATION_JSON)

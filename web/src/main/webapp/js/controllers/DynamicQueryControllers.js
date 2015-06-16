@@ -9,7 +9,7 @@ app.controller('DynamicQueryController', ['$scope', 'dynamicQueryFactory',
     $scope.formData = {};
     $scope.formData.key = 'classifierId';
     $scope.formData.value = 23;
-    $scope.status = {};
+    //$scope.status = {};
     $scope.patients = {};	
 	$scope.types = 
 	[
@@ -27,11 +27,12 @@ app.controller('DynamicQueryController', ['$scope', 'dynamicQueryFactory',
 	
     $scope.processForm = function() {
     	dynamicQueryFactory.getPatients($scope.formData)
-            .success(function (pats) {
-                $scope.patients = pats;
+            .success(function (data, status, headers, config) {
+            	$scope.status = status;
+                $scope.patients = data;
             })
-            .error(function (error) {
-                $scope.status = 'Unable to load patient data: ' + error.message;
+            .error(function (data, status, headers, config) {
+                $scope.status = 'Unable to load patient data: ' + data;
             });
     };
 }]);
