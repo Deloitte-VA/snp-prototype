@@ -13,7 +13,8 @@ import javax.inject.Named;
  */
 @Service
 @Named
-public class ClassifiedPceReadConverter extends AbstractReadConverter implements ReadConverter<Document, ClassifiedPce> {
+public class ClassifiedPceReadConverter extends AbstractReadConverter
+        implements ReadConverter<Document, ClassifiedPce> {
     @Override
     public ClassifiedPce convert(final Document source) {
         ClassifiedPce classifiedPce = new ClassifiedPce();

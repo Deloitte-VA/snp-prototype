@@ -15,6 +15,9 @@ public abstract class AbstractMongoDomainObject implements MongoDomainObject<Lon
      * @param pId the identifier object
      */
     public void setId(final Long pId) {
+        if (pId == null) {
+            return;
+        }
         id = pId;
     }
 

@@ -22,6 +22,7 @@ public interface PatientRepository extends MongoRepository<Patient, Long> {
 	 * @return list of patients
 	 */
     List<Patient> findAllByLastName(String lastName);
+
     /**
      * 
      * @param firstName is a string of the first name 
@@ -29,18 +30,27 @@ public interface PatientRepository extends MongoRepository<Patient, Long> {
      * @return list of patients
      */
     List<Patient> findAllByFirstNameAndLastName(String firstName, String lastName);
+
     /**
      * 
      * @param dateOfBirth is the birthday date
      * @return list of patients
      */
     List<Patient> findAllByDateOfBirth(LocalDate dateOfBirth);
+
     /**
      * 
      * @param gender is the gender
      * @return list of patients
      */
     List<Patient> findAllByGender(Gender gender);
+
+    /**
+     *
+     * @param fhirId the unique identifier used in fhir
+     * @return the patient matching the id
+     */
+    Patient findOneByFhirId(String fhirId);
 }
 
 

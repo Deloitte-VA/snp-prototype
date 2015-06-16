@@ -78,7 +78,7 @@ public class PatientRepositoryImpl extends
     		return patientShell;
     	}
         Document query = new Document() {{
-            put("lastName", lastName);
+            put(PatientTags.LAST_NAME_TAG, lastName);
         }};
         return executeQueryAndTransformResults(query);
     }
@@ -91,8 +91,8 @@ public class PatientRepositoryImpl extends
     		return patientShell;
     	}
         Document query = new Document() {{
-            put("firstName", firstName);
-            put("lastName", lastName);
+            put(PatientTags.FIRST_NAME_TAG, firstName);
+            put(PatientTags.LAST_NAME_TAG, lastName);
         }};
         return executeQueryAndTransformResults(query);
     }
@@ -105,7 +105,7 @@ public class PatientRepositoryImpl extends
     		return patientShell;
     	}
         Document query = new Document() {{
-            put("dateOfBirth", dateOfBirth);
+            put(PatientTags.DATE_OF_BIRTH_TAG, dateOfBirth);
         }};
         return executeQueryAndTransformResults(query);
     }
@@ -118,9 +118,22 @@ public class PatientRepositoryImpl extends
     		return patientShell;
     	}
         Document query = new Document() {{
-            put("gender", gender);
+            put(PatientTags.GENDER_TAG, gender);
         }};
         return executeQueryAndTransformResults(query);
     }
-    
+
+    @Override
+    public Patient findOneByFhirId(final String fhirId) {
+        LOGGER.trace("findOneByFhirId(fhirId={})", fhirId);
+        if (fhirId == null){
+            return null;
+        }
+        Document query = new Document() {{
+            put(PatientTags.FHIR_ID_TAG, fhirId);
+        }};
+        List<Patient> x = executeQueryAndTransformResults(query);
+        return x.get(0);
+    }
+
 }

@@ -1,20 +1,18 @@
 package com.github.jlgrock.snp.core.domain.fhir.converters;
 
-import static org.testng.Assert.assertEquals;
-
-import java.time.LocalDate;
+import com.github.jlgrock.snp.core.domain.fhir.model.Patient;
+import com.github.jlgrock.snp.domain.types.Gender;
+import org.testng.annotations.Test;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
+import java.time.LocalDate;
 
-import org.testng.annotations.Test;
+import static org.testng.Assert.assertEquals;
 
-import com.github.jlgrock.snp.core.domain.fhir.model.Patient;
-import com.github.jlgrock.snp.domain.types.Gender;
-
-public class PatientWriteConverterImplTest extends AbstractConverterTest {
+public class FhirPatientConverterTest extends AbstractConverterTest {
 	
 	public final static String xmlFile = "Patient-example-f001-pieter.xml";
 
@@ -28,7 +26,7 @@ public class PatientWriteConverterImplTest extends AbstractConverterTest {
 				readFile(xmlFile));
 		Patient patientIn = je.getValue();
 		
-		PatientWriteConverter patientConverter = new PatientWriteConverterImpl();
+		FhirPatientConverter patientConverter = new FhirPatientConverter();
 		
 		com.github.jlgrock.snp.domain.types.Patient patient = patientConverter.convert(patientIn);
 		

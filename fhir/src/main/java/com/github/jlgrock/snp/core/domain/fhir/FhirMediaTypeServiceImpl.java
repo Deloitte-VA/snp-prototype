@@ -7,17 +7,17 @@ import org.jvnet.hk2.annotations.Service;
  */
 @Service
 public class FhirMediaTypeServiceImpl implements FhirMediaTypeService {
-    private static final java.lang.String MIME_APPLICATION = "application";
+    private static final String MIME_APPLICATION = "application";
 
-    private static final java.lang.String MIME_SPECIFIC_XML = "fhir+xml";
+    private static final String MIME_SPECIFIC_XML = "fhir+xml";
 
     @Override
-    public java.lang.String getMediaTypeString() {
+    public String getMediaTypeString() {
         return MIME_APPLICATION + "/" + MIME_SPECIFIC_XML;
     }
 
     @Override
-    public java.lang.String getTypeName() {
+    public String getTypeName() {
         return MIME_APPLICATION;
     }
 

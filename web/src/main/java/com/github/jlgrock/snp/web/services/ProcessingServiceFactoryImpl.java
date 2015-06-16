@@ -46,6 +46,7 @@ public class ProcessingServiceFactoryImpl implements ProcessingServiceFactory {
      * @return the process that matches the media-type
      */
     public ProcessingService getService(final MediaType snpMediaType) {
+        LOGGER.trace("finding service '{}'", snpMediaType);
         return processingServices.get(snpMediaType.getType() + "/" + snpMediaType.getSubtype());
     }
 }

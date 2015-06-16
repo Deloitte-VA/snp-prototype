@@ -3,6 +3,7 @@ package com.github.jlgrock.snp.web.services;
 
 import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifierQuery;
 import com.github.jlgrock.snp.domain.data.EncounterRepository;
+import com.github.jlgrock.snp.domain.data.PatientRepository;
 import com.github.jlgrock.snp.domain.types.Encounter;
 import com.github.jlgrock.snp.domain.types.Patient;
 import gov.vha.isaac.logic.LogicGraph;
@@ -23,14 +24,19 @@ public class ClassifierQueryServiceImpl {
 
     private final LogicGraphClassifierQuery logicGraphClassifierQuery;
     private final EncounterRepository encounterRepository;
+    private final PatientRepository patientRepository;
 
     /**
      * @param logicGraphClassifierQueryIn to classify logic graphs
-     * @param encounterRepositoryIn the encounter repository, for executing queries against
+     * @param encounterRepositoryIn the encounter repository, for executing encounter queries against
+     * @param patientRepositoryIn the patient repository, for executing patient queries against
      */
-    public ClassifierQueryServiceImpl(final LogicGraphClassifierQuery logicGraphClassifierQueryIn, final EncounterRepository encounterRepositoryIn) {
+    public ClassifierQueryServiceImpl(final LogicGraphClassifierQuery logicGraphClassifierQueryIn,
+                                      final EncounterRepository encounterRepositoryIn,
+                                      final PatientRepository patientRepositoryIn) {
         logicGraphClassifierQuery = logicGraphClassifierQueryIn;
         encounterRepository = encounterRepositoryIn;
+        patientRepository = patientRepositoryIn;
     }
 
     /**
@@ -77,8 +83,9 @@ public class ClassifierQueryServiceImpl {
         return encounterRepository.
                 findByPceIdList(longNids)
                 .stream()
-                .map(Encounter::getPatient)
+                .map(Encounter::getPatientId)
                 .distinct()
+                .map(patientId -> patientRepository.findOneById(patientId))
                 .collect(Collectors.toSet());
     }
 }

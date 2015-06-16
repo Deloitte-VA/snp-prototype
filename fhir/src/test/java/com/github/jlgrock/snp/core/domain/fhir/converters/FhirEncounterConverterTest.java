@@ -1,6 +1,8 @@
 package com.github.jlgrock.snp.core.domain.fhir.converters;
 
 import com.github.jlgrock.snp.core.domain.fhir.model.Encounter;
+import com.github.jlgrock.snp.domain.data.PatientRepository;
+import org.mockito.Mockito;
 import org.testng.annotations.Test;
 
 import javax.xml.bind.JAXBContext;
@@ -10,7 +12,7 @@ import javax.xml.bind.Unmarshaller;
 
 import static org.testng.Assert.assertEquals;
 
-public class EncounterWriteConverterImplTest extends AbstractConverterTest {
+public class FhirEncounterConverterTest extends AbstractConverterTest {
 	
 	public final static String xmlFile = "Encounter-example-f201-20130404.xml";
 
@@ -23,12 +25,12 @@ public class EncounterWriteConverterImplTest extends AbstractConverterTest {
 		JAXBElement<Encounter> je = (JAXBElement<Encounter>) jaxbUnmarshaller.unmarshal(
 				readFile(xmlFile));
 		Encounter encounterIn = je.getValue();
-		
-		EncounterWriteConverter encounterConverter = new EncounterWriteConverterImpl();
+		PatientRepository patientRepositoryMock = Mockito.mock(PatientRepository.class);
+		FhirEncounterConverter encounterConverter = new FhirEncounterConverter(patientRepositoryMock);
 		
 		com.github.jlgrock.snp.domain.types.Encounter encounter = encounterConverter.convert(encounterIn);
 		
-		assertEquals(encounter.getFhirId(), "f201");
+		//TODO check the patient id somehow
 		assertEquals(encounter.getEncounterClass(), "OUTPATIENT");
 		assertEquals(encounter.getStatus(), "FINISHED");
 		assertEquals(encounter.getParticipant(), "Practitioner/f201");

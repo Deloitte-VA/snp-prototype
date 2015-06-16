@@ -2,7 +2,8 @@ package com.github.jlgrock.snp.core.domain.fhir.processors;
 
 import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
 import com.github.jlgrock.snp.apis.exceptions.ClassifierException;
-import com.github.jlgrock.snp.core.domain.fhir.converters.PatientWriteConverter;
+import com.github.jlgrock.snp.core.domain.fhir.converters.FhirEncounterConverter;
+import com.github.jlgrock.snp.core.domain.fhir.converters.FhirPatientConverter;
 import com.github.jlgrock.snp.core.domain.fhir.model.AdverseReaction;
 import com.github.jlgrock.snp.core.domain.fhir.model.Alert;
 import com.github.jlgrock.snp.core.domain.fhir.model.AllergyIntolerance;
@@ -50,8 +51,11 @@ import com.github.jlgrock.snp.core.domain.fhir.model.SecurityEvent;
 import com.github.jlgrock.snp.core.domain.fhir.model.Specimen;
 import com.github.jlgrock.snp.core.domain.fhir.model.Substance;
 import com.github.jlgrock.snp.core.domain.fhir.model.ValueSet;
+import com.github.jlgrock.snp.domain.data.EncounterRepository;
 import com.github.jlgrock.snp.domain.data.PatientRepository;
 import org.jvnet.hk2.annotations.Service;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 
@@ -60,21 +64,31 @@ import javax.inject.Inject;
  */
 @Service
 public class FhirElementProcessorFactoryImpl implements FhirElementProcessorFactory {
-    final LogicGraphClassifier logicGraphClassifier;
-    final PatientWriteConverter patientWriteConverter;
-    final PatientRepository patientRepository;
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(FhirElementProcessorFactoryImpl.class);
+
+    private final LogicGraphClassifier logicGraphClassifier;
+    private final FhirPatientConverter fhirPatientConverter;
+    private final FhirEncounterConverter fhirEncounterConverter;
+    private final PatientRepository patientRepository;
+    private final EncounterRepository encounterRepository;
 
     @Inject
     FhirElementProcessorFactoryImpl(final LogicGraphClassifier logicGraphClassifierIn,
-    		final PatientWriteConverter patientWriteConverterIn, final PatientRepository patientRepositoryIn) {
+                                    final FhirPatientConverter fhirPatientConverterIn,
+                                    final FhirEncounterConverter fhirEncounterConverterIn,
+                                    final PatientRepository patientRepositoryIn,
+                                    final EncounterRepository encounterRepositoryIn) {
         logicGraphClassifier = logicGraphClassifierIn;
-        patientWriteConverter = patientWriteConverterIn;
+        fhirPatientConverter = fhirPatientConverterIn;
+        fhirEncounterConverter = fhirEncounterConverterIn;
         patientRepository = patientRepositoryIn;
+        encounterRepository = encounterRepositoryIn;
     }
 
     @Override
     public FhirElementProcessorService findClassifier(final Object unmarshalledObject) throws ClassifierException {
-
+        LOGGER.trace("determining element processor service...");
         FhirElementProcessorService fhirElementProcessorService;
 
         if (unmarshalledObject instanceof AdverseReaction) {
@@ -104,7 +118,9 @@ public class FhirElementProcessorFactoryImpl implements FhirElementProcessorFact
         } else if (unmarshalledObject instanceof DocumentManifest) {
             fhirElementProcessorService = new DocumentManifestProcessor(logicGraphClassifier, (DocumentManifest) unmarshalledObject);
         } else if (unmarshalledObject instanceof Encounter) {
-            fhirElementProcessorService = new EncounterProcessor(logicGraphClassifier, (Encounter) unmarshalledObject);
+            fhirElementProcessorService = new EncounterProcessor(
+                    logicGraphClassifier, fhirEncounterConverter, encounterRepository,
+                    patientRepository, (Encounter) unmarshalledObject);
         } else if (unmarshalledObject instanceof FamilyHistory) {
             fhirElementProcessorService = new FamilyHistoryProcessor(logicGraphClassifier, (FamilyHistory) unmarshalledObject);
         } else if (unmarshalledObject instanceof Group) {
@@ -146,7 +162,7 @@ public class FhirElementProcessorFactoryImpl implements FhirElementProcessorFact
         } else if (unmarshalledObject instanceof Other) {
             fhirElementProcessorService = new OtherProcessor(logicGraphClassifier, (Other) unmarshalledObject);
         } else if (unmarshalledObject instanceof Patient) {
-            fhirElementProcessorService = new PatientProcessor(logicGraphClassifier, (Patient) unmarshalledObject, patientWriteConverter, patientRepository);
+            fhirElementProcessorService = new PatientProcessor(logicGraphClassifier, (Patient) unmarshalledObject, fhirPatientConverter, patientRepository);
         } else if (unmarshalledObject instanceof Practitioner) {
             fhirElementProcessorService = new PractitionerProcessor(logicGraphClassifier, (Practitioner) unmarshalledObject);
         } else if (unmarshalledObject instanceof Procedure) {

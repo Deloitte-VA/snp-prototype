@@ -1,20 +1,24 @@
 package com.github.jlgrock.snp.core.domain.fhir.converters;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
+import com.github.jlgrock.snp.apis.converters.Converter;
+import com.github.jlgrock.snp.core.domain.fhir.model.Code;
+import com.github.jlgrock.snp.core.domain.fhir.model.DateTime;
+import com.github.jlgrock.snp.domain.types.Gender;
+import org.jvnet.hk2.annotations.Contract;
 import org.jvnet.hk2.annotations.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.github.jlgrock.snp.core.domain.fhir.model.Code;
-import com.github.jlgrock.snp.core.domain.fhir.model.DateTime;
-import com.github.jlgrock.snp.domain.types.Gender;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
+@Contract
 @Service
-public class PatientWriteConverterImpl implements PatientWriteConverter{
+public class FhirPatientConverter
+        implements Converter<com.github.jlgrock.snp.core.domain.fhir.model.Patient,
+        com.github.jlgrock.snp.domain.types.Patient> {
 	
-	private static final Logger LOGGER = LoggerFactory.getLogger(PatientWriteConverterImpl.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(FhirPatientConverter.class);
 
 	@Override
 	public com.github.jlgrock.snp.domain.types.Patient convert(
@@ -35,6 +39,8 @@ public class PatientWriteConverterImpl implements PatientWriteConverter{
 		patientOut.setDateOfBirth(convertDateTimeToLocalDate(source.getBirthDate()));
 		patientOut.setDeceased(source.getDeceasedBoolean().isValue());
 		patientOut.setDateDeceased(convertDateTimeToLocalDate(source.getDeceasedDateTime()));
+		// FIX need to have a valid fhir id
+        //patientOut.setFhirId(source.getSubject);
 		return patientOut;
 	}
 	

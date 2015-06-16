@@ -67,12 +67,14 @@ public abstract class AbstractLegoProcessor implements LegoElementProcessorServi
         // Create the logic graph
         LegoExpressionGraphBuilder legoLogicGraphBuilder = new LegoExpressionGraphBuilder(logicGraphClassifier, expression);
         LogicGraph logicGraph = legoLogicGraphBuilder.build();
+        LOGGER.debug("executing classifier logic on logic graph...");
         Integer classifiedLogicGraphId = logicGraphClassifier.classify(logicGraph);
+        LOGGER.debug("received id: {}", classifiedLogicGraphId);
 
-        //TODO run through classification service, should get a number back. Should we change these to an int?
         ClassifiedPce cPce = new ClassifiedPce();
         cPce.setId((long) classifiedLogicGraphId.intValue());
-
+        cPce.setDesc(logicGraph.toString());
+        
         //TODO store concept ID, and logic graph expression
         classifiedPceStore.save(cPce);
     }

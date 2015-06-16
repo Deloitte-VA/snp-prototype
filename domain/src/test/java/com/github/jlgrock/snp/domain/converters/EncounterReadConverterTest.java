@@ -40,7 +40,7 @@ public class EncounterReadConverterTest {
         PatientRepository patientRepository = mock(PatientRepository.class);
 
         Long id = 123l;
-        String fhirId = "abc";
+        Long patientId = 234l;
         String participant = "def";
         String encounterClass = "ghi";
         String status = "jkl";
@@ -48,7 +48,7 @@ public class EncounterReadConverterTest {
 
         Document dbObject = new Document() {{
             put(SharedTags.ID_TAG, id);
-            put(EncounterTags.FHIR_ID, fhirId);
+            put(EncounterTags.PATIENT, patientId);
             put(EncounterTags.PARTICIPANT, participant);
             put(EncounterTags.ENCOUNTER_CLASS, encounterClass);
             put(EncounterTags.STATUS, status);
@@ -64,7 +64,7 @@ public class EncounterReadConverterTest {
 
         Encounter encounter = encounterReadConverter.convert(dbObject);
         Assert.assertEquals(id, encounter.getId());
-        Assert.assertEquals(fhirId, encounter.getFhirId());
+        Assert.assertEquals(patientId, encounter.getPatientId());
         Assert.assertEquals(participant, encounter.getParticipant());
         Assert.assertEquals(encounterClass, encounter.getEncounterClass());
         Assert.assertEquals(status, encounter.getStatus());

@@ -51,8 +51,8 @@ public abstract class AbstractLegoLogicGraphBuilder {
     /**
      * Can have either a Concept or a list of sub-Expressions, plus 0 or more Relations and 0 or more RelationGroups
      *
-     * @param expression
-     * @return
+     * @param expression the expression to parse
+     * @return the AND of all of the concept/subextpression + relations + relationGroups
      */
     protected And buildExpression(final Expression expression) {
         LOGGER.trace("Building from expression node...");
@@ -97,7 +97,7 @@ public abstract class AbstractLegoLogicGraphBuilder {
     /**
      * A relation can have a type (which contains one single concept) and a destination
      *
-     * @param relation
+     * @param relation the relation to parse
      * @return
      */
 	protected SomeRole buildRelation(final Relation relation) {
@@ -128,7 +128,7 @@ public abstract class AbstractLegoLogicGraphBuilder {
     /**
      * A destination can contain an expression, text, boolean, or measurement
      *
-     * @param destination
+     * @param destination the destination to parse
      * @return
      */
     protected And processDestination(final Destination destination) {
@@ -144,6 +144,11 @@ public abstract class AbstractLegoLogicGraphBuilder {
         }
     }
 
+    /**
+     * A Concept can have a uuid, an sctid, and a description.  These will be turned into the corresponding Conceptspec
+     * @param concept the concept to parse
+     * @return the new ConceptSpec
+     */
     protected ConceptSpec buildConcept(final Concept concept) {
         LOGGER.trace("Building from concept node...");
         String description = concept.getDesc();
@@ -164,7 +169,7 @@ public abstract class AbstractLegoLogicGraphBuilder {
     /**
      * can contain 1 or more Relations
      *
-     * @param relationGroup
+     * @param relationGroup the relation group to parse
      * @return
      */
     protected And buildRelationGroup(final RelationGroup relationGroup) {

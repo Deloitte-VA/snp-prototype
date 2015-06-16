@@ -35,6 +35,7 @@ public class PatientWriteConverter implements WriteConverter<Patient, Document> 
         } else {
             dbo.put(PatientTags.DATE_DECEASED, source.getDateDeceased().toEpochDay());
         }
+        dbo.put(PatientTags.FHIR_ID_TAG, source.getFhirId());
         return dbo;
     }
 }

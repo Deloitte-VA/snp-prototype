@@ -40,6 +40,12 @@ public final class PatientTags {
      * The date of death for a patient
      */
     public static final String DATE_DECEASED = "dod";
+
+    /**
+     * The date of death for a patient
+     */
+    public static final String FHIR_ID_TAG = "fhirId";
+
     /**
      * Private constructor for utility class.
      */

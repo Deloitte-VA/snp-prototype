@@ -104,7 +104,7 @@ public abstract class TestSetup {
             encounter.setEncounterClass("yyy");
 			encounter.setStatus("def");
 			encounter.setId(201521l);
-			encounter.setFhirId("4334");
+			encounter.setPatientId(123l);
 			encounters.add(encounter);
 			document = encounterWriteConverter.convert(encounter);
 			when(encounterWriteConverterMock.convert(encounter)).thenReturn(encounterWriteConverter.convert(encounter));
@@ -114,7 +114,7 @@ public abstract class TestSetup {
 			encounter.setParticipant("def");
             encounter.setEncounterClass("zzz");
 			encounter.setId(201522l);
-			encounter.setFhirId("ghi");
+			encounter.setPatientId(345l);
             encounters.add(encounter);
 			document = encounterWriteConverter.convert(encounter);
 			when(encounterWriteConverterMock.convert(encounter)).thenReturn(encounterWriteConverter.convert(encounter));

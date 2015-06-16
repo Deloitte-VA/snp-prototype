@@ -26,6 +26,8 @@ public class Patient extends AbstractMongoDomainObject {
     
     private LocalDate dateDeceased;
 
+    private String fhirId;
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) {
@@ -44,7 +46,8 @@ public class Patient extends AbstractMongoDomainObject {
                 Objects.equal(dateOfBirth, that.dateOfBirth) &&
                 Objects.equal(gender, that.gender) &&
                 Objects.equal(isDeceased, that.isDeceased) &&
-                Objects.equal(dateDeceased, that.dateDeceased);
+                Objects.equal(dateDeceased, that.dateDeceased) &&
+                Objects.equal(fhirId, that.fhirId);
     }
 
     @Override
@@ -57,7 +60,8 @@ public class Patient extends AbstractMongoDomainObject {
                 dateOfBirth,
                 gender,
                 isDeceased,
-                dateDeceased);
+                dateDeceased,
+                fhirId);
     }
 
     @Override
@@ -71,6 +75,7 @@ public class Patient extends AbstractMongoDomainObject {
                 .add("gender", gender)
                 .add("isDeceased", isDeceased)
                 .add("dateDeceased", dateDeceased)
+                .add("fhirId", fhirId)
                 .toString();
     }
 
@@ -129,5 +134,13 @@ public class Patient extends AbstractMongoDomainObject {
 	public void setDateDeceased(final LocalDate dateDeceasedIn) {
 		this.dateDeceased = dateDeceasedIn;
 	}
+
+    public String getFhirId() {
+        return fhirId;
+    }
+
+    public void setFhirId(String fhirId) {
+        this.fhirId = fhirId;
+    }
 }
 
