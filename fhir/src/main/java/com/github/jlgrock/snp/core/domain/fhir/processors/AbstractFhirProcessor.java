@@ -1,21 +1,21 @@
 package com.github.jlgrock.snp.core.domain.fhir.processors;
 
+import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
 import gov.vha.isaac.logic.LogicGraph;
-import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
 
 /**
  *
  */
 public abstract class AbstractFhirProcessor implements FhirElementProcessorService {
 
-    final private TerminologyStoreDI terminologyStoreDI;
+    private final LogicGraphClassifier logicGraphClassifier;
 
-    protected AbstractFhirProcessor(final TerminologyStoreDI terminologyStoreDIIn) {
-        terminologyStoreDI = terminologyStoreDIIn;
+    protected AbstractFhirProcessor(final LogicGraphClassifier logicGraphClassifierIn) {
+        logicGraphClassifier = logicGraphClassifierIn;
     }
 
-    public TerminologyStoreDI getTerminologyStoreDI() {
-        return terminologyStoreDI;
+    protected LogicGraphClassifier getLogicGraphClassifier() {
+        return logicGraphClassifier;
     }
 
     @Override

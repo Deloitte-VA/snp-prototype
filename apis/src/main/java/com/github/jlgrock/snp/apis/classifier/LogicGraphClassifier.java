@@ -4,6 +4,8 @@ import gov.vha.isaac.logic.LogicGraph;
 import org.ihtsdo.otf.tcc.api.concept.ConceptChronicleBI;
 import org.jvnet.hk2.annotations.Contract;
 
+import java.util.UUID;
+
 /**
  * Classify Post Coordinated Expressions using the classification store.
  */
@@ -13,9 +15,16 @@ public interface LogicGraphClassifier {
     /**
      * Get the native identifier
      * @param sctid SNOMED clinical terms identifier
-     * @return native identifier
+     * @return the native identifier (for all objects)
      */
     int getNidFromSNOMED(String sctid);
+
+    /**
+     *
+     * @param sctid SNOMED clinical terms identifier
+     * @return the UUID
+     */
+    UUID getUUIDFromSNOMED(String sctid);
 
     /**
      * Find a chronicle based on the sctId
@@ -32,4 +41,5 @@ public interface LogicGraphClassifier {
      * @return the native identifier
      */
     Integer classify(LogicGraph pce);
+
 }

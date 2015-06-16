@@ -1,10 +1,8 @@
 package com.github.jlgrock.snp.core.domain.fhir.processors;
 
+import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
 import com.github.jlgrock.snp.core.domain.fhir.model.Specimen;
-
 import gov.vha.isaac.logic.LogicGraph;
-
-import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
 
 /**
  *
@@ -13,8 +11,8 @@ public class SpecimenProcessor extends AbstractFhirProcessor {
 
     private final Specimen specimen;
 
-    public SpecimenProcessor(final TerminologyStoreDI terminologyStoreDIIn, final Specimen specimenIn) {
-        super(terminologyStoreDIIn);
+    public SpecimenProcessor(final LogicGraphClassifier logicGraphClassifierIn, final Specimen specimenIn) {
+        super(logicGraphClassifierIn);
         specimen = specimenIn;
     }
 

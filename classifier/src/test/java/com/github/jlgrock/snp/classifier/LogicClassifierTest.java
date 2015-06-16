@@ -47,7 +47,7 @@ public class LogicClassifierTest {
 
                     @Override
                     public Path luceneLocation() {
-                        return Paths.get("/Users/jlgrock/workspace/snp/data2/search");
+                        return Paths.get("/Users/jlgrock/workspace/snp/data2/run");
                     }
                 }).to(FileConfiguration.class);
             }

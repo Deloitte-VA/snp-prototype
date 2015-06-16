@@ -1,10 +1,8 @@
 package com.github.jlgrock.snp.core.domain.fhir.processors;
 
+import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
 import com.github.jlgrock.snp.core.domain.fhir.model.Procedure;
-
 import gov.vha.isaac.logic.LogicGraph;
-
-import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
 
 /**
  *
@@ -13,8 +11,8 @@ public class ProcedureProcessor extends AbstractFhirProcessor {
 
     private final Procedure procedure;
 
-    public ProcedureProcessor(final TerminologyStoreDI terminologyStoreDIIn, final Procedure procedureIn) {
-        super(terminologyStoreDIIn);
+    public ProcedureProcessor(final LogicGraphClassifier logicGraphClassifierIn, final Procedure procedureIn) {
+        super(logicGraphClassifierIn);
         procedure = procedureIn;
     }
 

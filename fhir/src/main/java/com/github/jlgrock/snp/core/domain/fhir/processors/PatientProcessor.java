@@ -1,13 +1,10 @@
 package com.github.jlgrock.snp.core.domain.fhir.processors;
 
+import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
 import com.github.jlgrock.snp.core.domain.fhir.converters.PatientWriteConverter;
-import com.github.jlgrock.snp.core.domain.fhir.converters.PatientWriteConverterImpl;
 import com.github.jlgrock.snp.core.domain.fhir.model.Patient;
 import com.github.jlgrock.snp.domain.data.PatientRepository;
-
 import gov.vha.isaac.logic.LogicGraph;
-
-import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
 
 /**
  *
@@ -18,9 +15,9 @@ public class PatientProcessor extends AbstractFhirProcessor {
     private final PatientWriteConverter pwc;
     private final PatientRepository patientRepo;
 
-    public PatientProcessor(final TerminologyStoreDI terminologyStoreDIIn, final Patient patientIn,
+    public PatientProcessor(final LogicGraphClassifier logicGraphClassifierIn, final Patient patientIn,
     		final PatientWriteConverter pwcIn, final PatientRepository patientRepositoryIn) {
-        super(terminologyStoreDIIn);
+        super(logicGraphClassifierIn);
         patient = patientIn;
         pwc = pwcIn;
         patientRepo = patientRepositoryIn;

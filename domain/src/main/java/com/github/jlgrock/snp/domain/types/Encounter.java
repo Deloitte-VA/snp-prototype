@@ -2,6 +2,7 @@ package com.github.jlgrock.snp.domain.types;
 
 import com.google.common.base.MoreObjects;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Objects;
 
@@ -15,12 +16,15 @@ public class Encounter extends AbstractMongoDomainObject {
     
     private String subject;
     
-    private String patientClass;
+    private String encounterClass;
 
     private String status;
-    
+
+    @NotNull
+    private Patient patient;
+
     private String participant;
-    
+
     private List<Observation> observations;
 
     @Override
@@ -29,16 +33,17 @@ public class Encounter extends AbstractMongoDomainObject {
                 .add("id", getId())
                 .add("fhirId", fhirId)
                 .add("subject", subject)
-                .add("patientClass", patientClass)
+                .add("encounterClass", encounterClass)
                 .add("status", status)
                 .add("participant", participant)
+                .add("patient", patient)
                 .add("observations", observations)
                 .toString();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), fhirId, patientClass, status, observations);
+        return Objects.hash(getId(), fhirId, encounterClass, status, observations);
     }
 
     @Override
@@ -53,9 +58,10 @@ public class Encounter extends AbstractMongoDomainObject {
         return Objects.equals(this.getId(), other.getId())
                 && Objects.equals(this.fhirId, other.fhirId)
                 && Objects.equals(this.subject, other.subject)
-                && Objects.equals(this.patientClass, other.patientClass)
+                && Objects.equals(this.encounterClass, other.encounterClass)
                 && Objects.equals(this.status, other.status)
                 && Objects.equals(this.participant, other.participant)
+                && Objects.equals(this.patient, other.patient)
                 && Objects.equals(this.observations, other.observations);
     }
 
@@ -83,13 +89,21 @@ public class Encounter extends AbstractMongoDomainObject {
 		status = statusIn;
 	}
 
-	public String getPatientClass() {
-		return patientClass;
+	public String getEncounterClass() {
+		return encounterClass;
 	}
 
-	public void setPatientClass(final String patientClassIn) {
-		patientClass = patientClassIn;
+	public void setEncounterClass(final String encounterClassIn) {
+        encounterClass = encounterClassIn;
 	}
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(final Patient patientIn) {
+        patient = patientIn;
+    }
 
 	public String getParticipant() {
 		return participant;

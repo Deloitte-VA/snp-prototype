@@ -29,7 +29,7 @@ public class EncounterWriteConverterImplTest extends AbstractConverterTest {
 		com.github.jlgrock.snp.domain.types.Encounter encounter = encounterConverter.convert(encounterIn);
 		
 		assertEquals(encounter.getFhirId(), "f201");
-		assertEquals(encounter.getPatientClass(), "OUTPATIENT");
+		assertEquals(encounter.getEncounterClass(), "OUTPATIENT");
 		assertEquals(encounter.getStatus(), "FINISHED");
 		assertEquals(encounter.getParticipant(), "Practitioner/f201");
 		assertEquals(encounter.getSubject(), "Patient/f201");

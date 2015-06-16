@@ -1,5 +1,6 @@
 package com.github.jlgrock.snp.core.domain.fhir.processors;
 
+import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
 import com.github.jlgrock.snp.apis.exceptions.ClassifierException;
 import com.github.jlgrock.snp.core.domain.fhir.converters.PatientWriteConverter;
 import com.github.jlgrock.snp.core.domain.fhir.model.AdverseReaction;
@@ -50,8 +51,6 @@ import com.github.jlgrock.snp.core.domain.fhir.model.Specimen;
 import com.github.jlgrock.snp.core.domain.fhir.model.Substance;
 import com.github.jlgrock.snp.core.domain.fhir.model.ValueSet;
 import com.github.jlgrock.snp.domain.data.PatientRepository;
-
-import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
 import org.jvnet.hk2.annotations.Service;
 
 import javax.inject.Inject;
@@ -61,15 +60,14 @@ import javax.inject.Inject;
  */
 @Service
 public class FhirElementProcessorFactoryImpl implements FhirElementProcessorFactory {
-    final TerminologyStoreDI terminologyStoreDI;
+    final LogicGraphClassifier logicGraphClassifier;
     final PatientWriteConverter patientWriteConverter;
     final PatientRepository patientRepository;
 
     @Inject
-    FhirElementProcessorFactoryImpl(/*final TerminologyStoreDI terminologyStoreDIIn,*/
+    FhirElementProcessorFactoryImpl(final LogicGraphClassifier logicGraphClassifierIn,
     		final PatientWriteConverter patientWriteConverterIn, final PatientRepository patientRepositoryIn) {
-//        terminologyStoreDI = terminologyStoreDIIn;
-    	terminologyStoreDI = null;
+        logicGraphClassifier = logicGraphClassifierIn;
         patientWriteConverter = patientWriteConverterIn;
         patientRepository = patientRepositoryIn;
     }
@@ -80,99 +78,99 @@ public class FhirElementProcessorFactoryImpl implements FhirElementProcessorFact
         FhirElementProcessorService fhirElementProcessorService;
 
         if (unmarshalledObject instanceof AdverseReaction) {
-            fhirElementProcessorService = new AdverseReactionProcessor(terminologyStoreDI, (AdverseReaction) unmarshalledObject);
+            fhirElementProcessorService = new AdverseReactionProcessor(logicGraphClassifier, (AdverseReaction) unmarshalledObject);
         } else if (unmarshalledObject instanceof Alert) {
-            fhirElementProcessorService = new AlertProcessor(terminologyStoreDI, (Alert) unmarshalledObject);
+            fhirElementProcessorService = new AlertProcessor(logicGraphClassifier, (Alert) unmarshalledObject);
         } else if (unmarshalledObject instanceof AllergyIntolerance) {
-            fhirElementProcessorService = new AllergyIntoleranceProcessor(terminologyStoreDI, (AllergyIntolerance) unmarshalledObject);
+            fhirElementProcessorService = new AllergyIntoleranceProcessor(logicGraphClassifier, (AllergyIntolerance) unmarshalledObject);
         } else if (unmarshalledObject instanceof CarePlan) {
-            fhirElementProcessorService = new CarePlanProcessor(terminologyStoreDI, (CarePlan) unmarshalledObject);
+            fhirElementProcessorService = new CarePlanProcessor(logicGraphClassifier, (CarePlan) unmarshalledObject);
         } else if (unmarshalledObject instanceof Composition) {
-            fhirElementProcessorService = new CompositionProcessor(terminologyStoreDI, (Composition) unmarshalledObject);
+            fhirElementProcessorService = new CompositionProcessor(logicGraphClassifier, (Composition) unmarshalledObject);
         } else if (unmarshalledObject instanceof ConceptMap) {
-            fhirElementProcessorService = new ConceptMapProcessor(terminologyStoreDI, (ConceptMap) unmarshalledObject);
+            fhirElementProcessorService = new ConceptMapProcessor(logicGraphClassifier, (ConceptMap) unmarshalledObject);
         } else if (unmarshalledObject instanceof Condition) {
-            fhirElementProcessorService = new ConditionProcessor(terminologyStoreDI, (Condition) unmarshalledObject);
+            fhirElementProcessorService = new ConditionProcessor(logicGraphClassifier, (Condition) unmarshalledObject);
         } else if (unmarshalledObject instanceof Conformance) {
-            fhirElementProcessorService = new ConformanceProcessor(terminologyStoreDI, (Conformance) unmarshalledObject);
+            fhirElementProcessorService = new ConformanceProcessor(logicGraphClassifier, (Conformance) unmarshalledObject);
         } else if (unmarshalledObject instanceof Device) {
-            fhirElementProcessorService = new DeviceProcessor(terminologyStoreDI, (Device) unmarshalledObject);
+            fhirElementProcessorService = new DeviceProcessor(logicGraphClassifier, (Device) unmarshalledObject);
         } else if (unmarshalledObject instanceof DeviceObservationReport) {
-            fhirElementProcessorService = new DeviceObservationReportProcessor(terminologyStoreDI, (DeviceObservationReport) unmarshalledObject);
+            fhirElementProcessorService = new DeviceObservationReportProcessor(logicGraphClassifier, (DeviceObservationReport) unmarshalledObject);
         } else if (unmarshalledObject instanceof DiagnosticOrder) {
-            fhirElementProcessorService = new DiagnosticOrderProcessor(terminologyStoreDI, (DiagnosticOrder) unmarshalledObject);
+            fhirElementProcessorService = new DiagnosticOrderProcessor(logicGraphClassifier, (DiagnosticOrder) unmarshalledObject);
         } else if (unmarshalledObject instanceof DiagnosticReport) {
-            fhirElementProcessorService = new DiagnosticReportProcessor(terminologyStoreDI, (DiagnosticReport) unmarshalledObject);
+            fhirElementProcessorService = new DiagnosticReportProcessor(logicGraphClassifier, (DiagnosticReport) unmarshalledObject);
         } else if (unmarshalledObject instanceof DocumentManifest) {
-            fhirElementProcessorService = new DocumentManifestProcessor(terminologyStoreDI, (DocumentManifest) unmarshalledObject);
+            fhirElementProcessorService = new DocumentManifestProcessor(logicGraphClassifier, (DocumentManifest) unmarshalledObject);
         } else if (unmarshalledObject instanceof Encounter) {
-            fhirElementProcessorService = new EncounterProcessor(terminologyStoreDI, (Encounter) unmarshalledObject);
+            fhirElementProcessorService = new EncounterProcessor(logicGraphClassifier, (Encounter) unmarshalledObject);
         } else if (unmarshalledObject instanceof FamilyHistory) {
-            fhirElementProcessorService = new FamilyHistoryProcessor(terminologyStoreDI, (FamilyHistory) unmarshalledObject);
+            fhirElementProcessorService = new FamilyHistoryProcessor(logicGraphClassifier, (FamilyHistory) unmarshalledObject);
         } else if (unmarshalledObject instanceof Group) {
-            fhirElementProcessorService = new GroupProcessor(terminologyStoreDI, (Group) unmarshalledObject);
+            fhirElementProcessorService = new GroupProcessor(logicGraphClassifier, (Group) unmarshalledObject);
         } else if (unmarshalledObject instanceof ImagingStudy) {
-            fhirElementProcessorService = new ImagingStudyProcessor(terminologyStoreDI, (ImagingStudy) unmarshalledObject);
+            fhirElementProcessorService = new ImagingStudyProcessor(logicGraphClassifier, (ImagingStudy) unmarshalledObject);
         } else if (unmarshalledObject instanceof Immunization) {
-            fhirElementProcessorService = new ImmunizationProcessor(terminologyStoreDI, (Immunization) unmarshalledObject);
+            fhirElementProcessorService = new ImmunizationProcessor(logicGraphClassifier, (Immunization) unmarshalledObject);
         } else if (unmarshalledObject instanceof ImmunizationRecommendation) {
-            fhirElementProcessorService = new ImmunizationRecommendationProcessor(terminologyStoreDI, (ImmunizationRecommendation) unmarshalledObject);
+            fhirElementProcessorService = new ImmunizationRecommendationProcessor(logicGraphClassifier, (ImmunizationRecommendation) unmarshalledObject);
         } else if (unmarshalledObject instanceof List) {
-            fhirElementProcessorService = new ListProcessor(terminologyStoreDI, (List) unmarshalledObject);
+            fhirElementProcessorService = new ListProcessor(logicGraphClassifier, (List) unmarshalledObject);
         } else if (unmarshalledObject instanceof Location) {
-            fhirElementProcessorService = new LocationProcessor(terminologyStoreDI, (Location) unmarshalledObject);
+            fhirElementProcessorService = new LocationProcessor(logicGraphClassifier, (Location) unmarshalledObject);
         } else if (unmarshalledObject instanceof Media) {
-            fhirElementProcessorService = new MediaProcessor(terminologyStoreDI, (Media) unmarshalledObject);
+            fhirElementProcessorService = new MediaProcessor(logicGraphClassifier, (Media) unmarshalledObject);
         } else if (unmarshalledObject instanceof Medication) {
-            fhirElementProcessorService = new MedicationProcessor(terminologyStoreDI, (Medication) unmarshalledObject);
+            fhirElementProcessorService = new MedicationProcessor(logicGraphClassifier, (Medication) unmarshalledObject);
         } else if (unmarshalledObject instanceof MedicationAdministration) {
-            fhirElementProcessorService = new MedicationAdministractionProcessor(terminologyStoreDI, (MedicationAdministration) unmarshalledObject);
+            fhirElementProcessorService = new MedicationAdministractionProcessor(logicGraphClassifier, (MedicationAdministration) unmarshalledObject);
         } else if (unmarshalledObject instanceof MedicationDispense) {
-            fhirElementProcessorService = new MedicationDispenseProcessor(terminologyStoreDI, (MedicationDispense) unmarshalledObject);
+            fhirElementProcessorService = new MedicationDispenseProcessor(logicGraphClassifier, (MedicationDispense) unmarshalledObject);
         } else if (unmarshalledObject instanceof MedicationPrescription) {
-            fhirElementProcessorService = new MedicationPrescriptionProcessor(terminologyStoreDI, (MedicationPrescription) unmarshalledObject);
+            fhirElementProcessorService = new MedicationPrescriptionProcessor(logicGraphClassifier, (MedicationPrescription) unmarshalledObject);
         } else if (unmarshalledObject instanceof MedicationStatement) {
-            fhirElementProcessorService = new MedicationStatementProcessor(terminologyStoreDI, (MedicationStatement) unmarshalledObject);
+            fhirElementProcessorService = new MedicationStatementProcessor(logicGraphClassifier, (MedicationStatement) unmarshalledObject);
         } else if (unmarshalledObject instanceof MessageHeader) {
-            fhirElementProcessorService = new MessageHeaderProcessor(terminologyStoreDI, (MessageHeader) unmarshalledObject);
+            fhirElementProcessorService = new MessageHeaderProcessor(logicGraphClassifier, (MessageHeader) unmarshalledObject);
         } else if (unmarshalledObject instanceof Observation) {
-            fhirElementProcessorService = new ObservationProcessor(terminologyStoreDI, (Observation) unmarshalledObject);
+            fhirElementProcessorService = new ObservationProcessor(logicGraphClassifier, (Observation) unmarshalledObject);
         } else if (unmarshalledObject instanceof OperationOutcome) {
-            fhirElementProcessorService = new OperationOutcomeProcessor(terminologyStoreDI, (OperationOutcome) unmarshalledObject);
+            fhirElementProcessorService = new OperationOutcomeProcessor(logicGraphClassifier, (OperationOutcome) unmarshalledObject);
         } else if (unmarshalledObject instanceof Order) {
-            fhirElementProcessorService = new OrderProcessor(terminologyStoreDI, (Order) unmarshalledObject);
+            fhirElementProcessorService = new OrderProcessor(logicGraphClassifier, (Order) unmarshalledObject);
         } else if (unmarshalledObject instanceof OrderResponse) {
-            fhirElementProcessorService = new OrderResponseProcessor(terminologyStoreDI, (OrderResponse) unmarshalledObject);
+            fhirElementProcessorService = new OrderResponseProcessor(logicGraphClassifier, (OrderResponse) unmarshalledObject);
         } else if (unmarshalledObject instanceof Organization) {
-            fhirElementProcessorService = new OrgazationProcessor(terminologyStoreDI, (Organization) unmarshalledObject);
+            fhirElementProcessorService = new OrgazationProcessor(logicGraphClassifier, (Organization) unmarshalledObject);
         } else if (unmarshalledObject instanceof Other) {
-            fhirElementProcessorService = new OtherProcessor(terminologyStoreDI, (Other) unmarshalledObject);
+            fhirElementProcessorService = new OtherProcessor(logicGraphClassifier, (Other) unmarshalledObject);
         } else if (unmarshalledObject instanceof Patient) {
-            fhirElementProcessorService = new PatientProcessor(terminologyStoreDI, (Patient) unmarshalledObject, patientWriteConverter, patientRepository);
+            fhirElementProcessorService = new PatientProcessor(logicGraphClassifier, (Patient) unmarshalledObject, patientWriteConverter, patientRepository);
         } else if (unmarshalledObject instanceof Practitioner) {
-            fhirElementProcessorService = new PractitionerProcessor(terminologyStoreDI, (Practitioner) unmarshalledObject);
+            fhirElementProcessorService = new PractitionerProcessor(logicGraphClassifier, (Practitioner) unmarshalledObject);
         } else if (unmarshalledObject instanceof Procedure) {
-            fhirElementProcessorService = new ProcedureProcessor(terminologyStoreDI, (Procedure) unmarshalledObject);
+            fhirElementProcessorService = new ProcedureProcessor(logicGraphClassifier, (Procedure) unmarshalledObject);
         } else if (unmarshalledObject instanceof Profile) {
-            fhirElementProcessorService = new ProfileProcessor(terminologyStoreDI, (Profile) unmarshalledObject);
+            fhirElementProcessorService = new ProfileProcessor(logicGraphClassifier, (Profile) unmarshalledObject);
         } else if (unmarshalledObject instanceof Provenance) {
-            fhirElementProcessorService = new ProvenanceProcessor(terminologyStoreDI, (Provenance) unmarshalledObject);
+            fhirElementProcessorService = new ProvenanceProcessor(logicGraphClassifier, (Provenance) unmarshalledObject);
         } else if (unmarshalledObject instanceof Query) {
-            fhirElementProcessorService = new QueryProcessor(terminologyStoreDI, (Query) unmarshalledObject);
+            fhirElementProcessorService = new QueryProcessor(logicGraphClassifier, (Query) unmarshalledObject);
         } else if (unmarshalledObject instanceof Questionnaire) {
-            fhirElementProcessorService = new QuestionnaireProcessor(terminologyStoreDI, (Questionnaire) unmarshalledObject);
+            fhirElementProcessorService = new QuestionnaireProcessor(logicGraphClassifier, (Questionnaire) unmarshalledObject);
         } else if (unmarshalledObject instanceof RelatedPerson) {
-            fhirElementProcessorService = new RelatedPersonProcessor(terminologyStoreDI, (RelatedPerson) unmarshalledObject);
+            fhirElementProcessorService = new RelatedPersonProcessor(logicGraphClassifier, (RelatedPerson) unmarshalledObject);
         } else if (unmarshalledObject instanceof SecurityEvent) {
-            fhirElementProcessorService = new SecurityEventProcessor(terminologyStoreDI, (SecurityEvent) unmarshalledObject);
+            fhirElementProcessorService = new SecurityEventProcessor(logicGraphClassifier, (SecurityEvent) unmarshalledObject);
         } else if (unmarshalledObject instanceof Specimen) {
-            fhirElementProcessorService = new SpecimenProcessor(terminologyStoreDI, (Specimen) unmarshalledObject);
+            fhirElementProcessorService = new SpecimenProcessor(logicGraphClassifier, (Specimen) unmarshalledObject);
         } else if (unmarshalledObject instanceof Substance) {
-            fhirElementProcessorService = new SubstanceProcessor(terminologyStoreDI, (Substance) unmarshalledObject);
+            fhirElementProcessorService = new SubstanceProcessor(logicGraphClassifier, (Substance) unmarshalledObject);
         } else if (unmarshalledObject instanceof ValueSet) {
-            fhirElementProcessorService = new ValueSetProcessor(terminologyStoreDI, (ValueSet) unmarshalledObject);
+            fhirElementProcessorService = new ValueSetProcessor(logicGraphClassifier, (ValueSet) unmarshalledObject);
         } else if (unmarshalledObject instanceof Binary) {
-            fhirElementProcessorService = new BinaryProcessor(terminologyStoreDI, (Binary) unmarshalledObject);
+            fhirElementProcessorService = new BinaryProcessor(logicGraphClassifier, (Binary) unmarshalledObject);
         } else {
             throw new ClassifierException("Could not parse unmarshalled object.  Are you sure this is a fhir document?");
         }

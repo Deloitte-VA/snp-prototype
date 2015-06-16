@@ -1,7 +1,6 @@
 package com.github.jlgrock.snp.domain.data;
 
 import com.github.jlgrock.snp.apis.connection.MongoDbFactory;
-
 import com.github.jlgrock.snp.domain.converters.EncounterReadConverter;
 import com.github.jlgrock.snp.domain.converters.EncounterWriteConverter;
 import com.github.jlgrock.snp.domain.types.Encounter;
@@ -11,7 +10,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,10 +26,7 @@ public class EncounterRepositoryImpl extends
 
     private final EncounterWriteConverter encounterWriteConverter;
     
-    private List<Encounter> encounterShell = new ArrayList<>(6);
-    
-    private static final Logger LOGGER = LoggerFactory
-            .getLogger(EncounterRepositoryImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(EncounterRepositoryImpl.class);
 
     /**
      * 
@@ -48,9 +43,6 @@ public class EncounterRepositoryImpl extends
         encounterWriteConverter = encounterWriteConverterIn;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     protected String getCollectionName() {
     	LOGGER.trace("getCollectionName()");
@@ -58,37 +50,42 @@ public class EncounterRepositoryImpl extends
     }
 
     /**
-     * {@inheritDoc}
+     * Find an encounter by the date of the encounter
+     * @param date the date to search by
+     * @return the results, in the form of a list
      */
     public List<Encounter> findByDate(final LocalDate date) {
     	if (date == null){
-    		return encounterShell;
+    		return new ArrayList<>();
     	}
-    	LOGGER.trace("findByDate(LocalDate date=" + date + ")");
+    	LOGGER.trace("findByDate(LocalDate date={})", date);
         Document query = new Document() {{
             put("date", date);
         }};
         return executeQueryAndTransformResults(query);
     }
-    
-    /**
-     * {@inheritDoc}
-     */
+
+    @Override
+    public List<Encounter> findByPceIdList(final List<Long> pceIds) {
+        Document query = new Document();
+        Document idsIn = new Document();
+        idsIn.put("$in", pceIds);
+        query.put("observations.name", idsIn);
+        return executeQueryAndTransformResults(query);
+    }
+
     @Override
     protected Encounter convertToDomainObject(final Document dbObjectin) {
-    	LOGGER.trace("convertToDomainObject(Document dbObjectin=" + dbObjectin + ")");
+    	LOGGER.trace("convertToDomainObject(Document dbObjectin={})", dbObjectin);
         if (dbObjectin == null) {
             return null;
         }
         return encounterReadConverter.convert(dbObjectin);
     }
     
-    /**
-     * {@inheritDoc}
-     */
     @Override
     protected Document convertToDBObject(final Encounter s) {
-    	LOGGER.trace("convertToDBObject(Encounter s=" + s + ")");
+    	LOGGER.trace("convertToDBObject(Encounter s={})", s);
         if (s == null) {
             return null;
         }

@@ -8,10 +8,10 @@ import com.github.jlgrock.snp.apis.data.Sort;
 import com.github.jlgrock.snp.apis.domain.MongoDomainObject;
 import com.github.jlgrock.snp.apis.exceptions.DataAccessException;
 import com.google.common.collect.Lists;
-import com.mongodb.BasicDBObject;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.UpdateOptions;
 import org.bson.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -117,11 +117,15 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
                     this.getClass().getSimpleName() + "");
             return null;
         }
-        MongoCollection dbCollection = db.getCollection(collectionName);
-
-        return dbCollection;
+        assert db != null;
+        return db.getCollection(collectionName);
     }
 
+    /**
+     * Delete all documents based on a query
+     *
+     * @param query delete using this query
+     */
     private void deleteByQuery(final Document query) {
         LOGGER.trace("deleteByQuery(query={})", query);
         if (query == null) {
@@ -130,27 +134,18 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
         dBCollection().deleteMany(query);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Iterable<S> findAll(final Sort sort) {
         LOGGER.trace("findAll(sort={})", sort);
         throw new UnsupportedOperationException("Method is not currently being utilized.");
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Page<S> findAll(final Pageable pageable) {
         LOGGER.trace("findAll(pageable={})", pageable);
         throw new UnsupportedOperationException("Method is not currently being utilized.");
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public <R extends S> S save(final R entity) {
         LOGGER.trace("save(entity={})", entity);
@@ -158,13 +153,36 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
             LOGGER.error("Entity parameter for save method is null, therefore nothing can be saved or updated in the database.");
             return null;
         }
-        dBCollection().insertOne(convertToDBObject(entity));
+
+        dBCollection().updateOne(createIdDocumentFromEntity(entity), convertToSetDocument(convertToDBObject(entity)), updateOptions());
         return entity;
     }
 
     /**
-     * {@inheritDoc}
+     * Convert a document into a set statement, based on saving the entity using an upsert
+     *
+     * @param document the document to update
+     * @return the set document
      */
+    protected Document convertToSetDocument(final Document document) {
+        Document updateDoc = new Document();
+        updateDoc.putAll(document);
+        updateDoc.remove(SharedTags.ID_TAG);
+        Document newDocument = new Document();
+        newDocument.put("$set", updateDoc);
+        newDocument.put("$setOnInsert", createIdDocument((T) document.get(SharedTags.ID_TAG)));
+        return newDocument;
+    }
+
+    /**
+     * @return The upsert setting
+     */
+    protected UpdateOptions updateOptions() {
+        UpdateOptions updateOptions = new UpdateOptions();
+        updateOptions.upsert(true);
+        return updateOptions;
+    }
+
     @Override
     public <R extends S> Iterable<R> save(final Iterable<R> entities) {
         if (LOGGER.isTraceEnabled()) {
@@ -178,21 +196,10 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
             LOGGER.error("Entities parameter for save method is null, therefore nothing can be saved or updated in the database.");
             return null;
         }
-        MongoCollection<Document> dbCollection = dBCollection();
-        for (S entity : entities) {
-            Document query = new Document() {{
-                id:
-                entity.getId();
-            }};
-            Document update = convertToDBObject(entity);
-            dbCollection.updateOne(query, update);
-        }
+        entities.forEach(this::save);
         return entities;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public S findOneById(final T id) {
         LOGGER.trace("findOneByID(id={})", id);
@@ -200,19 +207,12 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
             LOGGER.error("Id parameter for findOneById method is null, therefore Domain Object cannot be found.");
             return null;
         }
-        Document query = new Document() {{
-            put("_id", id);
-
-        }};
-        FindIterable<Document> iterable = dBCollection().find(query).limit(1);
-        return convertToDomainObject(iterable.first());
+        FindIterable<Document> iterable = dBCollection().find(createIdDocument(id)).limit(1);
+        Document first = iterable.first();
+        return convertToDomainObject(first);
 
     }
 
-    /**
-     * 1
-     * {@inheritDoc}
-     */
     @Override
     public boolean existsById(final T id) {
         LOGGER.trace("exists(id={})", id);
@@ -221,24 +221,15 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
             return false;
         }
         S obj = findOneById(id);
-        if (obj != null) {
-            return true;
-        }
-        return false;
+        return obj != null;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Iterable<S> findAll() {
         LOGGER.trace("findAll()");
         return executeQueryAndTransformResults(new Document());
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Iterable<S> findAllById(final Iterable<T> ids) {
         if (LOGGER.isTraceEnabled()) {
@@ -252,82 +243,114 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
         if (ids == null) {
             return sList;
         }
-        Document query = new Document() {{
-            put("_id", new BasicDBObject() {{
-                put("$in", ids);
-            }});
-        }};
-
-        return dBCollection().find(query).into(sList);
+        return dBCollection().find(createIdDocument(ids)).into(sList);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public long count() {
         LOGGER.trace("count()");
         return dBCollection().count();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void delete(final S entity) {
         LOGGER.trace("deleteById(entity={})", entity);
         if (entity == null) {
             LOGGER.error("Entity parameter for delete method is null, therefore no values were removed from the database.");
         }
-        dBCollection().findOneAndDelete(convertToDBObject(entity));
+        dBCollection().findOneAndDelete(createIdDocumentFromEntity(entity));
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void deleteById(final T id) {
         LOGGER.trace("deleteById(id={})", id);
         if (id == null) {
             LOGGER.error("Id parameter for deleteById method is null, therefore no values were removed from the database.");
         }
-        Document query = new Document() {{
-            put("_id", id);
-        }};
-        deleteByQuery(query);
+        deleteByQuery(createIdDocument(id));
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void delete(final Iterable<? extends S> entities) {
         if (LOGGER.isTraceEnabled()) {
             LOGGER.trace("delete(entities={}",
                     Lists.newArrayList(entities)
                             .stream()
-                            .map(entity -> entity.toString())
+                            .map(Object::toString)
                             .collect(Collectors.joining(", ")));
         }
         if (entities == null) {
             LOGGER.error("Entities parameter for delete method is null, therefore no values were removed from the database.");
             return;
         }
-        Document query = new Document() {{
-            put("_id", new Document() {{
-                put("$in", entities);
-            }});
-        }};
-
-        deleteByQuery(query);
+        deleteByQuery(createIdDocumentFromEntities(entities));
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void deleteAll() {
         LOGGER.trace("deleteAll()");
         deleteByQuery(new Document());
+    }
+
+    /**
+     * Create a Document that will match any of the ids
+     *
+     * @param entities the entities to search for
+     * @return the document created
+     */
+    protected Document createIdDocumentFromEntities(final Iterable<? extends S> entities) {
+        if (entities == null) {
+            return null;
+        }
+        ArrayList<T> ids = new ArrayList<>();
+        for (S entity : entities) {
+            ids.add(entity.getId());
+        }
+        return createIdDocument(ids);
+    }
+
+    /**
+     * Create a Document that will match any of the ids
+     *
+     * @param ids the ids to search for
+     * @return the document created
+     */
+    protected Document createIdDocument(final Iterable<T> ids) {
+        if (ids == null) {
+            return null;
+        }
+        Document d = new Document();
+        Document sub = new Document();
+        sub.put("$in", ids);
+        d.put("_id", sub);
+        return d;
+    }
+
+    /**
+     * Create a Document that will match the id
+     *
+     * @param entity the entity to search for
+     * @return the document created
+     */
+    protected Document createIdDocumentFromEntity(final S entity) {
+        if (entity == null) {
+            return null;
+        }
+        return createIdDocument(entity.getId());
+    }
+
+    /**
+     * Create a Document that will match the id
+     *
+     * @param id the id to search for
+     * @return the document created
+     */
+    protected Document createIdDocument(final T id) {
+        if (id == null) {
+            return null;
+        }
+        Document d = new Document();
+        d.put("_id", id);
+        return d;
     }
 }

@@ -1,10 +1,8 @@
 package com.github.jlgrock.snp.core.domain.fhir.processors;
 
+import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
 import com.github.jlgrock.snp.core.domain.fhir.model.ImmunizationRecommendation;
-
 import gov.vha.isaac.logic.LogicGraph;
-
-import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
 
 /**
  *
@@ -13,8 +11,8 @@ public class ImmunizationRecommendationProcessor extends AbstractFhirProcessor {
 
     private final ImmunizationRecommendation immunizationRecommendation;
 
-    public ImmunizationRecommendationProcessor(final TerminologyStoreDI terminologyStoreDIIn, final ImmunizationRecommendation immunizationRecommendationIn) {
-        super(terminologyStoreDIIn);
+    public ImmunizationRecommendationProcessor(final LogicGraphClassifier logicGraphClassifierIn, final ImmunizationRecommendation immunizationRecommendationIn) {
+        super(logicGraphClassifierIn);
         immunizationRecommendation = immunizationRecommendationIn;
     }
 

@@ -18,7 +18,7 @@ public class EncounterWriteConverterImpl implements EncounterWriteConverter {
 		
 		encounterOut.setFhirId(source.getSubject().getReference().getValue().replaceFirst("Patient/", ""));
 		encounterOut.setSubject(source.getSubject().getReference().getValue());
-		encounterOut.setPatientClass(source.getClazz().getValue().name());
+		encounterOut.setEncounterClass(source.getClazz().getValue().name());
 		encounterOut.setStatus(source.getStatus().getValue().name());
 		encounterOut.setParticipant(source.getParticipant().get(0).getIndividual().getReference().getValue());
 		return encounterOut;

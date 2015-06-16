@@ -24,7 +24,7 @@ public class ClassifiedPceMongoDbStore implements ClassifiedPceStore {
 	}
 	
 	@Override
-	public void save(final ClassifiedPce classifiedAssertion) {
-			classifiedPceRepository.save(classifiedAssertion);
+	public void save(final ClassifiedPce classifiedPce) {
+		classifiedPceRepository.save(classifiedPce);
 	}
 }

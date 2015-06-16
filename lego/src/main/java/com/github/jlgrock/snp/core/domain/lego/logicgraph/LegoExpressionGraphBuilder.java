@@ -2,8 +2,10 @@ package com.github.jlgrock.snp.core.domain.lego.logicgraph;
 
 import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
 import com.github.jlgrock.snp.core.domain.lego.model.Expression;
-import gov.vha.isaac.logic.node.AbstractNode;
-import gov.vha.isaac.logic.node.RootNode;
+import gov.vha.isaac.logic.LogicGraph;
+import gov.vha.isaac.ochre.api.logic.LogicalExpressionBuilder;
+import gov.vha.isaac.ochre.api.logic.assertions.Assertion;
+import gov.vha.isaac.ochre.api.logic.assertions.connectors.Connector;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,18 +24,16 @@ public class LegoExpressionGraphBuilder extends AbstractLegoLogicGraphBuilder {
     }
 
     @Override
-    public void create() {
-        LOGGER.trace("Creating LogicExpressionGraph");
+    public LogicGraph build() {
+        LOGGER.trace("Creating Lego Expression Logic Graph");
+        Assertion assertion = buildExpression(expression);
+        if (assertion instanceof Connector) {
+            LogicalExpressionBuilder.SufficientSet((Connector) assertion);
+        } else {
+            LogicalExpressionBuilder.SufficientSet(LogicalExpressionBuilder.And(assertion));
+        }
 
-        // TODO
-        // Determine if it is SufficientSet or NecessarySet.  In most cases in Lego, this will be a SufficientSet because
-        // all of the primitives have been defined in snomed.
-
-        //Create root node first
-        RootNode root = getRoot();
-
-        AbstractNode node = buildExpression(expression);
-        root.addChildren(SufficientSet(node));
+        return (LogicGraph) getLogicalExpressionBuilder().build();
     }
 
 

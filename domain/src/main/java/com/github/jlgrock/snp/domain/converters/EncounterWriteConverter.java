@@ -37,10 +37,15 @@ public class EncounterWriteConverter implements WriteConverter<Encounter, Docume
         Document dbo = new Document();
         dbo.put(SharedTags.ID_TAG, source.getId());
         dbo.put(EncounterTags.FHIR_ID, source.getFhirId());
-        dbo.put(EncounterTags.PARTICIPANT, source.getParticipant());
-        dbo.put(EncounterTags.PATIENT_CLASS, source.getPatientClass());
+        dbo.put(EncounterTags.ENCOUNTER_CLASS, source.getEncounterClass());
         dbo.put(EncounterTags.STATUS, source.getStatus());
         dbo.put(EncounterTags.SUBJECT, source.getSubject());
+        dbo.put(EncounterTags.PARTICIPANT, source.getParticipant());
+        if (source.getPatient() == null) {
+            dbo.put(EncounterTags.PATIENT, null);
+        } else {
+            dbo.put(EncounterTags.PATIENT, source.getPatient().getId());
+        }
 
         List<Observation> observations = source.getObservations();
         BasicDBList observationObjs = new BasicDBList();

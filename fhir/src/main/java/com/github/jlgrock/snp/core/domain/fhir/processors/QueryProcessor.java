@@ -1,10 +1,8 @@
 package com.github.jlgrock.snp.core.domain.fhir.processors;
 
+import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
 import com.github.jlgrock.snp.core.domain.fhir.model.Query;
-
 import gov.vha.isaac.logic.LogicGraph;
-
-import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
 
 /**
  *
@@ -13,8 +11,8 @@ public class QueryProcessor extends AbstractFhirProcessor {
 
     private final Query query;
 
-    public QueryProcessor(final TerminologyStoreDI terminologyStoreDIIn, final Query queryIn) {
-        super(terminologyStoreDIIn);
+    public QueryProcessor(final LogicGraphClassifier logicGraphClassifierIn, final Query queryIn) {
+        super(logicGraphClassifierIn);
         query = queryIn;
     }
 

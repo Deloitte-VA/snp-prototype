@@ -7,15 +7,20 @@ import com.github.jlgrock.snp.core.domain.lego.model.Expression;
 import com.github.jlgrock.snp.core.domain.lego.model.Relation;
 import com.github.jlgrock.snp.core.domain.lego.model.RelationGroup;
 import com.github.jlgrock.snp.core.domain.lego.model.Type;
-import gov.vha.isaac.logic.LogicGraphBuilder;
-import gov.vha.isaac.logic.Node;
-import gov.vha.isaac.logic.node.AbstractNode;
-import gov.vha.isaac.logic.node.AndNode;
+import gov.vha.isaac.logic.LogicGraph;
+import gov.vha.isaac.ochre.api.LookupService;
+import gov.vha.isaac.ochre.api.logic.LogicalExpressionBuilder;
+import gov.vha.isaac.ochre.api.logic.LogicalExpressionBuilderService;
+import gov.vha.isaac.ochre.api.logic.assertions.ConceptAssertion;
+import gov.vha.isaac.ochre.api.logic.assertions.SomeRole;
+import gov.vha.isaac.ochre.api.logic.assertions.connectors.And;
+import org.ihtsdo.otf.tcc.api.spec.ConceptSpec;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 /**
@@ -23,56 +28,113 @@ import java.util.stream.Collectors;
  * Abstract implementation of Logic Graph Builder
  *
  */
-public abstract class AbstractLegoLogicGraphBuilder extends LogicGraphBuilder {
+public abstract class AbstractLegoLogicGraphBuilder {
 	private static final Logger LOGGER = LoggerFactory.getLogger(AbstractLegoLogicGraphBuilder.class);
 
-    private class LocalConcept {
-        private int nid;
-        private String description;
-
-        public LocalConcept(final int nidIn, final String descriptionIn) {
-            nid = nidIn;
-            description = descriptionIn;
-        }
-
-        public int getNid() {
-            return nid;
-        }
-
-        public String getDescription() {
-            return description;
-        }
-    }
+    private LogicalExpressionBuilder logicalExpressionBuilder;
 
     private final LogicGraphClassifier logicGraphClassifier;
 
     public AbstractLegoLogicGraphBuilder(final LogicGraphClassifier logicGraphClassifierIn) {
         logicGraphClassifier = logicGraphClassifierIn;
+        LogicalExpressionBuilderService expressionBuilderService = LookupService.getService(LogicalExpressionBuilderService.class);
+        logicalExpressionBuilder = expressionBuilderService.getLogicalExpressionBuilder();
     }
 
-	protected AbstractNode buildRelation(final Relation relation) {
+    /**
+     * @return get the current logical expression builder, to turn it into a logic expression/graph
+     */
+    protected LogicalExpressionBuilder getLogicalExpressionBuilder() {
+        return logicalExpressionBuilder;
+    }
+
+    /**
+     * Can have either a Concept or a list of sub-Expressions, plus 0 or more Relations and 0 or more RelationGroups
+     *
+     * @param expression
+     * @return
+     */
+    protected And buildExpression(final Expression expression) {
+        LOGGER.trace("Building from expression node...");
+
+        List<gov.vha.isaac.ochre.api.logic.assertions.Assertion> values = new ArrayList<>();
+
+        // Concept or a list of sub-Expressions
+        Concept concept = expression.getConcept();
+        And subConceptOrExpression = null;
+        if (concept != null) {
+            subConceptOrExpression = LogicalExpressionBuilder.And(LogicalExpressionBuilder.ConceptAssertion(buildConcept(concept), getLogicalExpressionBuilder()));
+        } else {
+            List<Expression> subExpressions = expression.getExpression();
+            List<gov.vha.isaac.ochre.api.logic.assertions.Assertion> expressionNodes = subExpressions.stream()
+                    .map(this::buildExpression)
+                    .collect(Collectors.toList());
+
+            subConceptOrExpression = LogicalExpressionBuilder.And(expressionNodes.toArray(new And[expressionNodes.size()]));
+        }
+        values.add(subConceptOrExpression);
+
+        // parse 0 or more Relation XML objects
+        List<Relation> relations = expression.getRelation();
+        if (relations != null) {
+            values.addAll(relations.stream()
+                    .map(this::buildRelation)
+                    .collect(Collectors.toList()));
+        }
+
+        // parse 0 or more Relation Group XML objects
+        List<RelationGroup> relationGroups = expression.getRelationGroup();
+        if (relationGroups != null) {
+            values.addAll(relationGroups.stream()
+                    .map(this::buildRelationGroup)
+                    .collect(Collectors.toList()));
+        }
+
+        // And them all together
+        return LogicalExpressionBuilder.And(values.toArray(new gov.vha.isaac.ochre.api.logic.assertions.Assertion[values.size()]));
+    }
+
+    /**
+     * A relation can have a type (which contains one single concept) and a destination
+     *
+     * @param relation
+     * @return
+     */
+	protected SomeRole buildRelation(final Relation relation) {
         LOGGER.trace("Building from relation node...");
-        // A relation can have a type and a destination
+
         Type type = relation.getType();
-        LocalConcept typeConcept = buildType(type);
+        ConceptSpec typeConcept = buildType(type);
 
         Destination destination = relation.getDestination();
-        AbstractNode destinationConcept = processDestination(destination);
+        And destinationAssertion = processDestination(destination);
 
-		return SomeRole(typeConcept.getNid(), destinationConcept);
+        ConceptAssertion destinationConcept = (ConceptAssertion) destinationAssertion;
+
+		return LogicalExpressionBuilder.SomeRole(typeConcept, destinationConcept);
 	}
 
-    protected LocalConcept buildType(final Type type) {
+    /**
+     * Type can only take a concept.  Since this is only used in Relations (currently), this returns a ConceptSpec.
+     * @param type
+     * @return
+     */
+    protected ConceptSpec buildType(final Type type) {
         LOGGER.trace("Building from type node...");
-        Concept typeConcept = type.getConcept();
-        LocalConcept processedConcept = buildConcept(typeConcept);
-        return processedConcept;
+        Concept concept = type.getConcept();
+        return buildConcept(concept);
     }
 
-    protected AbstractNode processDestination(final Destination destination) {
+    /**
+     * A destination can contain an expression, text, boolean, or measurement
+     *
+     * @param destination
+     * @return
+     */
+    protected And processDestination(final Destination destination) {
         LOGGER.trace("Building from destination node...");
-        // A destination can contain an expression, text, boolean, or measurement
 
+        //TODO this skips the storage of the measurement.  Not sure if this is correct...
         Expression expression = destination.getExpression();
         if (expression != null) {
             return buildExpression(expression);
@@ -82,79 +144,42 @@ public abstract class AbstractLegoLogicGraphBuilder extends LogicGraphBuilder {
         }
     }
 
-    protected AbstractNode buildExpression(final Expression expression) {
-        LOGGER.trace("Building from expression node...");
-        //Can have either a Concept or a list of sub-Expressions, plus 0 or more Relations and 0 or more RelationGroups
-
-        AbstractNode returnVal = null;
-
-        List<AbstractNode> values = new ArrayList<>();
-
-        Concept concept = expression.getConcept();
-
-        String sourceSctId = null;
-        if (concept.getSctid() != null) {
-            sourceSctId = Long.toString(concept.getSctid());
-        }
-
-        //TODO what if I get a sctId?  Are we done?
-
-        AbstractNode subConceptOrExpression = null;
-        if (concept != null) {
-            LocalConcept localConcept = buildConcept(concept);
-            subConceptOrExpression = Concept(localConcept.getNid());
-        } else {
-            List<Expression> subExpressions = expression.getExpression();
-            List<Node> expressionNodes = subExpressions.stream().map(this::buildExpression).collect(Collectors.toList());
-
-            subConceptOrExpression = And(expressionNodes.toArray(new AbstractNode[expressionNodes.size()]));
-        }
-        values.add(subConceptOrExpression);
-
-        List<Relation> relations = expression.getRelation();
-        if (relations != null) {
-            values.addAll(relations.stream().map(this::buildRelation).collect(Collectors.toList()));
-        }
-
-        List<RelationGroup> relationGroups = expression.getRelationGroup();
-        if (relationGroups != null) {
-            values.addAll(relationGroups.stream().map(this::buildRelationGroup).collect(Collectors.toList()));
-        }
-
-        if (values.size() == 1) {
-            returnVal = subConceptOrExpression;
-        } else {
-            returnVal = And(values.toArray(new AbstractNode[values.size()]));
-        }
-        return returnVal;
-	}
-
-    protected LocalConcept buildConcept(final Concept concept) {
-        LocalConcept returnVal;
+    protected ConceptSpec buildConcept(final Concept concept) {
+        LOGGER.trace("Building from concept node...");
         String description = concept.getDesc();
+        String uuidString = concept.getUuid();
 
-        // can only have a sctid or a uuid
-        String sctId = Long.toString(concept.getSctid());
-        if (sctId != null) {
-            int nid = logicGraphClassifier.getNidFromSNOMED(sctId);
-            returnVal = new LocalConcept(nid, description);
+        UUID uuid;
+        if (uuidString == null) {
+            Long typeSctId = concept.getSctid();
+            uuid = logicGraphClassifier.getUUIDFromSNOMED(Long.toString(typeSctId));
         } else {
-            //TODO all of the examples have a sctid, but not sure what to do if we get a uuid
-            throw new UnsupportedOperationException();
+            uuid = UUID.fromString(uuidString);
         }
 
-        return returnVal;
+        LOGGER.trace("node with description '{}' built", description);
+        return new ConceptSpec(description, uuid);
     }
 
-    protected AbstractNode buildRelationGroup(final RelationGroup relationGroup) {
-        // can contain 1 or more Relations
-        AndNode andNode = null;
+    /**
+     * can contain 1 or more Relations
+     *
+     * @param relationGroup
+     * @return
+     */
+    protected And buildRelationGroup(final RelationGroup relationGroup) {
+
+        And andNode = null;
         List<Relation> relations = relationGroup.getRelation();
         if (relations.size() > 0) {
-            List<AbstractNode> nodes = relations.stream().map(this::buildRelation).collect(Collectors.toList());
-            andNode = And(nodes.toArray(new AbstractNode[nodes.size()]));
+            List<SomeRole> nodes = relations.stream()
+                    .map(this::buildRelation)
+                    .collect(Collectors.toList());
+            andNode = LogicalExpressionBuilder.And(nodes.toArray(new SomeRole[nodes.size()]));
         }
         return andNode;
     }
+
+    public abstract LogicGraph build();
 
 }

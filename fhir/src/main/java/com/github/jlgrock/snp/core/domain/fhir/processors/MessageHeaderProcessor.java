@@ -1,10 +1,8 @@
 package com.github.jlgrock.snp.core.domain.fhir.processors;
 
+import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
 import com.github.jlgrock.snp.core.domain.fhir.model.MessageHeader;
-
 import gov.vha.isaac.logic.LogicGraph;
-
-import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
 
 /**
  *
@@ -13,8 +11,8 @@ public class MessageHeaderProcessor extends AbstractFhirProcessor {
 
     private final MessageHeader messageHeader;
 
-    public MessageHeaderProcessor(final TerminologyStoreDI terminologyStoreDIIn, final MessageHeader messageHeaderIn) {
-        super(terminologyStoreDIIn);
+    public MessageHeaderProcessor(final LogicGraphClassifier logicGraphClassifierIn, final MessageHeader messageHeaderIn) {
+        super(logicGraphClassifierIn);
         messageHeader = messageHeaderIn;
     }
 

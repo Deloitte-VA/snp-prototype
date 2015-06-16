@@ -1,9 +1,10 @@
 package com.github.jlgrock.snp.core.domain.fhir.logicgraph;
 
+import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
 import com.github.jlgrock.snp.core.domain.fhir.model.Coding;
-import gov.vha.isaac.logic.node.AbstractNode;
-import gov.vha.isaac.logic.node.RootNode;
-import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
+import gov.vha.isaac.logic.LogicGraph;
+import gov.vha.isaac.ochre.api.logic.LogicalExpressionBuilder;
+import gov.vha.isaac.ochre.api.logic.assertions.connectors.Connector;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,22 +17,18 @@ public class FhirCodingGraphBuilder extends AbstractFhirLogicGraphBuilder {
     private final Coding coding;
 
     @Override
-    public void create() {
-        //Add the nodes to the logic graph based on FHIR XML parameters
-        //Create root node first
-        RootNode root = getRoot();
-
-        AbstractNode node = processCoding(coding);
-        root.addChildren(SufficientSet(node));
+    public LogicGraph build() {
+        Connector connector = processCoding(coding);
+        LogicalExpressionBuilder.SufficientSet(connector);
+        return (LogicGraph) getLogicalExpressionBuilder().build();
     }
 
-    public FhirCodingGraphBuilder(final TerminologyStoreDI terminologyStoreDIIn, final Coding codingIn) {
-        super(terminologyStoreDIIn);
+    public FhirCodingGraphBuilder(final LogicGraphClassifier logicGraphClassifierIn, final Coding codingIn) {
+        super(logicGraphClassifierIn);
         coding = codingIn;
     }
 
-    protected AbstractNode processCoding(final Coding coding) {
-        //TODO
-        return null;
+    protected Connector processCoding(final Coding coding) {
+        throw new UnsupportedOperationException();
     }
 }

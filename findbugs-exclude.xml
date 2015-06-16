@@ -1,0 +1,5 @@
+<FindBugsFilter>
+    <Match>
+        <Class name="com.github.jlgrock.snp.classifier.examples.AbstractQuery" />
+    </Match>
+</FindBugsFilter>

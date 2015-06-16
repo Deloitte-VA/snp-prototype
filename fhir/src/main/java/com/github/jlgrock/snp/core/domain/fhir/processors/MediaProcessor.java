@@ -1,10 +1,8 @@
 package com.github.jlgrock.snp.core.domain.fhir.processors;
 
+import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
 import com.github.jlgrock.snp.core.domain.fhir.model.Media;
-
 import gov.vha.isaac.logic.LogicGraph;
-
-import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
 
 /**
  *
@@ -13,8 +11,8 @@ public class MediaProcessor extends AbstractFhirProcessor {
 
     private final Media media;
 
-    public MediaProcessor(final TerminologyStoreDI terminologyStoreDIIn, final Media mediaIn) {
-        super(terminologyStoreDIIn);
+    public MediaProcessor(final LogicGraphClassifier logicGraphClassifierIn, final Media mediaIn) {
+        super(logicGraphClassifierIn);
         media = mediaIn;
     }
 

@@ -1,10 +1,8 @@
 package com.github.jlgrock.snp.core.domain.fhir.processors;
 
+import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
 import com.github.jlgrock.snp.core.domain.fhir.model.ConceptMap;
-
 import gov.vha.isaac.logic.LogicGraph;
-
-import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
 
 /**
  *
@@ -13,8 +11,8 @@ public class ConceptMapProcessor extends AbstractFhirProcessor {
 
     private final ConceptMap conceptMap;
 
-    public ConceptMapProcessor(final TerminologyStoreDI terminologyStoreDIIn, final ConceptMap conceptMapIn) {
-        super(terminologyStoreDIIn);
+    public ConceptMapProcessor(final LogicGraphClassifier logicGraphClassifierIn, final ConceptMap conceptMapIn) {
+        super(logicGraphClassifierIn);
         conceptMap = conceptMapIn;
     }
 

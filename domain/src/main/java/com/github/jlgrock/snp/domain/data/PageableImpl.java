@@ -67,25 +67,21 @@ public class PageableImpl implements Pageable {
 
     @Override
     public Pageable next() {
-        PageableImpl pg1 = new PageableImpl((offSet + pageSize), pageSize);
-        return pg1;
+        return new PageableImpl((offSet + pageSize), pageSize);
     }
 
     @Override
     public Pageable previousOrFirst() {
         if (offSet <= pageSize) {
-            PageableImpl pg2 = new PageableImpl(pageSize);
-            return pg2;
+            return new PageableImpl(pageSize);
         } else {
-            PageableImpl pg3 = new PageableImpl((offSet - pageSize), pageSize);
-            return pg3;
+            return new PageableImpl((offSet - pageSize), pageSize);
         }
     }
 
     @Override
     public Pageable first() {
-        PageableImpl pg4 = new PageableImpl(pageSize);
-        return pg4;
+        return new PageableImpl(pageSize);
     }
 
     @Override
