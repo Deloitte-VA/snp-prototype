@@ -6,10 +6,12 @@ var uploadFileControllers = angular.module('UploadFileControllers', []);
 
 uploadFileControllers.controller('uploader', ['$scope', '$http',
                                     function($scope, $http) {
+									var LEGO = 'LEGO';
+									var FHIR = 'FHIR';									
                       				$scope.contentTypes = 
                       					[
-                      						'LEGO',
-                      						'FHIR'
+                      						LEGO,
+                      						FHIR
                       					];
                       					$scope.filesChanged = function(elm) {
                       						$scope.files = elm.files;
@@ -18,12 +20,15 @@ uploadFileControllers.controller('uploader', ['$scope', '$http',
                       					$scope.upload = function() {
                       						var fd = new FormData();
                       						
-                      						if($scope.contentType == 'LEGO') {
+                      						if($scope.contentType == LEGO) {
                       							var blob = new Blob([], {type: 'application/lego+xml'});
-                      							fd.append('file', blob, 'LEGO');
-                      						} else if($scope.contentType == 'FIHR') {
+                      							fd.append('file', blob, LEGO);
+                      						} else if($scope.contentType == FHIR) {
                       							var blob = new Blob([], {type: 'application/fhir+xml'});
-                      							fd.append('file', blob, 'FIHR');
+                      							fd.append('file', blob, FHIR);
+                      						} else {
+                      							var blob = new Blob([], {type: 'text/xml'});
+                      							fd.append('file', blob);
                       						}
                       						
                       						angular.forEach($scope.files, function(file) {
@@ -34,9 +39,14 @@ uploadFileControllers.controller('uploader', ['$scope', '$http',
                       							transformRequest:angular.identity,
                       							headers:{'Content-Type':undefined}
                       						})
-                      						.success(function(d) {
-                      							console.log(d)	
+                      						.success(function(data, status, headers, config) {
+                      							console.log(data);
+                      							$scope.status = status;
                       						})
+                      						.error(function (data, status, headers, config) {
+                      							console.log(status);
+                      			                $scope.status = 'Error uploading file: ' + data;
+                      			            });
                       					}
                       				}
                       			]);
