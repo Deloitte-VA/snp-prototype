@@ -8,7 +8,7 @@ uploadFileControllers.controller('uploader', ['$scope', '$http',
                                     function($scope, $http) {
 									var LEGO = 'LEGO';
 									var FHIR = 'FHIR';
-									$scope.contentType = 'LEGO';
+									$scope.contentType = LEGO;
                       				$scope.contentTypes = 
                       					[
                       						LEGO,

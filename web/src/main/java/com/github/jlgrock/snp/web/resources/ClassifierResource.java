@@ -1,6 +1,8 @@
 package com.github.jlgrock.snp.web.resources;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -20,6 +22,10 @@ import org.glassfish.jersey.media.multipart.FormDataMultiPart;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.jlgrock.snp.apis.web.ProcessingServiceFactory;
 import com.github.jlgrock.snp.domain.types.Gender;
 import com.github.jlgrock.snp.domain.types.Patient;
@@ -125,33 +131,28 @@ public class ClassifierResource {
 
     @POST
     @Path("/query")
-    public Response processForm(String jsonStr) {
-    	LOGGER.debug("Parameters from query form: {}", jsonStr);
-    	Set<Patient> patients = classifierQueryServiceImpl.executeKindOfQuery("131148009");
-    	LOGGER.debug("patients: {}", patients);
+    public Response processForm(String json) {
+    	LOGGER.debug("Parameters from query form: {}", json);
+    	Response response = null;
+    	try {
+			Map<String,String> map = new HashMap<String,String>();
+			ObjectMapper mapper = new ObjectMapper();
+			//convert JSON string to Map
+			map = mapper.readValue(json, new TypeReference<HashMap<String,String>>(){});
+			String value = map.get("value");
+			LOGGER.debug("value: {}", value);
+			Set<Patient> patients = classifierQueryServiceImpl.executeKindOfQuery(value);
+			LOGGER.debug("patients: {}", patients);
+			response = Response.status(200)
+					.entity(patients)
+					.type(MediaType.APPLICATION_JSON)
+					.build();
+		} catch (Exception e) {
+			LOGGER.error("fatal error occurred.", e);
+            response = Response.status(Response.Status.BAD_REQUEST).build();
+		}
     	
-		return Response.status(200)
-				.entity(getPatients())
-				.type(MediaType.APPLICATION_JSON)
-				.build();
-	}
-	
-	public List<Patient> getPatients() {
-		List<Patient> patients = new ArrayList<>();
-		
-		Patient patient1 =  new Patient();
-		patient1.setFirstName("John");
-		patient1.setLastName("Doe");
-		patient1.setGender(Gender.MALE);
-		patients.add(patient1);
-		
-		Patient patient2 =  new Patient();
-		patient2.setFirstName("Jane");
-		patient2.setLastName("Doe");
-		patient2.setGender(Gender.FEMALE);
-		patients.add(patient2);
-		
-		return patients;
+		return response;
 	}
 	
     /**
