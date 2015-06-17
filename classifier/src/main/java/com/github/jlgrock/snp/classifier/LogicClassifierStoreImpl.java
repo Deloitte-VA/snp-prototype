@@ -6,11 +6,13 @@ import gov.vha.isaac.logic.LogicService;
 import gov.vha.isaac.metadata.coordinates.EditCoordinates;
 import gov.vha.isaac.metadata.coordinates.LogicCoordinates;
 import gov.vha.isaac.metadata.coordinates.StampCoordinates;
+import gov.vha.isaac.metadata.coordinates.ViewCoordinates;
 import gov.vha.isaac.ochre.api.IdentifierService;
 import gov.vha.isaac.ochre.api.LookupService;
 import gov.vha.isaac.ochre.api.TaxonomyService;
 import gov.vha.isaac.ochre.api.constants.Constants;
 import org.glassfish.hk2.runlevel.RunLevelController;
+import org.ihtsdo.otf.tcc.api.coordinate.ViewCoordinate;
 import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
 import org.ihtsdo.otf.tcc.model.index.service.IndexerBI;
 import org.jvnet.hk2.annotations.Service;
@@ -19,6 +21,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import java.io.IOException;
 
 /**
  * The default implementation of the classifier store, this stores data in ochre and lucene.
@@ -102,4 +105,16 @@ class LogicClassifierStoreImpl implements LogicClassifierStore {
         LookupService.shutdownIsaac();
         LOGGER.info("System down...");
     }
+
+    @Override
+    public ViewCoordinate getViewCoordinates() {
+        ViewCoordinate viewCoordinate = null;
+        try {
+            viewCoordinate = ViewCoordinates.getDevelopmentInferredLatest();
+        } catch(IOException ioe) {
+            LOGGER.error("Unable to get latest inferred view coordinates", ioe);
+        }
+        return viewCoordinate;
+    }
+
 }
