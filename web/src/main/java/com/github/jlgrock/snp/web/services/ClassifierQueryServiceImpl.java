@@ -5,7 +5,9 @@ import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifierQuery;
 import com.github.jlgrock.snp.domain.data.EncounterRepository;
 import com.github.jlgrock.snp.domain.types.Encounter;
 import com.github.jlgrock.snp.domain.types.Patient;
+
 import gov.vha.isaac.logic.LogicGraph;
+
 import org.jvnet.hk2.annotations.Contract;
 import org.jvnet.hk2.annotations.Service;
 
@@ -13,6 +15,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
+
+import javax.inject.Inject;
 
 /**
  * A Classifier service to be called when querying into the database
@@ -28,6 +32,7 @@ public class ClassifierQueryServiceImpl {
      * @param logicGraphClassifierQueryIn to classify logic graphs
      * @param encounterRepositoryIn the encounter repository, for executing queries against
      */
+    @Inject
     public ClassifierQueryServiceImpl(final LogicGraphClassifierQuery logicGraphClassifierQueryIn, final EncounterRepository encounterRepositoryIn) {
         logicGraphClassifierQuery = logicGraphClassifierQueryIn;
         encounterRepository = encounterRepositoryIn;
