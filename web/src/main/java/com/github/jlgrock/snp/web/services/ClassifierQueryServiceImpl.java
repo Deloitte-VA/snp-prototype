@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * A Classifier service to be called when querying into the database
@@ -46,8 +47,8 @@ public class ClassifierQueryServiceImpl {
      * @return the result
      */
     public Set<Patient> executeKindOfQuery(final UUID uuid) {
-        List<Integer> results = logicGraphClassifierQuery.query(uuid);
-        return findPatientsByNids(results);
+        int[] results = logicGraphClassifierQuery.query(uuid);
+        return findPatientsByNids(convertToList(results));
     }
 
     /**
@@ -57,8 +58,8 @@ public class ClassifierQueryServiceImpl {
      * @return the result
      */
     public Set<Patient> executeKindOfQuery(final String sctid) {
-        List<Integer> results = logicGraphClassifierQuery.query(sctid);
-        return findPatientsByNids(results);
+        int[] results = logicGraphClassifierQuery.query(sctid);
+        return findPatientsByNids(convertToList(results));
     }
 
     /**
@@ -68,15 +69,21 @@ public class ClassifierQueryServiceImpl {
      * @return the result
      */
     public Set<Patient> executeKindOfQuery(final LogicGraph logicGraph) {
-        List<Integer> results = logicGraphClassifierQuery.query(logicGraph);
-        return findPatientsByNids(results);
+        int[] results = logicGraphClassifierQuery.query(logicGraph);
+
+        return findPatientsByNids(convertToList(results));
     }
 
+    private List<Integer> convertToList(final int[] ints) {
+        return IntStream.of(ints)
+                .boxed()
+                .collect(Collectors.toList());
+    }
     private Set<Patient> findPatientsByNids(final List<Integer> nids) {
         // Convert the int list to a long list
         List<Long> longNids = nids
                 .stream()
-                .map(a -> 1l)
+                .map(a -> 1L)
                 .collect(Collectors.toList());
 
         // execute the custom query
