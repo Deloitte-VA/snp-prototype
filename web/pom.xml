@@ -189,6 +189,29 @@
                             <!--<value>9090</value>-->
                         <!--</systemProperty>-->
                     <!--</systemProperties>-->
+
+                    <!--
+                    please add the following properties with your local path information into your settings.xml to override the default config in config.properties file:
+                        <default.dir.location>/ZWork/trash/snp_data/uploads</default.dir.location>
+                        <default.chronicle.location>/ZWork/trash/snp_data/object-chronicles</default.chronicle.location>
+                        <default.index.location>/ZWork/trash/snp_data/search</default.index.location>
+                    -->
+                    <systemPropertiesFile>${project.basedir}/config.properties</systemPropertiesFile>
+
+                    <systemProperties>
+                        <systemProperty>
+                            <name>default.dir.location</name>
+                            <value>${default.dir.location}</value>
+                        </systemProperty>
+                        <systemProperty>
+                            <name>default.chronicle.location</name>
+                            <value>${default.chronicle.location}</value>
+                        </systemProperty>
+                        <systemProperty>
+                            <name>default.index.location</name>
+                            <value>${default.index.location}</value>
+                        </systemProperty>
+                    </systemProperties>
                 </configuration>
             </plugin>
 

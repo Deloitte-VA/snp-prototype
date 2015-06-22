@@ -16,12 +16,9 @@ import java.nio.file.Paths;
 public class FileConfig implements FileConfiguration {
     private static final Logger LOGGER = LoggerFactory.getLogger(FileConfig.class);
 
-//    private static final String DEFAULT_DIR_LOCATION = "/data/uploads";
-//    private static final String DEFAULT_CHRONICLE_LOCATION = "/data/object-chronicles";
-//    private static final String DEFAULT_INDEX_LOCATION = "/data/search";
-    private static final String DEFAULT_DIR_LOCATION = "/Users/jlgrock/workspace/snp/data/uploads";
-    private static final String DEFAULT_CHRONICLE_LOCATION = "/Users/jlgrock/workspace/snp/data/object-chronicles";
-    private static final String DEFAULT_INDEX_LOCATION = "/Users/jlgrock/workspace/snp/data/search";
+    private static final String DEFAULT_DIR_LOCATION = System.getProperty("default.dir.location");
+    private static final String DEFAULT_CHRONICLE_LOCATION = System.getProperty("default.chronicle.location");
+    private static final String DEFAULT_INDEX_LOCATION = System.getProperty("default.index.location");
 
     private final Path fileUploadPath;
     private final Path chroniclePath;
@@ -32,6 +29,11 @@ public class FileConfig implements FileConfiguration {
      * file and use it for the web application.
      */
     public FileConfig() {
+
+        LOGGER.debug("FileConfig: DEFAULT_DIR_LOCATION-->" + DEFAULT_DIR_LOCATION);
+        LOGGER.debug("FileConfig: DEFAULT_CHRONICLE_LOCATION-->" + DEFAULT_CHRONICLE_LOCATION);
+        LOGGER.debug("FileConfig: DEFAULT_INDEX_LOCATION-->" + DEFAULT_INDEX_LOCATION);
+
         String fileLocationString = PropertiesFileReader.getFilelocation();
         Path fileUploadPathIn = null;
         if (fileLocationString != null) {
