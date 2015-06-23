@@ -66,7 +66,7 @@ public class PatientControllerTest extends GenericControllerTest {
                     @Override
                     public void dispose(PatientRepository instance) {
                     }
-                }).to(PatientRepository.class).ranked(DEFAULT_HK2_TEST_BIND_RANK);;
+                }).to(PatientRepository.class).ranked(DEFAULT_HK2_TEST_BIND_RANK);
             }
         });
     }
