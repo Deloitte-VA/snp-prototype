@@ -12,18 +12,16 @@ import java.util.Objects;
  */
 public class Encounter extends AbstractMongoDomainObject {
 
-    private String fhirId;
-    
     private String subject;
     
     private String encounterClass;
 
     private String status;
 
-    @NotNull
-    private Patient patient;
-
     private String participant;
+
+    @NotNull
+    private Long patientId;
 
     private List<Observation> observations;
 
@@ -31,19 +29,18 @@ public class Encounter extends AbstractMongoDomainObject {
     public String toString() {
         return MoreObjects.toStringHelper(this)
                 .add("id", getId())
-                .add("fhirId", fhirId)
                 .add("subject", subject)
                 .add("encounterClass", encounterClass)
                 .add("status", status)
                 .add("participant", participant)
-                .add("patient", patient)
+                .add("patientId", patientId)
                 .add("observations", observations)
                 .toString();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), fhirId, encounterClass, status, observations);
+        return Objects.hash(getId(), subject, encounterClass, status, participant, patientId, observations);
     }
 
     @Override
@@ -56,12 +53,11 @@ public class Encounter extends AbstractMongoDomainObject {
         }
         final Encounter other = (Encounter) obj;
         return Objects.equals(this.getId(), other.getId())
-                && Objects.equals(this.fhirId, other.fhirId)
                 && Objects.equals(this.subject, other.subject)
                 && Objects.equals(this.encounterClass, other.encounterClass)
                 && Objects.equals(this.status, other.status)
                 && Objects.equals(this.participant, other.participant)
-                && Objects.equals(this.patient, other.patient)
+                && Objects.equals(this.patientId, other.patientId)
                 && Objects.equals(this.observations, other.observations);
     }
 
@@ -73,12 +69,12 @@ public class Encounter extends AbstractMongoDomainObject {
         observations = pObservations;
     }
 
-    public String getFhirId() {
-        return fhirId;
+    public Long getPatientId() {
+        return patientId;
     }
 
-	public void setFhirId(final String fhirIdIn) {
-        fhirId = fhirIdIn;
+	public void setPatientId(final Long patientIdIn) {
+        patientId = patientIdIn;
     }
 
 	public String getStatus() {
@@ -96,14 +92,6 @@ public class Encounter extends AbstractMongoDomainObject {
 	public void setEncounterClass(final String encounterClassIn) {
         encounterClass = encounterClassIn;
 	}
-
-    public Patient getPatient() {
-        return patient;
-    }
-
-    public void setPatient(final Patient patientIn) {
-        patient = patientIn;
-    }
 
 	public String getParticipant() {
 		return participant;

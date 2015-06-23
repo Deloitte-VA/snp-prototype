@@ -300,6 +300,7 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
      */
     protected Document createIdDocumentFromEntities(final Iterable<? extends S> entities) {
         if (entities == null) {
+            LOGGER.error("cannot create empty id document");
             return null;
         }
         ArrayList<T> ids = new ArrayList<>();
@@ -317,6 +318,7 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
      */
     protected Document createIdDocument(final Iterable<T> ids) {
         if (ids == null) {
+            LOGGER.error("cannot create empty id document");
             return null;
         }
         Document d = new Document();
@@ -334,6 +336,7 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
      */
     protected Document createIdDocumentFromEntity(final S entity) {
         if (entity == null) {
+            LOGGER.error("cannot create empty id document");
             return null;
         }
         return createIdDocument(entity.getId());
@@ -347,6 +350,7 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
      */
     protected Document createIdDocument(final T id) {
         if (id == null) {
+            LOGGER.error("cannot create empty id document");
             return null;
         }
         Document d = new Document();

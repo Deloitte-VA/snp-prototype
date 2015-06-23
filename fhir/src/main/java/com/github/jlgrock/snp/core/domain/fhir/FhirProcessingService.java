@@ -7,6 +7,8 @@ import com.github.jlgrock.snp.core.domain.fhir.marshallers.FhirMarshallerService
 import com.github.jlgrock.snp.core.domain.fhir.processors.FhirElementProcessorFactory;
 import com.github.jlgrock.snp.core.domain.fhir.processors.FhirElementProcessorService;
 import org.jvnet.hk2.annotations.Service;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 
@@ -15,6 +17,9 @@ import javax.inject.Inject;
  */
 @Service
 public class FhirProcessingService implements ProcessingService {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(FhirProcessingService.class);
+
     private FhirMediaTypeService fhirMediaTypeService;
     private FhirElementProcessorFactory fhirElementProcessorFactory;
     private FhirMarshallerService fhirMarshallerService;
@@ -29,7 +34,8 @@ public class FhirProcessingService implements ProcessingService {
     }
 
     @Override
-    public void processInput(final java.lang.String input) {
+    public void processInput(final String input) {
+        LOGGER.trace("Processing Input for fhir...");
         Object unmarshalledObject = null;
         try {
             unmarshalledObject = fhirMarshallerService.unmarshall(input);
@@ -48,7 +54,7 @@ public class FhirProcessingService implements ProcessingService {
     }
 
     @Override
-    public java.lang.String getMediaTypeString() {
+    public String getMediaTypeString() {
         return fhirMediaTypeService.getMediaTypeString();
     }
 

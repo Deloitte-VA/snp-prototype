@@ -3,7 +3,6 @@ package com.github.jlgrock.snp.apis.classifier;
 import gov.vha.isaac.logic.LogicGraph;
 import org.jvnet.hk2.annotations.Contract;
 
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -20,7 +19,7 @@ public interface LogicGraphClassifierQuery {
      * @param nid the native identifier for the database
      * @return the list of matching Concept Sequences
      */
-    List<Integer> query(int nid);
+    int[] query(int nid);
 
     /**
      * Query that will return all concept sequences that match the kind of
@@ -29,7 +28,7 @@ public interface LogicGraphClassifierQuery {
      * @param uuid the unique identifier for the database
      * @return the list of matching Concept Sequences
      */
-    List<Integer> query(UUID uuid);
+    int[] query(UUID uuid);
 
     /**
      * Query that will return all concept sequences that match the kind of
@@ -38,7 +37,7 @@ public interface LogicGraphClassifierQuery {
      * @param sctid the snomed identifier
      * @return the list of matching Concept Sequences
      */
-    List<Integer> query(final String sctid);
+    int[] query(final String sctid);
 
     /**
      * Query that will return all concept sequences that match the kind of
@@ -47,5 +46,5 @@ public interface LogicGraphClassifierQuery {
      * @param logicGraph the logic graph to classify, then search.
      * @return the list of matching Concept Sequences
      */
-    List<Integer> query(final LogicGraph logicGraph);
+    int[] query(final LogicGraph logicGraph);
 }

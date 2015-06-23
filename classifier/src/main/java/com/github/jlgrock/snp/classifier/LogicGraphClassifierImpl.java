@@ -7,8 +7,6 @@ import gov.vha.isaac.logic.LogicService;
 import gov.vha.isaac.metadata.coordinates.EditCoordinates;
 import gov.vha.isaac.metadata.coordinates.LogicCoordinates;
 import gov.vha.isaac.metadata.coordinates.StampCoordinates;
-import gov.vha.isaac.metadata.coordinates.ViewCoordinates;
-import gov.vha.isaac.ochre.api.LookupService;
 import org.ihtsdo.otf.tcc.api.concept.ConceptChronicleBI;
 import org.ihtsdo.otf.tcc.api.store.TerminologySnapshotDI;
 import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
@@ -43,18 +41,12 @@ public class LogicGraphClassifierImpl implements LogicGraphClassifier {
 
     @Override
 	public int getNidFromSNOMED(final String sctid) {
-    	int nid = 0;
-    	try {
-    		TerminologyStoreDI termStore = LookupService.getService(TerminologyStoreDI.class);
-    		TerminologySnapshotDI termSnapshot = termStore.getSnapshot(ViewCoordinates.getDevelopmentInferredLatest());
-    		UUID uuid = UuidT3Generator.fromSNOMED(Long.parseLong(sctid));
+		TerminologyStoreDI termStore = logicClassifierStore.getTerminologyStore();
+		TerminologySnapshotDI termSnapshot = termStore.getSnapshot(logicClassifierStore.getViewCoordinates());
+        UUID uuid = UuidT3Generator.fromSNOMED(Long.parseLong(sctid));
 
-    		//Get NID from UUID
-    		nid = termSnapshot.getNidForUuids(uuid);
-    	} catch (IOException ex) {
-    		LOGGER.error("Fatal error occured", ex);
-    	}
-    	return nid;
+		//Get NID from UUID
+    	return termSnapshot.getNidForUuids(uuid);
     }
 
     @Override
@@ -79,7 +71,7 @@ public class LogicGraphClassifierImpl implements LogicGraphClassifier {
 	public Integer classify(final LogicGraph logicGraph) {
 		LOGGER.debug("Stated logic graph: {}", logicGraph);
 
-        LogicService logicService = LookupService.getService(LogicService.class);
+        LogicService logicService = logicClassifierStore.getLogicService();
 		Integer classifiedResult = logicService.getConceptSequenceForExpression(logicGraph,
                 StampCoordinates.getDevelopmentLatest(),
                 LogicCoordinates.getStandardElProfile(),

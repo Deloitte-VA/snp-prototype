@@ -40,12 +40,11 @@ public class EncounterReadConverter extends AbstractReadConverter implements Con
     public Encounter convert(final Document source) {
         Encounter encounter = new Encounter();
         encounter.setId(parseId(source));
-        encounter.setFhirId(parseString(source, EncounterTags.FHIR_ID));
         encounter.setEncounterClass(parseString(source, EncounterTags.ENCOUNTER_CLASS));
         encounter.setStatus(parseString(source, EncounterTags.STATUS));
         encounter.setSubject(parseString(source, EncounterTags.SUBJECT));
         encounter.setParticipant(parseString(source, EncounterTags.PARTICIPANT));
-        encounter.setPatient(patientRepository.findOneById(parseLong(source, EncounterTags.PATIENT)));
+        encounter.setPatientId(parseLong(source, EncounterTags.PATIENT));
 
         List<Document> observationsObjs = (List<Document>) source.get(EncounterTags.OBSERVATIONS_TAG);
         List<Observation> observations = new ArrayList<>();

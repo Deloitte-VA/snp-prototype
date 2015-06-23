@@ -6,11 +6,6 @@ package com.github.jlgrock.snp.domain.data;
 public final class EncounterTags {
 
     /**
-     * The patient id.
-     */
-    public static final String FHIR_ID = "fhir_id";
-
-    /**
      * The date of the encounter.
      */
     public static final String ENCOUNTER_CLASS = "class";
@@ -31,7 +26,7 @@ public final class EncounterTags {
     public static final String PARTICIPANT = "participant";
 
     /**
-     * The patient, stored as a linked unique identifier.
+     * The participant, stored as a string description.
      */
     public static final String PATIENT = "patient";
 

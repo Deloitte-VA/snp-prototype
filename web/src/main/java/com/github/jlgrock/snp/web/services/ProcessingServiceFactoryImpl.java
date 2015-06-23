@@ -32,7 +32,8 @@ public class ProcessingServiceFactoryImpl implements ProcessingServiceFactory {
         for (ProcessingService processingService : processingServicesIn) {
             if (processingServices.containsKey(processingService.getMediaTypeString())) {
                 LOGGER.error(
-                        "Processing Service with the key '{}' has been found more than once. This should be corrected, as this needs to be unique.",
+                        "Processing Service with the key '{}' has been found more than once. " +
+                                "This should be corrected, as this needs to be unique.",
                         processingService.getMediaTypeString());
             }
             processingServices.put(processingService.getMediaTypeString(), processingService);
@@ -46,6 +47,7 @@ public class ProcessingServiceFactoryImpl implements ProcessingServiceFactory {
      * @return the process that matches the media-type
      */
     public ProcessingService getService(final MediaType snpMediaType) {
+        LOGGER.trace("finding service '{}'", snpMediaType);
         return processingServices.get(snpMediaType.getType() + "/" + snpMediaType.getSubtype());
     }
 }

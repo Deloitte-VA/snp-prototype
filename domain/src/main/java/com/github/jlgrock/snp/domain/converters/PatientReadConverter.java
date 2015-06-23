@@ -27,6 +27,7 @@ public class PatientReadConverter extends AbstractReadConverter
         p.setLastName(parseString(source, PatientTags.LAST_NAME_TAG));
         p.setGender(Gender.getValueById(parseInteger(source, PatientTags.GENDER_TAG)));
         p.setDateOfBirth(parseLocalDate(source, PatientTags.DATE_OF_BIRTH_TAG));
+        p.setFhirId(parseString(source, PatientTags.FHIR_ID_TAG));
 
         Optional<Boolean> isDeceased = parseBoolean(source, PatientTags.DECEASED);
         if (isDeceased.isPresent()) {

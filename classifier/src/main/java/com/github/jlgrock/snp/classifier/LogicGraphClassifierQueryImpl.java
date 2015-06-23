@@ -3,7 +3,6 @@ package com.github.jlgrock.snp.classifier;
 import com.github.jlgrock.snp.apis.classifier.LogicClassifierStore;
 import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifierQuery;
 import gov.vha.isaac.logic.LogicGraph;
-import gov.vha.isaac.metadata.coordinates.ViewCoordinates;
 import gov.vha.isaac.ochre.collections.SequenceSet;
 import org.ihtsdo.otf.tcc.api.concept.ConceptChronicleBI;
 import org.ihtsdo.otf.tcc.api.uuid.UuidT3Generator;
@@ -13,10 +12,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import java.io.IOException;
-import java.util.Collections;
-import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  * Class that provides query capabilities for the Logic Graph store.
@@ -38,26 +34,22 @@ public class LogicGraphClassifierQueryImpl implements LogicGraphClassifierQuery 
     }
 
     @Override
-    public List<Integer> query(final int nid) {
-        List<Integer> conceptSequences = Collections.emptyList();
+    public int[] query(final int nid) {
+        int[] conceptSequences = null;
         SequenceSet results = null;
-        try {
-            results = logicClassifierStore.getTaxonomyService()
-                    .getKindOfSequenceSet(nid, ViewCoordinates.getDevelopmentInferredLatest());
-        } catch (IOException e) {
-            LOGGER.error("Unable to getDevelopmentInferredLatest ", e);
-        }
+        results = logicClassifierStore.getTaxonomyService()
+                .getKindOfSequenceSet(nid, logicClassifierStore.getViewCoordinates());
         if (results != null) {
-            conceptSequences = results.stream().boxed().collect(Collectors.toList());
+            conceptSequences = results.stream().toArray();
         }
         return conceptSequences;
     }
 
     @Override
-    public List<Integer> query(final UUID uuid) {
-        List<Integer> conceptSequences = Collections.EMPTY_LIST;
+    public int[] query(final UUID uuid) {
+        int[] conceptSequences = null;
 
-        ConceptChronicleBI concept = null;
+        ConceptChronicleBI concept;
         try {
             concept = logicClassifierStore.getTerminologyStore().getConcept(uuid);
             int nid = concept.getNid();
@@ -70,7 +62,7 @@ public class LogicGraphClassifierQueryImpl implements LogicGraphClassifierQuery 
     }
 
     @Override
-    public List<Integer> query(final String sctId) {
+    public int[] query(final String sctId) {
         // Convert the sctId into a UUID
         UUID uuid = UuidT3Generator.fromSNOMED(sctId);
         // execute a uuid query
@@ -78,7 +70,7 @@ public class LogicGraphClassifierQueryImpl implements LogicGraphClassifierQuery 
     }
 
     @Override
-    public List<Integer> query(final LogicGraph logicGraph) {
+    public int[] query(final LogicGraph logicGraph) {
         //TODO
         throw new UnsupportedOperationException("Work on this");
     }
