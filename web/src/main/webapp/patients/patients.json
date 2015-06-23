@@ -1,0 +1,34 @@
+ [
+  {
+    "firstName": "John",
+    "middleName": "A",
+    "lastName": "Doe",
+    "DOB":"01/01/15",
+    "gender":"M",
+    "race":"white"
+  },
+  {
+    "firstName": "Jane",
+    "middleName": "B",
+    "lastName": "Doe",
+    "DOB":"01/01/15",
+    "gender":"F",
+    "race":"white"
+  },
+  {
+    "firstName": "Johnnie",
+    "middleName": "C",
+    "lastName": "Smith",
+    "DOB":"01/01/15",
+    "gender":"M",
+    "race":"white"
+  },
+  {
+    "firstName": "Janie",
+    "middleName": "D",
+    "lastName": "Smith",
+    "DOB":"01/01/15",
+    "gender":"F",
+    "race":"white"
+  }
+]

@@ -23,6 +23,17 @@
             <groupId>org.mongodb</groupId>
             <artifactId>mongo-java-driver</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>gov.vha.isaac.logic.modules</groupId>
+            <artifactId>logic</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.ws.rs</groupId>
+            <artifactId>javax.ws.rs-api</artifactId>
+        </dependency>
+
     </dependencies>
 
     <profiles>

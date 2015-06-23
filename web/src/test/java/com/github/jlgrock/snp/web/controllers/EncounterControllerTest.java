@@ -14,8 +14,8 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.github.jlgrock.snp.core.data.EncounterRepository;
-import com.github.jlgrock.snp.core.domain.Encounter;
+import com.github.jlgrock.snp.domain.data.EncounterRepository;
+import com.github.jlgrock.snp.domain.types.Encounter;
 
 /**
  *
@@ -65,10 +65,10 @@ public class EncounterControllerTest extends GenericControllerTest {
     public void testGetEncounterRestCall() throws JsonProcessingException {
         Encounter encounterTemp = new Encounter();
         encounterTemp.setId(1l);
-        encounterTemp.setDate(LocalDate.now());
-        encounterTemp.setPatientId(2l);
-        encounterTemp.setReasonForVisit("abc");
-        encounterTemp.setType(3);
+//        encounterTemp.setDate(LocalDate.now());
+//        encounterTemp.setPatientId(2l);
+//        encounterTemp.setReasonForVisit("abc");
+//        encounterTemp.setType(3);
         Mockito.when(encounterRepository.findOneById(Mockito.any())).thenReturn(encounterTemp);
         final WebTarget target = target("encounter/1");
 //        String response = target.request().get(String.class);

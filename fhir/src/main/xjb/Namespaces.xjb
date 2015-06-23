@@ -19,7 +19,7 @@
 
     <jaxb:bindings schemaLocation="../xsd/fhir-xhtml.xsd">
         <jaxb:schemaBindings>
-            <jaxb:package name="com.github.jlgrock.snp.core.domain.xhtml"/>
+            <jaxb:package name="com.github.jlgrock.snp.core.domain.fhir.xhtml"/>
         </jaxb:schemaBindings>
     </jaxb:bindings>
 
@@ -33,7 +33,7 @@
 
     <jaxb:bindings schemaLocation="../xsd/fhir-all.xsd">
         <jaxb:schemaBindings>
-            <jaxb:package name="com.github.jlgrock.snp.core.domain.fhir"/>
+            <jaxb:package name="com.github.jlgrock.snp.core.domain.fhir.model"/>
         </jaxb:schemaBindings>
     </jaxb:bindings>
 

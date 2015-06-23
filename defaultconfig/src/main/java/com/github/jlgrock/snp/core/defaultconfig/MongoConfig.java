@@ -7,7 +7,6 @@ import org.jvnet.hk2.annotations.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.net.UnknownHostException;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,7 +19,7 @@ public class MongoConfig implements MongoDbConfiguration {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MongoConfig.class);
 
-    static final String DEFAULT_HOST = "localhost";
+    static final String DEFAULT_HOST = "192.168.59.103";
 
     static final Integer DEFAULT_PORT = 27017;
 
@@ -63,18 +62,19 @@ public class MongoConfig implements MongoDbConfiguration {
         }
         try {
             hostSet = new ServerAddress( server, port );
-        } catch (UnknownHostException e) {
-            LOGGER.error("Unable to identify host=" + server, e);
+        } catch (Exception e) {
+            LOGGER.error("Unable to identify host.  Using default={}", server);
             hostSet = null;
         }
-        LOGGER.info("Connecting to " + server + ":" + port);
+        LOGGER.info("Connecting to {}:{}", server, port);
 
         host = hostSet;
         hosts = null;
 
-        String db = PropertiesFileReader.getDatabase();
+        String db = PropertiesFileReader.getDatabaseName();
         if (readProperties == false || db == null) {
             db = DEFAULT_DATABASE;
+            LOGGER.error("Unable to identify database name.  Using default={}", db);
         }
         defaultDatabase = db;
     }
@@ -90,7 +90,7 @@ public class MongoConfig implements MongoDbConfiguration {
     public MongoConfig(final List<MongoCredential> userCredentialsIn,
                        final ServerAddress hostIn,
                        final String defaultDatabaseIn) {
-        LOGGER.info("Connecting to " + hostIn.getHost() + ":" + hostIn.getPort());
+        LOGGER.info("Connecting to {}:{}", hostIn.getHost(), hostIn.getPort());
         userCredentials = userCredentialsIn;
         host = hostIn;
         hosts = null;
@@ -110,7 +110,7 @@ public class MongoConfig implements MongoDbConfiguration {
                        final String defaultDatabaseIn) {
         LOGGER.info("Connecting to ReplicaSet...");
         for (ServerAddress s : hostsIn) {
-            LOGGER.info("Host=" + s.getHost() + ":" + s.getPort());
+            LOGGER.info("Connecting to {}:{}", s.getHost(), s.getPort());
         }
         userCredentials = userCredentialsIn;
         host = null;

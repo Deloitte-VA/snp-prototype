@@ -1,13 +1,9 @@
 package com.github.jlgrock.snp.web.configuration;
 
+import com.github.jlgrock.snp.apis.classifier.LogicClassifierStore;
 import io.dropwizard.jersey.jackson.JacksonMessageBodyProvider;
 import io.dropwizard.jersey.jackson.JsonProcessingExceptionMapper;
-
-import javax.validation.Validation;
-import javax.ws.rs.ApplicationPath;
-
 import org.glassfish.hk2.api.ServiceLocator;
-import org.glassfish.hk2.api.TypeLiteral;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.media.multipart.MultiPartFeature;
@@ -16,133 +12,97 @@ import org.glassfish.jersey.server.ServerProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.github.jlgrock.snp.apis.connection.MongoDatabaseManager;
-import com.github.jlgrock.snp.apis.connection.MongoDbFactory;
-import com.github.jlgrock.snp.apis.connection.configuration.MongoDbConfiguration;
-import com.github.jlgrock.snp.apis.connection.configuration.WebConfiguration;
-import com.github.jlgrock.snp.apis.connection.synchronization.TransactionSynchronizationManager;
-import com.github.jlgrock.snp.apis.data.MultiPartFileUtils;
-import com.github.jlgrock.snp.core.classifier.FhirClassifierImpl;
-import com.github.jlgrock.snp.core.classifier.LegoClassifierImpl;
-import com.github.jlgrock.snp.core.classifier.PceClassifier;
-import com.github.jlgrock.snp.core.connection.SimpleMongoDbFactory;
-import com.github.jlgrock.snp.core.connection.SynchronizedMongoDatabaseManager;
-import com.github.jlgrock.snp.core.connection.synchronization.CollectionSynchronizationManager;
-import com.github.jlgrock.snp.core.converters.ClassifiedAssertionWriteConverter;
-import com.github.jlgrock.snp.core.converters.ClassifiedPceReadConverter;
-import com.github.jlgrock.snp.core.converters.EncounterReadConverter;
-import com.github.jlgrock.snp.core.converters.EncounterWriteConverter;
-import com.github.jlgrock.snp.core.converters.ObservationReadConverter;
-import com.github.jlgrock.snp.core.converters.ObservationWriteConverter;
-import com.github.jlgrock.snp.core.converters.PatientReadConverter;
-import com.github.jlgrock.snp.core.converters.PatientWriteConverter;
-import com.github.jlgrock.snp.core.data.ClassifiedPceMongoDbStore;
-import com.github.jlgrock.snp.core.data.ClassifiedPceRepository;
-import com.github.jlgrock.snp.core.data.ClassifiedPceRepositoryImpl;
-import com.github.jlgrock.snp.core.data.ClassifiedPceStore;
-import com.github.jlgrock.snp.core.data.EncounterRepository;
-import com.github.jlgrock.snp.core.data.EncounterRepositoryImpl;
-import com.github.jlgrock.snp.core.data.PatientRepository;
-import com.github.jlgrock.snp.core.data.PatientRepositoryImpl;
-import com.github.jlgrock.snp.core.defaultconfig.MongoConfig;
-import com.github.jlgrock.snp.core.defaultconfig.WebConfig;
-import com.github.jlgrock.snp.core.domain.fhir.Condition;
-import com.github.jlgrock.snp.core.domain.lego.Assertion;
-import com.github.jlgrock.snp.core.domain.lego.Lego;
-import com.github.jlgrock.snp.web.controllers.MultipartFileUtilsImpl;
-import com.github.jlgrock.snp.web.services.PceClassifierService;
-import com.github.jlgrock.snp.web.services.PceClassifierServiceFhirImpl;
-import com.github.jlgrock.snp.web.services.PceClassifierServiceLegoImpl;
+import javax.inject.Inject;
+import javax.servlet.ServletContext;
+import javax.validation.Validation;
+import javax.ws.rs.ApplicationPath;
 
 /**
  * The entry point for Jersey to start a web application in a Servlet 3.0 container.
  * This is a simple Jersey + HK2 application that can be bound to Spring IOC, Spring MVC,
  * Guice, as well as a number of others.
  */
-@ApplicationPath("/")
+@ApplicationPath("/services/")
 public class ApplicationConfig extends ResourceConfig {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ApplicationConfig.class);
 
-    // won't be initialized until onStartup()
-    ServiceLocator serviceLocator;
+    /**
+     * Sets up all of the standard features.
+     *
+     * @param serviceLocator the service locator that Jersey uses
+     * @param context the servlet context that allows for getting resources from the servlet container
+     */
+    @Inject
+    public ApplicationConfig(final ServiceLocator serviceLocator, final ServletContext context) {
+        this(serviceLocator, context, false);
+    }
 
     /**
      * Sets up all of the standard features.
+     *
+     * @param serviceLocator the service locator that Jersey uses
+     * @param context the servlet context that allows for getting resources from the servlet container
+     * @param isForTesting if true, skips loading hk2 resources automatically and allows you to do this
+     *                     via your own test framework
      */
-    public ApplicationConfig() {
-        LOGGER.info("Starting MongoRestApplication...");
+    public ApplicationConfig(final ServiceLocator serviceLocator, final ServletContext context, final boolean isForTesting) {
+        String s = isForTesting ? "in Testing mode" : "";
+        LOGGER.info("Starting MongoRestApplication {}...", s);
 
-        // Register Features
+        setApplicationName(ApplicationConfig.class.getSimpleName());
 
-        //register(Binder.class);
-        // Feature allowing for Multipart file uploads
+        if (!isForTesting) {
+            new JerseyAutoScan(serviceLocator, context).scan();
+
+            // preload the LogicGraphClassifier to bootstrap the database
+            serviceLocator.getService(LogicClassifierStore.class);
+
+        }
+
+        // Register Feature allowing for Multipart file uploads
         register(MultiPartFeature.class);
 
-        // Feature allowing Jackson to serialize objects
+        // Register Feature allowing Jackson to serialize objects
         register(JacksonFeature.class);
 
-        // Feature that allows for detailed exception messages for jackson mapping issues
+        // Register Feature that allows for detailed exception messages for jackson mapping issues
         register(new JsonProcessingExceptionMapper());
 
-        // Feature allowing jackson to use additional annotations and validations
+        // Register Feature allowing jackson to use additional annotations and validations
         register(new JacksonMessageBodyProvider(JacksonConfig.newObjectMapper(), Validation.buildDefaultValidatorFactory().getValidator()));
 
         // Enable Tracing support.
         property(ServerProperties.TRACING, "ALL");
 
+        // Scans packages for rest services
         packages("com.github.jlgrock.snp.web");
-        //doesn't work
-        // ServiceLocator locator = ServiceLocatorUtilities.createAndPopulateServiceLocator();
 
-        //doesn't work
-        //register(EncounterRepository.class);
-
-        // TODO this is supposed to work with just the packages(String...) function, but it doesn't seem to be working.
-        // The scan of packages doesn't seem to be working, so I have to create an abstract binder to bind classes
+        // Place to manually bind objects, in the case that the Jersey Auto-scan isn't working
+        // e.g. bind(x.class).to(y.class);
+        //
+        // note: if the object is generic, use TypeLiteral
+        // e.g. bind(x.class).to(new TypeLiteral<InjectionResolver<SessionInject>>(){});
+        //
         register(new AbstractBinder() {
             @Override
             protected void configure() {
-                bind(EncounterRepositoryImpl.class).to(EncounterRepository.class);
-                bind(PatientRepositoryImpl.class).to(PatientRepository.class);
-                bind(ClassifiedPceRepositoryImpl.class).to(ClassifiedPceRepository.class);
-                
-                bind(PceClassifierServiceLegoImpl.class).to(new TypeLiteral<PceClassifierService<Lego>>() {});
-                bind(PceClassifierServiceFhirImpl.class).to(new TypeLiteral<PceClassifierService<Condition>>() {});
-                bind(LegoClassifierImpl.class).to(new TypeLiteral<PceClassifier<Assertion>>() {});
-                bind(FhirClassifierImpl.class).to(new TypeLiteral<PceClassifier<Condition>>() {});
-                bind(ClassifiedPceMongoDbStore.class).to(ClassifiedPceStore.class);
-                bind(MultipartFileUtilsImpl.class).to(MultiPartFileUtils.class);
-
-                bind(ObservationReadConverter.class).to(ObservationReadConverter.class);
-                bind(ObservationWriteConverter.class).to(ObservationWriteConverter.class);
-
-                bind(EncounterReadConverter.class).to(EncounterReadConverter.class);
-                bind(EncounterWriteConverter.class).to(EncounterWriteConverter.class);
-
-                bind(PatientReadConverter.class).to(PatientReadConverter.class);
-                bind(PatientWriteConverter.class).to(PatientWriteConverter.class);
-
-                bind(ClassifiedPceReadConverter.class).to(ClassifiedPceReadConverter.class);
-                bind(ClassifiedAssertionWriteConverter.class).to(ClassifiedAssertionWriteConverter.class);
 
 
-                bind(SimpleMongoDbFactory.class).to(MongoDbFactory.class);
-                bind(MongoConfig.class).to(MongoDbConfiguration.class);
-                bind(WebConfig.class).to(WebConfiguration.class);
-                bind(SynchronizedMongoDatabaseManager.class).to(MongoDatabaseManager.class);
-                bind(CollectionSynchronizationManager.class).to(TransactionSynchronizationManager.class);
             }
         });
     }
-
-
     /**
      * Create and return an application configuration, for use in starting a jersey server.
+     *
+     * @param serviceLocator the service locator that Jersey uses
+     * @param context the servlet context that allows for getting resources from the servlet container
+     * @param isForTesting if true, skips loading hk2 resources automatically and allows you to do this
+     *                     via your own test framework
      * @return the configuration object, which can be modified further.
      */
-    public static ResourceConfig createApp() {
-        return new ApplicationConfig();
+    public static ResourceConfig createApp(final ServiceLocator serviceLocator, final ServletContext context, final boolean isForTesting) {
+        return new ApplicationConfig(serviceLocator, context, isForTesting);
     }
 
 }

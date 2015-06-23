@@ -155,7 +155,9 @@
       <property name="severity" value="error"/>
     </module>
     <module name="InterfaceIsType"/>
-    <module name="VisibilityModifier"/>
+    <module name="VisibilityModifier">
+      <property name="severity" value="error"/>
+    </module>
     <module name="ArrayTypeStyle">
       <property name="severity" value="error"/>
     </module>
@@ -224,6 +226,7 @@
   </module>
   <module name="NewlineAtEndOfFile">
     <property name="severity" value="error"/>
+	<property name="lineSeparator" value="lf"/>
   </module>
   <module name="Translation"/>
   <module name="FileLength"/>

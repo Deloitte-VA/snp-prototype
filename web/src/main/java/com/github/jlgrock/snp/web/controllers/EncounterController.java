@@ -1,7 +1,7 @@
 package com.github.jlgrock.snp.web.controllers;
 
-import com.github.jlgrock.snp.core.data.EncounterRepository;
-import com.github.jlgrock.snp.core.domain.Encounter;
+import com.github.jlgrock.snp.domain.data.EncounterRepository;
+import com.github.jlgrock.snp.domain.types.Encounter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,7 +34,7 @@ public class EncounterController {
 
     /**
      * Returns the encounter for the respective <code>id</code>.
-     * @param id encounter id used for search
+     * @param id encounter id used for run
      * @return returns an encounter
      */
     @GET @Path("/{id}")

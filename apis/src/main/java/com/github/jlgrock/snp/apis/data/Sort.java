@@ -123,8 +123,12 @@ public class Sort implements Iterable<Sort.Order> {
 
     @Override
     public boolean equals(final Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Sort that = (Sort) o;
 
@@ -192,7 +196,7 @@ public class Sort implements Iterable<Sort.Order> {
          * {@link Sort#DEFAULT_DIRECTION}
          *
          * @param directionIn can be {@literal null}, will default to {@link Sort#DEFAULT_DIRECTION}
-         * @param propertyIn must not be {@literal null} or empty.
+         * @param propertyIn  must not be {@literal null} or empty.
          */
         public Order(final Direction directionIn, final String propertyIn) {
             this(directionIn, propertyIn, DEFAULT_IGNORE_CASE, null);
@@ -202,8 +206,8 @@ public class Sort implements Iterable<Sort.Order> {
          * Creates a new {@link Order} instance. if order is {@literal null} then order defaults to
          * {@link Sort#DEFAULT_DIRECTION}
          *
-         * @param directionIn can be {@literal null}, will default to {@link Sort#DEFAULT_DIRECTION}
-         * @param propertyIn must not be {@literal null} or empty.
+         * @param directionIn        can be {@literal null}, will default to {@link Sort#DEFAULT_DIRECTION}
+         * @param propertyIn         must not be {@literal null} or empty.
          * @param nullHandlingHintIn can be {@literal null}, will default to {@link NullHandling#NATIVE}.
          */
         public Order(final Direction directionIn, final String propertyIn, final NullHandling nullHandlingHintIn) {
@@ -224,9 +228,9 @@ public class Sort implements Iterable<Sort.Order> {
          * Creates a new {@link Order} instance. if order is {@literal null} then order defaults to
          * {@link Sort#DEFAULT_DIRECTION}
          *
-         * @param directionIn can be {@literal null}, will default to {@link Sort#DEFAULT_DIRECTION}
-         * @param propertyIn must not be {@literal null} or empty.
-         * @param ignoreCaseIn true if sorting should be case insensitive. false if sorting should be case sensitive.
+         * @param directionIn    can be {@literal null}, will default to {@link Sort#DEFAULT_DIRECTION}
+         * @param propertyIn     must not be {@literal null} or empty.
+         * @param ignoreCaseIn   true if sorting should be case insensitive. false if sorting should be case sensitive.
          * @param nullHandlingIn can be {@literal null}, will default to {@link NullHandling#NATIVE}.
          */
         private Order(final Direction directionIn, final String propertyIn, final boolean ignoreCaseIn, final NullHandling nullHandlingIn) {
@@ -331,8 +335,12 @@ public class Sort implements Iterable<Sort.Order> {
 
         @Override
         public boolean equals(final Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
 
             Order that = (Order) o;
 
@@ -353,3 +361,4 @@ public class Sort implements Iterable<Sort.Order> {
         }
     }
 }
+
