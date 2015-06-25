@@ -5,6 +5,7 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -282,4 +283,115 @@ public class QueryParamParserTest {
 		List<String> fields = QueryParamParser.parseFields(new ArrayList<String>() {{add("abc, 123,def");}});
 		assertEquals(fields, expected);
 	}
+	
+	@Test
+	public void parseFilterEmptyListTest() {
+		Map<String, String> filter = QueryParamParser.parseFilter(new ArrayList<String>());
+		assertNotNull(filter);
+		assertEquals(filter.isEmpty(), true);
+	}
+	
+	@Test
+	public void parseFilterNullListTest() {
+		Map<String, String> filter = QueryParamParser.parseFilter(null);
+		assertNotNull(filter);
+		assertEquals(filter.isEmpty(), true);
+	}
+	
+	@Test(expectedExceptions = QueryParamException.class)
+	public void parseFilterMissingFieldTest() {
+		QueryParamParser.parseFilter(new ArrayList<String>() {{add("=def");}});
+	}
+	
+	@Test(expectedExceptions = QueryParamException.class)
+	public void parseFilterMissingValueTest() {
+		QueryParamParser.parseFilter(new ArrayList<String>() {{add("abc=");}});
+	}
+	
+	@Test(expectedExceptions = QueryParamException.class)
+	public void parseFilterMissingEqualsTest() {
+		QueryParamParser.parseFilter(new ArrayList<String>() {{add("abc?def");}});
+	}
+	
+	@Test(expectedExceptions = QueryParamException.class)
+	public void parseFilterMissingEquals2Test() {
+		QueryParamParser.parseFilter(new ArrayList<String>() {{add("abc=def, def$xyz");}});
+	}
+
+	@Test(expectedExceptions = QueryParamException.class)
+	public void parseFilterMissingParameterTest() {
+		QueryParamParser.parseFilter(new ArrayList<String>() {{add("abc=def,, def=xyz");}});
+	}
+	
+	@Test(expectedExceptions = QueryParamException.class)
+	public void parseFilterMissingParameterBlankspaceTest() {
+		QueryParamParser.parseFilter(new ArrayList<String>() {{add("abc=def, , def=xyz");}});
+	}
+	
+	@Test
+	public void parseFilterAlphaTest() {
+		Map<String, String> expected = new HashMap<String, String>() 
+				{{put("abc", "def");}};
+		Map<String, String> sort = QueryParamParser.parseFilter(new ArrayList<String>() 
+				{{add("abc=def");}});
+		assertEquals(sort, expected);
+	}
+	
+	@Test
+	public void parseFilterAlpha2Test() {
+		Map<String, String> expected = new HashMap<String, String>() 
+				{{put("abc", "def"); put("def", "xyz");}};
+		Map<String, String> sort = QueryParamParser.parseFilter(new ArrayList<String>() 
+				{{add("abc=def, def=xyz");}});
+		assertEquals(sort, expected);
+	}
+	
+	@Test
+	public void parseFilterTrailingCommaTest() {
+		Map<String, String> expected = new HashMap<String, String>() 
+				{{put("abc", "def"); put("def", "xyz");}};
+		Map<String, String> sort = QueryParamParser.parseFilter(new ArrayList<String>() 
+				{{add("abc=def, def=xyz,");}});
+		assertEquals(sort, expected);
+	}
+	
+	@Test
+	public void parseFilterTrailingCommaWithBlankspaceTest() {
+		Map<String, String> expected = new HashMap<String, String>() 
+				{{put("abc", "def"); put("def", "xyz");}};
+		Map<String, String> sort = QueryParamParser.parseFilter(new ArrayList<String>() 
+				{{add("abc=def, def=xyz, ");}});
+		assertEquals(sort, expected);
+	}
+	
+	@Test
+	public void parseFilterAlphaNumericTest() {
+		Map<String, String> expected = new HashMap<String, String>() 
+				{{put("aBc123", "def"); put("123Abc", "456"); put("123", "xyz");}};
+		Map<String, String> sort = QueryParamParser.parseFilter(new ArrayList<String>() 
+				{{add("aBc123=def, 123Abc=456, 123=xyz");}});
+		assertEquals(sort, expected);
+	}
+	
+	@Test
+	public void parseFilterAlphaNumericMixedCaseValueTest() {
+		Map<String, String> expected = new HashMap<String, String>() 
+				{{put("abc123", "dEf"); put("123abc", "456"); 
+				put("123", "Xyz"); put("abc", "GHI");}};
+		Map<String, String> sort = QueryParamParser.parseFilter(new ArrayList<String>() 
+				{{add("abc123=dEf, 123abc=456, 123=Xyz, abc=GHI");}});
+		assertEquals(sort, expected);
+	}
+
+//	FIXME: Fix parser to handle whitespace
+//	@Test
+//	public void parseFilterAlphaNumericWithAndWithoutWhitespaceTest() {
+//		Map<String, String> expected = new HashMap<String, String>() 
+//				{{put("abc123", "dEf"); put("123abc", "456"); 
+//				put("123", "Xyz"); put("abc", "GHI");}};
+//		Map<String, QuerySortDirection> sort = QueryParamParser.parseSort(new ArrayList<String>() 
+//				{{add("abc123= dEf,123abc = 456, 123= Xyz,abc =GHI");}});
+//		assertEquals(sort, expected);
+//	}
+	
 }

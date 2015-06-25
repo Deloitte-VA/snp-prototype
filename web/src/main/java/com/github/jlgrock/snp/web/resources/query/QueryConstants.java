@@ -12,4 +12,5 @@ public class QueryConstants {
 	
 	public static final String PARAM_SEPARATOR = ",";
 	public static final String SORT_PARAM_SEPARATOR = ":";
+	public static final String FILTER_PARAM_SEPARATOR = "=";
 }

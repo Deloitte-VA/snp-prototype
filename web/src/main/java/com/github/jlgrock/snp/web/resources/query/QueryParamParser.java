@@ -2,6 +2,7 @@ package com.github.jlgrock.snp.web.resources.query;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,13 +19,49 @@ public class QueryParamParser implements QueryParamHandler {
 		parseQuery(query);
 
 	}
+	
+	public static Map<String, String> parseFilter(List<String> filterList) {
+		LOGGER.trace("Inside parseFilter: filterList = {}", filterList == null ? null : Arrays.toString(filterList.toArray()));
+		
+		Map<String, String> filter = new HashMap<>();
+		
+		if (filterList == null || filterList.size() == 0) {
+			return filter;
+		}
+		
+		if (filterList.size() > 1) {
+			String s = "More than one filter parameter found";
+			LOGGER.error(s);
+			throw new QueryParamException(s);
+		}
+		else if (filterList.size() == 1) {
+			String filterString = filterList.get(0);
+			LOGGER.debug("filter string: {}", filterString);
+			String[] filterParams = filterString.trim().split(QueryConstants.PARAM_SEPARATOR);
+			LOGGER.debug("filter params: {}", Arrays.toString(filterParams));
+			
+			for (String param : filterParams) {
+				String[] filterTokens = param.split(QueryConstants.FILTER_PARAM_SEPARATOR);
+				LOGGER.debug("filter tokens: {}", Arrays.toString(filterTokens));
+				if (filterTokens.length != 2 || filterTokens[0] == null || filterTokens[0].trim().isEmpty()) {
+					String s = "Invalid filter parameter: " + param;
+					LOGGER.error(s);
+					throw new QueryParamException(s);
+				}
+				
+				filter.put(filterTokens[0].trim(), filterTokens[1]);
+			}
+		}
+		
+		return filter;
+	}
 
 	public static int parseLimit(List<String> limitList) throws QueryParamException {
 		LOGGER.trace("Inside parseLimit: limitList = {}", limitList == null ? null : Arrays.toString(limitList.toArray()));
 		
 		int limit = QueryConstants.LIMIT_PARAM_DEFAULT;
 		
-		if (limitList == null) {
+		if (limitList == null || limitList.size() == 0) {
 			return limit;
 		}
 		
@@ -58,7 +95,7 @@ public class QueryParamParser implements QueryParamHandler {
 		
 		int offset = QueryConstants.OFFSET_PARAM_DEFAULT;
 		
-		if (offsetList == null) {
+		if (offsetList == null || offsetList.size() == 0) {
 			return offset;
 		}
 		
@@ -92,7 +129,7 @@ public class QueryParamParser implements QueryParamHandler {
 		
 		Map<String, QuerySortDirection> sort = new LinkedHashMap<>();
 		
-		if (sortList == null) {
+		if (sortList == null || sortList.size() == 0) {
 			return sort;
 		}
 		
@@ -135,7 +172,7 @@ public class QueryParamParser implements QueryParamHandler {
 		
 		List<String> fields = new ArrayList<>();
 		
-		if (fieldsList == null) {
+		if (fieldsList == null || fieldsList.size() == 0) {
 			return fields;
 		}
 		
@@ -165,6 +202,7 @@ public class QueryParamParser implements QueryParamHandler {
 	}
 
 	public void parseQuery(QueryParamBean query) {
+		List<String> filterList = query.getUriInfo().getQueryParameters().get(QueryConstants.FILTER_PARAM);
 		List<String> sortList = query.getUriInfo().getQueryParameters().get(QueryConstants.SORT_PARAM);
 		List<String> offsetList = query.getUriInfo().getQueryParameters().get(QueryConstants.OFFSET_PARAM);
 		List<String> limitList = query.getUriInfo().getQueryParameters().get(QueryConstants.LIMIT_PARAM);
