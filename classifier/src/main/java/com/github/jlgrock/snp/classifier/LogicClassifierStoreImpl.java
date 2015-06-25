@@ -103,7 +103,7 @@ class LogicClassifierStoreImpl implements LogicClassifierStore {
     @Override
     public void stopExpressionService() {
         LookupService.shutdownIsaac();
-        LOGGER.info("System down...");
+        LOGGER.info("Shutting down Expression service...");
     }
 
     @Override

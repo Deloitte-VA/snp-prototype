@@ -12,6 +12,7 @@ import org.glassfish.jersey.server.ServerProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 import javax.servlet.ServletContext;
 import javax.validation.Validation;
@@ -26,6 +27,8 @@ import javax.ws.rs.ApplicationPath;
 public class ApplicationConfig extends ResourceConfig {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ApplicationConfig.class);
+
+    private final LogicClassifierStore logicClassifierStore;
 
     /**
      * Sets up all of the standard features.
@@ -46,7 +49,9 @@ public class ApplicationConfig extends ResourceConfig {
      * @param isForTesting if true, skips loading hk2 resources automatically and allows you to do this
      *                     via your own test framework
      */
-    public ApplicationConfig(final ServiceLocator serviceLocator, final ServletContext context, final boolean isForTesting) {
+    protected ApplicationConfig(final ServiceLocator serviceLocator,
+                                final ServletContext context,
+                                final boolean isForTesting) {
         String s = isForTesting ? "in Testing mode" : "";
         LOGGER.info("Starting MongoRestApplication {}...", s);
 
@@ -54,10 +59,10 @@ public class ApplicationConfig extends ResourceConfig {
 
         if (!isForTesting) {
             new JerseyAutoScan(serviceLocator, context).scan();
-
             // preload the LogicGraphClassifier to bootstrap the database
-            serviceLocator.getService(LogicClassifierStore.class);
-
+            logicClassifierStore = serviceLocator.getService(LogicClassifierStore.class);
+        } else {
+            logicClassifierStore = null;
         }
 
         // Register Feature allowing for Multipart file uploads
@@ -92,18 +97,16 @@ public class ApplicationConfig extends ResourceConfig {
             }
         });
     }
-    /**
-     * Create and return an application configuration, for use in starting a jersey server.
-     *
-     * @param serviceLocator the service locator that Jersey uses
-     * @param context the servlet context that allows for getting resources from the servlet container
-     * @param isForTesting if true, skips loading hk2 resources automatically and allows you to do this
-     *                     via your own test framework
-     * @return the configuration object, which can be modified further.
-     */
-    public static ResourceConfig createApp(final ServiceLocator serviceLocator, final ServletContext context, final boolean isForTesting) {
-        return new ApplicationConfig(serviceLocator, context, isForTesting);
-    }
 
+    /**
+     * Method to cleanup before shutting down.  Currently will just stop the expression
+     * service background thread.
+     */
+    @PreDestroy
+    public void destroy() {
+        if ( logicClassifierStore != null ) {
+            logicClassifierStore.stopExpressionService();
+        }
+    }
 }
 

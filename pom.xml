@@ -52,7 +52,6 @@
         <newtons-cradle.version>1.18</newtons-cradle.version>
         <query.version>2.13</query.version>
         <logic.version>1.13</logic.version>
-        <vha-isaac-logic.version>1.13</vha-isaac-logic.version>
 
         <!-- External versions -->
         <jackson.version>2.5.0</jackson.version>
@@ -61,13 +60,12 @@
         <mongo.driver.version>3.0.0</mongo.driver.version>
         <junit.version>4.12</junit.version>
         <mockito.version>1.10.8</mockito.version>
-        <hk2.version>2.4.0-b10</hk2.version>
+        <hk2.version>2.4.0-b26</hk2.version>
         <guava.version>18.0</guava.version>
         <jax-ws.version>2.0</jax-ws.version>
-        <jersey.version>2.17</jersey.version>
+        <jersey.version>2.18</jersey.version>
         <jersey-json.version>1.19</jersey-json.version>
         <testng.version>6.8.21</testng.version>
-        <hk2testing.version>2.4.0-b11</hk2testing.version>
         <jackson-jaxrs-json-provider.version>2.5.1</jackson-jaxrs-json-provider.version>
         <commons-io.version>2.4</commons-io.version>
         <jaxb.version>0.12.3</jaxb.version>
@@ -140,12 +138,6 @@
             </dependency>
 
             <dependency>
-                <groupId>${project.groupId}</groupId>
-                <artifactId>classifier</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-
-            <dependency>
                 <groupId>ch.qos.logback</groupId>
                 <artifactId>logback-classic</artifactId>
                 <version>${logback.version}</version>
@@ -155,7 +147,7 @@
             <dependency>
                 <groupId>gov.vha.isaac.logic.modules</groupId>
                 <artifactId>logic</artifactId>
-                <version>${vha-isaac-logic.version}</version>
+                <version>${logic.version}</version>
                 <exclusions>
                     <exclusion>
                         <groupId>org.glassfish.jersey.media</groupId>
@@ -202,12 +194,6 @@
                 <version>${query.version}</version>
             </dependency>
 
-            <dependency>
-                <groupId>gov.vha.isaac.logic.modules</groupId>
-                <artifactId>logic</artifactId>
-                <version>${vha-isaac-logic.version}</version>
-            </dependency>
-
             <!-- external dependencies -->
             <dependency>
                 <groupId>org.mongodb</groupId>
@@ -218,6 +204,12 @@
             <dependency>
                 <groupId>org.glassfish.hk2</groupId>
                 <artifactId>hk2</artifactId>
+                <version>${hk2.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.glassfish.hk2</groupId>
+                <artifactId>hk2-extras</artifactId>
                 <version>${hk2.version}</version>
             </dependency>
 
@@ -337,13 +329,6 @@
     			<artifactId>underscore</artifactId>
     			<version>${underscore.version}</version>
 			</dependency>
-	
-            <!-- When you need to bind to the console -->
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-simple</artifactId>
-                <version>${slf4j.version}</version>
-            </dependency>
 
             <!-- Testing dependencies -->
             <dependency>
@@ -367,7 +352,25 @@
             <dependency>
                 <groupId>org.glassfish.hk2</groupId>
                 <artifactId>hk2-testng</artifactId>
-                <version>${hk2testing.version}</version>
+                <version>${hk2.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.glassfish.hk2</groupId>
+                <artifactId>hk2-api</artifactId>
+                <version>${hk2.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.glassfish.hk2</groupId>
+                <artifactId>hk2-locator</artifactId>
+                <version>${hk2.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.glassfish.hk2</groupId>
+                <artifactId>hk2-locator-extras</artifactId>
+                <version>${hk2.version}</version>
             </dependency>
 
         </dependencies>
@@ -391,13 +394,7 @@
             <artifactId>slf4j-api</artifactId>
         </dependency>
 
-
         <!-- Testing dependencies for all projects -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-simple</artifactId>
-            <scope>test</scope>
-        </dependency>
 
         <dependency>
             <groupId>org.testng</groupId>
@@ -628,13 +625,6 @@
     </build>
 
     <profiles>
-        <profile>
-            <id>integrationTests</id>
-            <modules>
-                <module>integration</module>
-            </modules>
-        </profile>
-
         <!--
         This profile will sign the JAR file, sources file, and javadocs file using the GPG key on the local machine.
         See: https://docs.sonatype.org/display/Repository/How+To+Generate+PGP+Signatures+With+Maven
