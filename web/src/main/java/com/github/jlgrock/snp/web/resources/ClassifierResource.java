@@ -1,8 +1,7 @@
 package com.github.jlgrock.snp.web.resources;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -22,9 +21,7 @@ import org.glassfish.jersey.media.multipart.FormDataMultiPart;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.jlgrock.snp.apis.web.ProcessingServiceFactory;
 import com.github.jlgrock.snp.domain.types.Gender;
@@ -141,7 +138,8 @@ public class ClassifierResource {
 			map = mapper.readValue(json, new TypeReference<HashMap<String,String>>(){});
 			String value = map.get("value");
 			LOGGER.debug("value: {}", value);
-			Set<Patient> patients = classifierQueryServiceImpl.executeKindOfQuery(value);
+			//Set<Patient> patients = classifierQueryServiceImpl.executeKindOfQuery(value);
+			Set<Patient> patients = getPatients();
 			LOGGER.debug("patients: {}", patients);
 			response = Response.status(200)
 					.entity(patients)
@@ -155,6 +153,21 @@ public class ClassifierResource {
 		return response;
 	}
 	
+    public Set<Patient> getPatients() {
+    	Set<Patient> patients = new HashSet<>();
+    	Patient patient = new Patient();
+    	patient.setFirstName("John");
+    	patient.setLastName("Doe");
+    	patient.setGender(Gender.MALE);
+    	patients.add(patient);
+    	
+    	patient = new Patient();
+    	patient.setFirstName("Jane");
+    	patient.setLastName("Doe");
+    	patients.add(patient);
+    	
+    	return patients;
+    }
     /**
      * Process the file, using the processingService.  If either parameter is null, the file load is aborted and
      * message is logged.

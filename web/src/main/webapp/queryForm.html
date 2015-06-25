@@ -10,17 +10,27 @@
 			<form ng-submit="processForm()" class="form-horizontal" role="form">
 				<div class="col-md-12">
 					<div class="form-group row">
-						<label class="control-label col-md-1" for="key">Key:</label>
+						<label class="control-label col-md-1" for="observation">Observation:</label>
 						<div class="col-md-3">
-							<input type="text" name="key" class="form-control" ng-model="formData.key">
+							<input type="text" name="observation" class="form-control" ng-model="formData.observation">
 						</div>
+					</div>
+					<div class="form-group row">
+						<label class="control-label col-md-1" for="provenance">Provenance:</label>
+						<div class="col-md-3">
+							<input type="text" name="value" class="form-control" ng-model="formData.provenance">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="control-label col-md-1" for="timing">Timing:</label>
+						<div class="col-md-3">
+							<input type="text" name="value" class="form-control" ng-model="formData.timing">
+						</div>
+					</div>
+					<div class="form-group row">
 						<label class="control-label col-md-1" for="value">Value:</label>
 						<div class="col-md-3">
 							<input type="text" name="value" class="form-control" ng-model="formData.value">
-						</div>
-						<label class="control-label col-md-1" for="type">Type:</label>
-						<div class="col-md-3">
-							<select type="text" name="type" class="form-control" ng-options="type for type in types" ng-model="formData.bsonType"></select>
 						</div>
 					</div>
 				</div>

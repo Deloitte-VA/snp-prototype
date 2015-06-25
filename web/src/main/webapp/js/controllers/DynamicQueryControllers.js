@@ -7,8 +7,10 @@ app.controller('DynamicQueryController', ['$scope', 'dynamicQueryFactory',
     // create a blank object to hold our form information
 	// $scope will allow this to pass between controller and view
     $scope.formData = {};
-    $scope.formData.key = 'sctid';
-    $scope.formData.value = 131148009;
+    $scope.formData.observation = null;
+    $scope.formData.provenance = null;
+    $scope.formData.timing = null;
+    $scope.formData.value = null;
     $scope.patients = {};	
 	$scope.types = 
 	[
