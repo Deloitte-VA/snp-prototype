@@ -36,6 +36,7 @@ public class ClassifierQueryServiceImpl {
      * @param encounterRepositoryIn the encounter repository, for executing encounter queries against
      * @param patientRepositoryIn the patient repository, for executing patient queries against
      */
+    @Inject
     public ClassifierQueryServiceImpl(final LogicGraphClassifierQuery logicGraphClassifierQueryIn,
                                       final EncounterRepository encounterRepositoryIn,
                                       final PatientRepository patientRepositoryIn) {
