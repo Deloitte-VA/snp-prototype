@@ -43,7 +43,7 @@ public class PatientController {
      * @param repositoryIn the repository to get patients from
      */
     @Inject
-    public PatientController(@Named("patientRepository") final PatientRepository repositoryIn,
+    public PatientController(final PatientRepository repositoryIn,
     		final ClassifierQueryServiceImpl classifierQueryServiceIn) {
         patientRepository = repositoryIn;
         classifierQueryService = classifierQueryServiceIn;

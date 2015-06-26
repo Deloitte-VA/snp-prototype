@@ -73,6 +73,22 @@ public class PatientControllerTest extends GenericControllerTest {
                 }).to(PatientRepository.class).ranked(DEFAULT_HK2_TEST_BIND_RANK);
             }
         });
+        application.register(new AbstractBinder() {
+        	@Override
+        	protected void configure() {
+        		bindFactory(new Factory<ClassifierQueryServiceImpl>() {
+        			@Override
+        			public ClassifierQueryServiceImpl provide() {
+        				return classifierQuerySvc;
+        			}
+        			
+        			@Override
+        			public void dispose(ClassifierQueryServiceImpl instance) {
+        				
+        			}
+				}).to(ClassifierQueryServiceImpl.class).ranked(DEFAULT_HK2_TEST_BIND_RANK);
+        	}
+        });
     }
 
     @Override
