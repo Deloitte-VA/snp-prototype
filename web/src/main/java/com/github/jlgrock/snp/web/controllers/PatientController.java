@@ -18,6 +18,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -57,7 +58,7 @@ public class PatientController {
     @Path("/{id}")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Patient getPatient(@PathParam("id") final Long id) {
-        LOGGER.debug("getting Patient");
+        LOGGER.trace("getting Patient");
         return patientRepository.findOneById(id);
     }
     
@@ -68,14 +69,32 @@ public class PatientController {
     @GET @Path("/search")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getSearch(@BeanParam QueryParamBean beanParam) {
-    	LOGGER.debug("searching Patient");
+    	LOGGER.trace("searching Patient");
     	LOGGER.debug("Bean param: " + beanParam);
     	
     	QueryParamParser queryHandler = new QueryParamParser();
     	queryHandler.handleRequest(beanParam);
     	
     	String obs = queryHandler.getFilter().get("observation");
-    	Integer nid = Integer.parseInt(obs);
+    	if (obs == null) {
+    		String errMsg = "Missing 'observation' argument";
+    		LOGGER.error(errMsg);
+    		SuccessResponse response = new SuccessResponse(ResponseStatusCode.INVALID_REQUEST, 
+    				null, errMsg);
+    		return Response.status(Status.BAD_REQUEST).entity(response).build();
+    	}
+    	
+    	Integer nid;
+    	try {
+    		nid = Integer.parseInt(obs);
+    	}
+    	catch (NumberFormatException e) {
+    		String errMsg = "Unable to parse 'observation' argument: " + obs;
+    		LOGGER.error(errMsg, e);
+    		SuccessResponse response = new SuccessResponse(ResponseStatusCode.INVALID_REQUEST, 
+    				null, errMsg);
+    		return Response.status(Status.BAD_REQUEST).entity(response).build();
+    	}
     	
     	Set<Patient> patients = classifierQueryService.findPatientsByNids(new ArrayList<Integer>(){{add(nid);}});
     	

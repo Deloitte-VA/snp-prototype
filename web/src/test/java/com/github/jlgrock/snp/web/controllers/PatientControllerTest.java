@@ -145,11 +145,11 @@ public class PatientControllerTest extends GenericControllerTest {
     @Test
     public void testGetPatientSearch() throws IOException {
     	final WebTarget target = target().path(RESOURCE_URI + "/search")
-    			.queryParam("filter", "testf").queryParam("sort", "ASC").queryParam("fields", "1,2");
+    			.queryParam("filter", "observation=234").queryParam("sort", "1:ASC").queryParam("fields", "1,2");
     	final Response response = target.request(MediaType.APPLICATION_JSON_TYPE).get();
     	
     	LOGGER.debug("Patient search response: " + CharStreams.toString(new InputStreamReader((InputStream) response.getEntity())));
-//    	Assert.assertEquals(response.getStatus(), Response.Status.OK.getStatusCode());
+    	Assert.assertEquals(response.getStatus(), Response.Status.OK.getStatusCode());
     }
     
 //    @Test

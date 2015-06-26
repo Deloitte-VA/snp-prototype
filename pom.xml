@@ -60,7 +60,7 @@
         <mongo.driver.version>3.0.0</mongo.driver.version>
         <junit.version>4.12</junit.version>
         <mockito.version>1.10.8</mockito.version>
-        <hk2.version>2.4.0-b26</hk2.version>
+        <hk2.version>2.4.0-b16</hk2.version>
         <guava.version>18.0</guava.version>
         <jax-ws.version>2.0</jax-ws.version>
         <jersey.version>2.18</jersey.version>
