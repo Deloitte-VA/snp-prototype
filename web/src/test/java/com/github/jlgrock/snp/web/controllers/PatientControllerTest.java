@@ -29,6 +29,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.github.jlgrock.snp.domain.data.PatientRepository;
 import com.github.jlgrock.snp.domain.types.Gender;
 import com.github.jlgrock.snp.domain.types.Patient;
+import com.github.jlgrock.snp.web.services.ClassifierQueryServiceImpl;
 //import com.github.jlgrock.snp.domain.types.Race;
 import com.google.common.io.CharStreams;
 
@@ -48,6 +49,9 @@ public class PatientControllerTest extends GenericControllerTest {
 
 	@Mock
 	PatientRepository patientRepository;
+	
+	@Mock
+	ClassifierQueryServiceImpl classifierQuerySvc;
 	
 	private PatientController patientController;
 
@@ -81,7 +85,7 @@ public class PatientControllerTest extends GenericControllerTest {
     @Test
     public void testGetPatient() {
     	Mockito.when(patientRepository.findOneById(patient.getId())).thenReturn(patient);
-        patientController = new PatientController(patientRepository);
+        patientController = new PatientController(patientRepository, classifierQuerySvc);
     	Patient actual = patientController.getPatient(patient.getId());
 
     	assertEquals(actual, patient);

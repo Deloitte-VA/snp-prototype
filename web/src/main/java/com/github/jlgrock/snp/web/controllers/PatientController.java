@@ -1,7 +1,11 @@
 package com.github.jlgrock.snp.web.controllers;
 
+import java.util.ArrayList;
+import java.util.Set;
+
 import com.github.jlgrock.snp.domain.data.PatientRepository;
 import com.github.jlgrock.snp.domain.types.Patient;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,8 +23,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.github.jlgrock.snp.web.resources.query.QueryParamBean;
+import com.github.jlgrock.snp.web.resources.query.QueryParamHandler;
+import com.github.jlgrock.snp.web.resources.query.QueryParamParser;
 import com.github.jlgrock.snp.web.resources.response.ResponseStatusCode;
 import com.github.jlgrock.snp.web.resources.response.SuccessResponse;
+import com.github.jlgrock.snp.web.services.ClassifierQueryServiceImpl;
 
 /**
  * The Controller serving up domain objects for Patient objectsØ.
@@ -30,13 +37,16 @@ public class PatientController {
     private static final Logger LOGGER = LoggerFactory.getLogger(PatientController.class);
 
     private PatientRepository patientRepository;
+    private ClassifierQueryServiceImpl classifierQueryService;
 
     /**
      * @param repositoryIn the repository to get patients from
      */
     @Inject
-    public PatientController(@Named("patientRepository") final PatientRepository repositoryIn) {
+    public PatientController(@Named("patientRepository") final PatientRepository repositoryIn,
+    		final ClassifierQueryServiceImpl classifierQueryServiceIn) {
         patientRepository = repositoryIn;
+        classifierQueryService = classifierQueryServiceIn;
     }
 
     /** 
@@ -59,7 +69,16 @@ public class PatientController {
     public Response getSearch(@BeanParam QueryParamBean beanParam) {
     	LOGGER.debug("searching Patient");
     	LOGGER.debug("Bean param: " + beanParam);
-    	SuccessResponse response = new SuccessResponse(ResponseStatusCode.OK, "Sample Result");
+    	
+    	QueryParamParser queryHandler = new QueryParamParser();
+    	queryHandler.handleRequest(beanParam);
+    	
+    	String obs = queryHandler.getFilter().get("observation");
+    	Integer nid = Integer.parseInt(obs);
+    	
+    	Set<Patient> patients = classifierQueryService.findPatientsByNids(new ArrayList<Integer>(){{add(nid);}});
+    	
+    	SuccessResponse response = new SuccessResponse(ResponseStatusCode.OK, patients);
     	return Response.ok().entity(response).build();
     }
 }

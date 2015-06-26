@@ -14,8 +14,19 @@ public class QueryParamParser implements QueryParamHandler {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(QueryParamParser.class);
 	
+	private Map<String, QuerySortDirection> sort;
+
+	private int offset;
+
+	private int limit;
+
+	private List<String> fields;
+
+	private Map<String, String> filter;
+	
 	@Override
-	public void handleRquest(QueryParamBean query) {
+	public void handleRequest(QueryParamBean query) {
+		// parse and store results
 		parseQuery(query);
 
 	}
@@ -208,11 +219,32 @@ public class QueryParamParser implements QueryParamHandler {
 		List<String> limitList = query.getUriInfo().getQueryParameters().get(QueryConstants.LIMIT_PARAM);
 		List<String> fieldsList = query.getUriInfo().getQueryParameters().get(QueryConstants.FIELDS_PARAM);
 		
-//		TODO: store results
-//		sort = parseSort(sortList);
-//		offset = parseOffset(offsetList);
-//		limit = parseLimit(limitList);
-//		fields = parseFields(fieldsList);
+		// parse and store results
+		sort = parseSort(sortList);
+		offset = parseOffset(offsetList);
+		limit = parseLimit(limitList);
+		fields = parseFields(fieldsList);
+		filter = parseFilter(filterList);
+	}
+
+	public Map<String, QuerySortDirection> getSort() {
+		return sort;
+	}
+
+	public int getOffset() {
+		return offset;
+	}
+
+	public int getLimit() {
+		return limit;
+	}
+
+	public List<String> getFields() {
+		return fields;
+	}
+
+	public Map<String, String> getFilter() {
+		return filter;
 	}
 
 }

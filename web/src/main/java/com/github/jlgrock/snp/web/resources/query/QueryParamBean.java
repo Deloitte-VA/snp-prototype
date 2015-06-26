@@ -25,6 +25,17 @@ public class QueryParamBean {
 	
 	private UriInfo info;
 	
+//	@QueryParam("filter")
+//	private String filter;
+	
+//	private Map<String, QuerySortDirection> sort;
+	
+//	private List<String> fields;
+	
+//	private int limit;
+	
+//	private int offset;
+	
 	public QueryParamBean(@Context UriInfo infoIn) {
 		info = infoIn;
 	}
@@ -32,9 +43,34 @@ public class QueryParamBean {
 	public UriInfo getUriInfo() {
 		return info;
 	}
+	
+//	public String getFilter() {
+//		return filter;
+//	}
+//
+//	public Map<String, QuerySortDirection> getSort() {
+//		return sort;
+//	}
+//
+//	public List<String> getFields() {
+//		return fields;
+//	}
+//	
+//	public int getLimit() {
+//		return limit;
+//	}
+//	
+//	public int getOffset() {
+//		return offset;
+//	}
+	
+	public boolean isValid() {
+		return true;
+	}
 
 	@Override
 	public String toString() {
 		return MoreObjects.toStringHelper(QueryParamBean.class).add("info", info.getRequestUri()).toString();
 	}
+	
 }
