@@ -34,7 +34,7 @@ public class FhirProcessingService implements ProcessingService {
     }
 
     @Override
-    public void processInput(final String input) {
+    public void processInput(final String input, final String identifier) {
         LOGGER.trace("Processing Input for fhir...");
         Object unmarshalledObject = null;
         try {
@@ -49,7 +49,7 @@ public class FhirProcessingService implements ProcessingService {
             } catch (ClassifierException ce) {
                 //TODO
             }
-            legoElementClassifierService.process();
+            legoElementClassifierService.process(identifier);
         }
     }
 

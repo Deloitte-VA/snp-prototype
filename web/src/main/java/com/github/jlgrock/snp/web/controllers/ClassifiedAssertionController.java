@@ -37,7 +37,7 @@ public class ClassifiedAssertionController {
      * @return Returns a Assertion
      */
     @GET @Path("/{id}")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public ClassifiedPce getAssertion(@PathParam("id") final Long id) {
         LOGGER.debug("getting Assertion");
         return repository.findOneById(id);

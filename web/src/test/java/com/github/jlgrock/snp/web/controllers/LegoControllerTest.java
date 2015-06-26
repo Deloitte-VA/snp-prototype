@@ -14,6 +14,7 @@ import java.io.InputStreamReader;
 public class LegoControllerTest extends GenericControllerTest {
     private static final Logger LOGGER = LoggerFactory.getLogger(LegoControllerTest.class);
 
+
 //    WebConfiguration webconfiguration = new WebConfiguration() {
 //        @Override
 //        public Path fileLocation() {
@@ -25,9 +26,14 @@ public class LegoControllerTest extends GenericControllerTest {
 //    private MultiPartFileUtils multiPartFileUtils;
 
 
-//    @Mock
+    //    @Mock
 //    Path path;
 //
+    @Override
+    protected Class getClassToTest() {
+        return MultipartFileUtilsImpl.class;
+    }
+
     @Override
     public void registerInjectionPoints(final ResourceConfig application) {
         // register the injection points in HK2
@@ -133,33 +139,34 @@ public class LegoControllerTest extends GenericControllerTest {
     	Assert.assertEquals(response.getStatus(), Response.Status.OK.getStatusCode());
     }*/
 
-	/**
-	 * Prints the string content read from input stream
-	 * @return content in file
-	 */
-	private String readFile(String xmlFile) {
-		BufferedReader br = null;
-		StringBuilder out = new StringBuilder();
-		try {
-			InputStream in = getClass().getClassLoader().getResourceAsStream(xmlFile);
-	        BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-	        String line;
-	        while ((line = reader.readLine()) != null) {
-	        	if(!"<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>".equals(line.trim())) {
-	        		out.append(line.trim());
-	        	}
-	        }
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (br != null) {
-					br.close();
-				}
-			} catch (IOException ex) {
-				ex.printStackTrace();
-			}
-		}
-		 return out.toString();
-	}
+    /**
+     * Prints the string content read from input stream
+     *
+     * @return content in file
+     */
+    private String readFile(String xmlFile) {
+        BufferedReader br = null;
+        StringBuilder out = new StringBuilder();
+        try {
+            InputStream in = getClass().getClassLoader().getResourceAsStream(xmlFile);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                if (!"<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>".equals(line.trim())) {
+                    out.append(line.trim());
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (br != null) {
+                    br.close();
+                }
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+        return out.toString();
+    }
 }

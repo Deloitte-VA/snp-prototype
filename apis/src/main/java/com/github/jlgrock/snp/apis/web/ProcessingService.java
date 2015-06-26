@@ -11,8 +11,9 @@ public interface ProcessingService {
      * Process a string of characters.  It will only be asked to process input that
      * matches the media type string provided in the {@link #getMediaTypeString()} method
      * @param input the XML input
+     * @param identifier the unique identifier - this is required by some input types as the id is not defined in the
      */
-    void processInput(final String input);
+    void processInput(final String input, final String identifier);
 
     /**
      * @return the media types/mime-type that this process is applicable for.

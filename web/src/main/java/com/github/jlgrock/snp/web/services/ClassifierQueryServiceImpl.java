@@ -84,7 +84,8 @@ public class ClassifierQueryServiceImpl {
                 .boxed()
                 .collect(Collectors.toList());
     }
-    private Set<Patient> findPatientsByNids(final List<Integer> nids) {
+    
+    public Set<Patient> findPatientsByNids(final List<Integer> nids) {
         // Convert the int list to a long list
         List<Long> longNids = nids
                 .stream()

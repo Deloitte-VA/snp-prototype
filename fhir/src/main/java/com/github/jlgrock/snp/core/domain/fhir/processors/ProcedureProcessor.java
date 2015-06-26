@@ -2,7 +2,6 @@ package com.github.jlgrock.snp.core.domain.fhir.processors;
 
 import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
 import com.github.jlgrock.snp.core.domain.fhir.model.Procedure;
-import gov.vha.isaac.logic.LogicGraph;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,13 +20,8 @@ public class ProcedureProcessor extends AbstractFhirProcessor {
         procedure = procedureIn;
     }
 
-    @Override
-    protected LogicGraph getLogicGraph() {
-        throw new UnsupportedOperationException();
-    }
-
 	@Override
-	public void process() {
+	public void process(final String identifier) {
         LOGGER.trace("processing procedure into observation");
 		throw new UnsupportedOperationException();
 		
