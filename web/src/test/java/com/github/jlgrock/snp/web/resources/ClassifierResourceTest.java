@@ -1,33 +1,13 @@
 package com.github.jlgrock.snp.web.resources;
 
+import com.github.jlgrock.snp.web.controllers.GenericControllerTest;
+import org.glassfish.jersey.server.ResourceConfig;
+import org.jvnet.testing.hk2testng.HK2;
+
 import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-
-import javax.ws.rs.client.Entity;
-import javax.ws.rs.client.WebTarget;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-
-import org.glassfish.hk2.api.Factory;
-import org.glassfish.hk2.api.TypeLiteral;
-import org.glassfish.hk2.utilities.binding.AbstractBinder;
-import org.glassfish.jersey.media.multipart.FormDataBodyPart;
-import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
-import org.glassfish.jersey.media.multipart.FormDataMultiPart;
-import org.glassfish.jersey.server.ResourceConfig;
-import org.jvnet.testing.hk2testng.HK2;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
-import com.github.jlgrock.snp.core.domain.fhir.model.Condition;
-import com.github.jlgrock.snp.core.domain.lego.model.Lego;
-import com.github.jlgrock.snp.web.controllers.GenericControllerTest;
 //import com.github.jlgrock.snp.web.services.PceClassifierService;
 
 @HK2(populate = false)
@@ -41,6 +21,11 @@ public class ClassifierResourceTest extends GenericControllerTest {
 //	@Mock
 //	PceClassifierService<Condition> pceClssfrSvcFhir;
 //	
+	@Override
+	protected Class getClassToTest() {
+		return ClassifierResource.class;
+	}
+
 	@Override
 	protected void registerInjectionPoints(ResourceConfig application) {
 //		application.registerInstances(new AbstractBinder() {

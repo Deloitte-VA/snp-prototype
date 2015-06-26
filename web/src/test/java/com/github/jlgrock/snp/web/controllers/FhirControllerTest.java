@@ -29,6 +29,11 @@ public class FhirControllerTest extends GenericControllerTest {
 //    Path path;
 //
     @Override
+    protected Class getClassToTest() {
+        return MultipartFileUtilsImpl.class;
+    }
+
+    @Override
     public void registerInjectionPoints(final ResourceConfig application) {
         // register the injection points in HK2
 //        LOGGER.debug("webconfiguration = " + webconfiguration);

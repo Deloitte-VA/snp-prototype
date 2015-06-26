@@ -53,8 +53,9 @@ public class PatientController {
      * @param id used to find encounter
      * @return single encounter that corresponds to id
      */
-    @GET @Path("/{id}")
-    @Produces(MediaType.APPLICATION_JSON)
+    @GET
+    @Path("/{id}")
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Patient getPatient(@PathParam("id") final Long id) {
         LOGGER.debug("getting Patient");
         return patientRepository.findOneById(id);

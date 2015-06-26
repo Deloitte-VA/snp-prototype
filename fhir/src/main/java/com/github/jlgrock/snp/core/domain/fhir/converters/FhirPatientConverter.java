@@ -39,8 +39,7 @@ public class FhirPatientConverter
 		patientOut.setDateOfBirth(convertDateTimeToLocalDate(source.getBirthDate()));
 		patientOut.setDeceased(source.getDeceasedBoolean().isValue());
 		patientOut.setDateDeceased(convertDateTimeToLocalDate(source.getDeceasedDateTime()));
-		// FIX need to have a valid fhir id
-        //patientOut.setFhirId(source.getSubject);
+
 		return patientOut;
 	}
 	

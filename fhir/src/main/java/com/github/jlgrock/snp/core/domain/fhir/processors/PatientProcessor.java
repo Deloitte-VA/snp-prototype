@@ -4,7 +4,6 @@ import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
 import com.github.jlgrock.snp.core.domain.fhir.converters.FhirPatientConverter;
 import com.github.jlgrock.snp.core.domain.fhir.model.Patient;
 import com.github.jlgrock.snp.domain.data.PatientRepository;
-import gov.vha.isaac.logic.LogicGraph;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,15 +26,11 @@ public class PatientProcessor extends AbstractFhirProcessor {
         patientRepo = patientRepositoryIn;
     }
 
-    @Override
-    protected LogicGraph getLogicGraph() {
-        throw new UnsupportedOperationException();
-    }
-
 	@Override
-	public void process() {
+	public void process(final String identifier) {
         LOGGER.trace("Processing Patient {}", patient);
 		com.github.jlgrock.snp.domain.types.Patient patientOut = fhirPatientConverter.convert(patient);
+        patientOut.setFhirId(identifier);
 		patientRepo.save(patientOut);
 	}
 }

@@ -2,7 +2,6 @@ package com.github.jlgrock.snp.core.domain.fhir.processors;
 
 import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
 import com.github.jlgrock.snp.core.domain.fhir.model.CarePlan;
-import gov.vha.isaac.logic.LogicGraph;
 
 /**
  *
@@ -16,13 +15,8 @@ public class CarePlanProcessor extends AbstractFhirProcessor {
         carePlan = carePlanIn;
     }
 
-    @Override
-    protected LogicGraph getLogicGraph() {
-        throw new UnsupportedOperationException();
-    }
-
 	@Override
-	public void process() {
+	public void process(final String identifier) {
 		throw new UnsupportedOperationException();
 		
 	}

@@ -2,11 +2,9 @@ package com.github.jlgrock.snp.core.domain.fhir.processors;
 
 import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
 import com.github.jlgrock.snp.core.domain.fhir.converters.FhirEncounterConverter;
-import com.github.jlgrock.snp.core.domain.fhir.logicgraph.FhirEncounterGraphBuilder;
 import com.github.jlgrock.snp.core.domain.fhir.model.Encounter;
 import com.github.jlgrock.snp.domain.data.EncounterRepository;
 import com.github.jlgrock.snp.domain.data.PatientRepository;
-import gov.vha.isaac.logic.LogicGraph;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,15 +32,8 @@ public class EncounterProcessor extends AbstractFhirProcessor {
         patientRepository = patientRepositoryIn;
     }
 
-    @Override
-    protected LogicGraph getLogicGraph() {
-        FhirEncounterGraphBuilder fhirEncounterGraphBuilder = new FhirEncounterGraphBuilder(getLogicGraphClassifier(), encounter);
-        LogicGraph logicGraph = fhirEncounterGraphBuilder.build();
-        return logicGraph;
-    }
-
 	@Override
-	public void process() {
+	public void process(final String identifier) {
         LOGGER.trace("Processing Encounter {}", encounter);
         com.github.jlgrock.snp.domain.types.Encounter saveVal = fhirEncounterConverter.convert(encounter);
         // TODO see if patient exists and create it if it doesn't
@@ -52,5 +43,9 @@ public class EncounterProcessor extends AbstractFhirProcessor {
         //patientRepository.findOneByFhirId();
         // save the patient if it doesn't exists
         encounterRepository.save(saveVal);
+
+//        FhirEncounterGraphBuilder fhirEncounterGraphBuilder = new FhirEncounterGraphBuilder(getLogicGraphClassifier(), encounter);
+//        LogicGraph logicGraph = fhirEncounterGraphBuilder.build();
+//        return logicGraph;
 	}
 }
