@@ -29,8 +29,13 @@ public class LegoProcessingService implements ProcessingService {
         legoElementProcessorFactory = legoElementProcessorFactoryIn;
     }
 
+    /**
+     * @{@inheritDoc}
+     *
+     * This ignores the identifier parameter
+     */
     @Override
-    public void processInput(final String input) {
+    public void processInput(final String input, final String identifier) {
         Object unmarshalledObject = null;
         try {
             unmarshalledObject = legoMarshallerService.unmarshall(input);

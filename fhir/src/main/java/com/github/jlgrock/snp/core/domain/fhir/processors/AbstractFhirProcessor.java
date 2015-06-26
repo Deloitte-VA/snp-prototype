@@ -1,7 +1,6 @@
 package com.github.jlgrock.snp.core.domain.fhir.processors;
 
 import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
-import gov.vha.isaac.logic.LogicGraph;
 
 /**
  *
@@ -19,7 +18,6 @@ public abstract class AbstractFhirProcessor implements FhirElementProcessorServi
     }
 
     @Override
-    public abstract void process();
+    public abstract void process(final String identifier);
 
-    protected abstract LogicGraph getLogicGraph();
 }
