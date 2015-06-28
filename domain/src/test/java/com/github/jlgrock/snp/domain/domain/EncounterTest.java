@@ -121,7 +121,7 @@ public class EncounterTest {
 		en1.setStatus(status1);
 		en1.setSubject(subject1);
 		
-		assertEquals(en1.toString(), "Encounter{id=201521, subject=Patient/f203, encounterClass=OUTPATIENT, status=FINISHED, participant=Practitioner/f201, patientId=123, observations=null}");
+		assertEquals(en1.toString(), "Encounter{id=201521, subject=Patient/f203, encounterClass=OUTPATIENT, status=FINISHED, participant=Practitioner/f201, patientId=123, observations=null, fhirId=null}");
 	}
 
 }

@@ -19,6 +19,15 @@ public class Observation {
 
     private String identifier;
     private String subject;
+    private String fhirId;
+
+    public String getFhirId() {
+        return fhirId;
+    }
+
+    public void setFhirId(String fhirId) {
+        this.fhirId = fhirId;
+    }
 
     public SimplePrimitive getName() {
         return name;
@@ -84,6 +93,7 @@ public class Observation {
                 Objects.equal(applies, that.applies) &&
                 Objects.equal(issued, that.issued) &&
                 Objects.equal(identifier, that.identifier) &&
+                Objects.equal(fhirId, that.fhirId) &&
                 Objects.equal(subject, that.subject);
     }
 
@@ -101,6 +111,7 @@ public class Observation {
                 .add("issued", issued)
                 .add("identifier", identifier)
                 .add("subject", subject)
+                .add("fhirId", fhirId)
                 .toString();
     }
 }

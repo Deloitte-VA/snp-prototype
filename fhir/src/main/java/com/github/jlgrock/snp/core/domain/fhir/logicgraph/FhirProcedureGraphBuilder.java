@@ -35,6 +35,7 @@ public class FhirProcedureGraphBuilder extends AbstractFhirLogicGraphBuilder {
     }
 
     protected And processProcedure(final Procedure procedure) {
+        //TODO this should be transferred to the Procedure processor
         LOGGER.trace("Creating Fhir Procedure Logic Graph");
         List<And> childrenNodes = new ArrayList<>();
 

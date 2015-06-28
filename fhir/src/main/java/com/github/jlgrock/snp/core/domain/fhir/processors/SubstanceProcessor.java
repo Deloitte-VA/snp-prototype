@@ -2,22 +2,27 @@ package com.github.jlgrock.snp.core.domain.fhir.processors;
 
 import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
 import com.github.jlgrock.snp.core.domain.fhir.model.Substance;
+import org.jvnet.hk2.annotations.Service;
 
-/**
- *
- */
+import javax.inject.Inject;
+
+@Service
 public class SubstanceProcessor extends AbstractFhirProcessor {
 
-    private final Substance substance;
-
-    public SubstanceProcessor(final LogicGraphClassifier logicGraphClassifierIn, final Substance substanceIn) {
+    @Inject
+    public SubstanceProcessor(final LogicGraphClassifier logicGraphClassifierIn) {
         super(logicGraphClassifierIn);
-        substance = substanceIn;
     }
 
 	@Override
-	public void process(final String identifier) {
+	public void process(final String identifier, final Object unmarshalledObject) {
+        Substance substance = (Substance) unmarshalledObject;
 		throw new UnsupportedOperationException();
 		
 	}
+
+    @Override
+    public Class processesType() {
+        return Substance.class;
+    }
 }

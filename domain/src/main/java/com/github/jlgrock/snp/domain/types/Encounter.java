@@ -20,6 +20,8 @@ public class Encounter extends AbstractMongoDomainObject {
 
     private String participant;
 
+    private String fhirId;
+
     @NotNull
     private Long patientId;
 
@@ -35,6 +37,7 @@ public class Encounter extends AbstractMongoDomainObject {
                 .add("participant", participant)
                 .add("patientId", patientId)
                 .add("observations", observations)
+                .add("fhirId", fhirId)
                 .toString();
     }
 
@@ -52,13 +55,22 @@ public class Encounter extends AbstractMongoDomainObject {
             return false;
         }
         final Encounter other = (Encounter) obj;
-        return Objects.equals(this.getId(), other.getId())
-                && Objects.equals(this.subject, other.subject)
-                && Objects.equals(this.encounterClass, other.encounterClass)
-                && Objects.equals(this.status, other.status)
-                && Objects.equals(this.participant, other.participant)
-                && Objects.equals(this.patientId, other.patientId)
-                && Objects.equals(this.observations, other.observations);
+        return Objects.equals(getId(), other.getId())
+                && Objects.equals(subject, other.subject)
+                && Objects.equals(encounterClass, other.encounterClass)
+                && Objects.equals(status, other.status)
+                && Objects.equals(participant, other.participant)
+                && Objects.equals(patientId, other.patientId)
+                && Objects.equals(observations, other.observations)
+                && Objects.equals(fhirId, other.fhirId);
+    }
+
+    public String getFhirId() {
+        return fhirId;
+    }
+
+    public void setFhirId(String fhirId) {
+        this.fhirId = fhirId;
     }
 
     public List<Observation> getObservations() {

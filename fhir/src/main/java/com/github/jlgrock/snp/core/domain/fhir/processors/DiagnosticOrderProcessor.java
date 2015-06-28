@@ -2,23 +2,28 @@ package com.github.jlgrock.snp.core.domain.fhir.processors;
 
 import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
 import com.github.jlgrock.snp.core.domain.fhir.model.DiagnosticOrder;
+import org.jvnet.hk2.annotations.Service;
 
-/**
- *
- */
+import javax.inject.Inject;
+
+@Service
 public class DiagnosticOrderProcessor extends AbstractFhirProcessor {
 
-    private final DiagnosticOrder diagnosticOrder;
-
-    public DiagnosticOrderProcessor(final LogicGraphClassifier logicGraphClassifierIn, final DiagnosticOrder diagnosticOrderIn) {
+    @Inject
+    public DiagnosticOrderProcessor(final LogicGraphClassifier logicGraphClassifierIn) {
         super(logicGraphClassifierIn);
-        diagnosticOrder = diagnosticOrderIn;
     }
 
 	@Override
-	public void process(final String identifier) {
+	public void process(final String identifier, final Object unmarshalledObject) {
+        DiagnosticOrder diagnosticOrder = (DiagnosticOrder) unmarshalledObject;
 		throw new UnsupportedOperationException();
 		
 	}
+
+    @Override
+    public Class processesType() {
+        return DiagnosticOrder.class;
+    }
 
 }

@@ -2,22 +2,26 @@ package com.github.jlgrock.snp.core.domain.fhir.processors;
 
 import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
 import com.github.jlgrock.snp.core.domain.fhir.model.MedicationStatement;
+import org.jvnet.hk2.annotations.Service;
 
-/**
- *
- */
+import javax.inject.Inject;
+
+@Service
 public class MedicationStatementProcessor extends AbstractFhirProcessor {
 
-    private final MedicationStatement medicationStatement;
-
-    public MedicationStatementProcessor(final LogicGraphClassifier logicGraphClassifierIn, final MedicationStatement medicationStatementIn) {
+    @Inject
+    public MedicationStatementProcessor(final LogicGraphClassifier logicGraphClassifierIn) {
         super(logicGraphClassifierIn);
-        medicationStatement = medicationStatementIn;
     }
 
 	@Override
-	public void process(final String identifier) {
+	public void process(final String identifier, final Object unmarshalledObject) {
+        MedicationStatement medicationStatement = (MedicationStatement) unmarshalledObject;
 		throw new UnsupportedOperationException();
-		
 	}
+
+    @Override
+    public Class processesType() {
+        return MedicationStatement.class;
+    }
 }

@@ -1,10 +1,9 @@
 package com.github.jlgrock.snp.core.domain.fhir.logicgraph;
 
 import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
-import com.github.jlgrock.snp.core.domain.fhir.model.Coding;
+import com.github.jlgrock.snp.core.domain.fhir.model.CodeableConcept;
 import gov.vha.isaac.logic.LogicGraph;
 import gov.vha.isaac.ochre.api.logic.LogicalExpressionBuilder;
-import gov.vha.isaac.ochre.api.logic.assertions.connectors.Connector;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,21 +13,18 @@ import org.slf4j.LoggerFactory;
 public class FhirCodingGraphBuilder extends AbstractFhirLogicGraphBuilder {
     private static final Logger LOGGER = LoggerFactory.getLogger(FhirCodingGraphBuilder.class);
 
-    private final Coding coding;
+    private final CodeableConcept codeableConcept;
 
     @Override
     public LogicGraph build() {
-        Connector connector = processCoding(coding);
-        LogicalExpressionBuilder.SufficientSet(connector);
+        LOGGER.trace("building Coding Graph Builder");
+        LogicalExpressionBuilder.SufficientSet(buildCodeableConcept(codeableConcept));
         return (LogicGraph) getLogicalExpressionBuilder().build();
     }
 
-    public FhirCodingGraphBuilder(final LogicGraphClassifier logicGraphClassifierIn, final Coding codingIn) {
+    public FhirCodingGraphBuilder(final LogicGraphClassifier logicGraphClassifierIn, final CodeableConcept codeableConceptIn) {
         super(logicGraphClassifierIn);
-        coding = codingIn;
+        codeableConcept = codeableConceptIn;
     }
 
-    protected Connector processCoding(final Coding coding) {
-        throw new UnsupportedOperationException();
-    }
 }

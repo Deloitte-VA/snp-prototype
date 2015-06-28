@@ -3,22 +3,27 @@ package com.github.jlgrock.snp.core.domain.lego.processors;
 import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
 import com.github.jlgrock.snp.core.domain.lego.model.Concept;
 import com.github.jlgrock.snp.domain.data.ClassifiedPceStore;
+import org.jvnet.hk2.annotations.Service;
 
-/**
- *
- */
+import javax.inject.Inject;
+
+@Service
 public class ConceptProcessor extends AbstractLegoProcessor {
 
-    private final Concept concept;
-
-    ConceptProcessor(final LogicGraphClassifier logicGraphClassifierIn, final ClassifiedPceStore classPceStore,
-                     final Concept conceptIn) {
+    @Inject
+    ConceptProcessor(final LogicGraphClassifier logicGraphClassifierIn,
+                     final ClassifiedPceStore classPceStore) {
         super(logicGraphClassifierIn, classPceStore);
-        concept = conceptIn;
     }
 
     @Override
-    public void process() {
+    public void process(final Object unmarshalledObject) {
+        Concept concept = (Concept) unmarshalledObject;
         throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public Class processesType() {
+        return Concept.class;
     }
 }

@@ -4,6 +4,7 @@ import com.github.jlgrock.snp.apis.connection.MongoDbFactory;
 import com.github.jlgrock.snp.domain.converters.EncounterReadConverter;
 import com.github.jlgrock.snp.domain.converters.EncounterWriteConverter;
 import com.github.jlgrock.snp.domain.types.Encounter;
+import com.mongodb.client.FindIterable;
 import org.bson.Document;
 import org.jvnet.hk2.annotations.Service;
 import org.slf4j.Logger;
@@ -72,6 +73,20 @@ public class EncounterRepositoryImpl extends
         idsIn.put("$in", pceIds);
         query.put("observations.name", idsIn);
         return executeQueryAndTransformResults(query);
+    }
+
+    @Override
+    public Encounter findOneByFhirId(String fhirId) {
+        Document query = new Document();
+        query.put(EncounterTags.FHIR_ID, fhirId);
+        LOGGER.trace("findOneByID(fhirId={})", fhirId);
+        if (fhirId == null) {
+            LOGGER.error("fhirId parameter for findOneById method is null, therefore Domain Object cannot be found.");
+            return null;
+        }
+        FindIterable<Document> iterable = dBCollection().find(query).limit(1);
+        Document first = iterable.first();
+        return convertToDomainObject(first);
     }
 
     @Override

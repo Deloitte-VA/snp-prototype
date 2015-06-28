@@ -36,6 +36,12 @@ public final class EncounterTags {
     public static final String OBSERVATIONS_TAG = "observations";
 
     /**
+     * The list of observations.
+     */
+    public static final String FHIR_ID = "fhirId";
+
+
+    /**
      * Private constructor for utility class.
      */
     private EncounterTags(){

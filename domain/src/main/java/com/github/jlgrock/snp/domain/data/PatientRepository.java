@@ -46,7 +46,7 @@ public interface PatientRepository extends MongoRepository<Patient, Long> {
     List<Patient> findAllByGender(Gender gender);
 
     /**
-     *
+     * Find the unique Patient by Fhir Id
      * @param fhirId the unique identifier used in fhir
      * @return the patient matching the id
      */
