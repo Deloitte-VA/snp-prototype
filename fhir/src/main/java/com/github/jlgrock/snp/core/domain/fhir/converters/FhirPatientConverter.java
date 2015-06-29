@@ -33,12 +33,18 @@ public class FhirPatientConverter
 		if (source.getName().size() >= 2) {
 			patientOut.setMiddleName(source.getName().get(0).getGiven().get(1).getValue());
 		}
-		patientOut.setLastName(source.getName().get(0).getFamily().get(0).getValue());
-		
-		patientOut.setGender(convertGender(source.getGender().getCoding().get(0).getCode()));
+        patientOut.setLastName(source.getName().get(0).getFamily().get(0).getValue());
+
+		if (source.getGender() != null) {
+            patientOut.setGender(convertGender(source.getGender().getCoding().get(0).getCode()));
+        }
 		patientOut.setDateOfBirth(convertDateTimeToLocalDate(source.getBirthDate()));
-		patientOut.setDeceased(source.getDeceasedBoolean().isValue());
-		patientOut.setDateDeceased(convertDateTimeToLocalDate(source.getDeceasedDateTime()));
+		if (source.getDeceasedBoolean() != null) {
+            patientOut.setDeceased(source.getDeceasedBoolean().isValue());
+        }
+		if (source.getDeceasedDateTime() != null) {
+            patientOut.setDateDeceased(convertDateTimeToLocalDate(source.getDeceasedDateTime()));
+        }
 
 		return patientOut;
 	}

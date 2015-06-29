@@ -6,15 +6,19 @@ import org.bson.types.ObjectId;
 import javax.validation.constraints.NotNull;
 
 /**
- *
+ * Shared ID functionality between domain objects.
  */
 public abstract class AbstractMongoDomainObject implements MongoDomainObject<ObjectId> {
     @NotNull
     private ObjectId id;
 
+    /**
+     * Empty constructor, creates a new ObjectId.
+     */
     protected AbstractMongoDomainObject() {
         id = ObjectId.get();
     }
+
     /**
      * @param pId the identifier object
      */
