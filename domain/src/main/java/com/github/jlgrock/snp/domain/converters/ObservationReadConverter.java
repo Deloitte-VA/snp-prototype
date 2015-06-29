@@ -23,10 +23,10 @@ public class ObservationReadConverter extends AbstractReadConverter implements R
         observation.setIdentifier(parseString(source, SharedTags.ID_TAG));
         observation.setName(SimplePrimitive.createPrimitive(
                         parseInteger(source, ObservationTags.NAME_TYPE_TAG),
-                        parseInteger(source, ObservationTags.NAME_TAG)));
+                        source.get(ObservationTags.NAME_TAG)));
         observation.setValue(SimplePrimitive.createPrimitive(
                 parseInteger(source, ObservationTags.VALUE_TYPE_TAG),
-                parseInteger(source, ObservationTags.VALUE_TAG)));
+                source.get(ObservationTags.VALUE_TAG)));
         observation.setApplies(parseString(source, ObservationTags.APPLIES_TAG));
         observation.setSubject(parseString(source, ObservationTags.SUBJECT_TAG));
         observation.setIssued(parseInstant(source, ObservationTags.ISSUED_TAG));
