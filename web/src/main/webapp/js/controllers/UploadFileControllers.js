@@ -7,7 +7,8 @@ var uploadFileControllers = angular.module('UploadFileControllers', []);
 uploadFileControllers.controller('uploader', ['$scope', '$http',
                                     function($scope, $http) {
 									var LEGO = 'LEGO';
-									var FHIR = 'FHIR';									
+									var FHIR = 'FHIR';
+									$scope.contentType = LEGO;
                       				$scope.contentTypes = 
                       					[
                       						LEGO,
@@ -40,13 +41,14 @@ uploadFileControllers.controller('uploader', ['$scope', '$http',
                       							headers:{'Content-Type':undefined}
                       						})
                       						.success(function(data, status, headers, config) {
-                      							console.log(data);
-                      							$scope.status = status;
-                      						})
-                      						.error(function (data, status, headers, config) {
                       							console.log(status);
-                      			                $scope.status = 'Error uploading file: ' + data;
-                      			            });
+                      							$scope.status = status;
+                      							$scope.data = data;
+                      						})
+                      						.error(function(data, status, headers, config) {
+                      				          $scope.data = data || "Request failed";
+                      				          $scope.status = status;
+                      				      });
                       					}
                       				}
                       			]);

@@ -1,12 +1,12 @@
 package com.github.jlgrock.snp.web.resources;
 
-import com.github.jlgrock.snp.apis.web.ProcessingServiceFactory;
-import org.glassfish.jersey.media.multipart.BodyPart;
-import org.glassfish.jersey.media.multipart.FormDataBodyPart;
-import org.glassfish.jersey.media.multipart.FormDataMultiPart;
-import org.glassfish.jersey.media.multipart.FormDataParam;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -15,9 +15,20 @@ import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.MessageBodyReader;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
+
+import org.glassfish.jersey.media.multipart.BodyPart;
+import org.glassfish.jersey.media.multipart.FormDataBodyPart;
+import org.glassfish.jersey.media.multipart.FormDataMultiPart;
+import org.glassfish.jersey.media.multipart.FormDataParam;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.jlgrock.snp.apis.web.ProcessingServiceFactory;
+import com.github.jlgrock.snp.domain.types.Gender;
+import com.github.jlgrock.snp.domain.types.Patient;
+import com.github.jlgrock.snp.web.services.ClassifierQueryServiceImpl;
 
 /**
  * The controller for handling all classifier requests
@@ -29,16 +40,18 @@ public class ClassifierResource {
 
     private final ProcessingServiceFactory processingServiceFactory;
 
-    //ClassifierFactory classifierFactory;
+    private final ClassifierQueryServiceImpl classifierQueryServiceImpl;
 
     /**
      * Constructor
      *
      * @param processingServiceFactoryIn the marshaller that
+     * @param classifierQueryServiceImplIn query the database
      */
     @Inject
-    public ClassifierResource(final ProcessingServiceFactory processingServiceFactoryIn) {
+    public ClassifierResource(final ProcessingServiceFactory processingServiceFactoryIn, ClassifierQueryServiceImpl classifierQueryServiceImplIn) {
         processingServiceFactory = processingServiceFactoryIn;
+        classifierQueryServiceImpl = classifierQueryServiceImplIn;
     }
 
     /**
@@ -116,6 +129,48 @@ public class ClassifierResource {
         return Response.ok().build();
     }
 
+    @POST
+    @Path("/query")
+    public Response processForm(String json) {
+    	LOGGER.debug("Parameters from query form: {}", json);
+    	Response response = null;
+    	try {
+			Map<String,String> map = new HashMap<String,String>();
+			ObjectMapper mapper = new ObjectMapper();
+			//convert JSON string to Map
+			map = mapper.readValue(json, new TypeReference<HashMap<String,String>>(){});
+			String value = map.get("value");
+			LOGGER.debug("value: {}", value);
+			//Set<Patient> patients = classifierQueryServiceImpl.executeKindOfQuery(value);
+			Set<Patient> patients = getPatients();
+			LOGGER.debug("patients: {}", patients);
+			response = Response.status(200)
+					.entity(patients)
+					.type(MediaType.APPLICATION_JSON)
+					.build();
+		} catch (Exception e) {
+			LOGGER.error("fatal error occurred.", e);
+            response = Response.status(Response.Status.BAD_REQUEST).build();
+		}
+    	
+		return response;
+	}
+	
+    public Set<Patient> getPatients() {
+    	Set<Patient> patients = new HashSet<>();
+    	Patient patient = new Patient();
+    	patient.setFirstName("John");
+    	patient.setLastName("Doe");
+    	patient.setGender(Gender.MALE);
+    	patients.add(patient);
+    	
+    	patient = new Patient();
+    	patient.setFirstName("Jane");
+    	patient.setLastName("Doe");
+    	patients.add(patient);
+    	
+    	return patients;
+    }
     /**
      * Process the file, using the processingService.  If either parameter is null, the file load is aborted and
      * message is logged.
