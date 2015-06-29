@@ -11,6 +11,8 @@ import gov.vha.isaac.logic.LogicGraph;
 
 import org.jvnet.hk2.annotations.Contract;
 import org.jvnet.hk2.annotations.Service;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.Set;
@@ -26,6 +28,8 @@ import javax.inject.Inject;
 @Contract
 @Service
 public class ClassifierQueryServiceImpl {
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(ClassifierQueryServiceImpl.class);
 
     private final LogicGraphClassifierQuery logicGraphClassifierQuery;
     private final EncounterRepository encounterRepository;
@@ -86,6 +90,8 @@ public class ClassifierQueryServiceImpl {
     }
     
     public Set<Patient> findPatientsByNids(final List<Integer> nids) {
+    	LOGGER.trace("nids={}", nids);
+    	
         // Convert the int list to a long list
         List<Long> longNids = nids
                 .stream()
