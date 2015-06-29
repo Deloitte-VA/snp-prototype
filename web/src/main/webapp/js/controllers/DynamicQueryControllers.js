@@ -11,22 +11,11 @@ app.controller('DynamicQueryController', ['$scope', 'dynamicQueryFactory',
     $scope.formData.provenance = null;
     $scope.formData.timing = null;
     $scope.formData.value = null;
-    $scope.patients = {};	
-	$scope.types = 
-	[
-		'string',
-		'number',
-		'boolean',
-		'null',
-		'array',
-		'object',
-		'date',
-		'binary',
-		'objectId'
-	];
-	$scope.formData.bsonType = $scope.types[0];
+    $scope.patients = {};
 	
     $scope.processForm = function() {
+    	$scope.formData.filter = 'observation=' + $scope.formData.observation;
+    	
     	dynamicQueryFactory.getPatients($scope.formData)
             .success(function (data, status, headers, config) {
             	$scope.status = status;

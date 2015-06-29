@@ -14,10 +14,7 @@ app.factory('dynamicQueryFactory', ['$http', function($http) {
       //);
       return $http.get(urlBase, {
           params: {
-        	  observation: formData.observation,
-        	  provenance: formData.provenance,
-        	  timing: formData.timing,
-        	  value: formData.value
+        	  filter: formData.filter
           }
        })
   };  
