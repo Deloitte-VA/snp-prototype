@@ -69,7 +69,8 @@ public class ClassifierResource {
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     public Response postFile(final FormDataMultiPart form, @FormDataParam("id") final String identifier) {
         LOGGER.trace("Form data multipart: {}", form);
-
+        LOGGER.trace("identifier: {}", identifier);
+        
         if (form == null) {
             LOGGER.error("form is null");
             return Response.status(Response.Status.BAD_REQUEST).build();
