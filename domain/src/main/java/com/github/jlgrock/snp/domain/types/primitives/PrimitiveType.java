@@ -14,7 +14,7 @@ public enum PrimitiveType {
     /**
      * The allowable Primitive Types.
      */
-    LONG(1), INTEGER(2), DECIMAL(3), BOOLEAN(4), BINARY64(5), DATE(6), DATETIME(7), STRING(8);
+    LONG(1), INTEGER(2), DECIMAL(3), BOOLEAN(4), BINARY64(5), DATE(6), DATETIME(7), STRING(8), PCE(9);
 
     private static Map<Integer, PrimitiveType> valuesById;
 

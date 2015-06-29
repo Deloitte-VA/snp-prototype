@@ -37,8 +37,21 @@ public class EncounterProcessor extends AbstractFhirProcessor {
 
         LOGGER.trace("Processing Encounter {}", encounter);
 
+        // find the patient by the fhir id
+        String reference = encounter.getSubject().getReference().getValue();
+        com.github.jlgrock.snp.domain.types.Patient patient = patientRepository.findOneByFhirId(reference);
+
+        // save the patient if it doesn't exists
+        if (patient == null) {
+            patient = new com.github.jlgrock.snp.domain.types.Patient();
+            patientRepository.save(patient);
+        }
+
         // convert the encounter to the domain type of encounter
         com.github.jlgrock.snp.domain.types.Encounter saveVal = fhirEncounterConverter.convert(encounter);
+
+        // set the patient for the encounter
+        saveVal.setPatientId(patient.getId());
 
         // Copy the observations over if they exist already
         com.github.jlgrock.snp.domain.types.Encounter foundEncounter = encounterRepository.findOneByFhirId(identifier);
@@ -49,17 +62,8 @@ public class EncounterProcessor extends AbstractFhirProcessor {
         // insert/update the encounter
         encounterRepository.save(saveVal);
 
-        // pull out the fhirId
-        String reference = encounter.getSubject().getReference().getValue();
 
-        // find the patient by the fhir id
-        com.github.jlgrock.snp.domain.types.Patient patient = patientRepository.findOneByFhirId(reference);
 
-        // save the patient if it doesn't exists
-        if (patient == null) {
-            patient = new com.github.jlgrock.snp.domain.types.Patient();
-            patientRepository.save(patient);
-        }
 	}
 
     @Override

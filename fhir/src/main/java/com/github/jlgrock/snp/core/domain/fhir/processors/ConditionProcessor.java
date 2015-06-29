@@ -8,6 +8,9 @@ import com.github.jlgrock.snp.domain.data.ClassifiedPceRepository;
 import com.github.jlgrock.snp.domain.data.EncounterRepository;
 import com.github.jlgrock.snp.domain.types.ClassifiedPce;
 import com.github.jlgrock.snp.domain.types.Encounter;
+import com.github.jlgrock.snp.domain.types.Observation;
+import com.github.jlgrock.snp.domain.types.primitives.PrimitiveType;
+import com.github.jlgrock.snp.domain.types.primitives.SimplePrimitive;
 import gov.vha.isaac.logic.LogicGraph;
 import org.jvnet.hk2.annotations.Service;
 import org.slf4j.Logger;
@@ -34,9 +37,18 @@ public class ConditionProcessor extends AbstractFhirProcessor {
 
 	@Override
 	public void process(final String identifier, final Object unmarshalledObject) {
-        LOGGER.trace("processing condition into observation(s)");
-
         Condition condition = (Condition) unmarshalledObject;
+
+        LOGGER.trace("processing condition '{}' into observation(s)", condition);
+
+        // get the reference to the encounter so that we can determine where to write to
+        // if the encounter doesn't exist, create one
+        String encounterReference = condition.getEncounter().getReference().getValue();
+        Encounter encounter = encounterRepository.findOneByFhirId(encounterReference);
+        if (encounter == null) {
+            encounter = new Encounter();
+            encounter.setFhirId(encounterReference);
+        }
 
         // get the code
         CodeableConcept codeableConcept = condition.getCode();
@@ -48,25 +60,20 @@ public class ConditionProcessor extends AbstractFhirProcessor {
 
         // classify the logic graph
         Integer classifiedLogicGraphId = getLogicGraphClassifier().classify(logicGraph);
-
         ClassifiedPce cPce = new ClassifiedPce();
-        cPce.setNid((long) classifiedLogicGraphId);
+        cPce.setNid(classifiedLogicGraphId);
         cPce.setDesc(logicGraph.toString());
 
         classifiedPceRepository.save(cPce);
 
-        // get the reference to the encounter so that we can determine where to write to
-        String encounterReference = condition.getEncounter().getReference().getValue();
+        Observation observation = new Observation();
+        observation.setFhirId(identifier);
+        SimplePrimitive simplePrimitive = SimplePrimitive.createPrimitive(PrimitiveType.PCE.getId(), cPce.getNid());
+        observation.setName(simplePrimitive);
+        encounter.getObservations().add(observation);
 
-        // if the encounter doesn't exist, create one
-        Encounter encounter = encounterRepository.findOneByFhirId(encounterReference);
-        if (encounter == null) {
-            encounter = new Encounter();
-            encounter.setFhirId(encounterReference);
-        }
         // save the encounter
         encounterRepository.save(encounter);
-
 	}
 
     @Override
