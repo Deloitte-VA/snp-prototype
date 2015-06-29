@@ -7,6 +7,7 @@ import com.github.jlgrock.snp.domain.types.Encounter;
 import com.github.jlgrock.snp.domain.types.Observation;
 import com.mongodb.BasicDBList;
 import org.bson.Document;
+import org.bson.types.ObjectId;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -39,8 +40,8 @@ public class EncounterReadConverterTest {
         ObservationReadConverter observationReadConverter = mock(ObservationReadConverter.class);
         PatientRepository patientRepository = mock(PatientRepository.class);
 
-        Long id = 123l;
-        Long patientId = 234l;
+        ObjectId id = ObjectId.get();
+        ObjectId patientId = ObjectId.get();
         String participant = "def";
         String encounterClass = "ghi";
         String status = "jkl";

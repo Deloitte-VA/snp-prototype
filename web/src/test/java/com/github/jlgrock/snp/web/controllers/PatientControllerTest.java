@@ -10,6 +10,7 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.bson.types.ObjectId;
 import org.glassfish.hk2.api.Factory;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import org.glassfish.jersey.server.ResourceConfig;
@@ -115,14 +116,15 @@ public class PatientControllerTest extends GenericControllerTest {
     @Test
     public void testGetPatientRestCall() throws IOException {
         Patient patientTemp = new Patient();
-        patientTemp.setId(1l);
+        ObjectId objectId = ObjectId.get();
+        patientTemp.setId(objectId);
         patientTemp.setFirstName("a");
         patientTemp.setMiddleName("b");
         patientTemp.setLastName("c");
         patientTemp.setGender(Gender.FEMALE);
-        Mockito.when(patientRepository.findOneById(Mockito.eq(1l))).thenReturn(patientTemp);
+        Mockito.when(patientRepository.findOneById(Mockito.eq(objectId))).thenReturn(patientTemp);
 
-        final WebTarget target = target("patient/1");
+        final WebTarget target = target("patient/" + objectId.toString());
         String response = target.request().header("Content-Type", MediaType.APPLICATION_JSON).get(String.class);
         JsonNode marshalled = JacksonConfig.newObjectMapper().valueToTree(patientTemp);
         JsonNode responseObj = JacksonConfig.newObjectMapper().readTree(response);

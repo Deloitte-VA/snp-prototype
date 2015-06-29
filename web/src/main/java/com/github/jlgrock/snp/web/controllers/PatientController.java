@@ -5,12 +5,11 @@ import java.util.Set;
 
 import com.github.jlgrock.snp.domain.data.PatientRepository;
 import com.github.jlgrock.snp.domain.types.Patient;
-
+import org.bson.types.ObjectId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 import javax.ws.rs.BeanParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -57,7 +56,7 @@ public class PatientController {
     @GET
     @Path("/{id}")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public Patient getPatient(@PathParam("id") final Long id) {
+    public Patient getPatient(@PathParam("id") final ObjectId id) {
         LOGGER.trace("getting Patient");
         return patientRepository.findOneById(id);
     }

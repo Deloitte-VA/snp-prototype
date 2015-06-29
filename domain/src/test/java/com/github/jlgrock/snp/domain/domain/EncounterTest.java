@@ -2,6 +2,7 @@ package com.github.jlgrock.snp.domain.domain;
 
 import com.github.jlgrock.snp.domain.types.Encounter;
 import com.github.jlgrock.snp.domain.types.Observation;
+import org.bson.types.ObjectId;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
@@ -14,15 +15,15 @@ import static org.testng.Assert.assertTrue;
 
 public class EncounterTest {
 	
-    private Long enc1Id = new Long(201521);
-    private Long patient1Id = 123l;
+    private ObjectId enc1Id = ObjectId.get();
+    private ObjectId patient1Id = ObjectId.get();
     private String clazz1 = "OUTPATIENT";
     private String participant1 = "Practitioner/f201";
     private String status1 = "FINISHED";
     private String subject1 = "Patient/f203";
     
-    private Long enc2Id = new Long(201731);
-    private Long patient2Id = 345l;
+    private ObjectId enc2Id = ObjectId.get();
+    private ObjectId patient2Id = ObjectId.get();
     private String clazz2 = "INPATIENT";
     private String participant2 = "Practitioner/f301";
     private String status2 = "PLANNED";
@@ -121,7 +122,7 @@ public class EncounterTest {
 		en1.setStatus(status1);
 		en1.setSubject(subject1);
 		
-		assertEquals(en1.toString(), "Encounter{id=201521, subject=Patient/f203, encounterClass=OUTPATIENT, status=FINISHED, participant=Practitioner/f201, patientId=123, observations=null, fhirId=null}");
+		assertEquals(en1.toString(), "Encounter{id=" + enc1Id.toString() + ", subject=Patient/f203, encounterClass=OUTPATIENT, status=FINISHED, participant=Practitioner/f201, patientId=" + patient1Id.toString() + ", observations=null, fhirId=null}");
 	}
 
 }

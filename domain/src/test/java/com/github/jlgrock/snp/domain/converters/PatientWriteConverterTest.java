@@ -1,11 +1,11 @@
 package com.github.jlgrock.snp.domain.converters;
 
-import com.github.jlgrock.snp.domain.converters.PatientWriteConverter;
 import com.github.jlgrock.snp.domain.data.PatientTags;
 import com.github.jlgrock.snp.domain.data.SharedTags;
 import com.github.jlgrock.snp.domain.types.Gender;
 import com.github.jlgrock.snp.domain.types.Patient;
 import org.bson.Document;
+import org.bson.types.ObjectId;
 import org.mockito.Mockito;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -18,7 +18,7 @@ public class PatientWriteConverterTest {
      */
     @Test
     public void testConvert() {
-        Long id = 123l;
+        ObjectId objectId = ObjectId.get();
         String fName = "Jerry";
         String mName = "Lee";
         String lName = "Lewis";
@@ -27,7 +27,7 @@ public class PatientWriteConverterTest {
         LocalDate dod = LocalDate.ofEpochDay(12349l);
 
         Patient patient = Mockito.mock(Patient.class);
-        Mockito.when(patient.getId()).thenReturn(id);
+        Mockito.when(patient.getId()).thenReturn(objectId);
         Mockito.when(patient.getFirstName()).thenReturn(fName);
         Mockito.when(patient.getMiddleName()).thenReturn(mName);
         Mockito.when(patient.getLastName()).thenReturn(lName);
@@ -39,7 +39,7 @@ public class PatientWriteConverterTest {
         PatientWriteConverter patientWriteConverter = new PatientWriteConverter();
         Document dbObj = patientWriteConverter.convert(patient);
 
-        Assert.assertEquals(123l, dbObj.get(SharedTags.ID_TAG));
+        Assert.assertEquals(objectId, dbObj.get(SharedTags.ID_TAG));
         Assert.assertEquals(fName, dbObj.get(PatientTags.FIRST_NAME_TAG));
         Assert.assertEquals(mName, dbObj.get(PatientTags.MIDDLE_NAME_TAG));
         Assert.assertEquals(lName, dbObj.get(PatientTags.LAST_NAME_TAG));

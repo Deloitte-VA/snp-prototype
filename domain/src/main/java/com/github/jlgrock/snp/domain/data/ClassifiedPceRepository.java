@@ -1,5 +1,6 @@
 package com.github.jlgrock.snp.domain.data;
 
+import org.bson.types.ObjectId;
 import org.jvnet.hk2.annotations.Contract;
 
 import com.github.jlgrock.snp.apis.data.MongoRepository;
@@ -10,6 +11,6 @@ import com.github.jlgrock.snp.domain.types.ClassifiedPce;
  * Collection within MongoDB.
  */
 @Contract
-public interface ClassifiedPceRepository extends MongoRepository<ClassifiedPce, Long> {
+public interface ClassifiedPceRepository extends MongoRepository<ClassifiedPce, ObjectId> {
 }
 

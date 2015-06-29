@@ -35,23 +35,37 @@ public class EncounterWriteConverter implements WriteConverter<Encounter, Docume
     @Override
     public Document convert(final Encounter source) {
         Document dbo = new Document();
-        dbo.put(SharedTags.ID_TAG, source.getId());
-        dbo.put(EncounterTags.ENCOUNTER_CLASS, source.getEncounterClass());
-        dbo.put(EncounterTags.STATUS, source.getStatus());
-        dbo.put(EncounterTags.SUBJECT, source.getSubject());
-        dbo.put(EncounterTags.PARTICIPANT, source.getParticipant());
-        dbo.put(EncounterTags.PATIENT, source.getPatientId());
-
-        List<Observation> observations = source.getObservations();
-        BasicDBList observationObjs = new BasicDBList();
-        if (observations != null) {
-            observationObjs = observations
-                    .stream()
-                    .map(observation -> observationWriteConverter.convert(observation))
-                    .collect(Collectors.toCollection(BasicDBList::new));
+        if (source.getId() != null) {
+            dbo.put(SharedTags.ID_TAG, source.getId());
+        }
+        if (source.getEncounterClass() != null) {
+           dbo.put(EncounterTags.ENCOUNTER_CLASS, source.getEncounterClass());
+        }
+        if (source.getStatus() != null) {
+            dbo.put(EncounterTags.STATUS, source.getStatus());
+        }
+        if (source.getSubject() != null) {
+            dbo.put(EncounterTags.SUBJECT, source.getSubject());
+        }
+        if (source.getParticipant() != null) {
+            dbo.put(EncounterTags.PARTICIPANT, source.getParticipant());
+        }
+        if (source.getPatientId() != null) {
+            dbo.put(EncounterTags.PATIENT, source.getPatientId());
         }
 
-        dbo.put(EncounterTags.OBSERVATIONS_TAG, observationObjs);
+        if (source.getObservations() != null ) {
+            List<Observation> observations = source.getObservations();
+
+            BasicDBList observationObjs = new BasicDBList();
+            if (observations != null) {
+                observationObjs = observations
+                        .stream()
+                        .map(observation -> observationWriteConverter.convert(observation))
+                        .collect(Collectors.toCollection(BasicDBList::new));
+            }
+            dbo.put(EncounterTags.OBSERVATIONS_TAG, observationObjs);
+        }
         return dbo;
     }
 }

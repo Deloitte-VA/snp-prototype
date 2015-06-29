@@ -5,11 +5,12 @@ import com.github.jlgrock.snp.domain.converters.PatientReadConverter;
 import com.github.jlgrock.snp.domain.converters.PatientWriteConverter;
 import com.github.jlgrock.snp.domain.types.Patient;
 import org.bson.Document;
+import org.bson.types.ObjectId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class EmptyRepository extends
-		AbstractRepositoryImpl<Patient, Long> {
+		AbstractRepositoryImpl<Patient, ObjectId> {
 	
     private static final Logger LOGGER = LoggerFactory
             .getLogger(EmptyRepository.class);

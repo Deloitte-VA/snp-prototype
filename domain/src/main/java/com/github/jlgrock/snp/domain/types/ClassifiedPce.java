@@ -3,27 +3,26 @@ package com.github.jlgrock.snp.domain.types;
 import com.google.common.base.MoreObjects;
 
 import java.util.Objects;
-import java.util.UUID;
 
 /**
  * An object that has classified all of the PCEs
  */
 public class ClassifiedPce extends AbstractMongoDomainObject {
-    private UUID uuid;
+    private Long nid;
 
-    public UUID getUuid() {
-        return uuid;
+    public Long getNid() {
+        return nid;
     }
 
-    public void setUuid(final UUID uuidIn) {
-        uuid = uuidIn;
+    public void setNid(final Long nidIn) {
+        nid = nidIn;
     }
 
     private String desc;
 
     @Override
     public int hashCode() {
-        return Objects.hash(uuid, desc);
+        return Objects.hash(nid, desc);
     }
 
     @Override
@@ -35,7 +34,7 @@ public class ClassifiedPce extends AbstractMongoDomainObject {
             return false;
         }
         final ClassifiedPce other = (ClassifiedPce) obj;
-        return Objects.equals(this.uuid, other.uuid)
+        return Objects.equals(this.nid, other.nid)
                 && Objects.equals(this.desc, other.desc);
     }
 
@@ -43,7 +42,7 @@ public class ClassifiedPce extends AbstractMongoDomainObject {
     public String toString() {
         return MoreObjects.toStringHelper(this)
                 .add("id", getId())
-                .add("uuid", uuid)
+                .add("nid", nid)
                 .add("desc", desc)
                 .toString();
     }

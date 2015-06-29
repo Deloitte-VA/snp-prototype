@@ -1,6 +1,7 @@
 package com.github.jlgrock.snp.domain.types;
 
 import com.google.common.base.MoreObjects;
+import org.bson.types.ObjectId;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -23,7 +24,7 @@ public class Encounter extends AbstractMongoDomainObject {
     private String fhirId;
 
     @NotNull
-    private Long patientId;
+    private ObjectId patientId;
 
     private List<Observation> observations;
 
@@ -81,11 +82,11 @@ public class Encounter extends AbstractMongoDomainObject {
         observations = pObservations;
     }
 
-    public Long getPatientId() {
+    public ObjectId getPatientId() {
         return patientId;
     }
 
-	public void setPatientId(final Long patientIdIn) {
+	public void setPatientId(final ObjectId patientIdIn) {
         patientId = patientIdIn;
     }
 

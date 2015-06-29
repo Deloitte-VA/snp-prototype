@@ -19,16 +19,37 @@ public class ObservationWriteConverter  implements WriteConverter<Observation, D
     @Override
     public Document convert(final Observation source) {
         Document dbo = new Document();
-        dbo.put(SharedTags.ID_TAG, source.getIdentifier());
-        dbo.put(ObservationTags.NAME_TYPE_TAG, null);
-        dbo.put(ObservationTags.NAME_TAG, source.getName().getValue());
-        dbo.put(ObservationTags.NAME_TYPE_TAG, source.getName().getType().getId());
-        dbo.put(ObservationTags.VALUE_TAG, source.getValue().getValue());
-        dbo.put(ObservationTags.VALUE_TAG, source.getValue().getValue());
-        dbo.put(ObservationTags.VALUE_TYPE_TAG, source.getValue().getType().getId());
-        dbo.put(ObservationTags.APPLIES_TAG, source.getApplies());
-        dbo.put(ObservationTags.SUBJECT_TAG, source.getSubject());
-        dbo.put(ObservationTags.ISSUED_TAG, source.getIssued().getEpochSecond());
+        if (source.getIdentifier() != null) {
+            dbo.put(SharedTags.ID_TAG, source.getIdentifier());
+        }
+        if (source.getName() != null) {
+            dbo.put(ObservationTags.NAME_TAG, source.getName().getValue());
+        }
+
+        if (source.getName().getType() != null) {
+            dbo.put(ObservationTags.NAME_TYPE_TAG, source.getName().getType().getId());
+        }
+
+        if (source.getValue() != null) {
+            dbo.put(ObservationTags.VALUE_TAG, source.getValue().getValue());
+        }
+
+        if (source.getValue().getType() != null) {
+            dbo.put(ObservationTags.VALUE_TYPE_TAG, source.getValue().getType().getId());
+        }
+
+        if (source.getApplies() != null) {
+            dbo.put(ObservationTags.APPLIES_TAG, source.getApplies());
+        }
+
+        if (source.getSubject() != null) {
+            dbo.put(ObservationTags.SUBJECT_TAG, source.getSubject());
+        }
+
+        if (source.getIssued() != null) {
+            dbo.put(ObservationTags.ISSUED_TAG, source.getIssued().getEpochSecond());
+        }
+
         return dbo;
     }
 }

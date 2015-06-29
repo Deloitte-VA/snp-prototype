@@ -72,7 +72,7 @@ public abstract class AbstractLegoProcessor implements LegoElementProcessorServi
         LOGGER.debug("received id: {}", classifiedLogicGraphId);
 
         ClassifiedPce cPce = new ClassifiedPce();
-        cPce.setId((long) classifiedLogicGraphId.intValue());
+        cPce.setNid((long) classifiedLogicGraphId.intValue());
         cPce.setDesc(logicGraph.toString());
 
         classifiedPceRepository.save(cPce);
