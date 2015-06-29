@@ -90,6 +90,7 @@ public class ClassifierQueryServiceImpl {
      * @return the result
      */
     public Set<Patient> executeKindOfQuery(final int nid) {
+    	LOGGER.trace("executeKindOfQuery(nid={})", nid);
         int[] results = logicGraphClassifierQuery.query(nid);
         return findPatientsByNids(convertToList(results));
     }
@@ -101,14 +102,14 @@ public class ClassifierQueryServiceImpl {
     }
 
     private Set<Patient> findPatientsByNids(final List<Integer> nids) {
-    	LOGGER.trace("nids={}", nids);
+    	LOGGER.trace("findPatientsByNids(nids={})", nids);
 	
         // execute the custom query
         return encounterRepository.
                 findByPceIdList(nids)
                 .stream()
                 .map(Encounter::getPatientId)
-                .distinct()
+//                .distinct()
                 .map(patientId -> patientRepository.findOneById(patientId))
                 .collect(Collectors.toSet());
     }
