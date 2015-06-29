@@ -2,22 +2,27 @@ package com.github.jlgrock.snp.core.domain.fhir.processors;
 
 import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
 import com.github.jlgrock.snp.core.domain.fhir.model.Query;
+import org.jvnet.hk2.annotations.Service;
 
-/**
- *
- */
+import javax.inject.Inject;
+
+@Service
 public class QueryProcessor extends AbstractFhirProcessor {
 
-    private final Query query;
-
-    public QueryProcessor(final LogicGraphClassifier logicGraphClassifierIn, final Query queryIn) {
+    @Inject
+    public QueryProcessor(final LogicGraphClassifier logicGraphClassifierIn) {
         super(logicGraphClassifierIn);
-        query = queryIn;
     }
 
 	@Override
-	public void process(final String identifier) {
+	public void process(final String identifier, final Object unmarshalledObject) {
+        Query query = (Query) unmarshalledObject;
 		throw new UnsupportedOperationException();
 		
 	}
+
+    @Override
+    public Class processesType() {
+        return Query.class;
+    }
 }

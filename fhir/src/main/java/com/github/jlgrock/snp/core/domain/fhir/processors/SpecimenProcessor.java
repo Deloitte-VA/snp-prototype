@@ -2,22 +2,27 @@ package com.github.jlgrock.snp.core.domain.fhir.processors;
 
 import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
 import com.github.jlgrock.snp.core.domain.fhir.model.Specimen;
+import org.jvnet.hk2.annotations.Service;
 
-/**
- *
- */
+import javax.inject.Inject;
+
+@Service
 public class SpecimenProcessor extends AbstractFhirProcessor {
 
-    private final Specimen specimen;
-
-    public SpecimenProcessor(final LogicGraphClassifier logicGraphClassifierIn, final Specimen specimenIn) {
+    @Inject
+    public SpecimenProcessor(final LogicGraphClassifier logicGraphClassifierIn) {
         super(logicGraphClassifierIn);
-        specimen = specimenIn;
     }
 
 	@Override
-	public void process(final String identifier) {
+	public void process(final String identifier, final Object unmarshalledObject) {
+        Specimen specimen = (Specimen) unmarshalledObject;
 		throw new UnsupportedOperationException();
 		
 	}
+
+    @Override
+    public Class processesType() {
+        return Specimen.class;
+    }
 }

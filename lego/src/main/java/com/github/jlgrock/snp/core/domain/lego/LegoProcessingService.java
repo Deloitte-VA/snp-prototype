@@ -49,7 +49,7 @@ public class LegoProcessingService implements ProcessingService {
             } catch (ClassifierException ce) {
                 //TODO
             }
-            legoElementProcessorService.process();
+            legoElementProcessorService.process(unmarshalledObject);
         }
     }
 

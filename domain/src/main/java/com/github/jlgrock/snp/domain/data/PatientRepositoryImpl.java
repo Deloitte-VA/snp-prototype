@@ -133,7 +133,11 @@ public class PatientRepositoryImpl extends
             put(PatientTags.FHIR_ID_TAG, fhirId);
         }};
         List<Patient> x = executeQueryAndTransformResults(query);
-        return x.get(0);
+        Patient returnVal = null;
+        if (x.size() > 0) {
+            returnVal = x.get(0);
+        }
+        return returnVal;
     }
 
 }

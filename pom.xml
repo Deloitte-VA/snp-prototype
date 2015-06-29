@@ -48,10 +48,10 @@
         <target.jdk>1.8</target.jdk>
         
         <!-- VHA versions -->
-		<solor.version>1.8</solor.version>
         <newtons-cradle.version>1.18</newtons-cradle.version>
         <query.version>2.13</query.version>
         <logic.version>1.13</logic.version>
+        <solor.version>1.9</solor.version>
 
         <!-- External versions -->
         <jackson.version>2.5.0</jackson.version>
@@ -226,6 +226,12 @@
             </dependency>
 
             <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-simple</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
                 <version>${guava.version}</version>
@@ -393,6 +399,12 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
         </dependency>
+
+        <!--<dependency>-->
+            <!--<groupId>org.slf4j</groupId>-->
+            <!--<artifactId>slf4j-simple</artifactId>-->
+            <!--<scope>test</scope>-->
+        <!--</dependency>-->
 
         <!-- Testing dependencies for all projects -->
 

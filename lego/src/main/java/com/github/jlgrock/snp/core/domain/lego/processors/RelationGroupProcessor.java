@@ -2,23 +2,28 @@ package com.github.jlgrock.snp.core.domain.lego.processors;
 
 import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
 import com.github.jlgrock.snp.core.domain.lego.model.RelationGroup;
-import com.github.jlgrock.snp.domain.data.ClassifiedPceStore;
+import com.github.jlgrock.snp.domain.data.ClassifiedPceRepository;
+import org.jvnet.hk2.annotations.Service;
 
-/**
- *
- */
+import javax.inject.Inject;
+
+@Service
 public class RelationGroupProcessor extends AbstractLegoProcessor {
 
-    private final RelationGroup relationGroup;
-
-    RelationGroupProcessor(final LogicGraphClassifier logicGraphClassifierIn, final ClassifiedPceStore classPceStore,
-                           final RelationGroup relationGroupIn) {
-        super(logicGraphClassifierIn, classPceStore);
-        relationGroup = relationGroupIn;
+    @Inject
+    RelationGroupProcessor(final LogicGraphClassifier logicGraphClassifierIn,
+                           final ClassifiedPceRepository classifiedPceRepository) {
+        super(logicGraphClassifierIn, classifiedPceRepository);
     }
 
     @Override
-    public void process() {
+    public void process(final Object unmarshalledObject) {
+        RelationGroup relationGroup = (RelationGroup) unmarshalledObject;
         throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public Class processesType() {
+        return RelationGroup.class;
     }
 }

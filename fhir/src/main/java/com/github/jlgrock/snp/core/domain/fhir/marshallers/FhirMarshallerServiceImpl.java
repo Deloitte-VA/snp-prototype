@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import java.io.Reader;
@@ -34,6 +35,9 @@ public class FhirMarshallerServiceImpl implements FhirMarshallerService {
             JAXBContext jc = JAXBContext.newInstance(FHIR_PACKAGE);
             Unmarshaller unmarshaller = jc.createUnmarshaller();
             unmarshalledObject = unmarshaller.unmarshal(input);
+            if (unmarshalledObject.getClass().equals(JAXBElement.class)) {
+                unmarshalledObject = ((JAXBElement) unmarshalledObject).getValue();
+            }
             LOGGER.debug("Processing " + unmarshalledObject.getClass().getName());
         } catch (JAXBException e) {
             LOGGER.error("Unmarshalling Error", e);

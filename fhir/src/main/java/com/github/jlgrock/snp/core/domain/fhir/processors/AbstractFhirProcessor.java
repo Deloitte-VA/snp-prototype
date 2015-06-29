@@ -18,6 +18,12 @@ public abstract class AbstractFhirProcessor implements FhirElementProcessorServi
     }
 
     @Override
-    public abstract void process(final String identifier);
+    public abstract void process(final String identifier, final Object unmarshalledObject);
 
+    protected String parseFhirId(String value) {
+        return value.substring(value.indexOf('/'));
+    }
+
+    @Override
+    public abstract Class processesType();
 }

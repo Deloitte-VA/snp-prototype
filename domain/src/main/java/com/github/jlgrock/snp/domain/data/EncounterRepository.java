@@ -31,5 +31,13 @@ public interface EncounterRepository extends MongoRepository<Encounter, Long> {
      * @return a list of the encounters that match the criteria
      */
     List<Encounter> findByPceIdList(List<Long> pceIds);
+
+    /**
+     * Find the unique Encounter by Fhir Id
+     * @param fhirId the unique identifier used in fhir
+     * @return the patient matching the id
+     */
+    Encounter findOneByFhirId(String fhirId);
+
 }
 

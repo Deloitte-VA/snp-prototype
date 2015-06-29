@@ -2,24 +2,29 @@ package com.github.jlgrock.snp.core.domain.lego.processors;
 
 import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
 import com.github.jlgrock.snp.core.domain.lego.model.Assertion;
-import com.github.jlgrock.snp.domain.data.ClassifiedPceStore;
+import com.github.jlgrock.snp.domain.data.ClassifiedPceRepository;
+import org.jvnet.hk2.annotations.Service;
 
-/**
- *
- */
+import javax.inject.Inject;
+
+@Service
 public class AssertionProcessor extends AbstractLegoProcessor {
 
-    final Assertion assertion;
-
-    AssertionProcessor(final LogicGraphClassifier logicGraphClassifierIn, final ClassifiedPceStore classPceStore,
-                       final Assertion assertionIn) {
-        super(logicGraphClassifierIn, classPceStore);
-        assertion = assertionIn;
+    @Inject
+    AssertionProcessor(final LogicGraphClassifier logicGraphClassifierIn,
+                       final ClassifiedPceRepository classifiedPceRepository) {
+        super(logicGraphClassifierIn, classifiedPceRepository);
     }
 
     @Override
-    public void process() {
+    public void process(final Object unmarshalledObject) {
+        Assertion assertion = (Assertion) unmarshalledObject;
         processAssertion(assertion);
+    }
+
+    @Override
+    public Class processesType() {
+        return Assertion.class;
     }
 
 }

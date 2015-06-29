@@ -2,22 +2,26 @@ package com.github.jlgrock.snp.core.domain.fhir.processors;
 
 import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
 import com.github.jlgrock.snp.core.domain.fhir.model.ImmunizationRecommendation;
+import org.jvnet.hk2.annotations.Service;
 
-/**
- *
- */
+import javax.inject.Inject;
+
+@Service
 public class ImmunizationRecommendationProcessor extends AbstractFhirProcessor {
 
-    private final ImmunizationRecommendation immunizationRecommendation;
-
-    public ImmunizationRecommendationProcessor(final LogicGraphClassifier logicGraphClassifierIn, final ImmunizationRecommendation immunizationRecommendationIn) {
+    @Inject
+    public ImmunizationRecommendationProcessor(final LogicGraphClassifier logicGraphClassifierIn) {
         super(logicGraphClassifierIn);
-        immunizationRecommendation = immunizationRecommendationIn;
     }
 
 	@Override
-	public void process(final String identifier) {
+	public void process(final String identifier, final Object unmarshalledObject) {
+        ImmunizationRecommendation immunizationRecommendation = (ImmunizationRecommendation) unmarshalledObject;
 		throw new UnsupportedOperationException();
-		
 	}
+
+    @Override
+    public Class processesType() {
+        return ImmunizationRecommendation.class;
+    }
 }

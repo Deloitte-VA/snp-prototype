@@ -2,23 +2,27 @@ package com.github.jlgrock.snp.core.domain.fhir.processors;
 
 import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
 import com.github.jlgrock.snp.core.domain.fhir.model.ConceptMap;
+import org.jvnet.hk2.annotations.Service;
 
-/**
- *
- */
+import javax.inject.Inject;
+
+@Service
 public class ConceptMapProcessor extends AbstractFhirProcessor {
 
-    private final ConceptMap conceptMap;
-
-    public ConceptMapProcessor(final LogicGraphClassifier logicGraphClassifierIn, final ConceptMap conceptMapIn) {
+    @Inject
+    public ConceptMapProcessor(final LogicGraphClassifier logicGraphClassifierIn) {
         super(logicGraphClassifierIn);
-        conceptMap = conceptMapIn;
     }
 
 	@Override
-	public void process(final String identifier) {
+	public void process(final String identifier, final Object unmarshalledObject) {
+        ConceptMap conceptMap = (ConceptMap) unmarshalledObject;
 		throw new UnsupportedOperationException();
-		
 	}
+
+    @Override
+    public Class processesType() {
+        return ConceptMap.class;
+    }
 
 }
