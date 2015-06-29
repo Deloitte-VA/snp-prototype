@@ -5,6 +5,7 @@ import com.github.jlgrock.snp.domain.converters.ClassifiedPceReadConverter;
 import com.github.jlgrock.snp.domain.converters.ClassifiedPceWriteConverter;
 import com.github.jlgrock.snp.domain.types.ClassifiedPce;
 import org.bson.Document;
+import org.bson.types.ObjectId;
 import org.jvnet.hk2.annotations.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +17,7 @@ import javax.inject.Inject;
  * Collection within MongoDB.
  */
 @Service
-public class ClassifiedPceRepositoryImpl extends AbstractRepositoryImpl<ClassifiedPce, Long>
+public class ClassifiedPceRepositoryImpl extends AbstractRepositoryImpl<ClassifiedPce, ObjectId>
 		implements ClassifiedPceRepository {
 
 	private final ClassifiedPceReadConverter classifiedPceReadConverter;

@@ -2,6 +2,7 @@ package com.github.jlgrock.snp.domain.domain;
 
 import com.github.jlgrock.snp.domain.types.Gender;
 import com.github.jlgrock.snp.domain.types.Patient;
+import org.bson.types.ObjectId;
 import org.testng.annotations.Test;
 
 import java.time.LocalDate;
@@ -14,7 +15,7 @@ import static org.testng.Assert.assertTrue;
 
 public class PatientTest {
 
-    private Long pt1Id = new Long(201521L);
+    private ObjectId pt1Id = ObjectId.get();
     private String pt1FirstName = "Brady";
     private String pt1MiddleName = "Wilson";
     private String pt1LastName = "Lynch";
@@ -23,7 +24,7 @@ public class PatientTest {
     private Boolean pt1IsDeceased = true;
     private LocalDate pt1DateDeceased = LocalDate.of(2015, 3, 24);
 
-    private Long pt2Id = new Long(201523L);
+    private ObjectId pt2Id = ObjectId.get();
     private String pt2FirstName = "Gronkowski";
     private String pt2MiddleName = "Amendola";
     private String pt2LastName = "Sherman";
@@ -143,7 +144,7 @@ public class PatientTest {
         pt1.setDateDeceased(pt1DateDeceased);
         pt1.setFhirId(fhirId);
 
-        assertEquals(pt1.toString(), "Patient{id=201521, firstName=Brady, middleName=Wilson, lastName=Lynch, dateOfBirth=1958-02-02, gender=MALE, isDeceased=true, dateDeceased=2015-03-24, fhirId=f202}");
+        assertEquals(pt1.toString(), "Patient{id=" + pt1Id.toString() + ", firstName=Brady, middleName=Wilson, lastName=Lynch, dateOfBirth=1958-02-02, gender=MALE, isDeceased=true, dateDeceased=2015-03-24, fhirId=f202}");
     }
 }
 

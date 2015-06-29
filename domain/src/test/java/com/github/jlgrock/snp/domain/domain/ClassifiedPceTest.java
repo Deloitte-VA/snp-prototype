@@ -1,6 +1,7 @@
 package com.github.jlgrock.snp.domain.domain;
 
 import com.github.jlgrock.snp.domain.types.ClassifiedPce;
+import org.bson.types.ObjectId;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
@@ -15,10 +16,10 @@ public class ClassifiedPceTest {
     @Test
     public void test() {
 
-        Long ln1 = new Long(201521l);
+        ObjectId ln1 = ObjectId.get();
         String st1 = "Touchdown";
 
-        Long ln2 = new Long(201522l);
+        ObjectId ln2 = ObjectId.get();
         String st2 = "Field Goal";
 
         ClassifiedPce pc1 = new ClassifiedPce();
@@ -43,7 +44,7 @@ public class ClassifiedPceTest {
         assertNotEquals(pc1.getId(), pc2.getId());
         assertNotEquals(pc1.getDesc(), pc2.getDesc());
 
-        assertEquals("ClassifiedPce{id=" + ln1 + ", uuid=null, desc=" + st1 + "}", pc1.toString());
+        assertEquals("ClassifiedPce{id=" + ln1 + ", nid=null, desc=" + st1 + "}", pc1.toString());
         assertNotEquals(pc1.hashCode(), pc2.hashCode());
 
     }

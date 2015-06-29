@@ -6,6 +6,7 @@ import com.github.jlgrock.snp.domain.types.Encounter;
 import com.github.jlgrock.snp.domain.types.Observation;
 import com.mongodb.BasicDBList;
 import org.bson.Document;
+import org.bson.types.ObjectId;
 import org.testng.annotations.Test;
 
 import java.time.LocalDate;
@@ -23,6 +24,7 @@ public class EncounterWriteConverterTest {
     @Test
     public void testConvert() {
         LocalDate date = LocalDate.ofEpochDay(888l);
+        ObjectId objectId = ObjectId.get();
 
         Observation observation1 = mock(Observation.class);
         Observation observation2 = mock(Observation.class);
@@ -42,15 +44,14 @@ public class EncounterWriteConverterTest {
         when(observationWriteConverter.convert(observation1)).thenReturn(observation1Obj);
         when(observationWriteConverter.convert(observation2)).thenReturn(observation2Obj);
 
-        Long id = 123l;
-        Long patientId = 234l;
+        ObjectId patientId = ObjectId.get();
         String participant = "def";
         String encounterClass = "ghi";
         String status = "jkl";
         String subject = "mno";
 
         Encounter encounter = mock(Encounter.class);
-        when(encounter.getId()).thenReturn(id);
+        when(encounter.getId()).thenReturn(objectId);
         when(encounter.getPatientId()).thenReturn(patientId);
         when(encounter.getParticipant()).thenReturn(participant);
         when(encounter.getEncounterClass()).thenReturn(encounterClass);
@@ -61,7 +62,7 @@ public class EncounterWriteConverterTest {
         EncounterWriteConverter encounterWriteConverter = new EncounterWriteConverter(observationWriteConverter);
         Document dbObj = encounterWriteConverter.convert(encounter);
 
-        assertEquals(id, dbObj.get(SharedTags.ID_TAG));
+        assertEquals(objectId, dbObj.get(SharedTags.ID_TAG));
         assertEquals(patientId, dbObj.get(EncounterTags.PATIENT));
         assertEquals(participant, dbObj.get(EncounterTags.PARTICIPANT));
         assertEquals(encounterClass, dbObj.get(EncounterTags.ENCOUNTER_CLASS));

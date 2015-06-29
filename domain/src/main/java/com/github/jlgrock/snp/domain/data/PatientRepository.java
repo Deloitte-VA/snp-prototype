@@ -3,6 +3,7 @@ package com.github.jlgrock.snp.domain.data;
 import com.github.jlgrock.snp.apis.data.MongoRepository;
 import com.github.jlgrock.snp.domain.types.Gender;
 import com.github.jlgrock.snp.domain.types.Patient;
+import org.bson.types.ObjectId;
 import org.jvnet.hk2.annotations.Contract;
 
 import java.time.LocalDate;
@@ -15,7 +16,7 @@ import java.util.List;
  *
  */
 @Contract
-public interface PatientRepository extends MongoRepository<Patient, Long> {
+public interface PatientRepository extends MongoRepository<Patient, ObjectId> {
 	/**
 	 * 
 	 * @param lastName is a string of the last name

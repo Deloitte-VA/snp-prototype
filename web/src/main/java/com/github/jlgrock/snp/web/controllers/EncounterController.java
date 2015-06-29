@@ -3,6 +3,7 @@ package com.github.jlgrock.snp.web.controllers;
 import com.github.jlgrock.snp.domain.data.EncounterRepository;
 import com.github.jlgrock.snp.domain.types.Encounter;
 
+import org.bson.types.ObjectId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -39,7 +40,7 @@ public class EncounterController {
      */
     @GET @Path("/{id}")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public Encounter getEncounter(@PathParam("id") final Long id) {
+    public Encounter getEncounter(@PathParam("id") final ObjectId id) {
         LOGGER.debug("getting encounter");
         return repository.findOneById(id);
     }

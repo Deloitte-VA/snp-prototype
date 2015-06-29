@@ -18,8 +18,12 @@ public class ClassifiedPceWriteConverter implements WriteConverter<ClassifiedPce
     @Override
     public Document convert(final ClassifiedPce source) {
         Document dbo = new Document();
-        dbo.put(SharedTags.ID_TAG, source.getId());
-        dbo.put(ClassifiedPceTags.DESCRIPTION_TAG, source.getDesc());
+        if (source.getId() != null) {
+            dbo.put(SharedTags.ID_TAG, source.getId());
+        }
+        if (source.getDesc() != null) {
+            dbo.put(ClassifiedPceTags.DESCRIPTION_TAG, source.getDesc());
+        }
         return dbo;
 
     }

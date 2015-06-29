@@ -6,6 +6,7 @@ import com.github.jlgrock.snp.domain.converters.PatientWriteConverter;
 import com.github.jlgrock.snp.domain.types.Gender;
 import com.github.jlgrock.snp.domain.types.Patient;
 import org.bson.Document;
+import org.bson.types.ObjectId;
 import org.jvnet.hk2.annotations.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +22,7 @@ import java.util.List;
  */
 @Service
 public class PatientRepositoryImpl extends
-        AbstractRepositoryImpl<Patient, Long> implements PatientRepository {
+        AbstractRepositoryImpl<Patient, ObjectId> implements PatientRepository {
 
     private final PatientReadConverter patientReadConverter;
 

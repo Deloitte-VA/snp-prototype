@@ -2,6 +2,7 @@ package com.github.jlgrock.snp.domain.converters;
 
 import com.github.jlgrock.snp.domain.data.SharedTags;
 import org.bson.Document;
+import org.bson.types.ObjectId;
 
 import java.time.Instant;
 import java.time.LocalDate;
@@ -111,7 +112,18 @@ public abstract class AbstractReadConverter {
      * @param source document
      * @return the value of the id
      */
-    protected Long parseId(final Document source) {
-        return parseLong(source, SharedTags.ID_TAG);
+    protected ObjectId parseId(final Document source) {
+        return parseObjectId(source, SharedTags.ID_TAG);
+    }
+
+    /**
+     * Parses the document and the tag and returns the value to which the tag is mapped
+     *
+     * @param source document
+     * @param tag    JSON key tags
+     * @return the value to which the tag is mapped
+     */
+    protected ObjectId parseObjectId(final Document source, final String tag) {
+        return (ObjectId) source.get(tag);
     }
 }

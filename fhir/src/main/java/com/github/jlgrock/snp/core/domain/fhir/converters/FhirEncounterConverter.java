@@ -4,6 +4,7 @@ import com.github.jlgrock.snp.apis.converters.Converter;
 import com.github.jlgrock.snp.domain.data.PatientRepository;
 import com.github.jlgrock.snp.domain.types.Encounter;
 import com.github.jlgrock.snp.domain.types.Patient;
+import org.bson.types.ObjectId;
 import org.jvnet.hk2.annotations.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,7 +34,7 @@ public class FhirEncounterConverter
         // uploaded at a later point
         String fhirId = source.getSubject().getReference().getValue().replaceFirst("Patient/", "");
         Patient patient = patientRepository.findOneByFhirId(fhirId);
-        Long patientId = null;
+        ObjectId patientId = null;
         if (patient != null) {
             patientId = patient.getId();
         } else {

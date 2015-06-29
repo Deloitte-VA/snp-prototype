@@ -12,6 +12,7 @@ import com.github.jlgrock.snp.domain.types.Patient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
+import org.bson.types.ObjectId;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
@@ -60,7 +61,7 @@ public abstract class TestSetup {
 		
 		List<Document> encounterDocuments;
 		
-		List<Long> ids;
+		List<ObjectId> ids;
 		
 		List<Encounter> encounters;
 		
@@ -103,8 +104,8 @@ public abstract class TestSetup {
 			encounter.setParticipant("abc");
             encounter.setEncounterClass("yyy");
 			encounter.setStatus("def");
-			encounter.setId(201521l);
-			encounter.setPatientId(123l);
+			encounter.setId(ObjectId.get());
+			encounter.setPatientId(ObjectId.get());
 			encounters.add(encounter);
 			document = encounterWriteConverter.convert(encounter);
 			when(encounterWriteConverterMock.convert(encounter)).thenReturn(encounterWriteConverter.convert(encounter));
@@ -113,8 +114,8 @@ public abstract class TestSetup {
 			encounter = new Encounter();
 			encounter.setParticipant("def");
             encounter.setEncounterClass("zzz");
-			encounter.setId(201522l);
-			encounter.setPatientId(345l);
+			encounter.setId(ObjectId.get());
+			encounter.setPatientId(ObjectId.get());
             encounters.add(encounter);
 			document = encounterWriteConverter.convert(encounter);
 			when(encounterWriteConverterMock.convert(encounter)).thenReturn(encounterWriteConverter.convert(encounter));
@@ -125,7 +126,7 @@ public abstract class TestSetup {
 			PatientWriteConverter patientWriteConverter = new PatientWriteConverter();
 
 			patient = new Patient();
-			patient.setId(1l);
+			patient.setId(ObjectId.get());
 			patient.setFirstName("Justin");
 			patient.setLastName("Grant");
 			patient.setGender(Gender.MALE);
@@ -136,7 +137,7 @@ public abstract class TestSetup {
 			patientDocuments.add(document);
 
 			patient = new Patient();
-			patient.setId(2l);
+			patient.setId(ObjectId.get());
 			patient.setFirstName("Soyun");
 			patient.setLastName("Choi");
 			patient.setGender(Gender.FEMALE);
@@ -147,7 +148,7 @@ public abstract class TestSetup {
 			patientDocuments.add(document);
 			
 			patient = new Patient();
-			patient.setId(3l);
+			patient.setId(ObjectId.get());
 			patient.setFirstName("Rodney");
 			patient.setLastName("Johnson");
 			patient.setGender(Gender.MALE);
@@ -158,7 +159,7 @@ public abstract class TestSetup {
 			patientDocuments.add(document);
 			
 			patient = new Patient();
-			patient.setId(4l);
+			patient.setId(ObjectId.get());
 			patient.setFirstName("Vikram");
 			patient.setLastName("Bhole");
 			patient.setGender(Gender.MALE);
@@ -169,7 +170,7 @@ public abstract class TestSetup {
 			patientDocuments.add(document);
 			
 			patient = new Patient();
-			patient.setId(5l);
+			patient.setId(ObjectId.get());
 			patient.setFirstName("Sunny");
 			patient.setLastName("Vashisht");
 			patient.setGender(Gender.MALE);
@@ -180,7 +181,7 @@ public abstract class TestSetup {
 			patientDocuments.add(document);
 
 			patient = new Patient();
-			patient.setId(6l);
+			patient.setId(ObjectId.get());
 			patient.setFirstName("Shane");
 			patient.setLastName("Lewis");
 			patient.setGender(Gender.MALE);

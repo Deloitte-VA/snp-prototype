@@ -19,23 +19,33 @@ public class PatientWriteConverter implements WriteConverter<Patient, Document> 
     @Override
     public Document convert(final Patient source) {
         Document dbo = new Document();
-        dbo.put(SharedTags.ID_TAG, source.getId());
-        dbo.put(PatientTags.FIRST_NAME_TAG, source.getFirstName());
-        dbo.put(PatientTags.MIDDLE_NAME_TAG, source.getMiddleName());
-        dbo.put(PatientTags.LAST_NAME_TAG, source.getLastName());
-        dbo.put(PatientTags.GENDER_TAG, source.getGender().getId());
-        if (source.getDateOfBirth() == null) {
-            dbo.put(PatientTags.DATE_OF_BIRTH_TAG, null);
-        } else {
+        if (source.getId() != null) {
+            dbo.put(SharedTags.ID_TAG, source.getId());
+        }
+        if (source.getFirstName() != null) {
+            dbo.put(PatientTags.FIRST_NAME_TAG, source.getFirstName());
+        }
+        if (source.getMiddleName() != null) {
+            dbo.put(PatientTags.MIDDLE_NAME_TAG, source.getMiddleName());
+        }
+        if (source.getLastName() != null) {
+            dbo.put(PatientTags.LAST_NAME_TAG, source.getLastName());
+        }
+        if (source.getGender() != null) {
+            dbo.put(PatientTags.GENDER_TAG, source.getGender().getId());
+        }
+        if (source.getDateOfBirth() != null) {
             dbo.put(PatientTags.DATE_OF_BIRTH_TAG, source.getDateOfBirth().toEpochDay());
         }
-        dbo.put(PatientTags.DECEASED, String.valueOf(source.isDeceased()));
-        if (source.getDateDeceased() == null) {
-            dbo.put(PatientTags.DATE_DECEASED, null);
-        } else {
+        if (source.isDeceased() != null) {
+            dbo.put(PatientTags.DECEASED, String.valueOf(source.isDeceased()));
+        }
+        if (source.getDateDeceased() != null) {
             dbo.put(PatientTags.DATE_DECEASED, source.getDateDeceased().toEpochDay());
         }
-        dbo.put(PatientTags.FHIR_ID_TAG, source.getFhirId());
+        if (source.getFhirId() != null) {
+            dbo.put(PatientTags.FHIR_ID_TAG, source.getFhirId());
+        }
         return dbo;
     }
 }

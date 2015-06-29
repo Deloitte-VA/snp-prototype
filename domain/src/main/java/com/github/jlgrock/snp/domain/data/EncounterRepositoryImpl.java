@@ -6,6 +6,7 @@ import com.github.jlgrock.snp.domain.converters.EncounterWriteConverter;
 import com.github.jlgrock.snp.domain.types.Encounter;
 import com.mongodb.client.FindIterable;
 import org.bson.Document;
+import org.bson.types.ObjectId;
 import org.jvnet.hk2.annotations.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +22,7 @@ import java.util.List;
  */
 @Service(name="encounterRepository")
 public class EncounterRepositoryImpl extends
-        AbstractRepositoryImpl<Encounter, Long> implements EncounterRepository {
+        AbstractRepositoryImpl<Encounter, ObjectId> implements EncounterRepository {
 
     private final EncounterReadConverter encounterReadConverter;
 

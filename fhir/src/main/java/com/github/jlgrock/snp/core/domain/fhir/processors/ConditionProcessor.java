@@ -49,7 +49,7 @@ public class ConditionProcessor extends AbstractFhirProcessor {
         Integer classifiedLogicGraphId = getLogicGraphClassifier().classify(logicGraph);
 
         ClassifiedPce cPce = new ClassifiedPce();
-        cPce.setId((long) classifiedLogicGraphId);
+        cPce.setNid((long) classifiedLogicGraphId);
         cPce.setDesc(logicGraph.toString());
 
         classifiedPceRepository.save(cPce);

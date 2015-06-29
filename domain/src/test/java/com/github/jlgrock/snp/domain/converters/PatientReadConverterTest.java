@@ -6,6 +6,7 @@ import com.github.jlgrock.snp.domain.data.SharedTags;
 import com.github.jlgrock.snp.domain.types.Gender;
 import com.github.jlgrock.snp.domain.types.Patient;
 import org.bson.Document;
+import org.bson.types.ObjectId;
 import org.mockito.Mockito;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -18,7 +19,7 @@ public class PatientReadConverterTest {
      */
     @Test
     public void testConvert() {
-        Long id = 123l;
+        ObjectId id = ObjectId.get();
         String fName = "Jerry";
         String mName = "Lee";
         String lName = "Lewis";

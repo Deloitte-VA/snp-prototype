@@ -6,6 +6,7 @@ import com.github.jlgrock.snp.apis.data.Sort;
 import com.github.jlgrock.snp.domain.types.Patient;
 import com.mongodb.client.model.UpdateOptions;
 import org.bson.Document;
+import org.bson.types.ObjectId;
 import org.mockito.Mockito;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -78,7 +79,7 @@ public class AbstractRepositoryImplTest extends TestSetup {
 	
 	@Test
 	public void findOneByIdTest() {
-        Long id = patients.get(0).getId();
+        ObjectId id = patients.get(0).getId();
 		when(dbCollectionMock.find(er1.createIdDocument(id))).thenReturn(patientIterableMock);
 		er1.findOneById(id);
 		Mockito.verify(dbCollectionMock).find(er1.createIdDocument(id));
@@ -87,14 +88,14 @@ public class AbstractRepositoryImplTest extends TestSetup {
 	@Test
 	public void existsByIdTestNotNull() {
 		when(dbCollectionMock.find(Mockito.<Document> any())).thenReturn(patientIterableMock);
-		Long id = patients.get(0).getId();
+		ObjectId id = patients.get(0).getId();
 		Boolean b1 = er1.existsById(id);
 		Assert.assertEquals(b1, Boolean.TRUE);
 	}
 
 	@Test
 	public void existsByIdTestNotExists() {
-        Long id = patients.get(0).getId();
+		ObjectId id = patients.get(0).getId();
 		when(dbCollectionMock.find(er1.createIdDocument(id))).thenReturn(emptyIterableMock);
 		Boolean b1 = er1.existsById(id);
 		Assert.assertEquals(b1, Boolean.FALSE);
@@ -116,7 +117,7 @@ public class AbstractRepositoryImplTest extends TestSetup {
 		
 	@Test
 	public void countTest() {
-		long count1 = ids.get(0);
+		long count1 = 0l;
 		when(dbCollectionMock.count()).thenReturn(count1);
 		long count2 = er1.count();
 		Mockito.verify(dbCollectionMock).count();
@@ -132,7 +133,7 @@ public class AbstractRepositoryImplTest extends TestSetup {
 		
 	@Test
 	public void deleteByIdTest() {
-		Long id = encounters.get(1).getId();
+		ObjectId id = encounters.get(1).getId();
 		er1.deleteById(id);
 		Mockito.verify(dbCollectionMock).deleteMany(er1.createIdDocument(id));
 	}

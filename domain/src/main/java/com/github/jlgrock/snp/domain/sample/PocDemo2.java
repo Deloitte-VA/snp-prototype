@@ -13,6 +13,7 @@ import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
+import org.bson.types.ObjectId;
 import org.jvnet.hk2.annotations.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -78,7 +79,7 @@ public class PocDemo2 implements SampleQuery {
         List<Encounter> myRightArmEncounters = convertDBObjectToJavaEncounterObj(documents);
         LOGGER.debug("myRightArmEncounters=" + myRightArmEncounters + ", size=" + myRightArmEncounters.size());
 
-        Set<Long> uniquePatientIds = new HashSet<>();
+        Set<ObjectId> uniquePatientIds = new HashSet<>();
         for (Encounter rightArmEncounter : myRightArmEncounters) {
             LOGGER.debug("***!myRightArmEncounters patientId=" + rightArmEncounter.getId());
 
@@ -90,7 +91,7 @@ public class PocDemo2 implements SampleQuery {
             minObservationValue = minMaxObservation.getMin();
             maxObservationValue = minMaxObservation.getMax();
 
-            final Long patientId = rightArmEncounter.getId();  //final modifier needed for inner class usage
+            final ObjectId patientId = rightArmEncounter.getId();  //final modifier needed for inner class usage
 
             BasicDBObject query2 = new BasicDBObject("$and",
                     new ArrayList<BasicDBObject>() {{

@@ -154,6 +154,7 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
             return null;
         }
 
+        convertToSetDocument(convertToDBObject(entity));
         dBCollection().updateOne(createIdDocumentFromEntity(entity), convertToSetDocument(convertToDBObject(entity)), updateOptions());
         return entity;
     }
@@ -165,12 +166,16 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
      * @return the set document
      */
     protected Document convertToSetDocument(final Document document) {
+        LOGGER.trace("covert to set document {}", document);
         Document updateDoc = new Document();
         updateDoc.putAll(document);
         updateDoc.remove(SharedTags.ID_TAG);
         Document newDocument = new Document();
-        newDocument.put("$set", updateDoc);
+        if (updateDoc.size() > 0) {
+            newDocument.put("$set", updateDoc);
+        }
         newDocument.put("$setOnInsert", createIdDocument((T) document.get(SharedTags.ID_TAG)));
+        LOGGER.trace("setdocument: {}", newDocument);
         return newDocument;
     }
 
