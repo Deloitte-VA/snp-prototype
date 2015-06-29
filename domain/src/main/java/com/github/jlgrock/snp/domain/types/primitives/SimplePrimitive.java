@@ -113,6 +113,12 @@ public interface SimplePrimitive {
                 }
                 sp = new StringPrimitive((String) value);
                 break;
+            case PCE:
+                if (!(value instanceof Integer)) {
+                    throw new IllegalArgumentException(SimplePrimitive.makeErrorMessage(PrimitiveType.PCE, "PCE", value));
+                }
+                sp = new PcePrimitive((Integer) value);
+                break;
             default:
                 //Can't ever get to this
         }

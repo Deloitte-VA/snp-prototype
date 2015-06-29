@@ -95,7 +95,9 @@ public class PatientController {
     		return Response.status(Status.BAD_REQUEST).entity(response).build();
     	}
     	
-    	Set<Patient> patients = classifierQueryService.findPatientsByNids(new ArrayList<Integer>(){{add(nid);}});
+//    	Set<Patient> patients = classifierQueryService.findPatientsByNids(new ArrayList<Integer>(){{add(nid);}});
+    	
+    	Set<Patient> patients = classifierQueryService.executeKindOfQuery(nid);
     	
     	SuccessResponse response = new SuccessResponse(ResponseStatusCode.OK, patients);
     	return Response.ok().entity(response).build();

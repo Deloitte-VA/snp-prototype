@@ -21,7 +21,7 @@ public abstract class AbstractQuery {
      */
     protected void setup() {
         // TODO this needs to not be hard coded
-        System.setProperty(Constants.DATA_STORE_ROOT_LOCATION_PROPERTY, "/Users/jcis2/SNP-Prototype/data");
+        System.setProperty(Constants.DATA_STORE_ROOT_LOCATION_PROPERTY, "/Users/jlgrock/workspace/snp/data/1.9-data");
         LookupService.startupIsaac();
         HeapUseTicker.start(10);
         ActiveTasksTicker.start(10);

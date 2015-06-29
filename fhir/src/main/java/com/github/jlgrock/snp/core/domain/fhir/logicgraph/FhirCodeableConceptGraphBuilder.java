@@ -10,8 +10,8 @@ import org.slf4j.LoggerFactory;
 /**
  *
  */
-public class FhirCodingGraphBuilder extends AbstractFhirLogicGraphBuilder {
-    private static final Logger LOGGER = LoggerFactory.getLogger(FhirCodingGraphBuilder.class);
+public class FhirCodeableConceptGraphBuilder extends AbstractFhirLogicGraphBuilder {
+    private static final Logger LOGGER = LoggerFactory.getLogger(FhirCodeableConceptGraphBuilder.class);
 
     private final CodeableConcept codeableConcept;
 
@@ -22,7 +22,8 @@ public class FhirCodingGraphBuilder extends AbstractFhirLogicGraphBuilder {
         return (LogicGraph) getLogicalExpressionBuilder().build();
     }
 
-    public FhirCodingGraphBuilder(final LogicGraphClassifier logicGraphClassifierIn, final CodeableConcept codeableConceptIn) {
+    public FhirCodeableConceptGraphBuilder(final LogicGraphClassifier logicGraphClassifierIn,
+                                           final CodeableConcept codeableConceptIn) {
         super(logicGraphClassifierIn);
         codeableConcept = codeableConceptIn;
     }

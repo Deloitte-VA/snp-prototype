@@ -31,7 +31,7 @@ public interface EncounterRepository extends MongoRepository<Encounter, ObjectId
      * @param pceIds the pce ids to find in the observation sub-object
      * @return a list of the encounters that match the criteria
      */
-    List<Encounter> findByPceIdList(List<Long> pceIds);
+    List<Encounter> findByPceIdList(List<Integer> pceIds);
 
     /**
      * Find the unique Encounter by Fhir Id

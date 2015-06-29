@@ -26,4 +26,5 @@ public abstract class AbstractFhirProcessor implements FhirElementProcessorServi
 
     @Override
     public abstract Class processesType();
+
 }

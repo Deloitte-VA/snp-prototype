@@ -8,13 +8,13 @@ import java.util.Objects;
  * An object that has classified all of the PCEs
  */
 public class ClassifiedPce extends AbstractMongoDomainObject {
-    private Long nid;
+    private Integer nid;
 
-    public Long getNid() {
+    public Integer getNid() {
         return nid;
     }
 
-    public void setNid(final Long nidIn) {
+    public void setNid(final Integer nidIn) {
         nid = nidIn;
     }
 
