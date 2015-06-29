@@ -16,7 +16,7 @@ public class PatientProcessor extends AbstractFhirProcessor {
     private static final Logger LOGGER = LoggerFactory.getLogger(PatientProcessor.class);
 
     private final FhirPatientConverter fhirPatientConverter;
-    private final PatientRepository patientRepo;
+    private final PatientRepository patientRepository;
 
     @Inject
     public PatientProcessor(final LogicGraphClassifier logicGraphClassifierIn,
@@ -24,7 +24,7 @@ public class PatientProcessor extends AbstractFhirProcessor {
                             final PatientRepository patientRepositoryIn) {
         super(logicGraphClassifierIn);
         fhirPatientConverter = fhirPatientConverterIn;
-        patientRepo = patientRepositoryIn;
+        patientRepository = patientRepositoryIn;
     }
 
 	@Override
@@ -32,14 +32,19 @@ public class PatientProcessor extends AbstractFhirProcessor {
         Patient patient = (Patient) unmarshalledObject;
         LOGGER.trace("Processing Patient {}", patient);
 
+        com.github.jlgrock.snp.domain.types.Patient patientInDB = patientRepository.findOneByFhirId(identifier);
+
         // convert the patient to a domain type
         com.github.jlgrock.snp.domain.types.Patient patientOut = fhirPatientConverter.convert(patient);
+        if (patientInDB != null) {
+            patientOut.setId(patientInDB.getId());
+        }
 
         // set the fhir id that was passed in
         patientOut.setFhirId(identifier);
 
         // insert/update the patient in the db
-		patientRepo.save(patientOut);
+        patientRepository.save(patientOut);
 	}
 
     @Override
