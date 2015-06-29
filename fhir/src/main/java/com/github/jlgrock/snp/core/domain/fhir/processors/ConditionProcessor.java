@@ -1,7 +1,7 @@
 package com.github.jlgrock.snp.core.domain.fhir.processors;
 
 import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
-import com.github.jlgrock.snp.core.domain.fhir.logicgraph.FhirCodingGraphBuilder;
+import com.github.jlgrock.snp.core.domain.fhir.logicgraph.FhirCodeableConceptGraphBuilder;
 import com.github.jlgrock.snp.core.domain.fhir.model.CodeableConcept;
 import com.github.jlgrock.snp.core.domain.fhir.model.Condition;
 import com.github.jlgrock.snp.domain.data.ClassifiedPceRepository;
@@ -39,11 +39,12 @@ public class ConditionProcessor extends AbstractFhirProcessor {
         Condition condition = (Condition) unmarshalledObject;
 
         // get the code
-        CodeableConcept code = condition.getCode();
+        CodeableConcept codeableConcept = condition.getCode();
 
         // build the logic graph from the code
-        FhirCodingGraphBuilder fhirCodingGraphBuilder = new FhirCodingGraphBuilder(getLogicGraphClassifier(), code);
-        LogicGraph logicGraph = fhirCodingGraphBuilder.build();
+        FhirCodeableConceptGraphBuilder fhirCodeableConceptGraphBuilder =
+                new FhirCodeableConceptGraphBuilder(getLogicGraphClassifier(), codeableConcept);
+        LogicGraph logicGraph = fhirCodeableConceptGraphBuilder.build();
 
         // classify the logic graph
         Integer classifiedLogicGraphId = getLogicGraphClassifier().classify(logicGraph);
@@ -56,13 +57,12 @@ public class ConditionProcessor extends AbstractFhirProcessor {
 
         // get the reference to the encounter so that we can determine where to write to
         String encounterReference = condition.getEncounter().getReference().getValue();
-        String encounterFhirId = parseFhirId(encounterReference);
 
         // if the encounter doesn't exist, create one
-        Encounter encounter = encounterRepository.findOneByFhirId(encounterFhirId);
+        Encounter encounter = encounterRepository.findOneByFhirId(encounterReference);
         if (encounter == null) {
             encounter = new Encounter();
-            encounter.setFhirId(encounterFhirId);
+            encounter.setFhirId(encounterReference);
         }
         // save the encounter
         encounterRepository.save(encounter);

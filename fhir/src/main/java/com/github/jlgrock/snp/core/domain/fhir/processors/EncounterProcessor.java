@@ -51,10 +51,9 @@ public class EncounterProcessor extends AbstractFhirProcessor {
 
         // pull out the fhirId
         String reference = encounter.getSubject().getReference().getValue();
-        String fhirId = parseFhirId(reference);
 
         // find the patient by the fhir id
-        com.github.jlgrock.snp.domain.types.Patient patient = patientRepository.findOneByFhirId(fhirId);
+        com.github.jlgrock.snp.domain.types.Patient patient = patientRepository.findOneByFhirId(reference);
 
         // save the patient if it doesn't exists
         if (patient == null) {
