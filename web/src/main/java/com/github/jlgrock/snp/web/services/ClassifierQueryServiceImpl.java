@@ -74,21 +74,27 @@ public class ClassifierQueryServiceImpl {
         return findPatientsByNids(convertToList(results));
     }
 
+    /**
+     * Execute a query to find objects that are a kind of the object passed in
+     *
+     * @param nid the native identifier to identify the object to find kinds of
+     * @return the result
+     */
+    public Set<Patient> executeKindOfQuery(final int nid) {
+        int[] results = logicGraphClassifierQuery.query(nid);
+        return findPatientsByNids(convertToList(results));
+    }
+
     private List<Integer> convertToList(final int[] ints) {
         return IntStream.of(ints)
                 .boxed()
                 .collect(Collectors.toList());
     }
-    private Set<Patient> findPatientsByNids(final List<Integer> nids) {
-        // Convert the int list to a long list
-        List<Long> longNids = nids
-                .stream()
-                .map(a -> 1L)
-                .collect(Collectors.toList());
 
+    private Set<Patient> findPatientsByNids(final List<Integer> nids) {
         // execute the custom query
         return encounterRepository.
-                findByPceIdList(longNids)
+                findByPceIdList(nids)
                 .stream()
                 .map(Encounter::getPatientId)
                 .distinct()

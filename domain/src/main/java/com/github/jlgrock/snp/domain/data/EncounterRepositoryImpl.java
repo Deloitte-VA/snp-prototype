@@ -68,7 +68,7 @@ public class EncounterRepositoryImpl extends
     }
 
     @Override
-    public List<Encounter> findByPceIdList(final List<Long> pceIds) {
+    public List<Encounter> findByPceIdList(final List<Integer> pceIds) {
         Document query = new Document();
         Document idsIn = new Document();
         idsIn.put("$in", pceIds);
