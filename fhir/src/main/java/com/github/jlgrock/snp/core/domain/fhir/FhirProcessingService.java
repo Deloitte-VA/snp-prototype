@@ -40,14 +40,16 @@ public class FhirProcessingService implements ProcessingService {
         try {
             unmarshalledObject = fhirMarshallerService.unmarshall(input);
         } catch(UnmarshallingException ue) {
-            //TODO
+            LOGGER.error("Unable to unmarshall object", ue);
+            return;
         }
         if (unmarshalledObject != null) {
             FhirElementProcessorService legoElementClassifierService = null;
             try {
                 legoElementClassifierService = fhirElementProcessorFactory.findClassifier(unmarshalledObject);
             } catch (ClassifierException ce) {
-                //TODO
+                LOGGER.error("Unable to find processor", ce);
+                return;
             }
             legoElementClassifierService.process(identifier, unmarshalledObject);
         }

@@ -32,7 +32,8 @@ public class FhirElementProcessorFactoryImpl implements FhirElementProcessorFact
 
         FhirElementProcessorService fhirElementProcessorService = processingServices.get(unmarshalledObject.getClass());
         if (fhirElementProcessorService == null) {
-            throw new ClassifierException("Could not parse unmarshalled object.  Are you sure this is a fhir document?");
+            throw new ClassifierException("Could not parse unmarshalled object for class ["
+                    + unmarshalledObject.getClass().getName() + "].  Are you sure this is a fhir document?");
         }
         return fhirElementProcessorService;
     }

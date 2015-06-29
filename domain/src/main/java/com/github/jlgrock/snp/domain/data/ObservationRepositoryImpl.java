@@ -6,10 +6,17 @@ import com.github.jlgrock.snp.domain.types.Observation;
 import javax.inject.Inject;
 import java.util.Optional;
 
+/**
+ * This class executes queries against the Encounter
+ * Collection (and the Observation subobject) within MongoDB.
+ */
 public class ObservationRepositoryImpl implements ObservationRepository {
 
     private final EncounterRepository encounterRepository;
 
+    /**
+     * @param encounterRepositoryIn the encounter Repository, as it is a union of the observation and encounter
+     */
     @Inject
     public ObservationRepositoryImpl(final EncounterRepository encounterRepositoryIn) {
         encounterRepository = encounterRepositoryIn;

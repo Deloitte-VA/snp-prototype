@@ -10,7 +10,7 @@ import com.github.jlgrock.snp.core.domain.lego.model.Lego;
 import com.github.jlgrock.snp.core.domain.lego.model.LegoList;
 import com.github.jlgrock.snp.core.domain.lego.model.Pncs;
 import com.github.jlgrock.snp.core.domain.lego.model.Stamp;
-import com.github.jlgrock.snp.domain.data.ClassifiedPceStore;
+import com.github.jlgrock.snp.domain.data.ClassifiedPceRepository;
 import com.github.jlgrock.snp.domain.types.ClassifiedPce;
 import gov.vha.isaac.logic.LogicGraph;
 import org.slf4j.Logger;
@@ -26,12 +26,12 @@ public abstract class AbstractLegoProcessor implements LegoElementProcessorServi
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractLegoProcessor.class);
 
     private final LogicGraphClassifier logicGraphClassifier;
-    private final ClassifiedPceStore classifiedPceStore;
+    private final ClassifiedPceRepository classifiedPceRepository;
 
     protected AbstractLegoProcessor(final LogicGraphClassifier logicGraphClassifierIn,
-                                    final ClassifiedPceStore classPceStoreIn) {
+                                    final ClassifiedPceRepository classifiedPceRepositoryIn) {
         logicGraphClassifier = logicGraphClassifierIn;
-        classifiedPceStore = classPceStoreIn;
+        classifiedPceRepository = classifiedPceRepositoryIn;
     }
 
     protected void processLegoList(final LegoList legoListIn) {
@@ -75,7 +75,7 @@ public abstract class AbstractLegoProcessor implements LegoElementProcessorServi
         cPce.setId((long) classifiedLogicGraphId.intValue());
         cPce.setDesc(logicGraph.toString());
 
-        classifiedPceStore.save(cPce);
+        classifiedPceRepository.save(cPce);
     }
 
     protected void processPncs(final Pncs pncs) {

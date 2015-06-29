@@ -76,7 +76,7 @@ public class EncounterRepositoryImpl extends
     }
 
     @Override
-    public Encounter findOneByFhirId(String fhirId) {
+    public Encounter findOneByFhirId(final String fhirId) {
         Document query = new Document();
         query.put(EncounterTags.FHIR_ID, fhirId);
         LOGGER.trace("findOneByID(fhirId={})", fhirId);

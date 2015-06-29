@@ -4,7 +4,7 @@ import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
 import com.github.jlgrock.snp.core.domain.fhir.logicgraph.FhirCodingGraphBuilder;
 import com.github.jlgrock.snp.core.domain.fhir.model.CodeableConcept;
 import com.github.jlgrock.snp.core.domain.fhir.model.Condition;
-import com.github.jlgrock.snp.domain.data.ClassifiedPceStore;
+import com.github.jlgrock.snp.domain.data.ClassifiedPceRepository;
 import com.github.jlgrock.snp.domain.data.EncounterRepository;
 import com.github.jlgrock.snp.domain.types.ClassifiedPce;
 import com.github.jlgrock.snp.domain.types.Encounter;
@@ -21,14 +21,14 @@ public class ConditionProcessor extends AbstractFhirProcessor {
     private static final Logger LOGGER = LoggerFactory.getLogger(ConditionProcessor.class);
 
     private final EncounterRepository encounterRepository;
-    private final ClassifiedPceStore classifiedPceStore;
+    private final ClassifiedPceRepository classifiedPceRepository;
 
     @Inject
     public ConditionProcessor(final LogicGraphClassifier logicGraphClassifierIn,
                               final EncounterRepository encounterRepositoryIn,
-                              final ClassifiedPceStore classifiedPceStoreIn) {
+                              final ClassifiedPceRepository classifiedPceRepositoryIn) {
         super(logicGraphClassifierIn);
-        classifiedPceStore = classifiedPceStoreIn;
+        classifiedPceRepository = classifiedPceRepositoryIn;
         encounterRepository = encounterRepositoryIn;
     }
 
@@ -52,7 +52,7 @@ public class ConditionProcessor extends AbstractFhirProcessor {
         cPce.setId((long) classifiedLogicGraphId);
         cPce.setDesc(logicGraph.toString());
 
-        classifiedPceStore.save(cPce);
+        classifiedPceRepository.save(cPce);
 
         // get the reference to the encounter so that we can determine where to write to
         String encounterReference = condition.getEncounter().getReference().getValue();
