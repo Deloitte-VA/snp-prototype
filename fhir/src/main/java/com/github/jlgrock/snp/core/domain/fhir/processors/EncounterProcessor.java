@@ -56,6 +56,7 @@ public class EncounterProcessor extends AbstractFhirProcessor {
         // Copy the observations over if they exist already
         com.github.jlgrock.snp.domain.types.Encounter foundEncounter = encounterRepository.findOneByFhirId(identifier);
         if (foundEncounter != null) {
+            saveVal.setId(foundEncounter.getId());
             saveVal.setObservations(foundEncounter.getObservations());
         }
 

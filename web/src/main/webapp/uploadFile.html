@@ -4,36 +4,37 @@
 		<meta charset="utf-8"> 
 		<link rel="stylesheet" href="webjars/bootstrap/3.3.4/dist/css/bootstrap.min.css">
 	</head>
-	<body>
+	<body ng-controller="uploader">
 		<div class="container">
-			<div class="row">
-				<h1>Upload a File to a RESTful Web Service</h1>
-			</div>
-			<div class="row">
-				<h3>(JAX-RS using Jersey)</h3>
-			</div>
-			<div class="row">
-				<form ng-controller="uploader">
-					<div class="row">
-						<div class="col-xs-2">
-							<div class="form-group">
-								<select type="text" ng-model="contentType" ng-options="contentType for contentType in contentTypes"></select>
-							</div>
-						</div>
-						<div class="col-xs-6">
-							<div class="form-group">
-								<input type="file" file-input="files" multiple />
-								<li ng-repeat="file in files">{{file.name}}</li>
-							</div>
-						</div>
-						<div class="col-xs-2">
-							<div class="form-group">
-								<button class="btn btn-default" ng-click="upload()"><span class="glyphicon glyphicon-upload"></span>Upload</button>
-							</div>							
-						</div>
+			<h1>Upload a File to a RESTful Web Service</h1>
+			<h3>(JAX-RS using Jersey)</h3>
+			<form ng-submit="upload()" class="form-inline" role="form">
+				<div class="form-group">
+					<div class="col-xs-1">
+						<select type="text" name="contentType" class="form-control" ng-change="showId()" ng-options="contentType for contentType in contentTypes" ng-model="contentType"></select>
 					</div>
+				</div>
+				
+				<div ng-show="showIdentifier" class="form-group">					
+					<div class="col-xs-2">
+						<label class="control-label" for="identifier">Identifier:</label>
+						<input type="text" name="identifier" class="form-control" ng-model="identifier"/>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<div class="col-xs-3">
+						<input type="file" file-input="files" multiple />
+						<li ng-repeat="file in files">{{file.name}}</li>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<div class="col-xs-4">
+						<button class="btn btn-default"><span class="glyphicon glyphicon-upload"></span>Upload</button>
+					</div>							
+				</div>
 				</form>
-			</div>
 			<div ng-show="status">{{status}}</div>
 		</div>
 		

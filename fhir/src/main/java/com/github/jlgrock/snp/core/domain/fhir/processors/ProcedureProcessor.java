@@ -17,6 +17,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class ProcedureProcessor extends AbstractFhirProcessor {
@@ -70,7 +72,12 @@ public class ProcedureProcessor extends AbstractFhirProcessor {
         observation.setFhirId(identifier);
         SimplePrimitive simplePrimitive = SimplePrimitive.createPrimitive(PrimitiveType.PCE.getId(), cPce.getNid());
         observation.setName(simplePrimitive);
-        encounter.getObservations().add(observation);
+
+        List<Observation> observationList = encounter.getObservations();
+        if (observationList == null) {
+            observationList = new ArrayList<>();
+        }
+        observationList.add(observation);
 
         // save the encounter
         encounterRepository.save(encounter);
