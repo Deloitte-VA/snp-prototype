@@ -39,7 +39,7 @@ public class LogicGraphClassifierQueryImpl implements LogicGraphClassifierQuery 
 
     @Override
     public int[] query(final int nid) {
-    	LOGGER.trace("nid={}", nid);
+    	LOGGER.trace("query(nid={})", nid);
         int[] conceptSequences = null;
         SequenceSet results = null;
         results = logicClassifierStore.getTaxonomyService()

@@ -28,7 +28,7 @@ public final class EncounterTags {
     /**
      * The participant, stored as a string description.
      */
-    public static final String PATIENT = "patient";
+    public static final String PATIENT_ID = "patient_id";
 
     /**
      * The list of observations.

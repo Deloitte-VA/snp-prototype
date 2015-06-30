@@ -26,7 +26,7 @@ import com.github.jlgrock.snp.web.resources.query.QueryParamBean;
 import com.github.jlgrock.snp.web.resources.query.QueryParamHandler;
 import com.github.jlgrock.snp.web.resources.query.QueryParamParser;
 import com.github.jlgrock.snp.web.resources.response.ResponseStatusCode;
-import com.github.jlgrock.snp.web.resources.response.SuccessResponse;
+import com.github.jlgrock.snp.web.resources.response.ResponseWrapper;
 import com.github.jlgrock.snp.web.services.ClassifierQueryServiceImpl;
 
 /**
@@ -78,7 +78,7 @@ public class PatientController {
     	if (obs == null) {
     		String errMsg = "Missing 'observation' argument";
     		LOGGER.error(errMsg);
-    		SuccessResponse response = new SuccessResponse(ResponseStatusCode.INVALID_REQUEST, 
+    		ResponseWrapper response = new ResponseWrapper(ResponseStatusCode.INVALID_REQUEST, 
     				null, errMsg);
     		return Response.status(Status.BAD_REQUEST).entity(response).build();
     	}
@@ -90,16 +90,14 @@ public class PatientController {
     	catch (NumberFormatException e) {
     		String errMsg = "Unable to parse 'observation' argument: " + obs;
     		LOGGER.error(errMsg, e);
-    		SuccessResponse response = new SuccessResponse(ResponseStatusCode.INVALID_REQUEST, 
+    		ResponseWrapper response = new ResponseWrapper(ResponseStatusCode.INVALID_REQUEST, 
     				null, errMsg);
     		return Response.status(Status.BAD_REQUEST).entity(response).build();
     	}
     	
-//    	Set<Patient> patients = classifierQueryService.findPatientsByNids(new ArrayList<Integer>(){{add(nid);}});
-    	
     	Set<Patient> patients = classifierQueryService.executeKindOfQuery(nid);
     	
-    	SuccessResponse response = new SuccessResponse(ResponseStatusCode.OK, patients);
+    	ResponseWrapper response = new ResponseWrapper(ResponseStatusCode.OK, patients);
     	return Response.ok().entity(response).build();
     }
 }

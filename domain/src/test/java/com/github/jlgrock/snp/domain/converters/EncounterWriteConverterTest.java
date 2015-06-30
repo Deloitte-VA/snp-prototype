@@ -63,7 +63,7 @@ public class EncounterWriteConverterTest {
         Document dbObj = encounterWriteConverter.convert(encounter);
 
         assertEquals(objectId, dbObj.get(SharedTags.ID_TAG));
-        assertEquals(patientId, dbObj.get(EncounterTags.PATIENT));
+        assertEquals(patientId, dbObj.get(EncounterTags.PATIENT_ID));
         assertEquals(participant, dbObj.get(EncounterTags.PARTICIPANT));
         assertEquals(encounterClass, dbObj.get(EncounterTags.ENCOUNTER_CLASS));
         assertEquals(status, dbObj.get(EncounterTags.STATUS));
