@@ -78,9 +78,6 @@ public class ClassifierResource {
 
         // supports multi-file uploads
         List<FormDataBodyPart> fileParts = form.getFields("file");
-        // this is an empty file needed for html upload
-        // in order to select the media type i.e application/lego+xml
-        FormDataBodyPart mediaType = fileParts.remove(0);
 
         for (FormDataBodyPart filePart : fileParts) {
 
@@ -111,7 +108,7 @@ public class ClassifierResource {
 
             String filePartString = filePart.getEntityAs(String.class);
             // take the media type from the html upload page
-            processFile(filePartString, mediaType.getMediaType(), identifier);
+            processFile(filePartString, filePart.getMediaType(), identifier);
         }
 
         return Response.ok().build();
