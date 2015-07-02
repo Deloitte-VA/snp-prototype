@@ -1,12 +1,11 @@
 package com.github.jlgrock.snp.web.configuration;
 
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import io.dropwizard.jackson.AnnotationSensitivePropertyNamingStrategy;
+import io.dropwizard.jackson.LogbackModule;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
-
-import io.dropwizard.jackson.AnnotationSensitivePropertyNamingStrategy;
-import io.dropwizard.jackson.LogbackModule;
 
 /**
  * The configuration objects associated with Jackson
@@ -28,7 +27,6 @@ public final class JacksonConfig {
         mapper.registerModule(new LogbackModule());
         mapper.setPropertyNamingStrategy(new AnnotationSensitivePropertyNamingStrategy());
         mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
-        mapper.setSerializationInclusion(Include.NON_NULL);
         return mapper;
     }
 }

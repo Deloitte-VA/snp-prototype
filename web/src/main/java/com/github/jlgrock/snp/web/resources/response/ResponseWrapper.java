@@ -3,6 +3,9 @@
  */
 package com.github.jlgrock.snp.web.resources.response;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 
 /**
  * Wrapper class for REST API responses
@@ -10,6 +13,8 @@ package com.github.jlgrock.snp.web.resources.response;
 public class ResponseWrapper {
 	private final ResponseStatusCode status;
 	private final Object results;
+	
+	@JsonInclude(Include.NON_NULL)
 	private final String errorMessage;
 	
 	/**
@@ -18,7 +23,7 @@ public class ResponseWrapper {
 	 * @param statusIn query execution status
 	 * @param resultsIn query results
 	 */
-	public ResponseWrapper(ResponseStatusCode statusIn, Object resultsIn) {
+	public ResponseWrapper(final ResponseStatusCode statusIn, final Object resultsIn) {
 		this(statusIn, resultsIn, null);
 	}
 
