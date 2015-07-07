@@ -1,10 +1,11 @@
 package com.github.jlgrock.snp.web.configuration;
 
+import io.dropwizard.jackson.AnnotationSensitivePropertyNamingStrategy;
+import io.dropwizard.jackson.LogbackModule;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
-import io.dropwizard.jackson.AnnotationSensitivePropertyNamingStrategy;
-import io.dropwizard.jackson.LogbackModule;
 
 /**
  * The configuration objects associated with Jackson

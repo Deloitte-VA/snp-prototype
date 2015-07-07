@@ -18,6 +18,8 @@ import javax.ws.rs.core.Application;
 @HK2
 public abstract class GenericControllerTest extends JerseyTestNg.ContainerPerClassTest {
     private static final Logger LOGGER = LoggerFactory.getLogger(GenericControllerTest.class);
+    
+    public static final int DEFAULT_HK2_TEST_BIND_RANK = 10;
 
 //    @Inject
 //    EncounterRepository encounterRepository;
@@ -63,12 +65,14 @@ public abstract class GenericControllerTest extends JerseyTestNg.ContainerPerCla
 
     protected abstract Class getClassToTest();
 
-    @BeforeClass
+    @Override
+	@BeforeClass
     public void setUp() throws Exception {
         super.setUp();
     }
 
-    @AfterClass
+    @Override
+	@AfterClass
     public void tearDown() throws Exception {
         super.tearDown();
     }

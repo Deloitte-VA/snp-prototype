@@ -2,8 +2,10 @@ package com.github.jlgrock.snp.classifier;
 
 import com.github.jlgrock.snp.apis.classifier.LogicClassifierStore;
 import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifierQuery;
+
 import gov.vha.isaac.logic.LogicGraph;
 import gov.vha.isaac.ochre.collections.SequenceSet;
+
 import org.ihtsdo.otf.tcc.api.concept.ConceptChronicleBI;
 import org.ihtsdo.otf.tcc.api.uuid.UuidT3Generator;
 import org.jvnet.hk2.annotations.Service;
@@ -11,7 +13,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
+
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.UUID;
 
 /**
@@ -35,6 +39,7 @@ public class LogicGraphClassifierQueryImpl implements LogicGraphClassifierQuery 
 
     @Override
     public int[] query(final int nid) {
+    	LOGGER.trace("query(nid={})", nid);
         int[] conceptSequences = null;
         SequenceSet results = null;
         results = logicClassifierStore.getTaxonomyService()
@@ -42,6 +47,7 @@ public class LogicGraphClassifierQueryImpl implements LogicGraphClassifierQuery 
         if (results != null) {
             conceptSequences = results.stream().toArray();
         }
+        LOGGER.debug("conceptSequences={}", Arrays.toString(conceptSequences));
         return conceptSequences;
     }
 
