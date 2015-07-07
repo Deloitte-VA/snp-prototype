@@ -2,64 +2,55 @@
 
 /* Controllers */
 
-var uploadFileControllers = angular.module('UploadFileControllers', []);
-
-uploadFileControllers.controller('uploader', ['$scope', '$http',
-                                    function($scope, $http) {
-									var LEGO = 'LEGO';
-									var FHIR = 'FHIR';									
-									$scope.identifier = null;
-                      				$scope.contentTypes = [
-                      				    LEGO,
-                      					FHIR
-                      				];
+app.controller('Uploader', ['$scope', 'UploadFileFactory',
+  function($scope, UploadFileFactory) {
+    var LEGO = 'LEGO';
+    var FHIR = 'FHIR';
+    //create content type hashmap
+    $scope.contentTypes = {};
+    //add keys to the hashmap
+    $scope.contentTypes[LEGO] = 'application/lego+xml';
+    $scope.contentTypes[FHIR] = 'application/fhir+xml';
+    //create FHIR identifier
+    $scope.identifier = null;
+    //create status returned from RESTful webservice
+    $scope.status = null;
+		
+    //FHIR is selected by default
+    $scope.contentType = $scope.contentTypes[FHIR];
+    $scope.showIdentifier = true;
                       				
-                      				// FHIR is selected by default
-                      				$scope.contentType = FHIR;
-                      				$scope.showIdentifier = true;
-                      				
-                      				$scope.filesChanged = function(elm) {
-                      					$scope.files = elm.files;
-                      					$scope.$apply();
-                      				}
-                      	
-                      				$scope.showId = function() {
-                      					if($scope.contentType == FHIR) {
-                      						$scope.showIdentifier = true;  
-                      					} else {
-                      						$scope.showIdentifier = false;  
-                      					}                      			      
-                      			    };
+    $scope.filesChanged = function(elm) {
+      $scope.files = elm.files;
+      $scope.$apply();
+    }     	
+    
+    $scope.showId = function() {
+      if($scope.contentType == $scope.contentTypes[FHIR]) {
+        $scope.showIdentifier = true;  
+      } else {
+        $scope.showIdentifier = false;  
+      }                      			      
+    };
                       			    
-                      				$scope.upload = function() {
-                      					var fd = new FormData();
-                      					
-                      					if($scope.contentType == LEGO) {
-                      						var blob = new Blob([], {type: 'application/lego+xml'});
-                   							fd.append('file', blob, LEGO);
-                   						} else if($scope.contentType == FHIR) {
-                   							var blob = new Blob([], {type: 'application/fhir+xml'});
-                   							fd.append('file', blob, FHIR);
-                   							fd.append('id', $scope.identifier);
-                      					} else {
-                      						var blob = new Blob([], {type: 'text/xml'});
-                      						fd.append('file', blob);
-                      					}
-                     						
-                   						angular.forEach($scope.files, function(file) {
-                      						fd.append('file', file);
-                      					})
-                      					$http.post('services/classifier', fd,
-                      					{
-                      						transformRequest:angular.identity,
-                   							headers:{'Content-Type':undefined}
-                   						})
-                   						.success(function(data, status, headers, config) {
-                   							$scope.status = status;
-                   						})
-                   						.error(function (data, status, headers, config) {
-                   			                $scope.status = 'Error uploading file: ' + data;
-                   			            });
-                   					}
-                   				}
-                   			]);
+    $scope.upload = function() {
+      var fd = new FormData();
+      if($scope.contentType == $scope.contentTypes[FHIR]) {
+        fd.append('id', $scope.identifier);
+      }
+
+      angular.forEach($scope.files, function(file) {
+        var blob = new Blob([file], {type: $scope.contentType});
+        fd.append('file', blob);
+      });
+
+      UploadFileFactory.upload(fd)
+      .success(function(data, status, headers, config) {
+        $scope.status = status;
+      })
+      .error(function (data, status, headers, config) {
+        $scope.status = 'Error uploading file: ' + data;
+      });
+    }
+  }
+]);
