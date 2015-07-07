@@ -2,7 +2,7 @@
 
 /* Controllers */
 
-app.controller('Uploader', ['$scope', 'UploadFileFactory',
+app.controller('UploadFileController', ['$scope', 'UploadFileFactory',
   function($scope, UploadFileFactory) {
     var LEGO = 'LEGO';
     var FHIR = 'FHIR';

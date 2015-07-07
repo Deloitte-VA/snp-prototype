@@ -1,13 +1,5 @@
-<!DOCTYPE html>
-<html lang="en" ng-app="UploadFileApp">
-	<head>
-		<meta charset="utf-8">
-		<title>SNP Prototype</title>
-		<link rel="stylesheet" href="webjars/bootstrap/3.3.4/dist/css/bootstrap.min.css">
-	</head>
-	<body ng-controller="Uploader">
-		<div class="container">
-			<h1>Upload a File to a RESTful Web Service</h1>
+<div class="container">
+<h1>Upload a File to a RESTful Web Service</h1>
 			<h3>(JAX-RS using Jersey)</h3>
 			<form ng-submit="upload()" class="form-inline" role="form">
 				<div class="row">
@@ -27,22 +19,6 @@
 		            </div>
 		        </div>
 			</form>
-		</div>
 
 		<div ng-show="status">{{status}}</div>
-
-		<script type="text/javascript" src="webjars/angularjs/1.3.15/angular.min.js"></script>
-		
-		<!-- Modules -->
-    	<script type="text/javascript" src="js/UploadFileApp.js"></script>
-
-    	<!-- Controllers -->
-    	<script type="text/javascript" src="js/controllers/UploadFileControllers.js"></script>
-    
-    	<!-- Services -->
-		<script type="text/javascript" src="js/services/UploadFileServices.js"></script>
-
-    	<!-- Directives -->
-    	<script type="text/javascript" src="js/directives/UploadFileDirectives.js"></script>
-	</body>
-</html>
+</div>
