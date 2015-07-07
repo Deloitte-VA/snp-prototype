@@ -56,7 +56,8 @@ public class EncounterRepositoryImpl extends
      * @param date the date to search by
      * @return the results, in the form of a list
      */
-    public List<Encounter> findByDate(final LocalDate date) {
+    @Override
+	public List<Encounter> findByDate(final LocalDate date) {
     	if (date == null){
     		return new ArrayList<>();
     	}
@@ -72,7 +73,7 @@ public class EncounterRepositoryImpl extends
         Document query = new Document();
         Document idsIn = new Document();
         idsIn.put("$in", pceIds);
-        query.put("observations.name", idsIn);
+        query.put("assertions.observable", idsIn);
         return executeQueryAndTransformResults(query);
     }
 

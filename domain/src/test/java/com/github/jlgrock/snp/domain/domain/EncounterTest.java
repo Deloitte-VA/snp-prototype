@@ -1,7 +1,7 @@
 package com.github.jlgrock.snp.domain.domain;
 
 import com.github.jlgrock.snp.domain.types.Encounter;
-import com.github.jlgrock.snp.domain.types.Observation;
+import com.github.jlgrock.snp.domain.types.Assertion;
 import org.bson.types.ObjectId;
 import org.testng.annotations.Test;
 
@@ -29,13 +29,13 @@ public class EncounterTest {
     private String status2 = "PLANNED";
     private String subject2 = "Patient/f201";
 
-    private List<Observation> lt1 = new ArrayList<Observation>() {{
-        Observation observation1 = new Observation();
-        observation1.setIdentifier("abc");
-        Observation observation2 = new Observation();
-        observation1.setIdentifier("def");
-        add(observation1);
-        add(observation2);
+    private List<Assertion> lt1 = new ArrayList<Assertion>() {{
+        Assertion assertion1 = new Assertion();
+        assertion1.setIdentifier("abc");
+        Assertion assertion2 = new Assertion();
+        assertion1.setIdentifier("def");
+        add(assertion1);
+        add(assertion2);
     }};
 
 	@Test
@@ -43,7 +43,7 @@ public class EncounterTest {
 				
 	    Encounter en1 = new Encounter();
 	    
-	    en1.setObservations(lt1);
+	    en1.setAssertions(lt1);
 	    en1.setId(enc1Id);
         en1.setPatientId(patient1Id);
         en1.setEncounterClass(clazz1);
@@ -64,7 +64,7 @@ public class EncounterTest {
 	public void testEqualsAndEquals() {
 	    Encounter en1 = new Encounter();
 	    
-	    en1.setObservations(lt1);
+	    en1.setAssertions(lt1);
 	    en1.setId(enc1Id);
         en1.setPatientId(patient1Id);
         en1.setEncounterClass(clazz1);
@@ -74,7 +74,7 @@ public class EncounterTest {
         
 	    Encounter en2 = new Encounter();
 	    
-	    en2.setObservations(lt1);
+	    en2.setAssertions(lt1);
 	    en2.setId(enc1Id);
         en2.setPatientId(patient1Id);
         en2.setEncounterClass(clazz1);
@@ -90,7 +90,7 @@ public class EncounterTest {
 	public void testEqualsAndHashCodeNegative() {
 	    Encounter en1 = new Encounter();
 	    
-	    en1.setObservations(lt1);
+	    en1.setAssertions(lt1);
 	    en1.setId(enc1Id);
         en1.setPatientId(patient1Id);
         en1.setEncounterClass(clazz1);
@@ -100,7 +100,7 @@ public class EncounterTest {
         
 	    Encounter en2 = new Encounter();
 	    
-	    en2.setObservations(lt1);
+	    en2.setAssertions(lt1);
 	    en2.setId(enc2Id);
         en2.setPatientId(patient2Id);
         en2.setEncounterClass(clazz2);
@@ -122,7 +122,7 @@ public class EncounterTest {
 		en1.setStatus(status1);
 		en1.setSubject(subject1);
 		
-		assertEquals(en1.toString(), "Encounter{id=" + enc1Id.toString() + ", subject=Patient/f203, encounterClass=OUTPATIENT, status=FINISHED, participant=Practitioner/f201, patientId=" + patient1Id.toString() + ", observations=null, fhirId=null}");
+		assertEquals(en1.toString(), "Encounter{id=" + enc1Id.toString() + ", subject=Patient/f203, encounterClass=OUTPATIENT, status=FINISHED, participant=Practitioner/f201, patientId=" + patient1Id.toString() + ", assertions=null, fhirId=null}");
 	}
 
 }

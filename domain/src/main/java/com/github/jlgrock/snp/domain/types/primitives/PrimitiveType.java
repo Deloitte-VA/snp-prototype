@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * The primitive types allowable in the SNP Observation/Assertion objects.
+ * The primitive types allowable in the SNP Assertion/Assertion objects.
  *
  * Based off of the current FHIR primitives
  * http://www.hl7.org/implement/standards/fhir/datatypes.html

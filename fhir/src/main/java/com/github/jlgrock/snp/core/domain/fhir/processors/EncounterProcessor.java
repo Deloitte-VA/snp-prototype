@@ -53,11 +53,11 @@ public class EncounterProcessor extends AbstractFhirProcessor {
         // set the patient for the encounter
         saveVal.setPatientId(patient.getId());
 
-        // Copy the observations over if they exist already
+        // Copy the assertions over if they exist already
         com.github.jlgrock.snp.domain.types.Encounter foundEncounter = encounterRepository.findOneByFhirId(identifier);
         if (foundEncounter != null) {
             saveVal.setId(foundEncounter.getId());
-            saveVal.setObservations(foundEncounter.getObservations());
+            saveVal.setAssertions(foundEncounter.getAssertions());
         }
 
         // insert/update the encounter
