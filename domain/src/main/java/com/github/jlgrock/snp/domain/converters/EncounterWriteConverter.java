@@ -51,7 +51,7 @@ public class EncounterWriteConverter implements WriteConverter<Encounter, Docume
             dbo.put(EncounterTags.PARTICIPANT, source.getParticipant());
         }
         if (source.getPatientId() != null) {
-            dbo.put(EncounterTags.PATIENT, source.getPatientId());
+            dbo.put(EncounterTags.PATIENT_ID, source.getPatientId());
         }
 
         if (source.getObservations() != null ) {

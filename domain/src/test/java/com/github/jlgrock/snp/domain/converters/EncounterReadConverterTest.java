@@ -49,7 +49,7 @@ public class EncounterReadConverterTest {
 
         Document dbObject = new Document() {{
             put(SharedTags.ID_TAG, id);
-            put(EncounterTags.PATIENT, patientId);
+            put(EncounterTags.PATIENT_ID, patientId);
             put(EncounterTags.PARTICIPANT, participant);
             put(EncounterTags.ENCOUNTER_CLASS, encounterClass);
             put(EncounterTags.STATUS, status);
