@@ -6,7 +6,6 @@ import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifierQuery;
 import gov.vha.isaac.logic.LogicGraph;
 import gov.vha.isaac.ochre.collections.SequenceSet;
 
-import org.apache.mahout.math.Arrays;
 import org.ihtsdo.otf.tcc.api.concept.ConceptChronicleBI;
 import org.ihtsdo.otf.tcc.api.uuid.UuidT3Generator;
 import org.jvnet.hk2.annotations.Service;
@@ -16,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import javax.inject.Inject;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.UUID;
 
 /**

@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.github.jlgrock.snp.web.resources.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;

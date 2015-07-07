@@ -109,7 +109,7 @@ public class ClassifierQueryServiceImpl {
                 findByPceIdList(nids)
                 .stream()
                 .map(Encounter::getPatientId)
-//                .distinct()
+                .distinct()
                 .map(patientId -> patientRepository.findOneById(patientId))
                 .collect(Collectors.toSet());
     }
