@@ -49,7 +49,7 @@ public class AndOr implements SampleQuery {
         //
 
         //Now try to construct the query in Java similar to the Javascript query
-        //Note: For the observation.name value the sequence of digits is cast to Long as default Integer
+        //Note: For the assertion.observable value the sequence of digits is cast to Long as default Integer
         //can't hold the value as Integer.MAX_VALUE is 2147483647
         BasicDBObject query = new BasicDBObject("$and",
                 new ArrayList<BasicDBObject>() {{

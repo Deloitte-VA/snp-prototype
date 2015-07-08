@@ -81,14 +81,14 @@ public class PatientController {
 		QueryParamParser queryHandler = new QueryParamParser();
 		QueryParam queryParam = queryHandler.handleRequest(beanUri);
 
-		String obsParam = queryParam.getFilter().get("observation");
+		String obsParam = queryParam.getFilter().get("assertion");
 		String provParam = queryParam.getFilter().get("provenance");
 		String valueParam = queryParam.getFilter().get("value");
 		Integer obs;
 		Integer prov;
 		Integer value;
 		try {
-			obs = parseNid(obsParam, "observation");
+			obs = parseNid(obsParam, "assertion");
 			prov = parseNid(provParam, "provenance");
 			value = parseNid(valueParam, "value");
 		} catch (Exception e) {

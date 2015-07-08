@@ -14,40 +14,32 @@ import java.util.List;
  * against the Encounter Collection within MongoDB.
  */
 @Contract
-public interface EncounterRepository extends
-		MongoRepository<Encounter, ObjectId> {
-	/**
-	 * This function finds a list of encounters on a particular date
-	 *
-	 * @param date
-	 *            parameter of type Date
-	 * @return list of encounters
-	 */
-	List<Encounter> findByDate(LocalDate date);
+public interface EncounterRepository extends MongoRepository<Encounter, ObjectId> {
+    /**
+     * This function finds a list of encounters on a particular date
+     *
+     * @param date parameter of type Date
+     * @return list of encounters
+     */
+    List<Encounter> findByDate(LocalDate date);
+    //public List<Encounter> findByPatientId(Long id);
 
-	// public List<Encounter> findByPatientId(Long id);
+    //@Query("'$or':[{'firstName':{'$regex':?0,'$options':'i'}},{'lastName':{'$regex':?0,'$options':'i'}}]")
+    //List<User> findByEmailOrFirstnameOrLastnameLike(String searchText);
 
-	// @Query("'$or':[{'firstName':{'$regex':?0,'$options':'i'}},{'lastName':{'$regex':?0,'$options':'i'}}]")
-	// List<User> findByEmailOrFirstnameOrLastnameLike(String searchText);
+    /**
+     * Find all of the Encounters based off of whether they have had an observed PCE assertion
+     * @param pceIds the pce ids to find in the assertion sub-object
+     * @return a list of the encounters that match the criteria
+     */
+    List<Encounter> findByPceIdList(List<Integer> pceIds);
 
-	/**
-	 * Find all of the Encounters based off of whether they have had an observed
-	 * PCE observation
-	 * 
-	 * @param pceIds
-	 *            the pce ids to find in the observation sub-object
-	 * @return a list of the encounters that match the criteria
-	 */
-	List<Encounter> findByPceIdList(List<Integer> pceIds);
-
-	/**
-	 * Find the unique Encounter by Fhir Id
-	 * 
-	 * @param fhirId
-	 *            the unique identifier used in fhir
-	 * @return the patient matching the id
-	 */
-	Encounter findOneByFhirId(String fhirId);
+    /**
+     * Find the unique Encounter by Fhir Id
+     * @param fhirId the unique identifier used in fhir
+     * @return the patient matching the id
+     */
+    Encounter findOneByFhirId(String fhirId);
 
 	/**
 	 * Find all Encounters based off of whether they have had a PCE observation

@@ -4,7 +4,7 @@ import com.github.jlgrock.snp.apis.converters.Converter;
 import com.github.jlgrock.snp.domain.data.EncounterTags;
 import com.github.jlgrock.snp.domain.data.PatientRepository;
 import com.github.jlgrock.snp.domain.types.Encounter;
-import com.github.jlgrock.snp.domain.types.Observation;
+import com.github.jlgrock.snp.domain.types.Assertion;
 import org.bson.Document;
 import org.jvnet.hk2.annotations.Service;
 
@@ -21,18 +21,18 @@ import java.util.stream.Collectors;
 @Named
 public class EncounterReadConverter extends AbstractReadConverter implements Converter<Document, Encounter> {
 
-    private final ObservationReadConverter observationReadConverter;
+    private final AssertionReadConverter assertionReadConverter;
     private final PatientRepository patientRepository;
 
     /**
-     * @param observationReadConverterIn object of type ObservationReadConverter that has values from a MongoDB
-     *                                   object stored in an Observation object.
+     * @param assertionReadConverterIn object of type AssertionReadConverter that has values from a MongoDB
+     *                                   object stored in an Assertion object.
      * @param patientRepositoryIn repository to look up the patient.
      */
     @Inject
-    public EncounterReadConverter(final ObservationReadConverter observationReadConverterIn,
+    public EncounterReadConverter(final AssertionReadConverter assertionReadConverterIn,
                                   final PatientRepository patientRepositoryIn) {
-        observationReadConverter = observationReadConverterIn;
+        assertionReadConverter = assertionReadConverterIn;
         patientRepository = patientRepositoryIn;
     }
 
@@ -46,15 +46,15 @@ public class EncounterReadConverter extends AbstractReadConverter implements Con
         encounter.setParticipant(parseString(source, EncounterTags.PARTICIPANT));
         encounter.setPatientId(parseObjectId(source, EncounterTags.PATIENT_ID));
 
-        List<Document> observationsObjs = (List<Document>) source.get(EncounterTags.OBSERVATIONS_TAG);
-        List<Observation> observations = new ArrayList<>();
-        if (observationsObjs != null) {
-            observations = observationsObjs
+        List<Document> assertionsObjs = (List<Document>) source.get(EncounterTags.ASSERTIONS_TAG);
+        List<Assertion> assertions = new ArrayList<>();
+        if (assertionsObjs != null) {
+            assertions = assertionsObjs
                     .stream()
-                    .map(observationReadConverter::convert)
+                    .map(assertionReadConverter::convert)
                     .collect(Collectors.toList());
         }
-        encounter.setObservations(observations);
+        encounter.setAssertions(assertions);
         return encounter;
     }
 }

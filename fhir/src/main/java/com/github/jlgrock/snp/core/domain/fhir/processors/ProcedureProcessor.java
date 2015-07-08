@@ -8,7 +8,7 @@ import com.github.jlgrock.snp.domain.data.ClassifiedPceRepository;
 import com.github.jlgrock.snp.domain.data.EncounterRepository;
 import com.github.jlgrock.snp.domain.types.ClassifiedPce;
 import com.github.jlgrock.snp.domain.types.Encounter;
-import com.github.jlgrock.snp.domain.types.Observation;
+import com.github.jlgrock.snp.domain.types.Assertion;
 import com.github.jlgrock.snp.domain.types.primitives.PrimitiveType;
 import com.github.jlgrock.snp.domain.types.primitives.SimplePrimitive;
 import gov.vha.isaac.logic.LogicGraph;
@@ -41,7 +41,7 @@ public class ProcedureProcessor extends AbstractFhirProcessor {
 	public void process(final String identifier, final Object unmarshalledObject) {
         Procedure procedure = (Procedure) unmarshalledObject;
 
-        LOGGER.trace("processing procedure '{}' into observation(s)", procedure);
+        LOGGER.trace("processing procedure '{}' into assertion(s)", procedure);
 
         // get the reference to the encounter so that we can determine where to write to
         // if the encounter doesn't exist, create one
@@ -68,16 +68,16 @@ public class ProcedureProcessor extends AbstractFhirProcessor {
 
         classifiedPceRepository.save(cPce);
 
-        Observation observation = new Observation();
-        observation.setFhirId(identifier);
+        Assertion assertion = new Assertion();
+        assertion.setFhirId(identifier);
         SimplePrimitive simplePrimitive = SimplePrimitive.createPrimitive(PrimitiveType.PCE.getId(), cPce.getNid());
-        observation.setName(simplePrimitive);
+        assertion.setObservable(simplePrimitive);
 
-        List<Observation> observationList = encounter.getObservations();
-        if (observationList == null) {
-            observationList = new ArrayList<>();
+        List<Assertion> assertionList = encounter.getAssertions();
+        if (assertionList == null) {
+            assertionList = new ArrayList<>();
         }
-        observationList.add(observation);
+        assertionList.add(assertion);
 
         // save the encounter
         encounterRepository.save(encounter);
