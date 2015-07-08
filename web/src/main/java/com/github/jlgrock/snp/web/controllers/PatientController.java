@@ -81,30 +81,45 @@ public class PatientController {
 		QueryParamParser queryHandler = new QueryParamParser();
 		QueryParam queryParam = queryHandler.handleRequest(beanUri);
 
-		String obs = queryParam.getFilter().get("observation");
-		if (obs == null) {
-			String errMsg = "Missing 'observation' argument";
-			LOGGER.error(errMsg);
-			ResponseWrapper response = new ResponseWrapper(
-					ResponseStatusCode.INVALID_REQUEST, null, errMsg);
-			return Response.status(Status.BAD_REQUEST).entity(response).build();
-		}
-
-		Integer nid;
+		String obsParam = queryParam.getFilter().get("observation");
+		String provParam = queryParam.getFilter().get("provenance");
+		String valueParam = queryParam.getFilter().get("value");
+		Integer obs;
+		Integer prov;
+		Integer value;
 		try {
-			nid = Integer.parseInt(obs);
-		} catch (NumberFormatException e) {
-			String errMsg = "Unable to parse 'observation' argument: " + obs;
-			LOGGER.error(errMsg, e);
+			obs = parseNid(obsParam, "observation");
+			prov = parseNid(provParam, "provenance");
+			value = parseNid(valueParam, "value");
+		} catch (Exception e) {
 			ResponseWrapper response = new ResponseWrapper(
-					ResponseStatusCode.INVALID_REQUEST, null, errMsg);
+					ResponseStatusCode.INVALID_REQUEST, null, e.getMessage());
 			return Response.status(Status.BAD_REQUEST).entity(response).build();
 		}
 
-		Set<Patient> patients = classifierQueryService.executeKindOfQuery(nid);
+		Set<Patient> patients = classifierQueryService.executeKindOfQuery(obs);
 
 		ResponseWrapper response = new ResponseWrapper(ResponseStatusCode.OK,
 				patients);
 		return Response.ok().entity(response).build();
+	}
+	
+	private Integer parseNid(String sNid, String paramName) throws Exception {
+		if (sNid == null) {
+			String errMsg = "Missing '" + paramName + "' argument";
+			LOGGER.error(errMsg);
+			throw new Exception(errMsg);
+		}
+
+		Integer nid;
+		try {
+			nid = Integer.parseInt(sNid);
+		} catch (NumberFormatException e) {
+			String errMsg = "Unable to parse '" + paramName + "' argument: " + sNid;
+			LOGGER.error(errMsg, e);
+			throw new Exception(errMsg, e);
+		}
+		
+		return nid;
 	}
 }
