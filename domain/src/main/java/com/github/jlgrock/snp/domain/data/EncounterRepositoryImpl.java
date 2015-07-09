@@ -86,7 +86,7 @@ public class EncounterRepositoryImpl extends
 	public List<Encounter> findByObservableIdListAndProvenanceIdListAndValueIdList(
 			final List<Integer> observableIds,
 			final List<Integer> provenanceIds, final List<Integer> valueIds) {
-		Bson query = new Document();
+		Bson query;// = new Document();
 //		Document observableIdsIn = new Document();
 //		Document provenanceIdsIn = new Document();
 //		Document valuesIdsIn = new Document();

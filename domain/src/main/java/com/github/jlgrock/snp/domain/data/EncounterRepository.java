@@ -45,10 +45,10 @@ public interface EncounterRepository extends MongoRepository<Encounter, ObjectId
 	 * Find all Encounters based off of whether they have had a PCE observation
 	 * and PCE provenance and PCE value
 	 * 
-	 * @param observableIds
-	 * @param provenanceIds
-	 * @param valueIds
-	 * @return
+	 * @param observableIds observable PCE IDs to find in the assertion sub-object
+	 * @param provenanceIds provenance PCE IDs to find in the assertion sub-object
+	 * @param valueIds value PCE IDs to find in the assertion sub-object
+	 * @return a list of the encounters that match the criteria
 	 */
 	List<Encounter> findByObservableIdListAndProvenanceIdListAndValueIdList(
 			List<Integer> observableIds, List<Integer> provenanceIds,

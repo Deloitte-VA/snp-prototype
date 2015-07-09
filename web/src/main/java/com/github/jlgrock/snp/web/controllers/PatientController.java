@@ -97,14 +97,15 @@ public class PatientController {
 			return Response.status(Status.BAD_REQUEST).entity(response).build();
 		}
 
-		Set<Patient> patients = classifierQueryService.executeKindOfQuery(obs);
+		Set<Patient> patients = classifierQueryService.executeKindOfQuery(obs,
+				prov, value);
 
 		ResponseWrapper response = new ResponseWrapper(ResponseStatusCode.OK,
 				patients);
 		return Response.ok().entity(response).build();
 	}
-	
-	private Integer parseNid(String sNid, String paramName) throws Exception {
+
+	private Integer parseNid(final String sNid, final String paramName) throws Exception {
 		if (sNid == null) {
 			String errMsg = "Missing '" + paramName + "' argument";
 			LOGGER.error(errMsg);
@@ -115,11 +116,12 @@ public class PatientController {
 		try {
 			nid = Integer.parseInt(sNid);
 		} catch (NumberFormatException e) {
-			String errMsg = "Unable to parse '" + paramName + "' argument: " + sNid;
+			String errMsg = "Unable to parse '" + paramName + "' argument: "
+					+ sNid;
 			LOGGER.error(errMsg, e);
 			throw new Exception(errMsg, e);
 		}
-		
+
 		return nid;
 	}
 }
