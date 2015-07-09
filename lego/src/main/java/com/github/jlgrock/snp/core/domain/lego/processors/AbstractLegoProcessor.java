@@ -26,11 +26,14 @@ public abstract class AbstractLegoProcessor implements LegoElementProcessorServi
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractLegoProcessor.class);
 
     private final LogicGraphClassifier logicGraphClassifier;
+    private final LegoExpressionGraphBuilder legoExpressionGraphBuilder;
     private final ClassifiedPceRepository classifiedPceRepository;
 
     protected AbstractLegoProcessor(final LogicGraphClassifier logicGraphClassifierIn,
+                                    final LegoExpressionGraphBuilder legoExpressionGraphBuilderIn,
                                     final ClassifiedPceRepository classifiedPceRepositoryIn) {
         logicGraphClassifier = logicGraphClassifierIn;
+        legoExpressionGraphBuilder = legoExpressionGraphBuilderIn;
         classifiedPceRepository = classifiedPceRepositoryIn;
     }
 
@@ -65,8 +68,7 @@ public abstract class AbstractLegoProcessor implements LegoElementProcessorServi
 
     protected void processExpression(final Expression expression) {
         // Create the logic graph
-        LegoExpressionGraphBuilder legoLogicGraphBuilder = new LegoExpressionGraphBuilder(logicGraphClassifier, expression);
-        LogicGraph logicGraph = legoLogicGraphBuilder.build();
+        LogicGraph logicGraph = legoExpressionGraphBuilder.build(expression);
         LOGGER.debug("executing classifier logic on logic graph...");
         Integer classifiedLogicGraphId = logicGraphClassifier.classify(logicGraph);
         LOGGER.debug("received id: {}", classifiedLogicGraphId);

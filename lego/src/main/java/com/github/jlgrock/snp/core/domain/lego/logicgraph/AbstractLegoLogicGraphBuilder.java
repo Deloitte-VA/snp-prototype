@@ -185,6 +185,6 @@ public abstract class AbstractLegoLogicGraphBuilder {
         return andNode;
     }
 
-    public abstract LogicGraph build();
+    public abstract LogicGraph build(final Expression expression);
 
 }
