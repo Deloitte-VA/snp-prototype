@@ -46,9 +46,9 @@ public class PocDemoAggregationPipeline implements SampleQuery {
 				         db.encounters.aggregate([
 				    {
 				        $match: {
-				            "observations.name": {$in: [5695930304, 5695930310]},
-				            "observations.name_type": 1,
-				            "observations.value": {$gt: 140}    
+				            "assertions.observable": {$in: [5695930304, 5695930310]},
+				            "assertions.observable_type": 1,
+				            "assertions.value": {$gt: 140}    
 				        }
 				    },
 				    {
@@ -70,13 +70,13 @@ public class PocDemoAggregationPipeline implements SampleQuery {
         MongoCollection<Document> testCollection = db.getCollection("encounters");
         
         //Now try to construct the query in Java similar to the Javascript query
-        //Note: For the observation.name value the sequence of digits is cast to Long as default Integer
+        //Note: For the assertions.observable value the sequence of digits is cast to Long as default Integer
         //can't hold the value as Integer.MAX_VALUE is 2147483647
         
         // create our pipeline operations, first with the $match
-        Document match = new Document("$match", new Document("observations.name", (Long) 5695930304L)
-        .append("observations.name_type", 1)
-        .append("observations.value", new Document("$gt", 140)) );
+        Document match = new Document("$match", new Document("assertions.observable", (Long) 5695930304L)
+        .append("assertions.observable_type", 1)
+        .append("assertions.value", new Document("$gt", 140)) );
         
         // Now the $group operation based on patient_id
         Document groupFields = new Document( "_id", "$patient_id");

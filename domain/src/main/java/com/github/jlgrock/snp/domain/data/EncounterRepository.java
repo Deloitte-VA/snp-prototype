@@ -27,8 +27,8 @@ public interface EncounterRepository extends MongoRepository<Encounter, ObjectId
     //List<User> findByEmailOrFirstnameOrLastnameLike(String searchText);
 
     /**
-     * Find all of the Encounters based off of whether they have had an observed PCE observation
-     * @param pceIds the pce ids to find in the observation sub-object
+     * Find all of the Encounters based off of whether they have had an observed PCE assertion
+     * @param pceIds the pce ids to find in the assertion sub-object
      * @return a list of the encounters that match the criteria
      */
     List<Encounter> findByPceIdList(List<Integer> pceIds);

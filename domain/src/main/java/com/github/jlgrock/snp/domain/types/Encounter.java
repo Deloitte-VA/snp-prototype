@@ -9,7 +9,7 @@ import java.util.Objects;
 
 /**
  * The domain object that represents a single encounter in a patient visit.  Each encounter can consist
- * of multiple {@link com.github.jlgrock.snp.domain.types.Observation Observation} objects.
+ * of multiple {@link com.github.jlgrock.snp.domain.types.Assertion Assertion} objects.
  */
 public class Encounter extends AbstractMongoDomainObject {
 
@@ -26,7 +26,7 @@ public class Encounter extends AbstractMongoDomainObject {
     @NotNull
     private ObjectId patientId;
 
-    private List<Observation> observations;
+    private List<Assertion> assertions;
 
     @Override
     public String toString() {
@@ -37,14 +37,14 @@ public class Encounter extends AbstractMongoDomainObject {
                 .add("status", status)
                 .add("participant", participant)
                 .add("patientId", patientId)
-                .add("observations", observations)
+                .add("assertions", assertions)
                 .add("fhirId", fhirId)
                 .toString();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), subject, encounterClass, status, participant, patientId, observations);
+        return Objects.hash(getId(), subject, encounterClass, status, participant, patientId, assertions);
     }
 
     @Override
@@ -62,7 +62,7 @@ public class Encounter extends AbstractMongoDomainObject {
                 && Objects.equals(status, other.status)
                 && Objects.equals(participant, other.participant)
                 && Objects.equals(patientId, other.patientId)
-                && Objects.equals(observations, other.observations)
+                && Objects.equals(assertions, other.assertions)
                 && Objects.equals(fhirId, other.fhirId);
     }
 
@@ -74,12 +74,12 @@ public class Encounter extends AbstractMongoDomainObject {
         fhirId = fhirIdIn;
     }
 
-    public List<Observation> getObservations() {
-        return observations;
+    public List<Assertion> getAssertions() {
+        return assertions;
     }
 
-    public void setObservations(final List<Observation> pObservations) {
-        observations = pObservations;
+    public void setAssertions(final List<Assertion> pAssertions) {
+        assertions = pAssertions;
     }
 
     public ObjectId getPatientId() {

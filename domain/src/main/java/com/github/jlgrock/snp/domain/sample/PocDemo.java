@@ -36,14 +36,14 @@ public class PocDemo implements SampleQuery {
         MongoCollection<Document> testCollection = mongoDbFactory.db().getCollection("encounters");
 
         // Now try to construct the query in Java similar to the Javascript query
-        // Note: For the observation.name value the sequence of digits is cast to Long as default Integer
+        // Note: For the assertions.observable value the sequence of digits is cast to Long as default Integer
         // can't hold the value as Integer.MAX_VALUE is 2147483647
         Document query = new Document("distinct", "encounters")
                 .append("key", "patient_id")
                 .append("query",
-                        new BasicDBObject("observations.name", (Long) 5695930304L)
-                                .append("observations.name_type", 1)
-                                .append("observations.value",
+                        new BasicDBObject("assertions.observable", (Long) 5695930304L)
+                                .append("assertions.observable_type", 1)
+                                .append("assertions.value",
                                         new BasicDBObject("$gt", 140))
                 );
 

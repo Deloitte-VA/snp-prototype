@@ -1,11 +1,11 @@
 package com.github.jlgrock.snp.domain.sample;
 /**
  * 
- * Returns the minimum and maximum values from the input observation values. This method is used to obtain 
- * the minimum and maximum values from the given observation values. The observation values for an encounter 
+ * Returns the minimum and maximum values from the input assertion values. This method is used to obtain 
+ * the minimum and maximum values from the given assertion values. The assertion values for an encounter 
  * are provided as the input parameter (argument) to this method.
  */
-public class MinMaxObservationValue {
+public class MinMaxAssertionValue {
 	private Long min;
 	private Long max;
 	

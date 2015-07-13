@@ -3,7 +3,7 @@ package com.github.jlgrock.snp.domain.data;
 import com.github.jlgrock.snp.apis.connection.MongoDbFactory;
 import com.github.jlgrock.snp.domain.converters.EncounterReadConverter;
 import com.github.jlgrock.snp.domain.converters.EncounterWriteConverter;
-import com.github.jlgrock.snp.domain.converters.ObservationWriteConverter;
+import com.github.jlgrock.snp.domain.converters.AssertionWriteConverter;
 import com.github.jlgrock.snp.domain.converters.PatientReadConverter;
 import com.github.jlgrock.snp.domain.converters.PatientWriteConverter;
 import com.github.jlgrock.snp.domain.types.Encounter;
@@ -98,7 +98,7 @@ public abstract class TestSetup {
 
 			// create list of encounters
 			Encounter encounter;
-			EncounterWriteConverter encounterWriteConverter = new EncounterWriteConverter(new ObservationWriteConverter());
+			EncounterWriteConverter encounterWriteConverter = new EncounterWriteConverter(new AssertionWriteConverter());
 
 			encounter = new Encounter();
 			encounter.setParticipant("abc");

@@ -81,9 +81,9 @@ public class PatientController {
 		QueryParamParser queryHandler = new QueryParamParser();
 		QueryParam queryParam = queryHandler.handleRequest(beanUri);
 
-		String obs = queryParam.getFilter().get("observation");
+		String obs = queryParam.getFilter().get("assertion");
 		if (obs == null) {
-			String errMsg = "Missing 'observation' argument";
+			String errMsg = "Missing 'assertion' argument";
 			LOGGER.error(errMsg);
 			ResponseWrapper response = new ResponseWrapper(
 					ResponseStatusCode.INVALID_REQUEST, null, errMsg);
@@ -94,7 +94,7 @@ public class PatientController {
 		try {
 			nid = Integer.parseInt(obs);
 		} catch (NumberFormatException e) {
-			String errMsg = "Unable to parse 'observation' argument: " + obs;
+			String errMsg = "Unable to parse 'assertion' argument: " + obs;
 			LOGGER.error(errMsg, e);
 			ResponseWrapper response = new ResponseWrapper(
 					ResponseStatusCode.INVALID_REQUEST, null, errMsg);
