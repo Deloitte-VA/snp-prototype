@@ -19,10 +19,10 @@ app.controller('DynamicQueryController', ['$scope', 'dynamicQueryFactory',
     	dynamicQueryFactory.getPatients($scope.formData)
             .success(function (data, status, headers, config) {
             	$scope.status = status;
-                $scope.patients = data;
+                $scope.patients = data.results;
             })
             .error(function (data, status, headers, config) {
-                $scope.status = 'Unable to load patient data: ' + data;
+                $scope.status = 'Unable to load patient data: ' + status;
             });
     };
 }]);
