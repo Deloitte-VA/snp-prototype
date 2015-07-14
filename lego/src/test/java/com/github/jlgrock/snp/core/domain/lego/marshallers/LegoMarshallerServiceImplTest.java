@@ -33,6 +33,4 @@ public class LegoMarshallerServiceImplTest extends AbstractClassificationTest {
         Assert.assertTrue(o instanceof LegoList);
     }
 
-
-
 }

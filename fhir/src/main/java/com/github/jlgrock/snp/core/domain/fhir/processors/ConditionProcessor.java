@@ -31,7 +31,8 @@ public class ConditionProcessor extends AbstractFhirProcessor {
     @Inject
     public ConditionProcessor(final LogicGraphClassifier logicGraphClassifierIn,
                               final EncounterRepository encounterRepositoryIn,
-                              final ClassifiedPceRepository classifiedPceRepositoryIn) {
+                              final ClassifiedPceRepository classifiedPceRepositoryIn,
+                              final ObservationFactory observationFactoryIn) {
         super(logicGraphClassifierIn);
         classifiedPceRepository = classifiedPceRepositoryIn;
         encounterRepository = encounterRepositoryIn;
@@ -62,15 +63,15 @@ public class ConditionProcessor extends AbstractFhirProcessor {
 
         // classify the logic graph
         Integer classifiedLogicGraphId = getLogicGraphClassifier().classify(logicGraph);
-        ClassifiedPce cPce = new ClassifiedPce();
-        cPce.setNid(classifiedLogicGraphId);
-        cPce.setDesc(logicGraph.toString());
+        ClassifiedPce classifiedPce = new ClassifiedPce();
+        classifiedPce.setNid(classifiedLogicGraphId);
+        classifiedPce.setDesc(logicGraph.toString());
 
-        classifiedPceRepository.save(cPce);
+        classifiedPceRepository.save(classifiedPce);
 
         Observation observation = new Observation();
         observation.setFhirId(identifier);
-        SimplePrimitive simplePrimitive = SimplePrimitive.createPrimitive(PrimitiveType.PCE.getId(), cPce.getNid());
+        SimplePrimitive simplePrimitive = SimplePrimitive.createPrimitive(PrimitiveType.PCE.getId(), classifiedPce.getNid());
         observation.setName(simplePrimitive);
         List<Observation> observationList = encounter.getObservations();
         if (observationList == null) {
