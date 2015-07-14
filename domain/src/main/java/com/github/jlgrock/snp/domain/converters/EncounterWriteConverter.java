@@ -4,7 +4,7 @@ import com.github.jlgrock.snp.apis.converters.WriteConverter;
 import com.github.jlgrock.snp.domain.data.EncounterTags;
 import com.github.jlgrock.snp.domain.data.SharedTags;
 import com.github.jlgrock.snp.domain.types.Encounter;
-import com.github.jlgrock.snp.domain.types.Observation;
+import com.github.jlgrock.snp.domain.types.Assertion;
 import com.mongodb.BasicDBList;
 import org.bson.Document;
 import org.jvnet.hk2.annotations.Service;
@@ -21,15 +21,15 @@ import java.util.stream.Collectors;
 @Named
 public class EncounterWriteConverter implements WriteConverter<Encounter, Document> {
 
-    private final ObservationWriteConverter observationWriteConverter;
+    private final AssertionWriteConverter assertionWriteConverter;
     /**
      * 
-     * @param observationWriteConverterIn object of type ObservationWriteConverter that has values from
-     *                                    an Observation object stored in a MongoDB object.
+     * @param assertionWriteConverterIn object of type AssertionWriteConverter that has values from
+     *                                    an Assertion object stored in a MongoDB object.
      */
     @Inject
-    public EncounterWriteConverter(final ObservationWriteConverter observationWriteConverterIn) {
-        observationWriteConverter = observationWriteConverterIn;
+    public EncounterWriteConverter(final AssertionWriteConverter assertionWriteConverterIn) {
+        assertionWriteConverter = assertionWriteConverterIn;
     }
 
     @Override
@@ -51,20 +51,20 @@ public class EncounterWriteConverter implements WriteConverter<Encounter, Docume
             dbo.put(EncounterTags.PARTICIPANT, source.getParticipant());
         }
         if (source.getPatientId() != null) {
-            dbo.put(EncounterTags.PATIENT, source.getPatientId());
+            dbo.put(EncounterTags.PATIENT_ID, source.getPatientId());
         }
 
-        if (source.getObservations() != null ) {
-            List<Observation> observations = source.getObservations();
+        if (source.getAssertions() != null ) {
+            List<Assertion> assertions = source.getAssertions();
 
-            BasicDBList observationObjs = new BasicDBList();
-            if (observations != null) {
-                observationObjs = observations
+            BasicDBList assertionObjs = new BasicDBList();
+            if (assertions != null) {
+                assertionObjs = assertions
                         .stream()
-                        .map(observation -> observationWriteConverter.convert(observation))
+                        .map(assertion -> assertionWriteConverter.convert(assertion))
                         .collect(Collectors.toCollection(BasicDBList::new));
             }
-            dbo.put(EncounterTags.OBSERVATIONS_TAG, observationObjs);
+            dbo.put(EncounterTags.ASSERTIONS_TAG, assertionObjs);
         }
         return dbo;
     }

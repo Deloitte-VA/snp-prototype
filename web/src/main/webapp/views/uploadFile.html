@@ -1,0 +1,24 @@
+<div class="container">
+<h1>Upload a File to a RESTful Web Service</h1>
+			<h3>(JAX-RS using Jersey)</h3>
+			<form ng-submit="upload()" class="form-inline" role="form">
+				<div class="row">
+		            <div class="col-xs-1">
+		                <select type="text" name="contentType" class="form-control" ng-change="showId()" ng-options="key for (key, c) in contentTypes" ng-model="contentType"></select>
+		            </div>
+		            <div ng-show="showIdentifier" class="col-xs-3">
+		                <label class="control-label" for="identifier">Identifier:</label>
+						<input type="text" name="identifier" class="form-control" ng-model="identifier"/>
+					</div>
+		            <div class="col-xs-3">
+		                <input type="file" file-input="files" multiple />
+						<li ng-repeat="file in files">{{file.name}}</li>
+		            </div>
+		            <div class="col-xs-1">
+		                <button class="btn btn-default"><span class="glyphicon glyphicon-upload"></span>Upload</button>
+		            </div>
+		        </div>
+			</form>
+
+		<div ng-show="status">{{status}}</div>
+</div>

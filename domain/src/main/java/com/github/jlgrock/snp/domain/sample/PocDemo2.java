@@ -5,7 +5,7 @@ import com.github.jlgrock.snp.apis.exceptions.DataAccessException;
 import com.github.jlgrock.snp.apis.sample.SampleQuery;
 import com.github.jlgrock.snp.domain.converters.EncounterReadConverter;
 import com.github.jlgrock.snp.domain.types.Encounter;
-import com.github.jlgrock.snp.domain.types.Observation;
+import com.github.jlgrock.snp.domain.types.Assertion;
 import com.github.jlgrock.snp.domain.types.primitives.IntegerPrimitive;
 import com.github.jlgrock.snp.domain.types.primitives.PrimitiveType;
 import com.mongodb.BasicDBObject;
@@ -42,7 +42,7 @@ public class PocDemo2 implements SampleQuery {
     /**
      * Will set up the class for querying
      *
-     * @param encounterReadConverterIn the coverter to allow quick serialization of the Encounter domain object
+     * @param encounterReadConverterIn the converter to allow quick serialization of the Encounter domain object
      * @param mongoDbFactoryIn the mongoDB access
      */
     @Inject
@@ -61,9 +61,9 @@ public class PocDemo2 implements SampleQuery {
         //First, get the "encounters" collection from then database
         MongoCollection<Document> testCollection = db.getCollection("encounters");
 
-        //Query to get encounters with right arm observations
-        BasicDBObject query = new BasicDBObject("observations.name", (Long) 5695930304L)
-                .append("observations.name_type", 1);
+        //Query to get encounters with right arm assertions
+        BasicDBObject query = new BasicDBObject("assertions.observable", 5695930304L)
+                .append("assertions.observable_type", 1);
 
         //Just for our display purpose
         LOGGER.trace("Filtering query: " + query);
@@ -83,26 +83,26 @@ public class PocDemo2 implements SampleQuery {
         for (Encounter rightArmEncounter : myRightArmEncounters) {
             LOGGER.debug("***!myRightArmEncounters patientId=" + rightArmEncounter.getId());
 
-            MinMaxObservationValue minMaxObservation;
-            final Long minObservationValue; //final modifier needed for inner class usage
-            final Long maxObservationValue; //final modifier needed for inner class usage
+            MinMaxAssertionValue minMaxAssertion;
+            final Long minAssertionValue; //final modifier needed for inner class usage
+            final Long maxAssertionValue; //final modifier needed for inner class usage
 
-            minMaxObservation = findMinMaxObservation(rightArmEncounter.getObservations());
-            minObservationValue = minMaxObservation.getMin();
-            maxObservationValue = minMaxObservation.getMax();
+            minMaxAssertion = findMinMaxAssertion(rightArmEncounter.getAssertions());
+            minAssertionValue = minMaxAssertion.getMin();
+            maxAssertionValue = minMaxAssertion.getMax();
 
             final ObjectId patientId = rightArmEncounter.getId();  //final modifier needed for inner class usage
 
             BasicDBObject query2 = new BasicDBObject("$and",
                     new ArrayList<BasicDBObject>() {{
-                        add(new BasicDBObject("observations.name", (Long) 5695930310L)
-                                        .append("observations.name_type", 1)
+                        add(new BasicDBObject("assertions.observable", (Long) 5695930310L)
+                                        .append("assertions.observable_type", 1)
                                         .append("patient_id", patientId)
                         );
                         add(new BasicDBObject("$or",
                                         new ArrayList<BasicDBObject>() {{
-                                            add(new BasicDBObject("observations.value", new BasicDBObject("$gt", maxObservationValue + 10)));
-                                            add(new BasicDBObject("observations.value", new BasicDBObject("$lt", minObservationValue - 10)));
+                                            add(new BasicDBObject("assertions.value", new BasicDBObject("$gt", maxAssertionValue + 10)));
+                                            add(new BasicDBObject("assertions.value", new BasicDBObject("$lt", minAssertionValue - 10)));
                                         }}
                                 )
                         );
@@ -134,20 +134,20 @@ public class PocDemo2 implements SampleQuery {
     }
 
     /**
-     * Returns the minimum and maximum values from the input observation values.
-     * This method is used to obtain the minimum and maximum values from the given observation values.
-     * The observation values for an encounter are provided as input parameter (argument) to this method.
+     * Returns the minimum and maximum values from the input assertion values.
+     * This method is used to obtain the minimum and maximum values from the given assertion values.
+     * The assertion values for an encounter are provided as input parameter (argument) to this method.
      */
-    private MinMaxObservationValue findMinMaxObservation(final List<Observation> observations) {
+    private MinMaxAssertionValue findMinMaxAssertion(final List<Assertion> assertions) {
 
         Long min = null;
         Long max = null;
 
-        MinMaxObservationValue minMaxObservationValue = new MinMaxObservationValue();
+        MinMaxAssertionValue minMaxAssertionValue = new MinMaxAssertionValue();
 
-        for (Observation observation : observations) {
-            if (observation.getValue().getType() == PrimitiveType.INTEGER) {
-                IntegerPrimitive integerPrimitive = (IntegerPrimitive) observation.getValue();
+        for (Assertion assertion : assertions) {
+            if (assertion.getValue().getType() == PrimitiveType.INTEGER) {
+                IntegerPrimitive integerPrimitive = (IntegerPrimitive) assertion.getValue();
                 if (max == null || integerPrimitive.getValue() > max) {
                     max = integerPrimitive.getValue();
                 }
@@ -158,12 +158,12 @@ public class PocDemo2 implements SampleQuery {
             }
         }
 
-        //Set the minimum and maximum values from the input observations
-        minMaxObservationValue.setMin(min);
-        minMaxObservationValue.setMax(max);
+        //Set the minimum and maximum values from the input a
+        minMaxAssertionValue.setMin(min);
+        minMaxAssertionValue.setMax(max);
 
         //Return the minimum and maximum values
-        return minMaxObservationValue;
+        return minMaxAssertionValue;
     }
 
     /**

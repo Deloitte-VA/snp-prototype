@@ -110,13 +110,18 @@
 
 		<!-- AngularJS dependencies -->
 		<dependency>
-  			<groupId>org.webjars</groupId>
+  			<groupId>org.webjars.bower</groupId>
   			<artifactId>angularjs</artifactId>
 		</dependency>
 	
 		<dependency>
 	    	<groupId>org.webjars.bower</groupId>
 	    	<artifactId>angular-resource</artifactId>
+		</dependency>
+	
+		<dependency>
+		    <groupId>org.webjars.bower</groupId>
+		    <artifactId>angular-route</artifactId>
 		</dependency>
 	
 		<dependency>
@@ -129,6 +134,11 @@
     		<artifactId>underscore</artifactId>
 		</dependency>
 		
+		<dependency>
+			<groupId>org.webjars.bower</groupId>
+			<artifactId>jquery</artifactId>
+		</dependency>
+			
         <!-- Test dependencies -->
         <dependency>
             <groupId>org.glassfish.jersey.test-framework</groupId>

@@ -8,14 +8,16 @@ import java.time.Instant;
 
 /**
  * 
- * An Observation is a single measurement or perception during a patient visit.
+ * An Assertion is a single measurement or perception during a patient visit.
  */
-public class Observation {
+public class Assertion {
 
-    private SimplePrimitive name;
+    private SimplePrimitive observable;
     private SimplePrimitive value;
+    private SimplePrimitive provenance;
     private String applies;
     private Instant issued;
+    private TimeSpan timeSpan;
 
     private String identifier;
     private String subject;
@@ -29,12 +31,12 @@ public class Observation {
         fhirId = fhirIdIn;
     }
 
-    public SimplePrimitive getName() {
-        return name;
+    public SimplePrimitive getObservable() {
+        return observable;
     }
 
-    public void setName(final SimplePrimitive pName) {
-        this.name = pName;
+    public void setObservable(final SimplePrimitive pObservable) {
+        this.observable = pObservable;
     }
 
     public SimplePrimitive getValue() {
@@ -43,6 +45,22 @@ public class Observation {
 
     public void setValue(final SimplePrimitive pValue) {
         this.value = pValue;
+    }
+    
+    public SimplePrimitive getProvenance() {
+    	return provenance;
+    }
+    
+    public void setProvenance(final SimplePrimitive pProvenance) {
+    	this.provenance = pProvenance;
+    }
+    
+    public TimeSpan getTimeSpan() {
+    	return timeSpan;
+    }
+    
+    public void setTimeSpan(final TimeSpan pTimeSpan) {
+    	this.timeSpan = pTimeSpan;
     }
 
     public String getApplies() {
@@ -86,10 +104,12 @@ public class Observation {
             return false;
         }
 
-        Observation that = (Observation) o;
+        Assertion that = (Assertion) o;
 
-        return Objects.equal(name, that.name) &&
+        return Objects.equal(observable, that.observable) &&
                 Objects.equal(value, that.value) &&
+                Objects.equal(provenance, that.provenance) &&
+                Objects.equal(timeSpan, that.timeSpan) &&
                 Objects.equal(applies, that.applies) &&
                 Objects.equal(issued, that.issued) &&
                 Objects.equal(identifier, that.identifier) &&
@@ -99,14 +119,16 @@ public class Observation {
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(name, value, applies, issued, identifier, subject);
+        return Objects.hashCode(observable, value, applies, issued, identifier, subject);
     }
 
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
-                .add("name", name)
+                .add("observable", observable)
                 .add("value", value)
+                .add("provenance", provenance)
+                .add("timeSpan", timeSpan)
                 .add("applies", applies)
                 .add("issued", issued)
                 .add("identifier", identifier)

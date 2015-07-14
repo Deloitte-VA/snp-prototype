@@ -28,15 +28,15 @@ public final class EncounterTags {
     /**
      * The participant, stored as a string description.
      */
-    public static final String PATIENT = "patient_id";
+    public static final String PATIENT_ID = "patient_id";
 
     /**
-     * The list of observations.
+     * The list of assertions.
      */
-    public static final String OBSERVATIONS_TAG = "observations";
+    public static final String ASSERTIONS_TAG = "assertions";
 
     /**
-     * The list of observations.
+     * The FHIR ID.
      */
     public static final String FHIR_ID = "fhirId";
 

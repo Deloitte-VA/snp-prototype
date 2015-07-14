@@ -8,7 +8,7 @@ import com.github.jlgrock.snp.domain.data.ClassifiedPceRepository;
 import com.github.jlgrock.snp.domain.data.EncounterRepository;
 import com.github.jlgrock.snp.domain.types.ClassifiedPce;
 import com.github.jlgrock.snp.domain.types.Encounter;
-import com.github.jlgrock.snp.domain.types.Observation;
+import com.github.jlgrock.snp.domain.types.Assertion;
 import com.github.jlgrock.snp.domain.types.primitives.PrimitiveType;
 import com.github.jlgrock.snp.domain.types.primitives.SimplePrimitive;
 import gov.vha.isaac.logic.LogicGraph;
@@ -42,7 +42,7 @@ public class ConditionProcessor extends AbstractFhirProcessor {
 	public void process(final String identifier, final Object unmarshalledObject) {
         Condition condition = (Condition) unmarshalledObject;
 
-        LOGGER.trace("processing condition '{}' into observation(s)", condition);
+        LOGGER.trace("processing condition '{}' into assertion(s)", condition);
 
         // get the reference to the encounter so that we can determine where to write to
         // if the encounter doesn't exist, create one
@@ -69,15 +69,15 @@ public class ConditionProcessor extends AbstractFhirProcessor {
 
         classifiedPceRepository.save(classifiedPce);
 
-        Observation observation = new Observation();
-        observation.setFhirId(identifier);
-        SimplePrimitive simplePrimitive = SimplePrimitive.createPrimitive(PrimitiveType.PCE.getId(), classifiedPce.getNid());
-        observation.setName(simplePrimitive);
-        List<Observation> observationList = encounter.getObservations();
-        if (observationList == null) {
-            observationList = new ArrayList<>();
+        Assertion assertion = new Assertion();
+        assertion.setFhirId(identifier);
+        SimplePrimitive simplePrimitive = SimplePrimitive.createPrimitive(PrimitiveType.PCE.getId(), cPce.getNid());
+        assertion.setObservable(simplePrimitive);
+        List<Assertion> assertionList = encounter.getAssertions();
+        if (assertionList == null) {
+            assertionList = new ArrayList<>();
         }
-        observationList.add(observation);
+        assertionList.add(assertion);
 
         // save the encounter
         encounterRepository.save(encounter);

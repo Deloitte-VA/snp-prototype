@@ -1,10 +1,4 @@
-'use strict';
-
-/* App Module */
-
-var fileUploadApp = angular.module('UploadFileApp', ['UploadFileControllers']);
-
-fileUploadApp.directive('fileInput', ['$parse', function($parse){
+app.directive('fileInput', ['$parse', function($parse){
 	return {
 		restrict:'A',
 		link:function(scope, elm, attrs) {

@@ -1,6 +1,6 @@
 package com.github.jlgrock.snp.domain.domain;
 
-import com.github.jlgrock.snp.domain.types.Observation;
+import com.github.jlgrock.snp.domain.types.Assertion;
 import com.github.jlgrock.snp.domain.types.primitives.IntegerPrimitive;
 import com.github.jlgrock.snp.domain.types.primitives.StringPrimitive;
 
@@ -11,7 +11,7 @@ import java.time.Instant;
 
 import static org.testng.Assert.assertEquals;
 
-public class ObservationTest {
+public class AssertionTest {
     /**
      * public function returns void
      */
@@ -25,21 +25,21 @@ public class ObservationTest {
 		String st3 = new String();
 		String st4 = new String();
 		
-		Observation observation1 = new Observation();
+		Assertion assertion1 = new Assertion();
 		
-		observation1.setName(st1);
-		observation1.setValue(it1);
-		observation1.setApplies(st2);
-		observation1.setIssued(dt1);
-		observation1.setIdentifier(st3);
-		observation1.setSubject(st4);	
+		assertion1.setObservable(st1);
+		assertion1.setValue(it1);
+		assertion1.setApplies(st2);
+		assertion1.setIssued(dt1);
+		assertion1.setIdentifier(st3);
+		assertion1.setSubject(st4);	
 		
-		assertEquals(st1, observation1.getName());
-		assertEquals(it1, observation1.getValue());
-		assertEquals(st2, observation1.getApplies());
-		assertEquals(dt1, observation1.getIssued());
-		assertEquals(st3, observation1.getIdentifier());
-		assertEquals(st4, observation1.getSubject());
+		assertEquals(st1, assertion1.getObservable());
+		assertEquals(it1, assertion1.getValue());
+		assertEquals(st2, assertion1.getApplies());
+		assertEquals(dt1, assertion1.getIssued());
+		assertEquals(st3, assertion1.getIdentifier());
+		assertEquals(st4, assertion1.getSubject());
 		
 	}
 
