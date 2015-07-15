@@ -69,6 +69,7 @@ public class AbstractProcessorTest {
         Mockito.when(resourceReference.getReference()).thenReturn(reference);
         Mockito.when(reference.getValue()).thenReturn("bla_100");
 
+        Mockito.when(condition.getCode()).thenReturn(codeableConcept);
         Mockito.when(condition.getEncounter()).thenReturn(resourceReference);
         Mockito.when(procedure.getEncounter()).thenReturn(resourceReference);
         Mockito.when(encounter.getSubject()).thenReturn(resourceReference);

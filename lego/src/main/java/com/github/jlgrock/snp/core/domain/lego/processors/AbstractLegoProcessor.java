@@ -58,12 +58,16 @@ public abstract class AbstractLegoProcessor implements LegoElementProcessorServi
 
     protected void processAssertion(final Assertion assertion) {
         Discernible discernible = assertion.getDiscernible();
-        processDiscernible(discernible);
+        if (discernible != null) {
+            processDiscernible(discernible);
+        }
     }
 
     protected void processDiscernible(final Discernible discernible) {
         Expression expression = discernible.getExpression();
-        processExpression(expression);
+        if (expression != null) {
+            processExpression(expression);
+        }
     }
 
     protected void processExpression(final Expression expression) {

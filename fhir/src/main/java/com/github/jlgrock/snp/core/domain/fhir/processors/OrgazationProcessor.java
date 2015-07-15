@@ -16,7 +16,7 @@ public class OrgazationProcessor extends AbstractFhirProcessor {
 
 	@Override
 	public void process(final String identifier, final Object unmarshalledObject) {
-        OrgazationProcessor orgazationProcessor = (OrgazationProcessor) unmarshalledObject;
+        Organization organization = (Organization) unmarshalledObject;
 		throw new UnsupportedOperationException();
 	}
 

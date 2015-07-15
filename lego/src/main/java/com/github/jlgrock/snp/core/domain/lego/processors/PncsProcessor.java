@@ -21,7 +21,7 @@ public class PncsProcessor extends AbstractLegoProcessor {
     @Override
     public void process(final Object unmarshalledObject) {
         Pncs pncs = (Pncs) unmarshalledObject;
-        processPncs(pncs);
+        throw new UnsupportedOperationException();
     }
 
     @Override

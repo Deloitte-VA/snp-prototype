@@ -72,7 +72,6 @@ public class AbstractProcessorTest {
         Mockito.when(lego.getAssertion()).thenReturn(assertions);
 
         Mockito.when(assertion.getDiscernible()).thenReturn(discernible);
-
         Mockito.when(discernible.getExpression()).thenReturn(expression);
 
         Mockito.when(expression.getConcept()).thenReturn(concept);
@@ -80,5 +79,8 @@ public class AbstractProcessorTest {
 
         Mockito.when(expression2.getConcept()).thenReturn(concept);
         Mockito.when(expression2.getRelationGroup()).thenReturn(relationGroups);
+
+        Mockito.when(logicGraphClassifier.classify(logicGraph)).thenReturn(1);
+        Mockito.when(legoExpressionGraphBuilder.build(expression)).thenReturn(logicGraph);
     }
 }

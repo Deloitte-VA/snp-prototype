@@ -12,7 +12,8 @@ public class ConditionProcessorTest extends AbstractProcessorTest {
     @Test
     public void testCondition() {
         FhirElementProcessorService fhirElementProcessorService =
-                new ConditionProcessor(logicGraphClassifier, encounterRepository, classifiedPceRepository, fhirCodeableConceptGraphBuilder);
+                new ConditionProcessor(logicGraphClassifier, encounterRepository,
+                        classifiedPceRepository, fhirCodeableConceptGraphBuilder);
         fhirElementProcessorService.process("id", condition);
 
         Mockito.verify(logicGraphClassifier).classify(logicGraph);
