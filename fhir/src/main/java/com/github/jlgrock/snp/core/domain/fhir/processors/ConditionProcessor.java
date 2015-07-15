@@ -6,19 +6,11 @@ import com.github.jlgrock.snp.core.domain.fhir.model.CodeableConcept;
 import com.github.jlgrock.snp.core.domain.fhir.model.Condition;
 import com.github.jlgrock.snp.domain.data.ClassifiedPceRepository;
 import com.github.jlgrock.snp.domain.data.EncounterRepository;
-import com.github.jlgrock.snp.domain.types.ClassifiedPce;
-import com.github.jlgrock.snp.domain.types.Encounter;
-import com.github.jlgrock.snp.domain.types.Assertion;
-import com.github.jlgrock.snp.domain.types.primitives.PrimitiveType;
-import com.github.jlgrock.snp.domain.types.primitives.SimplePrimitive;
-import gov.vha.isaac.logic.LogicGraph;
 import org.jvnet.hk2.annotations.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class ConditionProcessor extends AbstractFhirProcessor {
@@ -27,15 +19,17 @@ public class ConditionProcessor extends AbstractFhirProcessor {
 
     private final EncounterRepository encounterRepository;
     private final ClassifiedPceRepository classifiedPceRepository;
+    private final FhirCodeableConceptGraphBuilder fhirCodeableConceptGraphBuilder;
 
     @Inject
     public ConditionProcessor(final LogicGraphClassifier logicGraphClassifierIn,
                               final EncounterRepository encounterRepositoryIn,
                               final ClassifiedPceRepository classifiedPceRepositoryIn,
-                              final ObservationFactory observationFactoryIn) {
+                              final FhirCodeableConceptGraphBuilder fhirCodeableConceptGraphBuilderIn) {
         super(logicGraphClassifierIn);
         classifiedPceRepository = classifiedPceRepositoryIn;
         encounterRepository = encounterRepositoryIn;
+        fhirCodeableConceptGraphBuilder = fhirCodeableConceptGraphBuilderIn;
     }
 
 	@Override
@@ -47,41 +41,24 @@ public class ConditionProcessor extends AbstractFhirProcessor {
         // get the reference to the encounter so that we can determine where to write to
         // if the encounter doesn't exist, create one
         String encounterReference = condition.getEncounter().getReference().getValue();
-        Encounter encounter = encounterRepository.findOneByFhirId(encounterReference);
-        if (encounter == null) {
-            encounter = new Encounter();
-            encounter.setFhirId(encounterReference);
-        }
 
         // get the code
         CodeableConcept codeableConcept = condition.getCode();
 
-        // build the logic graph from the code
-        FhirCodeableConceptGraphBuilder fhirCodeableConceptGraphBuilder =
-                new FhirCodeableConceptGraphBuilder(getLogicGraphClassifier(), codeableConcept);
-        LogicGraph logicGraph = fhirCodeableConceptGraphBuilder.build();
-
-        // classify the logic graph
-        Integer classifiedLogicGraphId = getLogicGraphClassifier().classify(logicGraph);
-        ClassifiedPce classifiedPce = new ClassifiedPce();
-        classifiedPce.setNid(classifiedLogicGraphId);
-        classifiedPce.setDesc(logicGraph.toString());
-
-        classifiedPceRepository.save(classifiedPce);
-
-        Assertion assertion = new Assertion();
-        assertion.setFhirId(identifier);
-        SimplePrimitive simplePrimitive = SimplePrimitive.createPrimitive(PrimitiveType.PCE.getId(), cPce.getNid());
-        assertion.setObservable(simplePrimitive);
-        List<Assertion> assertionList = encounter.getAssertions();
-        if (assertionList == null) {
-            assertionList = new ArrayList<>();
-        }
-        assertionList.add(assertion);
-
-        // save the encounter
-        encounterRepository.save(encounter);
+        saveConceptToEncounter(
+                fhirCodeableConceptGraphBuilder,
+                classifiedPceRepository,
+                encounterRepository,
+                encounterReference,
+                identifier,
+                codeableConcept,
+                null,
+                null
+        );
 	}
+
+
+
 
     @Override
     public Class processesType() {

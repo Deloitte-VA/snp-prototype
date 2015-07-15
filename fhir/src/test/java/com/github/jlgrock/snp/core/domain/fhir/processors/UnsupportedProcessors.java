@@ -29,6 +29,7 @@ import com.github.jlgrock.snp.core.domain.fhir.model.MessageHeader;
 import com.github.jlgrock.snp.core.domain.fhir.model.OperationOutcome;
 import com.github.jlgrock.snp.core.domain.fhir.model.Order;
 import com.github.jlgrock.snp.core.domain.fhir.model.OrderResponse;
+import com.github.jlgrock.snp.core.domain.fhir.model.Organization;
 import com.github.jlgrock.snp.core.domain.fhir.model.Other;
 import com.github.jlgrock.snp.core.domain.fhir.model.Provenance;
 import com.github.jlgrock.snp.core.domain.fhir.model.Query;
@@ -277,6 +278,14 @@ public class UnsupportedProcessors {
         FhirElementProcessorService fhirElementProcessorService =
                 new OrderResponseProcessor(logicGraphClassifier);
         fhirElementProcessorService.process("id", orderResponse);
+    }
+
+    @Test(expectedExceptions = UnsupportedOperationException.class)
+    public void testOrganization() {
+        Organization organization = Mockito.mock(Organization.class);
+        FhirElementProcessorService fhirElementProcessorService =
+                new OrgazationProcessor(logicGraphClassifier);
+        fhirElementProcessorService.process("id", organization);
     }
 
     @Test(expectedExceptions = UnsupportedOperationException.class)
