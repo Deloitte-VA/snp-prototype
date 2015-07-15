@@ -7,10 +7,10 @@ import org.jvnet.hk2.annotations.Service;
 import javax.inject.Inject;
 
 @Service
-public class OrgazationProcessor extends AbstractFhirProcessor {
+public class OrganizationProcessor extends AbstractFhirProcessor {
 
     @Inject
-    public OrgazationProcessor(final LogicGraphClassifier logicGraphClassifierIn) {
+    public OrganizationProcessor(final LogicGraphClassifier logicGraphClassifierIn) {
         super(logicGraphClassifierIn);
     }
 

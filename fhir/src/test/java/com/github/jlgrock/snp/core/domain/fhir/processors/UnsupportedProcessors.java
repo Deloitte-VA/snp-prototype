@@ -284,7 +284,7 @@ public class UnsupportedProcessors {
     public void testOrganization() {
         Organization organization = Mockito.mock(Organization.class);
         FhirElementProcessorService fhirElementProcessorService =
-                new OrgazationProcessor(logicGraphClassifier);
+                new OrganizationProcessor(logicGraphClassifier);
         fhirElementProcessorService.process("id", organization);
     }
 
