@@ -1,5 +1,6 @@
-package com.github.jlgrock.snp.core.domain.lego;
+package com.github.jlgrock.snp.core.domain.lego.marshallers;
 
+import com.github.jlgrock.snp.core.domain.lego.AbstractClassificationTest;
 import com.github.jlgrock.snp.core.domain.lego.model.Lego;
 import com.github.jlgrock.snp.core.domain.lego.model.LegoList;
 import org.testng.Assert;
@@ -12,10 +13,10 @@ import java.io.Reader;
 /**
  *
  */
-public class LegoTopLevelTest extends AbstractClassificationTest {
+public class LegoMarshallerServiceImplTest extends AbstractClassificationTest {
 
     @Test
-    public void testLegoSerialization() throws Exception {
+    public void testLegoUnmarshalling() throws Exception {
         JAXBContext jc = JAXBContext.newInstance(path);
         Unmarshaller unmarshaller = jc.createUnmarshaller();
         Reader reader = readFile("lego.xml");
@@ -24,14 +25,12 @@ public class LegoTopLevelTest extends AbstractClassificationTest {
     }
 
     @Test
-    public void testLegoListSerialization() throws Exception {
+    public void testLegoListUnmarshalling() throws Exception {
         JAXBContext jc = JAXBContext.newInstance(path);
         Unmarshaller unmarshaller = jc.createUnmarshaller();
         Reader reader = readFile("legolist.xml");
         Object o = unmarshaller.unmarshal(reader);
         Assert.assertTrue(o instanceof LegoList);
     }
-
-
 
 }

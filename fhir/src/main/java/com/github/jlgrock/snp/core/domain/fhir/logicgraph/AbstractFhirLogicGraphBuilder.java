@@ -72,5 +72,5 @@ public abstract class AbstractFhirLogicGraphBuilder {
         return and;
     }
 
-    public abstract LogicGraph build();
+    public abstract LogicGraph build(final CodeableConcept codeableConceptIn);
 }

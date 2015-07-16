@@ -1,6 +1,7 @@
 package com.github.jlgrock.snp.core.domain.lego.processors;
 
 import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
+import com.github.jlgrock.snp.core.domain.lego.logicgraph.LegoExpressionGraphBuilder;
 import com.github.jlgrock.snp.core.domain.lego.model.Relation;
 import com.github.jlgrock.snp.domain.data.ClassifiedPceRepository;
 import org.jvnet.hk2.annotations.Service;
@@ -12,8 +13,9 @@ public class RelationProcessor extends AbstractLegoProcessor {
 
     @Inject
     RelationProcessor(final LogicGraphClassifier logicGraphClassifierIn,
+                      final LegoExpressionGraphBuilder legoExpressionGraphBuilderIn,
                       final ClassifiedPceRepository classifiedPceRepository) {
-        super(logicGraphClassifierIn, classifiedPceRepository);
+        super(logicGraphClassifierIn, legoExpressionGraphBuilderIn, classifiedPceRepository);
     }
 
     @Override

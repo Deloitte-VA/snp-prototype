@@ -7,25 +7,24 @@ import gov.vha.isaac.ochre.api.logic.LogicalExpressionBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.inject.Inject;
+
 /**
  *
  */
 public class FhirCodeableConceptGraphBuilder extends AbstractFhirLogicGraphBuilder {
     private static final Logger LOGGER = LoggerFactory.getLogger(FhirCodeableConceptGraphBuilder.class);
 
-    private final CodeableConcept codeableConcept;
-
     @Override
-    public LogicGraph build() {
+    public LogicGraph build(CodeableConcept codeableConcept) {
         LOGGER.trace("building Coding Graph Builder");
         LogicalExpressionBuilder.SufficientSet(buildCodeableConcept(codeableConcept));
         return (LogicGraph) getLogicalExpressionBuilder().build();
     }
 
-    public FhirCodeableConceptGraphBuilder(final LogicGraphClassifier logicGraphClassifierIn,
-                                           final CodeableConcept codeableConceptIn) {
+    @Inject
+    public FhirCodeableConceptGraphBuilder(final LogicGraphClassifier logicGraphClassifierIn) {
         super(logicGraphClassifierIn);
-        codeableConcept = codeableConceptIn;
     }
 
 }

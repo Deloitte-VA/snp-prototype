@@ -16,15 +16,12 @@ public class LegoExpressionGraphBuilder extends AbstractLegoLogicGraphBuilder {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(LegoExpressionGraphBuilder.class);
 
-    private Expression expression;
-
-    public LegoExpressionGraphBuilder(final LogicGraphClassifier logicGraphClassifierIn, final Expression expressionIn) {
+    public LegoExpressionGraphBuilder(final LogicGraphClassifier logicGraphClassifierIn) {
         super(logicGraphClassifierIn);
-        expression = expressionIn;
     }
 
     @Override
-    public LogicGraph build() {
+    public LogicGraph build(final Expression expression) {
         LOGGER.trace("Creating Lego Expression Logic Graph");
         Assertion assertion = buildExpression(expression);
         if (assertion instanceof Connector) {
@@ -35,6 +32,5 @@ public class LegoExpressionGraphBuilder extends AbstractLegoLogicGraphBuilder {
 
         return (LogicGraph) getLogicalExpressionBuilder().build();
     }
-
 
 }

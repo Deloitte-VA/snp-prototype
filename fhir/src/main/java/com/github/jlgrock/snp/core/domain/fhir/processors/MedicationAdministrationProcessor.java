@@ -1,27 +1,27 @@
 package com.github.jlgrock.snp.core.domain.fhir.processors;
 
 import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
-import com.github.jlgrock.snp.core.domain.fhir.model.Organization;
+import com.github.jlgrock.snp.core.domain.fhir.model.MedicationAdministration;
 import org.jvnet.hk2.annotations.Service;
 
 import javax.inject.Inject;
 
 @Service
-public class OrgazationProcessor extends AbstractFhirProcessor {
+public class MedicationAdministrationProcessor extends AbstractFhirProcessor {
 
     @Inject
-    public OrgazationProcessor(final LogicGraphClassifier logicGraphClassifierIn) {
+    public MedicationAdministrationProcessor(final LogicGraphClassifier logicGraphClassifierIn) {
         super(logicGraphClassifierIn);
     }
 
 	@Override
 	public void process(final String identifier, final Object unmarshalledObject) {
-        OrgazationProcessor orgazationProcessor = (OrgazationProcessor) unmarshalledObject;
+        MedicationAdministration medicationAdministration = (MedicationAdministration) unmarshalledObject;
 		throw new UnsupportedOperationException();
 	}
 
     @Override
     public Class processesType() {
-        return Organization.class;
+        return MedicationAdministration.class;
     }
 }
