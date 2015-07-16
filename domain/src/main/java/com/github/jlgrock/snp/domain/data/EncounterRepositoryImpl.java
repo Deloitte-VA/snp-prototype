@@ -27,109 +27,115 @@ import java.util.List;
  */
 @Service(name = "encounterRepository")
 public class EncounterRepositoryImpl extends
-        AbstractRepositoryImpl<Encounter, ObjectId> implements EncounterRepository {
+		AbstractRepositoryImpl<Encounter, ObjectId> implements
+		EncounterRepository {
 
-    private final EncounterReadConverter encounterReadConverter;
+	private final EncounterReadConverter encounterReadConverter;
 
-    private final EncounterWriteConverter encounterWriteConverter;
-    
-    private static final Logger LOGGER = LoggerFactory.getLogger(EncounterRepositoryImpl.class);
+	private final EncounterWriteConverter encounterWriteConverter;
 
-    /**
-     * 
-     * @param mongoDbFactoryIn MongoDbFactory
-     * @param encounterReadConverterIn EncounterReadConverter
-     * @param encounterWriteConverterIn EncounterWriteConverter
-     */
-    @Inject
-    protected EncounterRepositoryImpl(final MongoDbFactory mongoDbFactoryIn,
-                                      final EncounterReadConverter encounterReadConverterIn,
-                                      final EncounterWriteConverter encounterWriteConverterIn) {
-        super(mongoDbFactoryIn);
-        encounterReadConverter = encounterReadConverterIn;
-        encounterWriteConverter = encounterWriteConverterIn;
-    }
+	private static final Logger LOGGER = LoggerFactory
+			.getLogger(EncounterRepositoryImpl.class);
 
-    @Override
-    protected String getCollectionName() {
-    	LOGGER.trace("getCollectionName()");
-        return "encounters";
-    }
+	/**
+	 * Constructor
+	 * 
+	 * @param mongoDbFactoryIn
+	 *            MongoDbFactory
+	 * @param encounterReadConverterIn
+	 *            EncounterReadConverter
+	 * @param encounterWriteConverterIn
+	 *            EncounterWriteConverter
+	 */
+	@Inject
+	protected EncounterRepositoryImpl(final MongoDbFactory mongoDbFactoryIn,
+			final EncounterReadConverter encounterReadConverterIn,
+			final EncounterWriteConverter encounterWriteConverterIn) {
+		super(mongoDbFactoryIn);
+		encounterReadConverter = encounterReadConverterIn;
+		encounterWriteConverter = encounterWriteConverterIn;
+	}
 
-    /**
-     * Find an encounter by the date of the encounter
-     * @param date the date to search by
-     * @return the results, in the form of a list
-     */
-    @Override
+	@Override
+	protected String getCollectionName() {
+		LOGGER.trace("getCollectionName()");
+		return "encounters";
+	}
+
+	/**
+	 * Find an encounter by the date of the encounter
+	 * 
+	 * @param date
+	 *            the date to search by
+	 * @return the results, in the form of a list
+	 */
+	@Override
 	public List<Encounter> findByDate(final LocalDate date) {
-    	if (date == null){
-    		return new ArrayList<>();
-    	}
-    	LOGGER.trace("findByDate(LocalDate date={})", date);
-        Document query = new Document() {{
-            put("date", date);
-        }};
-        return executeQueryAndTransformResults(query);
-    }
+		if (date == null) {
+			return new ArrayList<>();
+		}
+		LOGGER.trace("findByDate(LocalDate date={})", date);
+		Document query = new Document() {
+			{
+				put("date", date);
+			}
+		};
+		return executeQueryAndTransformResults(query);
+	}
 
-    @Override
-    public List<Encounter> findByPceIdList(final List<Integer> pceIds) {
-        Document query = new Document();
-        Document idsIn = new Document();
-        idsIn.put("$in", pceIds);
-        query.put("assertions.observable", idsIn);
-        return executeQueryAndTransformResults(query);
-    }
-    
+	@Override
+	public List<Encounter> findByPceIdList(final List<Integer> pceIds) {
+		Document query = new Document();
+		Document idsIn = new Document();
+		idsIn.put("$in", pceIds);
+		query.put("assertions.observable", idsIn);
+		return executeQueryAndTransformResults(query);
+	}
+
 	@Override
 	public List<Encounter> findByObservableIdListAndProvenanceIdListAndValueIdList(
 			final List<Integer> observableIds,
 			final List<Integer> provenanceIds, final List<Integer> valueIds) {
-		Bson query;// = new Document();
-//		Document observableIdsIn = new Document();
-//		Document provenanceIdsIn = new Document();
-//		Document valuesIdsIn = new Document();
-//		observableIdsIn.put("$in", observableIds);
-//		provenanceIdsIn.put("$in", provenanceIds);
-//		valuesIdsIn.put("$in", valueIds);
-//		query.put("assertions.observable", observableIdsIn);
+		LOGGER.trace(
+				"findByObservableIdListAndProvenanceIdListAndValueIdList(observableIds={}, provenanceIds={}, valueIds={})",
+				observableIds, provenanceIds, valueIds);
+		Bson query = and(in("assertions.observable", observableIds),
+				in("assertions.provenance", provenanceIds),
+				in("assertions.value", valueIds));
 
-		query = and(in("assertions.observable", observableIds),
-				in("assertions.provenance", provenanceIds), in("assertions.value", valueIds));
-		
 		return executeQueryAndTransformResults(query);
 	}
 
-    @Override
-    public Encounter findOneByFhirId(final String fhirId) {
-        Document query = new Document();
-        query.put(EncounterTags.FHIR_ID, fhirId);
-        LOGGER.trace("findOneByID(fhirId={})", fhirId);
-        if (fhirId == null) {
-            LOGGER.error("fhirId parameter for findOneById method is null, therefore Domain Object cannot be found.");
-            return null;
-        }
-        FindIterable<Document> iterable = dBCollection().find(query).limit(1);
-        Document first = iterable.first();
-        return convertToDomainObject(first);
-    }
+	@Override
+	public Encounter findOneByFhirId(final String fhirId) {
+		Document query = new Document();
+		query.put(EncounterTags.FHIR_ID, fhirId);
+		LOGGER.trace("findOneByID(fhirId={})", fhirId);
+		if (fhirId == null) {
+			LOGGER.error("fhirId parameter for findOneById method is null, therefore Domain Object cannot be found.");
+			return null;
+		}
+		FindIterable<Document> iterable = dBCollection().find(query).limit(1);
+		Document first = iterable.first();
+		return convertToDomainObject(first);
+	}
 
-    @Override
-    protected Encounter convertToDomainObject(final Document dbObjectin) {
-    	LOGGER.trace("convertToDomainObject(Document dbObjectin={})", dbObjectin);
-        if (dbObjectin == null) {
-            return null;
-        }
-        return encounterReadConverter.convert(dbObjectin);
-    }
-    
-    @Override
-    protected Document convertToDBObject(final Encounter s) {
-    	LOGGER.trace("convertToDBObject(Encounter s={})", s);
-        if (s == null) {
-            return null;
-        }
-        return encounterWriteConverter.convert(s);
-    }
+	@Override
+	protected Encounter convertToDomainObject(final Document dbObjectin) {
+		LOGGER.trace("convertToDomainObject(Document dbObjectin={})",
+				dbObjectin);
+		if (dbObjectin == null) {
+			return null;
+		}
+		return encounterReadConverter.convert(dbObjectin);
+	}
+
+	@Override
+	protected Document convertToDBObject(final Encounter s) {
+		LOGGER.trace("convertToDBObject(Encounter s={})", s);
+		if (s == null) {
+			return null;
+		}
+		return encounterWriteConverter.convert(s);
+	}
 }

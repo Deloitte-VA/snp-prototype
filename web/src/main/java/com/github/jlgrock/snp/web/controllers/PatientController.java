@@ -81,14 +81,14 @@ public class PatientController {
 		QueryParamParser queryHandler = new QueryParamParser();
 		QueryParam queryParam = queryHandler.handleRequest(beanUri);
 
-		String obsParam = queryParam.getFilter().get("assertion");
+		String obsParam = queryParam.getFilter().get("observation");
 		String provParam = queryParam.getFilter().get("provenance");
 		String valueParam = queryParam.getFilter().get("value");
 		Integer obs;
 		Integer prov;
 		Integer value;
 		try {
-			obs = parseNid(obsParam, "assertion");
+			obs = parseNid(obsParam, "observation");
 			prov = parseNid(provParam, "provenance");
 			value = parseNid(valueParam, "value");
 		} catch (Exception e) {
@@ -99,7 +99,7 @@ public class PatientController {
 
 		Set<Patient> patients = classifierQueryService.executeKindOfQuery(obs,
 				prov, value);
-
+		
 		ResponseWrapper response = new ResponseWrapper(ResponseStatusCode.OK,
 				patients);
 		return Response.ok().entity(response).build();
