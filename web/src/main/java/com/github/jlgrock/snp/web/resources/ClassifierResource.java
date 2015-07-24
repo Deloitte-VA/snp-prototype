@@ -1,24 +1,33 @@
 package com.github.jlgrock.snp.web.resources;
 
+import gov.vha.isaac.logic.LogicGraph;
+
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.ext.MessageBodyReader;
 
 import org.glassfish.jersey.media.multipart.BodyPart;
 import org.glassfish.jersey.media.multipart.FormDataBodyPart;
 import org.glassfish.jersey.media.multipart.FormDataMultiPart;
 import org.glassfish.jersey.media.multipart.FormDataParam;
+import org.ihtsdo.otf.tcc.api.concept.ConceptChronicleBI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
+import com.github.jlgrock.snp.apis.exceptions.ProcessingException;
 import com.github.jlgrock.snp.apis.web.ProcessingServiceFactory;
 import com.github.jlgrock.snp.web.services.ClassifierQueryServiceImpl;
 
@@ -33,7 +42,9 @@ public class ClassifierResource {
 
 	private final ProcessingServiceFactory processingServiceFactory;
 
-	private final ClassifierQueryServiceImpl classifierQueryServiceImpl;
+	// private final ClassifierQueryServiceImpl classifierQueryServiceImpl;
+
+	private final LogicGraphClassifier logicGraphClassifier;
 
 	/**
 	 * Constructor
@@ -42,32 +53,17 @@ public class ClassifierResource {
 	 *            the marshaller that
 	 * @param classifierQueryServiceImplIn
 	 *            query the database
+	 * @param logicGraphClassifierIn
+	 *            logic graph classifier
 	 */
 	@Inject
 	public ClassifierResource(
 			final ProcessingServiceFactory processingServiceFactoryIn,
-			final ClassifierQueryServiceImpl classifierQueryServiceImplIn) {
+			// final ClassifierQueryServiceImpl classifierQueryServiceImplIn,
+			final LogicGraphClassifier logicGraphClassifierIn) {
 		processingServiceFactory = processingServiceFactoryIn;
-		classifierQueryServiceImpl = classifierQueryServiceImplIn;
-	}
-
-	/**
-	 * Handles posted streaming Lego requests
-	 *
-	 * @param postBody
-	 *            entity post body
-	 * @return HTTP 200 if successful
-	 */
-	@POST
-	private Response processUpload(final BodyPart body, final String postBody) {
-		LOGGER.info("mimetype: {} , postBody: {}", body.getMediaType(),
-				postBody);
-		if (postBody == null) {
-			LOGGER.error("requestBody is null");
-			return Response.status(Response.Status.BAD_REQUEST).build();
-		}
-		processFile(postBody, body.getMediaType(), null);
-		return Response.ok().build();
+		// classifierQueryServiceImpl = classifierQueryServiceImplIn;
+		logicGraphClassifier = logicGraphClassifierIn;
 	}
 
 	/**
@@ -129,27 +125,54 @@ public class ClassifierResource {
 
 			String filePartString = filePart.getEntityAs(String.class);
 			// take the media type from the html upload page
-			processFile(filePartString, filePart.getMediaType(), identifier);
+			try {
+				processFile(filePartString, filePart.getMediaType(), identifier);
+			} catch (ProcessingException e) {
+				LOGGER.error(
+						"Exception processing file (filePartString="
+								+ filePartString + ", mediaType="
+								+ filePart.getMediaType() + ", identifier="
+								+ identifier + ")", e);
+				return Response.status(Status.BAD_REQUEST).build();
+			}
 		}
 
 		return Response.ok().build();
 	}
+
+	 @GET
+	 @Path("{nid}")
+	 public Response getPce(@PathParam("nid") final int nid) {
+	 LOGGER.trace("getPce(nid={})", nid);
+	
+		LogicGraph logicGraph;
+		try {
+			logicGraph = logicGraphClassifier.getStatedTermLogicGraph(nid);
+		} catch (IOException e) {
+			return Response.serverError().build();
+		}
+	
+	 return Response.ok(logicGraph, MediaType.APPLICATION_JSON_TYPE).build();
+	 }
 
 	/**
 	 * Process the file, using the processingService. If either parameter is
 	 * null, the file load is aborted and message is logged.
 	 *
 	 * @param input
-	 *            the XML string to process. This cannot be null.
+	 *            the XML string to process. This cannot be null or empty.
 	 * @param mediaType
 	 *            the media type to process. This cannot be null.
 	 */
 	private void processFile(final String input, final MediaType mediaType,
-			final String identifier) {
-		LOGGER.trace("processing file.  mediatype: {} , postBody: {}",
+			final String identifier) throws ProcessingException {
+		LOGGER.trace(
+				"processing file.  mediatype: {} , input (postBody): '{}'",
 				mediaType, input);
-		if (input == null || mediaType == null) {
-			LOGGER.error("neither mediatype nor input are allowed to be null.  Skipping file.");
+		if (input == null || mediaType == null || input.trim().isEmpty()) {
+			String errMsg = "Mediatype is not allowed to be null. Input is not allowed to be null or empty.";
+			LOGGER.error(errMsg);
+			throw new ProcessingException(errMsg);
 		}
 		processingServiceFactory.getService(mediaType).processInput(input,
 				identifier);
