@@ -14,7 +14,7 @@ public interface ProcessingService {
      * matches the media type string provided in the {@link #getMediaTypeString()} method
      * @param input the XML input
      * @param identifier the unique identifier - this is required by some input types as the id is not defined in the
-     * @throws ProcessingException 
+     * @throws ProcessingException if an error occurs during processing
      */
     void processInput(final String input, final String identifier) throws ProcessingException;
 

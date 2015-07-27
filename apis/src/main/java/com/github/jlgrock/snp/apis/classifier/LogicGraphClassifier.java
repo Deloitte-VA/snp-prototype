@@ -14,43 +14,61 @@ import java.util.UUID;
 @Contract
 public interface LogicGraphClassifier {
 
-    /**
-     * Get the native identifier
-     * @param sctid SNOMED clinical terms identifier
-     * @return the native identifier (for all objects)
-     */
-    int getNidFromSNOMED(String sctid);
+	/**
+	 * Get the native identifier
+	 * 
+	 * @param sctid
+	 *            SNOMED clinical terms identifier
+	 * @return the native identifier (for all objects)
+	 */
+	int getNidFromSNOMED(String sctid);
 
-    /**
-     *
-     * @param sctid SNOMED clinical terms identifier
-     * @return the UUID
-     */
-    UUID getUUIDFromSNOMED(String sctid);
+	/**
+	 *
+	 * @param sctid
+	 *            SNOMED clinical terms identifier
+	 * @return the UUID
+	 */
+	UUID getUUIDFromSNOMED(String sctid);
 
-    /**
-     * Find a chronicle based on the sctId
-     * @param sctid SNOMED clinical terms identifier
-     * @return concept chronicle
-     */
-    ConceptChronicleBI findChronicle(String sctid);
-    
-    /**
-     * Find a chronicle based on the nid
-     * @param nid native identifier
-     * @return concept chronicle
-     */
-    ConceptChronicleBI findChronicle(int nid);
+	/**
+	 * Find a chronicle based on the sctId
+	 * 
+	 * @param sctid
+	 *            SNOMED clinical terms identifier
+	 * @return concept chronicle
+	 */
+	ConceptChronicleBI findChronicle(String sctid);
 
-    /**
-     * Find the native id for the indexed LogicGraph.  If one does not exist,
-     * it will create one and return the native id.
-     *
-     * @param pce Post Coordinated Expression
-     * @return the native identifier
-     */
-    Integer classify(LogicGraph pce);
+	/**
+	 * Find a chronicle based on the nid
+	 * 
+	 * @param nid
+	 *            native identifier
+	 * @return concept chronicle
+	 */
+	ConceptChronicleBI findChronicle(int nid);
 
+	/**
+	 * Find the native id for the indexed LogicGraph. If one does not exist, it
+	 * will create one and return the native id.
+	 *
+	 * @param pce
+	 *            Post Coordinated Expression
+	 * @return the native identifier
+	 */
+	Integer classify(LogicGraph pce);
+
+	/**
+	 * Get the stated terminology logic graph for the given native id.
+	 * 
+	 * @param nid
+	 *            native identifier to get the respective logic graph
+	 * @return the logic graph for the respective nid
+	 * @throws IOException
+	 *             if there was IO related error encountered while looking up
+	 *             the logic graph
+	 */
 	LogicGraph getStatedTermLogicGraph(int nid) throws IOException;
 
 }
