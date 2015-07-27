@@ -12,8 +12,8 @@ public class ExpressionProcessor extends AbstractLegoProcessor {
 
     @Inject
     ExpressionProcessor(final LogicalExpressionClassifier logicalExpressionClassifierIn,
-                        final ClassifiedPceStore classPceStore) {
-        super(logicalExpressionClassifierIn, classPceStore);
+                        final ClassifiedPceRepository classifiedPceRepositoryIn) {
+        super(logicalExpressionClassifierIn, classifiedPceRepositoryIn);
     }
 
     @Override

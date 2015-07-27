@@ -12,8 +12,8 @@ public class IntervalProcessor extends AbstractLegoProcessor {
 
     @Inject
     IntervalProcessor(final LogicalExpressionClassifier logicalExpressionClassifierIn,
-                      final ClassifiedPceStore classPceStore) {
-        super(logicalExpressionClassifierIn, classPceStore);
+                      final ClassifiedPceRepository classifiedPceRepositoryIn) {
+        super(logicalExpressionClassifierIn, classifiedPceRepositoryIn);
     }
 
     @Override

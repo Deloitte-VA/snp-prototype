@@ -11,7 +11,7 @@ import com.github.jlgrock.snp.domain.types.ClassifiedPce;
 import com.github.jlgrock.snp.domain.types.Encounter;
 import com.github.jlgrock.snp.domain.types.primitives.PrimitiveType;
 import com.github.jlgrock.snp.domain.types.primitives.SimplePrimitive;
-import gov.vha.isaac.logic.LogicGraph;
+import gov.vha.isaac.ochre.api.logic.LogicalExpression;
 import org.jvnet.hk2.annotations.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -57,14 +57,14 @@ public class ProcedureProcessor extends AbstractFhirProcessor {
 
         // build the logic graph from the code
         FhirCodeableConceptGraphBuilder fhirCodeableConceptGraphBuilder =
-                new FhirCodeableConceptGraphBuilder(getLogicalExpressionClassifier(), codeableConcept);
-        LogicGraph logicGraph = fhirCodeableConceptGraphBuilder.build();
+                new FhirCodeableConceptGraphBuilder(getLogicalExpressionClassifier());
+        LogicalExpression logicalExpression = fhirCodeableConceptGraphBuilder.build(codeableConcept);
 
         // classify the logic graph
-        Integer classifiedLogicGraphId = getLogicalExpressionClassifier().classify(logicGraph);
+        Integer classifiedLogicGraphId = getLogicalExpressionClassifier().classify(logicalExpression);
         ClassifiedPce cPce = new ClassifiedPce();
         cPce.setNid(classifiedLogicGraphId);
-        cPce.setDesc(logicGraph.toString());
+        cPce.setDesc(logicalExpression.toString());
 
         classifiedPceRepository.save(cPce);
 

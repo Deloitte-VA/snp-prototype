@@ -48,10 +48,10 @@
         <target.jdk>1.8</target.jdk>
         
         <!-- VHA versions -->
-		<newtons-cradle.version>1.19</newtons-cradle.version>
-        <query.version>2.14</query.version>
-        <logic.version>1.14</logic.version>
-        <solor.version>1.10</solor.version>
+		<newtons-cradle.version>1.20-SNAPSHOT</newtons-cradle.version>
+        <query.version>2.15-SNAPSHOT</query.version>
+        <logic.version>1.15-SNAPSHOT</logic.version>
+        <solor.version>1.11-SNAPSHOT</solor.version>
 
         <!-- External versions -->
         <jackson.version>2.5.0</jackson.version>
@@ -100,6 +100,12 @@
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>apis</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>mock-classifier</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
@@ -432,6 +438,7 @@
         <module>fhir</module>
         <module>apis</module>
         <module>defaultconfig</module>
+        <module>mock-classifier</module>
         <module>classifier</module>
         <module>web</module>
         <!--<module>client</module>-->

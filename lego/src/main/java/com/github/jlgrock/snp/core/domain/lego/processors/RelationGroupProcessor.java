@@ -12,8 +12,8 @@ public class RelationGroupProcessor extends AbstractLegoProcessor {
 
     @Inject
     RelationGroupProcessor(final LogicalExpressionClassifier logicalExpressionClassifierIn,
-                           final ClassifiedPceStore classPceStore) {
-        super(logicalExpressionClassifierIn, classPceStore);
+                           final ClassifiedPceRepository classifiedPceRepositoryIn) {
+        super(logicalExpressionClassifierIn, classifiedPceRepositoryIn);
     }
 
     @Override

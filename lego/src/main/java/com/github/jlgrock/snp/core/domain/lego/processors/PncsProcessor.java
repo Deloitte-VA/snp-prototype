@@ -12,8 +12,8 @@ public class PncsProcessor extends AbstractLegoProcessor {
 
     @Inject
     PncsProcessor(final LogicalExpressionClassifier logicalExpressionClassifierIn,
-                  final ClassifiedPceStore classPceStore) {
-        super(logicalExpressionClassifierIn, classPceStore);
+                  final ClassifiedPceRepository classifiedPceRepositoryIn) {
+        super(logicalExpressionClassifierIn, classifiedPceRepositoryIn);
     }
 
     @Override

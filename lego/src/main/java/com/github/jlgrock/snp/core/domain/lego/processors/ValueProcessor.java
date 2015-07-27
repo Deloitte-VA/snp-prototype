@@ -12,8 +12,8 @@ public class ValueProcessor extends AbstractLegoProcessor {
 
     @Inject
     ValueProcessor(final LogicalExpressionClassifier logicalExpressionClassifierIn,
-                   final ClassifiedPceStore classPceStore) {
-        super(logicalExpressionClassifierIn, classPceStore);
+                   final ClassifiedPceRepository classifiedPceRepositoryIn) {
+        super(logicalExpressionClassifierIn, classifiedPceRepositoryIn);
     }
 
     @Override

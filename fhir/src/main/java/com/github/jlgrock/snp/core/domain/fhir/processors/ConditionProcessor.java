@@ -59,8 +59,8 @@ public class ConditionProcessor extends AbstractFhirProcessor {
 
         // build the logic graph from the code
         FhirCodeableConceptGraphBuilder fhirCodeableConceptGraphBuilder =
-                new FhirCodeableConceptGraphBuilder(getLogicalExpressionClassifier(), codeableConcept);
-        LogicalExpression logicalExpression = fhirCodeableConceptGraphBuilder.build();
+                new FhirCodeableConceptGraphBuilder(getLogicalExpressionClassifier());
+        LogicalExpression logicalExpression = fhirCodeableConceptGraphBuilder.build(codeableConcept);
 
         // classify the logic graph
         Integer classifiedLogicGraphId = getLogicalExpressionClassifier().classify(logicalExpression);

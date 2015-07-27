@@ -12,8 +12,8 @@ public class StampProcessor extends AbstractLegoProcessor {
 
     @Inject
     StampProcessor(final LogicalExpressionClassifier logicalExpressionClassifierIn,
-                   final ClassifiedPceStore classPceStore) {
-        super(logicalExpressionClassifierIn, classPceStore);
+                   final ClassifiedPceRepository classifiedPceRepositoryIn) {
+        super(logicalExpressionClassifierIn, classifiedPceRepositoryIn);
     }
 
     @Override

@@ -12,8 +12,8 @@ public class LegoProcessor extends AbstractLegoProcessor {
 
     @Inject
     LegoProcessor(final LogicalExpressionClassifier logicalExpressionClassifierIn,
-                  final ClassifiedPceStore classPceStore) {
-        super(logicalExpressionClassifierIn, classPceStore);
+                  final ClassifiedPceRepository classifiedPceRepositoryIn) {
+        super(logicalExpressionClassifierIn, classifiedPceRepositoryIn);
     }
 
     @Override

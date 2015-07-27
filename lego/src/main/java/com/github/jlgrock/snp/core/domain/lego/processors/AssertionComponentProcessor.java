@@ -12,8 +12,8 @@ public class AssertionComponentProcessor extends AbstractLegoProcessor {
 
     @Inject
     AssertionComponentProcessor(final LogicalExpressionClassifier logicalExpressionClassifierIn,
-                                final ClassifiedPceStore classPceStore) {
-        super(logicalExpressionClassifierIn, classPceStore);
+                                final ClassifiedPceRepository classifiedPceRepositoryIn) {
+        super(logicalExpressionClassifierIn, classifiedPceRepositoryIn);
     }
 
     @Override

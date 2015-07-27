@@ -2,8 +2,7 @@ package com.github.jlgrock.snp.classifier;
 
 import com.github.jlgrock.snp.apis.classifier.LogicClassifierStore;
 import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifierQuery;
-
-import gov.vha.isaac.logic.LogicGraph;
+import gov.vha.isaac.ochre.api.logic.LogicalExpression;
 import gov.vha.isaac.ochre.collections.SequenceSet;
 import gov.vha.isaac.ochre.util.UuidT3Generator;
 import org.ihtsdo.otf.tcc.api.concept.ConceptChronicleBI;
@@ -12,7 +11,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
-
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.UUID;
@@ -75,7 +73,7 @@ public class LogicGraphClassifierQueryImpl implements LogicGraphClassifierQuery 
     }
 
     @Override
-    public int[] query(final LogicGraph logicGraph) {
+    public int[] query(final LogicalExpression logicalExpression) {
         //TODO
         throw new UnsupportedOperationException("Work on this");
     }

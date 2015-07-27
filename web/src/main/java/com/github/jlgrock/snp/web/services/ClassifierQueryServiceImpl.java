@@ -6,21 +6,18 @@ import com.github.jlgrock.snp.domain.data.EncounterRepository;
 import com.github.jlgrock.snp.domain.data.PatientRepository;
 import com.github.jlgrock.snp.domain.types.Encounter;
 import com.github.jlgrock.snp.domain.types.Patient;
-
-import gov.vha.isaac.logic.LogicGraph;
-
+import gov.vha.isaac.ochre.api.logic.LogicalExpression;
 import org.jvnet.hk2.annotations.Contract;
 import org.jvnet.hk2.annotations.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.inject.Inject;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-
-import javax.inject.Inject;
 
 /**
  * A Classifier service to be called when querying into the database
@@ -74,11 +71,11 @@ public class ClassifierQueryServiceImpl {
     /**
      * Execute a query to find objects that are a kind of the object passed in
      *
-     * @param logicGraph the full logic graph to identify the object passed in
+     * @param logicalExpression the full logic graph to identify the object passed in
      * @return the result
      */
-    public Set<Patient> executeKindOfQuery(final LogicGraph logicGraph) {
-        int[] results = logicGraphClassifierQuery.query(logicGraph);
+    public Set<Patient> executeKindOfQuery(final LogicalExpression logicalExpression) {
+        int[] results = logicGraphClassifierQuery.query(logicalExpression);
 
         return findPatientsByNids(convertToList(results));
     }
