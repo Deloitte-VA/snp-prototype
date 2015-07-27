@@ -1,6 +1,6 @@
 package com.github.jlgrock.snp.apis.classifier;
 
-import gov.vha.isaac.logic.LogicGraph;
+import gov.vha.isaac.ochre.api.logic.LogicalExpression;
 import org.ihtsdo.otf.tcc.api.concept.ConceptChronicleBI;
 import org.jvnet.hk2.annotations.Contract;
 
@@ -10,7 +10,7 @@ import java.util.UUID;
  * Classify Post Coordinated Expressions using the classification store.
  */
 @Contract
-public interface LogicGraphClassifier {
+public interface LogicalExpressionClassifier {
 
     /**
      * Get the native identifier
@@ -40,6 +40,6 @@ public interface LogicGraphClassifier {
      * @param pce Post Coordinated Expression
      * @return the native identifier
      */
-    Integer classify(LogicGraph pce);
+    Integer classify(LogicalExpression pce);
 
 }

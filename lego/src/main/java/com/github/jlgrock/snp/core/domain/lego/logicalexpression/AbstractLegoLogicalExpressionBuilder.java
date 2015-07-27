@@ -1,14 +1,14 @@
-package com.github.jlgrock.snp.core.domain.lego.logicgraph;
+package com.github.jlgrock.snp.core.domain.lego.logicalexpression;
 
-import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
+import com.github.jlgrock.snp.apis.classifier.LogicalExpressionClassifier;
 import com.github.jlgrock.snp.core.domain.lego.model.Concept;
 import com.github.jlgrock.snp.core.domain.lego.model.Destination;
 import com.github.jlgrock.snp.core.domain.lego.model.Expression;
 import com.github.jlgrock.snp.core.domain.lego.model.Relation;
 import com.github.jlgrock.snp.core.domain.lego.model.RelationGroup;
 import com.github.jlgrock.snp.core.domain.lego.model.Type;
-import gov.vha.isaac.logic.LogicGraph;
 import gov.vha.isaac.ochre.api.LookupService;
+import gov.vha.isaac.ochre.api.logic.LogicalExpression;
 import gov.vha.isaac.ochre.api.logic.LogicalExpressionBuilder;
 import gov.vha.isaac.ochre.api.logic.LogicalExpressionBuilderService;
 import gov.vha.isaac.ochre.api.logic.assertions.ConceptAssertion;
@@ -28,15 +28,15 @@ import java.util.stream.Collectors;
  * Abstract implementation of Logic Graph Builder
  *
  */
-public abstract class AbstractLegoLogicGraphBuilder {
-	private static final Logger LOGGER = LoggerFactory.getLogger(AbstractLegoLogicGraphBuilder.class);
+public abstract class AbstractLegoLogicalExpressionBuilder {
+	private static final Logger LOGGER = LoggerFactory.getLogger(AbstractLegoLogicalExpressionBuilder.class);
 
     private LogicalExpressionBuilder logicalExpressionBuilder;
 
-    private final LogicGraphClassifier logicGraphClassifier;
+    private final LogicalExpressionClassifier logicalExpressionClassifier;
 
-    public AbstractLegoLogicGraphBuilder(final LogicGraphClassifier logicGraphClassifierIn) {
-        logicGraphClassifier = logicGraphClassifierIn;
+    public AbstractLegoLogicalExpressionBuilder(final LogicalExpressionClassifier logicalExpressionClassifierIn) {
+        logicalExpressionClassifier = logicalExpressionClassifierIn;
         LogicalExpressionBuilderService expressionBuilderService = LookupService.getService(LogicalExpressionBuilderService.class);
         logicalExpressionBuilder = expressionBuilderService.getLogicalExpressionBuilder();
     }
@@ -157,7 +157,7 @@ public abstract class AbstractLegoLogicGraphBuilder {
         UUID uuid;
         if (uuidString == null) {
             Long typeSctId = concept.getSctid();
-            uuid = logicGraphClassifier.getUUIDFromSNOMED(Long.toString(typeSctId));
+            uuid = logicalExpressionClassifier.getUUIDFromSNOMED(Long.toString(typeSctId));
         } else {
             uuid = UUID.fromString(uuidString);
         }
@@ -185,6 +185,6 @@ public abstract class AbstractLegoLogicGraphBuilder {
         return andNode;
     }
 
-    public abstract LogicGraph build();
+    public abstract LogicalExpression build();
 
 }

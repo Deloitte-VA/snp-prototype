@@ -1,6 +1,5 @@
 package com.github.jlgrock.snp.classifier.examples;
 
-import gov.vha.isaac.logic.LogicGraph;
 import gov.vha.isaac.ochre.api.LookupService;
 import gov.vha.isaac.ochre.api.logic.LogicalExpression;
 import gov.vha.isaac.ochre.api.logic.LogicalExpressionBuilder;
@@ -25,7 +24,7 @@ public class CreateLogicExpression {
      * Execute the example
      * @return the logic graph created
      */
-    protected LogicGraph execute() {
+    protected LogicalExpression execute() {
         LogicalExpressionBuilderService expressionBuilderService = LookupService.getService(LogicalExpressionBuilderService.class);
         LogicalExpressionBuilder defBuilder = expressionBuilderService.getLogicalExpressionBuilder();
 
@@ -35,7 +34,7 @@ public class CreateLogicExpression {
         LogicalExpression abdominalWallBleedingDef = defBuilder.build();
 
         LOGGER.info("Created definition:\n\n {}", abdominalWallBleedingDef);
-        return (LogicGraph) abdominalWallBleedingDef; //apparently we can just assume this is a LogicGraph?
+        return abdominalWallBleedingDef;
     }
 
     /**

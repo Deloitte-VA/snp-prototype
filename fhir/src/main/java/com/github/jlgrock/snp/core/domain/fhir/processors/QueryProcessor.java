@@ -1,6 +1,6 @@
 package com.github.jlgrock.snp.core.domain.fhir.processors;
 
-import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
+import com.github.jlgrock.snp.apis.classifier.LogicalExpressionClassifier;
 import com.github.jlgrock.snp.core.domain.fhir.model.Query;
 import org.jvnet.hk2.annotations.Service;
 
@@ -10,8 +10,8 @@ import javax.inject.Inject;
 public class QueryProcessor extends AbstractFhirProcessor {
 
     @Inject
-    public QueryProcessor(final LogicGraphClassifier logicGraphClassifierIn) {
-        super(logicGraphClassifierIn);
+    public QueryProcessor(final LogicalExpressionClassifier logicalExpressionClassifierIn) {
+        super(logicalExpressionClassifierIn);
     }
 
 	@Override

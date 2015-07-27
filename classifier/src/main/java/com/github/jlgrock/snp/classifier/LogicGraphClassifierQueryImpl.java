@@ -5,9 +5,8 @@ import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifierQuery;
 
 import gov.vha.isaac.logic.LogicGraph;
 import gov.vha.isaac.ochre.collections.SequenceSet;
-
+import gov.vha.isaac.ochre.util.UuidT3Generator;
 import org.ihtsdo.otf.tcc.api.concept.ConceptChronicleBI;
-import org.ihtsdo.otf.tcc.api.uuid.UuidT3Generator;
 import org.jvnet.hk2.annotations.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

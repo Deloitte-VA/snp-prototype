@@ -1,15 +1,17 @@
 package com.github.jlgrock.snp.classifier.examples;
 
-import gov.vha.isaac.logic.LogicGraph;
-import gov.vha.isaac.logic.LogicService;
+import gov.vha.isaac.metadata.coordinates.EditCoordinates;
+import gov.vha.isaac.metadata.coordinates.LogicCoordinates;
+import gov.vha.isaac.metadata.coordinates.StampCoordinates;
 import gov.vha.isaac.metadata.coordinates.ViewCoordinates;
 import gov.vha.isaac.ochre.api.IdentifierService;
 import gov.vha.isaac.ochre.api.LookupService;
+import gov.vha.isaac.ochre.api.classifier.ClassifierService;
+import gov.vha.isaac.ochre.api.logic.LogicService;
+import gov.vha.isaac.ochre.util.UuidT3Generator;
 import org.ihtsdo.otf.tcc.api.concept.ConceptChronicleBI;
 import org.ihtsdo.otf.tcc.api.store.TerminologySnapshotDI;
 import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
-import org.ihtsdo.otf.tcc.api.uuid.UuidT3Generator;
-import org.ihtsdo.otf.tcc.model.cc.concept.ConceptVersion;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,6 +30,11 @@ public class SearchByUUID extends AbstractQuery {
         IdentifierService idService = LookupService.getService(IdentifierService.class);
         LogicService logicService = LookupService.getService(LogicService.class);
 
+        ClassifierService classifierService = logicService.getClassifierService(
+                StampCoordinates.getDevelopmentLatest(),
+                LogicCoordinates.getStandardElProfile(),
+                EditCoordinates.getDefaultUserSolorOverlay());
+
         TerminologySnapshotDI statedTermSnapshot = termStore.getSnapshot(ViewCoordinates.getDevelopmentStatedLatest());
         TerminologySnapshotDI inferredTermSnapshot = termStore.getSnapshot(ViewCoordinates.getDevelopmentInferredLatest());
 
@@ -41,12 +48,6 @@ public class SearchByUUID extends AbstractQuery {
         LOGGER.info("\nFound [1] nid: {}", bleedingConcept1.getNid());
         LOGGER.info("Found [1] concept sequence: {}", idService.getConceptSequence(bleedingConcept1.getNid()));
         LOGGER.info("Found [1]: {}\n {}", bleedingConcept1, bleedingConcept1.toLongString());
-
-        //Print the results
-        LogicGraph lg1 = logicService.createLogicGraph((ConceptVersion) statedTermSnapshot.getConceptVersion(bleedingConcept1.getConceptNid()));
-        LOGGER.info("Stated logic graph:  {}", lg1);
-        LogicGraph lg2 = logicService.createLogicGraph((ConceptVersion) inferredTermSnapshot.getConceptVersion(bleedingConcept1.getConceptNid()));
-        LOGGER.info("Inferred logic graph: {}", lg2);
     }
 
     /**

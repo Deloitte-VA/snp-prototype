@@ -13,7 +13,7 @@ import java.util.stream.IntStream;
 /**
  *
  */
-public class LogicGraphClassifierQueryImplTest {
+public class LogicalExpressionClassifierQueryImplTest {
 
 
     @Test

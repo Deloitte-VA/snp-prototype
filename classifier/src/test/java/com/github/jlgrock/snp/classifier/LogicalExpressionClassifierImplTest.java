@@ -15,7 +15,7 @@ import java.util.UUID;
  *
  */
 @HK2(populate = false)
-public class LogicGraphClassifierImplTest {
+public class LogicalExpressionClassifierImplTest {
 
     @Test(expectedExceptions = NumberFormatException.class)
     public void testNidLookupBadNumber() {
@@ -28,7 +28,7 @@ public class LogicGraphClassifierImplTest {
         ViewCoordinate viewCoordinate = Mockito.mock(ViewCoordinate.class);
         Mockito.when(logicClassifierStore.getViewCoordinates()).thenReturn(viewCoordinate);
 
-        LogicGraphClassifierImpl logicGraphClassifier = new LogicGraphClassifierImpl(logicClassifierStore);
+        LogicalExpressionClassifierImpl logicGraphClassifier = new LogicalExpressionClassifierImpl(logicClassifierStore);
         Assert.assertEquals(logicGraphClassifier.getNidFromSNOMED("asd"), 5);
 
     }
@@ -44,7 +44,7 @@ public class LogicGraphClassifierImplTest {
         ViewCoordinate viewCoordinate = Mockito.mock(ViewCoordinate.class);
         Mockito.when(logicClassifierStore.getViewCoordinates()).thenReturn(viewCoordinate);
 
-        LogicGraphClassifierImpl logicGraphClassifier = new LogicGraphClassifierImpl(logicClassifierStore);
+        LogicalExpressionClassifierImpl logicGraphClassifier = new LogicalExpressionClassifierImpl(logicClassifierStore);
         Assert.assertEquals(logicGraphClassifier.getNidFromSNOMED("123"), 5);
 
     }

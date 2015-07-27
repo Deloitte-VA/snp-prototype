@@ -1,11 +1,11 @@
-package com.github.jlgrock.snp.core.domain.fhir.logicgraph;
+package com.github.jlgrock.snp.core.domain.fhir.logicalexpression;
 
-import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
+import com.github.jlgrock.snp.apis.classifier.LogicalExpressionClassifier;
 import com.github.jlgrock.snp.core.domain.fhir.model.Code;
 import com.github.jlgrock.snp.core.domain.fhir.model.CodeableConcept;
 import com.github.jlgrock.snp.core.domain.fhir.model.Coding;
-import gov.vha.isaac.logic.LogicGraph;
 import gov.vha.isaac.ochre.api.LookupService;
+import gov.vha.isaac.ochre.api.logic.LogicalExpression;
 import gov.vha.isaac.ochre.api.logic.LogicalExpressionBuilder;
 import gov.vha.isaac.ochre.api.logic.LogicalExpressionBuilderService;
 import gov.vha.isaac.ochre.api.logic.assertions.ConceptAssertion;
@@ -27,12 +27,12 @@ public abstract class AbstractFhirLogicGraphBuilder {
 
     private LogicalExpressionBuilder logicalExpressionBuilder;
 
-    private final LogicGraphClassifier logicGraphClassifier;
+    private final LogicalExpressionClassifier logicalExpressionClassifier;
 
     private static final String IS_ABOUT_SCTID = "53";
 
-    protected AbstractFhirLogicGraphBuilder(final LogicGraphClassifier logicGraphClassifierIn) {
-        logicGraphClassifier = logicGraphClassifierIn;
+    protected AbstractFhirLogicGraphBuilder(final LogicalExpressionClassifier logicalExpressionClassifierIn) {
+        logicalExpressionClassifier = logicalExpressionClassifierIn;
         LogicalExpressionBuilderService expressionBuilderService = LookupService.getService(LogicalExpressionBuilderService.class);
         logicalExpressionBuilder = expressionBuilderService.getLogicalExpressionBuilder();
     }
@@ -63,7 +63,7 @@ public abstract class AbstractFhirLogicGraphBuilder {
             if (id == null) {
                 throw new UnsupportedOperationException("Coding must have a unique identifier");
             }
-            uuid = logicGraphClassifier.getUUIDFromSNOMED(id);
+            uuid = logicalExpressionClassifier.getUUIDFromSNOMED(id);
             String description = coding.getDisplay().getValue();
             ConceptSpec conceptSpec = new ConceptSpec(description, uuid);
             childrenList.add(LogicalExpressionBuilder.ConceptAssertion(conceptSpec, logicalExpressionBuilder));
@@ -72,5 +72,5 @@ public abstract class AbstractFhirLogicGraphBuilder {
         return and;
     }
 
-    public abstract LogicGraph build();
+    public abstract LogicalExpression build(final CodeableConcept codeableConcept);
 }

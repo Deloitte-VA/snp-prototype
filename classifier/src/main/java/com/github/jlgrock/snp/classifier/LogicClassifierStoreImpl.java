@@ -2,7 +2,6 @@ package com.github.jlgrock.snp.classifier;
 
 import com.github.jlgrock.snp.apis.classifier.LogicClassifierStore;
 import com.github.jlgrock.snp.apis.connection.configuration.FileConfiguration;
-import gov.vha.isaac.logic.LogicService;
 import gov.vha.isaac.metadata.coordinates.EditCoordinates;
 import gov.vha.isaac.metadata.coordinates.LogicCoordinates;
 import gov.vha.isaac.metadata.coordinates.StampCoordinates;
@@ -10,7 +9,9 @@ import gov.vha.isaac.metadata.coordinates.ViewCoordinates;
 import gov.vha.isaac.ochre.api.IdentifierService;
 import gov.vha.isaac.ochre.api.LookupService;
 import gov.vha.isaac.ochre.api.TaxonomyService;
+import gov.vha.isaac.ochre.api.component.concept.ConceptService;
 import gov.vha.isaac.ochre.api.constants.Constants;
+import gov.vha.isaac.ochre.api.logic.LogicService;
 import org.glassfish.hk2.runlevel.RunLevelController;
 import org.ihtsdo.otf.tcc.api.coordinate.ViewCoordinate;
 import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
@@ -44,6 +45,12 @@ class LogicClassifierStoreImpl implements LogicClassifierStore {
         LOGGER.info("Starting Expression Service...");
         fileConfiguration = fileConfigurationIn;
         startExpressionService();
+        int conceptCnt = LookupService.getService(ConceptService.class).getConceptCount();
+        if (conceptCnt == 0) {
+            LOGGER.warn("No concepts found.  An empty database is being indexed.  This is either a new setup or an incorrect property has been set");
+        } else {
+            LOGGER.info("After startup, the number of concepts loaded is {}", conceptCnt);
+        }
         runFullClassification();
     }
 
@@ -53,10 +60,12 @@ class LogicClassifierStoreImpl implements LogicClassifierStore {
      * logic graph assemblage. Running a full classification will likely take several minutes.
      */
     private void runFullClassification() {
-        getLogicService().fullClassification(
-                StampCoordinates.getDevelopmentLatest(),
-                LogicCoordinates.getStandardElProfile(),
-                EditCoordinates.getDefaultUserSolorOverlay());
+        getLogicService()
+                .getClassifierService(
+                    StampCoordinates.getDevelopmentLatest(),
+                    LogicCoordinates.getStandardElProfile(),
+                    EditCoordinates.getDefaultUserSolorOverlay())
+                .classify();
     }
 
     @Override
@@ -65,8 +74,9 @@ class LogicClassifierStoreImpl implements LogicClassifierStore {
 
         if(!LookupService.isIsaacStarted()) {
             LOGGER.info("Setting System properties for Expression Service startup...");
-            System.setProperty(Constants.CHRONICLE_COLLECTIONS_ROOT_LOCATION_PROPERTY, fileConfiguration.chronicleLocation().toString());
-            System.setProperty(Constants.SEARCH_ROOT_LOCATION_PROPERTY, fileConfiguration.luceneLocation().toString());
+            System.setProperty(Constants.DATA_STORE_ROOT_LOCATION_PROPERTY, "/Users/jlgrock/workspace/snp/data/1.10-data/snomed-1.10-all.data");
+//            System.setProperty(Constants.CHRONICLE_COLLECTIONS_ROOT_LOCATION_PROPERTY, fileConfiguration.chronicleLocation().toString());
+//            System.setProperty(Constants.SEARCH_ROOT_LOCATION_PROPERTY, fileConfiguration.luceneLocation().toString());
 
             LookupService.startupIsaac();
             LOGGER.info("Expression Service is now up.");

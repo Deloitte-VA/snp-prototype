@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Shared functionality for the majority of the examples.
@@ -42,7 +43,7 @@ public abstract class AbstractQuery {
      *
      * @throws IOException if there are any issues with
      */
-    protected abstract void run() throws IOException;
+    protected abstract void run() throws IOException, ExecutionException, InterruptedException;
 
     /**
      * set up the database, run the example, and tear down the database
@@ -52,7 +53,7 @@ public abstract class AbstractQuery {
         setup();
         try {
             run();
-        } catch(IOException ioe) {
+        } catch(Exception ioe) {
             //TODO
         }
         teardown();

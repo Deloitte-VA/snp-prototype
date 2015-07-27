@@ -1,6 +1,6 @@
 package com.github.jlgrock.snp.core.domain.fhir.processors;
 
-import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
+import com.github.jlgrock.snp.apis.classifier.LogicalExpressionClassifier;
 import com.github.jlgrock.snp.core.domain.fhir.model.RelatedPerson;
 import org.jvnet.hk2.annotations.Service;
 
@@ -10,8 +10,8 @@ import javax.inject.Inject;
 public class RelatedPersonProcessor extends AbstractFhirProcessor {
 
     @Inject
-    public RelatedPersonProcessor(final LogicGraphClassifier logicGraphClassifierIn) {
-        super(logicGraphClassifierIn);
+    public RelatedPersonProcessor(final LogicalExpressionClassifier logicalExpressionClassifierIn) {
+        super(logicalExpressionClassifierIn);
     }
 
 	@Override

@@ -1,7 +1,7 @@
 package com.github.jlgrock.snp.classifier;
 
 import com.github.jlgrock.snp.apis.classifier.LogicClassifierStore;
-import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
+import com.github.jlgrock.snp.apis.classifier.LogicalExpressionClassifier;
 import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifierQuery;
 import com.github.jlgrock.snp.apis.connection.configuration.FileConfiguration;
 import gov.vha.isaac.ochre.api.LookupService;
@@ -31,7 +31,7 @@ public class LogicClassifierTest {
             @Override
             protected void configure() {
                 bind(LogicClassifierStoreImpl.class).to(LogicClassifierStore.class);
-                bind(LogicGraphClassifierImpl.class).to(LogicGraphClassifier.class);
+                bind(LogicalExpressionClassifierImpl.class).to(LogicalExpressionClassifier.class);
                 bind(LogicGraphClassifierQueryImpl.class).to(LogicGraphClassifierQuery.class);
                 bind(new FileConfiguration() {
 
