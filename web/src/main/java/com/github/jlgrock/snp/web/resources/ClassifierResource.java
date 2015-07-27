@@ -18,18 +18,15 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.ext.MessageBodyReader;
 
-import org.glassfish.jersey.media.multipart.BodyPart;
 import org.glassfish.jersey.media.multipart.FormDataBodyPart;
 import org.glassfish.jersey.media.multipart.FormDataMultiPart;
 import org.glassfish.jersey.media.multipart.FormDataParam;
-import org.ihtsdo.otf.tcc.api.concept.ConceptChronicleBI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
 import com.github.jlgrock.snp.apis.exceptions.ProcessingException;
 import com.github.jlgrock.snp.apis.web.ProcessingServiceFactory;
-import com.github.jlgrock.snp.web.services.ClassifierQueryServiceImpl;
 
 /**
  * The controller for handling all classifier requests
@@ -42,8 +39,6 @@ public class ClassifierResource {
 
 	private final ProcessingServiceFactory processingServiceFactory;
 
-	// private final ClassifierQueryServiceImpl classifierQueryServiceImpl;
-
 	private final LogicGraphClassifier logicGraphClassifier;
 
 	/**
@@ -51,18 +46,14 @@ public class ClassifierResource {
 	 *
 	 * @param processingServiceFactoryIn
 	 *            the marshaller that
-	 * @param classifierQueryServiceImplIn
-	 *            query the database
 	 * @param logicGraphClassifierIn
 	 *            logic graph classifier
 	 */
 	@Inject
 	public ClassifierResource(
 			final ProcessingServiceFactory processingServiceFactoryIn,
-			// final ClassifierQueryServiceImpl classifierQueryServiceImplIn,
 			final LogicGraphClassifier logicGraphClassifierIn) {
 		processingServiceFactory = processingServiceFactoryIn;
-		// classifierQueryServiceImpl = classifierQueryServiceImplIn;
 		logicGraphClassifier = logicGraphClassifierIn;
 	}
 
@@ -140,20 +131,27 @@ public class ClassifierResource {
 		return Response.ok().build();
 	}
 
-	 @GET
-	 @Path("{nid}")
-	 public Response getPce(@PathParam("nid") final int nid) {
-	 LOGGER.trace("getPce(nid={})", nid);
-	
+	/**
+	 * Returns a logic graph expression for a given nid
+	 * 
+	 * @param nid
+	 *            native identifier to lookup the logic graph
+	 * @return logic graph expression
+	 */
+	@GET
+	@Path("{nid}")
+	public Response getPce(@PathParam("nid") final int nid) {
+		LOGGER.trace("getPce(nid={})", nid);
+
 		LogicGraph logicGraph;
 		try {
 			logicGraph = logicGraphClassifier.getStatedTermLogicGraph(nid);
 		} catch (IOException e) {
 			return Response.serverError().build();
 		}
-	
-	 return Response.ok(logicGraph, MediaType.APPLICATION_JSON_TYPE).build();
-	 }
+
+		return Response.ok(logicGraph, MediaType.APPLICATION_JSON_TYPE).build();
+	}
 
 	/**
 	 * Process the file, using the processingService. If either parameter is
