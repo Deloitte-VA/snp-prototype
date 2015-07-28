@@ -40,7 +40,7 @@ public class LogicGraphClassifierQueryImpl implements LogicGraphClassifierQuery 
         int[] conceptSequences = null;
         SequenceSet results = null;
         results = logicClassifierStore.getTaxonomyService()
-                .getKindOfSequenceSet(nid, logicClassifierStore.getViewCoordinates());
+                .getKindOfSequenceSet(nid, logicClassifierStore.getViewCoordinate());
         if (results != null) {
             conceptSequences = results.stream().toArray();
         }

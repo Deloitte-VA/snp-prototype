@@ -26,7 +26,7 @@ public class LogicalExpressionClassifierImplTest {
         Mockito.when(terminologyStoreDI.getSnapshot(Mockito.any())).thenReturn(terminologySnapshotDI);
         Mockito.when(terminologySnapshotDI.getNidForUuids(Mockito.<UUID> any())).thenReturn(5);
         ViewCoordinate viewCoordinate = Mockito.mock(ViewCoordinate.class);
-        Mockito.when(logicClassifierStore.getViewCoordinates()).thenReturn(viewCoordinate);
+        Mockito.when(logicClassifierStore.getViewCoordinate()).thenReturn(viewCoordinate);
 
         LogicalExpressionClassifierImpl logicGraphClassifier = new LogicalExpressionClassifierImpl(logicClassifierStore);
         Assert.assertEquals(logicGraphClassifier.getNidFromSNOMED("asd"), 5);
@@ -42,7 +42,7 @@ public class LogicalExpressionClassifierImplTest {
         Mockito.when(terminologyStoreDI.getSnapshot(Mockito.any())).thenReturn(terminologySnapshotDI);
         Mockito.when(terminologySnapshotDI.getNidForUuids(Mockito.<UUID> any())).thenReturn(5);
         ViewCoordinate viewCoordinate = Mockito.mock(ViewCoordinate.class);
-        Mockito.when(logicClassifierStore.getViewCoordinates()).thenReturn(viewCoordinate);
+        Mockito.when(logicClassifierStore.getViewCoordinate()).thenReturn(viewCoordinate);
 
         LogicalExpressionClassifierImpl logicGraphClassifier = new LogicalExpressionClassifierImpl(logicClassifierStore);
         Assert.assertEquals(logicGraphClassifier.getNidFromSNOMED("123"), 5);

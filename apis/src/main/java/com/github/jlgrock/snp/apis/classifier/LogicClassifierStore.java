@@ -49,7 +49,7 @@ public interface LogicClassifierStore {
     TaxonomyService getTaxonomyService();
 
     /**
-     * @return get the latest view coordinates.  This is used for everything in the system for now
+     * @return get the latest view coordinate.  This is used for everything in the system for now
      */
-    ViewCoordinate getViewCoordinates();
+    ViewCoordinate getViewCoordinate();
 }

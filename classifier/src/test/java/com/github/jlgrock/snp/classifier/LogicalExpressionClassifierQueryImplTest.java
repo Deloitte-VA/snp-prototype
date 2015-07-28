@@ -25,7 +25,7 @@ public class LogicalExpressionClassifierQueryImplTest {
         TaxonomyService taxonomyService = Mockito.mock(TaxonomyService.class);
         Mockito.when(logicClassifierStore.getTaxonomyService()).thenReturn(taxonomyService);
         ViewCoordinate viewCoordinate = Mockito.mock(ViewCoordinate.class);
-        Mockito.when(logicClassifierStore.getViewCoordinates()).thenReturn(viewCoordinate);
+        Mockito.when(logicClassifierStore.getViewCoordinate()).thenReturn(viewCoordinate);
         ConceptSequenceSet conceptSequenceSet = Mockito.mock(ConceptSequenceSet.class);
         IntStream intStream = Mockito.mock(IntStream.class);
         Mockito.when(conceptSequenceSet.stream()).thenReturn(intStream);

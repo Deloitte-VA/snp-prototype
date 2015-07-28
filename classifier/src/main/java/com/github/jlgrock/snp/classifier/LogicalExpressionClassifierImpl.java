@@ -46,7 +46,7 @@ public class LogicalExpressionClassifierImpl implements LogicalExpressionClassif
     @Override
     public int getNidFromSNOMED(final String sctid) {
         TerminologyStoreDI termStore = logicClassifierStore.getTerminologyStore();
-        TerminologySnapshotDI termSnapshot = termStore.getSnapshot(logicClassifierStore.getViewCoordinates());
+        TerminologySnapshotDI termSnapshot = termStore.getSnapshot(logicClassifierStore.getViewCoordinate());
         UUID uuid = UuidT3Generator.fromSNOMED(Long.parseLong(sctid));
 
         //Get NID from UUID

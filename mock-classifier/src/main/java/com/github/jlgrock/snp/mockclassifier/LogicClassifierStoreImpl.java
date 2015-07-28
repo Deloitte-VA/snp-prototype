@@ -48,7 +48,7 @@ public class LogicClassifierStoreImpl implements LogicClassifierStore {
     }
 
     @Override
-    public ViewCoordinate getViewCoordinates() {
+    public ViewCoordinate getViewCoordinate() {
         return null;
     }
 }
