@@ -60,7 +60,6 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>aspectj-maven-plugin</artifactId>
-                <version>${aspectj.plugin.version}</version>
                 <configuration>
                     <aspectLibraries>
                         <aspectLibrary>
@@ -68,33 +67,9 @@
                             <artifactId>aop</artifactId>
                         </aspectLibrary>
                     </aspectLibraries>
-                    <showWeaveInfo>true</showWeaveInfo>
-                    <complianceLevel>${source.jdk}</complianceLevel>
-                    <source>${source.jdk}</source>
-                    <target>${target.jdk}</target>
-                    <Xlint>ignore</Xlint>
-                    <!--<verbose>true</verbose>-->
-                    <!--<warn>constructorName,packageDefaultMethod,deprecation,maskedCatchBlocks,unusedLocals,unusedArguments,unusedImport</warn>-->
                 </configuration>
-                <executions>
-                    <execution>
-                        <!-- Kun: IMPORTANT! have to do it in this PHASE! this will do the trick! -->
-                        <phase>process-sources</phase>
-                        <goals>
-                            <goal>compile</goal>
-                            <goal>test-compile</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.aspectj</groupId>
-                        <artifactId>aspectjtools</artifactId>
-                        <version>${aspectj.version}</version>
-                    </dependency>
-                </dependencies>
             </plugin>
-            
+
         </plugins>
     </build>
 

@@ -594,45 +594,22 @@
                     </configuration>
                 </plugin>
 
-
-
-<!--
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>aspectj-maven-plugin</artifactId>
-                    <version>1.7</version>
-                    <executions>
-                        <execution>
-                            <goals>
-                                <goal>compile</goal>
-                                <goal>test-compile</goal>
-                            </goals>
-                        </execution>
-                    </executions>
+                    <version>${aspectj.plugin.version}</version>
                     <configuration>
+                        <showWeaveInfo>true</showWeaveInfo>
+                        <complianceLevel>${source.jdk}</complianceLevel>
                         <source>${source.jdk}</source>
                         <target>${target.jdk}</target>
-                    </configuration>
-                </plugin>
--->
-<!--
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>aspectj-maven-plugin</artifactId>
-                    <version>1.7</version>
-                    <configuration>
-                        &lt;!&ndash;<showWeaveInfo>true</showWeaveInfo>&ndash;&gt;
-                        <source>${source.jdk}</source>
-                        <target>${source.jdk}</target>
                         <Xlint>ignore</Xlint>
-                        <complianceLevel>${source.jdk}</complianceLevel>
-                        <encoding>${project.build.sourceEncoding}</encoding>
-                        &lt;!&ndash;<verbose>true</verbose>&ndash;&gt;
-                        &lt;!&ndash;<warn>constructorName,packageDefaultMethod,deprecation,maskedCatchBlocks,unusedLocals,unusedArguments,unusedImport</warn>&ndash;&gt;
+                        <!--<verbose>true</verbose>-->
+                        <!--<warn>constructorName,packageDefaultMethod,deprecation,maskedCatchBlocks,unusedLocals,unusedArguments,unusedImport</warn>-->
                     </configuration>
                     <executions>
                         <execution>
-                            &lt;!&ndash; IMPORTANT &ndash;&gt;
+                            <!-- Kun: IMPORTANT! have to do it in this PHASE! this will do the trick! -->
                             <phase>process-sources</phase>
                             <goals>
                                 <goal>compile</goal>
@@ -648,7 +625,7 @@
                         </dependency>
                     </dependencies>
                 </plugin>
--->
+
                 <plugin>
 
                     <!-- The gmavenplus plugin is used to compile Groovy code. To learn more about this plugin,
@@ -675,7 +652,6 @@
                 </plugin>
 
                 <plugin>
-
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>exec-maven-plugin</artifactId>
                     <executions>
@@ -730,18 +706,6 @@
                         <useFile>false</useFile>
                         <argLine>-Xmx512m</argLine>
                     </configuration>
-                    <!--<dependencies>-->
-                        <!--<dependency>-->
-                            <!--<groupId>org.apache.maven.surefire</groupId>-->
-                            <!--<artifactId>surefire-junit47</artifactId>-->
-                            <!--<version>${maven-surefire-plugin.version}</version>-->
-                        <!--</dependency>-->
-                        <!--<dependency>-->
-                            <!--<groupId>org.apache.maven.surefire</groupId>-->
-                            <!--<artifactId>surefire-testng</artifactId>-->
-                            <!--<version>${maven-surefire-plugin.version}</version>-->
-                        <!--</dependency>-->
-                    <!--</dependencies>-->
                 </plugin>
 
                 <!-- Generate Java Doc jar -->
