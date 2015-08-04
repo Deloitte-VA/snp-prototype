@@ -9,8 +9,12 @@ import gov.vha.isaac.metadata.coordinates.ViewCoordinates;
 import gov.vha.isaac.ochre.api.IdentifierService;
 import gov.vha.isaac.ochre.api.LookupService;
 import gov.vha.isaac.ochre.api.TaxonomyService;
+import gov.vha.isaac.ochre.api.classifier.ClassifierService;
 import gov.vha.isaac.ochre.api.component.concept.ConceptService;
 import gov.vha.isaac.ochre.api.constants.Constants;
+import gov.vha.isaac.ochre.api.coordinate.EditCoordinate;
+import gov.vha.isaac.ochre.api.coordinate.LogicCoordinate;
+import gov.vha.isaac.ochre.api.coordinate.StampCoordinate;
 import gov.vha.isaac.ochre.api.logic.LogicService;
 import org.glassfish.hk2.runlevel.RunLevelController;
 import org.ihtsdo.otf.tcc.api.coordinate.ViewCoordinate;
@@ -60,12 +64,15 @@ class LogicClassifierStoreImpl implements LogicClassifierStore {
      * logic graph assemblage. Running a full classification will likely take several minutes.
      */
     private void runFullClassification() {
-        getLogicService()
-                .getClassifierService(
-                    StampCoordinates.getDevelopmentLatest(),
-                    LogicCoordinates.getStandardElProfile(),
-                    EditCoordinates.getDefaultUserSolorOverlay())
-                .classify();
+        getClassifierService().classify();
+    }
+
+    @Override
+    public ClassifierService getClassifierService() {
+        return getLogicService().getClassifierService(
+                StampCoordinates.getDevelopmentLatest(),
+                LogicCoordinates.getStandardElProfile(),
+                EditCoordinates.getDefaultUserSolorOverlay());
     }
 
     @Override
@@ -74,9 +81,8 @@ class LogicClassifierStoreImpl implements LogicClassifierStore {
 
         if(!LookupService.isIsaacStarted()) {
             LOGGER.info("Setting System properties for Expression Service startup...");
-            System.setProperty(Constants.DATA_STORE_ROOT_LOCATION_PROPERTY, "/Users/jlgrock/workspace/snp/data/1.10-data/snomed-1.10-all.data");
-//            System.setProperty(Constants.CHRONICLE_COLLECTIONS_ROOT_LOCATION_PROPERTY, fileConfiguration.chronicleLocation().toString());
-//            System.setProperty(Constants.SEARCH_ROOT_LOCATION_PROPERTY, fileConfiguration.luceneLocation().toString());
+            System.setProperty(Constants.CHRONICLE_COLLECTIONS_ROOT_LOCATION_PROPERTY, fileConfiguration.chronicleLocation().toString());
+            System.setProperty(Constants.SEARCH_ROOT_LOCATION_PROPERTY, fileConfiguration.luceneLocation().toString());
 
             LookupService.startupIsaac();
             LOGGER.info("Expression Service is now up.");
@@ -117,7 +123,7 @@ class LogicClassifierStoreImpl implements LogicClassifierStore {
     }
 
     @Override
-    public ViewCoordinate getViewCoordinates() {
+    public ViewCoordinate getViewCoordinate() {
         ViewCoordinate viewCoordinate = null;
         try {
             viewCoordinate = ViewCoordinates.getDevelopmentInferredLatest();
@@ -127,4 +133,19 @@ class LogicClassifierStoreImpl implements LogicClassifierStore {
         return viewCoordinate;
     }
 
+    @Override
+    public StampCoordinate getStampCoordinate() {
+        return StampCoordinates.getDevelopmentLatest();
+    }
+
+    @Override
+    public int getInferredAssemblageSequence() {
+        LogicCoordinate logicCoordinate = LogicCoordinates.getStandardElProfile();
+        return logicCoordinate.getInferredAssemblageSequence();
+    }
+
+    @Override
+    public EditCoordinate getSolorOverlay() {
+        return EditCoordinates.getDefaultUserSolorOverlay();
+    }
 }

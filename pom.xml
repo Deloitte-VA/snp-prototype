@@ -42,6 +42,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <project.rootdir>${project.basedir}</project.rootdir>
         <source.jdk>1.8</source.jdk>
@@ -61,7 +62,13 @@
         <junit.version>4.12</junit.version>
         <mockito.version>1.10.8</mockito.version>
         <hk2.version>2.4.0-b16</hk2.version>
+        <objenesis.version>2.1</objenesis.version>
+        <hamcrest.version>1.3</hamcrest.version>
+        <cglib.version>3.1</cglib.version>
+        <spock.version>1.0-groovy-2.4</spock.version>
         <guava.version>18.0</guava.version>
+        <groovy.version>2.4.4</groovy.version>
+        <gmaven-plugin.version>1.4</gmaven-plugin.version>
         <jax-ws.version>2.0</jax-ws.version>
         <jersey.version>2.18</jersey.version>
         <jersey-json.version>1.19</jersey-json.version>
@@ -347,12 +354,6 @@
             </dependency>
 
             <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-test</artifactId>
-                <version>${spring.core.version}</version>
-            </dependency>
-
-            <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-all</artifactId>
                 <version>${mockito.version}</version>
@@ -382,6 +383,40 @@
                 <version>${hk2.version}</version>
             </dependency>
 
+            <dependency> <!-- enables mocking of classes (in addition to interfaces) -->
+                <groupId>cglib</groupId>
+                <artifactId>cglib-nodep</artifactId>
+                <version>${cglib.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency> <!-- enables mocking of classes without default constructor (together with CGLIB) -->
+                <groupId>org.objenesis</groupId>
+                <artifactId>objenesis</artifactId>
+                <version>${objenesis.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency> <!-- only required if Hamcrest matchers are used -->
+                <groupId>org.hamcrest</groupId>
+                <artifactId>hamcrest-core</artifactId>
+                <version>${hamcrest.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.spockframework</groupId>
+                <artifactId>spock-core</artifactId>
+                <version>${spock.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency> <!-- use a specific Groovy version rather than the one specified by spock-core -->
+                <groupId>org.codehaus.groovy</groupId>
+                <artifactId>groovy-all</artifactId>
+                <version>${groovy.version}</version>
+                <scope>test</scope>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -402,12 +437,6 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
         </dependency>
-
-        <!--<dependency>-->
-            <!--<groupId>org.slf4j</groupId>-->
-            <!--<artifactId>slf4j-simple</artifactId>-->
-            <!--<scope>test</scope>-->
-        <!--</dependency>-->
 
         <!-- Testing dependencies for all projects -->
 
@@ -430,6 +459,37 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency> <!-- enables mocking of classes (in addition to interfaces) -->
+            <groupId>cglib</groupId>
+            <artifactId>cglib-nodep</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency> <!-- enables mocking of classes without default constructor (together with CGLIB) -->
+            <groupId>org.objenesis</groupId>
+            <artifactId>objenesis</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency> <!-- only required if Hamcrest matchers are used -->
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.spockframework</groupId>
+            <artifactId>spock-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Optional dependencies for using Spock -->
+        <dependency> <!-- use a specific Groovy version rather than the one specified by spock-core -->
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy-all</artifactId>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <modules>
@@ -441,7 +501,6 @@
         <module>mock-classifier</module>
         <module>classifier</module>
         <module>web</module>
-        <!--<module>client</module>-->
     </modules>
 
     <build>
@@ -471,18 +530,79 @@
                 </plugin>
 
                 <plugin>
+                    <!-- The gmavenplus plugin is used to compile Groovy code. To learn more about this plugin,
+                    visit https://github.com/groovy/GMavenPlus/wiki -->
+                    <groupId>org.codehaus.gmavenplus</groupId>
+                    <artifactId>gmavenplus-plugin</artifactId>
+                    <version>${gmaven-plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>compile</goal>
+                                <goal>testCompile</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.codehaus.groovy</groupId>
+                            <artifactId>groovy-all</artifactId>
+                            <version>${groovy.version}</version>
+                            <scope>runtime</scope>
+                        </dependency>
+                    </dependencies>
+                </plugin>
+
+                <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>${maven-surefire-plugin.version}</version>
+                    <executions>
+                        <execution> <!-- Anything ending in *Test.java will be run be TestNG -->
+                            <id>test-testng</id>
+                            <phase>test</phase>
+                            <goals>
+                                <goal>test</goal>
+                            </goals>
+                            <configuration>
+                                <junitArtifactName>none:none</junitArtifactName>
+                                <includes>
+                                    <include>**/*Test.java</include>
+                                </includes>
+                            </configuration>
+                        </execution>
+                        <execution> <!-- Anything ending in *Spec.groovy will be run be JUnit -->
+                            <id>test-spock</id>
+                            <phase>test</phase>
+                            <goals>
+                                <goal>test</goal>
+                            </goals>
+                            <configuration>
+                                <testNGArtifactName>none:none</testNGArtifactName>
+                                <includes>
+                                    <!-- By default only files ending in 'Test' will be included, so also include support for Spock style naming convention -->
+                                    <!-- Oddly enough for Groovy files, *Spec.groovy does not work, but *Spec.java does -->
+                                    <include>**/*Spec.java</include>
+                                </includes>
+                            </configuration>
+                        </execution>
+                    </executions>
                     <configuration>
+                        <useFile>false</useFile>
                         <argLine>-Xmx512m</argLine>
-                        <includes>
-                            <!-- By default only files ending in 'Test' will be included, so also include support for Spock style naming convention -->
-                            <!-- Oddly enough for Groovy files, *Spec.groovy does not work, but *Spec.java does -->
-                            <include>**/*Test.java</include>
-                            <include>**/*Spec.java</include>
-                        </includes>
                     </configuration>
+                    <!--<dependencies>-->
+                        <!--<dependency>-->
+                            <!--<groupId>org.apache.maven.surefire</groupId>-->
+                            <!--<artifactId>surefire-junit47</artifactId>-->
+                            <!--<version>${maven-surefire-plugin.version}</version>-->
+                        <!--</dependency>-->
+                        <!--<dependency>-->
+                            <!--<groupId>org.apache.maven.surefire</groupId>-->
+                            <!--<artifactId>surefire-testng</artifactId>-->
+                            <!--<version>${maven-surefire-plugin.version}</version>-->
+                        <!--</dependency>-->
+                    <!--</dependencies>-->
                 </plugin>
 
                 <!-- Generate Java Doc jar -->
@@ -636,6 +756,13 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
+            </plugin>
+
+            <!-- Execute the groovy testing -->
+            <plugin>
+                <groupId>org.codehaus.gmavenplus</groupId>
+                <artifactId>gmavenplus-plugin</artifactId>
+                <version>${gmaven-plugin.version}</version>
             </plugin>
         </plugins>
     </build>

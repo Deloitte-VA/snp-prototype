@@ -3,10 +3,7 @@ package com.github.jlgrock.snp.classifier;
 import com.github.jlgrock.snp.apis.classifier.LogicClassifierStore;
 import com.github.jlgrock.snp.apis.classifier.LogicalExpressionClassifier;
 import gov.vha.isaac.metadata.coordinates.EditCoordinates;
-import gov.vha.isaac.metadata.coordinates.LogicCoordinates;
-import gov.vha.isaac.metadata.coordinates.StampCoordinates;
-import gov.vha.isaac.ochre.api.classifier.ClassifierService;
-import gov.vha.isaac.ochre.api.logic.LogicService;
+import gov.vha.isaac.ochre.api.chronicle.LatestVersion;
 import gov.vha.isaac.ochre.api.logic.LogicalExpression;
 import gov.vha.isaac.ochre.util.UuidT3Generator;
 import javafx.concurrent.Task;
@@ -19,6 +16,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import java.io.IOException;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 
@@ -26,7 +24,7 @@ import java.util.concurrent.ExecutionException;
  * Class that provides classification services to ochre and lucene.
  */
 @Service
-public class LogicalExpressionClassifierImpl implements LogicalExpressionClassifier {
+class LogicalExpressionClassifierImpl implements LogicalExpressionClassifier {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(LogicalExpressionClassifierImpl.class);
 
@@ -39,7 +37,6 @@ public class LogicalExpressionClassifierImpl implements LogicalExpressionClassif
      */
     @Inject
     public LogicalExpressionClassifierImpl(final LogicClassifierStore logicClassifierStoreIn) {
-        LOGGER.info("Instantiating Classifier Service...");
         logicClassifierStore = logicClassifierStoreIn;
     }
 
@@ -72,18 +69,28 @@ public class LogicalExpressionClassifierImpl implements LogicalExpressionClassif
     }
 
     @Override
+    public ConceptChronicleBI findChronicle(final int nid) {
+        ConceptChronicleBI returnVal = null;
+        try {
+            TerminologyStoreDI terminologyStoreDI = logicClassifierStore
+                    .getTerminologyStore();
+            returnVal = terminologyStoreDI.getConcept(nid);
+        } catch (IOException ex) {
+            LOGGER.error("Unable to get ViewCoordinates Inferred Latest", ex);
+        }
+        return returnVal;
+    }
+
+    @Override
     public Integer classify(final LogicalExpression logicGraph) {
         LOGGER.debug("Stated logic graph: {}", logicGraph);
 
-        LogicService logicService = logicClassifierStore.getLogicService();
-        ClassifierService classifierService =
-                logicService.getClassifierService(
-                        StampCoordinates.getDevelopmentLatest(),
-                        LogicCoordinates.getStandardElProfile(),
-                        EditCoordinates.getDefaultUserSolorOverlay());
-        Task<Integer> classifierResult = classifierService.getConceptSequenceForExpression(
-                logicGraph,
-                EditCoordinates.getDefaultUserSolorOverlay());
+        Task<Integer> classifierResult = logicClassifierStore.
+                getClassifierService().
+                getConceptSequenceForExpression(
+                    logicGraph,
+                    EditCoordinates.getDefaultUserSolorOverlay()
+                );
 
         Integer returnVal = null;
         try {
@@ -92,6 +99,19 @@ public class LogicalExpressionClassifierImpl implements LogicalExpressionClassif
             LOGGER.error("There was an interruption classifying the logic graph {}", logicGraph, ie);
         } catch (ExecutionException ee) {
             LOGGER.error("There was an execution exception classifying the logic graph {}", logicGraph, ee);
+        }
+        return returnVal;
+    }
+
+    @Override
+    public LogicalExpression getInferredTermLogicalExpression(final int nid) throws IOException {
+        LogicalExpression returnVal = null;
+        Optional<LatestVersion<? extends LogicalExpression>> logicalExpressionOptional = logicClassifierStore.getLogicService().
+                getLogicalExpression(nid, logicClassifierStore.getInferredAssemblageSequence(),
+                logicClassifierStore.getStampCoordinate());
+
+        if (logicalExpressionOptional.isPresent()) {
+            returnVal = logicalExpressionOptional.get().value();
         }
         return returnVal;
     }

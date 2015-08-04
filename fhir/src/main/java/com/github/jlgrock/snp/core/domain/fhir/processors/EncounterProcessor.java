@@ -63,8 +63,6 @@ public class EncounterProcessor extends AbstractFhirProcessor {
         // insert/update the encounter
         encounterRepository.save(saveVal);
 
-
-
 	}
 
     @Override

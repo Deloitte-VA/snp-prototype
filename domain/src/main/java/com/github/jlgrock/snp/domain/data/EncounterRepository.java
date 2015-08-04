@@ -2,6 +2,7 @@ package com.github.jlgrock.snp.domain.data;
 
 import com.github.jlgrock.snp.apis.data.MongoRepository;
 import com.github.jlgrock.snp.domain.types.Encounter;
+
 import org.bson.types.ObjectId;
 import org.jvnet.hk2.annotations.Contract;
 
@@ -9,8 +10,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 /**
- * The Encounter Repository provides an abstraction layer to executing queries against the Encounter
- * Collection within MongoDB.
+ * The Encounter Repository provides an abstraction layer to executing queries
+ * against the Encounter Collection within MongoDB.
  */
 @Contract
 public interface EncounterRepository extends MongoRepository<Encounter, ObjectId> {
@@ -40,5 +41,17 @@ public interface EncounterRepository extends MongoRepository<Encounter, ObjectId
      */
     Encounter findOneByFhirId(String fhirId);
 
-}
+	/**
+	 * Find all Encounters based off of whether they have had a PCE observation
+	 * and PCE provenance and PCE value
+	 * 
+	 * @param observableIds observable PCE IDs to find in the assertion sub-object
+	 * @param provenanceIds provenance PCE IDs to find in the assertion sub-object
+	 * @param valueIds value PCE IDs to find in the assertion sub-object
+	 * @return a list of the encounters that match the criteria
+	 */
+	List<Encounter> findByObservableIdListAndProvenanceIdListAndValueIdList(
+			List<Integer> observableIds, List<Integer> provenanceIds,
+			List<Integer> valueIds);
 
+}

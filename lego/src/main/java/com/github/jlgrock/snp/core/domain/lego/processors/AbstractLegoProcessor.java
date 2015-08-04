@@ -27,11 +27,14 @@ public abstract class AbstractLegoProcessor implements LegoElementProcessorServi
 
     private final LogicalExpressionClassifier logicalExpressionClassifier;
     private final ClassifiedPceRepository classifiedPceRepository;
+    private final LegoLogicalExpressionBuilder legoLogicalExpressionBuilder;
 
     protected AbstractLegoProcessor(final LogicalExpressionClassifier logicalExpressionClassifierIn,
-                                    final ClassifiedPceRepository classifiedPceRepositoryIn) {
+                                    final ClassifiedPceRepository classifiedPceRepositoryIn,
+                                    final LegoLogicalExpressionBuilder legoLogicalExpressionBuilderIn) {
         logicalExpressionClassifier = logicalExpressionClassifierIn;
         classifiedPceRepository = classifiedPceRepositoryIn;
+        legoLogicalExpressionBuilder = legoLogicalExpressionBuilderIn;
     }
 
     protected void processLegoList(final LegoList legoListIn) {
@@ -55,18 +58,21 @@ public abstract class AbstractLegoProcessor implements LegoElementProcessorServi
 
     protected void processAssertion(final Assertion assertion) {
         Discernible discernible = assertion.getDiscernible();
-        processDiscernible(discernible);
+        if (discernible != null) {
+            processDiscernible(discernible);
+        }
     }
 
     protected void processDiscernible(final Discernible discernible) {
         Expression expression = discernible.getExpression();
-        processExpression(expression);
+        if (expression != null) {
+            processExpression(expression);
+        }
     }
 
     protected void processExpression(final Expression expression) {
         // Create the logic graph
-        LegoLogicalExpressionBuilder legoLogicalExpressionBuilder = new LegoLogicalExpressionBuilder(logicalExpressionClassifier, expression);
-        LogicalExpression logicalExpression = legoLogicalExpressionBuilder.build();
+        LogicalExpression logicalExpression = legoLogicalExpressionBuilder.build(expression);
         LOGGER.debug("executing classifier logic on logic graph...");
         Integer classifiedLogicGraphId = logicalExpressionClassifier.classify(logicalExpression);
         LOGGER.debug("received id: {}", classifiedLogicGraphId);

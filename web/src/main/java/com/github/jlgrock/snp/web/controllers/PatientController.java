@@ -81,30 +81,47 @@ public class PatientController {
 		QueryParamParser queryHandler = new QueryParamParser();
 		QueryParam queryParam = queryHandler.handleRequest(beanUri);
 
-		String obs = queryParam.getFilter().get("assertion");
-		if (obs == null) {
-			String errMsg = "Missing 'assertion' argument";
-			LOGGER.error(errMsg);
+		String obsParam = queryParam.getFilter().get("observation");
+		String provParam = queryParam.getFilter().get("provenance");
+		String valueParam = queryParam.getFilter().get("value");
+		Integer obs;
+		Integer prov;
+		Integer value;
+		try {
+			obs = parseNid(obsParam, "observation");
+			prov = parseNid(provParam, "provenance");
+			value = parseNid(valueParam, "value");
+		} catch (Exception e) {
 			ResponseWrapper response = new ResponseWrapper(
-					ResponseStatusCode.INVALID_REQUEST, null, errMsg);
+					ResponseStatusCode.INVALID_REQUEST, null, e.getMessage());
 			return Response.status(Status.BAD_REQUEST).entity(response).build();
+		}
+
+		Set<Patient> patients = classifierQueryService.executeKindOfQuery(obs,
+				prov, value);
+		
+		ResponseWrapper response = new ResponseWrapper(ResponseStatusCode.OK,
+				patients);
+		return Response.ok().entity(response).build();
+	}
+
+	private Integer parseNid(final String sNid, final String paramName) throws Exception {
+		if (sNid == null) {
+			String errMsg = "Missing '" + paramName + "' argument";
+			LOGGER.error(errMsg);
+			throw new Exception(errMsg);
 		}
 
 		Integer nid;
 		try {
-			nid = Integer.parseInt(obs);
+			nid = Integer.parseInt(sNid);
 		} catch (NumberFormatException e) {
-			String errMsg = "Unable to parse 'assertion' argument: " + obs;
+			String errMsg = "Unable to parse '" + paramName + "' argument: "
+					+ sNid;
 			LOGGER.error(errMsg, e);
-			ResponseWrapper response = new ResponseWrapper(
-					ResponseStatusCode.INVALID_REQUEST, null, errMsg);
-			return Response.status(Status.BAD_REQUEST).entity(response).build();
+			throw new Exception(errMsg, e);
 		}
 
-		Set<Patient> patients = classifierQueryService.executeKindOfQuery(nid);
-
-		ResponseWrapper response = new ResponseWrapper(ResponseStatusCode.OK,
-				patients);
-		return Response.ok().entity(response).build();
+		return nid;
 	}
 }

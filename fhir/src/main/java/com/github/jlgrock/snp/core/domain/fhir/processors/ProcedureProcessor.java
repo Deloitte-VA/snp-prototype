@@ -27,14 +27,17 @@ public class ProcedureProcessor extends AbstractFhirProcessor {
 
     private final EncounterRepository encounterRepository;
     private final ClassifiedPceRepository classifiedPceRepository;
+    private final FhirCodeableConceptGraphBuilder fhirCodeableConceptGraphBuilder;
 
     @Inject
     public ProcedureProcessor(final LogicalExpressionClassifier logicalExpressionClassifierIn,
                               final EncounterRepository encounterRepositoryIn,
-                              final ClassifiedPceRepository classifiedPceRepositoryIn) {
+                              final ClassifiedPceRepository classifiedPceRepositoryIn,
+                              final FhirCodeableConceptGraphBuilder fhirCodeableConceptGraphBuilderIn) {
         super(logicalExpressionClassifierIn);
         classifiedPceRepository = classifiedPceRepositoryIn;
         encounterRepository = encounterRepositoryIn;
+        fhirCodeableConceptGraphBuilder = fhirCodeableConceptGraphBuilderIn;
     }
 
 	@Override
@@ -56,8 +59,6 @@ public class ProcedureProcessor extends AbstractFhirProcessor {
         CodeableConcept codeableConcept = procedure.getType();
 
         // build the logic graph from the code
-        FhirCodeableConceptGraphBuilder fhirCodeableConceptGraphBuilder =
-                new FhirCodeableConceptGraphBuilder(getLogicalExpressionClassifier());
         LogicalExpression logicalExpression = fhirCodeableConceptGraphBuilder.build(codeableConcept);
 
         // classify the logic graph

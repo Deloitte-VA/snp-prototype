@@ -14,7 +14,8 @@ app.controller('DynamicQueryController', ['$scope', 'dynamicQueryFactory',
     $scope.patients = {};
 	
     $scope.processForm = function() {
-    	$scope.formData.filter = 'observation=' + $scope.formData.observation;
+    	$scope.formData.filter = 'observation=' + $scope.formData.observation + 
+    	',provenance=' + $scope.formData.provenance + ',value=' + $scope.formData.value;
     	
     	dynamicQueryFactory.getPatients($scope.formData)
             .success(function (data, status, headers, config) {

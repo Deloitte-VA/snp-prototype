@@ -185,6 +185,6 @@ public abstract class AbstractLegoLogicalExpressionBuilder {
         return andNode;
     }
 
-    public abstract LogicalExpression build();
+    public abstract LogicalExpression build(final Expression expression);
 
 }

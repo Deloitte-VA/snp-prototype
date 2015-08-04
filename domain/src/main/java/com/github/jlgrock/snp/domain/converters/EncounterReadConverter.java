@@ -5,11 +5,13 @@ import com.github.jlgrock.snp.domain.data.EncounterTags;
 import com.github.jlgrock.snp.domain.data.PatientRepository;
 import com.github.jlgrock.snp.domain.types.Encounter;
 import com.github.jlgrock.snp.domain.types.Assertion;
+
 import org.bson.Document;
 import org.jvnet.hk2.annotations.Service;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -46,7 +48,8 @@ public class EncounterReadConverter extends AbstractReadConverter implements Con
         encounter.setParticipant(parseString(source, EncounterTags.PARTICIPANT));
         encounter.setPatientId(parseObjectId(source, EncounterTags.PATIENT_ID));
 
-        List<Document> assertionsObjs = (List<Document>) source.get(EncounterTags.ASSERTIONS_TAG);
+        @SuppressWarnings("unchecked")
+		List<Document> assertionsObjs = (List<Document>) source.get(EncounterTags.ASSERTIONS_TAG);
         List<Assertion> assertions = new ArrayList<>();
         if (assertionsObjs != null) {
             assertions = assertionsObjs

@@ -12,7 +12,9 @@ import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.UpdateOptions;
+
 import org.bson.Document;
+import org.bson.conversions.Bson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -82,7 +84,7 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
      * @return a list of the objects
      */
     @SuppressWarnings("unchecked")
-    protected List<S> executeQueryAndTransformResults(final Document query) {
+    protected List<S> executeQueryAndTransformResults(final Bson query) {
         LOGGER.trace("executeQueryAndTransformResults(query={})", query);
         List<S> eList = new ArrayList<>();
         if (query == null) {

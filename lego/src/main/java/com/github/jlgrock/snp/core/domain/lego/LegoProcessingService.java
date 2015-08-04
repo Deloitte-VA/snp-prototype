@@ -1,12 +1,16 @@
 package com.github.jlgrock.snp.core.domain.lego;
 
 import com.github.jlgrock.snp.apis.exceptions.ClassifierException;
+import com.github.jlgrock.snp.apis.exceptions.ProcessingException;
 import com.github.jlgrock.snp.apis.exceptions.UnmarshallingException;
 import com.github.jlgrock.snp.apis.web.ProcessingService;
 import com.github.jlgrock.snp.core.domain.lego.marhsallers.LegoMarshallerService;
 import com.github.jlgrock.snp.core.domain.lego.processors.LegoElementProcessorFactory;
 import com.github.jlgrock.snp.core.domain.lego.processors.LegoElementProcessorService;
+
 import org.jvnet.hk2.annotations.Service;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 
@@ -15,6 +19,8 @@ import javax.inject.Inject;
  */
 @Service
 public class LegoProcessingService implements ProcessingService {
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(LegoProcessingService.class);
 
     private LegoMediaTypeService legoMediaType;
     private LegoMarshallerService legoMarshallerService;
@@ -30,24 +36,29 @@ public class LegoProcessingService implements ProcessingService {
     }
 
     /**
+     * @throws ProcessingException 
      * @{@inheritDoc}
      *
      * This ignores the identifier parameter
      */
     @Override
-    public void processInput(final String input, final String identifier) {
+    public void processInput(final String input, final String identifier) throws ProcessingException {
         Object unmarshalledObject = null;
         try {
             unmarshalledObject = legoMarshallerService.unmarshall(input);
-        } catch(UnmarshallingException ue) {
-            //TODO
+        } catch (UnmarshallingException ue) {
+        	String errMsg = "Unable to unmarshall object";
+            LOGGER.error(errMsg, ue);
+        	throw new ProcessingException(errMsg, ue);
         }
         if (unmarshalledObject != null) {
             LegoElementProcessorService legoElementProcessorService = null;
             try {
                 legoElementProcessorService = legoElementProcessorFactory.findElementProcessor(unmarshalledObject);
             } catch (ClassifierException ce) {
-                //TODO
+            	String errMsg = "Unable to find classifier";
+            	LOGGER.error(errMsg, ce);
+            	throw new ProcessingException(errMsg, ce);
             }
             legoElementProcessorService.process(unmarshalledObject);
         }

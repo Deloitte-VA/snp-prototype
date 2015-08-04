@@ -1,6 +1,5 @@
 package com.github.jlgrock.snp.web.services;
 
-
 import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifierQuery;
 import com.github.jlgrock.snp.domain.data.EncounterRepository;
 import com.github.jlgrock.snp.domain.data.PatientRepository;
@@ -25,12 +24,9 @@ import java.util.stream.IntStream;
 @Contract
 @Service
 public class ClassifierQueryServiceImpl {
-	
-	private static final Logger LOGGER = LoggerFactory.getLogger(ClassifierQueryServiceImpl.class);
 
-    private final LogicGraphClassifierQuery logicGraphClassifierQuery;
-    private final EncounterRepository encounterRepository;
-    private final PatientRepository patientRepository;
+	private static final Logger LOGGER = LoggerFactory
+			.getLogger(ClassifierQueryServiceImpl.class);
 
     /**
      * @param logicGraphClassifierQueryIn to classify logic graphs
@@ -46,68 +42,121 @@ public class ClassifierQueryServiceImpl {
         patientRepository = patientRepositoryIn;
     }
 
-    /**
-     * Execute a query to find objects that are a kind of the object passed in
-     *
-     * @param uuid the uuid to identify the object passed in
-     * @return the result
-     */
-    public Set<Patient> executeKindOfQuery(final UUID uuid) {
-        int[] results = logicGraphClassifierQuery.query(uuid);
-        return findPatientsByNids(convertToList(results));
-    }
+	/**
+	 * @param logicGraphClassifierQueryIn
+	 *            to classify logic graphs
+	 * @param encounterRepositoryIn
+	 *            the encounter repository, for executing encounter queries
+	 *            against
+	 * @param patientRepositoryIn
+	 *            the patient repository, for executing patient queries against
+	 */
+	@Inject
+	public ClassifierQueryServiceImpl(
+			final LogicGraphClassifierQuery logicGraphClassifierQueryIn,
+			final EncounterRepository encounterRepositoryIn,
+			final PatientRepository patientRepositoryIn) {
+		logicGraphClassifierQuery = logicGraphClassifierQueryIn;
+		encounterRepository = encounterRepositoryIn;
+		patientRepository = patientRepositoryIn;
+	}
 
-    /**
-     * Execute a query to find objects that are a kind of the object passed in
-     *
-     * @param sctid the snomed concept identifier to identify the object passed in
-     * @return the result
-     */
-    public Set<Patient> executeKindOfQuery(final String sctid) {
-        int[] results = logicGraphClassifierQuery.query(sctid);
-        return findPatientsByNids(convertToList(results));
-    }
+	/**
+	 * Execute a query to find objects that are a kind of the object passed in
+	 *
+	 * @param uuid
+	 *            the uuid to identify the object passed in
+	 * @return the result
+	 */
+	public Set<Patient> executeKindOfQuery(final UUID uuid) {
+		int[] results = logicGraphClassifierQuery.query(uuid);
+		return findPatientsByNids(convertToList(results));
+	}
 
-    /**
-     * Execute a query to find objects that are a kind of the object passed in
-     *
-     * @param logicalExpression the full logic graph to identify the object passed in
-     * @return the result
-     */
-    public Set<Patient> executeKindOfQuery(final LogicalExpression logicalExpression) {
-        int[] results = logicGraphClassifierQuery.query(logicalExpression);
+	/**
+	 * Execute a query to find objects that are a kind of the object passed in
+	 *
+	 * @param sctid
+	 *            the snomed concept identifier to identify the object passed in
+	 * @return the result
+	 */
+	public Set<Patient> executeKindOfQuery(final String sctid) {
+		int[] results = logicGraphClassifierQuery.query(sctid);
+		return findPatientsByNids(convertToList(results));
+	}
 
-        return findPatientsByNids(convertToList(results));
-    }
+	/**
+	 * Execute a query to find objects that are a kind of the object passed in
+	 *
+	 * @param logicGraph
+	 *            the full logic graph to identify the object passed in
+	 * @return the result
+	 */
+	public Set<Patient> executeKindOfQuery(final LogicGraph logicGraph) {
+		int[] results = logicGraphClassifierQuery.query(logicGraph);
 
-    /**
-     * Execute a query to find objects that are a kind of the object passed in
-     *
-     * @param nid the native identifier to identify the object to find kinds of
-     * @return the result
-     */
-    public Set<Patient> executeKindOfQuery(final int nid) {
-    	LOGGER.trace("executeKindOfQuery(nid={})", nid);
-        int[] results = logicGraphClassifierQuery.query(nid);
-        return findPatientsByNids(convertToList(results));
-    }
+		return findPatientsByNids(convertToList(results));
+	}
 
-    private List<Integer> convertToList(final int[] ints) {
-        return IntStream.of(ints)
-                .boxed()
-                .collect(Collectors.toList());
-    }
+	/**
+	 * Execute a query to find objects that are a kind of the object passed in
+	 *
+	 * @param nid
+	 *            the native identifier to identify the object to find kinds of
+	 * @return the result
+	 */
+	public Set<Patient> executeKindOfQuery(final int nid) {
+		LOGGER.trace("executeKindOfQuery(nid={})", nid);
+		int[] results = logicGraphClassifierQuery.query(nid);
+		return findPatientsByNids(convertToList(results));
+	}
 
-    private Set<Patient> findPatientsByNids(final List<Integer> nids) {
-    	LOGGER.trace("findPatientsByNids(nids={})", nids);
-	
-        // execute the custom query
-        return encounterRepository.
-                findByPceIdList(nids)
-                .stream()
-                .map(Encounter::getPatientId)
-                .distinct()
-                .map(patientId -> patientRepository.findOneById(patientId))
-                .collect(Collectors.toSet());
-    }
+	/**
+	 * Execute a query to find objects that are a kind of the object passed in
+	 * 
+	 * @param observableNid native identifier for an observable object
+	 * @param provenanceNid native identifier for a provenance object
+	 * @param valueNid native identifier for a value object
+	 * @return set of patients
+	 */
+	public Set<Patient> executeKindOfQuery(final int observableNid,
+			final int provenanceNid, final int valueNid) {
+		LOGGER.trace(
+				"executeKindOfQuery(observableNid={}, provenanceNid={}, valueNid={})",
+				observableNid, provenanceNid, valueNid);
+		int[] obsResults = logicGraphClassifierQuery.query(observableNid);
+		int[] provResults = logicGraphClassifierQuery.query(provenanceNid);
+		int[] valueResults = logicGraphClassifierQuery.query(valueNid);
+		return findPatientsByNids(convertToList(obsResults),
+				convertToList(provResults), convertToList(valueResults));
+	}
+
+	private List<Integer> convertToList(final int[] ints) {
+		return IntStream.of(ints).boxed().collect(Collectors.toList());
+	}
+
+	private Set<Patient> findPatientsByNids(final List<Integer> nids) {
+		LOGGER.trace("findPatientsByNids(nids={})", nids);
+
+		// execute the custom query
+		return encounterRepository.findByPceIdList(nids).stream()
+				.map(Encounter::getPatientId).distinct()
+				.map(patientId -> patientRepository.findOneById(patientId))
+				.collect(Collectors.toSet());
+	}
+
+	private Set<Patient> findPatientsByNids(final List<Integer> observableNids,
+			final List<Integer> provenanceNids, final List<Integer> valueNids) {
+		LOGGER.trace(
+				"findPatientsByNids(observableNids={}, provenanceNids={}, valueNids={})",
+				observableNids, provenanceNids, valueNids);
+
+		// execute the custom query
+		return encounterRepository
+				.findByObservableIdListAndProvenanceIdListAndValueIdList(
+						observableNids, provenanceNids, valueNids).stream()
+				.map(Encounter::getPatientId).distinct()
+				.map(patientId -> patientRepository.findOneById(patientId))
+				.collect(Collectors.toSet());
+	}
 }
