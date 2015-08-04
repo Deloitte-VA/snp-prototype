@@ -47,7 +47,9 @@
         <project.rootdir>${project.basedir}</project.rootdir>
         <source.jdk>1.8</source.jdk>
         <target.jdk>1.8</target.jdk>
-        
+
+        <aspectj.version>1.8.6</aspectj.version>
+
         <!-- VHA versions -->
         <newtons-cradle.version>1.18</newtons-cradle.version>
         <query.version>2.13</query.version>
@@ -109,6 +111,7 @@
                 <artifactId>apis</artifactId>
                 <version>${project.version}</version>
             </dependency>
+<!--
 
             <dependency>
                 <groupId>${project.groupId}</groupId>
@@ -145,6 +148,7 @@
                 <artifactId>fhir</artifactId>
                 <version>${project.version}</version>
             </dependency>
+-->
 
             <dependency>
                 <groupId>ch.qos.logback</groupId>
@@ -326,19 +330,19 @@
 			    <artifactId>angularjs</artifactId>
 			    <version>${angularjs.version}</version>
 			</dependency>
-	
+
 			<dependency>
     			<groupId>org.webjars.bower</groupId>
     			<artifactId>angular-resource</artifactId>
     			<version>${angularjs-resource.version}</version>
 			</dependency>
-			
+
 			<dependency>
 			    <groupId>org.webjars.bower</groupId>
 			    <artifactId>angular-route</artifactId>
 			    <version>${angularjs-route.version}</version>
 			</dependency>
-	
+
     		<dependency>
     			<groupId>org.webjars.bower</groupId>
     			<artifactId>bootstrap</artifactId>
@@ -350,7 +354,7 @@
     			<artifactId>underscore</artifactId>
     			<version>${underscore.version}</version>
 			</dependency>
-			
+
 			<dependency>
 			    <groupId>org.webjars.bower</groupId>
 			    <artifactId>jquery</artifactId>
@@ -428,6 +432,30 @@
                 <version>${groovy.version}</version>
                 <scope>test</scope>
             </dependency>
+<!--
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjtools</artifactId>
+                <version>${aspectj.version}</version>
+            </dependency>
+-->
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjrt</artifactId>
+                <version>${aspectj.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjweaver</artifactId>
+                <version>${aspectj.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.github.jlgrock.snp</groupId>
+                <artifactId>aop</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
@@ -470,6 +498,7 @@
             <scope>test</scope>
         </dependency>
 
+
         <dependency> <!-- enables mocking of classes (in addition to interfaces) -->
             <groupId>cglib</groupId>
             <artifactId>cglib-nodep</artifactId>
@@ -501,16 +530,31 @@
             <scope>test</scope>
         </dependency>
 
+
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjrt</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+        </dependency>
+
+
     </dependencies>
 
     <modules>
+        <module>aop</module>
+        <module>apis</module>
+
+<!--
         <module>domain</module>
         <module>lego</module>
         <module>fhir</module>
-        <module>apis</module>
         <module>defaultconfig</module>
         <module>classifier</module>
         <module>web</module>
+-->
     </modules>
 
     <build>
@@ -536,10 +580,106 @@
                     <configuration>
                         <source>${source.jdk}</source>
                         <target>${target.jdk}</target>
+                        <useIncrementalCompilation>false</useIncrementalCompilation>
                     </configuration>
                 </plugin>
 
                 <plugin>
+                      <groupId>org.codehaus.mojo</groupId>
+                      <artifactId>aspectj-maven-plugin</artifactId>
+                      <version>1.7</version>
+                      <configuration>
+<!--
+                          <aspectLibraries>
+                              <aspectLibrary>
+                                  <groupId>com.github.jlgrock.snp</groupId>
+                                  <artifactId>aop</artifactId>
+                              </aspectLibrary>
+                          </aspectLibraries>
+-->
+                          <!--<showWeaveInfo>true</showWeaveInfo>-->
+                          <source>${source.jdk}</source>
+                          <target>${target.jdk}</target>
+                          <Xlint>ignore</Xlint>
+                          <complianceLevel>${source.jdk}</complianceLevel>
+                          <encoding>${project.build.sourceEncoding}</encoding>
+                          <!--<verbose>true</verbose>-->
+                          <!--<warn>constructorName,packageDefaultMethod,deprecation,maskedCatchBlocks,unusedLocals,unusedArguments,unusedImport</warn>-->
+                      </configuration>
+                      <executions>
+                          <execution>
+                              <!-- Kun: IMPORTANT! have to do it in this PHASE! this do the trick! -->
+                              <phase>process-sources</phase>
+                              <goals>
+                                  <goal>compile</goal>
+                                  <goal>test-compile</goal>
+                              </goals>
+                          </execution>
+                      </executions>
+                      <dependencies>
+                          <dependency>
+                              <groupId>org.aspectj</groupId>
+                              <artifactId>aspectjtools</artifactId>
+                              <version>${aspectj.version}</version>
+                          </dependency>
+                      </dependencies>
+                  </plugin>
+
+<!--
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>aspectj-maven-plugin</artifactId>
+                    <version>1.7</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>compile</goal>
+                                <goal>test-compile</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <source>${source.jdk}</source>
+                        <target>${target.jdk}</target>
+                    </configuration>
+                </plugin>
+-->
+<!--
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>aspectj-maven-plugin</artifactId>
+                    <version>1.7</version>
+                    <configuration>
+                        &lt;!&ndash;<showWeaveInfo>true</showWeaveInfo>&ndash;&gt;
+                        <source>${source.jdk}</source>
+                        <target>${source.jdk}</target>
+                        <Xlint>ignore</Xlint>
+                        <complianceLevel>${source.jdk}</complianceLevel>
+                        <encoding>${project.build.sourceEncoding}</encoding>
+                        &lt;!&ndash;<verbose>true</verbose>&ndash;&gt;
+                        &lt;!&ndash;<warn>constructorName,packageDefaultMethod,deprecation,maskedCatchBlocks,unusedLocals,unusedArguments,unusedImport</warn>&ndash;&gt;
+                    </configuration>
+                    <executions>
+                        <execution>
+                            &lt;!&ndash; IMPORTANT &ndash;&gt;
+                            <phase>process-sources</phase>
+                            <goals>
+                                <goal>compile</goal>
+                                <goal>test-compile</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.aspectj</groupId>
+                            <artifactId>aspectjtools</artifactId>
+                            <version>${aspectj.version}</version>
+                        </dependency>
+                    </dependencies>
+                </plugin>
+-->
+                <plugin>
+
                     <!-- The gmavenplus plugin is used to compile Groovy code. To learn more about this plugin,
                     visit https://github.com/groovy/GMavenPlus/wiki -->
                     <groupId>org.codehaus.gmavenplus</groupId>
@@ -562,6 +702,24 @@
                         </dependency>
                     </dependencies>
                 </plugin>
+
+                <plugin>
+
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>exec-maven-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>java</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <mainClass>com.github.jlgrock.snp.web.zzsandbox.App</mainClass>
+                    </configuration>
+                </plugin>
+
+
 
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -772,7 +930,10 @@
             <plugin>
                 <groupId>org.codehaus.gmavenplus</groupId>
                 <artifactId>gmavenplus-plugin</artifactId>
-                <version>${gmaven-plugin.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>aspectj-maven-plugin</artifactId>
             </plugin>
         </plugins>
     </build>
