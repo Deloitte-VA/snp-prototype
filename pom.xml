@@ -49,10 +49,10 @@
         <target.jdk>1.8</target.jdk>
         
         <!-- VHA versions -->
-		<newtons-cradle.version>1.20-SNAPSHOT</newtons-cradle.version>
-        <query.version>2.15-SNAPSHOT</query.version>
-        <logic.version>1.15-SNAPSHOT</logic.version>
-        <solor.version>1.11-SNAPSHOT</solor.version>
+		<newtons-cradle.version>1.20</newtons-cradle.version>
+        <query.version>2.15</query.version>
+        <logic.version>1.15</logic.version>
+        <solor.version>1.11</solor.version>
 
         <!-- External versions -->
         <jackson.version>2.5.0</jackson.version>
