@@ -39,6 +39,8 @@
             <artifactId>aop</artifactId>
         </dependency>
 
+<!--
+Kun: duplicate
         <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjrt</artifactId>
@@ -53,6 +55,7 @@
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjtools</artifactId>
         </dependency>
+-->
     </dependencies>
 
     <build>

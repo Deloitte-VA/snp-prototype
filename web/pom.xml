@@ -184,41 +184,6 @@
                 </configuration>
 			</plugin>
 
-<!--
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>aspectj-maven-plugin</artifactId>
-                <configuration>
-                    &lt;!&ndash;<showWeaveInfo>true</showWeaveInfo>&ndash;&gt;
-                    <source>${source.jdk}</source>
-                    <target>${source.jdk}</target>
-                    <showWeaveInfo>true</showWeaveInfo>
-                    <Xlint>ignore</Xlint>
-                    <complianceLevel>${source.jdk}</complianceLevel>
-                    <encoding>${project.build.sourceEncoding}</encoding>
-                    &lt;!&ndash;<verbose>true</verbose>&ndash;&gt;
-                    &lt;!&ndash;<warn>constructorName,packageDefaultMethod,deprecation,maskedCatchBlocks,unusedLocals,unusedArguments,unusedImport</warn>&ndash;&gt;
-                </configuration>
-                <executions>
-                    <execution>
-                        &lt;!&ndash; IMPORTANT &ndash;&gt;
-                        <phase>process-sources</phase>
-                        <goals>
-                            <goal>compile</goal>
-                            <goal>test-compile</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.aspectj</groupId>
-                        <artifactId>aspectjtools</artifactId>
-                        <version>${aspectj.version}</version>
-                    </dependency>
-                </dependencies>
-            </plugin>
--->
-
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
@@ -310,8 +275,21 @@
 	            </executions>
 	        </plugin>
 
-		</plugins>
-	</build>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>aspectj-maven-plugin</artifactId>
+                <configuration>
+                    <aspectLibraries>
+                        <aspectLibrary>
+                            <groupId>com.github.jlgrock.snp</groupId>
+                            <artifactId>aop</artifactId>
+                        </aspectLibrary>
+                    </aspectLibraries>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
 
     <profiles>
         <profile>
