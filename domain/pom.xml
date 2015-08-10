@@ -51,20 +51,10 @@
                 </executions>
             </plugin>
 
-<!--
-skip weaving for domain module due to the error:
- [ERROR] java.lang.ClassFormatError: Method makeErrorMessage_aroundBody0 in class
-  com/github/jlgrock/snp/domain/types/primitives/SimplePrimitive has illegal modi
-  fiers: 0x18
--->
-<!--
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>aspectj-maven-plugin</artifactId>
                 <configuration>
-                    <excludes>
-                        <exclude>com/github/jlgrock/snp/domain/**.java</exclude>
-                    </excludes>
                     <aspectLibraries>
                         <aspectLibrary>
                             <groupId>com.github.jlgrock.snp</groupId>
@@ -73,7 +63,6 @@ skip weaving for domain module due to the error:
                     </aspectLibraries>
                 </configuration>
             </plugin>
--->
 
         </plugins>
     </build>
