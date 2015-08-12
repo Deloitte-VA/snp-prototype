@@ -11,6 +11,9 @@ import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 
+/**
+ * A converter class that converts from a FHIR XML Encounter to a domain Encounter.
+ */
 @Service
 public class FhirEncounterConverter
         implements Converter<com.github.jlgrock.snp.core.domain.fhir.model.Encounter, Encounter> {
@@ -23,9 +26,10 @@ public class FhirEncounterConverter
     public FhirEncounterConverter(final PatientRepository patientRepositoryIn) {
         patientRepository = patientRepositoryIn;
     }
+
 	@Override
 	public Encounter convert(
-			com.github.jlgrock.snp.core.domain.fhir.model.Encounter source) {
+			final com.github.jlgrock.snp.core.domain.fhir.model.Encounter source) {
 		com.github.jlgrock.snp.domain.types.Encounter encounterOut = new com.github.jlgrock.snp.domain.types.Encounter();
 		
 		LOGGER.trace("convert xml encounter to model encounter: source={}", source);

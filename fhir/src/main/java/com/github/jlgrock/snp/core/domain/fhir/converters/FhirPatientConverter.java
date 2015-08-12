@@ -12,6 +12,9 @@ import org.slf4j.LoggerFactory;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * A converter class that converts from a FHIR XML Patient to a domain Patient.
+ */
 @Contract
 @Service
 public class FhirPatientConverter
@@ -22,7 +25,7 @@ public class FhirPatientConverter
 
 	@Override
 	public com.github.jlgrock.snp.domain.types.Patient convert(
-			com.github.jlgrock.snp.core.domain.fhir.model.Patient source) {
+			final com.github.jlgrock.snp.core.domain.fhir.model.Patient source) {
 		LOGGER.trace("source={}", source);
 		
 		com.github.jlgrock.snp.domain.types.Patient patientOut = new com.github.jlgrock.snp.domain.types.Patient();
@@ -49,7 +52,7 @@ public class FhirPatientConverter
 		return patientOut;
 	}
 	
-	protected Gender convertGender(Code genderCode) {
+	protected Gender convertGender(final Code genderCode) {
 		switch (genderCode.getValue()) {
 		case "M":
 			return Gender.MALE;
@@ -62,7 +65,7 @@ public class FhirPatientConverter
 		}
 	}
 	
-	protected LocalDate convertDateTimeToLocalDate(DateTime dateTime) {
+	protected LocalDate convertDateTimeToLocalDate(final DateTime dateTime) {
 		LOGGER.trace("dateTime={}", dateTime);
 		if (dateTime == null) {
 			return null;

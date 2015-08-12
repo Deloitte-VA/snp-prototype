@@ -6,7 +6,7 @@ import javax.validation.constraints.NotNull;
 
 /**
  * Shared ID functionality between domain objects.
- * T the type to use
+ * @param <T> the type to use for the ID
  */
 public abstract class AbstractMongoDomainObject<T> implements MongoDomainObject<T> {
     @NotNull

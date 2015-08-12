@@ -3,7 +3,7 @@ package com.github.jlgrock.snp.core.domain.fhir;
 import org.jvnet.hk2.annotations.Service;
 
 /**
- * The media types related to Fhir
+ * The media types related to Fhir.
  */
 @Service
 public class FhirMediaTypeServiceImpl implements FhirMediaTypeService {

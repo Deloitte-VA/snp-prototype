@@ -22,11 +22,6 @@ public class AspectLogging {
     @Pointcut("execution(* com.github.jlgrock.snp..*.*(..))")
     public void everything() {}
 
-    /**
-     *
-     */
-    @Pointcut("execution(* com.github.jlgrock.snp..*.*Test(..))")
-    public void everyTest() {}
 
     /**
      * Pointcut to be excluded from SNP project
@@ -37,7 +32,7 @@ public class AspectLogging {
     /**
      * Pointcut to be applied on SNP project
      */
-    @Pointcut("everything() && ! toBeExcluded() && ! everyTest()")
+    @Pointcut("everything() && ! toBeExcluded()")
     public void logging(){}
 
 

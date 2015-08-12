@@ -10,6 +10,9 @@ import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 
+/**
+ * The processor used for handling Patient objects unmarshalled from FHIR XML.
+ */
 @Service
 public class PatientProcessor extends AbstractFhirProcessor {
 

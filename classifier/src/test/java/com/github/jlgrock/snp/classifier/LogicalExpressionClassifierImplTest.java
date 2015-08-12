@@ -24,13 +24,12 @@ public class LogicalExpressionClassifierImplTest {
         Mockito.when(classifierStorage.getTerminologyStore()).thenReturn(terminologyStoreDI);
         TerminologySnapshotDI terminologySnapshotDI = Mockito.mock(TerminologySnapshotDI.class);
         Mockito.when(terminologyStoreDI.getSnapshot(Mockito.any())).thenReturn(terminologySnapshotDI);
-        Mockito.when(terminologySnapshotDI.getNidForUuids(Mockito.<UUID> any())).thenReturn(5);
+        Mockito.when(terminologySnapshotDI.getNidForUuids(Mockito.<UUID>any())).thenReturn(5);
         ViewCoordinate viewCoordinate = Mockito.mock(ViewCoordinate.class);
         Mockito.when(classifierStorage.getViewCoordinate()).thenReturn(viewCoordinate);
 
         LogicalExpressionClassifierImpl logicGraphClassifier = new LogicalExpressionClassifierImpl(classifierStorage);
-        Assert.assertEquals(logicGraphClassifier.getNidFromSNOMED("123"), 5);
-
+        logicGraphClassifier.getNidFromSNOMED("asd");
     }
 
     @Test

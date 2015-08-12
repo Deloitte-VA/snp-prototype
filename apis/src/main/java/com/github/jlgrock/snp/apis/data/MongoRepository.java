@@ -2,8 +2,6 @@ package com.github.jlgrock.snp.apis.data;
 
 import org.jvnet.hk2.annotations.Contract;
 
-import java.io.Serializable;
-
 /**
  * An Abstraction level, to separate the implementation from the queries
  *

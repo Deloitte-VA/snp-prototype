@@ -16,16 +16,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * An abstract processor that stores all shared functionality for processors related to FHIR XML documents.
  */
 public abstract class AbstractFhirProcessor implements FhirElementProcessorService {
 
     private final LogicalExpressionClassifier logicalExpressionClassifier;
 
+    /**
+     * @param logicalExpressionClassifierIn the classifier service, used for classifying logical expressions when
+     *                                      built off of a particular tag.
+     */
     protected AbstractFhirProcessor(final LogicalExpressionClassifier logicalExpressionClassifierIn) {
         logicalExpressionClassifier = logicalExpressionClassifierIn;
     }
 
+    /**
+     * @return the logical expression classifier, used for classifying logical expressions when encountered.
+     */
     protected LogicalExpressionClassifier getLogicalExpressionClassifier() {
         return logicalExpressionClassifier;
     }
@@ -40,7 +47,14 @@ public abstract class AbstractFhirProcessor implements FhirElementProcessorServi
     @Override
     public abstract Class processesType();
 
-    protected  Integer processConcept(final FhirCodeableConceptGraphBuilder fhirCodeableConceptBuilder,
+    /**
+     * Process a codeable concept when encountered within a FHIR XML document.
+     * @param fhirCodeableConceptBuilder the builder to build the fhir logical expression
+     * @param classifiedPceRepository the repository to store the classified assertions after completion
+     * @param codeableConcept the codeable concept to process
+     * @return the native identifier that is achieved after classification
+     */
+    protected Integer processConcept(final FhirCodeableConceptGraphBuilder fhirCodeableConceptBuilder,
                                       final ClassifiedPceRepository classifiedPceRepository,
                                       final CodeableConcept codeableConcept) {
         // build the logic graph from the code
@@ -59,6 +73,21 @@ public abstract class AbstractFhirProcessor implements FhirElementProcessorServi
         return classifiedPce.getNid();
     }
 
+    /**
+     * Save a concept within an encounter.
+     * @param fhirCodeableConceptGraphBuilder the builder to build the fhir logical expression
+     * @param classifiedPceRepository the repository to store the classified assertions
+     * @param encounterRepository the repository to store the encounters
+     * @param encounterReference the reference identifier for the encounter.  This is only necessary for identifying an
+     *                           encounter until fhir bundles are achieved, at which point this will be part of the
+     *                           data
+     * @param identifier the reference identifier for the concept.  This is only necessary for identifying an
+     *                           encounter until fhir bundles are achieved, at which point this will be part of the
+     *                           data
+     * @param observation the observation codeable concept to build a logical expression out of
+     * @param provenance the provenance codeable concept to build a logical expression out of
+     * @param value the value codeable concept to build a logical expression out of
+     */
     protected void saveConceptToEncounter(final FhirCodeableConceptGraphBuilder fhirCodeableConceptGraphBuilder,
                                           final ClassifiedPceRepository classifiedPceRepository,
                                           final EncounterRepository encounterRepository,

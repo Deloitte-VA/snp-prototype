@@ -11,6 +11,9 @@ import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 
+/**
+ * The processor used for handling Encounter objects unmarshalled from FHIR XML.
+ */
 @Service
 public class EncounterProcessor extends AbstractFhirProcessor {
 

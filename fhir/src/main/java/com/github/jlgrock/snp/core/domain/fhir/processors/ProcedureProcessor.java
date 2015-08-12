@@ -20,6 +20,9 @@ import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The processor used for handling Procedure objects unmarshalled from FHIR XML.
+ */
 @Service
 public class ProcedureProcessor extends AbstractFhirProcessor {
 

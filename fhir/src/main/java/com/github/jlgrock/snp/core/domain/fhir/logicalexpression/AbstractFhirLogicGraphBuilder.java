@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * A Logic Graph Builder specific to FHIR documents.
+ * Shared functionality for creating Logical Expressions specific to FHIR documents.
  */
 public abstract class AbstractFhirLogicGraphBuilder {
 

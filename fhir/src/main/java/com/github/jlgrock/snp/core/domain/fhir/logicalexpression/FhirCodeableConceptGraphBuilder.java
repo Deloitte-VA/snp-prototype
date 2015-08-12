@@ -8,7 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- *
+ * Build a LogicalExpression from a FHIR Codeable Concept.
  */
 public class FhirCodeableConceptGraphBuilder extends AbstractFhirLogicGraphBuilder {
     private static final Logger LOGGER = LoggerFactory.getLogger(FhirCodeableConceptGraphBuilder.class);

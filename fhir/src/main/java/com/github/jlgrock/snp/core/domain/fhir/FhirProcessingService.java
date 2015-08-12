@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
 import javax.inject.Inject;
 
 /**
- *
+ * Unmarshalls and Processes a fhir object.
  */
 @Service
 public class FhirProcessingService implements ProcessingService {
@@ -49,7 +49,7 @@ public class FhirProcessingService implements ProcessingService {
         if (unmarshalledObject != null) {
             FhirElementProcessorService legoElementClassifierService = null;
             try {
-                legoElementClassifierService = fhirElementProcessorFactory.findClassifier(unmarshalledObject);
+                legoElementClassifierService = fhirElementProcessorFactory.findProcessingService(unmarshalledObject);
             } catch (ClassifierException ce) {
             	String errMsg = "Unable to find processor";
                 LOGGER.error(errMsg, ce);

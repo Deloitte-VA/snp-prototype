@@ -6,6 +6,9 @@ import org.jvnet.hk2.annotations.Service;
 
 import javax.inject.Inject;
 
+/**
+ * The processor used for handling DocumentManifest objects unmarshalled from FHIR XML.
+ */
 @Service
 public class DocumentManifestProcessor extends AbstractFhirProcessor {
 

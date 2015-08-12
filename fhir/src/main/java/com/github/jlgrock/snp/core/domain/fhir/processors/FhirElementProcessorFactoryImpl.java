@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- *
+ * The factory implementation for finding a specific processing service to handle an unmarshalled FHIR XML object.
  */
 @Service
 public class FhirElementProcessorFactoryImpl implements FhirElementProcessorFactory {
@@ -27,7 +27,7 @@ public class FhirElementProcessorFactoryImpl implements FhirElementProcessorFact
     }
 
     @Override
-    public FhirElementProcessorService findClassifier(final Object unmarshalledObject) throws ClassifierException {
+    public FhirElementProcessorService findProcessingService(final Object unmarshalledObject) throws ClassifierException {
         LOGGER.trace("determining fhir element processor service...");
 
         FhirElementProcessorService fhirElementProcessorService = processingServices.get(unmarshalledObject.getClass());

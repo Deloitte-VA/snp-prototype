@@ -19,8 +19,6 @@ import java.io.StringReader;
 public class FhirMarshallerServiceImpl implements FhirMarshallerService {
     private static final Logger LOGGER = LoggerFactory.getLogger(FhirMarshallerServiceImpl.class);
 
-    public static final java.lang.String FHIR_PACKAGE = "com.github.jlgrock.snp.core.domain.fhir.model";
-
     @Override
     public Object unmarshall(final java.lang.String input) throws UnmarshallingException {
         LOGGER.trace("unmarshalling fhir string: {}", input);

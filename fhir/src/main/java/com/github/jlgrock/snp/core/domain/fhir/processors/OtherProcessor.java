@@ -6,6 +6,9 @@ import org.jvnet.hk2.annotations.Service;
 
 import javax.inject.Inject;
 
+/**
+ * The processor used for handling Other objects unmarshalled from FHIR XML.
+ */
 @Service
 public class OtherProcessor extends AbstractFhirProcessor {
 

@@ -12,6 +12,9 @@ import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 
+/**
+ * The processor used for handling Condition objects unmarshalled from FHIR XML.
+ */
 @Service
 public class ConditionProcessor extends AbstractFhirProcessor {
 

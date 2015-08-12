@@ -6,7 +6,9 @@ import org.jvnet.hk2.annotations.Service;
 
 import javax.inject.Inject;
 
-
+/**
+ * The processor used for handling AllergyIntolerance objects unmarshalled from FHIR XML.
+ */
 @Service
 public class AllergyIntoleranceProcessor extends AbstractFhirProcessor {
 
