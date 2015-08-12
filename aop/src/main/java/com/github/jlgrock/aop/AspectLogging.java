@@ -40,10 +40,13 @@ public class AspectLogging {
     @Pointcut("everything() && ! toBeExcluded() && ! everyTest()")
     public void logging(){}
 
+
     /**
      * AOP Advise
      * @param pjp JoinPoint object
      * @return object from Around advise
+     * @throws Throwable exception thrown if JoinPoint could not get proceeded.
+     *
      */
     @Around("logging()")
     public Object logging(final ProceedingJoinPoint pjp) throws Throwable {
