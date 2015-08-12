@@ -1,8 +1,8 @@
 package com.github.jlgrock.snp.classifier;
 
-import com.github.jlgrock.snp.apis.classifier.LogicClassifierStore;
+import com.github.jlgrock.snp.apis.classifier.ClassifierStorage;
 import com.github.jlgrock.snp.apis.classifier.LogicalExpressionClassifier;
-import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifierQuery;
+import com.github.jlgrock.snp.apis.classifier.ClassifierQuery;
 import com.github.jlgrock.snp.apis.connection.configuration.FileConfiguration;
 import gov.vha.isaac.ochre.api.LookupService;
 import org.glassfish.hk2.api.ServiceLocator;
@@ -30,9 +30,9 @@ public class LogicClassifierTest {
         ServiceLocatorUtilities.bind(serviceLocator, new AbstractBinder() {
             @Override
             protected void configure() {
-                bind(LogicClassifierStoreImpl.class).to(LogicClassifierStore.class);
+                bind(ClassifierStorageImpl.class).to(ClassifierStorage.class);
                 bind(LogicalExpressionClassifierImpl.class).to(LogicalExpressionClassifier.class);
-                bind(LogicGraphClassifierQueryImpl.class).to(LogicGraphClassifierQuery.class);
+                bind(ClassifierQueryImpl.class).to(ClassifierQuery.class);
                 bind(new FileConfiguration() {
 
                     @Override

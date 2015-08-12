@@ -15,7 +15,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifierQuery;
+import com.github.jlgrock.snp.apis.classifier.ClassifierQuery;
 import com.github.jlgrock.snp.domain.data.EncounterRepository;
 import com.github.jlgrock.snp.domain.data.PatientRepository;
 import com.github.jlgrock.snp.domain.types.Encounter;
@@ -25,7 +25,7 @@ import com.github.jlgrock.snp.domain.types.Patient;
 public class ClassifierQueryServiceImplTest {
 
 	@Mock
-	private LogicGraphClassifierQuery logicGraphClassifierQuery;
+	private ClassifierQuery classifierQuery;
 
 	@Mock
 	private EncounterRepository encounterRepository;
@@ -41,7 +41,7 @@ public class ClassifierQueryServiceImplTest {
 	
 	@BeforeMethod
 	public void beforeMethod() {
-		Mockito.reset(logicGraphClassifierQuery);
+		Mockito.reset(classifierQuery);
 		Mockito.reset(encounterRepository);
 		Mockito.reset(patientRepository);
 	}
@@ -71,7 +71,7 @@ public class ClassifierQueryServiceImplTest {
 		
 		List<Encounter> encounterList = new ArrayList<Encounter>() {{add(encounter1); add(encounter2);}};
 		
-		Mockito.when(logicGraphClassifierQuery.query(uuid)).thenReturn(queryResults);
+		Mockito.when(classifierQuery.query(uuid)).thenReturn(queryResults);
 		Mockito.when(encounterRepository.findByPceIdList(queryResultsList)).thenReturn(encounterList);
 		Mockito.when(patientRepository.findOneById(patient1Id)).thenReturn(patient1);
 		Mockito.when(patientRepository.findOneById(patient2Id)).thenReturn(patient2);
@@ -80,11 +80,11 @@ public class ClassifierQueryServiceImplTest {
 		Set<Patient> patientExpected = new HashSet<Patient>() {{add(patient1); add(patient2);}};
 		
 		ClassifierQueryServiceImpl classifierQuerySvc = new ClassifierQueryServiceImpl(
-				logicGraphClassifierQuery, encounterRepository,
+				classifierQuery, encounterRepository,
 				patientRepository);
 		Set<Patient> patientActual = classifierQuerySvc.executeKindOfQuery(uuid);
 		Assert.assertEquals(patientExpected, patientActual);
-		Mockito.verify(logicGraphClassifierQuery).query(uuid);
+		Mockito.verify(classifierQuery).query(uuid);
 		Mockito.verify(encounterRepository).findByPceIdList(queryResultsList);
 		Mockito.verify(patientRepository, Mockito.never()).findOneById(patient3Id);
 	}
@@ -114,7 +114,7 @@ public class ClassifierQueryServiceImplTest {
 		
 		List<Encounter> encounterList = new ArrayList<Encounter>() {{add(encounter1); add(encounter2);}};
 		
-		Mockito.when(logicGraphClassifierQuery.query(sctid)).thenReturn(queryResults);
+		Mockito.when(classifierQuery.query(sctid)).thenReturn(queryResults);
 		Mockito.when(encounterRepository.findByPceIdList(queryResultsList)).thenReturn(encounterList);
 		Mockito.when(patientRepository.findOneById(patient1Id)).thenReturn(patient1);
 		Mockito.when(patientRepository.findOneById(patient2Id)).thenReturn(patient2);
@@ -123,11 +123,11 @@ public class ClassifierQueryServiceImplTest {
 		Set<Patient> patientExpected = new HashSet<Patient>() {{add(patient1); add(patient2);}};
 		
 		ClassifierQueryServiceImpl classifierQuerySvc = new ClassifierQueryServiceImpl(
-				logicGraphClassifierQuery, encounterRepository,
+				classifierQuery, encounterRepository,
 				patientRepository);
 		Set<Patient> patientActual = classifierQuerySvc.executeKindOfQuery(sctid);
 		Assert.assertEquals(patientExpected, patientActual);
-		Mockito.verify(logicGraphClassifierQuery).query(sctid);
+		Mockito.verify(classifierQuery).query(sctid);
 		Mockito.verify(encounterRepository).findByPceIdList(queryResultsList);
 		Mockito.verify(patientRepository, Mockito.never()).findOneById(patient3Id);
 	}
@@ -163,7 +163,7 @@ public class ClassifierQueryServiceImplTest {
 		
 		List<Encounter> encounterList = new ArrayList<Encounter>() {{add(encounter1); add(encounter2);}};
 		
-		Mockito.when(logicGraphClassifierQuery.query(nid)).thenReturn(queryResults);
+		Mockito.when(classifierQuery.query(nid)).thenReturn(queryResults);
 		Mockito.when(encounterRepository.findByPceIdList(queryResultsList)).thenReturn(encounterList);
 		Mockito.when(patientRepository.findOneById(patient1Id)).thenReturn(patient1);
 		Mockito.when(patientRepository.findOneById(patient2Id)).thenReturn(patient2);
@@ -172,11 +172,11 @@ public class ClassifierQueryServiceImplTest {
 		Set<Patient> patientExpected = new HashSet<Patient>() {{add(patient1); add(patient2);}};
 		
 		ClassifierQueryServiceImpl classifierQuerySvc = new ClassifierQueryServiceImpl(
-				logicGraphClassifierQuery, encounterRepository,
+				classifierQuery, encounterRepository,
 				patientRepository);
 		Set<Patient> patientActual = classifierQuerySvc.executeKindOfQuery(nid);
 		Assert.assertEquals(patientExpected, patientActual);
-		Mockito.verify(logicGraphClassifierQuery).query(nid);
+		Mockito.verify(classifierQuery).query(nid);
 		Mockito.verify(encounterRepository).findByPceIdList(queryResultsList);
 		Mockito.verify(patientRepository, Mockito.never()).findOneById(patient3Id);
 	}
@@ -214,9 +214,9 @@ public class ClassifierQueryServiceImplTest {
 		
 		List<Encounter> encounterList = new ArrayList<Encounter>() {{add(encounter1); add(encounter2);}};
 		
-		Mockito.when(logicGraphClassifierQuery.query(obsNid)).thenReturn(queryObsResults);
-		Mockito.when(logicGraphClassifierQuery.query(provNid)).thenReturn(queryProvResults);
-		Mockito.when(logicGraphClassifierQuery.query(valueNid)).thenReturn(queryValueResults);
+		Mockito.when(classifierQuery.query(obsNid)).thenReturn(queryObsResults);
+		Mockito.when(classifierQuery.query(provNid)).thenReturn(queryProvResults);
+		Mockito.when(classifierQuery.query(valueNid)).thenReturn(queryValueResults);
 		Mockito.when(encounterRepository.findByObservableIdListAndProvenanceIdListAndValueIdList(queryObsResultsList, queryProvResultsList, queryValueResultsList)).thenReturn(encounterList);
 		Mockito.when(patientRepository.findOneById(patient1Id)).thenReturn(patient1);
 		Mockito.when(patientRepository.findOneById(patient2Id)).thenReturn(patient2);
@@ -225,13 +225,13 @@ public class ClassifierQueryServiceImplTest {
 		Set<Patient> patientExpected = new HashSet<Patient>() {{add(patient1); add(patient2);}};
 		
 		ClassifierQueryServiceImpl classifierQuerySvc = new ClassifierQueryServiceImpl(
-				logicGraphClassifierQuery, encounterRepository,
+				classifierQuery, encounterRepository,
 				patientRepository);
 		Set<Patient> patientActual = classifierQuerySvc.executeKindOfQuery(obsNid, provNid, valueNid);
 		Assert.assertEquals(patientExpected, patientActual);
-		Mockito.verify(logicGraphClassifierQuery).query(obsNid);
-		Mockito.verify(logicGraphClassifierQuery).query(provNid);
-		Mockito.verify(logicGraphClassifierQuery).query(valueNid);
+		Mockito.verify(classifierQuery).query(obsNid);
+		Mockito.verify(classifierQuery).query(provNid);
+		Mockito.verify(classifierQuery).query(valueNid);
 		Mockito.verify(encounterRepository).findByObservableIdListAndProvenanceIdListAndValueIdList(queryObsResultsList, queryProvResultsList, queryValueResultsList);
 		Mockito.verify(patientRepository, Mockito.never()).findOneById(patient3Id);
 	}

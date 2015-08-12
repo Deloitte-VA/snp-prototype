@@ -42,6 +42,8 @@ public abstract class AbstractQuery {
      * Execute a classifier example after a database has been setup.
      *
      * @throws IOException if there are any issues with
+     * @throws ExecutionException if there is a problem running the query
+     * @throws InterruptedException if the thread is interrupted
      */
     protected abstract void run() throws IOException, ExecutionException, InterruptedException;
 

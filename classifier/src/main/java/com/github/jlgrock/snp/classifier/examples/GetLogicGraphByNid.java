@@ -8,7 +8,6 @@ import gov.vha.isaac.ochre.api.coordinate.LogicCoordinate;
 import gov.vha.isaac.ochre.api.coordinate.StampCoordinate;
 import gov.vha.isaac.ochre.api.logic.LogicService;
 import gov.vha.isaac.ochre.api.logic.LogicalExpression;
-import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,8 +24,6 @@ public class GetLogicGraphByNid extends AbstractQuery {
 
 	@Override
 	protected void run() throws IOException {
-		TerminologyStoreDI termStore = LookupService
-				.getService(TerminologyStoreDI.class);
 		LogicService logicService = LookupService
 				.getService(LogicService.class);
 

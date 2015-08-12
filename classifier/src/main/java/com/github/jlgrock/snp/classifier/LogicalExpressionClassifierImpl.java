@@ -1,6 +1,6 @@
 package com.github.jlgrock.snp.classifier;
 
-import com.github.jlgrock.snp.apis.classifier.LogicClassifierStore;
+import com.github.jlgrock.snp.apis.classifier.ClassifierStorage;
 import com.github.jlgrock.snp.apis.classifier.LogicalExpressionClassifier;
 import gov.vha.isaac.metadata.coordinates.EditCoordinates;
 import gov.vha.isaac.ochre.api.chronicle.LatestVersion;
@@ -28,22 +28,22 @@ class LogicalExpressionClassifierImpl implements LogicalExpressionClassifier {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(LogicalExpressionClassifierImpl.class);
 
-    private final LogicClassifierStore logicClassifierStore;
+    private final ClassifierStorage classifierStorage;
 
     /**
      * Creates a new classifier, using ochre and lucene
      *
-     * @param logicClassifierStoreIn the store that is specific to ochre and lucene
+     * @param classifierStorageIn the store that is specific to ochre and lucene
      */
     @Inject
-    public LogicalExpressionClassifierImpl(final LogicClassifierStore logicClassifierStoreIn) {
-        logicClassifierStore = logicClassifierStoreIn;
+    public LogicalExpressionClassifierImpl(final ClassifierStorage classifierStorageIn) {
+        classifierStorage = classifierStorageIn;
     }
 
     @Override
     public int getNidFromSNOMED(final String sctid) {
-        TerminologyStoreDI termStore = logicClassifierStore.getTerminologyStore();
-        TerminologySnapshotDI termSnapshot = termStore.getSnapshot(logicClassifierStore.getViewCoordinate());
+        TerminologyStoreDI termStore = classifierStorage.getTerminologyStore();
+        TerminologySnapshotDI termSnapshot = termStore.getSnapshot(classifierStorage.getViewCoordinate());
         UUID uuid = UuidT3Generator.fromSNOMED(Long.parseLong(sctid));
 
         //Get NID from UUID
@@ -59,7 +59,7 @@ class LogicalExpressionClassifierImpl implements LogicalExpressionClassifier {
     public ConceptChronicleBI findChronicle(final String sctid) {
         ConceptChronicleBI returnVal = null;
         try {
-            TerminologyStoreDI terminologyStoreDI = logicClassifierStore.getTerminologyStore();
+            TerminologyStoreDI terminologyStoreDI = classifierStorage.getTerminologyStore();
             UUID uuid = UuidT3Generator.fromSNOMED(Long.parseLong(sctid));
             returnVal = terminologyStoreDI.getConcept(uuid);
         } catch (IOException ex) {
@@ -72,7 +72,7 @@ class LogicalExpressionClassifierImpl implements LogicalExpressionClassifier {
     public ConceptChronicleBI findChronicle(final int nid) {
         ConceptChronicleBI returnVal = null;
         try {
-            TerminologyStoreDI terminologyStoreDI = logicClassifierStore
+            TerminologyStoreDI terminologyStoreDI = classifierStorage
                     .getTerminologyStore();
             returnVal = terminologyStoreDI.getConcept(nid);
         } catch (IOException ex) {
@@ -85,7 +85,7 @@ class LogicalExpressionClassifierImpl implements LogicalExpressionClassifier {
     public Integer classify(final LogicalExpression logicGraph) {
         LOGGER.debug("Stated logic graph: {}", logicGraph);
 
-        Task<Integer> classifierResult = logicClassifierStore.
+        Task<Integer> classifierResult = classifierStorage.
                 getClassifierService().
                 getConceptSequenceForExpression(
                     logicGraph,
@@ -106,9 +106,9 @@ class LogicalExpressionClassifierImpl implements LogicalExpressionClassifier {
     @Override
     public LogicalExpression getInferredTermLogicalExpression(final int nid) throws IOException {
         LogicalExpression returnVal = null;
-        Optional<LatestVersion<? extends LogicalExpression>> logicalExpressionOptional = logicClassifierStore.getLogicService().
-                getLogicalExpression(nid, logicClassifierStore.getInferredAssemblageSequence(),
-                logicClassifierStore.getStampCoordinate());
+        Optional<LatestVersion<? extends LogicalExpression>> logicalExpressionOptional = classifierStorage.getLogicService().
+                getLogicalExpression(nid, classifierStorage.getInferredAssemblageSequence(),
+                classifierStorage.getStampCoordinate());
 
         if (logicalExpressionOptional.isPresent()) {
             returnVal = logicalExpressionOptional.get().value();

@@ -12,7 +12,7 @@ public class DiscernibleProcessorTest extends AbstractProcessorTest {
     @Test
     public void testDiscernable() {
         LegoElementProcessorService legoElementProcessorService =
-                new DiscernibleProcessor(logicGraphClassifier, legoExpressionGraphBuilder, classifiedPceRepository);
+                new DiscernibleProcessor(logicGraphClassifier, classifiedPceRepository, legoLogicalExpressionBuilder);
         legoElementProcessorService.process(discernible);
         Mockito.verify(classifiedPceRepository).save(Mockito.any(ClassifiedPce.class));
     }

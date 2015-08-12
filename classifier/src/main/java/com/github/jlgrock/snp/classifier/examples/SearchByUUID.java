@@ -1,16 +1,9 @@
 package com.github.jlgrock.snp.classifier.examples;
 
-import gov.vha.isaac.metadata.coordinates.EditCoordinates;
-import gov.vha.isaac.metadata.coordinates.LogicCoordinates;
-import gov.vha.isaac.metadata.coordinates.StampCoordinates;
-import gov.vha.isaac.metadata.coordinates.ViewCoordinates;
 import gov.vha.isaac.ochre.api.IdentifierService;
 import gov.vha.isaac.ochre.api.LookupService;
-import gov.vha.isaac.ochre.api.classifier.ClassifierService;
-import gov.vha.isaac.ochre.api.logic.LogicService;
 import gov.vha.isaac.ochre.util.UuidT3Generator;
 import org.ihtsdo.otf.tcc.api.concept.ConceptChronicleBI;
-import org.ihtsdo.otf.tcc.api.store.TerminologySnapshotDI;
 import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,15 +21,6 @@ public class SearchByUUID extends AbstractQuery {
     protected void run() throws IOException {
         TerminologyStoreDI termStore = LookupService.getService(TerminologyStoreDI.class);
         IdentifierService idService = LookupService.getService(IdentifierService.class);
-        LogicService logicService = LookupService.getService(LogicService.class);
-
-        ClassifierService classifierService = logicService.getClassifierService(
-                StampCoordinates.getDevelopmentLatest(),
-                LogicCoordinates.getStandardElProfile(),
-                EditCoordinates.getDefaultUserSolorOverlay());
-
-        TerminologySnapshotDI statedTermSnapshot = termStore.getSnapshot(ViewCoordinates.getDevelopmentStatedLatest());
-        TerminologySnapshotDI inferredTermSnapshot = termStore.getSnapshot(ViewCoordinates.getDevelopmentInferredLatest());
 
         Long sctId = 131148009L;
 

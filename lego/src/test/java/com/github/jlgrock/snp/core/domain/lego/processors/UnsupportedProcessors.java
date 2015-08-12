@@ -22,7 +22,7 @@ public class UnsupportedProcessors extends AbstractProcessorTest {
     public void testAssertionComponent() {
         AssertionComponent assertionComponent = Mockito.mock(AssertionComponent.class);
         LegoElementProcessorService legoElementProcessorService =
-                new AssertionComponentProcessor(logicGraphClassifier, legoExpressionGraphBuilder, classifiedPceRepository);
+                new AssertionComponentProcessor(logicGraphClassifier, classifiedPceRepository, legoLogicalExpressionBuilder);
         legoElementProcessorService.process(assertionComponent);
     }
 
@@ -30,7 +30,7 @@ public class UnsupportedProcessors extends AbstractProcessorTest {
     public void testInterval() {
         Interval interval = Mockito.mock(Interval.class);
         LegoElementProcessorService legoElementProcessorService =
-                new IntervalProcessor(logicGraphClassifier, legoExpressionGraphBuilder, classifiedPceRepository);
+                new IntervalProcessor(logicGraphClassifier, classifiedPceRepository, legoLogicalExpressionBuilder);
         legoElementProcessorService.process(interval);
     }
 
@@ -38,7 +38,7 @@ public class UnsupportedProcessors extends AbstractProcessorTest {
     public void testPncs() {
         Pncs pncs = Mockito.mock(Pncs.class);
         LegoElementProcessorService legoElementProcessorService =
-                new PncsProcessor(logicGraphClassifier, legoExpressionGraphBuilder, classifiedPceRepository);
+                new PncsProcessor(logicGraphClassifier, classifiedPceRepository, legoLogicalExpressionBuilder);
         legoElementProcessorService.process(pncs);
     }
 
@@ -46,7 +46,7 @@ public class UnsupportedProcessors extends AbstractProcessorTest {
     public void testQualifier() {
         Qualifier qualifier = Mockito.mock(Qualifier.class);
         LegoElementProcessorService legoElementProcessorService =
-                new QualifierProcessor(logicGraphClassifier, legoExpressionGraphBuilder, classifiedPceRepository);
+                new QualifierProcessor(logicGraphClassifier, classifiedPceRepository, legoLogicalExpressionBuilder);
         legoElementProcessorService.process(qualifier);
     }
 
@@ -54,7 +54,7 @@ public class UnsupportedProcessors extends AbstractProcessorTest {
     public void testRelationGroup() {
         RelationGroup relationGroup = Mockito.mock(RelationGroup.class);
         LegoElementProcessorService legoElementProcessorService =
-                new RelationGroupProcessor(logicGraphClassifier, legoExpressionGraphBuilder, classifiedPceRepository);
+                new RelationGroupProcessor(logicGraphClassifier, classifiedPceRepository, legoLogicalExpressionBuilder);
         legoElementProcessorService.process(relationGroup);
     }
 
@@ -62,7 +62,7 @@ public class UnsupportedProcessors extends AbstractProcessorTest {
     public void testRelation() {
         Relation relation = Mockito.mock(Relation.class);
         LegoElementProcessorService legoElementProcessorService =
-                new RelationProcessor(logicGraphClassifier, legoExpressionGraphBuilder, classifiedPceRepository);
+                new RelationProcessor(logicGraphClassifier, classifiedPceRepository, legoLogicalExpressionBuilder);
         legoElementProcessorService.process(relation);
     }
 
@@ -70,7 +70,7 @@ public class UnsupportedProcessors extends AbstractProcessorTest {
     public void testStamp() {
         Stamp stamp = Mockito.mock(Stamp.class);
         LegoElementProcessorService legoElementProcessorService =
-                new StampProcessor(logicGraphClassifier, legoExpressionGraphBuilder, classifiedPceRepository);
+                new StampProcessor(logicGraphClassifier, classifiedPceRepository, legoLogicalExpressionBuilder);
         legoElementProcessorService.process(stamp);
     }
 
@@ -78,7 +78,7 @@ public class UnsupportedProcessors extends AbstractProcessorTest {
     public void testType() {
         Type type = Mockito.mock(Type.class);
         LegoElementProcessorService legoElementProcessorService =
-                new TypeProcessor(logicGraphClassifier, legoExpressionGraphBuilder, classifiedPceRepository);
+                new TypeProcessor(logicGraphClassifier, classifiedPceRepository, legoLogicalExpressionBuilder);
         legoElementProcessorService.process(type);
     }
 
@@ -86,7 +86,7 @@ public class UnsupportedProcessors extends AbstractProcessorTest {
     public void testUnits() {
         Units units = Mockito.mock(Units.class);
         LegoElementProcessorService legoElementProcessorService =
-                new UnitsProcessor(logicGraphClassifier, legoExpressionGraphBuilder, classifiedPceRepository);
+                new UnitsProcessor(logicGraphClassifier, classifiedPceRepository, legoLogicalExpressionBuilder);
         legoElementProcessorService.process(units);
     }
 
@@ -94,7 +94,7 @@ public class UnsupportedProcessors extends AbstractProcessorTest {
     public void testValue() {
         Value value = Mockito.mock(Value.class);
         LegoElementProcessorService legoElementProcessorService =
-                new ValueProcessor(logicGraphClassifier, legoExpressionGraphBuilder, classifiedPceRepository);
+                new ValueProcessor(logicGraphClassifier, classifiedPceRepository, legoLogicalExpressionBuilder);
         legoElementProcessorService.process(value);
     }
 }

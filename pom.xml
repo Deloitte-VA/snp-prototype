@@ -498,7 +498,6 @@
         <module>fhir</module>
         <module>apis</module>
         <module>defaultconfig</module>
-        <module>mock-classifier</module>
         <module>classifier</module>
         <module>web</module>
     </modules>

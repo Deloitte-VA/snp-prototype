@@ -1,15 +1,12 @@
 package com.github.jlgrock.snp.web.controllers;
 
-import static org.testng.Assert.assertEquals;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-
-import javax.ws.rs.client.WebTarget;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-
+import com.fasterxml.jackson.databind.JsonNode;
+import com.github.jlgrock.snp.domain.data.PatientRepository;
+import com.github.jlgrock.snp.domain.types.Gender;
+import com.github.jlgrock.snp.domain.types.Patient;
+import com.github.jlgrock.snp.web.configuration.JacksonConfig;
+import com.github.jlgrock.snp.web.services.ClassifierQueryServiceImpl;
+import com.google.common.io.CharStreams;
 import org.bson.types.ObjectId;
 import org.glassfish.hk2.api.Factory;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
@@ -26,14 +23,16 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.github.jlgrock.snp.domain.data.PatientRepository;
-import com.github.jlgrock.snp.domain.types.Gender;
-import com.github.jlgrock.snp.domain.types.Patient;
-import com.github.jlgrock.snp.web.configuration.JacksonConfig;
-import com.github.jlgrock.snp.web.services.ClassifierQueryServiceImpl;
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
+import static org.testng.Assert.assertEquals;
+
 //import com.github.jlgrock.snp.domain.types.Race;
-import com.google.common.io.CharStreams;
 
 /**
  *
@@ -153,6 +152,7 @@ public class PatientControllerTest extends GenericControllerTest {
     	LOGGER.debug("Patient search response: " + CharStreams.toString(new InputStreamReader((InputStream) response.getEntity())));
     	Assert.assertEquals(response.getStatus(), Response.Status.OK.getStatusCode());
     }
+
     
 //    @Test
 //    public void testGetPatientSearchError() throws IOException {

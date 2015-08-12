@@ -1,6 +1,6 @@
 package com.github.jlgrock.snp.classifier;
 
-import com.github.jlgrock.snp.apis.classifier.LogicClassifierStore;
+import com.github.jlgrock.snp.apis.classifier.ClassifierStorage;
 import com.github.jlgrock.snp.apis.connection.configuration.FileConfiguration;
 import gov.vha.isaac.metadata.coordinates.EditCoordinates;
 import gov.vha.isaac.metadata.coordinates.LogicCoordinates;
@@ -35,8 +35,8 @@ import java.io.IOException;
  */
 @Service
 @Singleton
-class LogicClassifierStoreImpl implements LogicClassifierStore {
-    private static final Logger LOGGER = LoggerFactory.getLogger(LogicClassifierStoreImpl.class);
+class ClassifierStorageImpl implements ClassifierStorage {
+    private static final Logger LOGGER = LoggerFactory.getLogger(ClassifierStorageImpl.class);
 
     private final FileConfiguration fileConfiguration;
 
@@ -45,7 +45,7 @@ class LogicClassifierStoreImpl implements LogicClassifierStore {
      * @param fileConfigurationIn the configuration that will be used for the expression service
      */
     @Inject
-    public LogicClassifierStoreImpl(final FileConfiguration fileConfigurationIn) {
+    public ClassifierStorageImpl(final FileConfiguration fileConfigurationIn) {
         LOGGER.info("Starting Expression Service...");
         fileConfiguration = fileConfigurationIn;
         startExpressionService();

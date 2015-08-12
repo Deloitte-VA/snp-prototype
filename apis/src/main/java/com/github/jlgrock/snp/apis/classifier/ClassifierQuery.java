@@ -10,7 +10,7 @@ import java.util.UUID;
  * Logic Graph.
  */
 @Contract
-public interface LogicGraphClassifierQuery {
+public interface ClassifierQuery {
 
     /**
      * Query that will return all concept sequences that match the kind of

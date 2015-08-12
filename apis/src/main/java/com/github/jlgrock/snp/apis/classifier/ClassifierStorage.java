@@ -15,7 +15,7 @@ import org.jvnet.hk2.annotations.Contract;
  * The classifier store, which stores the data from the classifier.
  */
 @Contract
-public interface LogicClassifierStore {
+public interface ClassifierStorage {
     /**
      * Start the expression service
      */
@@ -71,6 +71,9 @@ public interface LogicClassifierStore {
      */
     ClassifierService getClassifierService();
 
+    /**
+     * @return the Edit coordinates required for use in building concepts
+     */
     EditCoordinate getSolorOverlay();
 
 }

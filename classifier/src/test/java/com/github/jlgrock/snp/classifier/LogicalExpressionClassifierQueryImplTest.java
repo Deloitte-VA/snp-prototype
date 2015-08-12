@@ -1,6 +1,6 @@
 package com.github.jlgrock.snp.classifier;
 
-import com.github.jlgrock.snp.apis.classifier.LogicClassifierStore;
+import com.github.jlgrock.snp.apis.classifier.ClassifierStorage;
 import gov.vha.isaac.ochre.api.TaxonomyService;
 import gov.vha.isaac.ochre.collections.ConceptSequenceSet;
 import org.ihtsdo.otf.tcc.api.coordinate.ViewCoordinate;
@@ -18,14 +18,14 @@ public class LogicalExpressionClassifierQueryImplTest {
 
     @Test
     public void queryByNid() {
-        LogicClassifierStore logicClassifierStore = Mockito.mock(LogicClassifierStore.class);
+        ClassifierStorage classifierStorage = Mockito.mock(ClassifierStorage.class);
         int nid = 123;
         int[] result = {123, 345};
-        LogicGraphClassifierQueryImpl logicGraphClassifierQuery = new LogicGraphClassifierQueryImpl(logicClassifierStore);
+        ClassifierQueryImpl logicGraphClassifierQuery = new ClassifierQueryImpl(classifierStorage);
         TaxonomyService taxonomyService = Mockito.mock(TaxonomyService.class);
-        Mockito.when(logicClassifierStore.getTaxonomyService()).thenReturn(taxonomyService);
+        Mockito.when(classifierStorage.getTaxonomyService()).thenReturn(taxonomyService);
         ViewCoordinate viewCoordinate = Mockito.mock(ViewCoordinate.class);
-        Mockito.when(logicClassifierStore.getViewCoordinate()).thenReturn(viewCoordinate);
+        Mockito.when(classifierStorage.getViewCoordinate()).thenReturn(viewCoordinate);
         ConceptSequenceSet conceptSequenceSet = Mockito.mock(ConceptSequenceSet.class);
         IntStream intStream = Mockito.mock(IntStream.class);
         Mockito.when(conceptSequenceSet.stream()).thenReturn(intStream);
