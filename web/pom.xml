@@ -161,7 +161,6 @@
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
 		</dependency>
-
 	</dependencies>
 
 	<build>
@@ -184,6 +183,22 @@
                     </packagingExcludes>
                 </configuration>
 			</plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.4.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <mainClass>com.github.jlgrock.snp.web.zzsandbox.MainApp</mainClass>
+                </configuration>
+            </plugin>
 
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
@@ -260,8 +275,21 @@
 	            </executions>
 	        </plugin>
 
-		</plugins>
-	</build>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>aspectj-maven-plugin</artifactId>
+                <configuration>
+                    <aspectLibraries>
+                        <aspectLibrary>
+                            <groupId>com.github.jlgrock.snp</groupId>
+                            <artifactId>aop</artifactId>
+                        </aspectLibrary>
+                    </aspectLibraries>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
 
     <profiles>
         <profile>
