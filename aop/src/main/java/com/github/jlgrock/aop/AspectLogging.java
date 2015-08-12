@@ -46,17 +46,12 @@ public class AspectLogging {
      * @return object from Around advise
      */
     @Around("logging()")
-    public Object logging(final ProceedingJoinPoint pjp) {
+    public Object logging(final ProceedingJoinPoint pjp) throws Throwable {
         AOP_LOGGER.info("%n******************************************************%n");
         AOP_LOGGER.info("Before " + pjp.getSignature());
         AOP_LOGGER.info(getLogInfo(pjp));
 
-        Object ret = null;
-        try {
-            ret = pjp.proceed();
-        } catch (Throwable throwable) {
-            throwable.printStackTrace();
-        }
+        Object ret = pjp.proceed();
 
         AOP_LOGGER.info("%n******************************************************%n");
         AOP_LOGGER.info("After " + pjp.getSignature());
