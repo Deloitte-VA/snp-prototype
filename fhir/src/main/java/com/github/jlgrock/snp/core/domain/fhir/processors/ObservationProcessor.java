@@ -1,7 +1,7 @@
 package com.github.jlgrock.snp.core.domain.fhir.processors;
 
-import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
-import com.github.jlgrock.snp.core.domain.fhir.logicgraph.FhirCodeableConceptGraphBuilder;
+import com.github.jlgrock.snp.apis.classifier.LogicalExpressionClassifier;
+import com.github.jlgrock.snp.core.domain.fhir.logicalexpression.FhirCodeableConceptGraphBuilder;
 import com.github.jlgrock.snp.core.domain.fhir.model.CodeableConcept;
 import com.github.jlgrock.snp.core.domain.fhir.model.Observation;
 import com.github.jlgrock.snp.domain.data.ClassifiedPceRepository;
@@ -17,7 +17,7 @@ public class ObservationProcessor extends AbstractFhirProcessor {
     final EncounterRepository encounterRepository;
 
     @Inject
-    public ObservationProcessor(final LogicGraphClassifier logicGraphClassifierIn,
+    public ObservationProcessor(final LogicalExpressionClassifier logicGraphClassifierIn,
                                 final FhirCodeableConceptGraphBuilder fhirCodeableConceptGraphBuilderIn,
                                 final ClassifiedPceRepository classifiedPceRepositoryIn,
                                 final EncounterRepository encounterRepositoryIn) {

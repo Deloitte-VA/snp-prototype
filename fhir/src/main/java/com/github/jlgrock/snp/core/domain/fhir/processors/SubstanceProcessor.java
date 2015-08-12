@@ -1,6 +1,6 @@
 package com.github.jlgrock.snp.core.domain.fhir.processors;
 
-import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
+import com.github.jlgrock.snp.apis.classifier.LogicalExpressionClassifier;
 import com.github.jlgrock.snp.core.domain.fhir.model.Substance;
 import org.jvnet.hk2.annotations.Service;
 
@@ -10,8 +10,8 @@ import javax.inject.Inject;
 public class SubstanceProcessor extends AbstractFhirProcessor {
 
     @Inject
-    public SubstanceProcessor(final LogicGraphClassifier logicGraphClassifierIn) {
-        super(logicGraphClassifierIn);
+    public SubstanceProcessor(final LogicalExpressionClassifier logicalExpressionClassifierIn) {
+        super(logicalExpressionClassifierIn);
     }
 
 	@Override

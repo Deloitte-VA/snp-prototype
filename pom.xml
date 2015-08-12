@@ -49,10 +49,10 @@
         <target.jdk>1.8</target.jdk>
         
         <!-- VHA versions -->
-        <newtons-cradle.version>1.18</newtons-cradle.version>
-        <query.version>2.13</query.version>
-        <logic.version>1.13</logic.version>
-        <solor.version>1.9</solor.version>
+		<newtons-cradle.version>1.20</newtons-cradle.version>
+        <query.version>2.15</query.version>
+        <logic.version>1.15</logic.version>
+        <solor.version>1.11</solor.version>
 
         <!-- External versions -->
         <jackson.version>2.5.0</jackson.version>
@@ -107,6 +107,12 @@
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>apis</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>mock-classifier</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
@@ -173,23 +179,6 @@
                 </exclusions>
             </dependency>
 
-            <dependency>
-                <groupId>gov.vha.solor.modules</groupId>
-                <artifactId>snomed</artifactId>
-                <version>${solor.version}</version>
-                <type>lucene.zip</type>
-                <classifier>all</classifier>
-                <scope>compile</scope>
-            </dependency>
-
-            <dependency>
-                <groupId>gov.vha.solor.modules</groupId>
-                <artifactId>snomed</artifactId>
-                <version>${solor.version}</version>
-                <type>cradle.zip</type>
-                <classifier>all</classifier>
-                <scope>compile</scope>
-            </dependency>
 
             <dependency>
                 <groupId>gov.vha.isaac.newtons-cradle.modules</groupId>

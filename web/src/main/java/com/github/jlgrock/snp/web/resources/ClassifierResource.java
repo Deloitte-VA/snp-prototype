@@ -1,11 +1,14 @@
 package com.github.jlgrock.snp.web.resources;
 
-import gov.vha.isaac.logic.LogicGraph;
-
-import java.io.IOException;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
+import com.github.jlgrock.snp.apis.classifier.LogicalExpressionClassifier;
+import com.github.jlgrock.snp.apis.exceptions.ProcessingException;
+import com.github.jlgrock.snp.apis.web.ProcessingServiceFactory;
+import gov.vha.isaac.ochre.api.logic.LogicalExpression;
+import org.glassfish.jersey.media.multipart.FormDataBodyPart;
+import org.glassfish.jersey.media.multipart.FormDataMultiPart;
+import org.glassfish.jersey.media.multipart.FormDataParam;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -17,16 +20,10 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.ext.MessageBodyReader;
-
-import org.glassfish.jersey.media.multipart.FormDataBodyPart;
-import org.glassfish.jersey.media.multipart.FormDataMultiPart;
-import org.glassfish.jersey.media.multipart.FormDataParam;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
-import com.github.jlgrock.snp.apis.exceptions.ProcessingException;
-import com.github.jlgrock.snp.apis.web.ProcessingServiceFactory;
+import java.io.IOException;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  * The controller for handling all classifier requests
@@ -39,22 +36,22 @@ public class ClassifierResource {
 
 	private final ProcessingServiceFactory processingServiceFactory;
 
-	private final LogicGraphClassifier logicGraphClassifier;
+	private final LogicalExpressionClassifier logicalExpressionClassifier;
 
 	/**
 	 * Constructor
 	 *
 	 * @param processingServiceFactoryIn
 	 *            the marshaller that
-	 * @param logicGraphClassifierIn
+	 * @param logicalExpressionClassifierIn
 	 *            logic graph classifier
 	 */
 	@Inject
 	public ClassifierResource(
 			final ProcessingServiceFactory processingServiceFactoryIn,
-			final LogicGraphClassifier logicGraphClassifierIn) {
+			final LogicalExpressionClassifier logicalExpressionClassifierIn) {
 		processingServiceFactory = processingServiceFactoryIn;
-		logicGraphClassifier = logicGraphClassifierIn;
+		logicalExpressionClassifier = logicalExpressionClassifierIn;
 	}
 
 	/**
@@ -143,14 +140,14 @@ public class ClassifierResource {
 	public Response getPce(@PathParam("nid") final int nid) {
 		LOGGER.trace("getPce(nid={})", nid);
 
-		LogicGraph logicGraph;
+		LogicalExpression logicalExpression;
 		try {
-			logicGraph = logicGraphClassifier.getStatedTermLogicGraph(nid);
+			logicalExpression = logicalExpressionClassifier.getInferredTermLogicalExpression(nid);
 		} catch (IOException e) {
 			return Response.serverError().build();
 		}
 
-		return Response.ok(logicGraph, MediaType.APPLICATION_JSON_TYPE).build();
+		return Response.ok(logicalExpression, MediaType.APPLICATION_JSON_TYPE).build();
 	}
 
 	/**

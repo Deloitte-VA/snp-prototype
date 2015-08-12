@@ -1,6 +1,6 @@
 package com.github.jlgrock.snp.core.domain.fhir.processors;
 
-import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
+import com.github.jlgrock.snp.apis.classifier.LogicalExpressionClassifier;
 import com.github.jlgrock.snp.core.domain.fhir.converters.FhirPatientConverter;
 import com.github.jlgrock.snp.core.domain.fhir.model.Patient;
 import com.github.jlgrock.snp.domain.data.PatientRepository;
@@ -19,10 +19,10 @@ public class PatientProcessor extends AbstractFhirProcessor {
     private final PatientRepository patientRepository;
 
     @Inject
-    public PatientProcessor(final LogicGraphClassifier logicGraphClassifierIn,
+    public PatientProcessor(final LogicalExpressionClassifier logicalExpressionClassifierIn,
                             final FhirPatientConverter fhirPatientConverterIn,
                             final PatientRepository patientRepositoryIn) {
-        super(logicGraphClassifierIn);
+        super(logicalExpressionClassifierIn);
         fhirPatientConverter = fhirPatientConverterIn;
         patientRepository = patientRepositoryIn;
     }

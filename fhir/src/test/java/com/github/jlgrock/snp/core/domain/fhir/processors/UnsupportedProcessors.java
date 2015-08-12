@@ -1,6 +1,6 @@
 package com.github.jlgrock.snp.core.domain.fhir.processors;
 
-import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
+import com.github.jlgrock.snp.apis.classifier.LogicalExpressionClassifier;
 import com.github.jlgrock.snp.core.domain.fhir.model.AdverseReaction;
 import com.github.jlgrock.snp.core.domain.fhir.model.Alert;
 import com.github.jlgrock.snp.core.domain.fhir.model.AllergyIntolerance;
@@ -46,7 +46,7 @@ import org.testng.annotations.Test;
  *
  */
 public class UnsupportedProcessors {
-    protected LogicGraphClassifier logicGraphClassifier = Mockito.mock(LogicGraphClassifier.class);
+    protected LogicalExpressionClassifier logicGraphClassifier = Mockito.mock(LogicalExpressionClassifier.class);
 
     @Test(expectedExceptions = UnsupportedOperationException.class)
     public void testAdverseReaction() {

@@ -5,10 +5,6 @@ import com.github.jlgrock.snp.domain.converters.EncounterReadConverter;
 import com.github.jlgrock.snp.domain.converters.EncounterWriteConverter;
 import com.github.jlgrock.snp.domain.types.Encounter;
 import com.mongodb.client.FindIterable;
-
-import static com.mongodb.client.model.Filters.and;
-import static com.mongodb.client.model.Filters.in;
-
 import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
@@ -17,10 +13,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.mongodb.client.model.Filters.and;
+import static com.mongodb.client.model.Filters.in;
 
 /**
  * This class executes queries against the Encounter Collection within MongoDB.
@@ -95,15 +93,24 @@ public class EncounterRepositoryImpl extends
 	@Override
 	public List<Encounter> findByObservableIdListAndProvenanceIdListAndValueIdList(
 			final List<Integer> observableIds,
-			final List<Integer> provenanceIds, final List<Integer> valueIds) {
+			final List<Integer> provenanceIds,
+            final List<Integer> valueIds) {
 		LOGGER.trace(
 				"findByObservableIdListAndProvenanceIdListAndValueIdList(observableIds={}, provenanceIds={}, valueIds={})",
 				observableIds, provenanceIds, valueIds);
-		Bson query = and(in("assertions.observable", observableIds),
-				in("assertions.provenance", provenanceIds),
-				in("assertions.value", valueIds));
 
-		return executeQueryAndTransformResults(query);
+        List<Bson> ins = new ArrayList<>();
+        if (observableIds != null && observableIds.size() > 0) {
+            ins.add(in("assertions.observable", observableIds));
+        }
+        if (provenanceIds != null && provenanceIds.size() > 0) {
+            ins.add(in("assertions.provenance", provenanceIds));
+        }
+        if (valueIds != null && valueIds.size() > 0) {
+            ins.add(in("assertions.value", valueIds));
+        }
+
+		return executeQueryAndTransformResults(and(ins.toArray(new Bson[ins.size()])));
 	}
 
 	@Override

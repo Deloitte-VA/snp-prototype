@@ -12,7 +12,7 @@ public class LegoProcessorTest extends AbstractProcessorTest {
     @Test
     public void testLegoProcessor() {
         LegoElementProcessorService legoElementProcessorService =
-                new LegoProcessor(logicGraphClassifier, legoExpressionGraphBuilder, classifiedPceRepository);
+                new LegoProcessor(logicGraphClassifier, classifiedPceRepository, legoLogicalExpressionBuilder);
         legoElementProcessorService.process(lego);
         Mockito.verify(classifiedPceRepository).save(Mockito.any(ClassifiedPce.class));
     }

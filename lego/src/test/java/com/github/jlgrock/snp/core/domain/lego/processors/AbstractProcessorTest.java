@@ -1,7 +1,7 @@
 package com.github.jlgrock.snp.core.domain.lego.processors;
 
-import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
-import com.github.jlgrock.snp.core.domain.lego.logicgraph.LegoExpressionGraphBuilder;
+import com.github.jlgrock.snp.apis.classifier.LogicalExpressionClassifier;
+import com.github.jlgrock.snp.core.domain.lego.logicalexpression.LegoLogicalExpressionBuilder;
 import com.github.jlgrock.snp.core.domain.lego.model.Assertion;
 import com.github.jlgrock.snp.core.domain.lego.model.Concept;
 import com.github.jlgrock.snp.core.domain.lego.model.Discernible;
@@ -11,7 +11,7 @@ import com.github.jlgrock.snp.core.domain.lego.model.LegoList;
 import com.github.jlgrock.snp.core.domain.lego.model.Relation;
 import com.github.jlgrock.snp.core.domain.lego.model.RelationGroup;
 import com.github.jlgrock.snp.domain.data.ClassifiedPceRepository;
-import gov.vha.isaac.logic.LogicGraph;
+import gov.vha.isaac.ochre.api.logic.LogicalExpression;
 import org.mockito.Mockito;
 import org.testng.annotations.BeforeClass;
 
@@ -23,9 +23,9 @@ import java.util.List;
  */
 public class AbstractProcessorTest {
 
-    protected LogicGraphClassifier logicGraphClassifier = Mockito.mock(LogicGraphClassifier.class);
+    protected LogicalExpressionClassifier logicGraphClassifier = Mockito.mock(LogicalExpressionClassifier.class);
     protected ClassifiedPceRepository classifiedPceRepository = Mockito.mock(ClassifiedPceRepository.class);
-    protected LegoExpressionGraphBuilder legoExpressionGraphBuilder = Mockito.mock(LegoExpressionGraphBuilder.class);
+    protected LegoLogicalExpressionBuilder legoLogicalExpressionBuilder = Mockito.mock(LegoLogicalExpressionBuilder.class);
 
     protected Assertion assertion = Mockito.mock(Assertion.class);
     protected Assertion assertion2 = Mockito.mock(Assertion.class);
@@ -45,11 +45,11 @@ public class AbstractProcessorTest {
     protected RelationGroup relationGroup2 = Mockito.mock(RelationGroup.class);
     protected List<RelationGroup> relationGroups;
 
-    protected LogicGraph logicGraph = Mockito.mock(LogicGraph.class);
+    protected LogicalExpression logicalExpression = Mockito.mock(LogicalExpression.class);
 
     @BeforeClass
     public void setup() {
-        Mockito.when(legoExpressionGraphBuilder.build(expression)).thenReturn(logicGraph);
+        Mockito.when(legoLogicalExpressionBuilder.build(expression)).thenReturn(logicalExpression);
 
         legos = new ArrayList<>();
         legos.add(lego);
@@ -80,7 +80,7 @@ public class AbstractProcessorTest {
         Mockito.when(expression2.getConcept()).thenReturn(concept);
         Mockito.when(expression2.getRelationGroup()).thenReturn(relationGroups);
 
-        Mockito.when(logicGraphClassifier.classify(logicGraph)).thenReturn(1);
-        Mockito.when(legoExpressionGraphBuilder.build(expression)).thenReturn(logicGraph);
+        Mockito.when(logicGraphClassifier.classify(logicalExpression)).thenReturn(1);
+        Mockito.when(legoLogicalExpressionBuilder.build(expression)).thenReturn(logicalExpression);
     }
 }

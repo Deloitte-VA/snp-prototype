@@ -1,7 +1,7 @@
 package com.github.jlgrock.snp.core.domain.fhir.processors;
 
-import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
-import com.github.jlgrock.snp.core.domain.fhir.logicgraph.FhirCodeableConceptGraphBuilder;
+import com.github.jlgrock.snp.apis.classifier.LogicalExpressionClassifier;
+import com.github.jlgrock.snp.core.domain.fhir.logicalexpression.FhirCodeableConceptGraphBuilder;
 import com.github.jlgrock.snp.core.domain.fhir.model.CodeableConcept;
 import com.github.jlgrock.snp.domain.data.ClassifiedPceRepository;
 import com.github.jlgrock.snp.domain.data.EncounterRepository;
@@ -10,7 +10,7 @@ import com.github.jlgrock.snp.domain.types.ClassifiedPce;
 import com.github.jlgrock.snp.domain.types.Encounter;
 import com.github.jlgrock.snp.domain.types.primitives.PrimitiveType;
 import com.github.jlgrock.snp.domain.types.primitives.SimplePrimitive;
-import gov.vha.isaac.logic.LogicGraph;
+import gov.vha.isaac.ochre.api.logic.LogicalExpression;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,14 +20,14 @@ import java.util.List;
  */
 public abstract class AbstractFhirProcessor implements FhirElementProcessorService {
 
-    private final LogicGraphClassifier logicGraphClassifier;
+    private final LogicalExpressionClassifier logicalExpressionClassifier;
 
-    protected AbstractFhirProcessor(final LogicGraphClassifier logicGraphClassifierIn) {
-        logicGraphClassifier = logicGraphClassifierIn;
+    protected AbstractFhirProcessor(final LogicalExpressionClassifier logicalExpressionClassifierIn) {
+        logicalExpressionClassifier = logicalExpressionClassifierIn;
     }
 
-    protected LogicGraphClassifier getLogicGraphClassifier() {
-        return logicGraphClassifier;
+    protected LogicalExpressionClassifier getLogicalExpressionClassifier() {
+        return logicalExpressionClassifier;
     }
 
     @Override
@@ -44,15 +44,15 @@ public abstract class AbstractFhirProcessor implements FhirElementProcessorServi
                                       final ClassifiedPceRepository classifiedPceRepository,
                                       final CodeableConcept codeableConcept) {
         // build the logic graph from the code
-        LogicGraph logicGraph = fhirCodeableConceptBuilder.build(codeableConcept);
+        LogicalExpression logicalExpression = fhirCodeableConceptBuilder.build(codeableConcept);
 
         // classify the logic graph
-        Integer classifiedId = getLogicGraphClassifier().classify(logicGraph);
+        Integer classifiedId = getLogicalExpressionClassifier().classify(logicalExpression);
 
         // save the classified PCE
         ClassifiedPce classifiedPce = new ClassifiedPce();
         classifiedPce.setNid(classifiedId);
-        classifiedPce.setDesc(logicGraph.toString());
+        classifiedPce.setDesc(logicalExpression.toString());
         classifiedPceRepository.save(classifiedPce);
 
         // return the nid

@@ -1,8 +1,7 @@
 package com.github.jlgrock.snp.classifier;
 
-import com.github.jlgrock.snp.apis.classifier.LogicClassifierStore;
+import com.github.jlgrock.snp.apis.classifier.ClassifierStorage;
 import com.github.jlgrock.snp.apis.connection.configuration.FileConfiguration;
-import gov.vha.isaac.logic.LogicService;
 import gov.vha.isaac.metadata.coordinates.EditCoordinates;
 import gov.vha.isaac.metadata.coordinates.LogicCoordinates;
 import gov.vha.isaac.metadata.coordinates.StampCoordinates;
@@ -10,7 +9,13 @@ import gov.vha.isaac.metadata.coordinates.ViewCoordinates;
 import gov.vha.isaac.ochre.api.IdentifierService;
 import gov.vha.isaac.ochre.api.LookupService;
 import gov.vha.isaac.ochre.api.TaxonomyService;
+import gov.vha.isaac.ochre.api.classifier.ClassifierService;
+import gov.vha.isaac.ochre.api.component.concept.ConceptService;
 import gov.vha.isaac.ochre.api.constants.Constants;
+import gov.vha.isaac.ochre.api.coordinate.EditCoordinate;
+import gov.vha.isaac.ochre.api.coordinate.LogicCoordinate;
+import gov.vha.isaac.ochre.api.coordinate.StampCoordinate;
+import gov.vha.isaac.ochre.api.logic.LogicService;
 import org.glassfish.hk2.runlevel.RunLevelController;
 import org.ihtsdo.otf.tcc.api.coordinate.ViewCoordinate;
 import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
@@ -30,8 +35,8 @@ import java.io.IOException;
  */
 @Service
 @Singleton
-class LogicClassifierStoreImpl implements LogicClassifierStore {
-    private static final Logger LOGGER = LoggerFactory.getLogger(LogicClassifierStoreImpl.class);
+class ClassifierStorageImpl implements ClassifierStorage {
+    private static final Logger LOGGER = LoggerFactory.getLogger(ClassifierStorageImpl.class);
 
     private final FileConfiguration fileConfiguration;
 
@@ -40,10 +45,16 @@ class LogicClassifierStoreImpl implements LogicClassifierStore {
      * @param fileConfigurationIn the configuration that will be used for the expression service
      */
     @Inject
-    public LogicClassifierStoreImpl(final FileConfiguration fileConfigurationIn) {
+    public ClassifierStorageImpl(final FileConfiguration fileConfigurationIn) {
         LOGGER.info("Starting Expression Service...");
         fileConfiguration = fileConfigurationIn;
         startExpressionService();
+        int conceptCnt = LookupService.getService(ConceptService.class).getConceptCount();
+        if (conceptCnt == 0) {
+            LOGGER.warn("No concepts found.  An empty database is being indexed.  This is either a new setup or an incorrect property has been set");
+        } else {
+            LOGGER.info("After startup, the number of concepts loaded is {}", conceptCnt);
+        }
         runFullClassification();
     }
 
@@ -53,7 +64,12 @@ class LogicClassifierStoreImpl implements LogicClassifierStore {
      * logic graph assemblage. Running a full classification will likely take several minutes.
      */
     private void runFullClassification() {
-        getLogicService().fullClassification(
+        getClassifierService().classify();
+    }
+
+    @Override
+    public ClassifierService getClassifierService() {
+        return getLogicService().getClassifierService(
                 StampCoordinates.getDevelopmentLatest(),
                 LogicCoordinates.getStandardElProfile(),
                 EditCoordinates.getDefaultUserSolorOverlay());
@@ -107,7 +123,7 @@ class LogicClassifierStoreImpl implements LogicClassifierStore {
     }
 
     @Override
-    public ViewCoordinate getViewCoordinates() {
+    public ViewCoordinate getViewCoordinate() {
         ViewCoordinate viewCoordinate = null;
         try {
             viewCoordinate = ViewCoordinates.getDevelopmentInferredLatest();
@@ -117,4 +133,19 @@ class LogicClassifierStoreImpl implements LogicClassifierStore {
         return viewCoordinate;
     }
 
+    @Override
+    public StampCoordinate getStampCoordinate() {
+        return StampCoordinates.getDevelopmentLatest();
+    }
+
+    @Override
+    public int getInferredAssemblageSequence() {
+        LogicCoordinate logicCoordinate = LogicCoordinates.getStandardElProfile();
+        return logicCoordinate.getInferredAssemblageSequence();
+    }
+
+    @Override
+    public EditCoordinate getSolorOverlay() {
+        return EditCoordinates.getDefaultUserSolorOverlay();
+    }
 }

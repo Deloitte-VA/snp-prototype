@@ -1,7 +1,6 @@
 package com.github.jlgrock.snp.apis.classifier;
 
-import gov.vha.isaac.logic.LogicGraph;
-
+import gov.vha.isaac.ochre.api.logic.LogicalExpression;
 import org.ihtsdo.otf.tcc.api.concept.ConceptChronicleBI;
 import org.jvnet.hk2.annotations.Contract;
 
@@ -12,7 +11,7 @@ import java.util.UUID;
  * Classify Post Coordinated Expressions using the classification store.
  */
 @Contract
-public interface LogicGraphClassifier {
+public interface LogicalExpressionClassifier {
 
 	/**
 	 * Get the native identifier
@@ -57,7 +56,7 @@ public interface LogicGraphClassifier {
 	 *            Post Coordinated Expression
 	 * @return the native identifier
 	 */
-	Integer classify(LogicGraph pce);
+	Integer classify(LogicalExpression pce);
 
 	/**
 	 * Get the stated terminology logic graph for the given native id.
@@ -69,6 +68,6 @@ public interface LogicGraphClassifier {
 	 *             if there was IO related error encountered while looking up
 	 *             the logic graph
 	 */
-	LogicGraph getStatedTermLogicGraph(int nid) throws IOException;
+	LogicalExpression getInferredTermLogicalExpression(int nid) throws IOException;
 
 }

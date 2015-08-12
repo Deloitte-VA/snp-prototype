@@ -1,19 +1,16 @@
 package com.github.jlgrock.snp.classifier;
 
-import com.github.jlgrock.snp.apis.classifier.LogicClassifierStore;
-import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifierQuery;
-
-import gov.vha.isaac.logic.LogicGraph;
+import com.github.jlgrock.snp.apis.classifier.ClassifierStorage;
+import com.github.jlgrock.snp.apis.classifier.ClassifierQuery;
+import gov.vha.isaac.ochre.api.logic.LogicalExpression;
 import gov.vha.isaac.ochre.collections.SequenceSet;
-
+import gov.vha.isaac.ochre.util.UuidT3Generator;
 import org.ihtsdo.otf.tcc.api.concept.ConceptChronicleBI;
-import org.ihtsdo.otf.tcc.api.uuid.UuidT3Generator;
 import org.jvnet.hk2.annotations.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
-
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.UUID;
@@ -22,19 +19,19 @@ import java.util.UUID;
  * Class that provides query capabilities for the Logic Graph store.
  */
 @Service
-public class LogicGraphClassifierQueryImpl implements LogicGraphClassifierQuery {
-    private static final Logger LOGGER = LoggerFactory.getLogger(LogicGraphClassifierQueryImpl.class);
+public class ClassifierQueryImpl implements ClassifierQuery {
+    private static final Logger LOGGER = LoggerFactory.getLogger(ClassifierQueryImpl.class);
 
-    private final LogicClassifierStore logicClassifierStore;
+    private final ClassifierStorage classifierStorage;
 
     /**
      * Creates the classifier query object
      *
-     * @param logicClassifierStoreIn the specific store to use, in this case, ochre+lucene
+     * @param classifierStorageIn the specific store to use, in this case, ochre+lucene
      */
     @Inject
-    public LogicGraphClassifierQueryImpl(final LogicClassifierStore logicClassifierStoreIn) {
-        logicClassifierStore = logicClassifierStoreIn;
+    public ClassifierQueryImpl(final ClassifierStorage classifierStorageIn) {
+        classifierStorage = classifierStorageIn;
     }
 
     @Override
@@ -42,8 +39,8 @@ public class LogicGraphClassifierQueryImpl implements LogicGraphClassifierQuery 
     	LOGGER.trace("query(nid={})", nid);
         int[] conceptSequences = null;
         SequenceSet results = null;
-        results = logicClassifierStore.getTaxonomyService()
-                .getKindOfSequenceSet(nid, logicClassifierStore.getViewCoordinates());
+        results = classifierStorage.getTaxonomyService()
+                .getKindOfSequenceSet(nid, classifierStorage.getViewCoordinate());
         if (results != null) {
             conceptSequences = results.stream().toArray();
         }
@@ -57,7 +54,7 @@ public class LogicGraphClassifierQueryImpl implements LogicGraphClassifierQuery 
 
         ConceptChronicleBI concept;
         try {
-            concept = logicClassifierStore.getTerminologyStore().getConcept(uuid);
+            concept = classifierStorage.getTerminologyStore().getConcept(uuid);
             int nid = concept.getNid();
             conceptSequences = query(nid);
 
@@ -76,7 +73,7 @@ public class LogicGraphClassifierQueryImpl implements LogicGraphClassifierQuery 
     }
 
     @Override
-    public int[] query(final LogicGraph logicGraph) {
+    public int[] query(final LogicalExpression logicalExpression) {
         //TODO
         throw new UnsupportedOperationException("Work on this");
     }

@@ -1,17 +1,18 @@
 package com.github.jlgrock.snp.classifier.examples;
 
-import gov.vha.isaac.logic.LogicGraph;
-import gov.vha.isaac.logic.LogicService;
-import gov.vha.isaac.metadata.coordinates.ViewCoordinates;
+import gov.vha.isaac.metadata.coordinates.LogicCoordinates;
+import gov.vha.isaac.metadata.coordinates.StampCoordinates;
 import gov.vha.isaac.ochre.api.LookupService;
-
-import java.io.IOException;
-
-import org.ihtsdo.otf.tcc.api.store.TerminologySnapshotDI;
-import org.ihtsdo.otf.tcc.api.store.TerminologyStoreDI;
-import org.ihtsdo.otf.tcc.model.cc.concept.ConceptVersion;
+import gov.vha.isaac.ochre.api.chronicle.LatestVersion;
+import gov.vha.isaac.ochre.api.coordinate.LogicCoordinate;
+import gov.vha.isaac.ochre.api.coordinate.StampCoordinate;
+import gov.vha.isaac.ochre.api.logic.LogicService;
+import gov.vha.isaac.ochre.api.logic.LogicalExpression;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.IOException;
+import java.util.Optional;
 
 /**
  * Gets a logic graph by a native id.
@@ -23,24 +24,19 @@ public class GetLogicGraphByNid extends AbstractQuery {
 
 	@Override
 	protected void run() throws IOException {
-		TerminologyStoreDI termStore = LookupService
-				.getService(TerminologyStoreDI.class);
 		LogicService logicService = LookupService
 				.getService(LogicService.class);
 
-		TerminologySnapshotDI statedTermSnapshot = termStore
-				.getSnapshot(ViewCoordinates.getDevelopmentStatedLatest());
-		TerminologySnapshotDI inferredTermSnapshot = termStore
-				.getSnapshot(ViewCoordinates.getDevelopmentInferredLatest());
+		LogicCoordinate logicCoordinate = LogicCoordinates.getStandardElProfile();
+		StampCoordinate stampCoordinate = StampCoordinates.getDevelopmentLatest();
+
+		int nid = -2147481445;
 
 		// Print the results
-		LogicGraph lg1 = logicService
-				.createLogicGraph((ConceptVersion) statedTermSnapshot
-						.getConceptVersion(-2147481445));
+		Optional<LatestVersion<? extends LogicalExpression>> lg1 = logicService.getLogicalExpression(nid, logicCoordinate.getStatedAssemblageSequence(), stampCoordinate);
 		LOGGER.info("Stated logic graph:  {}", lg1);
-		LogicGraph lg2 = logicService
-				.createLogicGraph((ConceptVersion) inferredTermSnapshot
-						.getConceptVersion(-2147481445));
+
+		Optional<LatestVersion<? extends LogicalExpression>> lg2 = logicService.getLogicalExpression(nid, logicCoordinate.getInferredAssemblageSequence(), stampCoordinate);
 		LOGGER.info("Inferred logic graph: {}", lg2);
 	}
 
