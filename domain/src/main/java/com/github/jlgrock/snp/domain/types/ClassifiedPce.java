@@ -7,7 +7,7 @@ import java.util.Objects;
 /**
  * An object that has classified all of the PCEs
  */
-public class ClassifiedPce extends AbstractMongoDomainObject {
+public class ClassifiedPce extends AbstractMongoDomainObject<Integer> {
     private Integer nid;
 
     public Integer getNid() {

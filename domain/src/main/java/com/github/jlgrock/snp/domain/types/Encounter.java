@@ -11,7 +11,7 @@ import java.util.Objects;
  * The domain object that represents a single encounter in a patient visit.  Each encounter can consist
  * of multiple {@link com.github.jlgrock.snp.domain.types.Assertion Assertion} objects.
  */
-public class Encounter extends AbstractMongoDomainObject {
+public class Encounter extends AbstractMongoDomainObjectIdObject {
 
     private String subject;
     

@@ -1,13 +1,12 @@
 package com.github.jlgrock.snp.domain.domain;
 
 import com.github.jlgrock.snp.domain.types.ClassifiedPce;
-import org.bson.types.ObjectId;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotEquals;
 import static org.testng.Assert.assertTrue;
-import static org.testng.Assert.assertFalse;
 
 public class ClassifiedPceTest {
     /**
@@ -16,10 +15,10 @@ public class ClassifiedPceTest {
     @Test
     public void test() {
 
-        ObjectId ln1 = ObjectId.get();
+        Integer ln1 = 6;
         String st1 = "Touchdown";
 
-        ObjectId ln2 = ObjectId.get();
+        Integer ln2 = 7;
         String st2 = "Field Goal";
 
         ClassifiedPce pc1 = new ClassifiedPce();

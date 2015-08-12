@@ -12,13 +12,11 @@ import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.UpdateOptions;
-
 import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,7 +27,7 @@ import java.util.stream.Collectors;
  * @param <S> the type of the domain object to store
  * @param <T> the type of the ID
  */
-public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T extends Serializable>
+public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T>
         implements MongoRepository<S, T> {
 
     /**

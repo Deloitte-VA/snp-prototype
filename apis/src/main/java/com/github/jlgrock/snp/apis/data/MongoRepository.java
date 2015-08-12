@@ -11,7 +11,7 @@ import java.io.Serializable;
  * @param <ID> the type of the id
  */
 @Contract
-public interface MongoRepository<DT, ID extends Serializable> {
+public interface MongoRepository<DT, ID> {
 
     /**
      * Returns all entities sorted by the given options.

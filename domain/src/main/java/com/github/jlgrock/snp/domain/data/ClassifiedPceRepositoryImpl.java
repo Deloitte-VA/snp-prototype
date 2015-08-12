@@ -17,7 +17,7 @@ import javax.inject.Inject;
  * Collection within MongoDB.
  */
 @Service
-public class ClassifiedPceRepositoryImpl extends AbstractRepositoryImpl<ClassifiedPce, ObjectId>
+public class ClassifiedPceRepositoryImpl extends AbstractRepositoryImpl<ClassifiedPce, Integer>
 		implements ClassifiedPceRepository {
 
 	private final ClassifiedPceReadConverter classifiedPceReadConverter;

@@ -2,6 +2,7 @@ package com.github.jlgrock.snp.domain.converters;
 
 import com.github.jlgrock.snp.apis.converters.ReadConverter;
 import com.github.jlgrock.snp.domain.data.ClassifiedPceTags;
+import com.github.jlgrock.snp.domain.data.SharedTags;
 import com.github.jlgrock.snp.domain.types.ClassifiedPce;
 import org.bson.Document;
 import org.jvnet.hk2.annotations.Service;
@@ -18,7 +19,7 @@ public class ClassifiedPceReadConverter extends AbstractReadConverter
     @Override
     public ClassifiedPce convert(final Document source) {
         ClassifiedPce classifiedPce = new ClassifiedPce();
-        classifiedPce.setId(parseId(source));
+        classifiedPce.setId(parseInteger(source, SharedTags.ID_TAG));
         classifiedPce.setDesc(parseString(source, ClassifiedPceTags.DESCRIPTION_TAG));
         return classifiedPce;
     }

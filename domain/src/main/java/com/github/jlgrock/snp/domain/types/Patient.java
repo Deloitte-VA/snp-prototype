@@ -9,7 +9,7 @@ import java.time.LocalDate;
 /**
  * The patient and all of the immediate metadata about the patient.
  */
-public class Patient extends AbstractMongoDomainObject {
+public class Patient extends AbstractMongoDomainObjectIdObject {
 
     private String firstName;
 
