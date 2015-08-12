@@ -47,7 +47,10 @@
         <project.rootdir>${project.basedir}</project.rootdir>
         <source.jdk>1.8</source.jdk>
         <target.jdk>1.8</target.jdk>
-        
+
+        <aspectj.version>1.8.6</aspectj.version>
+        <aspectj.plugin.version>1.7</aspectj.plugin.version>
+
         <!-- VHA versions -->
 		<newtons-cradle.version>1.20</newtons-cradle.version>
         <query.version>2.15</query.version>
@@ -112,7 +115,7 @@
 
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>mock-classifier</artifactId>
+                <artifactId>aop</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
@@ -130,13 +133,7 @@
 
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>defaultconfig</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>${project.groupId}</groupId>
-                <artifactId>web</artifactId>
+                <artifactId>fhir</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
@@ -148,7 +145,13 @@
 
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>fhir</artifactId>
+                <artifactId>defaultconfig</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>web</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
@@ -315,19 +318,19 @@
 			    <artifactId>angularjs</artifactId>
 			    <version>${angularjs.version}</version>
 			</dependency>
-	
+
 			<dependency>
     			<groupId>org.webjars.bower</groupId>
     			<artifactId>angular-resource</artifactId>
     			<version>${angularjs-resource.version}</version>
 			</dependency>
-			
+
 			<dependency>
 			    <groupId>org.webjars.bower</groupId>
 			    <artifactId>angular-route</artifactId>
 			    <version>${angularjs-route.version}</version>
 			</dependency>
-	
+
     		<dependency>
     			<groupId>org.webjars.bower</groupId>
     			<artifactId>bootstrap</artifactId>
@@ -339,7 +342,7 @@
     			<artifactId>underscore</artifactId>
     			<version>${underscore.version}</version>
 			</dependency>
-			
+
 			<dependency>
 			    <groupId>org.webjars.bower</groupId>
 			    <artifactId>jquery</artifactId>
@@ -417,6 +420,26 @@
                 <version>${groovy.version}</version>
                 <scope>test</scope>
             </dependency>
+
+            <!-- AspectJ dependencies -->
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjrt</artifactId>
+                <version>${aspectj.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjweaver</artifactId>
+                <version>${aspectj.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjtools</artifactId>
+                <version>${aspectj.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
@@ -490,15 +513,34 @@
             <scope>test</scope>
         </dependency>
 
+
+        <!-- AspectJ specific dependencies -->
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjrt</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjtools</artifactId>
+        </dependency>
+
+
     </dependencies>
 
     <modules>
-        <module>domain</module>
-        <module>lego</module>
-        <module>fhir</module>
+        <module>aop</module>
         <module>apis</module>
-        <module>defaultconfig</module>
         <module>classifier</module>
+        <module>domain</module>
+        <module>fhir</module>
+        <module>lego</module>
+        <module>defaultconfig</module>
         <module>web</module>
     </modules>
 
@@ -525,10 +567,47 @@
                     <configuration>
                         <source>${source.jdk}</source>
                         <target>${target.jdk}</target>
+                        <useIncrementalCompilation>false</useIncrementalCompilation>
                     </configuration>
                 </plugin>
 
                 <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>aspectj-maven-plugin</artifactId>
+                    <version>${aspectj.plugin.version}</version>
+                    <configuration>
+                        <showWeaveInfo>true</showWeaveInfo>
+                        <complianceLevel>${source.jdk}</complianceLevel>
+                        <source>${source.jdk}</source>
+                        <target>${target.jdk}</target>
+                        <Xlint>ignore</Xlint>
+                        <excludes>
+                            <exclude>**/package-info.java</exclude>
+                        </excludes>
+                        <!--<verbose>true</verbose>-->
+                        <!--<warn>constructorName,packageDefaultMethod,deprecation,maskedCatchBlocks,unusedLocals,unusedArguments,unusedImport</warn>-->
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <!-- Kun: IMPORTANT! have to do it in this PHASE! this will do the trick! -->
+                            <phase>process-sources</phase>
+                            <goals>
+                                <goal>compile</goal>
+                                <!--<goal>test-compile</goal>-->
+                            </goals>
+                        </execution>
+                    </executions>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.aspectj</groupId>
+                            <artifactId>aspectjtools</artifactId>
+                            <version>${aspectj.version}</version>
+                        </dependency>
+                    </dependencies>
+                </plugin>
+
+                <plugin>
+
                     <!-- The gmavenplus plugin is used to compile Groovy code. To learn more about this plugin,
                     visit https://github.com/groovy/GMavenPlus/wiki -->
                     <groupId>org.codehaus.gmavenplus</groupId>
@@ -551,6 +630,25 @@
                         </dependency>
                     </dependencies>
                 </plugin>
+
+<!--
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>exec-maven-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>java</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <mainClass>com.github.jlgrock.snp.web.zzsandbox.App</mainClass>
+                    </configuration>
+                </plugin>
+-->
+
+
 
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -590,18 +688,6 @@
                         <useFile>false</useFile>
                         <argLine>-Xmx512m</argLine>
                     </configuration>
-                    <!--<dependencies>-->
-                        <!--<dependency>-->
-                            <!--<groupId>org.apache.maven.surefire</groupId>-->
-                            <!--<artifactId>surefire-junit47</artifactId>-->
-                            <!--<version>${maven-surefire-plugin.version}</version>-->
-                        <!--</dependency>-->
-                        <!--<dependency>-->
-                            <!--<groupId>org.apache.maven.surefire</groupId>-->
-                            <!--<artifactId>surefire-testng</artifactId>-->
-                            <!--<version>${maven-surefire-plugin.version}</version>-->
-                        <!--</dependency>-->
-                    <!--</dependencies>-->
                 </plugin>
 
                 <!-- Generate Java Doc jar -->
@@ -761,7 +847,10 @@
             <plugin>
                 <groupId>org.codehaus.gmavenplus</groupId>
                 <artifactId>gmavenplus-plugin</artifactId>
-                <version>${gmaven-plugin.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>aspectj-maven-plugin</artifactId>
             </plugin>
         </plugins>
     </build>

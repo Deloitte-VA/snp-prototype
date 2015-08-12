@@ -46,6 +46,24 @@
 
     </dependencies>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>aspectj-maven-plugin</artifactId>
+                <configuration>
+                    <aspectLibraries>
+                        <aspectLibrary>
+                            <groupId>com.github.jlgrock.snp</groupId>
+                            <artifactId>aop</artifactId>
+                        </aspectLibrary>
+                    </aspectLibraries>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+
     <profiles>
         <profile>
             <id>codeQuality</id>
