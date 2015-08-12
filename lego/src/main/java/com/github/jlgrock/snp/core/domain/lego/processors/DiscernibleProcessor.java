@@ -1,7 +1,7 @@
 package com.github.jlgrock.snp.core.domain.lego.processors;
 
-import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
-import com.github.jlgrock.snp.core.domain.lego.logicgraph.LegoExpressionGraphBuilder;
+import com.github.jlgrock.snp.apis.classifier.LogicalExpressionClassifier;
+import com.github.jlgrock.snp.core.domain.lego.logicalexpression.LegoLogicalExpressionBuilder;
 import com.github.jlgrock.snp.core.domain.lego.model.Discernible;
 import com.github.jlgrock.snp.domain.data.ClassifiedPceRepository;
 import org.jvnet.hk2.annotations.Service;
@@ -12,10 +12,10 @@ import javax.inject.Inject;
 public class DiscernibleProcessor extends AbstractLegoProcessor {
 
     @Inject
-    DiscernibleProcessor(final LogicGraphClassifier logicGraphClassifierIn,
-                         final LegoExpressionGraphBuilder legoExpressionGraphBuilderIn,
-                         final ClassifiedPceRepository classifiedPceRepository) {
-        super(logicGraphClassifierIn, legoExpressionGraphBuilderIn, classifiedPceRepository);
+    DiscernibleProcessor(final LogicalExpressionClassifier logicalExpressionClassifierIn,
+                         final ClassifiedPceRepository classifiedPceRepositoryIn,
+                         final LegoLogicalExpressionBuilder legoLogicalExpressionBuilderIn) {
+        super(logicalExpressionClassifierIn, classifiedPceRepositoryIn, legoLogicalExpressionBuilderIn);
     }
 
     @Override

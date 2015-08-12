@@ -1,11 +1,10 @@
 package com.github.jlgrock.snp.web.resources;
 
-import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
+import com.github.jlgrock.snp.apis.classifier.LogicalExpressionClassifier;
 import com.github.jlgrock.snp.apis.exceptions.ProcessingException;
 import com.github.jlgrock.snp.apis.web.ProcessingService;
 import com.github.jlgrock.snp.apis.web.ProcessingServiceFactory;
 import com.github.jlgrock.snp.web.controllers.GenericControllerTest;
-
 import org.glassfish.hk2.api.Factory;
 import org.glassfish.hk2.api.TypeLiteral;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
@@ -22,16 +21,15 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-
-import javax.ws.rs.client.Entity;
-import javax.ws.rs.client.WebTarget;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 
 @HK2(populate = false)
 public class ClassifierResourceTest extends GenericControllerTest {
@@ -39,16 +37,16 @@ public class ClassifierResourceTest extends GenericControllerTest {
 	public static final String RESOURCE_URI = "classifier";
 
 	@Mock
-	ProcessingServiceFactory processingServiceFactory;
+	private ProcessingServiceFactory processingServiceFactory;
 
 	@Mock
-	ProcessingService legoProcessingService;
+	private ProcessingService legoProcessingService;
 
 	@Mock
-	ProcessingService fhirProcessingService;
+	private ProcessingService fhirProcessingService;
 
 	@Mock
-	LogicGraphClassifier logicGraphClassifier;
+	private LogicalExpressionClassifier logicalExpressionClassifier;
 
 	@Override
 	protected Class getClassToTest() {
@@ -77,16 +75,16 @@ public class ClassifierResourceTest extends GenericControllerTest {
 		application.registerInstances(new AbstractBinder() {
 			@Override
 			protected void configure() {
-				bindFactory(new Factory<LogicGraphClassifier>() {
+				bindFactory(new Factory<LogicalExpressionClassifier>() {
 					@Override
-					public LogicGraphClassifier provide() {
-						return logicGraphClassifier;
+					public LogicalExpressionClassifier provide() {
+						return logicalExpressionClassifier;
 					}
 
 					@Override
-					public void dispose(LogicGraphClassifier instance) {
+					public void dispose(LogicalExpressionClassifier instance) {
 					}
-				}).to(new TypeLiteral<LogicGraphClassifier>() {
+				}).to(new TypeLiteral<LogicalExpressionClassifier>() {
 				}).ranked(DEFAULT_HK2_TEST_BIND_RANK);
 			}
 		});
@@ -101,7 +99,7 @@ public class ClassifierResourceTest extends GenericControllerTest {
 	public void setup() {
 		Mockito.reset(processingServiceFactory);
 		Mockito.reset(legoProcessingService);
-		Mockito.reset(logicGraphClassifier);
+		Mockito.reset(logicalExpressionClassifier);
 
 		Mockito.when(
 				processingServiceFactory
@@ -289,7 +287,7 @@ public class ClassifierResourceTest extends GenericControllerTest {
 		final Response response = target.request().get();
 		
 		Assert.assertEquals(response.getStatus(), Response.Status.OK.getStatusCode());
-		Mockito.verify(logicGraphClassifier).getStatedTermLogicGraph(100348);
+		Mockito.verify(logicalExpressionClassifier).getInferredTermLogicalExpression(100348);
 	}
 
 	/**

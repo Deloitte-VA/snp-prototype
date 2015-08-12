@@ -1,7 +1,7 @@
 package com.github.jlgrock.snp.core.domain.fhir.processors;
 
-import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
-import com.github.jlgrock.snp.core.domain.fhir.logicgraph.FhirCodeableConceptGraphBuilder;
+import com.github.jlgrock.snp.apis.classifier.LogicalExpressionClassifier;
+import com.github.jlgrock.snp.core.domain.fhir.logicalexpression.FhirCodeableConceptGraphBuilder;
 import com.github.jlgrock.snp.core.domain.fhir.model.CodeableConcept;
 import com.github.jlgrock.snp.core.domain.fhir.model.Condition;
 import com.github.jlgrock.snp.domain.data.ClassifiedPceRepository;
@@ -22,11 +22,11 @@ public class ConditionProcessor extends AbstractFhirProcessor {
     private final FhirCodeableConceptGraphBuilder fhirCodeableConceptGraphBuilder;
 
     @Inject
-    public ConditionProcessor(final LogicGraphClassifier logicGraphClassifierIn,
+    public ConditionProcessor(final LogicalExpressionClassifier logicalExpressionClassifierIn,
                               final EncounterRepository encounterRepositoryIn,
                               final ClassifiedPceRepository classifiedPceRepositoryIn,
                               final FhirCodeableConceptGraphBuilder fhirCodeableConceptGraphBuilderIn) {
-        super(logicGraphClassifierIn);
+        super(logicalExpressionClassifierIn);
         classifiedPceRepository = classifiedPceRepositoryIn;
         encounterRepository = encounterRepositoryIn;
         fhirCodeableConceptGraphBuilder = fhirCodeableConceptGraphBuilderIn;
@@ -34,6 +34,8 @@ public class ConditionProcessor extends AbstractFhirProcessor {
 
 	@Override
 	public void process(final String identifier, final Object unmarshalledObject) {
+        LOGGER.trace("processing condition into observation(s)");
+
         Condition condition = (Condition) unmarshalledObject;
 
         LOGGER.trace("processing condition '{}' into assertion(s)", condition);

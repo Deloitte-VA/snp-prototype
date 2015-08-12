@@ -12,10 +12,10 @@ public class ProcedureProcessorTest extends AbstractProcessorTest {
     @Test
     public void testProcedure() {
         FhirElementProcessorService fhirElementProcessorService =
-                new ProcedureProcessor(logicGraphClassifier, encounterRepository, classifiedPceRepository, fhirCodeableConceptGraphBuilder);
+                new ProcedureProcessor(logicalExpressionClassifier, encounterRepository, classifiedPceRepository, fhirCodeableConceptGraphBuilder);
         fhirElementProcessorService.process("id", procedure);
 
-        Mockito.verify(logicGraphClassifier).classify(logicGraph);
+        Mockito.verify(logicalExpressionClassifier).classify(logicalExpression);
         Mockito.verify(encounterRepository).save(Mockito.any(Encounter.class));
         Mockito.verify(classifiedPceRepository).save(Mockito.any(ClassifiedPce.class));
     }

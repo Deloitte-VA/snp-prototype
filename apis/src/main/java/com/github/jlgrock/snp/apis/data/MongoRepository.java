@@ -14,14 +14,6 @@ import java.io.Serializable;
 public interface MongoRepository<DT, ID> {
 
     /**
-     * Returns all entities sorted by the given options.
-     *
-     * @param sort the direction to sort the results
-     * @return all entities sorted by the given options
-     */
-    Iterable<DT> findAll(Sort sort);
-
-    /**
      * Returns a {@link Page} of entities meeting the paging restriction provided in the {@code Pageable} object.
      *
      * @param pageable the details on how the results should be returned

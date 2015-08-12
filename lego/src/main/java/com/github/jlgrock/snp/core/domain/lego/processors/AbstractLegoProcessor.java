@@ -1,7 +1,7 @@
 package com.github.jlgrock.snp.core.domain.lego.processors;
 
-import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
-import com.github.jlgrock.snp.core.domain.lego.logicgraph.LegoExpressionGraphBuilder;
+import com.github.jlgrock.snp.apis.classifier.LogicalExpressionClassifier;
+import com.github.jlgrock.snp.core.domain.lego.logicalexpression.LegoLogicalExpressionBuilder;
 import com.github.jlgrock.snp.core.domain.lego.model.Assertion;
 import com.github.jlgrock.snp.core.domain.lego.model.Destination;
 import com.github.jlgrock.snp.core.domain.lego.model.Discernible;
@@ -12,7 +12,7 @@ import com.github.jlgrock.snp.core.domain.lego.model.Pncs;
 import com.github.jlgrock.snp.core.domain.lego.model.Stamp;
 import com.github.jlgrock.snp.domain.data.ClassifiedPceRepository;
 import com.github.jlgrock.snp.domain.types.ClassifiedPce;
-import gov.vha.isaac.logic.LogicGraph;
+import gov.vha.isaac.ochre.api.logic.LogicalExpression;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,16 +25,16 @@ public abstract class AbstractLegoProcessor implements LegoElementProcessorServi
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractLegoProcessor.class);
 
-    private final LogicGraphClassifier logicGraphClassifier;
-    private final LegoExpressionGraphBuilder legoExpressionGraphBuilder;
+    private final LogicalExpressionClassifier logicalExpressionClassifier;
     private final ClassifiedPceRepository classifiedPceRepository;
+    private final LegoLogicalExpressionBuilder legoLogicalExpressionBuilder;
 
-    protected AbstractLegoProcessor(final LogicGraphClassifier logicGraphClassifierIn,
-                                    final LegoExpressionGraphBuilder legoExpressionGraphBuilderIn,
-                                    final ClassifiedPceRepository classifiedPceRepositoryIn) {
-        logicGraphClassifier = logicGraphClassifierIn;
-        legoExpressionGraphBuilder = legoExpressionGraphBuilderIn;
+    protected AbstractLegoProcessor(final LogicalExpressionClassifier logicalExpressionClassifierIn,
+                                    final ClassifiedPceRepository classifiedPceRepositoryIn,
+                                    final LegoLogicalExpressionBuilder legoLogicalExpressionBuilderIn) {
+        logicalExpressionClassifier = logicalExpressionClassifierIn;
         classifiedPceRepository = classifiedPceRepositoryIn;
+        legoLogicalExpressionBuilder = legoLogicalExpressionBuilderIn;
     }
 
     protected void processLegoList(final LegoList legoListIn) {
@@ -72,14 +72,14 @@ public abstract class AbstractLegoProcessor implements LegoElementProcessorServi
 
     protected void processExpression(final Expression expression) {
         // Create the logic graph
-        LogicGraph logicGraph = legoExpressionGraphBuilder.build(expression);
+        LogicalExpression logicalExpression = legoLogicalExpressionBuilder.build(expression);
         LOGGER.debug("executing classifier logic on logic graph...");
-        Integer classifiedLogicGraphId = logicGraphClassifier.classify(logicGraph);
+        Integer classifiedLogicGraphId = logicalExpressionClassifier.classify(logicalExpression);
         LOGGER.debug("received id: {}", classifiedLogicGraphId);
 
         ClassifiedPce cPce = new ClassifiedPce();
         cPce.setNid(classifiedLogicGraphId.intValue());
-        cPce.setDesc(logicGraph.toString());
+        cPce.setDesc(logicalExpression.toString());
 
         classifiedPceRepository.save(cPce);
     }

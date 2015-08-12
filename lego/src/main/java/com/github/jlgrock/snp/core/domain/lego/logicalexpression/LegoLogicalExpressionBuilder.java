@@ -1,8 +1,8 @@
-package com.github.jlgrock.snp.core.domain.lego.logicgraph;
+package com.github.jlgrock.snp.core.domain.lego.logicalexpression;
 
-import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
+import com.github.jlgrock.snp.apis.classifier.LogicalExpressionClassifier;
 import com.github.jlgrock.snp.core.domain.lego.model.Expression;
-import gov.vha.isaac.logic.LogicGraph;
+import gov.vha.isaac.ochre.api.logic.LogicalExpression;
 import gov.vha.isaac.ochre.api.logic.LogicalExpressionBuilder;
 import gov.vha.isaac.ochre.api.logic.assertions.Assertion;
 import gov.vha.isaac.ochre.api.logic.assertions.connectors.Connector;
@@ -12,16 +12,16 @@ import org.slf4j.LoggerFactory;
 /**
  * A Logic Graph Builder specific to Lego documents.  This should only be used to
  */
-public class LegoExpressionGraphBuilder extends AbstractLegoLogicGraphBuilder {
+public class LegoLogicalExpressionBuilder extends AbstractLegoLogicalExpressionBuilder {
 	
-	private static final Logger LOGGER = LoggerFactory.getLogger(LegoExpressionGraphBuilder.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(LegoLogicalExpressionBuilder.class);
 
-    public LegoExpressionGraphBuilder(final LogicGraphClassifier logicGraphClassifierIn) {
-        super(logicGraphClassifierIn);
+    public LegoLogicalExpressionBuilder(final LogicalExpressionClassifier logicalExpressionClassifierIn) {
+        super(logicalExpressionClassifierIn);
     }
 
     @Override
-    public LogicGraph build(final Expression expression) {
+    public LogicalExpression build(final Expression expression) {
         LOGGER.trace("Creating Lego Expression Logic Graph");
         Assertion assertion = buildExpression(expression);
         if (assertion instanceof Connector) {
@@ -30,7 +30,7 @@ public class LegoExpressionGraphBuilder extends AbstractLegoLogicGraphBuilder {
             LogicalExpressionBuilder.SufficientSet(LogicalExpressionBuilder.And(assertion));
         }
 
-        return (LogicGraph) getLogicalExpressionBuilder().build();
+        return getLogicalExpressionBuilder().build();
     }
 
 }

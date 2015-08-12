@@ -1,6 +1,16 @@
 package com.github.jlgrock.snp.web.controllers;
 
-import java.util.Set;
+import com.github.jlgrock.snp.domain.data.PatientRepository;
+import com.github.jlgrock.snp.domain.types.Patient;
+import com.github.jlgrock.snp.web.resources.query.QueryParam;
+import com.github.jlgrock.snp.web.resources.query.QueryParamParser;
+import com.github.jlgrock.snp.web.resources.query.QueryUriBean;
+import com.github.jlgrock.snp.web.resources.response.ResponseStatusCode;
+import com.github.jlgrock.snp.web.resources.response.ResponseWrapper;
+import com.github.jlgrock.snp.web.services.ClassifierQueryServiceImpl;
+import org.bson.types.ObjectId;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import javax.ws.rs.BeanParam;
@@ -11,19 +21,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
-
-import org.bson.types.ObjectId;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.github.jlgrock.snp.domain.data.PatientRepository;
-import com.github.jlgrock.snp.domain.types.Patient;
-import com.github.jlgrock.snp.web.resources.query.QueryParam;
-import com.github.jlgrock.snp.web.resources.query.QueryParamParser;
-import com.github.jlgrock.snp.web.resources.query.QueryUriBean;
-import com.github.jlgrock.snp.web.resources.response.ResponseStatusCode;
-import com.github.jlgrock.snp.web.resources.response.ResponseWrapper;
-import com.github.jlgrock.snp.web.services.ClassifierQueryServiceImpl;
+import java.util.Set;
 
 /**
  * The Controller serving up domain objects for Patient objectsØ.
@@ -84,21 +82,29 @@ public class PatientController {
 		String obsParam = queryParam.getFilter().get("observation");
 		String provParam = queryParam.getFilter().get("provenance");
 		String valueParam = queryParam.getFilter().get("value");
-		Integer obs;
-		Integer prov;
-		Integer value;
+
+        LOGGER.debug("observation: {}, provenance: {}, value: {}", obsParam, provParam, valueParam);
+
+		Integer obs = null;
+		Integer prov = null;
+		Integer value = null;
 		try {
-			obs = parseNid(obsParam, "observation");
-			prov = parseNid(provParam, "provenance");
-			value = parseNid(valueParam, "value");
+			if (obsParam != null && "".equals(obsParam)) {
+				obs = parseNid(obsParam, "observation");
+			}
+			if (provParam != null && "".equals(provParam)) {
+				prov = parseNid(provParam, "provenance");
+			}
+			if (valueParam != null && "".equals(valueParam)) {
+				value = parseNid(valueParam, "value");
+			}
 		} catch (Exception e) {
 			ResponseWrapper response = new ResponseWrapper(
 					ResponseStatusCode.INVALID_REQUEST, null, e.getMessage());
 			return Response.status(Status.BAD_REQUEST).entity(response).build();
 		}
 
-		Set<Patient> patients = classifierQueryService.executeKindOfQuery(obs,
-				prov, value);
+		Set<Patient> patients = classifierQueryService.executeKindOfQuery(obs, prov, value);
 		
 		ResponseWrapper response = new ResponseWrapper(ResponseStatusCode.OK,
 				patients);

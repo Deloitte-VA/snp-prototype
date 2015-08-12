@@ -24,6 +24,11 @@
         </dependency>
 
         <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>aop</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>gov.vha.isaac.newtons-cradle.modules</groupId>
             <artifactId>newtons-cradle-extension</artifactId>
         </dependency>

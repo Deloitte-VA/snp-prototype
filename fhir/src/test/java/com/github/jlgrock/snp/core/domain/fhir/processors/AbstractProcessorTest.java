@@ -1,9 +1,9 @@
 package com.github.jlgrock.snp.core.domain.fhir.processors;
 
-import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
+import com.github.jlgrock.snp.apis.classifier.LogicalExpressionClassifier;
 import com.github.jlgrock.snp.core.domain.fhir.converters.FhirEncounterConverter;
 import com.github.jlgrock.snp.core.domain.fhir.converters.FhirPatientConverter;
-import com.github.jlgrock.snp.core.domain.fhir.logicgraph.FhirCodeableConceptGraphBuilder;
+import com.github.jlgrock.snp.core.domain.fhir.logicalexpression.FhirCodeableConceptGraphBuilder;
 import com.github.jlgrock.snp.core.domain.fhir.model.CodeableConcept;
 import com.github.jlgrock.snp.core.domain.fhir.model.Condition;
 import com.github.jlgrock.snp.core.domain.fhir.model.Encounter;
@@ -16,7 +16,7 @@ import com.github.jlgrock.snp.domain.data.EncounterRepository;
 import com.github.jlgrock.snp.domain.data.PatientRepository;
 import com.github.jlgrock.snp.domain.types.Assertion;
 import com.github.jlgrock.snp.domain.types.ClassifiedPce;
-import gov.vha.isaac.logic.LogicGraph;
+import gov.vha.isaac.ochre.api.logic.LogicalExpression;
 import org.mockito.Mockito;
 import org.testng.annotations.BeforeClass;
 
@@ -56,8 +56,8 @@ public class AbstractProcessorTest {
     protected ClassifiedPceRepository classifiedPceRepository = Mockito.mock(ClassifiedPceRepository.class);
     protected PatientRepository patientRepository = Mockito.mock(PatientRepository.class);
 
-    protected LogicGraph logicGraph = Mockito.mock(LogicGraph.class);
-    protected LogicGraphClassifier logicGraphClassifier = Mockito.mock(LogicGraphClassifier.class);
+    protected LogicalExpression logicalExpression = Mockito.mock(LogicalExpression.class);
+    protected LogicalExpressionClassifier logicalExpressionClassifier = Mockito.mock(LogicalExpressionClassifier.class);
     protected FhirCodeableConceptGraphBuilder fhirCodeableConceptGraphBuilder = Mockito.mock(FhirCodeableConceptGraphBuilder.class);
 
     @BeforeClass
@@ -78,7 +78,7 @@ public class AbstractProcessorTest {
         Mockito.when(observation.getBodySite()).thenReturn(codeableConcept);
         Mockito.when(observation.getValueCodeableConcept()).thenReturn(codeableConcept);
 
-        Mockito.when(fhirCodeableConceptGraphBuilder.build(Mockito.any(CodeableConcept.class))).thenReturn(logicGraph);
+        Mockito.when(fhirCodeableConceptGraphBuilder.build(Mockito.any(CodeableConcept.class))).thenReturn(logicalExpression);
 
         Mockito.when(fhirPatientConverter.convert(patient)).thenReturn(patientDomain);
         Mockito.when(fhirEncounterConverter.convert(encounter)).thenReturn(encounterDomain);

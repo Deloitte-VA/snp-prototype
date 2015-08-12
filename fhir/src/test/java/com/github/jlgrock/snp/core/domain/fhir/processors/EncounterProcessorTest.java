@@ -10,7 +10,7 @@ public class EncounterProcessorTest extends AbstractProcessorTest {
     @Test
     public void testEncounter() {
         FhirElementProcessorService fhirElementProcessorService =
-                new EncounterProcessor(logicGraphClassifier, fhirEncounterConverter, encounterRepository, patientRepository);
+                new EncounterProcessor(logicalExpressionClassifier, fhirEncounterConverter, encounterRepository, patientRepository);
         fhirElementProcessorService.process("id", encounter);
 
         Mockito.verify(encounterRepository).save(encounterDomain);

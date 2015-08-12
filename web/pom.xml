@@ -17,10 +17,15 @@
 
 	<dependencies>
 		<!-- internal dependencies -->
-		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>apis</artifactId>
-		</dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>apis</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>aop</artifactId>
+        </dependency>
 
 		<dependency>
 			<groupId>com.github.jlgrock.snp</groupId>
@@ -72,19 +77,16 @@
         <dependency>
             <groupId>io.dropwizard</groupId>
             <artifactId>dropwizard-jackson</artifactId>
-            <version>0.8.0-rc5</version>
         </dependency>
 
         <dependency>
             <groupId>io.dropwizard</groupId>
             <artifactId>dropwizard-validation</artifactId>
-            <version>0.8.0-rc5</version>
         </dependency>
         
         <dependency>
             <groupId>io.dropwizard</groupId>
             <artifactId>dropwizard-jersey</artifactId>
-            <version>0.8.0-rc5</version>
         </dependency>
 
         <!-- Jersey dependencies -->
@@ -205,22 +207,6 @@
                 <artifactId>jetty-maven-plugin</artifactId>
                 <configuration>
                     <jvmArgs>-Xmx6144m -XX:+HeapDumpOnOutOfMemoryError</jvmArgs>
-                    <!--<scanIntervalSeconds>1</scanIntervalSeconds>-->
-                    <!--<stopKey>stop-jetty</stopKey>-->
-                    <!--<stopPort>9999</stopPort>-->
-                    <!--<systemProperties>-->
-                        <!--<systemProperty>-->
-                            <!--<name>jetty.port</name>-->
-                            <!--<value>9090</value>-->
-                        <!--</systemProperty>-->
-                    <!--</systemProperties>-->
-
-                    <!--
-                    please add the following properties with your local path information into your settings.xml to override the default config in config.properties file:
-                        <default.dir.location>/ZWork/trash/snp_data/uploads</default.dir.location>
-                        <default.chronicle.location>/ZWork/trash/snp_data/object-chronicles</default.chronicle.location>
-                        <default.index.location>/ZWork/trash/snp_data/search</default.index.location>
-                    -->
                     <systemPropertiesFile>${project.basedir}/config.properties</systemPropertiesFile>
 
                     <systemProperties>

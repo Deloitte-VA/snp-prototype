@@ -52,10 +52,10 @@
         <aspectj.plugin.version>1.7</aspectj.plugin.version>
 
         <!-- VHA versions -->
-        <newtons-cradle.version>1.18</newtons-cradle.version>
-        <query.version>2.13</query.version>
-        <logic.version>1.13</logic.version>
-        <solor.version>1.9</solor.version>
+		<newtons-cradle.version>1.20</newtons-cradle.version>
+        <query.version>2.15</query.version>
+        <logic.version>1.15</logic.version>
+        <solor.version>1.11</solor.version>
 
         <!-- External versions -->
         <jackson.version>2.5.0</jackson.version>
@@ -80,6 +80,7 @@
         <commons-io.version>2.4</commons-io.version>
         <jaxb.version>0.12.3</jaxb.version>
         <jaxb.basics.version>0.9.3</jaxb.basics.version>
+        <dropwizard.version>0.8.0-rc5</dropwizard.version>
 
         <!-- JavaScript dependencies -->
         <angularjs.version>1.4.1</angularjs.version>
@@ -182,23 +183,6 @@
                 </exclusions>
             </dependency>
 
-            <dependency>
-                <groupId>gov.vha.solor.modules</groupId>
-                <artifactId>snomed</artifactId>
-                <version>${solor.version}</version>
-                <type>lucene.zip</type>
-                <classifier>all</classifier>
-                <scope>compile</scope>
-            </dependency>
-
-            <dependency>
-                <groupId>gov.vha.solor.modules</groupId>
-                <artifactId>snomed</artifactId>
-                <version>${solor.version}</version>
-                <type>cradle.zip</type>
-                <classifier>all</classifier>
-                <scope>compile</scope>
-            </dependency>
 
             <dependency>
                 <groupId>gov.vha.isaac.newtons-cradle.modules</groupId>
@@ -327,6 +311,24 @@
                 <groupId>org.glassfish.jersey.media</groupId>
                 <artifactId>jersey-media-multipart</artifactId>
                 <version>${jersey.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.dropwizard</groupId>
+                <artifactId>dropwizard-jackson</artifactId>
+                <version>${dropwizard.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.dropwizard</groupId>
+                <artifactId>dropwizard-validation</artifactId>
+                <version>${dropwizard.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.dropwizard</groupId>
+                <artifactId>dropwizard-jersey</artifactId>
+                <version>${dropwizard.version}</version>
             </dependency>
 
 			<!-- AngularJS dependencies -->
@@ -499,7 +501,6 @@
             <scope>test</scope>
         </dependency>
 
-
         <dependency> <!-- enables mocking of classes (in addition to interfaces) -->
             <groupId>cglib</groupId>
             <artifactId>cglib-nodep</artifactId>
@@ -602,8 +603,6 @@
                         <excludes>
                             <exclude>**/package-info.java</exclude>
                         </excludes>
-                        <!--<verbose>true</verbose>-->
-                        <!--<warn>constructorName,packageDefaultMethod,deprecation,maskedCatchBlocks,unusedLocals,unusedArguments,unusedImport</warn>-->
                     </configuration>
                     <executions>
                         <execution>
@@ -648,25 +647,6 @@
                         </dependency>
                     </dependencies>
                 </plugin>
-
-<!--
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>exec-maven-plugin</artifactId>
-                    <executions>
-                        <execution>
-                            <goals>
-                                <goal>java</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                    <configuration>
-                        <mainClass>com.github.jlgrock.snp.web.zzsandbox.App</mainClass>
-                    </configuration>
-                </plugin>
--->
-
-
 
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -886,6 +866,32 @@
                     <value>true</value>
                 </property>
             </activation>
+        </profile>
+
+        <profile>
+            <id>codeQuality</id>
+            <build>
+                <plugins>
+
+                    <!-- Check the project for issues in style guidelines -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-checkstyle-plugin</artifactId>
+                    </plugin>
+
+                    <!-- check for significant bugs that might have been missed in development -->
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>findbugs-maven-plugin</artifactId>
+                    </plugin>
+
+                    <!-- check for significant bugs that might have been missed in development -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-pmd-plugin</artifactId>
+                    </plugin>
+                </plugins>
+            </build>
         </profile>
     </profiles>
 

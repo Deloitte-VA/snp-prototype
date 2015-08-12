@@ -1,6 +1,6 @@
 package com.github.jlgrock.snp.apis.classifier;
 
-import gov.vha.isaac.logic.LogicGraph;
+import gov.vha.isaac.ochre.api.logic.LogicalExpression;
 import org.jvnet.hk2.annotations.Contract;
 
 import java.util.UUID;
@@ -10,7 +10,7 @@ import java.util.UUID;
  * Logic Graph.
  */
 @Contract
-public interface LogicGraphClassifierQuery {
+public interface ClassifierQuery {
 
     /**
      * Query that will return all concept sequences that match the kind of
@@ -43,8 +43,8 @@ public interface LogicGraphClassifierQuery {
      * Query that will return all concept sequences that match the kind of
      * the concept identified by the logic graph provided
      *
-     * @param logicGraph the logic graph to classify, then search.
+     * @param logicalExpression the logic graph to classify, then search.
      * @return the list of matching Concept Sequences
      */
-    int[] query(final LogicGraph logicGraph);
+    int[] query(final LogicalExpression logicalExpression);
 }

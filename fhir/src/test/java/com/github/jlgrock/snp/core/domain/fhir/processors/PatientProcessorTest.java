@@ -10,7 +10,7 @@ public class PatientProcessorTest extends AbstractProcessorTest {
     @Test
     public void testPatient() {
         FhirElementProcessorService fhirElementProcessorService =
-                new PatientProcessor(logicGraphClassifier, fhirPatientConverter, patientRepository);
+                new PatientProcessor(logicalExpressionClassifier, fhirPatientConverter, patientRepository);
         fhirElementProcessorService.process("id", patient);
 
         Mockito.verify(patientRepository).save(patientDomain);

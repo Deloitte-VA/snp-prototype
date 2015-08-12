@@ -1,17 +1,17 @@
 package com.github.jlgrock.snp.core.domain.fhir.processors;
 
-import com.github.jlgrock.snp.apis.classifier.LogicGraphClassifier;
-import com.github.jlgrock.snp.core.domain.fhir.logicgraph.FhirCodeableConceptGraphBuilder;
+import com.github.jlgrock.snp.apis.classifier.LogicalExpressionClassifier;
+import com.github.jlgrock.snp.core.domain.fhir.logicalexpression.FhirCodeableConceptGraphBuilder;
 import com.github.jlgrock.snp.core.domain.fhir.model.CodeableConcept;
 import com.github.jlgrock.snp.core.domain.fhir.model.Procedure;
 import com.github.jlgrock.snp.domain.data.ClassifiedPceRepository;
 import com.github.jlgrock.snp.domain.data.EncounterRepository;
+import com.github.jlgrock.snp.domain.types.Assertion;
 import com.github.jlgrock.snp.domain.types.ClassifiedPce;
 import com.github.jlgrock.snp.domain.types.Encounter;
-import com.github.jlgrock.snp.domain.types.Assertion;
 import com.github.jlgrock.snp.domain.types.primitives.PrimitiveType;
 import com.github.jlgrock.snp.domain.types.primitives.SimplePrimitive;
-import gov.vha.isaac.logic.LogicGraph;
+import gov.vha.isaac.ochre.api.logic.LogicalExpression;
 import org.jvnet.hk2.annotations.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,11 +30,11 @@ public class ProcedureProcessor extends AbstractFhirProcessor {
     private final FhirCodeableConceptGraphBuilder fhirCodeableConceptGraphBuilder;
 
     @Inject
-    public ProcedureProcessor(final LogicGraphClassifier logicGraphClassifierIn,
+    public ProcedureProcessor(final LogicalExpressionClassifier logicalExpressionClassifierIn,
                               final EncounterRepository encounterRepositoryIn,
                               final ClassifiedPceRepository classifiedPceRepositoryIn,
                               final FhirCodeableConceptGraphBuilder fhirCodeableConceptGraphBuilderIn) {
-        super(logicGraphClassifierIn);
+        super(logicalExpressionClassifierIn);
         classifiedPceRepository = classifiedPceRepositoryIn;
         encounterRepository = encounterRepositoryIn;
         fhirCodeableConceptGraphBuilder = fhirCodeableConceptGraphBuilderIn;
@@ -59,13 +59,13 @@ public class ProcedureProcessor extends AbstractFhirProcessor {
         CodeableConcept codeableConcept = procedure.getType();
 
         // build the logic graph from the code
-        LogicGraph logicGraph = fhirCodeableConceptGraphBuilder.build(codeableConcept);
+        LogicalExpression logicalExpression = fhirCodeableConceptGraphBuilder.build(codeableConcept);
 
         // classify the logic graph
-        Integer classifiedLogicGraphId = getLogicGraphClassifier().classify(logicGraph);
+        Integer classifiedLogicGraphId = getLogicalExpressionClassifier().classify(logicalExpression);
         ClassifiedPce cPce = new ClassifiedPce();
         cPce.setNid(classifiedLogicGraphId);
-        cPce.setDesc(logicGraph.toString());
+        cPce.setDesc(logicalExpression.toString());
 
         classifiedPceRepository.save(cPce);
 

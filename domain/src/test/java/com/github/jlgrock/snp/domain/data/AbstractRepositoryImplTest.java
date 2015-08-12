@@ -2,7 +2,6 @@ package com.github.jlgrock.snp.domain.data;
 
 import com.github.jlgrock.snp.apis.data.Page;
 import com.github.jlgrock.snp.apis.data.Pageable;
-import com.github.jlgrock.snp.apis.data.Sort;
 import com.github.jlgrock.snp.domain.types.Patient;
 import com.mongodb.client.model.UpdateOptions;
 import org.bson.Document;
@@ -14,22 +13,6 @@ import org.testng.annotations.Test;
 import static org.mockito.Mockito.when;
 
 public class AbstractRepositoryImplTest extends TestSetup {
-	
-	@Test
-	public void findAllSortTest() {
-		
-		int b1 = 0;
-		try{
-			Sort sort = Mockito.mock(Sort.class);
-			Iterable<Patient> patient1 = er1.findAll(sort);
-			b1 += 1;
-		}
-		catch (Exception e){
-			b1 +=1;
-		}
-		Assert.assertNotEquals(b1, 0);
-		
-	}
 	
 	@Test
 	public void findAllPageableTest() {

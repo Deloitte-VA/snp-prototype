@@ -12,7 +12,7 @@ public class ObservationProcessorTest extends AbstractProcessorTest {
     @Test
     public void testObservation() {
         FhirElementProcessorService fhirElementProcessorService =
-                new ObservationProcessor(logicGraphClassifier, fhirCodeableConceptGraphBuilder,
+                new ObservationProcessor(logicalExpressionClassifier, fhirCodeableConceptGraphBuilder,
                         classifiedPceRepository, encounterRepository);
         fhirElementProcessorService.process("id", observation);
 
