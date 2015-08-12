@@ -25,7 +25,6 @@ public interface Pageable {
     /**
      * @return the sorting parameters.
      */
-    Sort getSort();
 
     /**
      * @return the {@link Pageable} requesting the next {@link Page}.

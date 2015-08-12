@@ -29,7 +29,7 @@ public class LogicalExpressionClassifierImplTest {
         Mockito.when(classifierStorage.getViewCoordinate()).thenReturn(viewCoordinate);
 
         LogicalExpressionClassifierImpl logicGraphClassifier = new LogicalExpressionClassifierImpl(classifierStorage);
-        Assert.assertEquals(logicGraphClassifier.getNidFromSNOMED("asd"), 5);
+        Assert.assertEquals(logicGraphClassifier.getNidFromSNOMED("123"), 5);
 
     }
 

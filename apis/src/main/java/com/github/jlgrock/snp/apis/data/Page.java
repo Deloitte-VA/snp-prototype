@@ -47,11 +47,6 @@ public interface Page<T> {
     boolean hasContent();
 
     /**
-     * @return the sorting parameters for the {@link Page}.
-     */
-    Sort getSort();
-
-    /**
      * @return  whether the current {@link Page} is the first one.
      */
     boolean isFirst();

@@ -4,7 +4,6 @@ import com.github.jlgrock.snp.apis.connection.MongoDbFactory;
 import com.github.jlgrock.snp.apis.data.MongoRepository;
 import com.github.jlgrock.snp.apis.data.Page;
 import com.github.jlgrock.snp.apis.data.Pageable;
-import com.github.jlgrock.snp.apis.data.Sort;
 import com.github.jlgrock.snp.apis.domain.MongoDomainObject;
 import com.github.jlgrock.snp.apis.exceptions.DataAccessException;
 import com.google.common.collect.Lists;
@@ -134,12 +133,6 @@ public abstract class AbstractRepositoryImpl<S extends MongoDomainObject<T>, T e
             LOGGER.error("Document parameter was null for the deleteByQuery method.");
         }
         dBCollection().deleteMany(query);
-    }
-
-    @Override
-    public Iterable<S> findAll(final Sort sort) {
-        LOGGER.trace("findAll(sort={})", sort);
-        throw new UnsupportedOperationException("Method is not currently being utilized.");
     }
 
     @Override
