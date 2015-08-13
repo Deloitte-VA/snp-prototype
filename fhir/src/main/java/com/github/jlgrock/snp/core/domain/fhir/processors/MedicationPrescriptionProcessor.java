@@ -12,6 +12,10 @@ import javax.inject.Inject;
 @Service
 public class MedicationPrescriptionProcessor extends AbstractFhirProcessor {
 
+    /**
+     * Constructor.
+     * @param logicalExpressionClassifierIn the classification utility for when a logical encounter is created
+     */
     @Inject
     public MedicationPrescriptionProcessor(final LogicalExpressionClassifier logicalExpressionClassifierIn) {
         super(logicalExpressionClassifierIn);

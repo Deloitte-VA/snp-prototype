@@ -15,16 +15,24 @@ import javax.inject.Inject;
  */
 @Service
 public class ObservationProcessor extends AbstractFhirProcessor {
-    final FhirCodeableConceptGraphBuilder fhirCodeableConceptGraphBuilder;
-    final ClassifiedPceRepository classifiedPceRepository;
-    final EncounterRepository encounterRepository;
+    private final FhirCodeableConceptGraphBuilder fhirCodeableConceptGraphBuilder;
+    private final ClassifiedPceRepository classifiedPceRepository;
+    private final EncounterRepository encounterRepository;
 
+    /**
+     * Constructor.
+     * @param logicalExpressionClassifierIn the classification utility for when a logical encounter is created
+     * @param fhirCodeableConceptGraphBuilderIn the class that will be used for building a logical expression based off
+     *                                          of a codeable concept
+     * @param classifiedPceRepositoryIn the repository to store the newly created pce/assertion
+     * @param encounterRepositoryIn the repository to store a newly created Encounter, if necessary
+     */
     @Inject
-    public ObservationProcessor(final LogicalExpressionClassifier logicGraphClassifierIn,
+    public ObservationProcessor(final LogicalExpressionClassifier logicalExpressionClassifierIn,
                                 final FhirCodeableConceptGraphBuilder fhirCodeableConceptGraphBuilderIn,
                                 final ClassifiedPceRepository classifiedPceRepositoryIn,
                                 final EncounterRepository encounterRepositoryIn) {
-        super(logicGraphClassifierIn);
+        super(logicalExpressionClassifierIn);
         fhirCodeableConceptGraphBuilder = fhirCodeableConceptGraphBuilderIn;
         classifiedPceRepository = classifiedPceRepositoryIn;
         encounterRepository = encounterRepositoryIn;

@@ -12,6 +12,10 @@ import javax.inject.Inject;
 @Service
 public class ConceptMapProcessor extends AbstractFhirProcessor {
 
+    /**
+     * Constructor.
+     * @param logicalExpressionClassifierIn the classification utility for when a logical encounter is created
+     */
     @Inject
     public ConceptMapProcessor(final LogicalExpressionClassifier logicalExpressionClassifierIn) {
         super(logicalExpressionClassifierIn);

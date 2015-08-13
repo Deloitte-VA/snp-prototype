@@ -24,6 +24,13 @@ public class ConditionProcessor extends AbstractFhirProcessor {
     private final ClassifiedPceRepository classifiedPceRepository;
     private final FhirCodeableConceptGraphBuilder fhirCodeableConceptGraphBuilder;
 
+    /**
+     * Constructor.
+     * @param logicalExpressionClassifierIn the classification utility for when a logical encounter is created
+     * @param encounterRepositoryIn the repository to store the Encounter object, if necessary
+     * @param classifiedPceRepositoryIn the repository to store the newly classified logical expression
+     * @param fhirCodeableConceptGraphBuilderIn the class used for building logical expressions from a codeable concept
+     */
     @Inject
     public ConditionProcessor(final LogicalExpressionClassifier logicalExpressionClassifierIn,
                               final EncounterRepository encounterRepositoryIn,

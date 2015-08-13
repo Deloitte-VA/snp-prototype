@@ -26,6 +26,13 @@ public class LegoProcessingService implements ProcessingService {
     private LegoMarshallerService legoMarshallerService;
     private LegoElementProcessorFactory legoElementProcessorFactory;
 
+    /**
+     * Constructor.
+     * @param legoMediaTypeIn the media type that this processor can handle
+     * @param legoMarshallerServiceIn the unmarshaller used for converting xml into java objects
+     * @param legoElementProcessorFactoryIn the factory for determining what processor should be used for the java
+     *                                      object created by the fhir marshaller
+     */
     @Inject
     public LegoProcessingService(final LegoMediaTypeService legoMediaTypeIn,
                                  final LegoMarshallerService legoMarshallerServiceIn,

@@ -21,6 +21,12 @@ public class PatientProcessor extends AbstractFhirProcessor {
     private final FhirPatientConverter fhirPatientConverter;
     private final PatientRepository patientRepository;
 
+    /**
+     * Constructor.
+     * @param logicalExpressionClassifierIn the classification utility for when a logical encounter is created
+     * @param fhirPatientConverterIn the converter to convert a FHIR Patient to a domain patient
+     * @param patientRepositoryIn the repository to store the newly created patient in
+     */
     @Inject
     public PatientProcessor(final LogicalExpressionClassifier logicalExpressionClassifierIn,
                             final FhirPatientConverter fhirPatientConverterIn,

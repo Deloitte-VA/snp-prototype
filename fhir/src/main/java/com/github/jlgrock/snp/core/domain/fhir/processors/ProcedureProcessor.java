@@ -32,6 +32,14 @@ public class ProcedureProcessor extends AbstractFhirProcessor {
     private final ClassifiedPceRepository classifiedPceRepository;
     private final FhirCodeableConceptGraphBuilder fhirCodeableConceptGraphBuilder;
 
+    /**
+     * Constructor.
+     * @param logicalExpressionClassifierIn the classification utility for when a logical encounter is created
+     * @param encounterRepositoryIn the encounter repository, used for storing newly created encounters
+     * @param classifiedPceRepositoryIn the classifiedPce repository, used for storing newly created assertions
+     * @param fhirCodeableConceptGraphBuilderIn the logical expression builder, used to create a logical expression
+     *                                          to classify
+     */
     @Inject
     public ProcedureProcessor(final LogicalExpressionClassifier logicalExpressionClassifierIn,
                               final EncounterRepository encounterRepositoryIn,

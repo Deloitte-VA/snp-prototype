@@ -52,7 +52,7 @@ public class FhirPatientConverter
 		return patientOut;
 	}
 	
-	protected Gender convertGender(final Code genderCode) {
+	private Gender convertGender(final Code genderCode) {
 		switch (genderCode.getValue()) {
 		case "M":
 			return Gender.MALE;
@@ -65,7 +65,7 @@ public class FhirPatientConverter
 		}
 	}
 	
-	protected LocalDate convertDateTimeToLocalDate(final DateTime dateTime) {
+	private LocalDate convertDateTimeToLocalDate(final DateTime dateTime) {
 		LOGGER.trace("dateTime={}", dateTime);
 		if (dateTime == null) {
 			return null;

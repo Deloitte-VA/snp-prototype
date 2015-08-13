@@ -40,7 +40,14 @@ public abstract class AbstractFhirProcessor implements FhirElementProcessorServi
     @Override
     public abstract void process(final String identifier, final Object unmarshalledObject);
 
-    protected String parseFhirId(String value) {
+    /**
+     * Parse a local identifier.  This is usually in the form of "Patient/250", so the local identifier would be 250.
+     * This is meant to only be used within a fhir bundle, however we've been receiving these from the Smartform system
+     * as part of independant files, so we will parse them and store them as a secondary unique identifier.
+     * @param value the local identifier string
+     * @return the resulting id
+     */
+    protected String parseFhirId(final String value) {
         return value.substring(value.indexOf('/'));
     }
 

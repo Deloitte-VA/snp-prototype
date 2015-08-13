@@ -35,8 +35,16 @@ public abstract class AbstractLegoLogicalExpressionBuilder {
 
     private final LogicalExpressionClassifier logicalExpressionClassifier;
 
+    /**
+     * Shared functionality for creating logical expressions.  This currently has a hard dependency on the va-logic
+     * package.  This should be removed at a later point, but it was the fastest way to get a logical expression
+     * built at the current point.  At the very least, it should be moved into the classifier service.
+     *
+     * @param logicalExpressionClassifierIn the tool for classifying logical expressions.
+     */
     public AbstractLegoLogicalExpressionBuilder(final LogicalExpressionClassifier logicalExpressionClassifierIn) {
         logicalExpressionClassifier = logicalExpressionClassifierIn;
+        // This needs to be encapsulated as it creates a hard dependency with no injection point to replace it
         LogicalExpressionBuilderService expressionBuilderService = LookupService.getService(LogicalExpressionBuilderService.class);
         logicalExpressionBuilder = expressionBuilderService.getLogicalExpressionBuilder();
     }
@@ -63,7 +71,8 @@ public abstract class AbstractLegoLogicalExpressionBuilder {
         Concept concept = expression.getConcept();
         And subConceptOrExpression = null;
         if (concept != null) {
-            subConceptOrExpression = LogicalExpressionBuilder.And(LogicalExpressionBuilder.ConceptAssertion(buildConcept(concept), getLogicalExpressionBuilder()));
+            subConceptOrExpression = LogicalExpressionBuilder.And(LogicalExpressionBuilder.ConceptAssertion(
+                    buildConcept(concept), getLogicalExpressionBuilder()));
         } else {
             List<Expression> subExpressions = expression.getExpression();
             List<gov.vha.isaac.ochre.api.logic.assertions.Assertion> expressionNodes = subExpressions.stream()
@@ -98,7 +107,7 @@ public abstract class AbstractLegoLogicalExpressionBuilder {
      * A relation can have a type (which contains one single concept) and a destination
      *
      * @param relation the relation to parse
-     * @return
+     * @return a relationship node
      */
 	protected SomeRole buildRelation(final Relation relation) {
         LOGGER.trace("Building from relation node...");
@@ -116,8 +125,8 @@ public abstract class AbstractLegoLogicalExpressionBuilder {
 
     /**
      * Type can only take a concept.  Since this is only used in Relations (currently), this returns a ConceptSpec.
-     * @param type
-     * @return
+     * @param type the object to parse
+     * @return a concept spec node
      */
     protected ConceptSpec buildType(final Type type) {
         LOGGER.trace("Building from type node...");
@@ -129,7 +138,7 @@ public abstract class AbstractLegoLogicalExpressionBuilder {
      * A destination can contain an expression, text, boolean, or measurement
      *
      * @param destination the destination to parse
-     * @return
+     * @return a conjunction node
      */
     protected And processDestination(final Destination destination) {
         LOGGER.trace("Building from destination node...");
@@ -170,7 +179,7 @@ public abstract class AbstractLegoLogicalExpressionBuilder {
      * can contain 1 or more Relations
      *
      * @param relationGroup the relation group to parse
-     * @return
+     * @return a conjunction node
      */
     protected And buildRelationGroup(final RelationGroup relationGroup) {
 
@@ -185,6 +194,11 @@ public abstract class AbstractLegoLogicalExpressionBuilder {
         return andNode;
     }
 
+    /**
+     * Build out a logical expression based off of a Expression fhir object
+     * @param expression the object to parse
+     * @return the built logical expression
+     */
     public abstract LogicalExpression build(final Expression expression);
 
 }

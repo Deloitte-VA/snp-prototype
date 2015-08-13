@@ -31,8 +31,16 @@ public abstract class AbstractFhirLogicGraphBuilder {
 
     private static final String IS_ABOUT_SCTID = "53";
 
+    /**
+     * Shared functionality for creating logical expressions.  This currently has a hard dependency on the va-logic
+     * package.  This should be removed at a later point, but it was the fastest way to get a logical expression
+     * built at the current point.  At the very least, it should be moved into the classifier service.
+     *
+     * @param logicalExpressionClassifierIn the tool for classifying logical expressions.
+     */
     protected AbstractFhirLogicGraphBuilder(final LogicalExpressionClassifier logicalExpressionClassifierIn) {
         logicalExpressionClassifier = logicalExpressionClassifierIn;
+        // This needs to be encapsulated as it creates a hard dependency with no injection point to replace it
         LogicalExpressionBuilderService expressionBuilderService = LookupService.getService(LogicalExpressionBuilderService.class);
         logicalExpressionBuilder = expressionBuilderService.getLogicalExpressionBuilder();
     }
@@ -44,6 +52,11 @@ public abstract class AbstractFhirLogicGraphBuilder {
         return logicalExpressionBuilder;
     }
 
+    /**
+     * Build a logical expression from a particular codeable concept
+     * @param codeableConcept the concept to build from
+     * @return the AND from a logical expression, in the off chance that it part of a larger body of expressions
+     */
     protected And buildCodeableConcept(final CodeableConcept codeableConcept) {
         LOGGER.trace("Building a Codeable Concept: {}", codeableConcept);
 
@@ -72,5 +85,10 @@ public abstract class AbstractFhirLogicGraphBuilder {
         return and;
     }
 
+    /**
+     * Build a logical expression from a codeable concept
+     * @param codeableConcept the concept to build
+     * @return the logical expression to create
+     */
     public abstract LogicalExpression build(final CodeableConcept codeableConcept);
 }

@@ -2,4 +2,37 @@
     <Match>
         <Class name="com.github.jlgrock.snp.classifier.examples.AbstractQuery" />
     </Match>
+    <!-- Exclude generated fhir model objects -->
+    <Match>
+        <Package name="com.github.jlgrock.snp.core.domain.fhir.model.*" />
+    </Match>
+
+    <!-- Exclude generated fhir xhtml objects -->
+    <Match>
+        <Package name="com.github.jlgrock.snp.core.domain.fhir.xhtml.*" />
+    </Match>
+
+    <!-- Exclude generated lego model objects -->
+    <Match>
+        <Package name="com.github.jlgrock.snp.core.domain.lego.model.*" />
+    </Match>
+
+    <!-- Exclude generated lego xhtml objects -->
+    <Match>
+        <Package name="com.github.jlgrock.snp.core.domain.lego.xhtml.*" />
+    </Match>
+
+    <!-- exclude dead stores in the fhir processors for clarity -->
+    <Match>
+        <Package name="com.github.jlgrock.snp.core.domain.fhir.processors" />
+        <Bug pattern="DLS_DEAD_LOCAL_STORE" />
+        <Priority value="2" />
+    </Match>
+
+    <!-- exclude dead stores in the lego processors for clarity -->
+    <Match>
+        <Package name="com.github.jlgrock.snp.core.domain.lego.processors" />
+        <Bug pattern="DLS_DEAD_LOCAL_STORE" />
+        <Priority value="2" />
+    </Match>
 </FindBugsFilter>

@@ -23,6 +23,13 @@ public class EncounterProcessor extends AbstractFhirProcessor {
     private final FhirEncounterConverter fhirEncounterConverter;
     private final PatientRepository patientRepository;
 
+    /**
+     * Constructor.
+     * @param logicalExpressionClassifierIn the classification utility for when a logical encounter is created
+     * @param fhirEncounterConverterIn the converter that will change a FHIR XML Encounter to a domain Encounter
+     * @param encounterRepositoryIn the repository to create the newly created Encounter
+     * @param patientRepositoryIn the repository to create the newly created Patient, if necessary
+     */
     @Inject
     public EncounterProcessor(final LogicalExpressionClassifier logicalExpressionClassifierIn,
                               final FhirEncounterConverter fhirEncounterConverterIn,

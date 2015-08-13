@@ -162,7 +162,7 @@ public class FhirElementProcessorFactoryImplTest {
 
     Collection<FhirElementProcessorService> processorCollection;
 
-    class IterableProviderObjectList implements IterableProvider<FhirElementProcessorService> {
+    public class IterableProviderObjectList implements IterableProvider<FhirElementProcessorService> {
 
         private Collection coll;
 

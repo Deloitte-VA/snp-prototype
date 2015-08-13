@@ -26,6 +26,13 @@ public class FhirProcessingService implements ProcessingService {
     private FhirElementProcessorFactory fhirElementProcessorFactory;
     private FhirMarshallerService fhirMarshallerService;
 
+    /**
+     * Constructor.
+     * @param fhirMediaTypeServiceIn the media type that this processor can handle
+     * @param fhirMarshallerServiceIn the unmarshaller used for converting xml into java objects
+     * @param fhirElementProcessorFactoryIn the factory for determining what processor should be used for the java
+     *                                      object created by the fhir marshaller
+     */
     @Inject
     public FhirProcessingService(final FhirMediaTypeService fhirMediaTypeServiceIn,
                           final FhirMarshallerService fhirMarshallerServiceIn,

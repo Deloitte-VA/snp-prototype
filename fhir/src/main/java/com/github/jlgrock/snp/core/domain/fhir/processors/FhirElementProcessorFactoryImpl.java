@@ -20,6 +20,10 @@ public class FhirElementProcessorFactoryImpl implements FhirElementProcessorFact
 
     private final Map<Class, FhirElementProcessorService> processingServices;
 
+    /**
+     * Constructor.
+     * @param processingServicesIn all of the possible services that can be used by the processor factory.
+     */
     @Inject
     FhirElementProcessorFactoryImpl(final IterableProvider<FhirElementProcessorService> processingServicesIn) {
         processingServices = new HashMap<>();

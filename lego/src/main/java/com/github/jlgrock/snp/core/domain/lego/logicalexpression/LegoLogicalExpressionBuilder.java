@@ -16,6 +16,10 @@ public class LegoLogicalExpressionBuilder extends AbstractLegoLogicalExpressionB
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(LegoLogicalExpressionBuilder.class);
 
+    /**
+     * Constructor/
+     * @param logicalExpressionClassifierIn the classifier for identifying a logical expression.
+     */
     public LegoLogicalExpressionBuilder(final LogicalExpressionClassifier logicalExpressionClassifierIn) {
         super(logicalExpressionClassifierIn);
     }

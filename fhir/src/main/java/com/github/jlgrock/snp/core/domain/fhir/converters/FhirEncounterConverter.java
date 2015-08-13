@@ -22,6 +22,11 @@ public class FhirEncounterConverter
 
     private final PatientRepository patientRepository;
 
+    /**
+     * Constructor.
+     * @param patientRepositoryIn the patient repository used for storing newly created patients.  This should probably
+     *                            not be part of a converter, but part of a processor, but this is where it is for now
+     */
     @Inject
     public FhirEncounterConverter(final PatientRepository patientRepositoryIn) {
         patientRepository = patientRepositoryIn;

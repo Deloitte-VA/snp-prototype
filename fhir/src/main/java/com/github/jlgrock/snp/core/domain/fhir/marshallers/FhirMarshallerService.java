@@ -22,7 +22,7 @@ public interface FhirMarshallerService {
      * @return the FHIR Object that was created
      * @throws UnmarshallingException any exceptions that happened during the unmarshalling
      */
-    public Object unmarshall(final String input) throws UnmarshallingException;
+    Object unmarshall(final String input) throws UnmarshallingException;
 
     /**
      * Unmarshall an XML reader to java objects.  Return the Specific FHIR Object created.  Note that this will need
@@ -31,5 +31,5 @@ public interface FhirMarshallerService {
      * @return the FHIR Object that was created
      * @throws UnmarshallingException any exceptions that happened during the unmarshalling
      */
-    public Object unmarshall(final Reader input) throws UnmarshallingException;
+    Object unmarshall(final Reader input) throws UnmarshallingException;
 }

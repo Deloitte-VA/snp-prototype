@@ -10,6 +10,9 @@ import javax.inject.Inject;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * The factory implementation for finding a specific processing service to handle an unmarshalled Lego XML object.
+ */
 @Service
 public class LegoElementProcessorFactoryImpl implements LegoElementProcessorFactory {
 
@@ -17,6 +20,10 @@ public class LegoElementProcessorFactoryImpl implements LegoElementProcessorFact
 
     private final Map<Class, LegoElementProcessorService> processingServices;
 
+    /**
+     * Constructor.
+     * @param processingServicesIn all of the possible services that can be used by the processor factory.
+     */
     @Inject
     LegoElementProcessorFactoryImpl(final IterableProvider<LegoElementProcessorService> processingServicesIn) {
         LOGGER.debug("initializing processing factory.  There are a total of {} processes", processingServicesIn.getSize());

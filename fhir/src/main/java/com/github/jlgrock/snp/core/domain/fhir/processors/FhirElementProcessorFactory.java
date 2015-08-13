@@ -8,5 +8,12 @@ import org.jvnet.hk2.annotations.Contract;
  */
 @Contract
 public interface FhirElementProcessorFactory {
+
+    /**
+     * Finds the appropriate processing service from the object passed in
+     * @param unmarshalledObject the object that has been unmarshalled using JAXb
+     * @return the appropriate processor to handle the object
+     * @throws ClassifierException if there is any problem identifying the object
+     */
     FhirElementProcessorService findProcessingService(Object unmarshalledObject) throws ClassifierException;
 }

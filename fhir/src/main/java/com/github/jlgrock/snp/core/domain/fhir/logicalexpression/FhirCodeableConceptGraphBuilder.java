@@ -20,6 +20,10 @@ public class FhirCodeableConceptGraphBuilder extends AbstractFhirLogicGraphBuild
         return getLogicalExpressionBuilder().build();
     }
 
+    /**
+     * Constructor.
+     * @param logicalExpressionClassifierIn the classifier to store the logical expression, once it has been created
+     */
     public FhirCodeableConceptGraphBuilder(final LogicalExpressionClassifier logicalExpressionClassifierIn) {
         super(logicalExpressionClassifierIn);
     }

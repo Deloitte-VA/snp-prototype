@@ -19,7 +19,7 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 
 /**
- *
+ * An abstract processor that stores all shared functionality for processors related to Lego XML documents.
  */
 public abstract class AbstractLegoProcessor implements LegoElementProcessorService {
 
@@ -29,6 +29,12 @@ public abstract class AbstractLegoProcessor implements LegoElementProcessorServi
     private final ClassifiedPceRepository classifiedPceRepository;
     private final LegoLogicalExpressionBuilder legoLogicalExpressionBuilder;
 
+    /**
+     * Constructor
+     * @param logicalExpressionClassifierIn the classifier for analyzing a logical expression and providing a unique id
+     * @param classifiedPceRepositoryIn the repository for storing a classified id
+     * @param legoLogicalExpressionBuilderIn the builder for creating logical expressions
+     */
     protected AbstractLegoProcessor(final LogicalExpressionClassifier logicalExpressionClassifierIn,
                                     final ClassifiedPceRepository classifiedPceRepositoryIn,
                                     final LegoLogicalExpressionBuilder legoLogicalExpressionBuilderIn) {
@@ -37,6 +43,10 @@ public abstract class AbstractLegoProcessor implements LegoElementProcessorServi
         legoLogicalExpressionBuilder = legoLogicalExpressionBuilderIn;
     }
 
+    /**
+     * Process any nested LegoList objects.
+     * @param legoListIn the object to process
+     */
     protected void processLegoList(final LegoList legoListIn) {
         List<Lego> legoList = legoListIn.getLego();
         for (Lego lego : legoList) {
@@ -44,6 +54,10 @@ public abstract class AbstractLegoProcessor implements LegoElementProcessorServi
         }
     }
 
+    /**
+     * Process any nested Lego objects.
+     * @param lego the object to process
+     */
     protected void processLego(final Lego lego) {
         List<Assertion> assertionList = lego.getAssertion();
         for (Assertion assertion : assertionList) {
@@ -56,6 +70,10 @@ public abstract class AbstractLegoProcessor implements LegoElementProcessorServi
         processStamp(stamp);
     }
 
+    /**
+     * Process any nested Assertion objects
+     * @param assertion the object to process
+     */
     protected void processAssertion(final Assertion assertion) {
         Discernible discernible = assertion.getDiscernible();
         if (discernible != null) {
@@ -63,6 +81,10 @@ public abstract class AbstractLegoProcessor implements LegoElementProcessorServi
         }
     }
 
+    /**
+     * Process any nested Discernable objects
+     * @param discernible the object to process
+     */
     protected void processDiscernible(final Discernible discernible) {
         Expression expression = discernible.getExpression();
         if (expression != null) {
@@ -70,6 +92,10 @@ public abstract class AbstractLegoProcessor implements LegoElementProcessorServi
         }
     }
 
+    /**
+     * Process any nested Expression objects.
+     * @param expression the object to process
+     */
     protected void processExpression(final Expression expression) {
         // Create the logic graph
         LogicalExpression logicalExpression = legoLogicalExpressionBuilder.build(expression);
@@ -84,14 +110,26 @@ public abstract class AbstractLegoProcessor implements LegoElementProcessorServi
         classifiedPceRepository.save(cPce);
     }
 
+    /**
+     * Process any nested Pncs objects.
+     * @param pncs the object to process
+     */
     protected void processPncs(final Pncs pncs) {
         //Do nothing?
     }
 
+    /**
+     * Process any nested Stamp objects
+     * @param stamp the object to process
+     */
     protected void processStamp(final Stamp stamp) {
         //Do nothing?
     }
 
+    /**
+     * Process any nested Destination objects
+     * @param destination the object to process
+     */
     protected void processDestination(final Destination destination) {
         Expression expression = destination.getExpression();
         processExpression(expression);
