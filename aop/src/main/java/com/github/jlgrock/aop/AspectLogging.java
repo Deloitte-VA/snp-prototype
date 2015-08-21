@@ -45,14 +45,15 @@ public class AspectLogging {
      */
     @Around("logging()")
     public Object logging(final ProceedingJoinPoint pjp) throws Throwable {
-        AOP_LOGGER.info("%n******************************************************%n");
-        AOP_LOGGER.info("Before " + pjp.getSignature());
-        AOP_LOGGER.info(getLogInfo(pjp));
+        AOP_LOGGER.debug("******************************************************");
+        AOP_LOGGER.debug("Before " + pjp.getSignature());
+        AOP_LOGGER.debug(getLogInfo(pjp));
 
+        AOP_LOGGER.debug("\n");
         Object ret = pjp.proceed();
 
-        AOP_LOGGER.info("%n******************************************************%n");
-        AOP_LOGGER.info("After " + pjp.getSignature());
+        AOP_LOGGER.debug("******************************************************");
+        AOP_LOGGER.debug("After " + pjp.getSignature());
 
         return ret;
     }
@@ -69,18 +70,18 @@ public class AspectLogging {
         Class[] parameterTypes = ((CodeSignature) joinPoint.getSignature()).getParameterTypes();
         String[] parameterNames = ((CodeSignature) joinPoint.getSignature()).getParameterNames();
 
-        builder.append("%n******************************************************%n");
+        builder.append("******************************************************");
         for (int i = 0; i < joinPoint.getArgs().length; i++) {
             builder.append(String.format("Arg %d :%n", i));
             builder.append("type: ");
             builder.append(parameterTypes[i]);
-            builder.append("%n");
+            builder.append(", ");
             builder.append("name: ");
             builder.append(parameterNames[i]);
-            builder.append("%n");
+            builder.append(", ");
             builder.append("value: ");
             builder.append(signatureArgs[i]);
-            builder.append("%n%n");
+            builder.append(", \n");
         }
 
         return builder.toString();

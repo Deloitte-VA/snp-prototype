@@ -44,7 +44,7 @@ public class LegoProcessingService implements ProcessingService {
 
     /**
      * @throws ProcessingException 
-     * @{@inheritDoc}
+     * {@inheritDoc}
      *
      * This ignores the identifier parameter
      */
