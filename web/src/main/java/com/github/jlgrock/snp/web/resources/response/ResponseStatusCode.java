@@ -1,10 +1,7 @@
 package com.github.jlgrock.snp.web.resources.response;
 
 /**
- * Status codes to be returned as part of a response. Valid values are:
- * <li>{@link #OK}</li>
- * <li>{@link #ZERO_RESULTS}</li>
- * <li>{@link #INVALID_REQUEST}</li>
+ * Status codes to be returned as part of a response.
  */
 public enum ResponseStatusCode {
 	/**
