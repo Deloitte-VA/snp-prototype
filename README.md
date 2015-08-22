@@ -1,5 +1,3 @@
-[![Build Status](http://52.6.46.55:8080/buildStatus/icon?job=snp-prototype)](http://52.5.163.147:8080/view/SNP/job/snp-prototype/)
-
 SN Prototype - Semantic Normalization Prototype
 =============
 
